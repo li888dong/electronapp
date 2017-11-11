@@ -5,7 +5,7 @@
         color: #000;
         font-size: 14px;
         line-height: 16px;
-        top: -26px;
+        top: -10px;
     }
     .weather-container .weather-data{
         width: 180px;

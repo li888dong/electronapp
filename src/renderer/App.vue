@@ -22,11 +22,11 @@
 <style>
 	body {
 		padding: 0;
-		margin: 99px 0 50px 220px;
-		background-color: #E8ECF0;
+		margin: 79px 0 0 220px;
+		background-color: #F6F6F6;
 		font-size: 12px;
+		font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif!important;
 		overflow-x: hidden;
-		font-family: "Microsoft YaHei" ! important;
 	}
 
 	body::-webkit-scrollbar {
@@ -36,18 +36,20 @@
 		/*滚动条高度（底部滚动条）*/
 		background-color: #333;
 	}
+
 	.main-container{
 		width: 1700px;
-		padding: 15px 18px;
+		height: 900px;
+		padding: 0 18px;
 		overflow: hidden;
 	}
 	.main-container .title{
 		display: inline-block;
-		margin-bottom: 5px;
+		margin: 0 0 5px 15px;
 	}
 	.main-container-panel{
 		width: 1664px;
-		height: 909px;
+
 		background-color: #fff;
 	}
 	.main-container-panel .header{
@@ -91,16 +93,18 @@
 		box-sizing: border-box;
 		overflow: hidden;
 		position: relative;
-		padding: 10px;
-		margin-left: 18px;
+		padding: 10px 20px 10px 20px;
+		margin-left: 20px;
 		margin-top: 15px;
 		display: inline-block;
+		vertical-align: top;
 	}
 
 	.data-panel .title {
 		margin: 0;
 		padding: 0;
-		font-size: 16px !important;
+		font-size: 14px !important;
+		color: #404040;
 	}
 
 
@@ -114,15 +118,16 @@
 		height: 30px;
 		line-height: 20px;
 		font-size: 12px;
-		color: #108CEE;
-		border: none;
+		color: #828282;
+		border: 1px solid #999;
 		outline: none;
-		background-color: #EAF6FE;
+		background-color: #EEEEEE;
 	}
 
 	.btn-group .btnSelected {
-		background-color: #108CEE;
-		color: #fff;
+		background-color: #108CEE!important;
+		border: none;
+		color: #fff!important;
 	}
 	.legend {
 		float: right;
@@ -160,8 +165,8 @@
 	.top_10{
 		top: 10px;
 	}
-	.height_99 {
-		height: 99px;
+	.height_79 {
+		height: 79px;
 	}
 
 	.ft_35c {
@@ -184,13 +189,12 @@
 		width: 220px;
 		position: fixed;
 		top: 0;
-		bottom: 0;
 		left: 0;
+		height: 994px;
 		background: #19233C;
 		z-index: 9;
 		transition: width 0.3s;
 		font-size: 12px;
-		font-family: "Arial Black";
 		color: #fff;
 		overflow: hidden;
 	}

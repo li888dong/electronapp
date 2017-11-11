@@ -7,7 +7,7 @@
 <template>
 	<div style="width: 900px;margin: 0 auto">
 
-		<div id="henan-map" :style="{width: '800px', height: '800px'}">
+		<div id="henan-map" :style="{width: '900px', height: '550px'}">
 
 		</div>
 	</div>
@@ -54,12 +54,17 @@
                         inRange: {
                             color: ['#e0ffff', '#006edd']
                         },
-                        calculable: true
+                        calculable: true,
+	                    right:150,
+	                    bottom:110,
+	                    orient:'horizontal'
                     },
                     series: [{
                         type: 'map',
                         map: 'henan',
                         selectedMode: 'single',
+	                    top:'0',
+	                    left:'100',
                         itemStyle: {
                             normal: {
                                 label: {
@@ -104,11 +109,12 @@
         },
         methods: {
             drawHenan(henanData = this.henanData) {
+                const that = this;
                 let mapChart = this.$echarts.init(document.getElementById('henan-map'));
                 this.$echarts.registerMap('henan', this.henanMapJson);
                 mapChart.setOption(henanData);
-                mapChart.on('click',function (params) {
-                    console.log(params.name)
+                mapChart.on('mouseover',function (params) {
+	                that.$emit('hoverCity',params)
                 })
             }
         }

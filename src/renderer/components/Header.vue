@@ -36,7 +36,7 @@
 </script>
 <template>
 
-	<div class="header fixed height_99">
+	<div class="header fixed height_79">
 		<ul class="absolute">
 			<li class="top_40 icon-menu">
 				<i class="icon iconfont icon-liebiao"></i>
@@ -52,12 +52,13 @@
 			</li>
 			<li class="setting">
 				<ul>
-					<li class="menu-icon right_316"><i class="iconfont">&#xe6ff;</i></li>
+					<router-link  class="menu-icon right_316" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>
+					<!--<li class="menu-icon right_316"><i class="iconfont">&#xe6ff;</i></li>-->
 					<li class="menu-icon right_243"><i class="iconfont">&#xe606;</i></li>
 					<li class="menu-icon right_168"><i class="iconfont">&#xe607;</i></li>
-					<li class="menu-icon right_72"><i class="iconfont">&#xe606;</i></li>
-					<li class="hideBtn iconfont" @click="hideApp()">&#xe601;</li>
-					<li class="right_29 closeBtn iconfont" @click="closeApp()">&#xe664;</li>
+					<li class="avatar right_72">李栋</li>
+					<!--<li class="hideBtn iconfont" @click="hideApp()">&#xe601;</li>-->
+					<!--<li class="right_29 closeBtn iconfont" @click="closeApp()">&#xe664;</li>-->
 				</ul>
 			</li>
 		</ul>
@@ -89,7 +90,17 @@
 		text-align: center;
 		border-right: 1px solid #efefef;
 	}
-
+	.header .avatar{
+		top: -10px;
+		width: 45px;
+		height: 45px;
+		text-align: center;
+		line-height: 45px;
+		background-color: #EA2E2E;
+		border-radius: 50%;
+		color: white;
+		font-size: 18px;
+	}
 	.icon-li {
 		width: 30px;
 		height: 40px;
@@ -102,7 +113,7 @@
 	}
 
 	.top_40 {
-		top: 40px;
+		top: 20px;
 	}
 
 	.left_47 {
@@ -157,7 +168,7 @@
 	}
 
 	.header .setting {
-		top: 45px;
+		top: 20px;
 		right: 0;
 	}
 
@@ -167,15 +178,18 @@
 	}
 
 	.closeBtn {
-		top: -50px;
+		top: -45px;
 		cursor: pointer;
-		font-size: 26px;
+		font-size: 20px;
+		font-weight:bold;
 	}
 
 	.hideBtn {
-		top: -50px;
+		top: -45px;
 		right: 65px;
 		cursor: pointer;
-		font-size: 26px;
+		font-size: 20px;
+		font-weight:bold;
+
 	}
 </style>

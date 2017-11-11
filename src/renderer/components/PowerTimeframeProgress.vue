@@ -1,149 +1,93 @@
-<style>
-
-</style>
-<template>
-	<div>
-		<div id="powerTimeFrameProgress" :style="{width: '507px', height: '130px'}">
-
-		</div>
-	</div>
-
-</template>
-
 <script>
     export default {
-        name: 'powertimeframeprogress',
+        name: 'powerframe',
         data() {
             return {
-                chartOption2: {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'cross'
-                        }
-                    },
-                    grid: {
-                        top: '1%',
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: {
-                        show: false,
-                        type: 'value',
-                        boundaryGap: [0, 0.01]
-                    },
-                    yAxis: {
-                        type: 'category',
-                        axisLabel: {
-                            inside: false,
-                            textStyle: {
-                                fontSize: 16,
-                                color: '#333'
-                            }
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        data: ['谷段', '平段', '峰段']
-                    },
-                    series: [
-                        { // For shadow
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {color: 'rgba(0,0,0,0.05)'}
-                            },
-                            barGap:'-100%',
-                            data: [{
-                              name:'月',
-	                          value:100,
-	                          label:{
-                                  normal:{
-                                      show:true,
-	                                  position:'insideRight',
-                                      formatter: '{c}mw.h',
-	                                  color:"#999"
-                                  }
-	                          }
-                            },{
-                                name:'月',
-                                value:100,
-                                label:{
-                                    normal:{
-                                        show:true,
-                                        position:'insideRight',
-                                        formatter: '{c}mw.h',
-                                        color:"#999"
-                                    }
-                                }
-                            },{
-                                name:'月',
-                                value:100,
-                                label:{
-                                    normal:{
-                                        show:true,
-                                        position:'insideRight',
-                                        formatter: '{c}mw.h',
-                                        color:"#999"
-                                    }
-                                }
-                            }],
-                            animation: false
-                        },
-                        {
-                            name: '月度',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 1, 0,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 1, 0,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-	                        label:{
-                                normal:{
-                                    show:true,
-                                    position:'insideLeft',
-	                                color:'#fff',
-                                    formatter: '{c}%'
-                                }
-	                        },
-                            data: [30, 50, 20]
-                        }
-                    ]
-                }
+
             }
         },
-        mounted() {
-            this.drawLine(this.chartOption2);
+        mounted(){
+
         },
         methods: {
-            drawLine(option = this.chartOption2) {
-                // 基于准备好的dom，初始化echarts实例
-                let powerTimeFrameProgressChart = this.$echarts.init(document.getElementById('powerTimeFrameProgress'));
-                // 绘制图表
-                powerTimeFrameProgressChart.setOption(option);
-            }
+
         }
     }
 </script>
+<template>
+	<div class="power-timeframe data-panel ">
+		<h3 class="title">用电实时段分布</h3>
+		<div class="power-timeframe-bar">
+			<div class="power-timeframe-bar-low">谷段 <br> <span><span class="bar"
+			                                                    v-bind:style="{width: 100 + 'px'}">50%</span>228Mw.时</span>
+			</div>
+			<div class="power-timeframe-bar-normal">平段 <br> <span><span class="bar"
+			                                                       v-bind:style="{width: 50 + 'px'}">50%</span>228Mw.时</span>
+			</div>
+			<div class="power-timeframe-bar-high">峰段 <br> <span><span class="bar"
+			                                                     v-bind:style="{width: 100 + 'px'}">50%</span>228Mw.时</span>
+			</div>
+		</div>
+	</div>
+</template>
+<style scoped>
+	.power-timeframe {
+		width: 410px;
+		height: 202px;
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 20px;
+	}
 
+	.power-timeframe .title {
+		margin-left: -10px;
+	}
+
+	.power-timeframe h3 {
+		display: inline-block;
+	}
+
+	.power-timeframe .btn-switch {
+		margin-top: 0;
+	}
+
+	.power-timeframe .btn-switch button {
+		float: left;
+		padding: 0;
+		height: 24px;
+		min-width: 24px;
+		font-size: 12px;
+		line-height: 24px;
+		border-radius: 50%;
+		margin-left: 20px
+	}
+
+	.power-timeframe .power-timeframe-bar {
+		width: 400px;
+		height: 150px;
+	}
+
+	.power-timeframe .power-timeframe-bar > div {
+		white-space: nowrap;
+		width: 100%;
+		height: 50px;
+	}
+
+	.power-timeframe .power-timeframe-bar > div > span {
+		display: inline-block;
+		vertical-align: middle;
+		background-color: #eee;
+		width: 92%;
+		line-height: 35px;
+		color: #a8a8a8;
+	}
+
+	.power-timeframe .power-timeframe-bar > div > span .bar {
+		background-color: #4FA8F9;
+		margin-right: 10px;
+		text-align: center;
+		color: #fff;
+		display: inline-block;
+		transition: width 0.5s ease;
+	}
+</style>

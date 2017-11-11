@@ -1,9 +1,10 @@
 <script>
+	import FiveData from '@/components/Home/PowerUse'
 	import BidChart from '@/components/BidChart'
 	import RealTimePowerChart from '@/components/RealTimePowerChart'
-	import PowerTimeFrame from '@/components/PowerTimeFrame'
+	import TradePi from '@/components/TradePi'
 	import HenanMap from '@/components/HenanMap'
-	import ClientSidebar from '@/components/ClientSidebar'
+	import ClientSidebar from '@/components/Client/ClientSidebar'
 	import CompanyPowerProgress from '@/components/CompanyPowerProgress'
 	import JieXianTu from '@/components/JieXianTu'
 	import Pagenation from '@/components/Pagenation'
@@ -24,17 +25,19 @@
 	    components:{
             'bid-chart':BidChart,
             'real-time-power-chart':RealTimePowerChart,
-            'power-time-frame':PowerTimeFrame,
+            'trade-pi':TradePi,
             'henan-map':HenanMap,
 		    'client-sidebar':ClientSidebar,
             'company-power-progress':CompanyPowerProgress,
             'jie-xian-tu':JieXianTu,
-		    'pagenation':Pagenation
+		    'pagenation':Pagenation,
+		    'five-data':FiveData
         }
     }
 </script>
 <template>
 	<div>
+		<five-data></five-data>
 		<pagenation :cur.sync="cur" :all.sync="all" v-on:btn-click="pageListen"></pagenation>
 		<jie-xian-tu></jie-xian-tu>
 		<company-power-progress></company-power-progress>

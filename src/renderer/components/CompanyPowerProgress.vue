@@ -80,8 +80,9 @@
 		border-bottom-right-radius: 40px;
 	}
 	.legend{
-		top: 135px;
-		left: 25px;
+		position: absolute;
+		top: 1px;
+		left: 1px;
 	}
 	.tips{
 		top: 135px;

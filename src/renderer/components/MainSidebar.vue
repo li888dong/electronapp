@@ -56,8 +56,8 @@
             <span>客户中心</span>
             <transition name="slide-fade">
             <ul id="sidebar-customer-sevice" v-show="sidebarCustomerSeviceShow">
-                <router-link to="echarts-demo/demo2" tag="li"><i class="iconfont icon-bcc"></i><span>客户概况</span></router-link>
-                <router-link to="client-list" tag="li"><i class="iconfont icon-bcc"></i><span>客户列表</span></router-link>
+                <router-link to="/client-situation" tag="li"><i class="iconfont icon-bcc"></i><span>客户概况</span></router-link>
+                <router-link to="/client-list" tag="li"><i class="iconfont icon-bcc"></i><span>客户详情</span></router-link>
             </ul>
             </transition>
         </div>
