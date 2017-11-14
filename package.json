@@ -53,7 +53,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "calendar-plugin": "^1.0.1",
-    "echarts": "^3.7.2",
+    "echarts": "^3.8.4",
     "iview": "^2.6.0",
     "mockjs": "^1.0.1-beta3",
     "raphael": "^2.2.7",

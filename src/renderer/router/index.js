@@ -44,13 +44,25 @@ export default new Router({
                     path: '/add-celiang',
                     name: 'add-celiang',
                     component: require('@/components/Client/ClientAddCeliang').default
-                }, {
+                },{
+                    path: '/hetong',
+                    name: 'agreement',
+                    component: require('@/components/Client/ClientAgreement').default
+                },{
+                    path: '/user-manager',
+                    name: 'user-manager',
+                    component: require('@/components/Client/ClientUserManage').default
+                },{
                     path: '*',
                     redirect: '/client-detail'
                 }
             ]
         },
-
+        {
+            path: '/add-hetong',
+            name: 'addAgreement',
+            component: require('@/components/Client/ClientAddAgreement').default
+        },
         {
             path: '/client-situation',
             name: 'client-situation',

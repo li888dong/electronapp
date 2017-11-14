@@ -149,7 +149,7 @@
 								<span class="xiala">更多 <i class="iconfont icon-xiala"></i>
 									<div class="router-container">
 										<router-link to="/hetong">合同</router-link>
-										<router-link to="/yonghu">用户</router-link>
+										<router-link to="/user-manager">用户</router-link>
 									</div>
 								</span>
 							</td>

@@ -37,9 +37,9 @@
 </script>
 <template>
 	<div>
+		<jie-xian-tu></jie-xian-tu>
 		<five-data></five-data>
 		<pagenation :cur.sync="cur" :all.sync="all" v-on:btn-click="pageListen"></pagenation>
-		<jie-xian-tu></jie-xian-tu>
 		<company-power-progress></company-power-progress>
 
 		<div class="data-panel data-exmaple">
@@ -70,11 +70,11 @@
 			<div class="content">
 				<bid-chart></bid-chart>
 				<real-time-power-chart></real-time-power-chart>
-				<power-time-frame></power-time-frame>
+
 				<henan-map></henan-map>
 			</div>
 		</div>
-		<client-sidebar></client-sidebar>
+		<!--<client-sidebar></client-sidebar>-->
 	</div>
 </template>
 <style>

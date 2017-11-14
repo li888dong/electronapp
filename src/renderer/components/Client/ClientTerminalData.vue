@@ -20,7 +20,90 @@
 					byqrl:'120KW',
 					zt:'已启用'
 				},
+                monitoringShow:false,
                 chartOption1:{
+                    title: {
+                        text: "日电量同比",
+                        textStyle:{
+                            fontSize:'14'
+                        },
+                        left:'155',
+                        top:'5'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    xAxis:{
+                        type: 'category',
+                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15","1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15"],
+                        nameTextStyle:{
+                            fontSize:12
+                        },
+//	                    控制x轴隔几个显示
+                        axisLabel :{
+                            interval:0
+                        }
+
+                    }
+                    ,
+                    yAxis: [
+                        {
+                            position:'right',
+                            type: 'value',
+                            boundaryGap: 0
+                        }
+                    ],
+                    dataZoom: [ {
+                        type: 'slider',
+                        bottom:0,
+                        startValue: '1968/10/4',
+                        endValue: '1968/10/10'
+                    }],
+                    series: [
+//                        { // For shadow
+//                            type: 'bar',
+//                            itemStyle: {
+//                                normal: {color: 'rgba(0,0,0,0.05)'}
+//                            },
+//                            barGap:'-100%',
+//                            barCategoryGap:'40%',
+//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
+//                            animation: false
+//                        },
+                        {
+                            name: '今年',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30,184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
+                        }
+
+                    ]
+                },
+                chartOption2:{
                     title: {
                         text: "日电量同比",
                         textStyle:{
@@ -106,6 +189,7 @@
 		},
 		mounted(){
             this.drawBar1(this.chartOption1);
+            this.drawBar2(this.chartOption2);
 
         },
 		methods:{
@@ -114,7 +198,15 @@
 		        let compare1Chart = this.$echarts.init(document.getElementById('chart-main'));
 		        // 绘制图表
 		        compare1Chart.setOption(option);
-		    }
+		    },
+			drawBar2(option = this.chartOption2){
+
+                console.log(this.monitoringShow);
+                // 基于准备好的dom，初始化echarts实例
+                let compare1Chart = this.$echarts.init(document.getElementById('chart-jiankong'));
+                // 绘制图表
+                compare1Chart.setOption(option);
+			}
 		}
 	}
 </script>
@@ -207,10 +299,73 @@
 				</ul>
 				<ul class="fr">
 					<li>采集监控</li>
-					<li>在线监控</li>
+					<li @click="monitoringShow = !monitoringShow" style="cursor: pointer;position: relative;z-index: 999">在线监控</li>
 				</ul>
 			</div>
-			<div class="chart-main" id="chart-main" style="width: 1447px;height: 450px;">
+			<div v-show="monitoringShow" class="relative" style="height: 500px">
+				<div class="chart-main" id="chart-jiankong" style="width: 977px;height: 217px;float: left;">
+
+				</div>
+				<div class="unusual-commind fr" style="width: 400px;height: 217px;margin-top: 50px;">
+					<table width="400" cellspacing="15">
+						<thead>
+							<tr>
+								<th>时间日期</th>
+								<th>事件</th>
+								<th>处理结果</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td>17-12-12 24:00:00</td>
+								<td>掉线</td>
+								<td>已自动登录</td>
+							</tr>
+							<tr>
+								<td>17-12-12 24:00:00</td>
+								<td>掉线</td>
+								<td>等待登录</td>
+							</tr>
+							<tr>
+								<td>17-12-12 24:00:00</td>
+								<td>上报失败</td>
+								<td>已补抄数据</td>
+							</tr>
+							<tr>
+								<td>17-12-12 24:00:00</td>
+								<td>上报失败</td>
+								<td>等待抄数据</td>
+							</tr>
+						</tbody>
+
+					</table>
+
+				</div >
+				<div class="shebei-log absolute" style="left: 80px;top: 300px;   ">
+					<table width="840" cellspacing="15">
+						<thead>
+						<tr>
+							<th>上线时间</th>
+							<th>掉线时间</th>
+							<th>在线时长</th>
+							<th>远程ip</th>
+							<th>端口</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>17-12-12 24:00:00</td>
+								<td>17-12-12 24:00:00</td>
+								<td>20天20小时20分钟20秒</td>
+								<td>192.192.192.192</td>
+								<td>1234</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div v-show="!monitoringShow" class="chart-main" id="chart-main" style="width: 1447px;height: 450px;">
 
 			</div>
 		</div>
@@ -310,5 +465,13 @@
 	}
 	.chart-header li.selected{
 		background-color: #fff;
+	}
+	.terminal-chart th,td{
+		text-align: center;
+		
+	}
+	.terminal-chart th{
+		background-color: #f6f6f6;
+		height: 40px;
 	}
 </style>

@@ -1,16 +1,52 @@
 <style>
-    /* 可以设置不同的进入和离开动画 */
-    /* 设置持续时间和动画函数 */
-    .slide-fade-enter-active {
-        transition: all .1s ease;
+
+    #main-sidebar {
+        width: 220px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 994px;
+        background: #19233C;
+        z-index: 9;
+        transition: width 0.3s;
+        font-size: 12px;
+        color: #fff;
+        overflow: hidden;
     }
-    .slide-fade-leave-active {
-        transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+
+    .sidebar-item, .sidebar-group {
+        position: relative;
+        padding-left: 30px;
+        border-bottom: 0.5px solid #999;
     }
-    .slide-fade-enter, .slide-fade-leave-to
-        /* .slide-fade-leave-active for below version 2.1.8 */ {
-        transform: translateX(10px);
-        opacity: 0;
+
+    .sidebar-item {
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .sidebar-group {
+        line-height: 30px;
+    }
+
+    .sidebar-group li {
+        cursor: pointer;
+    }
+
+    #main-sidebar i {
+        margin-right: 8px;
+    }
+
+    .logo {
+        width: 220px;
+        height: 80px;
+        background: url("../assets/logo.png") no-repeat center;
+        background-size: cover;
+    }
+
+    .sidebar-group ul li {
+        list-style: none;
+        padding-left: 20px;
     }
     .sidebar-group i{
         display: inline-block;
