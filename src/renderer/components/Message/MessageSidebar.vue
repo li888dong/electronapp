@@ -1,10 +1,17 @@
 <script>
 	export default {
 	    name:'messagesidebar',
+
 		data(){
 	        return{
-
+				nowPage:'xtxx'
 	        }
+		},
+		methods:{
+		    changePage(page){
+				this.nowPage = page
+			    this.$emit('nowPage',page)
+		    }
 		}
 	}
 </script>
@@ -12,16 +19,16 @@
 	<div class="message-sidebar">
 		<dl>
 			<dt>消息中心</dt>
-			<dd class="selected">系统消息</dd>
-			<dd>公司消息</dd>
-			<dd>发消息</dd>
+			<dd v-bind:class="{selected:nowPage==='xtxx'}" @click="changePage('xtxx')">系统消息</dd>
+			<dd v-bind:class="{selected:nowPage==='gsxx'}" @click="changePage('gsxx')">公司消息</dd>
+			<dd v-bind:class="{selected:nowPage==='fsxx'}" @click="changePage('fsxx')">发消息</dd>
 		</dl>
 	</div>
 </template>
-<style>
+<style scoped>
 	.message-sidebar{
 		width: 160px;
-		height: 944px;
+		height: 920px;
 		background-color: #fff;
 		float: left;
 		border: 1px solid #e5e5e5;
@@ -42,6 +49,7 @@
 	}
 	dd{
 		font-size: 14px;
+		cursor: pointer;
 	}
 	dd.selected{
 		border-top: 1px solid #e5e5e5;

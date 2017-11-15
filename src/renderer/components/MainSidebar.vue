@@ -5,7 +5,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 994px;
+        height: 1194px;
         background: #19233C;
         z-index: 9;
         transition: width 0.3s;
@@ -59,11 +59,11 @@
     <div id="main-sidebar">
         <div class="logo"></div>
         <div class="sidebar-item">
-            <router-link to="exmaple" tag="span"><i class="iconfont icon-overview"></i><span>概况</span></router-link>
+            <router-link to="home" tag="span"><i class="iconfont icon-overview"></i><span>概况</span></router-link>
         </div>
         <div class="sidebar-item">
             <i class="iconfont icon-yanjing"></i>
-            <router-link to="home" tag="span">实时监控</router-link>
+            <router-link to="exmaple" tag="span">实时监控</router-link>
         </div>
         <div class="sidebar-group">
             <i class="icon iconfont icon-xiala" v-bind:class="{rotate90:!sidebarPredictiveShow}" @click="sidebarPredictiveShow = !sidebarPredictiveShow"></i>
@@ -84,6 +84,7 @@
                 <router-link to="bid-management" tag="li"><i class="iconfont icon-zhuzhuangtutubiao"></i><span>交易概况</span></router-link>
                 <router-link to="home" tag="li"><i class="iconfont icon-kehu"></i><span>长协管理</span></router-link>
                 <router-link to="map" tag="li"><i class="iconfont icon-numberlist"></i><span>竞价管理</span></router-link>
+                <router-link to="sand-table" tag="li"><i class="iconfont icon-numberlist"></i><span>售电沙盘</span></router-link>
             </ul>
             </transition>
         </div>
@@ -109,7 +110,7 @@
         </div>
         <div class="sidebar-item" style="border-bottom: none">
             <i class="iconfont icon-shujuku"></i>
-            <span>电量数据库</span>
+            <router-link to="/database" tag="span">电量数据库</router-link>
         </div>
     </div>
 </template>

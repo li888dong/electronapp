@@ -7,7 +7,7 @@
 <template>
 	<div style="width: 900px;margin: 0 auto">
 
-		<div id="henan-map" :style="{width: '900px', height: '550px'}">
+		<div id="henan-map" :style="{width: '900px', height: '480px'}">
 
 		</div>
 	</div>

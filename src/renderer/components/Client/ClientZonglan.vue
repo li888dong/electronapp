@@ -43,7 +43,7 @@
 
 	</div>
 </template>
-<style>
+<style scoped>
 	.zonglan-header{
 		width: 1447px;
 		height: 60px;

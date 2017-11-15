@@ -17,6 +17,7 @@
                         {
                             show: true,
                             name: '户号1',
+                            symbol: 'image://http://pic.58pic.com/58pic/12/36/51/66d58PICMUV.jpg',
                             children: [
                                 {
                                     show: true,
@@ -24,7 +25,8 @@
                                     children: [
                                         {
                                            show:true,
-                                           name: '表号1'
+                                           name: '表号1',
+                                           symbol: 'image://http://pic.58pic.com/58pic/12/36/51/66d58PICMUV.jpg'
                                         }, {
                                            show:true,
                                            name: '表号2'
@@ -84,6 +86,7 @@
 	                    {
                             show: true,
                             name: '户号2',
+                            symbol: 'image://http://www.iconpng.com/png/ecommerce-business/iphone.png',
                             children: [
                                 {
                                     show: true,

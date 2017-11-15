@@ -53,6 +53,10 @@ export default new Router({
                     name: 'user-manager',
                     component: require('@/components/Client/ClientUserManage').default
                 },{
+                    path: '/database',
+                    name: 'database',
+                    component: require('@/components/Client/PowerDatabase').default
+                },{
                     path: '*',
                     redirect: '/client-detail'
                 }
@@ -62,6 +66,14 @@ export default new Router({
             path: '/add-hetong',
             name: 'addAgreement',
             component: require('@/components/Client/ClientAddAgreement').default
+        },{
+            path: '/import-data',
+            name: 'import-data',
+            component: require('@/components/Forecast/ImportData').default
+        },{
+            path: '/sand-table',
+            name: 'sand-table',
+            component: require('@/components/SandTable').default
         },
         {
             path: '/client-situation',
@@ -87,7 +99,7 @@ export default new Router({
         {
             path: '/annual-forecast',
             name: 'annual-forecast',
-            component: require('@/components/AnnualForecast').default
+            component: require('@/components/Forecast/AnnualForecast').default
         },
         {
             path: '/weather',
