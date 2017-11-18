@@ -55,7 +55,7 @@
                             color: ['#e0ffff', '#006edd']
                         },
                         calculable: true,
-	                    right:150,
+	                    right:220,
 	                    bottom:110,
 	                    orient:'horizontal'
                     },
@@ -77,6 +77,7 @@
                                 label: {
                                     show: true
                                 },
+                                areaColor: '#006edd',
                                 shadowColor: 'rgba(0, 0, 0, 0.5)',
                                 shadowBlur: 20
                             }

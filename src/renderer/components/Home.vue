@@ -134,11 +134,10 @@
 
 <script>
 
-    import RealTimePowerChart from '@/components/RealTimePowerChart.vue'
-    import TradePi from '@/components/TradePi.vue'
-    import PowerTimeFrameProgress from '@/components/PowerTimeFrameProgress.vue'
+    import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
+    import TradePi from '@/components/Home/TradePi.vue'
+    import PowerTimeFrameProgress from '@/components/Home/PowerTimeFrameProgress.vue'
     import CompletionRate from '@/components/CompletionRate.vue'
-    import HomeCalendar from '@/components/HomeCalendar.vue'
     import FiveData from '@/components/Home/FiveData'
     import WorkRemind from '@/components/Home/WorkRemind'
     import DataIndex from '@/components/Home/DataIndex'
@@ -191,7 +190,6 @@
             'trade-pi': TradePi,
             'power-time-frame-progress': PowerTimeFrameProgress,
             'completion-rate': CompletionRate,
-            'home-calendar': HomeCalendar,
             'five-data':FiveData,
             'work-remind':WorkRemind,
             'data-index':DataIndex,

@@ -1,5 +1,5 @@
 <script>
-	import HomeCalendar from '@/components/HomeCalendar'
+	import HomeCalendar from '@/components/Home/HomeCalendar'
 	export default {
 	    name:'processplan',
 		data(){

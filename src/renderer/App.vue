@@ -40,15 +40,16 @@
 	.main-container{
 		width: 1700px;
 		height: 900px;
-		padding: 0 18px;
+		padding: 0 20px;
 		overflow: hidden;
 	}
 	.main-container .title{
 		display: inline-block;
+		font-size: 16px!important;
 		margin: 0 0 5px 15px;
 	}
 	.main-container-panel{
-		width: 1664px;
+		width: 1655px;
 
 		background-color: #fff;
 	}
@@ -57,7 +58,6 @@
 		font-weight: bold;
 		font-size: 16px;
 		height: 50px;
-		line-height: 50px;
 		padding-left: 15px;
 		border-bottom: 1px solid #e5e5e5;
 	}
@@ -174,13 +174,13 @@
 	}
 
 	.flex-row {
-		display: flex;
+		display: flex!important;
 		flex-flow: row nowrap;
 		justify-content: space-around;
 	}
 
 	.flex-col {
-		display: flex;
+		display: flex!important;
 		flex-flow: column nowrap;
 		justify-content: space-around;
 	}

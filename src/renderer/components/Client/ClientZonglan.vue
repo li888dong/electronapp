@@ -2,9 +2,9 @@
 	import ClientHeader from './ClientHeader'
 	import ClientSider from './ClientSidebar'
 	import CompanyPowerProgress from '@/components/Home/PowerUse'
-	import JieXianTu from '@/components/JieXianTu'
-	import PowerTimeframe from '@/components/PowerTimeframeProgress'
-    import RealTimePowerChart from '@/components/RealTimePowerChart.vue'
+	import JieXianTu from '@/components/Client/JieXianTu'
+	import PowerTimeframe from '@/components/Home/PowerTimeframeProgress'
+    import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
     import LineChart from '@/components/LineChart.vue'
 
     export default {

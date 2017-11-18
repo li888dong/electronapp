@@ -1,5 +1,20 @@
 <style>
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title,
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover,
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened{
+        background-color: #19233C;
+    }
 
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu):hover{
+        background-color: #000 !important;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover {
+        background-color: #000 !important;
+    }
+
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title-active:not(.ivu-menu-submenu) {
+        color: #ffffff;
+    }
     #main-sidebar {
         width: 220px;
         position: fixed;
@@ -57,61 +72,119 @@
 </style>
 <template>
     <div id="main-sidebar">
-        <div class="logo"></div>
-        <div class="sidebar-item">
-            <router-link to="home" tag="span"><i class="iconfont icon-overview"></i><span>概况</span></router-link>
-        </div>
-        <div class="sidebar-item">
-            <i class="iconfont icon-yanjing"></i>
-            <router-link to="exmaple" tag="span">实时监控</router-link>
-        </div>
-        <div class="sidebar-group">
-            <i class="icon iconfont icon-xiala" v-bind:class="{rotate90:!sidebarPredictiveShow}" @click="sidebarPredictiveShow = !sidebarPredictiveShow"></i>
-            <span>预测分析</span>
-            <transition name="slide-fade">
-                <ul id="sidebar-predictive" v-show="sidebarPredictiveShow">
-                    <router-link to="weather" tag="li"><i class="iconfont icon-shebei"></i><span>预测概况</span></router-link>
-                    <router-link to="annual-forecast" tag="li"><i class="iconfont icon-xieyi"></i><span>年度预测</span></router-link>
-                    <router-link to="cart" tag="li"><i class="iconfont icon-shujuku"></i><span>月度预测</span></router-link>
-                </ul>
-            </transition>
-        </div>
-        <div class="sidebar-group">
-            <i class="icon iconfont icon-xiala" v-bind:class="{rotate90:!sidebarTransactionTanagementShow}"  @click="sidebarTransactionTanagementShow = !sidebarTransactionTanagementShow"></i>
-            <span>交易管理</span>
-            <transition name="slide-fade">
-            <ul id="sidebar-transaction-management" v-show="sidebarTransactionTanagementShow">
-                <router-link to="bid-management" tag="li"><i class="iconfont icon-zhuzhuangtutubiao"></i><span>交易概况</span></router-link>
-                <router-link to="home" tag="li"><i class="iconfont icon-kehu"></i><span>长协管理</span></router-link>
-                <router-link to="map" tag="li"><i class="iconfont icon-numberlist"></i><span>竞价管理</span></router-link>
-                <router-link to="sand-table" tag="li"><i class="iconfont icon-numberlist"></i><span>售电沙盘</span></router-link>
-            </ul>
-            </transition>
-        </div>
-        <div class="sidebar-group">
-            <i class="icon iconfont icon-xiala" v-bind:class="{rotate90:!sidebarCustomerSeviceShow}"  @click="sidebarCustomerSeviceShow = !sidebarCustomerSeviceShow"></i>
-            <span>客户中心</span>
-            <transition name="slide-fade">
-            <ul id="sidebar-customer-sevice" v-show="sidebarCustomerSeviceShow">
-                <router-link to="/client-situation" tag="li"><i class="iconfont icon-bcc"></i><span>客户概况</span></router-link>
-                <router-link to="/client-list" tag="li"><i class="iconfont icon-bcc"></i><span>客户详情</span></router-link>
-            </ul>
-            </transition>
-        </div>
-        <div class="sidebar-group">
-            <i class="icon iconfont icon-xiala" v-bind:class="{rotate90:!sidebarEquipmentControlShow}"  @click="sidebarEquipmentControlShow = !sidebarEquipmentControlShow"></i>
-            <span>设备管理</span>
-            <transition name="slide-fade">
-            <ul id="sidebar-equipment-control" v-show="sidebarEquipmentControlShow">
-                <router-link to="echarts-demo/demo2" tag="li"><i class="iconfont icon-bcc"></i><span>设备概况</span></router-link>
-                <router-link to="" tag="li"><i class="iconfont icon-bcc"></i><span>资产信息</span></router-link>
-            </ul>
-            </transition>
-        </div>
-        <div class="sidebar-item" style="border-bottom: none">
-            <i class="iconfont icon-shujuku"></i>
-            <router-link to="/database" tag="span">电量数据库</router-link>
-        </div>
+        <Row>
+            <Col span="24">
+                <div class="logo">
+
+                </div>
+            </Col>
+            <Col span="24">
+            <Menu :theme="'dark'" :open-names="['1']" accordion style="width: 220px;background-color: #19233C;">
+                <MenuItem name="01" >
+                    <router-link to="/home" tag="div"><i class="iconfont icon-zonglan-hui"></i><span>概况</span>
+                    </router-link>
+                </MenuItem>
+                <MenuItem name="02" ><i class="iconfont icon-yanjing"></i><router-link to="/button" tag="span"><span>概况</span>
+                </router-link></MenuItem>
+                <Submenu name="1">
+                    <template slot="title">
+                        <Icon type="ios-people"></Icon>
+                        客户中心
+                    </template>
+                    <MenuItem name="1-1">
+                        <router-link to="/client-situation" tag="div"><i class="iconfont icon-kehu"></i><span>客户概况</span>
+                        </router-link>
+                    </MenuItem>
+                    <MenuItem name="1-2">
+                        <router-link to="/client-list" tag="div"><i class="iconfont icon-numberlist"></i><span>客户列表</span>
+                        </router-link>
+                    </MenuItem>
+                </Submenu>
+                <Submenu name="2">
+                    <template slot="title">
+                        <i class="iconfont icon-fenxi"></i>
+                        预测分析
+                    </template>
+                    <MenuItem name="2-1">
+                        <router-link to="UserForecast" tag="div"><i class="iconfont icon-fenxi"></i><span>用户申报</span>
+                        </router-link>
+                    </MenuItem>
+                    <MenuItem name="2-2">
+                        <router-link to="annual-forecast" tag="div"><i class="iconfont icon-xieyi"></i><span>年度预测</span>
+                        </router-link>
+                    </MenuItem>
+                    <MenuItem name="2-3">
+                        <router-link to="MonthForecast" tag="div"><i class="iconfont icon-shujuku"></i><span>月度预测</span>
+                        </router-link>
+                    </MenuItem>
+                </Submenu>
+                <Submenu name="3">
+                    <template slot="title">
+                        <i class="iconfont icon-jiaoyiguanli"></i>
+                        交易管理
+                    </template>
+                    <MenuItem name="3-1">
+                        <router-link to="trade-situation" tag="li"><i
+                                class="iconfont icon-jiaoyiguanli"></i><span>交易概况</span>
+                        </router-link>
+
+                    </MenuItem>
+                    <MenuItem name="3-3">
+                        <router-link to="bid-management" tag="li"><i class="iconfont icon-zhuzhuangtutubiao"></i><span>竞价管理</span>
+                        </router-link>
+
+                    </MenuItem>
+                    <MenuItem name="3-2">
+                        <router-link to="changxie-management" tag="li"><i class="iconfont icon-xieyi"></i><span>长协管理</span>
+                        </router-link>
+
+                    </MenuItem>
+
+                    <MenuItem name="3-4">
+                        <router-link to="matching-management" tag="li"><i
+                                class="iconfont icon-pipei"></i><span>交易匹配管理</span>
+                        </router-link>
+
+                    </MenuItem>
+
+
+                </Submenu>
+                <Submenu name="4">
+                    <template slot="title">
+                        <i class="iconfont icon-shebei1"></i>
+                        设备管理
+                    </template>
+
+
+                    <MenuItem name="4-1">
+                        <router-link to="/equipment" tag="li"><i class="iconfont icon-shebei"></i><span>设备概况</span></router-link>
+
+                    </MenuItem>
+                    <MenuItem name="4-2">
+                        <router-link to="/AssetInfo" tag="li"><i class="iconfont icon-lifangti"></i><span>资产信息</span></router-link>
+
+                    </MenuItem>
+
+                </Submenu>
+                <MenuItem name="03" >
+                    <router-link to="index-compare" tag="li"><i class="iconfont icon-xingzhuang"></i><span>行业指数</span>
+                    </router-link>
+                </MenuItem>
+                <MenuItem name="04" >
+                    <router-link to="sand-table" tag="li"><i class="iconfont icon-qizi"></i><span>售电沙盘</span>
+                    </router-link>
+                </MenuItem>
+                <MenuItem name="05" >
+                    <router-link to="/database" tag="div"><i class="iconfont icon-shujuku1"></i><span>电量数据库</span></router-link>
+                </MenuItem>
+                <!--<router-link to="/ContractManagement" tag="li"><i class="iconfont icon-bcc"></i><span>合同信息</span></router-link>-->
+                <!--<router-link to="/AddContractManagement" tag="li"><i class="iconfont icon-bcc"></i><span>添加长协合同</span></router-link>-->
+                <MenuItem name="06" >
+                    <router-link to="/ContractManagement" tag="li"><i class="iconfont icon-wenjianjia"></i><span>合同信息</span></router-link>
+                </MenuItem>
+            </Menu>
+            </Col>
+        </Row>
     </div>
 </template>
 <script>
@@ -119,10 +192,7 @@
         name: 'mainsidebar',
         data(){
             return{
-                sidebarPredictiveShow:true,
-                sidebarTransactionTanagementShow:true,
-                sidebarCustomerSeviceShow:true,
-                sidebarEquipmentControlShow:true
+
             }
         }
     }

@@ -10,11 +10,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+
+// 重置iVew样式
+import '../../static/myiVew.css'
 // 引入mock测试数据
 
 
 import '../../static/normalize.css'
-import '../../static/iconfont.css'
+import '../../static/font/iconfont.css'
 import '../../static/dateformat'
 
 Vue.use(iView);

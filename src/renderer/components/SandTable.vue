@@ -20,6 +20,14 @@
 			</div>
 			<div class="map">
 				<henan-map></henan-map>
+				<div class="btn-group relative" style="bottom: 120px">
+					<button class="button btnSelected">年度</button>
+					<button class="button ">月度</button>
+					<button class="button ">上一年</button>
+					<button class="button btnSelected">2017年6月</button>
+					<button class="button ">下一月</button>
+
+				</div>
 			</div>
 			<div class="market-shares">
 				<div class="btn-group" style="margin-left: 300px;">
@@ -46,46 +54,46 @@
 			<div class="list-container">
 				<h3 class="title">公司区域购电量Top10</h3>
 				<ul>
-					<li>1.<span class="area">南阳市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>2.<span class="area">信阳市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>3.<span class="area">洛阳市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>4.<span class="area">驻马店</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>5.<span class="area">周口市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>6.<span class="area">商丘市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>7.<span class="area">三门峡</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>8.<span class="area">新乡市</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>9.<span class="area">平顶山</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li>10.<span class="area">郑州市</span><span class="rate">55%</span><span class="bar"></span></li>
+					<li><span class="rank">1.</span><span class="area">南阳市</span><span class="bar"></span></li>
+					<li><span class="rank">2.</span><span class="area">信阳市</span><span class="bar"></span></li>
+					<li><span class="rank">3.</span><span class="area">洛阳市</span><span class="bar"></span></li>
+					<li><span class="rank">4.</span><span class="area">驻马店</span><span class="bar"></span></li>
+					<li><span class="rank">5.</span><span class="area">周口市</span><span class="bar"></span></li>
+					<li><span class="rank">6.</span><span class="area">商丘市</span><span class="bar"></span></li>
+					<li><span class="rank">7.</span><span class="area">三门峡</span><span class="bar"></span></li>
+					<li><span class="rank">8.</span><span class="area">新乡市</span><span class="bar"></span></li>
+					<li><span class="rank">9.</span><span class="area">平顶山市</span><span class="bar"></span></li>
+					<li><span class="rank">10.</span><span class="area">郑州市</span><span class="bar"></span></li>
 				</ul>
 			</div>
 			<div class="list-container">
 				<h3 class="title">签约企业用电量Top10</h3>
 				<ul>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">1.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">2.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">3.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">4.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">5.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">6.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">7.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">8.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">9.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">10.</span><span class="rate">55%</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">1.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">2.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">3.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">4.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">5.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">6.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">7.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">8.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">9.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">10.</span><span class="rate">33</span><span class="bar"></span></li>
 				</ul>
 			</div>
 			<div class="list-container">
 				<h3 class="title">客户申报电量偏差Top10</h3>
 				<ul>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">1.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">2.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">3.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">4.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">5.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">6.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">7.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">8.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">9.</span><span class="rate">55%</span><span class="bar"></span></li>
-					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">10.</span><span class="rate">55%</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">1.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">2.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">3.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">4.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">5.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">6.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">7.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">8.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">9.</span><span class="rate">6121</span><span class="bar"></span></li>
+					<li><span class="company-name">河南众企联合售电有限公司</span><span class="rank">10.</span><span class="rate">33</span><span class="bar"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -139,6 +147,8 @@
 		text-overflow : ellipsis
 	}
 	.rate{
+		min-width: 30px;
+		text-align: right;
 		margin-left: 10px;
 		color:  #48C3F3;
 	}
@@ -161,5 +171,8 @@
 	}
 	.list-container:not(:nth-child(1)){
 		margin-left: 180px;
+	}
+	.area{
+		min-width: 60px;
 	}
 </style>

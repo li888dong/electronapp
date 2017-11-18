@@ -1,0 +1,175 @@
+/* 输入框*/
+.myInput input{
+    width: 280px;
+    height: 34px;
+    border-radius: 0;
+}
+/*文本域状态,使用时 *** + .myTextarea 前面加上父级文件名称（否则优先级不够）*/
+.myTextarea textarea{
+    width: 700px;
+    height: 102px;
+    resize:none;
+}
+
+/* 地市选择器 */
+.mySelect{
+    width: 100px;
+    height: 34px;
+}
+.mySelect .ivu-select-selection .ivu-select-placeholder, .mySelect .ivu-select-selection .ivu-select-selected-value{
+    height: 32px;
+    line-height: 32px;
+}
+.mySelect .ivu-select-selection{
+    height: 34px;
+    border-radius: 0;
+}
+/*弹出的修改框居中显示*/
+.vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+
+}
+/*重置按钮样式  Button组件中有例子*/
+.ivu-btn{
+    position: relative;
+}
+.ivu-btn span{
+    position: relative;
+    z-index: 10;
+}
+.ivu-btn-primary{
+    background-color: #0089F0!important;
+    color: #fff!important;
+}
+.ivu-btn-info{
+    background-color: #ffffff!important;
+    color: #0089F0!important;
+
+}
+.ivu-btn-info.disabled{
+    border:1px solid #0089F0;
+    border-radius: 4px;
+    opacity: 0.5;
+}
+.ivu-btn-info.disabled:hover{
+    opacity: 0.5;
+    border:1px solid #0089F0;
+    border-radius: 4px;
+}
+.ivu-btn-info.disabled:hover:after{
+    display: none!important;
+}
+.ivu-btn-info.disabled:after{
+    display: none!important;
+}
+.ivu-btn-success{
+    background-color: #31C9D7!important;
+    color: #fff!important;
+}
+.ivu-btn-error{
+    background-color: #F35E7A!important;
+    color: #fff!important;
+}
+.ivu-btn-default:hover{
+    color: inherit;
+    border-color: rgb(221, 222, 225)!important;
+    opacity: 0.8;
+}
+.ivu-btn-info:hover:after{
+    display: none!important;
+}
+.ivu-btn:hover:after{
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.1);
+    color: #ffffff;
+    content: "";
+}
+
+.ivu-btn.disabled:after{
+    display: inline-block;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    background-color: #fff;
+    opacity: 0.6;
+    content: "";
+}
+
+/*全局tab样式 button组件中有例子*/
+.my-tab{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px;
+    margin: 0;
+    text-align: center;
+    height: 30px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight:normal;
+}
+.my-tab-disabled{
+    background-color:#F57E6A;
+    color: #ffffff;
+    border: 1px solid transparent;
+}
+.my-tab-normal{
+    background-color:#F8F8F8;
+    color: #000;
+    border: 1px solid #CACACA;
+}
+.my-tab-hl{
+    background-color:#DEDEDE;
+    color: #8D8D8D;
+    border: 1px solid #CACACA;
+}
+.my-tab-zd{
+    background-color: #31C9D7;
+    color: #ffffff;
+}
+
+
+/*!*重置table样式*!*/
+/*.ivu-table table th,*/
+/*.ivu-table table td {*/
+    /*text-align: center;*/
+    /*height: 36px;*/
+    /*line-height: 35px;*/
+/*}*/
+/*!*最后一个th td大小自适应*!*/
+/*.ivu-table table tr th:nth-last-child(1),*/
+/*.ivu-table table tr td:nth-last-child(1){*/
+    /*flex: 1;*/
+/*}*/
+/*!*需要手动定义宽度,在定义table外容器时，需要同时设置其内部tr宽度，值为容器宽-1*!*/
+/*.ivu-table tr{*/
+    /*display: flex;*/
+    /*flex-flow: row nowrap;*/
+    /*justify-content: flex-start;*/
+/*}*/
+/*!*在这里控制th和td的宽度*!*/
+/*.ivu-table th,.ivu-table td{*/
+    /*color: #ffffff;*/
+    /*display: inline-block;*/
+    /*width: 105px;*/
+/*}*/
+.ivu-table th{
+    background-color: #4FA8F9;
+    text-align: center;
+    color: #fff;
+    font-weight:500;
+}
+.ivu-table td{
+    text-align: center;
+}
+/*.ivu-table td{*/
+    /*color: #202020;*/
+/*}*/

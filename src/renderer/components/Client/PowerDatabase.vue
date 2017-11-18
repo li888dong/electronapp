@@ -11,7 +11,10 @@
                         trigger: 'axis'
                     },
                     legend: {
-                        data:['意向']
+                        data:[{
+                            name:'实际用电量',
+	                        icon:'rect'
+                        }]
                     },
                     backgroundColor:'#fff',
                     calculable : true,
@@ -27,13 +30,25 @@
                             type : 'value'
                         }
                     ],
+	                dataZoom:{
+
+	                },
+                    color:['#48C3F3'],
                     series : [
 
                         {
-                            name:'意向',
+                            name:'实际用电量',
                             type:'line',
                             smooth:true,
-                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+
+                            itemStyle: {
+                                normal: {
+	                                areaStyle: {
+		                                type: 'default',
+			                            color:'#EBF7FC'
+	                                }
+	                            }
+                            },
                             data:[1320, 1132, 601, 234, 120, 90, 20]
                         }
                     ]
