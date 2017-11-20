@@ -7,51 +7,57 @@
 		margin:0 20px;
 		height: 30px;
 		z-index: 999;
+		padding-bottom: 50px;
 	}
 
 	.power-load-chart .typeSwich li {
-		margin-left: 20px;
+		margin-right: 40px;
 		width: 24px;
 		height: 24px;
 		float: right;
-		border-radius: 50%;
-		background-color: #eeeeee;
-		border: 1px solid #999;
-		text-align: center;
-		line-height: 24px;
-		cursor: pointer;
-		color: #828282;
+		/*border-radius: 50%;*/
+		/*background-color: #eeeeee;*/
+		/*border: 1px solid #999;*/
+		/*text-align: center;*/
+		/*line-height: 24px;*/
+		/*cursor: pointer;*/
+		/*color: #828282;*/
 	}
 	.power-load-chart .typeSwich .btnSelected{
 
 	}
 	.danwei{
+		position: relative;
+		top: 20px;
+		left: 225px;
 		border: none!important;
-		background-color: #fff!important;
+		background-color: transparent!important;
 	}
 	.danwei span{
 		position: absolute;
-		top: 30px;
-		right: 20px;
+		top: 40px;
+		right: -20px;
 		color: #868686;
+		width: 100px;
 
 	}
 </style>
 <template>
 	<div class="relative">
 		<ul class="absolute typeSwich btn-group">
-			<li v-bind:class="{btnSelected:powerRealtimeType==='月'}" class="btn" @click="powerRealtimeTypeSwitch('月')">
-				月
+			<li>
+				<Button v-bind:type="powerRealtimeType==='月'?'primary':'default'" @click="powerRealtimeTypeSwitch('月')">月</Button>
 			</li>
-			<li v-bind:class="{btnSelected:powerRealtimeType==='日'}" class="btn" @click="powerRealtimeTypeSwitch('日')">
-				日
+			<li>
+				<Button v-bind:type="powerRealtimeType==='日'?'primary':'default'" @click="powerRealtimeTypeSwitch('日')">日</Button>
 			</li>
-			<li v-bind:class="{btnSelected:powerRealtimeType==='15'}" class="btn"
-			    @click="powerRealtimeTypeSwitch('15')">15
+			<li>
+				<Button v-bind:type="powerRealtimeType==='15'?'primary':'default'" @click="powerRealtimeTypeSwitch('15')">15</Button>
 			</li>
+
 			<li class="danwei"><span>单位Mw.h</span></li>
 		</ul>
-		<div id="powerChart" :style="{width: '1662px', height: '383px',margin:'0 auto'}">
+		<div id="powerChart" :style="{width: chartWidth+'px', height: chartHeight+'px'}">
 
 		</div>
 	</div>
@@ -62,8 +68,11 @@
 
     export default {
         name: 'powerChart',
+	    props:['cwidth','cheight'],
         data() {
             return {
+                chartWidth:1000,
+	            chartHeight:400,
                 powerRealtimeType: '15',
                 powerdata: [],
                 powerdate: [],
@@ -71,7 +80,7 @@
                     title: {
                         text: "实时电量负荷",
 	                    textStyle:{
-                            fontSize:'14'
+                            fontSize:'16'
                         },
 	                    left:'5',
 	                    top:'5'
@@ -84,12 +93,12 @@
                     },
                     legend: {
                         left:20,
-	                    top:42,
+	                    top:62,
 	                    itemWidth:14,
                         data: ['申报电量', '预测电量','长协购电量','竞价购电量', '实时电量', '谷段电量', '平段电量','峰段电量',]
                     },
                     grid: {
-                        top:'20%',
+                        top:'110',
                         left: '20',
                         right: '3%',
                         bottom: '3%',
@@ -165,6 +174,10 @@
                 }
             }
         },
+	    beforeMount(){
+            this.chartWidth = this.cwidth;
+            this.chartHeight = this.cheight;
+	    },
         mounted() {
             this.initData();
             this.drawLine(this.chartOption1);

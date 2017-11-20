@@ -1,16 +1,16 @@
 <style>
 	.powerTimeFrame {
 		margin: 0 0 0 0;
-		padding:  5px 5px;
+		padding: 5px 5px;
 		box-sizing: border-box;
 		background-color: #fff;
-		height: 202px;
-		width: 399px;
+		height: 199px;
+		width: 424px;
 	}
 </style>
 <template>
 	<div class="data-pannel powerTimeFrame">
-		<div id="powerTimeFrame" :style="{width: '399px', height: '202px'}">
+		<div id="powerTimeFrame" :style="{width: '424px', height: '199px'}">
 
 		</div>
 	</div>
@@ -26,8 +26,8 @@
                     title: {
                         text: '交易分布',
                         textStyle: {
-                            fontSize:14,
-	                        fontWeight:'bolder'
+                            fontSize: 14,
+                            fontWeight: 'bolder'
 
                         }
                     },
@@ -38,9 +38,9 @@
                     },
                     legend: {
                         orient: 'vertical',
-	                    right:'40',
-	                    top:'30',
-                        itemWidth:14,
+                        right: '40',
+                        top: '30',
+                        itemWidth: 14,
                         data: ['市场竞价(月)', '长协(月)', '市场竞价(年)', '长协(年)']
                     },
                     series: [
@@ -49,20 +49,16 @@
                             type: 'pie',
                             selectedMode: 'single',
                             radius: ['0', '45px'],
-                            center:['115','105'],
-//              itemStyle:{
-//                normal:{
-//                    color:['#ab7aee','#31c9d7']
-//                },
-//                emphasis:{
-//                    color:['#ab7aee','#31c9d7']
-//                }
-//              },
-//              color:['#ab7aee','#31c9d7'],
-
+                            center: ['115', '105'],
+                            itemStyle: {
+                                normal: {
+                                    offset:5
+                                },
+                                emphasis: {}
+                            },
                             label: {
                                 normal: {
-                                    show:false
+                                    show: false
                                 }
                             },
 
@@ -99,10 +95,10 @@
                             radius: ['65px', '80px'],
                             label: {
                                 normal: {
-                                    show:false
+                                    show: false
                                 }
                             },
-                            center:['115','105'],
+                            center: ['115', '105'],
                             data: [
                                 {
                                     value: 335,
@@ -129,14 +125,6 @@
                                     }
                                 },
                             ]
-//                itemStyle:{
-//                  normal:{
-//                      color:['#edb00d','#4fa8f9']
-//                  },
-//                    emphasis:{
-//                        color:['#d69d02','#3077b9']
-//                    }
-//                }
                         }
                     ]
                 }

@@ -95,7 +95,7 @@
 		position: relative;
 		padding: 10px 20px 10px 20px;
 		margin-left: 20px;
-		margin-top: 15px;
+		margin-top: 20px;
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -103,7 +103,7 @@
 	.data-panel .title {
 		margin: 0;
 		padding: 0;
-		font-size: 14px !important;
+		font-size: 16px !important;
 		color: #404040;
 	}
 

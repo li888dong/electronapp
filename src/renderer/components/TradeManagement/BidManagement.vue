@@ -5,13 +5,51 @@
 	    name:'bidmanagement',
 		data(){
 	        return{
-				mockSelected:'0'
+				mockSelected:'0',
+		        dcmc:'',
+		        gyl:'',
+		        bj:'',
+		        mockDatas:[
+			        {
+			            rank:'1',
+			            name:'汕头华能南澳风力发电有限公司',
+				        gongying:'123.321',
+				        baojia:'123.321',
+				        caozuo:'修改',
+			        },{
+                        rank:'1',
+
+                        name:'汕头华能南澳风力发电有限公司',
+				        gongying:'123.321',
+				        baojia:'123.321',
+				        caozuo:'修改',
+			        },{
+				        rank:'1',
+                        name:'汕头华能南澳风力发电有限公司',
+				        gongying:'123.321',
+				        baojia:'123.321',
+				        caozuo:'修改',
+			        },{
+                        rank:'1',
+
+                        name:'汕头华能南澳风力发电有限公司',
+				        gongying:'123.321',
+				        baojia:'123.321',
+				        caozuo:'修改',
+			        },
+		        ]
 	        }
 		},
 		methods:{
 		    switchSelected(type){
 		        this.mockSelected = type
-		    }
+		    },
+            modifyData(data){
+		        console.log(data);
+		        this.dcmc = data.name;
+		        this.gyl = data.gongying;
+		        this.bj = data.baojia
+            }
 		},
 		components:{
 		    'bid-chart':BidChart,
@@ -52,34 +90,21 @@
 				<span v-bind:class="{selected:mockSelected==='1'}" @click="switchSelected('1')">添加需求侧价格</span>
 			</div>
 			<div class="input-container">
-				<input v-if="mockSelected === '0'" type="text" placeholder="电厂名称">
-				<input v-if="mockSelected === '1'" type="text" placeholder="售电公司名称">
-				<input type="text" placeholder="报价(元/Kw时)">
+				<input v-if="mockSelected === '0'" type="text" placeholder="电厂名称" v-model="dcmc">
+				<input v-if="mockSelected === '0'" type="text" placeholder="供应量" v-model="gyl">
+				<input v-if="mockSelected === '1'" type="text" placeholder="售电公司名称" v-model="dcmc">
+				<input v-if="mockSelected === '1'" type="text" placeholder="需求量" v-model="gyl">
+				<input type="text" placeholder="报价(元/Kw时)" v-model="bj">
 				<div v-if="mockSelected === '0'" class="btn-group"><button class="button btnSelected">保存</button></div>
 				<div v-if="mockSelected === '1'" class="btn-group"><button class="button btnSelected">保存</button></div>
 			</div>
-			<table>
-				<tbody>
-				<tr>
-					<td>1</td>
-					<td>汕头华能南澳风力发电有限公司</td>
-					<td style="width: 100px">123.12</td>
-					<td>修改</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>汕头华能南澳风力发电有限公司</td>
-					<td style="width: 100px">123.12</td>
-					<td>修改</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>汕头华能南澳风力发电有限公司</td>
-					<td style="width: 100px">123.12</td>
-					<td>修改</td>
-				</tr>
-				</tbody>
-			</table>
+			<ul v-for="mockData in mockDatas">
+					<li>{{mockData.rank}}</li>
+					<li class="name">{{mockData.name}}</li>
+					<li class="gongying">{{mockData.gongying}}</li>
+					<li class="baojia">{{mockData.baojia}}</li>
+					<li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
+			</ul>
 		</div>
 	</div>
 </template>
@@ -133,18 +158,36 @@
 	.input-container input{
 		border: 1px solid #999999;
 		margin-left: 10px;
-		width: 100px;
+		width: 80px;
 		height: 30px;
 		text-align: center;
+		outline: none;
 	}
 	.input-container input:nth-child(1){
-		width: 150px;
+		width: 100px;
 	}
-	.mock-trading table{
-		margin-left: 20px;
-	}
-	.mock-trading td{
-		text-align: center;
+	.mock-trading ul{
 		height: 30px;
+		margin-top: 10px;
+	}
+	.mock-trading li{
+		float: left;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		margin-left: 20px;
+		text-align: center;
+	}
+	li.name{
+		width: 80px;
+	}
+	li.gongying{
+		width: 70px;
+	}
+	li.baojia{
+		width:80px;
+	}
+	li.caozuo{
+		cursor: pointer;
 	}
 </style>

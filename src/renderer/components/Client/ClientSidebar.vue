@@ -3,7 +3,33 @@
 	    name:'clientsidebar',
 		data(){
 	        return{
-
+				companyList:[
+					{
+					    name:'河南众企联合售电有限公司',
+						id:'123456789987654321',
+						avatar:''
+					},
+					{
+					    name:'河南众企联合售电有限公司',
+						id:'123456789987654321',
+						avatar:''
+					},
+					{
+					    name:'河南众企联合售电有限公司',
+						id:'123456789987654321',
+						avatar:''
+					},
+					{
+					    name:'河南众企联合售电有限公司',
+						id:'123456789987654321',
+						avatar:''
+					},
+					{
+					    name:'河南众企联合售电有限公司',
+						id:'123456789987654321',
+						avatar:''
+					},
+				]
 	        }
 		}
 	}
@@ -16,12 +42,13 @@
 		</div>
 		<div class="company-list">
 			<ul>
-				<li>河南众企联合售电有限公司</li>
-				<li>河南众企联合售电有限公司</li>
-				<li class="selected">河南众企联合售电有限公司</li>
-				<li>河南众企联合售电有限公司</li>
-				<li>河南众企联合售电有限公司</li>
-				<li>河南众企联合售电有限公司</li>
+				<li class="relative" v-for="item in companyList">
+					<div class="avator absolute" style="left: 2px;top: 6px;width: 40px;height: 40px;line-height: 43px;text-align: center;">
+						<i class="iconfont icon-touxiang2" style="font-size: 36px!important;"></i>
+					</div>
+					<p>{{item.name}}</p>
+					<p>{{item.id}}</p>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -30,7 +57,6 @@
 	.client-sidebar{
 		width: 205px;
 		height: 940px;
-
 		background-color: #fff;
 		display: inline-block;
 		vertical-align: top;
@@ -62,14 +88,14 @@
 		width: 205px;
 
 	}
-	.company-list li.selected{
-		background-color: #108CEE;
-		color: white;
+	.company-list li:nth-of-type(1){
+		background-color: #E0EBF7;
 	}
 	.company-list li{
 		width: 205px;
-		height: 28px;
-		text-align: center;
+		padding-left: 50px;
+		height: 55px;
+		text-align: left;
 		overflow: hidden;
 		line-height: 28px;
 		word-wrap: break-word;

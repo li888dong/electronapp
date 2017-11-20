@@ -3,9 +3,11 @@
 	import ClientSider from './ClientSidebar'
 	import CompanyPowerProgress from '@/components/Home/PowerUse'
 	import JieXianTu from '@/components/Client/JieXianTu'
-	import PowerTimeframe from '@/components/Home/PowerTimeframeProgress'
+	import PowerTimeframe from '@/components/Home/PowerTimeframeYM'
     import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
-    import LineChart from '@/components/LineChart.vue'
+    import LineChart1 from '@/components/LineChart1.vue'
+    import LineChart2 from '@/components/LineChart2.vue'
+    import LineChart3 from '@/components/LineChart3.vue'
 
     export default {
 	    name:'zonglan',
@@ -20,26 +22,32 @@
 			'company-power-progress':CompanyPowerProgress,
 			'jiexiantu':JieXianTu,
             'power-timeframe':PowerTimeframe,
-			'line-chart':LineChart,
+			'line-chart1':LineChart1,
+			'line-chart2':LineChart2,
+			'line-chart3':LineChart3,
 			'client-header':ClientHeader
 		}
 	}
 </script>
 <template>
 	<div class="main-container">
-		<client-header></client-header>
-		<!-- b
-		--><div class="zonglan-container">
+		<div class="zonglan-container">
+			<jiexiantu></jiexiantu><!-- b
+		--><company-power-progress></company-power-progress>
+			<div style="display: inline-block;margin-left: 20px;">
 
-			<company-power-progress></company-power-progress>
-			<jiexiantu></jiexiantu>
-			<power-timeframe></power-timeframe>
-			<div class="chart-container">
-				<real-time-power-chart></real-time-power-chart>
+				<power-timeframe baseWidth="383"></power-timeframe>
 			</div>
-			<line-chart></line-chart>
+			<div class="chart-container power-load-chart">
+				<real-time-power-chart cwidth="1447" cheight="349"></real-time-power-chart>
+			</div>
+			<div class="flex-row" style="justify-content: flex-start">
+				<line-chart1></line-chart1>
+				<line-chart2></line-chart2>
+				<line-chart3></line-chart3>
+			</div>
+
 		</div>
-		<client-sider></client-sider>
 
 	</div>
 </template>
@@ -78,7 +86,7 @@
 		overflow: hidden;
 		box-sizing: border-box;
 		float: right;
-		margin-top: 60px;
+		margin-top: 40px;
 		margin-right: -12px;
 	}
 	.chart-container{
@@ -86,40 +94,7 @@
 		margin-top: 15px;
 		background-color: #fff;
 	}
-	ul.typeSwich{
-		border-bottom: solid 1px #eee;
-		right: 0;
-		left: 0;
-		top: 10px;
-		margin:0 20px;
-		height: 30px;
-		z-index: 999;
-	}
-	ul.typeSwich li {
-		margin-left: 20px;
-		width: 24px;
-		height: 24px;
-		float: right;
-		border-radius: 50%;
-		background-color: #eeeeee;
-		border: 1px solid #999;
-		text-align: center;
-		line-height: 24px;
-		cursor: pointer;
-		color: #828282;
-	}
-	ul.typeSwich .btnSelected{
-
-	}
-	.danwei{
-		border: none!important;
-		background-color: #fff!important;
-	}
-	.danwei span{
-		position: absolute;
-		top: 30px;
-		right: 20px;
-		color: #868686;
-
+	.power-load-chart{
+		width: 1447px;
 	}
 </style>

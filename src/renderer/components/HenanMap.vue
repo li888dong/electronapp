@@ -5,9 +5,9 @@
 </style>
 
 <template>
-	<div style="width: 900px;margin: 0 auto">
+	<div style="width: 700px;height: 380px;margin: 0 auto">
 
-		<div id="henan-map" :style="{width: '900px', height: '480px'}">
+		<div id="henan-map" :style="{width: '700px', height: '480px',background:'transparent'}">
 
 		</div>
 	</div>
@@ -55,10 +55,16 @@
                             color: ['#e0ffff', '#006edd']
                         },
                         calculable: true,
-	                    right:220,
+	                    right:20,
 	                    bottom:110,
 	                    orient:'horizontal'
                     },
+					grid:{
+                        left:0,
+						top:0,
+						right:0,
+						bottom:0
+					},
                     series: [{
                         type: 'map',
                         map: 'henan',

@@ -29,11 +29,11 @@
 <style scoped>
 	/*计划进度提醒*/
 	.process-plan {
-		width: 400px;
-		height: 283px;
+		width: 424px;
+		height: 282px;
 		padding: 10px;
 		right: 5px;
-		top: -175px;
+		top: -177px;
 	}
 
 	.process-plan > div {
@@ -41,7 +41,7 @@
 	}
 
 	.process-plan .deadline {
-		height: 220px;
+		height: 210px;
 		width: 140px;
 		background-color: #5ecfb8;
 		margin-top: 20px;
@@ -74,8 +74,8 @@
 	.process-plan .count-down {
 		font-size: 64px;
 		color: #fea06f;
-		width: 80px;
-		height: 80px;
+		width: 85px;
+		height: 76px;
 		text-align: center;
 		line-height: 80px;
 		box-sizing: border-box;
@@ -89,7 +89,7 @@
 
 	#rili {
 		width: 236px;
-		height: 205px;
+		height: 210px;
 		overflow: hidden;
 		position: relative;
 		top: 20px;

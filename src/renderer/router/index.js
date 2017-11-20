@@ -61,7 +61,7 @@ export default new Router({
             component: require('@/components/Client/Client').default,
             children: [
                 {
-                    path: '/zonglan',
+                    path: '/client-zonglan',
                     name: 'client-zonglan',
                     component: require('@/components/Client/ClientZonglan').default
                 },

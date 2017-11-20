@@ -1,5 +1,7 @@
 <script>
 import PagingTool from '@/components/Equipment/PagingTool'
+import ChangxieContract from '@/components/ContractManagement/ChangxieContract'
+import saleContract from '@/components/ContractManagement/saleContract'
 
 export default {
     name: 'ContractManagement',
@@ -9,7 +11,9 @@ export default {
         }
     },
     components: {
-        'PagingToolView': PagingTool
+        'PagingToolView': PagingTool,
+        'saleContract': saleContract,
+        'ChangxieContract': ChangxieContract
     }
 }
 </script>
@@ -18,12 +22,13 @@ export default {
 <div class="ContractManagement">
     <div class="ConNavBar">
         <span class="hetongMan">合同管理</span>
-        <span>长协合同</span>
-        <span>售电合同</span>
+        <router-link to="ChangxieContract" tag="span" style="cursor: pointer; ">长协合同</router-link>
+        <router-link to="saleContract" tag="span" style="cursor: pointer; ">售电合同</router-link>
         <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">添加长协合同</router-link>
     </div>
     <!-- 长协合同 -->
-    <div class="changxie">
+    <ChangxieContract></ChangxieContract>
+    <!-- <div class="changxie">
         <h3>长协合同</h3>
         <div class="hetongList">
             <div class="hetongForm">
@@ -121,102 +126,10 @@ export default {
             </div>
             <PagingToolView></PagingToolView>
         </div>
-    </div>
+    </div> -->
     <!-- 售电合同 -->
-    <div class="shoudian">
-        <h3>售电合同</h3>
-        <div class="saleList">
-            <div class="saleInfo">
-                <span class="hetongChat">
-                    <i class="iconfont icon-xieyi seeicon"></i><a href="">查看</a>
-                </span>
-                <span class="hetongBiaohao">13456654-7</span>
-                <table>
-                    <tr>
-                        <th>营销用户编号</th>
-                        <th>用户电压等级</th>
-                        <th>报装容量</th>
-                        <th>用电类别</th>
-                        <th>用电单元类型</th>
-                        <th>用电地址</th>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                </table>
-                <div class="listChang">
-                    <span>修改</span>
-                    <span>删除</span>
-                </div>
-            </div>
-            <div class="saleInfo">
-                <span class="hetongChat">
-                    <i class="iconfont icon-chakan seeicon"></i><a href="">查看</a>
-                </span>
-                <span class="hetongBiaohao">13456654-7</span>
-                <table>
-                    <tr>
-                        <th>营销用户编号</th>
-                        <th>用户电压等级</th>
-                        <th>报装容量</th>
-                        <th>用电类别</th>
-                        <th>用电单元类型</th>
-                        <th>用电地址</th>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                    <tr>
-                        <td>7231346465</td>
-                        <td>10kv</td>
-                        <td>10kva</td>
-                        <td>大工业用电</td>
-                        <td>第二产业(工业)</td>
-                        <td>河南的郑州</td>
-                    </tr>
-                </table>
-                <div class="listChang">
-                    <span>修改</span>
-                    <span>删除</span>
-                </div>
-            </div>
-            <PagingToolView></PagingToolView>
-        </div>
-    </div>
+    <saleContract></saleContract>
+    
 </div>
 </template>
 
@@ -256,7 +169,7 @@ export default {
     padding: 20px;
     margin-left: 160px;
     background-color: #E8ECF0;
-    display: none;
+    /* display: none; */
 }
 .changxie h3 {
     height: 52px;
@@ -330,59 +243,5 @@ export default {
     line-height: 25px;
 }
 
-/* 售电合同样式 */
-.shoudian {
-    width: 1540px;
-    height: 914px;
-    padding: 20px;
-    margin-left: 160px;
-    background-color: #E8ECF0;
-}
-.shoudian h3 {
-    height: 52px;
-    border: 1px solid #E5E5E5;
-    background-color: #fff;
-    padding-left: 20px;
-    padding-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-}
-.saleList {
-    height: 850px;
-    background-color: #fff;
-    border: 1px solid #E5E5E5;
-    border-top: none;
-    padding-top: 14px;
-}
-.saleInfo {
-    position: relative;
-    padding: 10px;
-    padding-left: 220px;
-    background-color: #F6F7FB;
-    margin: 20px;
-}
-.saleInfo table {
-    text-align: center;
-}
-.saleInfo table th, .saleInfo table td{
-    padding-left: 50px;
-}
-.hetongBiaohao {
-    position: absolute;
-    top: 40px;
-    left: 100px;
-    font-size: 14px;
-}
-.listChang {
-    width: 30px;
-    height: 40px;
-    position: absolute;
-    top: 30px;
-    right: 15px;
-    color: #108CEE;
-}
-.listChang span{
-    width: 30px;
-    height: 20px;
-}
+
 </style>

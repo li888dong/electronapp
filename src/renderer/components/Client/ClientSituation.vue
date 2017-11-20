@@ -64,7 +64,96 @@
 						<div class="newItem">
 							<p class="item-title"><span>郑州</span></p>
 							<p class="count"><span>2658</span></p>
-							<p class="new"><span>月新增 <span class="new-count">228家</span> 新用户</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+					</div>
+					<div class="flex-row">
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+					</div>
+					<div class="flex-row">
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
+						</div>
+						<div class="newItem">
+							<p class="item-title"><span>郑州</span></p>
+							<p class="count"><span>2658</span></p>
+							<p class="new"><span>月新增 <span class="new-count">&nbsp; 228 &nbsp;</span> 家新用户</span></p>
 						</div>
 					</div>
 				</div>
@@ -84,7 +173,6 @@
 	.main-container-panel>div{
 		display: inline-block;
 		vertical-align: top;
-		height: 437px;
 		background-color: #fff;
 	}
 	.input-container{
@@ -142,17 +230,26 @@
 	.ranklist-container li .city{
 		padding:0 20px ;
 	}
+	.ranklist-container li .ranklist-bar::after{
+		content: "";
+		position: absolute;
+		width: 200px;
+		height: 10px;
+		background-color: #aaa;
+		opacity: 0.2;
+	}
 	.ranklist-container li .ranklist-bar{
 		height: 10px;
 		margin-left: 10px;
 		background-color: #31C9D7;
+		position: relative;
 	}
 	.table-container{
-		height: 457px;
+		height: 417px;
 	}
 	.newItem{
 		width: 245px;
-		height: 122px;
+		height: 108px;
 		background-color:#F6F7FB;
 	}
 	.newItem p{
@@ -167,9 +264,18 @@
 		font-size: 48px;
 		font-weight:bold;
 		color: #0089F0;
+		line-height: 40px;
 	}
 	.newItem .new{
 		text-align: center;
 		font-size: 14px;
+	}
+	.newItem .new-count{
+		font-size: 24px;
+		font-weight:bold;
+		color: #f38900;
+	}
+	.flex-row{
+		height: 125px;
 	}
 </style>

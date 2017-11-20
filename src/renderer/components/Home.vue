@@ -7,7 +7,7 @@
 	}
 
 	.data-remind-top, .data-remind-bottom {
-		width: 1264px;
+		width: 1231px;
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -24,76 +24,20 @@
 
 
 	.time-frame {
-		width: 407px;
-		height: 202px;
+		width: 424px;
+		height: 199px;
 		background-color: #F6F6F6;
 		position: absolute;
-		top: 16px;
-		left: 1282px;
+		top: 21px;
+		left: 1250px;
 	}
-
-	/*.time-frame .add-features {*/
-		/*margin: 0 0 15px 0;*/
-		/*width: 407px;*/
-		/*height: 140px;*/
-		/*display: flex;*/
-		/*flex-flow: row nowrap;*/
-		/*justify-content: space-around;*/
-		/*align-items: center;*/
-	/*}*/
-
-	/*.time-frame .add-features > div {*/
-		/*display: inline-block;*/
-		/*width: 70px;*/
-		/*height: 94px;*/
-		/*text-align: center;*/
-	/*}*/
-
-	/*.time-frame .add-features > div i.adduser {*/
-		/*background-color: #108CEE;*/
-	/*}*/
-
-	/*.time-frame .add-features > div i.contract {*/
-		/*background-color: #009900;*/
-	/*}*/
-
-	/*.time-frame .add-features > div i.terminal {*/
-		/*background-color: #F38900;*/
-	/*}*/
-
-	/*.time-frame .add-features > div i {*/
-		/*display: inline-block;*/
-		/*vertical-align: top;*/
-		/*width: 70px;*/
-		/*height: 70px;*/
-		/*border-radius: 35px;*/
-	/*}*/
-
 	.power-load-chart {
-		width: 1662px;
-		height: 387px;
+		width: 1655px;
+		height: 365px;
 		margin-left: 18px;
-		margin-top: 6px;
+		margin-top: 10px;
 		background-color: #fff;
 	}
-
-	/*.completion-rate {*/
-		/*width: 1667px;*/
-		/*height: 136px;*/
-		/*background-color: #fff;*/
-		/*margin-left: 20px;*/
-	/*}*/
-
-	/*.completion-rate strong {*/
-		/*font-size: 24px;*/
-		/*color: #999;*/
-	/*}*/
-
-	/*.completion-rate > div > div {*/
-		/*width: 33%;*/
-		/*height: 100px;*/
-		/*line-height: 100px;*/
-	/*}*/
 
 </style>
 <template>
@@ -113,20 +57,15 @@
 		<div class="data-container">
 			<div class="data-container-left">
 				<power-use></power-use>
-				<power-timeframe></power-timeframe>
+				<power-timeframe baseWidth="540"></power-timeframe>
 			</div>
 			<div class="time-frame data-container-right">
-				<!--<div class="data-panel add-features flex-row">-->
-				<!--<div><i class="adduser"></i><br><br><br>添加用户</div>-->
-				<!--<div><i class="contract"></i><br><br><br>添加合同</div>-->
-				<!--<div><i class="terminal"></i><br><br><br>添加终端</div>-->
-				<!--</div>-->
 				<trade-pi></trade-pi>
 			</div>
 		</div>
 
 		<div class="power-load-chart">
-			<real-time-power-chart></real-time-power-chart>
+			<real-time-power-chart cwidth="1655" cheight="349"></real-time-power-chart>
 		</div>
 	</div>
 

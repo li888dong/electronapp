@@ -16,7 +16,93 @@
 			        hhgs:'2个',
 			        mydl:'10000',
 			        htms:'服务费模式'
-		        }
+		        },
+                columns: [
+                    {
+                        title: '申报月份',
+                        key: 'month'
+                    },
+                    {
+                        title: '申报电量',
+                        key: 'sbdl'
+                    },
+                    {
+                        title: '采集电量',
+                        key: 'cjdl'
+                    },
+                    {
+                        title: '偏差',
+                        key: 'pc'
+                    },
+                    {
+                        title: '实用电量',
+                        key: 'sydl'
+                    },
+                    {
+                        title: '电费单电量',
+                        key: 'dfddl'
+                    },
+	                {
+                        title: '申报人',
+                        key: 'sbr'
+                    },
+                    {
+                        title: '审核',
+                        key: 'sh'
+                    }
+                ],
+		        columns2: [
+                    {
+                        title: '用电月',
+                        key: 'ydy'
+                    },
+                    {
+                        title: '用电量',
+                        key: 'ydl'
+                    },
+                    {
+                        title: '金额',
+                        key: 'je'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+
+                                    style: {
+                                        marginRight: '5px',
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+                                            this.gotoDetail()
+                                        }
+                                    }
+                                }, '查看'),
+                                h('span', {
+                                    style: {
+                                        marginRight: '5px',
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+
+                                            this.gotoHetong()
+                                        }
+                                    }
+                                }, '确认'),
+                            ])
+                        }
+                    }
+
+                ],
 	        }
 		}
 	}
@@ -25,73 +111,45 @@
 	<div>
 		<div class="detail-container relative">
 			<div class="data-panel client-data-panel user-detail">
-				<h3 class="title">用户基本情况 <small>详情</small></h3>
-				<table cellspacing="15" width="100%">
+				<h3 class="title">用户基本信息 <small>详情</small></h3>
+				<table cellspacing="5" width="100%">
 					<tbody>
 
 						<tr>
-							<td>客户编码:{{userDetail.khbm}}</td>
-							<td>所属行业:{{userDetail.sshy}}</td>
-							<td>售电起止时间:{{userDetail.qzsh}}</td>
+							<td><span>客户编码 :</span> {{userDetail.khbm}}</td>
+							<td><span>所属行业 :</span> {{userDetail.sshy}}</td>
+							<td><span>售电起止时间 :</span> {{userDetail.qzsh}}</td>
 						</tr>
 						<tr>
-							<td>客户地址:{{userDetail.khdz}}</td>
-							<td>联系人:{{userDetail.lxr}}</td>
-							<td>联系电话:{{userDetail.lxdh}}</td>
+							<td><span>客户地址 :</span> {{userDetail.khdz}}</td>
+							<td><span>联系人 :</span> {{userDetail.lxr}}</td>
+							<td><span>联系电话 :</span> {{userDetail.lxdh}}</td>
 						</tr>
 					</tbody>
 				</table>
-			</div><div class="data-panel client-data-panel agreement-detail">
+			</div><!--
+			--><div class="data-panel client-data-panel agreement-detail">
 				<h3 class="title">合同基本情况 <small>详情</small></h3>
-				<table  cellspacing="15" width="100%">
+				<table  cellspacing="5" width="100%">
 					<tr>
-						<td>合同编码:{{agreementDetail.htbm}}</td>
-						<td>户号个数:{{agreementDetail.hhgs}}</td>
+						<td><span>合同编码 :</span> {{agreementDetail.htbm}}</td>
+						<td><span>户号个数 :</span> {{agreementDetail.hhgs}}</td>
 					</tr>
 					<tr>
-						<td>年用电量:{{agreementDetail.mydl}} <span>Kw.时</span></td>
-						<td>合同模式:{{agreementDetail.htms}}</td>
+						<td><span>年用电量 :</span> {{agreementDetail.mydl}} <span class="danwei1">Kw.时</span></td>
+						<td><span>合同模式 :</span> {{agreementDetail.htms}}</td>
 					</tr>
 				</table>
-			</div><div class="data-panel client-data-panel user-apply">
+			</div>
+			<div class="data-panel client-data-panel user-apply">
 				<h3 class="title">用户申报记录</h3>
-				<table cellspacing="15" width="100%">
-					<thead>
-						<tr>
-							<th>申报月份</th>
-							<th>申报电量</th>
-							<th>采集电量</th>
-							<th>偏差</th>
-							<th>实用电量</th>
-							<th>电费单电量</th>
-							<th>申报人</th>
-							<th>审核</th>
-						</tr>
-					</thead>
-				</table>
-			</div><div class="data-panel client-data-panel user-bill">
+				<Table :columns="columns"></Table>
+			</div><!--
+			--><div class="data-panel client-data-panel user-bill">
 				<h3 class="title">用户电费单</h3>
-				<table cellspacing="0" width="100%" style="margin-top: 15px;">
-					<tbody>
-						<tr>
-							<td>2017年12月</td>
-							<td>20000.12KW</td>
-							<td>135.61元</td>
-							<td>状态</td>
-							<td>确认</td>
-						</tr>
-						<tr>
-							<td>2017年12月</td>
-							<td>20000.12KW</td>
-							<td>135.61元</td>
-							<td>状态</td>
-							<td>确认</td>
-						</tr>
-					</tbody>
-
-
-				</table>
-			</div><div class="data-panel client-data-panel user-clientlist">
+				<Table :columns="columns2" :show-header="true" ></Table>
+			</div>
+			<div class="data-panel client-data-panel user-clientlist">
 				<h3 class="title">用户终端列表</h3>
 				<div class="btn-group fr">
 					<button class="button btnSelected">+配置终端</button>
@@ -130,27 +188,33 @@
 </template>
 <style scoped>
 	.detail-container{
-		top: 60px;
+		top: 40px;
 		left: 205px;
 	}
-	.title{
-		border-left: 4px solid #36c;
-		padding-left: 5px;
-	}
+
 	.title small{
-		color: blue;
+		color: #4fa8f9;
+		font-size: 12px;
+		font-weight:normal;
+		float: right;
 	}
 	.user-detail{
-		width: 1007px;
-		height: 127px;
+		width: 940px;
+		height: 95px;
+	}
+	.user-detail table td span,
+	.agreement-detail table td span:not(.danwei1){
+		color: #999999;
 	}
 	.agreement-detail{
-		width: 417px;
-		height: 127px;
+		width: 487px;
+		height: 95px;
+
 	}
 	.user-apply{
-		width: 1007px;
+		width: 940px;
 		height: 287px;
+		margin-top: 15px;
 	}
 	.user-apply th{
 		text-align: center;
@@ -161,16 +225,18 @@
 		text-align: center;
 	}
 	.user-bill{
-		width: 417px;
+		width: 487px;
 		height: 287px;
+		margin-top: 15px;
 	}
 	.user-bill td{
 		border-top: 1px solid #333333;
 		height: 36px;
 	}
 	.user-clientlist{
-		width: 1444px;
-		height: 380px;
+		width: 1447px;
+		height: 425px;
+		margin-top: 15px;
 	}
 	.user-clientlist th{
 		text-align: center;

@@ -28,11 +28,11 @@
 		<h3 class="title">数据指数</h3>
 		<ul class="index-title">
 			<li><span class="shiji-count">实际月用电量</span><span>同比</span>|<span class="huanbi-rate">环比</span>|<span>偏差</span></li>
-			<li><span class="count">预测月偏差</span><span
+			<li><span class="count">预测月偏差</span>|<span
 					class="huanbi-rate">环比</span></li>
-			<li><span class="count">申报月偏差</span><span
+			<li><span class="count">申报月偏差</span>|<span
 					class="huanbi-rate">环比</span></li>
-			<li><span class="count">上月监测偏差</span><span
+			<li><span class="count">上月监测偏差</span>|<span
 					class="huanbi-rate">环比</span></li>
 		</ul>
 		<ul class="tongbi">
@@ -58,31 +58,32 @@
 <style scoped>
 	/*数据指数*/
 	.data-index {
-		width: 1244px;
-		height: 108px;
+		width: 1211px;
+		height: 105px;
 		background-color: #fff;
 		padding: 10px;
 	}
 
 	.data-index span {
 		display: inline;
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	.data-index li, .data-index h3 {
 		display: inline-block;
 		vertical-align: top;
 	}
-
+	.data-index h3{
+		margin-bottom: 10px;
+	}
 	.data-index .index-title,
 	.data-index .tongbi{
-		margin-top: 10px;
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content:space-around;
 	}
 	.data-index .index-title li{
-		background-color: #eee;
+		background-color: #F6F7FB;
 		line-height: 30px;
 
 	}
@@ -90,7 +91,6 @@
 	.data-index .tongbi li span{
 		margin-top:8px;
 		min-width: 100px;
-		color: #999;
 		text-align: center;
 	}
 	.data-index .tongbi li:nth-child(1) span{
@@ -110,7 +110,7 @@
 	}
 	.data-index li:not(:nth-child(1)),
 	.data-index .tongbi li:not(:nth-child(1)) {
-		width: 240px;
+		width: 200px;
 		height: 30px;
 		display: flex;
 		flex-flow: row nowrap;
@@ -121,7 +121,10 @@
 	.data-index li span{
 		height: 15px;
 		line-height: 15px;
-		color: #444;
+		color: #444444;
+	}
+	.data-index .index-title li span{
+		color: #999;
 	}
 	.data-index li span.shiji-count{
 		width: 200px;

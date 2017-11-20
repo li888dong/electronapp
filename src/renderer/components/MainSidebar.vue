@@ -180,7 +180,7 @@
                 <!--<router-link to="/ContractManagement" tag="li"><i class="iconfont icon-bcc"></i><span>合同信息</span></router-link>-->
                 <!--<router-link to="/AddContractManagement" tag="li"><i class="iconfont icon-bcc"></i><span>添加长协合同</span></router-link>-->
                 <MenuItem name="06" >
-                    <router-link to="/ContractManagement" tag="li"><i class="iconfont icon-wenjianjia"></i><span>合同信息</span></router-link>
+                    <router-link to="/ContractManagement" tag="li"><i class="iconfont icon-wenjianjia"></i><span>合同管理</span></router-link>
                 </MenuItem>
             </Menu>
             </Col>

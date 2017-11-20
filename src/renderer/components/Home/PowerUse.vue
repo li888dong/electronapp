@@ -4,10 +4,19 @@
 		data(){
 	        return{
 				yigou:95145.66,
-		        yiyong:95000.00,
+		        yiyong:109000.00,
 		        chaochu:0,
-		        piancha:0
+		        piancha:0,
+		        yiyongRate:0,
+		        chaochuRate:0
 	        }
+		},
+		mounted(){
+            this.chaochu=parseInt(Math.max(this.yiyong - this.yigou,0)*100)/100;
+			this.piancha=parseInt((this.chaochu/this.yigou)*100)/100;
+			this.yiyongRate = parseInt((this.yiyong/(Math.max(this.yigou,this.yiyong)+this.chaochu))*100)/100;
+			this.chaochuRate = parseInt((this.chaochu/(this.chaochu + this.yigou))*100)/100;
+			console.log(this.yiyong,this.yigou+this.chaochu)
 		}
 	}
 </script>
@@ -23,9 +32,9 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high">33%</div>
-				<div class="progress-bar-frame frame-normal"></div>
-				<div class="progress-bar-frame frame-low">33%</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(600*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
+				<div class="progress-bar-frame frame-normal">{{piancha}}</div>
+				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(600*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>
 			<div class="deviation-data">
 				<ul>
@@ -41,7 +50,7 @@
 <style scoped>
 	/*用电实时进度*/
 	.power-use {
-		width: 640px;
+		width: 630px;
 		height: 202px;
 		background-color: #fff;
 	}
@@ -63,7 +72,7 @@
 	.power-realTime-progress .legend {
 		position: absolute;
 		top: 40px;
-		right: -80px;
+		left: -20px;
 	}
 
 	.power-realTime-progress .legend li {
@@ -95,8 +104,8 @@
 
 	.power-realTime-progress .progress-bar {
 		width: 600px;
-		height: 48px;
-		border-radius: 48px;
+		height: 34px;
+		border-radius: 34px;
 		overflow: hidden;
 		background-color: #EEEEEE;
 		top: 80px;
@@ -105,38 +114,35 @@
 	.power-realTime-progress .progress-bar .progress-bar-frame {
 		display: inline-block;
 		vertical-align: top;
-		height: 46px;
+		height: 34px;
 		font-size: 14px;
 		color: white;
 		text-align: center;
-		line-height: 46px;
+		line-height: 34px;
 		position: absolute;
 		box-sizing: border-box;
 	}
 
 	.frame-high {
-		width: 33%;
 		background-color: #108CEE;
-		border-radius: 46px;
+		border-radius: 34px;
 		border:1px solid transparent;
 		top: 0;
 		left: 0;
 		z-index: 3;
 	}
 	.frame-normal {
-		width: 90%;
 		background-color: #eeeeee;
-		border-top-right-radius: 46px;
-		border-bottom-right-radius: 46px;
+		border-top-right-radius: 34px;
+		border-bottom-right-radius: 34px;
 		top: 0;
 		left: 0;
 		z-index: 2;
 	}
 	.frame-low {
-		width: 150px;
 		background-color: #FBCED7;
-		border-top-right-radius: 46px;
-		border-bottom-right-radius: 46px;
+		border-top-right-radius: 34px;
+		border-bottom-right-radius: 34px;
 		border:2px dotted #F35E7A;
 		top: 0;
 		right: 0;
@@ -145,7 +151,7 @@
 
 	.deviation-data {
 		position: relative;
-		top: 161px;
+		top: 140px;
 		width: 600px;
 		height: 30px;
 	}

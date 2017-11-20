@@ -22,17 +22,17 @@
 <style scoped>
 	/*工作提醒*/
 	.work-reminder {
-		width: 400px;
-		height: 160px;
+		width: 371px;
+		height: 157px;
 		padding: 10px;
 	}
 
 	.work-reminder li {
-		width: 380px;
-		height: 37px;
+		width: 331px;
+		height: 32px;
 		box-sizing: border-box;
 		margin: 5px auto;
-		line-height: 37px;
+		line-height: 32px;
 		padding-left: 23px;
 		font-size: 18px;
 		color: #108cee;
@@ -53,7 +53,8 @@
 
 	.work-reminder span {
 		font-size: 12px;
-		color: #444;
+		color: #666;
+		font-weight: 300;
 		width: 50%;
 	}
 
