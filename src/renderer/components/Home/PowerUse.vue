@@ -8,7 +8,7 @@
 		        chaochu:0,
 		        piancha:0,
 		        yiyongRate:0,
-		        chaochuRate:0
+		        chaochuRate:0,
 	        }
 		},
 		mounted(){
@@ -21,9 +21,10 @@
 	}
 </script>
 <template>
-	<div class="power-use data-panel ">
+	<panel class="power-use">
 		<div class="power-realTime-progress relative">
-			<h3 class="title" style="display: inline-block">用电实时进度
+			<h3 class="title-lv3">
+				用电实时进度
 				<small>单位：<span style="color: #4FA8F9;display:inline;vertical-align:bottom">Mw.h</span> (每十五分钟已更新)</small>
 			</h3>
 			<ul class="legend">
@@ -32,9 +33,9 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high" :style="{width:(600*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(540*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
 				<div class="progress-bar-frame frame-normal">{{piancha}}</div>
-				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(600*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
+				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(540*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>
 			<div class="deviation-data">
 				<ul>
@@ -45,20 +46,16 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</panel>
 </template>
 <style scoped>
 	/*用电实时进度*/
 	.power-use {
-		width: 630px;
 		height: 202px;
 		background-color: #fff;
 	}
-	.power-use .title{
-		margin-left: -10px;
-	}
 	.power-realTime-progress {
-		width: 600px;
+		width: 540px;
 		height: 140px;
 		display: inline-block;
 		vertical-align: middle;
@@ -72,7 +69,7 @@
 	.power-realTime-progress .legend {
 		position: absolute;
 		top: 40px;
-		left: -20px;
+		left: 20px;
 	}
 
 	.power-realTime-progress .legend li {
@@ -103,12 +100,13 @@
 	}
 
 	.power-realTime-progress .progress-bar {
-		width: 600px;
+		width: 540px;
 		height: 34px;
 		border-radius: 34px;
 		overflow: hidden;
 		background-color: #EEEEEE;
 		top: 80px;
+		left: 20px;
 	}
 
 	.power-realTime-progress .progress-bar .progress-bar-frame {

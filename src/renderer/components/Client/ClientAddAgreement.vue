@@ -10,7 +10,6 @@
 </script>
 <template>
 	<div class="main-container relative">
-		<h3 class="title">总览/添加售电合同</h3>
 		<div class="main-container-panel">
 			<div class="header">
 				添加售电合同

@@ -1,0 +1,61 @@
+/*!*重置table样式*!*/
+/*.ivu-table table th,*/
+/*.ivu-table table td {*/
+/*text-align: center;*/
+/*height: 36px;*/
+/*line-height: 35px;*/
+/*}*/
+/*!*最后一个th td大小自适应*!*/
+/*.ivu-table table tr th:nth-last-child(1),*/
+/*.ivu-table table tr td:nth-last-child(1){*/
+/*flex: 1;*/
+/*}*/
+/*!*需要手动定义宽度,在定义table外容器时，需要同时设置其内部tr宽度，值为容器宽-1*!*/
+/*.ivu-table tr{*/
+/*display: flex;*/
+/*flex-flow: row nowrap;*/
+/*justify-content: flex-start;*/
+/*}*/
+/*!*在这里控制th和td的宽度*!*/
+/*.ivu-table th,.ivu-table td{*/
+/*color: #ffffff;*/
+/*display: inline-block;*/
+/*width: 105px;*/
+/*}*/
+.ivu-table th{
+	background-color: #4FA8F9;
+	text-align: center;
+	color: #fff;
+	font-weight:500;
+}
+.ivu-table td{
+	text-align: center;
+}
+.ivu-table-sort i{
+	color: #ffffff;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.ivu-table-body::-webkit-scrollbar{
+	width: 10px;
+	/*滚动条宽度（右侧滚动条）*/
+	height: 10px;
+	/*滚动条高度（底部滚动条）*/
+	background-color: #eeeeee;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+.ivu-table-body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+/*定义滑块 内阴影+圆角*/
+.ivu-table-body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+	background-color: #ccc;
+}
+/*.ivu-table td{*/
+/*color: #202020;*/
+/*}*/

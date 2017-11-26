@@ -1,9 +1,11 @@
 <script>
-	import MyTab from '@/components/Button/MyTab'
+	import MyTab from '@/components/Tool/MyTab'
+    import Panel from "../Tool/Panel.vue";
     export default {
         name:'clientlist',
         data(){
             return{
+
                 pageData:{
                     total:100,
 	                current:2
@@ -12,11 +14,7 @@
 	            currentTabType:'normal',
                 columns4: [
                     {
-                        type: 'selection',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
+                        sortable: true,
                         title: '客户名称',
                         key: 'name'
                     },
@@ -26,30 +24,37 @@
                         key: 'shiji'
                     },
                     {
+                        sortable: true,
                         title: '申报电量',
                         key: 'shenbao'
                     },
 	                {
+                        sortable: true,
                         title: '申报偏差',
                         key: 'shenbaopiancha'
                     },
 	                {
+                        sortable: true,
                         title: '购电量',
                         key: 'goudianliang'
                     },
 	                {
+                        sortable: true,
                         title: '购电偏差',
                         key: 'goudianpiancha'
                     },
 	                {
+                        sortable: true,
                         title: '预测电量',
                         key: 'yucedianliang'
                     },
 	                {
+                        sortable: true,
                         title: '预测偏差',
                         key: 'yucepiancha'
                     },
 	                {
+                        sortable: true,
                         title: '最低功率因数',
                         key: 'gonglv'
                     },
@@ -81,7 +86,7 @@
 		                render:(h,params)=>{
                             return h('span', {
 								attrs:{
-								    class:'iconfont icon-xingzhuang'
+								    class:'iconfont icon-zhishufenxiyanpan'
 								},
                                 style: {
                                     marginRight: '5px',
@@ -219,17 +224,18 @@
             }
         },
         components:{
-			'my-tab':MyTab
+            Panel,
+            'my-tab':MyTab
         }
     }
 </script>
 <template>
-	<div>
-		<div class="main-container">
-			<div class="main-container-panel">
-				<div class="header">
-					<span style="font-size: 14px;">客户列表</span>
-					<div class="tab-container">
+	<Row>
+		<panel class="main-container">
+			<div class="header relative">
+				<Row>
+					<h3 class="title-lv2">客户列表</h3>
+					<div class="tab-container ">
 						<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
 						<my-tab v-on:changeSelect="changeSelect('zz')" v-bind:type="currentCity === 'zz'?'disabled':'normal'">郑州 <span>(332)</span></my-tab>
 						<my-tab v-on:changeSelect="changeSelect('kf')" v-bind:type="currentCity === 'kf'?'disabled':'normal'">开封 <span>(332)</span></my-tab>
@@ -243,43 +249,51 @@
 						<my-tab v-on:changeSelect="changeSelect('zmd')" v-bind:type="currentCity === 'zmd'?'disabled':'normal'">驻马店 <span>(332)</span></my-tab>
 						<span class="more">更多 <i class="iconfont icon-xiala"></i></span>
 					</div>
-
-					<div class="form-container">
-						<div class="search-container">
-							<i class="iconfont icon-search"></i><input type="search" placeholder="客户编号或客户名称" style="width: 300px"></input>
-						</div>
-						<Button type="primary" style="width: 150px;margin:0 40px;" class="normal" @click="gotoAddUser">+新增用户</Button>
-						<Button type="primary" shape="circle" icon="refresh"></Button>
+				</Row>
+			</div>
+			<Row>
+				<div class="form-container">
+					<div class="search-container">
+						<i class="iconfont icon-search"></i><input type="search" placeholder="客户编号或客户名称"></input>
 					</div>
+
+					<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
+					<i class="iconfont icon-shuaxin shuaxin"></i>
 				</div>
-				<div class="table-container">
-					<Table ref="selection" :columns="columns4" :data="data1"></Table>
-					<div style="margin: 20px auto;width: 650px">
+			</Row>
 
-						<Page :total="pageData.total" :current="pageData.current" show-total show-elevator></Page>
-					</div>
+			<div class="table-container">
+					<Table :columns="columns4" :data="data1"></Table>
+
+				<div class="page-container">
+
+					<Page :total="pageData.total" :current="pageData.current" show-total show-elevator></Page>
 				</div>
 			</div>
-		</div>
+		</panel>
 
-	</div>
+	</Row>
 </template>
 <style scoped>
 	.main-container{
-		margin-top:99px;
-		overflow: hidden;
+		width: 97.7%;
+		position: relative;
+	}
+	.header{
+		border-bottom: 1px solid #eeeeee;
+		padding-bottom: 10px;
 	}
 	.header span {
 		font-size: 12px;
 	}
 	.form-container{
 		margin-top: 20px;
-		margin-right: 20px;
-		float: right;
+
+		display: inline-block;
 	}
 	.form-container input[type='search']{
 		display: inline-block;
-		width: 200px;
+		width: 300px;
 		height: 32px;
 		line-height: 1.5;
 		padding: 4px 30px;
@@ -291,13 +305,13 @@
 		background-image: none;
 		position: relative;
 		cursor: text;
-		outline: none;
 		transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
 	}
 
 	.search-container{
 		display: inline-block;
 		vertical-align: middle;
+		margin-right: 40px;
 	}
 	.search-container i{
 		position: relative;
@@ -317,14 +331,19 @@
 	.more{
 		position: absolute;
 		right: 35px;
-		top: 110px;
+		top: 18px;
 		color: #4fa8f9;
 	}
 	.more i{
 		font-size: 10px;
 	}
 	.table-container{
-		margin-top: 60px;
+		margin: 20px 20px 0 20px;
+		height: 770px;
 	}
-
+	.shuaxin{
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 30px;
+	}
 </style>

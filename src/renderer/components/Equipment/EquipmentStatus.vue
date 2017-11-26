@@ -1,27 +1,139 @@
 <script>
-import PagingTool from '@/components/Equipment/PagingTool'
 
 export default {
     name: 'EquipmentStatus',
     data(){
         return{
-            
+            columns1: [
+                {
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                },
+                {
+                    "sortable": true,
+                    title: '终端编号',
+                    key: 'n1'
+                },
+                {
+                    "sortable": true,
+                    title: '生产厂家',
+                    key: 'n2'
+                },
+                {
+                    "sortable": true,
+                    title: '登陆IP：端口',
+                    key: 'n3'
+                },
+                { 
+                    title: '最新上线时间',
+                    key: 'n4'
+                },
+                {
+                    "sortable": true,
+                    title: '当前在线时长',
+                    key: 'n5'
+                },
+                {
+                    "sortable": true,
+                    title: '合计在线时长',
+                    key: 'n6'
+                },
+                {
+                    "sortable": true,
+                    title: '当前状态',
+                    key: 'n7'
+                },
+                {
+                    title: '掉线时间',
+                    key: 'n8'
+                },
+                {
+                    "sortable": true,
+                    title: '采集成功率',
+                    key: 'n9'
+                },
+                {
+                    "sortable": true,
+                    title: '上报比例',
+                    key: 'n10'
+                },
+                {
+                    title: '操作',
+                    key: 'n11',
+                    align: 'center',
+                    render: (h, params) => {
+                        return h('div', [                            
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                        
+                                    }
+                                }
+                            }, '更多')                            
+                        ]);
+                    }
+
+                }               
+            ],
+            data1: [
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+            ]
         }
-    },
-    components: {
-        'PagingToolView': PagingTool
     }
 }
 </script>
 
 <template><!-- 设备状态页面 -->
-<div class="EquipmentStatus">
-    设备管理 / 设备统计日志
-    <div class="statusTittle">
+<Row class="EquipmentStatus">
+    <div  class="statusTittle">
         <h3>设备统计日志</h3>
         <router-link to="/EquipmentException" tag="a">设备异常记录</router-link>
     </div>
-    <div class="statusTop">
+    <Row class="statusTop">
         <i class="iconfont icon-search searchPic"></i>
         <input type="text" name="" id="" class="SearchText" placeholder="终端名称、编号、客户名称、IP地址等"><button>搜索</button>
         <span>m</span>
@@ -30,63 +142,28 @@ export default {
             <option value="">河南区域</option>
             <option value="">全国区域</option>
         </select>
-        <span>时间</span>
+        <span><DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker></span>
         <div class="viewOffline">
             <input type="checkbox" name="" id="">
             仅显示已掉线设备
         </div>    
-    </div>
-    <div class="statusForm">
-        <table>
-            <tr>
-                <th><input type="checkbox" name="" id="">终端编号</th>
-                <th>生产厂家</th>
-                <th>登录IP：端口</th>
-                <th>最新上线时间</th>
-                <th>当前在线时长</th>
-                <th>当前状态</th>
-                <th>掉线时间</th>
-                <th>采集成功率</th>
-                <th>上报比例</th>
-                <th>操作</th>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>运行中</td>
-                <td>状态正常</td>
-                <td>25%</td>
-                <td>3.5</td>
-                <td>
-                    详情
-                </td>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>已掉线</td>
-                <td>2017-12-12 12:12:12</td>
-                <td>33%</td>
-                <td>33%</td>
-                <td>
-                    详情
-                </td>
-            </tr>
-            <PagingToolView></PagingToolView>
-        </table>
-    </div>
-</div>
+    </Row>
+    <Row class="statusForm">
+        <Table border :columns='columns1' :data='data1'></Table>
+        <div class="fenYe">
+            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
+        </div>
+    </Row>
+</Row>
 </template>
 
 <style scoped>
+button {
+    outline: none;
+    border: none;
+}
 .EquipmentStatus{
-    width: 1700px;
+    max-width: 1700px;
     height: 914px;
     background-color: #E8ECF0;
     padding: 15px;
@@ -94,13 +171,17 @@ export default {
 }
 .statusTittle{
     background-color: #fff;
-    height: 60px;
-    border-bottom: 1px solid #666666;
-    padding: 20px 10px 10px 10px;
+    border-bottom: 1px solid #ccc;
+    line-height: 1;
+    position: relative;
+    height: 40px;
+    padding-left: 20px;
+    line-height: 40px;
 }
 .statusTittle h3{
     display: inline-block;
     font-size: 16px;
+    font-weight: 700;
     font-family: 'MicrosoftYahei'; 
 }
 .statusTittle a {
@@ -114,10 +195,12 @@ export default {
     line-height: 30px;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute;
+    top: 6px;
+    right: 30px;
 }
 
 .statusTop {
-    height: 50px;
     padding: 10px;
     background-color: #fff;
     position: relative;
@@ -171,30 +254,27 @@ export default {
 
 .statusForm{
     background-color: #fff;
-    position: relative;
-    height: 768px;
+    position: relative;    
+    max-height: 768px;
+    padding: 0 10px;
 }
-.statusForm th{
-    display: inline-block;
-    padding: 0 20px;
-    height: 40px;
-    background-color: #F6F7FB;
-    line-height: 40px;
-    margin: 0 27px;
-}
-.statusForm th input {
-    vertical-align: middle;
-}
-.statusForm td{
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 32px;
-    text-align: center;
-    width: 100px;
-}
-.statusForm a{
-    padding: 0 2px;
-} 
 
+/* 分页的样式 */
+.fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+}
+.fenYe table{
+    border: 0;
+}
+.fenYe ul {
+    display: inline-block;
+}
+.fenYe button{
+    top: -12px;
+    left: 12px;
+}
 </style>

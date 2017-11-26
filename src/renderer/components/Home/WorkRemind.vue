@@ -10,25 +10,24 @@
 	}
 </script>
 <template>
-	<div class="data-panel work-reminder">
-		<h3 class="title">工作提醒</h3>
+	<panel class="work-reminder">
+		<h3 class="title-lv3">工作提醒</h3>
 		<ul>
 			<li><span>电量申报</span> <strong class="ft_35c">{{electricity}}</strong></li>
 			<li><span>电费单</span> <strong class="ft_35c">{{electricityBill}}</strong></li>
 			<li><span>电费单</span> <strong class="ft_35c">{{electricityBill}}</strong></li>
 		</ul>
-	</div>
+	</panel>
 </template>
 <style scoped>
 	/*工作提醒*/
 	.work-reminder {
-		width: 371px;
+		width: 100%;
 		height: 157px;
-		padding: 10px;
 	}
 
 	.work-reminder li {
-		width: 331px;
+		width: 90%;
 		height: 32px;
 		box-sizing: border-box;
 		margin: 5px auto;
@@ -39,12 +38,6 @@
 		background-color: #F6F7FB;
 		cursor: pointer;
 	}
-
-	/*.work-reminder li:hover {*/
-	/*background: #CFEAFC;*/
-
-	/*}*/
-
 	.work-reminder strong, span {
 		display: inline-block;
 		vertical-align: top;

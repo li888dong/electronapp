@@ -1,66 +1,35 @@
-<style>
-	.power-load-chart .typeSwich {
-		border-bottom: solid 1px #eee;
-		right: 0;
-		left: 0;
-		top: 10px;
-		margin:0 20px;
-		height: 30px;
-		z-index: 999;
-		padding-bottom: 50px;
-	}
-
-	.power-load-chart .typeSwich li {
-		margin-right: 40px;
-		width: 24px;
-		height: 24px;
-		float: right;
-		/*border-radius: 50%;*/
-		/*background-color: #eeeeee;*/
-		/*border: 1px solid #999;*/
-		/*text-align: center;*/
-		/*line-height: 24px;*/
-		/*cursor: pointer;*/
-		/*color: #828282;*/
-	}
-	.power-load-chart .typeSwich .btnSelected{
-
+<style scoped>
+	.chart-container{
+		height: 377px;
 	}
 	.danwei{
-		position: relative;
-		top: 20px;
-		left: 225px;
+		position: absolute;
+		top: 44px;
+		right: 10px;
 		border: none!important;
 		background-color: transparent!important;
 	}
-	.danwei span{
-		position: absolute;
-		top: 40px;
-		right: -20px;
-		color: #868686;
-		width: 100px;
 
+	.btn-group{
+		z-index: 10;
 	}
 </style>
 <template>
-	<div class="relative">
-		<ul class="absolute typeSwich btn-group">
-			<li>
-				<Button v-bind:type="powerRealtimeType==='月'?'primary':'default'" @click="powerRealtimeTypeSwitch('月')">月</Button>
-			</li>
-			<li>
-				<Button v-bind:type="powerRealtimeType==='日'?'primary':'default'" @click="powerRealtimeTypeSwitch('日')">日</Button>
-			</li>
-			<li>
-				<Button v-bind:type="powerRealtimeType==='15'?'primary':'default'" @click="powerRealtimeTypeSwitch('15')">15</Button>
-			</li>
+	<panel class="chart-container">
+		<h3 class="title-lv3">实时电量负荷</h3>
+		<div class="btn-group relative">
+			<Button v-bind:type="powerRealtimeType==='月'?'primary':'default'" @click="powerRealtimeTypeSwitch('月')">月</Button>
 
-			<li class="danwei"><span>单位Mw.h</span></li>
-		</ul>
-		<div id="powerChart" :style="{width: chartWidth+'px', height: chartHeight+'px'}">
+			<Button v-bind:type="powerRealtimeType==='日'?'primary':'default'" @click="powerRealtimeTypeSwitch('日')">日</Button>
+
+			<Button v-bind:type="powerRealtimeType==='15'?'primary':'default'" @click="powerRealtimeTypeSwitch('15')">15</Button>
+
+			<span class="danwei">单位Mw.h</span>
+		</div>
+		<div id="powerChart" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;">
 
 		</div>
-	</div>
+	</panel>
 
 </template>
 
@@ -77,14 +46,6 @@
                 powerdata: [],
                 powerdate: [],
                 chartOption1: {
-                    title: {
-                        text: "实时电量负荷",
-	                    textStyle:{
-                            fontSize:'16'
-                        },
-	                    left:'5',
-	                    top:'5'
-                    },
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -99,8 +60,8 @@
                     },
                     grid: {
                         top:'110',
-                        left: '20',
-                        right: '3%',
+                        left: '40',
+                        right: '1%',
                         bottom: '3%',
                         containLabel: true
                     },

@@ -6,6 +6,11 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
+            path: '/planInfo',
+            name: 'planInfo',
+            component: require('@/components/planInfo').default
+        },
+        {
             path: '/UserForecast',
             name: 'UserForecast',
             component: require('@/components/Forecast/UserForecast').default
@@ -33,7 +38,24 @@ export default new Router({
         {
             path: '/ContractManagement',
             name: 'ContractManagement',
-            component: require('@/components/ContractManagement/ContractManagement').default
+            component: require('@/components/ContractManagement/ContractManagement').default,
+            children:[
+
+                {
+                    path: '/ChangxieContract',
+                    name: 'ChangxieContract',
+                    component: require('@/components/ContractManagement/ChangxieContract').default
+                },
+                {
+                    path: '/saleContract',
+                    name: 'saleContract',
+                    component: require('@/components/ContractManagement/saleContract').default
+                },
+                {
+                    path: '/ContractManagement',
+                    redirect: '/ChangxieContract'
+                }
+            ]
         },
         {
             path: '/AddContractManagement',
@@ -52,8 +74,20 @@ export default new Router({
         },
         {
             path: '/message-center',
-            name: 'message-center',
-            component: require('@/components/Message/MessageCenter').default
+            component: require('@/components/Message/Message').default,
+            children:[
+                {
+                    path:'/',
+                    name:'message-center',
+                    component:require('@/components/Message/MessageCenter').default,
+
+                },
+                {
+                    path:'/message-send',
+                    name:'message-send',
+                    component:require('@/components/Message/MessageSend').default,
+                }
+            ]
         },
         {
             path: '/client',
@@ -182,11 +216,11 @@ export default new Router({
         },{
             path: '/button',
             name: 'button',
-            component: require('@/components/Button/Button').default
+            component: require('@/components/Tool/Button').default
         },{
             path: '/table',
             name: 'table',
-            component: require('@/components/Table/Table').default
+            component: require('@/components/Tool/Table').default
         },
         {
             path: '/home',

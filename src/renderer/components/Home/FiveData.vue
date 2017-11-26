@@ -13,33 +13,33 @@
 	}
 </script>
 <template>
-	<div class="data-panel five-data">
-		<ul>
-			<li class="lxyj five-first"><strong class="offline-warning">{{offlineWarning}}</strong><br><span>离线预警</span>
-			</li>
-			<li class="sjyc"><strong class="data-exception">{{dataException}}</strong><br><span>数据异常</span></li>
-			<li class="dlpc"><strong class="power-deviation">{{powerDeviation}}</strong><br> <span>电量偏差</span>
-			</li>
-			<li class="glys"><strong class="power-factor">{{powerFactor}}</strong><br><span>功率因数</span></li>
-			<li class="fhyc"><strong class="abnormal-load">{{abnormalLoad}}</strong><br><span>负荷异常</span></li>
-		</ul>
-	</div>
+	<panel>
+		<Row class-name="five-data" type="flex" justify="space-between" align="middle">
+
+			<div class="data-item lxyj"><strong class="offline-warning">{{offlineWarning}}</strong><br><span>离线预警</span></div>
+
+			<div class="data-item sjyc"><strong class="data-exception">{{dataException}}</strong><br><span>数据异常</span></div>
+
+			<div class="data-item dlpc"><strong class="power-deviation">{{powerDeviation}}</strong><br> <span>电量偏差</span></div>
+
+			<div class="data-item glys"><strong class="power-factor">{{powerFactor}}</strong><br><span>功率因数</span></div>
+
+			<div class="data-item fhyc"><strong class="abnormal-load">{{abnormalLoad}}</strong><br><span>负荷异常</span></div>
+
+		</Row>
+	</panel>
 </template>
 <style scoped>
 	/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/
 	.five-data {
-		width: 820px;
-		height: 157px;
+		height: 158px;
 		vertical-align: top;
+		background-color: #fff;
+		padding:0 20px;
 	}
-	.five-data ul{
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-around;
-	}
-	.five-data li {
-		width: 140px;
-		height: 137px;
+	.data-item {
+		width: 18%;
+		height: 140px;
 		text-align: center;
 		display: inline-block;
 		vertical-align: top;
@@ -47,40 +47,35 @@
 		cursor: pointer;
 	}
 
-	.five-data li.lxyj {
+	.five-data div.lxyj {
 		background-color: #669bd8;
 	}
 
-	.five-data li.sjyc {
+	.five-data div.sjyc {
 		background-color: #5ecfb8;
 	}
 
-	.five-data li.dlpc {
+	.five-data div.dlpc {
 		background-color: #fea06f;
 	}
 
-	.five-data li.glys {
+	.five-data div.glys {
 		background-color: #f78181;
 	}
 
-	.five-data li.fhyc {
+	.five-data div.fhyc {
 		background-color: #ca94ec;
 	}
 
-	.five-data li:not(.five-first) {
-		margin-left: 17px;
-
-	}
 
 	/*.five-data li:hover {*/
 	/*background: #CFEAFC;*/
 	/*}*/
 
-	.five-data li strong {
+	.five-data div strong {
 		font-size: 64px;
-		line-height: 100px;
 	}
-	.five-data li span{
+	.five-data div span{
 		opacity: 0.7;
 		font-weight:300;
 	}

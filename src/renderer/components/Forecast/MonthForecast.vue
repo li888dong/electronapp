@@ -3,7 +3,7 @@ export default {
     name: 'MonthForecast',
     data(){
         return{
-            value: '请输入你想查询的编号',
+            value: '',
             place: [
                 {
                     value: 'New York',
@@ -33,65 +33,87 @@ export default {
             model1: '',
             columns4: [
                 {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
-                },
-                {
+                    width: '200',
                     title: '企业名称',
                     key: 'name'
                 },
                 {
+                    width: '100',
                     title: '所属区域',
-                    key: 'name'
+                    key: 'place'
                 },
                 {
+                    width: '150',
                     title: '是否参与购电',
-                    key: 'name'
+                    key: 'sales'
                 },
                 {
+                    width: '150',
                     title: '人工预测(万kW-h)',
-                    key: 'name'
+                    key: 'n1'
                 },
                 {
+                    width: '150',
                     title: '系统预测(万kW-h)',
-                    key: 'name'
+                    key: 'n2'
                 },
                 {
+                    width: '150',
                     title: '偏差电量(万kW-h)',
-                    key: 'name'
+                    key: 'n3'
                 },{
                     title: '偏差比例',
-                    key: 'name'
+                    key: 'n4'
                 },
                 {
                     title: '合计',
-                    key: 'name'
+                    key: 'all'
                 },
                 {
                     title: '修改人',
-                    key: 'name'
+                    key: 'n5'
                 },
                 {
                     title: '确认人',
-                    key: 'name'
+                    key: 'n6'
                 },
                 {
                     title: '状态',
-                    key: 'name'
+                    key: 'n7'
                 },
                 {
                     title: '操作',
-                    key: 'name'
+                    key: 'n8'
                 }
             ],
             data1: [
                 {
                     name: '河南众企联合售电有限公司',
-                    name: '修改  确认',
+                    place: '河南大区',
+                    sales: '是',
+                    n1: '22',
+                    n2: '22',
+                    n3: '22',
+                    n4: '22',
+                    all: '110',
+                    n5: '22',
+                    n6: '22',
+                    n7: '22',
+                    n8: 'ok'
                 },
-                {                   
-                    name: '修改  确认',
+                {
+                    name: '河南特使售电有限公司',
+                    place: '河南大区',
+                    sales: '是',
+                    n1: '22',
+                    n2: '22',
+                    n3: '22',
+                    n4: '22',
+                    all: '110',
+                    n5: '22',
+                    n6: '22',
+                    n7: '22',
+                    n8: 'ok'
                 },
             ]
         }
@@ -127,75 +149,87 @@ export default {
 
 <template>
 <div class="MonthForecast">
-    <div class="layout-breadcrumb">
-        <Breadcrumb>
-            <BreadcrumbItem href="#">预测分析</BreadcrumbItem>
-            <BreadcrumbItem>月度预测</BreadcrumbItem>
-        </Breadcrumb>
-    </div>
+
     <div class="layout-content">
         <h3>月度预测</h3>
         <div class="layout-content-top">          
             <Row>
-                    <Col span="1">
-                    <div class="aaa" style="opacity: 0;">
-                        我是占位符
-                    </div>
-                </Col>
                 <Col span="3">
-                    <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px"></DatePicker>
+                    <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
                 </Col>
                 <Col span="3">
                     <Select v-model="model1" style="width:200px">
-                        <Option v-for="item in place" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        <Option v-for="item in place" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                     </Select>
                 </Col>
-                <Col span="11">
-                    <div class="aaa" style="opacity: 0;">
-                        我是占位符
-                    </div>
-                </Col>
-                <Col span="6">
-                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
+                <Col span="6" offset='12' style=" text-align: right;">
+                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary" style="border-radius: 0">搜索</Button>
                 </Col>
             </Row>
         </div>
         <div class="layout-content-main">
             <Table border ref="selection" :columns="columns4" :data="data1"></Table>
         </div>
-        <Button type="primary" style="margin-left: 20px">批量确认</Button>
-        <Button type="primary">导入</Button>
-        <Button type="primary">导出</Button>
-        <Page :total="100" show-sizer style="float: right"></Page>
+        <Row class="fenYe">
+            <Col span="5" style="margin: 14px">
+                <Button type="primary" style="margin-left: 20px">批量确认</Button>
+                <Button type="primary">导入</Button>
+            </Col>
+            <Col span="10">
+                <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
+            </Col>
+        </Row>
     </div>
 </div>
 
 </template>
 
 <style scoped>
-.layout-breadcrumb{
-    padding: 10px 15px 0;
-    
+
+.MonthForecast {
+    width: 100%;
 }
 .layout-content{
-    min-height: 200px;
-    margin: 15px;
+    margin: 20px;
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
+    padding: 10px;    
+    height: 945px;
 }
-.layout-content-main{
-    padding: 10px;
-}
+
 .layout-content h3{
-    height: 50px;
-    padding-left: 10px;
-    padding-top: 15px;
-    border-bottom: 1px solid #E5E5E5;
-    font-size: 16px;
-    font-weight: 700;
+    height: 40px;
+	border-bottom: 1px solid #E5E5E5;
+	background-color: #fff;
+	padding-left: 10px;
+	padding-top: 10px;
+	font-size: 16px;
+	font-weight: 400;     
 }
 .layout-content-top {
     padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+
+/* 分页的样式 */
+.fenYe {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    text-align: center;
+}
+.fenYe table{
+    border: 0;
+}
+.fenYe ul {
+    display: inline-block;
+}
+.fenYe button{
+    top: -12px;
+    left: 12px;
 }
 </style>

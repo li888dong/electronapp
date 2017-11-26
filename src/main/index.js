@@ -24,7 +24,7 @@ function createWindow() {
         width: size.width,
         // fullscreen: true,
         skipTaskbar:false,
-        movable:false,
+        // movable:false,
         resizable:false,//不可改变窗口大小
     })
 

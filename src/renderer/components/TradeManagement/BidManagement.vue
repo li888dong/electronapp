@@ -59,35 +59,71 @@
 </script>
 <template>
 	<div class="main-container relative">
-		交易概况
-		<bid-chart></bid-chart>
-		<previous-biding-chart></previous-biding-chart>
+		<h2>本月竞价模拟</h2>
+		<Row>
+
+			<bid-chart></bid-chart>
+		</Row>
+		<h2 class="">往期竞价结果</h2>
+		<Row>
+
+			<previous-biding-chart></previous-biding-chart>
+		</Row>
+		<h2>上期交易结果公式</h2>
+
 		<div class="previous-biding-resolute data-panel">
-			<h3 class="title">上期交易结果公式</h3>
-			<table width="100%">
-				<thead>
-					<tr>
-						<th>购方名称</th>
-						<th>所属区域</th>
-						<th>售方名称</th>
-						<th>时间段</th>
-						<th>成交电量</th>
-						<th>成交电价</th>
-						<th>价差</th>
-						<th>电厂报价</th>
-						<th>售电公司报价</th>
-						<th>报价价差</th>
-					</tr>
-				</thead>
-			</table>
+			<Table :columns="[
+			        {
+			            title:'购防名称',
+			            key:'gfmc'
+			        },
+			        {
+			            title:'所属区域',
+			            key:'ssqy'
+			        },
+			        {
+			            title:'售方名称',
+			            key:'ssqy'
+			        },
+			        {
+			            title:'时间段',
+			            key:'sjd'
+			        },
+			        {
+			            title:'成交电量',
+			            key:'cjdl'
+			        },
+			        {
+			            title:'成交电价',
+			            key:'cjdj'
+			        },
+			        {
+			            title:'差价',
+			            key:'cj'
+			        },
+			        {
+			            title:'电厂报价',
+			            key:'dcbj'
+			        },
+			        {
+			            title:'售电公司报价',
+			            key:'sdgsbj'
+			        },
+			        {
+			            title:'报价差价',
+			            key:'bjcj'
+			        },
+			    ]">
+
+			</Table>
 		</div>
 		<div class="data-panel mock-trading">
 			<div class="header">
 				<h3 class="title">模拟交易</h3>
 			</div>
-			<div class="tab">
-				<span v-bind:class="{selected:mockSelected==='0'}" @click="switchSelected('0')">添加供给侧价格</span>
-				<span v-bind:class="{selected:mockSelected==='1'}" @click="switchSelected('1')">添加需求侧价格</span>
+			<div class="btn-group fr">
+				<my-tab v-on:changeSelect="switchSelected('0')" v-bind:type="mockSelected === '0'?'zd':'normal'">添加供给侧价格</my-tab>
+				<my-tab v-on:changeSelect="switchSelected('1')" v-bind:type="mockSelected === '1'?'zd':'normal'">添加需求侧价格</my-tab>
 			</div>
 			<div class="input-container">
 				<input v-if="mockSelected === '0'" type="text" placeholder="电厂名称" v-model="dcmc">
@@ -95,8 +131,8 @@
 				<input v-if="mockSelected === '1'" type="text" placeholder="售电公司名称" v-model="dcmc">
 				<input v-if="mockSelected === '1'" type="text" placeholder="需求量" v-model="gyl">
 				<input type="text" placeholder="报价(元/Kw时)" v-model="bj">
-				<div v-if="mockSelected === '0'" class="btn-group"><button class="button btnSelected">保存</button></div>
-				<div v-if="mockSelected === '1'" class="btn-group"><button class="button btnSelected">保存</button></div>
+				<div v-if="mockSelected === '0'" class="btn-group"><Button type="primary">保存</Button></div>
+				<div v-if="mockSelected === '1'" class="btn-group"><Button type="primary">保存</Button></div>
 			</div>
 			<ul v-for="mockData in mockDatas">
 					<li>{{mockData.rank}}</li>
@@ -113,6 +149,7 @@
 		width: 1667px;
 		height: 329px;
 		margin: 0!important;
+		padding: 0;
 	}
 	.previous-biding-resolute table{
 	}
@@ -123,34 +160,24 @@
 	}
 	.mock-trading{
 		position: absolute;
-		width: 410px;
-		height: 600px;
-		right: 20px;
-		top: 3px;
+		width: 430px;
+		height: 647px;
+		right: 0px;
+		top: 7px;
 		padding: 0;
 	}
 	.mock-trading .header{
 		height: 50px;
 		line-height: 50px;
 		padding-left: 20px;
+		display: inline-block;
 	}
-	.mock-trading .tab{
-		background-color: #f9f9f9;
+	.mock-trading .btn-group{
+		margin: 10px 10px 0 0;
 		height: 40px;
 	}
-	.mock-trading .tab span{
-		display: inline-block;
-		margin-top: 10px;
-		margin-left: 10px;
-		width: 150px;
-		height: 30px;
-		text-align: center;
-		line-height: 30px;
-		cursor: pointer;
-	}
-	.mock-trading .tab span.selected{
-		background-color: #fff;
-	}
+
+
 	.input-container{
 		padding-left: 20px;
 		margin-top: 15px;
@@ -162,6 +189,7 @@
 		height: 30px;
 		text-align: center;
 		outline: none;
+		vertical-align: middle;
 	}
 	.input-container input:nth-child(1){
 		width: 100px;

@@ -15,7 +15,7 @@ export default {
             let myChart = this.$echarts.init(document.getElementById('myCharts'))
             // 绘制图表
             myChart.setOption({
-                color: ['#22c','#ccc','#a33'],
+                color: ['#f57e6a','#6ec71e','#0089f0'],
                 title: { 
                     text: '设备安装概况',
                     x: "left",
@@ -55,33 +55,33 @@ export default {
 </script>
 
 <template>
-<div class="equipmentInstall">
-    <div id="myCharts" :style="{width: '780px', height: '260px'}"></div>
-    <!-- 安装的种类 -->
-    <div class="inType">
-        <p class="oneType">
-            三相三线
-            <i></i>
-        </p>
-        <p>
-            三相四丝
-            <i></i>
-        </p>
-        
-    </div>
-    <!-- 安装的数据 -->
-    <div class="indata">
-        <span>已安装: <i>95,145.61</i></span>
-        <span>待安装: <i>6,145.61</i></span>
-        <span>已申报: <i>-5,145.61</i></span>
-    </div>
-</div>
+<Row class="equipmentInstall">
+        <Col span='24' id="myCharts" :style="{width: '780px', height: '260px'}"></Col>
+        <!-- 安装的种类 -->
+        <div class="inType">
+            <p class="oneType">
+                三相三线
+                <i></i>
+            </p>
+            <p>
+                三相四丝
+                <i></i>
+            </p>
+            
+        </div>
+        <!-- 安装的数据 -->
+        <div class="indata">
+            <span>已安装: <i>95,145.61</i></span>
+            <span>待安装: <i>6,145.61</i></span>
+            <span>已申报: <i>-5,145.61</i></span>
+        </div>    
+</Row>
 
 </template>
 
 <style scoped>
     .equipmentInstall{
-        width: 820px;
+        max-width: 820px;
         height: 290px;
         border: 1px #e5e5e5 solid;
         float: left;
@@ -91,7 +91,7 @@ export default {
         position: relative;
     }
     .inType{
-        width: 460px;
+        max-width: 460px;
         height: 136px;
         position: absolute;
         top: 46px;

@@ -16,13 +16,13 @@
 </script>
 <template>
 	<div class="client-header">
-		<h1>河南众企联合售电有限公司</h1>
+		<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i><h1>河南众企联合售电有限公司</h1>
 		<div class="span-group fr">
 
 			<span :class="{selected:$route.name==='client-zonglan'}" @click="changePage('client-zonglan')"><i class="iconfont icon-zonglan-hui"></i> 总览</span>
 			<span :class="{selected:$route.name==='client-detail'}" @click="changePage('client-detail')"><i class="iconfont icon-chakan"></i> 详情</span>
-			<span :class="{selected:$route.name==='client-compare'}" @click="changePage('client-compare')"><i class="iconfont icon-zhibiaoyuce"></i> 指数</span>
 			<span :class="{selected:$route.name==='client-piancha'}" @click="changePage('client-piancha')"><i class="iconfont icon-zhuzhuangtutubiao"></i> 偏差</span>
+			<span :class="{selected:$route.name==='client-compare'}" @click="changePage('client-compare')"><i class="iconfont icon-zhibiaoyuce"></i> 指数</span>
 		</div>
 	</div>
 </template>
@@ -37,13 +37,20 @@
 		z-index: 1000;
 		top: 79px;
 	}
+	.client-header .back{
+		position: absolute;
+		top: 18px;
+		left: 0px;
+		z-index: 9;
+		cursor: pointer;
+	}
 	.client-header h1{
 		height: 26px;
 		font-size: 24px;
-		border-left: 5px solid #36c;
 		font-weight:normal;
 		line-height: 26px;
 		padding:0 15px;
+		margin-left:30px;
 		float: left;
 	}
 

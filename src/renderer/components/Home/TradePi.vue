@@ -1,19 +1,16 @@
 <style>
 	.powerTimeFrame {
-		margin: 0 0 0 0;
-		padding: 5px 5px;
 		box-sizing: border-box;
 		background-color: #fff;
-		height: 199px;
-		width: 424px;
+		height: 202px;
 	}
 </style>
 <template>
-	<div class="data-pannel powerTimeFrame">
-		<div id="powerTimeFrame" :style="{width: '424px', height: '199px'}">
-
+	<panel class="powerTimeFrame">
+		<h3 class="title-lv3">交易分布</h3>
+		<div id="powerTimeFrame" style="position: absolute;left: 0;top: 0;bottom: 0;right: 0;">
 		</div>
-	</div>
+	</panel>
 
 </template>
 
@@ -23,14 +20,6 @@
         data() {
             return {
                 chartOption2: {
-                    title: {
-                        text: '交易分布',
-                        textStyle: {
-                            fontSize: 14,
-                            fontWeight: 'bolder'
-
-                        }
-                    },
 //          鼠标悬浮提示
                     tooltip: {
                         trigger: 'item',
@@ -38,8 +27,8 @@
                     },
                     legend: {
                         orient: 'vertical',
-                        right: '40',
-                        top: '30',
+                        left: '240',
+                        top: '60',
                         itemWidth: 14,
                         data: ['市场竞价(月)', '长协(月)', '市场竞价(年)', '长协(年)']
                     },
@@ -49,7 +38,7 @@
                             type: 'pie',
                             selectedMode: 'single',
                             radius: ['0', '45px'],
-                            center: ['115', '105'],
+                            center: ['135', '115'],
                             itemStyle: {
                                 normal: {
                                     offset:5
@@ -98,7 +87,7 @@
                                     show: false
                                 }
                             },
-                            center: ['115', '105'],
+                            center: ['135', '115'],
                             data: [
                                 {
                                     value: 335,

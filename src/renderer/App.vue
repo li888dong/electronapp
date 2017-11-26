@@ -1,20 +1,43 @@
 <template>
 	<div id="app">
-		<main-sidebar></main-sidebar>
-		<main-header></main-header>
-		<router-view></router-view>
+		<Row>
+			<Col span="3">
+				<main-sidebar></main-sidebar>
+			</Col>
+			<Col span="21">
+				<main-header v-on:hideFast="hideFast"></main-header>
+				<router-view></router-view>
+				<transition name="fade">
+					<fast-boot v-if="fastboot" v-on:hideSelf="hideFast"></fast-boot>
+				</transition>
+			</Col>
+		</Row>
+
 	</div>
 </template>
 
 <script>
     import MainSidebar from '@/components/MainSidebar'
     import Header from '@/components/Header'
+    import FastBoot from '@/components/FastBoot'
 
     export default {
         name: 'smartpower',
+	    data(){
+            return{
+                fastboot:false
+
+            }
+	    },
+	    methods:{
+	      hideFast(){
+              this.fastboot = !this.fastboot
+	      }
+	    },
         components: {
             'main-sidebar': MainSidebar,
-            'main-header': Header
+            'main-header': Header,
+	        'fast-boot':FastBoot
         }
     }
 </script>
@@ -22,11 +45,12 @@
 <style>
 	body {
 		padding: 0;
-		margin: 79px 0 0 220px;
+		margin: 0;
 		background-color: #F6F6F6;
 		font-size: 12px;
 		font-family: "Microsoft YaHei","Arial","黑体","宋体",sans-serif!important;
-		overflow-x: hidden;
+		overflow: hidden;
+		/*overflow-x: hidden;*/
 	}
 
 	body::-webkit-scrollbar {
@@ -36,30 +60,23 @@
 		/*滚动条高度（底部滚动条）*/
 		background-color: #333;
 	}
-
+	input,select,textarea,option{
+		outline: none;
+	}
 	.main-container{
-		width: 1700px;
-		height: 900px;
-		padding: 0 20px;
+		height:100%;
+		margin:20px;
 		overflow: hidden;
+		z-index: 998;
 	}
-	.main-container .title{
-		display: inline-block;
-		font-size: 16px!important;
-		margin: 0 0 5px 15px;
-	}
-	.main-container-panel{
-		width: 1655px;
 
-		background-color: #fff;
-	}
-	.main-container-panel .header{
+	.client-container{
+		width: 1440px;
+		height: 100%;
+		overflow: hidden;
 		box-sizing: border-box;
-		font-weight: bold;
-		font-size: 16px;
-		height: 50px;
-		padding-left: 15px;
-		border-bottom: 1px solid #e5e5e5;
+		margin-top: 60px;
+		margin-left: 220px;
 	}
 	.fixed {
 		top: 0;
@@ -93,8 +110,8 @@
 		box-sizing: border-box;
 		overflow: hidden;
 		position: relative;
-		padding: 10px 20px 10px 20px;
-		margin-left: 20px;
+		padding: 10px 15px 10px 15px;
+		margin-left: 15px;
 		margin-top: 20px;
 		display: inline-block;
 		vertical-align: top;
@@ -159,19 +176,23 @@
 	.legend-blue {
 		background-color: #108CEE;
 	}
-	.right_10{
-		right: 10px;
-	}
-	.top_10{
-		top: 10px;
-	}
-	.height_79 {
-		height: 79px;
+
+	.mgt_15{
+		margin-top: 15px;
 	}
 
-	.ft_35c {
-		color: #35c;
+	.mgl_20{
+		margin-left: 20px;
 	}
+
+	.trendUp {
+		background: url('./assets/icons.png') no-repeat -385px -85px;
+	}
+
+	.trendDown {
+		background: url('./assets/icons.png') no-repeat -385px -103px;
+	}
+
 
 	.flex-row {
 		display: flex!important;
@@ -184,7 +205,52 @@
 		flex-flow: column nowrap;
 		justify-content: space-around;
 	}
+	/*排行榜*/
+	.ranklist-container{
+		width: 100%;
+		height: 400px;
+	}
+	.ranklist-container ul{
+		margin-top: 20px;
+	}
+	.ranklist-container li{
+		height: 32px;
+		line-height: 32px;
+	}
+	.ranklist-container li span{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	span.rate{
+		min-width: 50px;
+	}
+	.ranklist-container li .ranking{
+		width: 20px;
+		text-align: right;
+	}
+	.ranklist-container li .city{
+		padding: 0;
+	}
+	.ranklist-container li .ranklist-bar::after{
+		content: "";
+		position: absolute;
+		width: 200px;
+		height: 10px;
+		background-color: #aaa;
+		opacity: 0.2;
+	}
+	.ranklist-container li .ranklist-bar{
+		height: 10px;
+		margin-left: 10px;
+		background-color: #31C9D7;
+		position: relative;
+	}
 
+	.icon-shuaxin{
+		font-size: 22px;
+		color: #0089F0;
+		cursor: pointer;
+	}
 	/* 可以设置不同的进入和离开动画 */
 	/* 设置持续时间和动画函数 */
 	.slide-fade-enter-active {
@@ -197,5 +263,29 @@
 		/* .slide-fade-leave-active for below version 2.1.8 */ {
 		transform: translateX(10px);
 		opacity: 0;
+	}
+
+	/* placeholder 字体默认颜色 */
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	    color: #CCCCCC; opacity:1;
+	}
+
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color: #CCCCCC;opacity:1;
+	}
+
+	input:-ms-input-placeholder{
+	    color: #CCCCCC;opacity:1;
+	}
+
+	input::-webkit-input-placeholder{
+	    color: #CCCCCC;opacity:1;
+	}
+
+	.page-container{
+		position: absolute;
+		bottom: 40px;
+		left: 50%;
+		margin-left: -250px;
 	}
 </style>

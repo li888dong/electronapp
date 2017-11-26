@@ -1,82 +1,59 @@
 <style>
-	.data-remind {
-		position: relative;
-		width: 1700px;
-		height: 308px;
-		overflow: hidden;
-	}
 
-	.data-remind-top, .data-remind-bottom {
-		width: 1231px;
-		display: inline-block;
-		vertical-align: top;
-	}
-
-
-	.data-container {
-		position: relative;
-		height: 227px;
-	}
-	.data-container .data-container-left{
-		overflow: hidden;
-		margin-top: -10px;
-	}
-
-
-	.time-frame {
-		width: 424px;
-		height: 199px;
-		background-color: #F6F6F6;
-		position: absolute;
-		top: 21px;
-		left: 1250px;
-	}
-	.power-load-chart {
-		width: 1655px;
-		height: 365px;
-		margin-left: 18px;
-		margin-top: 10px;
-		background-color: #fff;
-	}
 
 </style>
 <template>
-	<div class="main-router">
-		<div class="data-remind">
-			<div class="data-remind-top">
-				<!--/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/-->
-				<five-data></five-data><!--
-				工作提醒 --><work-remind></work-remind>
-			</div>
-			<div class="data-remind-bottom">
-				<data-index></data-index>
-			</div>
-			<process-plan></process-plan>
 
-		</div>
-		<div class="data-container">
-			<div class="data-container-left">
+	<Row class="main-container">
+		<Row gutter=15>
+			<Col span="17">
+				<Row gutter=15>
+					<!--/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/-->
+					<Col span="16">
+						<five-data></five-data>
+					</Col>
+					<!--工作提醒 -->
+					<Col span="8">
+						<work-remind></work-remind>
+					</Col>
+				</Row>
+				<Row class="mgt_15">
+					<!--数据指数-->
+					<data-index></data-index>
+				</Row>
+			</Col>
+			<Col span="7">
+				<!--计划进度提醒-->
+				<process-plan></process-plan>
+			</Col>
+		</Row>
+		<Row gutter=15 class="mgt_15">
+			<!--用电实时进度-->
+			<Col span="9">
 				<power-use></power-use>
-				<power-timeframe baseWidth="540"></power-timeframe>
-			</div>
-			<div class="time-frame data-container-right">
+			</Col>
+			<!--用电时段分布-->
+			<Col span="8">
+				<power-timeframe baseWidth="500"></power-timeframe>
+			</Col>
+			<!--交易分步--> 
+			<Col span="7">
 				<trade-pi></trade-pi>
-			</div>
-		</div>
-
-		<div class="power-load-chart">
-			<real-time-power-chart cwidth="1655" cheight="349"></real-time-power-chart>
-		</div>
-	</div>
-
+			</Col>
+		</Row>
+		<!--实时电量负荷-->
+		<Row class="mgt_15">
+			<Col span="24">
+				<real-time-power-chart></real-time-power-chart>
+			</Col>
+		</Row>
+	</Row>
 </template>
 
 <script>
 
     import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
     import TradePi from '@/components/Home/TradePi.vue'
-    import PowerTimeFrameProgress from '@/components/Home/PowerTimeFrameProgress.vue'
-    import CompletionRate from '@/components/CompletionRate.vue'
     import FiveData from '@/components/Home/FiveData'
     import WorkRemind from '@/components/Home/WorkRemind'
     import DataIndex from '@/components/Home/DataIndex'
@@ -127,8 +104,6 @@
         components: {
             'real-time-power-chart': RealTimePowerChart,
             'trade-pi': TradePi,
-            'power-time-frame-progress': PowerTimeFrameProgress,
-            'completion-rate': CompletionRate,
             'five-data':FiveData,
             'work-remind':WorkRemind,
             'data-index':DataIndex,

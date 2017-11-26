@@ -5,9 +5,143 @@
         name: 'changxie',
         data() {
             return {
-                cur: 1,
-                all: 5,
-                msg: '',
+                columns6:[
+                    {
+                        title:'类型',
+	                    width:200,
+                        key:'name',
+                    },
+                    {
+                        title:'01月',
+                        key:'Jan',
+                    },{
+                        title:'02月',
+                        key:'Feb',
+                    },
+                    {
+                        title:'03月',
+                        key:'Mar',
+                    },{
+                        title:'04月',
+                        key:'Apr',
+                    },
+                    {
+                        title:'05月',
+                        key:'May',
+                    },{
+                        title:'06月',
+                        key:'Jun',
+                    },{
+                        title:'07月',
+                        key:'July',
+                    },{
+                        title:'08月',
+                        key:'Aug',
+                    },{
+                        title:'09月',
+                        key:'Sept',
+                    },{
+                        title:'10月',
+                        key:'Oct',
+                    },{
+                        title:'11月',
+                        key:'Nov',
+                    },{
+                        title:'12月',
+                        key:'Dec',
+                    },{
+                        title:'总计',
+                        key:'all',
+                    }
+                ],
+	            column2:[
+	                {
+	                    title:'合同编号',
+		                key:'htbh'
+	                },
+	                {
+	                    title:'电厂名称',
+		                key:'dcmc'
+	                },
+	                {
+	                    title:'签约电量',
+		                key:'qydl'
+	                },
+	                {
+	                    title:'签约日期',
+		                key:'qydl'
+	                },
+	                {
+	                    title:'执行日期',
+		                key:'zxrq'
+	                },
+	                {
+	                    title:'联系人',
+		                key:'lxr'
+	                },
+	                {
+	                    title:'联系电话',
+		                key:'lxdh'
+	                },
+	                {
+	                    title:'查看',
+		                key:'ck'
+	                },
+	                {
+	                    title:'查看',
+		                key:'ck1111'
+	                }
+	            ],
+                data5:[
+                    {
+                        name:'年度预测合计（wkw）',
+                        Jan:'111',
+                        Feb:'111',
+                        Mar:'111',
+                        Apr:'111',
+                        May:'111',
+                        Jun:'111',
+                        July:'1',
+                        Aug:'1',
+                        Sept:'1',
+                        Oct:'1',
+                        Nov:'1',
+                        Dec:'1',
+                        all:'1',
+                    },
+                    {
+                        name:'长协合同总计（wkw）',
+                        Jan:'111',
+                        Feb:'111',
+                        Mar:'111',
+                        Apr:'111',
+                        May:'111',
+                        Jun:'111',
+                        July:'1',
+                        Aug:'1',
+                        Sept:'1',
+                        Oct:'1',
+                        Nov:'1',
+                        Dec:'1',
+                        all:'1',
+                    },
+                    {
+                        name:'长协比例（%）',
+                        Jan:'111',
+                        Feb:'111',
+                        Mar:'111',
+                        Apr:'111',
+                        May:'111',
+                        Jun:'111',
+                        July:'1',
+                        Aug:'1',
+                        Sept:'1',
+                        Oct:'1',
+                        Nov:'1',
+                        Dec:'1',
+                        all:'1',
+                    },
+                ],
                 chartOption: {
                     tooltip: {
                         trigger: 'axis',
@@ -16,14 +150,17 @@
                         }
                     },
                     legend: {
-                        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+                        data: ['电厂1', '电厂2', '电厂3', '电厂4', '电厂5'],
                         orient: 'vertical',
-                        right: '0'
+                        right: '10',
+	                    bottom:'60'
                     },
+	                color:['#0089f0','#6ec71e','#f57e6a','#fc8b40','#818af8'],
                     grid: {
+                        top:'20',
                         left: '3%',
                         right: '8%',
-                        bottom: '3%',
+                        bottom: '8%',
                         containLabel: true
                     },
                     xAxis: {
@@ -36,9 +173,10 @@
                     },
                     series: [
                         {
-                            name: '直接访问',
+                            name: '电厂1',
                             type: 'bar',
                             stack: '总量',
+	                        barWidth:40,
                             label: {
                                 normal: {
                                     show: true,
@@ -48,7 +186,7 @@
                             data: [320, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390]
                         },
                         {
-                            name: '邮件营销',
+                            name: '电厂2',
                             type: 'bar',
                             stack: '总量',
                             label: {
@@ -60,7 +198,7 @@
                             data: [120, 132, 101, 134, 90, 120, 132, 101, 134, 90, 230, 210]
                         },
                         {
-                            name: '联盟广告',
+                            name: '电厂3',
                             type: 'bar',
                             stack: '总量',
                             label: {
@@ -72,7 +210,7 @@
                             data: [220, 182, 191, 234, 290, 330, 310]
                         },
                         {
-                            name: '视频广告',
+                            name: '电厂4',
                             type: 'bar',
                             stack: '总量',
                             label: {
@@ -84,7 +222,7 @@
                             data: [150, 212, 201, 154, 190, 330, 410]
                         },
                         {
-                            name: '搜索引擎',
+                            name: '电厂5',
                             type: 'bar',
                             stack: '总量',
                             label: {
@@ -117,118 +255,48 @@
     }
 </script>
 <template>
-	<div>
-		<div class="data-panel">
-			<h3 class="title">长协统计</h3>
+	<div class="main-container">
+		<panel>
+			<h3 class="title-lv2">长协统计</h3>
 			<div class="btn-group fr">
-				<button class="button">本年度</button>
-				<button class="button btnSelected">2017年</button>
-				<button class="button">2017年</button>
+				<Button type="primary">上一年</Button>
+				<Button type="primary">2017年</Button>
+				<Button type="primary">下一年</Button>
 			</div>
 			<div id="cxchart" class="chart-container" style="width: 1550px;height: 300px;">
 
 			</div>
-			<div class="table-container">
-				<table width="100%">
-					<thead>
-					<tr>
-						<th>类型</th>
-						<th>一月</th>
-						<th>二月</th>
-						<th>三月</th>
-						<th>四月</th>
-						<th>五月</th>
-						<th>六月</th>
-						<th>七月</th>
-						<th>八月</th>
-						<th>九月</th>
-						<th>十月</th>
-						<th>十一月</th>
-						<th>十二月</th>
-						<th>合计</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td>年度预测合计(万KW.h)</td>
-					</tr>
-					<tr>
-						<td>长协合同合计(万KW.h)</td>
-					</tr>
-					<tr>
-						<td>长协比例(%)</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="data-panel">
-			<h3 class="title">长协统计</h3>
-			<div class="btn-group fr">
-				<button class="button btnSelected">长协合同</button>
-			</div>
-			<div class="table-container">
-				<table width="100%" style="margin-top: 20px;">
-					<thead>
-					<tr>
-						<th>合同编号</th>
-						<th>电厂名称</th>
-						<th>签约电量</th>
-						<th>签约日期</th>
-						<th>执行日期</th>
-						<th>联系人</th>
-						<th>联系电话</th>
-						<th>联络人</th>
-						<th>查看</th>
 
-					</tr>
-					</thead>
-				</table>
-				<div class="table-page absolute">
-					<span>共44444条记录</span><span>123页</span>
-					<span>第 <select name="" id="">
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-						</select>页</span>
+		</panel>
+		<Row className="mgt_15">
+
+			<Table :columns="columns6" :data="data5"  height="180"></Table>
+		</Row>
+		<panel class="mgt_15" >
+			<Row>
+
+				<h3 class="title-lv2">签约统计</h3>
+				<div class="btn-group fr">
+					<Button type="primary">长协合同</Button>
 				</div>
-				<pagenation class="absolute" style="bottom: 20px;right: 40px; " :cur.sync="cur" :all.sync="all"
-				            v-on:btn-click="pageListen"></pagenation>
-			</div>
-		</div>
+			</Row>
+			<Row className="mgt_15">
+				<Table :columns="column2" height="300"></Table>
+				<div class="page-container">
+					<Page :total="100"></Page>
+				</div>
+			</Row>
+		</panel>
 	</div>
 </template>
 <style scoped>
 	.data-panel {
-		width: 1656px;
+		width: 100%;
+		margin: 0;
+		padding: 0;
 	}
 
-	.data-panel:nth-child(2) {
-		height: 400px;
-	}
-
-	.data-panel .title {
-		padding: 0 0 0 5px;
-		border-left: solid 5px #36c;
-		display: inline-block;
-	}
-
-	.data-panel th {
-		height: 30px;
-		background-color: #f6f6f6;
-	}
-
-	.data-panel td {
-		height: 30px;
-		text-align: center;
-	}
-
-	.table-page {
-		font-size: 14px;
-		color: #36c;
-		bottom: 20px;
-		right: 300px;
+	.fr{
+		clear: both;
 	}
 </style>

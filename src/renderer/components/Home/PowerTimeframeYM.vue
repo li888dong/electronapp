@@ -25,18 +25,11 @@
     }
 </script>
 <template>
-	<div class="power-timeframe data-panel ">
-		<h3 class="title">用电实时段分布</h3>
-		<div class="btn-group fr btn-switch">
+	<panel class="power-timeframe">
+		<h3 class="title-lv3">用电实时段分布</h3>
+		<div class="btn-group btn-switch">
 			<Button v-bind:type="powerFrameType==='month'?'primary':'default'"@click="changeType('month')">月</Button>
 			<Button v-bind:type="powerFrameType==='year'?'primary':'default'"@click="changeType('year')">年</Button>
-			<!--<button class="button" v-bind:class="{btnSelected:powerFrameType==='month'}"-->
-			        <!--@click="changeType('month')">月-->
-			<!--</button>&lt;!&ndash;0-->
-			<!--&ndash;&gt;-->
-			<!--<button class="button" v-bind:class="{btnSelected:powerFrameType==='year'}"-->
-			        <!--@click="changeType('year')">年-->
-			<!--</button>-->
 		</div>
 		<div class="power-timeframe-bar" :style="{width:totalWidth+'px'}">
 			<div class="power-timeframe-bar-low">谷段 <span><span class="bar" v-if="guduanData !==0"
@@ -49,14 +42,13 @@
 			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">50%</span>228Mw.时</span>
 			</div>
 		</div>
-	</div>
+	</panel>
 </template>
 <style scoped>
 	.power-timeframe {
 		height: 202px;
 		display: inline-block;
 		vertical-align: top;
-		margin-left: -5px;
 	}
 
 	.power-timeframe .title {
@@ -67,13 +59,11 @@
 		display: inline-block;
 	}
 
-	.power-timeframe .btn-switch {
-		margin-top: 0;
-	}
 
 	.power-timeframe .power-timeframe-bar {
 		height: 150px;
 		margin-top: 22px;
+		margin-left: 20px;
 	}
 
 	.power-timeframe .power-timeframe-bar > div {

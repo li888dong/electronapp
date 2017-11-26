@@ -4,55 +4,137 @@
 		data(){
 	        return{
                 chartOption2: {
-                    title : {
-                        text: '历史用电量'
-                    },
-                    tooltip : {
-                        trigger: 'axis'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
                     },
                     legend: {
-                        data:[{
-                            name:'实际用电量',
-	                        icon:'rect'
-                        }]
+                        data:['河南众企联合售电'],
+                        left:20,
+                        top:2,
+                        itemWidth:14,
                     },
-                    backgroundColor:'#fff',
-                    calculable : true,
-                    xAxis : [
-                        {
-                            type : 'category',
-                            boundaryGap : false,
-                            data : ['周一','周二','周三','周四','周五','周六','周日']
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value'
-                        }
-                    ],
-	                dataZoom:{
-
-	                },
+	                backgroundColor:'#fff',
+                    grid: {
+                        top:'40',
+                        left: 0,
+                        right: 0,
+                        bottom: '6%',
+                        containLabel: true
+                    },
                     color:['#48C3F3'],
-                    series : [
-
+                    xAxis: [
                         {
-                            name:'实际用电量',
-                            type:'line',
-                            smooth:true,
-
-                            itemStyle: {
-                                normal: {
-	                                areaStyle: {
-		                                type: 'default',
-			                            color:'#EBF7FC'
-	                                }
-	                            }
+                            type:'category',
+                            boundaryGap : false,
+                            data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
+                            splitLine: {show: false},
+                            splitArea: {show: false},
+                            axisLine: {
+                                show: false
                             },
-                            data:[1320, 1132, 601, 234, 120, 90, 20]
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            position:'right',
+                            type: 'value',
+                            boundaryGap: 0,
+                            splitArea: {show: false},
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom:{
+                        bottom:-5,
+                        start:0,
+                        end:90
+                    },
+                    series: [
+                        {
+                            name: '河南众企联合售电',
+                            type: 'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default',opacity:0.3}}},
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
                         }
                     ]
-                }
+                },
+				columns6:[
+					{
+					    title:'户号',
+						key:'name',
+					},
+					{
+					    title:'01月',
+						key:'Jan',
+					},{
+                        title:'02月',
+						key:'Feb',
+					},
+					{
+					    title:'03月',
+						key:'Mar',
+					},{
+                      title:'04月',
+						key:'Apr',
+					},
+					{
+					    title:'05月',
+						key:'May',
+					},{
+                       title:'06月',
+						key:'Jun',
+					},{
+                        title:'07月',
+						key:'July',
+					},{
+                        title:'08月',
+						key:'Aug',
+					},{
+                        title:'09月',
+						key:'Sept',
+					},{
+                        title:'10月',
+						key:'Oct',
+					},{
+                        title:'11月',
+						key:'Nov',
+					},{
+                         title:'12月',
+						  key:'Dec',
+					},{
+                        title:'总计',
+						key:'all',
+					}
+				],
+				data5:[
+					{
+					    name:'111',
+						Jan:'111',
+						Feb:'111',
+						Mar:'111',
+						Apr:'111',
+						May:'111',
+						Jun:'111',
+						July:'1',
+						Aug:'1',
+						Sept:'1',
+						Oct:'1',
+						Nov:'1',
+						Dec:'1',
+						all:'1',
+					}
+				]
 	        }
 		},mounted() {
             this.drawChart(this.chartOption2);
@@ -70,67 +152,36 @@
 <template>
 	<div class="database-container relative">
 		<div class="history-chart-container" id="historyChart">
-
 		</div>
-		<div class="history-table-container">
-			<h3 class="title">历史用电量数据</h3>
-			<div class="btn-group fr">
-				<button class="button btnSelected">2017年</button>
-				<button class="button">2016年</button>
-				<button class="button">2015年</button>
-				<button class="button">2014年</button>
+		<panel class="history-table-container mgt_15">
+			<h3 class="title-lv2">历史用电量数据</h3>
+			<div class="btn-group">
+				<Button type="primary">2017年</Button>
+				<Button type="default">2016年</Button>
+				<Button type="default">2015年</Button>
+				<Button type="default">2014年</Button>
 			</div>
-			<table width="100%" cellspacing="15">
-				<thead>
-					<tr>
-						<th>户号</th>
-						<th>01月</th>
-						<th>02月</th>
-						<th>03月</th>
-						<th>04月</th>
-						<th>05月</th>
-						<th>06月</th>
-						<th>07月</th>
-						<th>08月</th>
-						<th>09月</th>
-						<th>10月</th>
-						<th>11月</th>
-						<th>12月</th>
-						<th>合计</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		</panel>
+		<Row>
+
+			<Table :columns="columns6" :data="data5" width="1440" height="422"></Table>
+		</Row>
 	</div>
 </template>
 <style scoped>
 	.database-container{
-		top: 75px;
-		left: 225px;
+		top: 60px;
+		left: 220px;
 		overflow: hidden;
 	}
 	.history-chart-container{
-		width: 1447px;
+		width:1440px;
 		height: 371px;
 		background-color: #fff;
-		padding: 10px 15px;
 	}
 	.history-table-container{
-		width: 1447px;
-		height: 441px;
-		background-color: #fff;
-		margin-top: 15px;
-		padding: 10px 15px;
-
+		width:1440px;
+		height: 50px;
 	}
-	.history-table-container th{
-		height: 40px;
-		background-color: #f6f6f6;
 
-	}
 </style>

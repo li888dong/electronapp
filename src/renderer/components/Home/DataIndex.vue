@@ -24,114 +24,141 @@
 	}
 </script>
 <template>
-	<div class="data-panel data-index relative">
-		<h3 class="title">数据指数</h3>
-		<ul class="index-title">
-			<li><span class="shiji-count">实际月用电量</span><span>同比</span>|<span class="huanbi-rate">环比</span>|<span>偏差</span></li>
-			<li><span class="count">预测月偏差</span>|<span
-					class="huanbi-rate">环比</span></li>
-			<li><span class="count">申报月偏差</span>|<span
-					class="huanbi-rate">环比</span></li>
-			<li><span class="count">上月监测偏差</span>|<span
-					class="huanbi-rate">环比</span></li>
-		</ul>
-		<ul class="tongbi">
-			<li>
-				<span class="count">{{indexData.shijiliang}}</span>
-				<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-				<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-				<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
-			</li>
-			<li><span class="count">{{indexData.yucePiancha}}%</span> <span class="huanbi-rate">{{indexData.yuceHuanbi}}<i
-					class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
-			</li>
-			<li><span class="count">{{indexData.shenbaoPiancha}}%</span> <span class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
-					class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-			</li>
-			<li><span class="count">{{indexData.goudianPiancha}}%</span> <span class="huanbi-rate">{{indexData.goudianHuanbi}}<i
-					class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-			</li>
 
-		</ul>
-	</div>
+	<panel class="data-index relative">
+		<Row>
+			<h3 class="title-lv3">数据指数</h3>
+
+		</Row>
+		<Row>
+
+		<Col span="9">
+			<Row className="data-title">
+				<Col span="6">
+					<span>实际月用电量</span>
+				</Col>
+
+				<Col span="6">
+					<span>同比</span>
+				</Col>
+
+				<Col span="6">
+					<span>环比</span>
+				</Col>
+
+				<Col span="6">
+					<span>偏差</span>
+				</Col>
+			</Row>
+			<Row className="data-content">
+				<Col span="6">
+				<span >{{indexData.shijiliang}}</span>
+				</Col>
+
+				<Col span="6">
+				<span>{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+
+				</Col>
+
+				<Col span="6">
+				<span>{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+
+				</Col>
+
+				<Col span="6">
+				<span>{{indexData.shijiHuanbi}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+
+				</Col>
+
+			</Row>
+		</Col>
+
+		<Col span="5">
+			<Row className="data-title">
+				<Col span="12">
+					<span >预测月偏差</span>|
+				</Col>
+				<Col span="12">
+					<span >环比</span>
+				</Col>
+			</Row>
+			<Row className="data-content">
+				<Col span="12">
+				<span>{{indexData.yucePiancha}}%</span>
+
+				</Col>
+				<Col span="12">
+				<span>{{indexData.yuceHuanbi}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+
+				</Col>
+			</Row>
+		</Col>
+		<Col span="5">
+			<Row className="data-title">
+				<Col span="12">
+				<span>申报月偏差</span>
+				</Col>
+				<Col span="12">
+				<span >环比</span>
+				</Col>
+			</Row>
+			<Row className="data-content">
+				<Col span="12">
+				<span>{{indexData.shenbaoPiancha}}%</span>
+
+				</Col>
+				<Col span="12">
+				<span>{{indexData.shenbaoHuanbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+
+				</Col>
+			</Row>
+		</Col>
+		<Col span="5">
+			<Row className="data-title">
+				<Col span="12">
+				<span>上月监测偏差</span>
+				</Col>
+				<Col span="12">
+				<span >环比</span>
+				</Col>
+			</Row>
+			<Row className="data-content">
+				<Col span="12">
+				<span>{{indexData.goudianPiancha}}%</span>
+				</Col>
+				<Col span="12">
+				<span>{{indexData.goudianHuanbi}}<i class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+
+				</Col>
+			</Row>
+		</Col>
+		</Row>
+
+	</panel>
+
 </template>
 <style scoped>
 	/*数据指数*/
 	.data-index {
-		width: 1211px;
-		height: 105px;
+		height: 115px;
 		background-color: #fff;
-		padding: 10px;
 	}
 
-	.data-index span {
-		display: inline;
-		font-size: 12px;
+	.data-title{
+		background-color: #F6F7FB;
 	}
-
-	.data-index li, .data-index h3 {
-		display: inline-block;
-		vertical-align: top;
+	.data-content,.data-title{
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
 	}
+	
 	.data-index h3{
 		margin-bottom: 10px;
 	}
-	.data-index .index-title,
-	.data-index .tongbi{
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content:space-around;
-	}
-	.data-index .index-title li{
-		background-color: #F6F7FB;
-		line-height: 30px;
-
-	}
-	.data-index .index-title li span,
-	.data-index .tongbi li span{
-		margin-top:8px;
-		min-width: 100px;
-		text-align: center;
-	}
-	.data-index .tongbi li:nth-child(1) span{
-		margin-left: 10px;
-	}
-	span.count{
-		min-width: 100px;
-	}
-	.data-index li:nth-child(1),
-	.data-index .tongbi li:nth-child(1){
-		width: 420px;
-		height: 30px;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content:space-around;
-		float: left;
-	}
-	.data-index li:not(:nth-child(1)),
-	.data-index .tongbi li:not(:nth-child(1)) {
-		width: 200px;
-		height: 30px;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content:space-around;
-		float: left;
-	}
-
-	.data-index li span{
-		height: 15px;
-		line-height: 15px;
-		color: #444444;
-	}
-	.data-index .index-title li span{
-		color: #999;
-	}
-	.data-index li span.shiji-count{
-		width: 200px;
-	}
 
 
-	.data-index .trend {
+	.trend {
 		display: inline-block;
 		width: 15px;
 		height: 15px;

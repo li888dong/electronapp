@@ -1,12 +1,11 @@
 <script>
+    import Panel from "../Tool/Panel.vue";
+
     export default {
+        components: {Panel},
         name: 'jiexiantu',
         mounted() {
             this.initScroll();
-
-//            this.dragParams.drag = this.$refs.mybox;
-//            this.dragParams.min = this.$refs.mybox.parentNode.offsetWidth - this.$refs.mybox.offsetWidth;
-
         },
         data() {
             return {
@@ -449,14 +448,11 @@
             },
             initScroll: function () {
                 let mychart = this.$echarts.init(document.getElementById('mybox'));
-//                mychart.showLoading();
-//                    console.log(data.data)
-//                    mychart.hideLoading();
                 mychart.setOption({
                     title: {
                         text: "接线图",
                         textStyle: {
-                            fontSize: '16'
+                            fontSize: '14'
                         },
                         left: '5',
                         top: '5'
@@ -471,8 +467,8 @@
                             name: 'jiexiantu',
                             data: [this.jiexianData],
 
-                            left: '2%',
-                            right: '2%',
+                            left: '0',
+                            right: '0',
                             top: '15%',
                             bottom: '20%',
 
@@ -517,111 +513,20 @@
     }
 </script>
 <template>
-	<div class="jiexiantu">
-		<div class="mycontainer relative" style="width: 366px;height: 215px" ref="mybox">
-			<div id="mybox" style="position: absolute;top: 0;left: 0;right: 0px;bottom: 0"></div>
-			<!--<div class="client">-->
-			<!--<p class="kehu">-->
-			<!--<i class="iconfont icon-daloutubiao" @click="jiexianData.show = !jiexianData.show"></i><span>{{jiexianData.kehuName}}</span>-->
-			<!--</p>-->
-			<!--<transition-group name="fade">-->
-			<!--<div class="huhao" v-show="jiexianData.show" v-for="huhao in jiexianData.huhaos" :key="huhao.name">-->
-			<!--<p><i class="iconfont icon-gongchang" @click="huhao.show = !huhao.show"></i></p>-->
-			<!--<transition-group name="fade">-->
+	<panel class="jiexiantu">
 
-			<!--<div v-show="huhao.show" v-for="bianhao in huhao.bianhaos" :key="bianhao.name">-->
-			<!--<div class="bianhao">-->
-			<!--<p><i class="iconfont icon-bianyaqiyunhangpingjia" @click="bianhao.show = !bianhao.show"></i></p>-->
-			<!--<transition-group name="fade">-->
-			<!--<div class="biaohao" v-show="bianhao.show" v-for="biaohao in bianhao.biaohaos" :key="biaohao.name">-->
-			<!--<p><i class="iconfont icon-new_dianbiao"></i></p>-->
-			<!--</div>-->
-			<!--</transition-group>-->
+		<div id="mybox" style="position: absolute;top: 0;left: 0;right: 0px;bottom: 0"></div>
 
-			<!--</div>-->
-			<!--</div>-->
-			<!--</transition-group>-->
-
-			<!--</div>-->
-			<!--</transition-group>-->
-			<!--</div>-->
-
-		</div>
-
-	</div>
+	</panel>
 </template>
 <style scoped>
 	.jiexiantu {
-		width: 355px;
+		width: 100%;
 		height: 202px;
 		display: inline-block;
 		vertical-align: top;
-		margin-top: 20px;
-		margin-left: 20px;
 		position: relative;
 		overflow: hidden;
-	}
-
-	.mycontainer {
-		height: 202px;
-		width: auto;
-		position: absolute;
-		background-color: #fff;
-		overflow-x: scroll;
-	}
-
-	.client {
-		white-space: nowrap;
-		text-align: center;
-		width: inherit;
-	}
-
-	.huhao {
-		margin-top: 10px;
-	}
-
-	.bianhao {
-		margin: 10px 10px 0 10px;
-	}
-
-	.biaohao {
-		margin: 10px 10px 0 10px;
-	}
-
-	.client div {
-		display: inline-block;
-		vertical-align: top;
-	}
-
-	.kehu {
-		display: flex;
-		flex-flow: column;
-		height: 30px;
-		line-height: 15px;
-		margin-top: 10px;
-		border-bottom: 1px solid red;
-	}
-
-	.fade-enter-active, .fade-leave-active {
-		transition: opacity .5s
-	}
-
-	.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */
-	{
-		opacity: 0
-	}
-
-	li {
-		width: 100px;
-		display: inline-block;
-		text-align: center;
-	}
-
-	.mycontainer::-webkit-scrollbar {
-		width: 0px;
-		/*滚动条宽度（右侧滚动条）*/
-		height: 10px;
-		/*滚动条高度（底部滚动条）*/
 	}
 
 </style>

@@ -1,21 +1,133 @@
 <script>
-import PagingTool from '@/components/Equipment/PagingTool'
-
 export default {
     name: 'EquipmentException',
     data(){
         return{
-            
+            columns1: [
+                {
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                },
+                {
+                    "sortable": true,
+                    title: '终端编号',
+                    key: 'n1'
+                },
+                {
+                    "sortable": true,
+                    title: '生产厂家',                    
+                    width: 200,
+                    key: 'n2'
+                },
+                {
+                    "sortable": true,
+                    title: '当前状态',
+                    key: 'n3'
+                },
+                { 
+                    title: '异常编码',
+                    key: 'n4'
+                },
+                {
+                    "sortable": true,
+                    title: '异常类别',
+                    key: 'n5'
+                },
+                {
+                    title: '异常出现时间',
+                    key: 'n6'
+                },
+                {
+                    "sortable": true,
+                    title: '操作人',
+                    key: 'n7'
+                },
+                
+                {
+                    title: '操作',
+                    key: 'n8',
+                    align: 'center',
+                    width: 150,
+                    render: (h, params) => {
+                        return h('div', [                            
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                        
+                                    }
+                                }
+                            }, '修正完成'),
+                            h('span', {
+                                style: {
+                                    marginLeft: '10px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                        
+                                    }
+                                }
+                            }, '拆除设备')                                        
+                        ]);
+                    }
+
+                }               
+            ],
+            data1: [
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+                {
+                    n1: '123456',
+                    n2: '2017-11-12',
+                    n3: '123456',
+                    n4: '2017-11-12',
+                    n5: '123456',
+                    n6: '2017-11-12',
+                    n7: '123456',
+                    n8: '2017-11-12',
+                    n9: '123456',
+                    n10: '22',
+                    n11: '33'
+                },
+            ]
         }
-    },
-    components: {
-        'PagingToolView': PagingTool
     }
 }
 </script>
 
 <template><!-- 设备异常页面 -->
-<div class="EquipmentException">
+<Row class="EquipmentException">
     设备管理 / 设备异常记录
     <div class="ExceptionTittle">
         <h3>设备异常记录</h3>
@@ -29,49 +141,25 @@ export default {
             <option value="">河南区域</option>
             <option value="">全国区域</option>
         </select>
-        <span>时间</span>        
+        <span><DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker></span>        
     </div>
     <div class="ExceptionForm">
-        <table>
-            <tr>
-                <th><input type="checkbox" name="" id="">终端编号</th>
-                <th>生产厂家</th>
-                <th>当前状态</th>
-                <th>异常编码</th>
-                <th>异常类别</th>
-                <th>异常出现时间</th>
-                <th>操作人</th>
-                <th>操作</th>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>2017-12-12 12:12:12</td>
-                <td>丽丽</td>
-                <td>修正完成</td>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>2017-12-12 12:12:12</td>
-                <td>明明</td>
-                <td>拆除设备</td>
-            </tr>
-            <PagingToolView></PagingToolView>
-        </table>
+        <Table border :columns='columns1' :data='data1'></Table>
+        <!-- 分页 -->
+        <div class="fenYe">
+            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
+        </div>
     </div>
-</div>
+</Row>
 </template>
 
 <style scoped>
+button {
+    outline: none;
+    border: none;
+}
 .EquipmentException{
-    width: 1700px;
+    max-width: 1700px;
     height: 914px;
     background-color: #E8ECF0;
     padding: 15px;
@@ -79,9 +167,9 @@ export default {
 }
 .ExceptionTittle{
     background-color: #fff;
-    height: 60px;
-    border-bottom: 1px solid #666666;
-    padding: 20px 10px 10px 10px;
+    height: 46px;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 10px 0px 10px;
 }
 .ExceptionTittle h3{
     display: inline-block;
@@ -147,29 +235,27 @@ export default {
 .ExceptionForm{
     background-color: #fff;
     position: relative;
-    height: 768px;
+    max-height: 768px;
+    padding: 0 10px;
 }
-.ExceptionForm th{
-    display: inline-block;
-    padding: 0 20px;
-    height: 40px;
-    background-color: #F6F7FB;
-    line-height: 40px;
-    margin: 0 33px;
-}
-.ExceptionForm th input {
-    vertical-align: middle;
-}
-.ExceptionForm td{
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 32px;
-    text-align: center;
-    width: 100px;
-}
-.ExceptionForm a{
-    padding: 0 2px;
-} 
 
+
+/* 分页的样式 */
+.fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+}
+.fenYe table{
+    border: 0;
+}
+.fenYe ul {
+    display: inline-block;
+}
+.fenYe button{
+    top: -12px;
+    left: 12px;
+}
 </style>

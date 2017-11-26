@@ -1,17 +1,18 @@
-<style>
-	#myCharts-2 {
-		margin: 0 auto;
+<style scoped>
+	.chart-container{
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		height: 400px;
 	}
 </style>
 
 <template>
-	<div style="width: 700px;height: 380px;margin: 0 auto">
+	<div id="henan-map" class="chart-container">
 
-		<div id="henan-map" :style="{width: '700px', height: '480px',background:'transparent'}">
-
-		</div>
 	</div>
-
 </template>
 
 <script>
@@ -55,22 +56,18 @@
                             color: ['#e0ffff', '#006edd']
                         },
                         calculable: true,
-	                    right:20,
-	                    bottom:110,
+	                    left:20,
+	                    bottom:60,
 	                    orient:'horizontal'
                     },
-					grid:{
-                        left:0,
-						top:0,
-						right:0,
-						bottom:0
-					},
+
                     series: [{
                         type: 'map',
                         map: 'henan',
                         selectedMode: 'single',
-	                    top:'0',
-	                    left:'100',
+	                    top:'20',
+	                    left:'30%',
+	                    bottom:'20',
                         itemStyle: {
                             normal: {
                                 label: {

@@ -1,15 +1,28 @@
 <style scoped>
 	.relative{
 		background-color: #fff;
-		margin:15px 0 0 20px
 	}
 </style>
 <template>
-	<div class="relative">
-		<div id="lineChart3" :style="{width: '449px', height: '243px',margin:'15px 0 0 20px'}">
+	<panel class="relative">
+		<span style="font-size: 14px;font-weight: bold;position: absolute;top: 5px;left: 15px;width: 100px;">有功功率</span>
+		<div @click="modal3 = true;drawModal1()" style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
+			<Icon type="qr-scanner"></Icon> &nbsp;全屏
+		</div>
+		<Modal v-model="modal3"
+		       title="有功功率"
+		       width="1500">
+			<div id="lineModalChart3" :style="{width: '1449px', height: '543px',margin:'15px 0 0 20px'}">
+
+			</div>
+			<div slot="footer">
+
+			</div>
+		</Modal>
+		<div id="lineChart3" :style="{width: '449px', height: '253px'}">
 
 		</div>
-	</div>
+	</panel>
 
 </template>
 
@@ -19,18 +32,11 @@
         name: 'lineChart',
         data() {
             return {
+                modal3:false,
                 powerRealtimeType: '15',
                 powerdata: [],
                 powerdate: [],
                 chartOption1: {
-                    title: {
-                        text: "有功功率",
-                        textStyle:{
-                            fontSize:'16'
-                        },
-                        left:'5',
-                        top:'5'
-                    },
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -44,9 +50,9 @@
                     },
                     grid: {
                         top:'40',
-                        left: 0,
+                        left: 15,
                         right: 0,
-                        bottom: '3%',
+                        bottom: '6%',
                         containLabel: true
                     },
                     xAxis: [
@@ -64,9 +70,14 @@
                             boundaryGap: 0,
 
                             axisLabel: {
-                                inside: true,
                                 color:'#999'
-                            }
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
                         }
                     ],
 //          设置可拖动区间
@@ -85,7 +96,96 @@
                             data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
                         }
                     ]
+                },
+                chartOption2: {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data:['河南众企联合售电','111111111','22222222222','asdasdasda','dasfsdgdafasd'],
+                        left:20,
+                        top:2,
+                        itemWidth:14,
+                    },
+                    grid: {
+                        top:'40',
+                        left: 0,
+                        right: 0,
+                        bottom: '6%',
+                        containLabel: true
+                    },
+                    color:['#0089f0','#31c9d7','#f35e7a','#6ec71e','#f57e6a','#818af8'],
+                    xAxis: [
+                        {
+                            type:'category',
+                            boundaryGap : false,
+                            data: ['2017年01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
+                            splitLine: {show: false},
+                            splitArea: {show: false},
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            position:'left',
+                            type: 'value',
+                            boundaryGap: 0,
+                            splitArea: {show: false},
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom:{
+                        bottom:-5,
+                        start:0,
+                        end:90
+                    },
+                    series: [
+                        {
+                            name: '河南众企联合售电',
+                            type: 'line',
+                            smooth:true,
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
+                        },
+                        {
+                            name: '111111111',
+                            type: 'line',
+                            smooth:true,
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.8)
+                        },
+                        {
+                            name: '22222222222',
+                            type: 'line',
+                            smooth:true,
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.9)
+                        },
+                        {
+                            name: 'asdasdasda',
+                            type: 'line',
+                            smooth:true,
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*1.1)
+                        },
+                        {
+                            name: 'dasfsdgdafasd',
+                            type: 'line',
+                            smooth:true,
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*1.5)
+                        },
+                    ]
                 }
+
             }
         },
         mounted() {
@@ -112,6 +212,12 @@
             drawLine(option = this.chartOption1) {
                 // 基于准备好的dom，初始化echarts实例
                 let powerChart = this.$echarts.init(document.getElementById('lineChart3'));
+                // 绘制图表
+                powerChart.setOption(option);
+            }, drawModal1(option = this.chartOption2){
+                console.log(1)
+                // 基于准备好的dom，初始化echarts实例
+                let powerChart = this.$echarts.init(document.getElementById('lineModalChart3'));
                 // 绘制图表
                 powerChart.setOption(option);
             }

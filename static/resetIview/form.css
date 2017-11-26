@@ -1,0 +1,41 @@
+/* 输入框*/
+
+.ivu-input{
+	height: 34px;
+	border-radius: 0;
+}
+
+ .ivu-select-single .ivu-select-selection{
+	border-radius: 0;
+	height: 34px;
+}
+
+/*文本域状态,使用时 *** + .myTextarea 前面加上父级文件名称（否则优先级不够）*/
+.myTextarea textarea{
+	width: 700px;
+	height: 102px;
+	resize:none;
+}
+
+/* 地市选择器 */
+.mySelect{
+	width: 100px;
+	height: 34px;
+}
+.mySelect .ivu-select-selection .ivu-select-placeholder, .mySelect .ivu-select-selection .ivu-select-selected-value{
+	height: 32px;
+	line-height: 32px;
+}
+.mySelect .ivu-select-selection{
+	height: 34px;
+	border-radius: 0;
+}
+
+
+/*弹出的修改框居中显示*/
+.vertical-center-modal{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}

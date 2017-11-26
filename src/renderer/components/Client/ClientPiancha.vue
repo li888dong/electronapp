@@ -3,334 +3,249 @@
 	    name:'piancha',
 		data(){
 	        return{
-                chartOption1:{
-                    title: {
-                        text: "采集偏差",
-                        textStyle:{
-                            fontSize:'14'
-                        },
-                        left:'105',
-                        top:'5'
+	            year:'2017',
+	            yearList:[
+                    {
+                        value: '2017',
                     },
+                    {
+                        value: '2016',
+                    },
+                    {
+                        value: '2015',
+                    },
+                    {
+                        value: '2014',
+                    },
+                    {
+                        value: '2013',
+                    },
+                    {
+                        value: '2012',
+                    }
+	            ],
+                option : {
+                    legend: {
+                        data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
+                        align: 'left',
+                        left: 10,
+                        itemWidth:14,
+                    },
+	                color:['#0089f0','#31c9d7','#f35e7a'],
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
-                    xAxis:{
-                        type: 'category',
-                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12"],
-                        nameTextStyle:{
-                            fontSize:12
+                    xAxis: {
+                        type:'category',
+                        data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
+                        axisLine: {onZero: true},
+                        splitLine: {show: false},
+                        splitArea: {show: false}
+                    },
+                    yAxis: {
+                        inverse: true,
+                        splitArea: {show: false},
+                        axisLine: {
+                            show: false
                         },
-//	                    控制x轴隔几个显示
-                        axisLabel :{
-                            interval:2
-                        }
-
-                    }
-                    ,
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
-                        }
-                    ],
-                    dataZoom: [ {
-                        type: 'slider',
-                        bottom:-225,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/8'
-                    }],
+                        axisTick: {
+                            show: false
+                        },
+                    },
+	                dataZoom:{
+                        bottom:0
+	                },
+                    grid: {
+                        left: 40,
+	                    top:40,
+	                    bottom:60
+                    },
                     series: [
-//                        { // For shadow
-//                            type: 'bar',
-//                            itemStyle: {
-//                                normal: {color: 'rgba(0,0,0,0.05)'}
-//                            },
-//                            barGap:'-100%',
-//                            barCategoryGap:'40%',
-//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
-//                            animation: false
-//                        },
                         {
-                            name: '今年',
+                            name: '采集偏差',
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
                                 },
                                 emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
                                 }
                             },
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217]
+                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6]
                         },
                         {
-                            name: '去年',
+                            name: '客户预测偏差',
                             type: 'bar',
                             itemStyle: {
                                 normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
                                 },
                                 emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
                                 }
                             },
-                            data: [ 276, 284, 261, 49, 66, 175, 46, 275,150]
+                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6].map((i)=>i*2)
+                        },
+                        {
+                            name: '公司预测偏差',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                },
+                                emphasis: {
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                }
+                            },
+                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6].map((i)=>i*0.5)
                         }
-
                     ]
                 },
-                chartOption2:{
-                    title: {
-                        text: "客戶預測",
-                        textStyle:{
-                            fontSize:'14'
-                        },
-                        left:'105',
-                        top:'5'
+                columns4: [
+                    {
+                        title: '类别',
+	                    width:200,
+                        key: 'category'
                     },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
+                    {
+                        title: '1月',
+                        key: 'January'
                     },
-                    xAxis:{
-                        type: 'category',
-                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12"],
-                        nameTextStyle:{
-                            fontSize:12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel :{
-                            interval:2
-                        }
-
+                    {
+                        title: '2月',
+                        key: 'February'
+                    },
+                    {
+                        title: '3月',
+                        key: 'March'
+                    },
+                    {
+                        title: '4月',
+                        key: 'April'
+                    },
+                    {
+                        title: '5月',
+                        key: 'May'
+                    },
+                    {
+                        title: '6月',
+                        key: 'June'
+                    },
+                    {
+                        title: '7月',
+                        key: 'July'
+                    },
+                    {
+                        title: '8月',
+                        key: 'August'
+                    },
+                    {
+                        title: '9月',
+                        key: 'September'
+                    },
+                    {
+                        title: '10月',
+                        key: 'October'
+                    },
+                    {
+                        title: '11月',
+                        key: 'November'
+                    },
+                    {
+                        title: '12月',
+                        key: 'December'
                     }
-                    ,
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
-                        }
-                    ],
-                    dataZoom: [ {
-                        type: 'slider',
-                        bottom:-225,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/8'
-                    }],
-                    series: [
-//                        { // For shadow
-//                            type: 'bar',
-//                            itemStyle: {
-//                                normal: {color: 'rgba(0,0,0,0.05)'}
-//                            },
-//                            barGap:'-100%',
-//                            barCategoryGap:'40%',
-//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
-//                            animation: false
-//                        },
-                        {
-                            name: '今年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217]
-                        },
-                        {
-                            name: '去年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [ 276, 284, 261, 49, 66, 175, 46, 275,150]
-                        }
-
-                    ]
-                },
-                chartOption3:{
-                    title: {
-                        text: "公司预测",
-                        textStyle:{
-                            fontSize:'14'
-                        },
-                        left:'105',
-                        top:'5'
+                ],
+                data1: [
+                    {
+                        category: 'John Brown',
+                        January: 1000000,
+                        February: 100000,
+                        March: 100000,
+                        April:100000,
+                        May:100000,
+                        June:1000000,
+                        July:100000,
+                        August:10000,
+                        September:1000000,
+                        October:1000000,
+                        November:1000000,
+                        December:1000000,
                     },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
+                    {
+                        category: 'John Brown',
+                        January: 1000000,
+                        February: 100000,
+                        March: 100000,
+                        April:100000,
+                        May:100000,
+                        June:1000000,
+                        July:100000,
+                        August:10000,
+                        September:1000000,
+                        October:1000000,
+                        November:1000000,
+                        December:1000000,
                     },
-                    xAxis:{
-                        type: 'category',
-                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12"],
-                        nameTextStyle:{
-                            fontSize:12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel :{
-                            interval:2
-                        }
-
+                    {
+                        category: 'John Brown',
+                        January: 1000000,
+                        February: 100000,
+                        March: 100000,
+                        April:100000,
+                        May:100000,
+                        June:1000000,
+                        July:100000,
+                        August:10000,
+                        September:1000000,
+                        October:1000000,
+                        November:1000000,
+                        December:1000000,
                     },
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
-                        }
-                    ],
-                    dataZoom: [ {
-                        type: 'slider',
-                        bottom:-5,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/8'
-                    }],
-                    series: [
-//                        { // For shadow
-//                            type: 'bar',
-//                            itemStyle: {
-//                                normal: {color: 'rgba(0,0,0,0.05)'}
-//                            },
-//                            barGap:'-100%',
-//                            barCategoryGap:'40%',
-//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
-//                            animation: false
-//                        },
-                        {
-                            name: '今年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217]
-                        },
-                        {
-                            name: '去年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [ 276, 284, 261, 49, 66, 175, 46, 275,150],
-                            //          设置可拖动区间
-
-                        }
-
-                    ]
-                }
+                    {
+                        category: 'John Brown',
+                        January: 1000000,
+                        February: 100000,
+                        March: 100000,
+                        April:100000,
+                        May:100000,
+                        June:1000000,
+                        July:100000,
+                        August:10000,
+                        September:1000000,
+                        October:1000000,
+                        November:1000000,
+                        December:1000000,
+                    },
+                    {
+                        category: 'John Brown',
+                        January: 1000000,
+                        February: 100000,
+                        March: 100000,
+                        April:100000,
+                        May:100000,
+                        June:1000000,
+                        July:100000,
+                        August:10000,
+                        September:1000000,
+                        October:1000000,
+                        November:1000000,
+                        December:1000000,
+                    },
+                ]
 	        }
 		},
 		mounted(){
@@ -339,15 +254,8 @@
 		methods:{
 		    drawBar(){
                 let compare1Chart = this.$echarts.init(document.getElementById('caiji'));
-                let compare2Chart = this.$echarts.init(document.getElementById('kehuyuce'));
-                let compare3Chart = this.$echarts.init(document.getElementById('gongsiyuce'));
-                compare1Chart.setOption(this.chartOption1);
-                compare2Chart.setOption(this.chartOption2);
-                compare3Chart.setOption(this.chartOption3);
-                compare1Chart.group = 'group1';
-                compare2Chart.group = 'group2';
-                compare3Chart.group = 'group3';
-                this.$echarts.connect([compare1Chart,compare2Chart,compare3Chart])
+
+                compare1Chart.setOption(this.option);
             }
 		}
 	}
@@ -356,40 +264,58 @@
 	<div>
 		<div class="piancha-container">
 			<div class="data-panel client-piancha relative">
-				<h3 class="title fl">偏差分析</h3>
-				<div class="btn-group fr">
-					<button class="button btnSelected" >年度选择</button>
-					<button class="button" >上一年</button>
-					<button class="button btnSelected" >2017年</button>
-					<button class="button" >下一年</button>
+				<div class="header">
 
+					<h3 class="title fl">偏差分析</h3>
+					<div class="select">
+						<Select v-model="year" style="width:180px;">
+							<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+						</Select>
+						<div class="refresh" style="display: inline-block;vertical-align: middle;margin-left: 20px;cursor: pointer">
+
+							<i class="iconfont icon-shuaxin" style="color: #0089F0;font-size: 22px;"></i>
+						</div>
+					</div>
 				</div>
 				<div class="char-group">
 					<div id="caiji">
 
 					</div>
-					<div id="kehuyuce">
-
-					</div>
-					<div id="gongsiyuce">
-
-					</div>
 				</div>
+			</div>
+			<div class="table-container">
+
+				<Table :columns="columns4" :data="data1" height="387"></Table>
 			</div>
 		</div>
 	</div>
 </template>
 <style scoped>
 	.piancha-container{
-		margin-left: 225px;
-		margin-top: 153px;
+		margin: 60px 20px 20px 220px;
 		background-color: #fff;
 	}
 	.client-piancha{
-		width: 1400px;
+		width: 1432px;
+		margin: 0;
+	}
+	.client-piancha .header{
+		border-bottom: 1px solid #eeeeee;
+	}
+	.select{
+		margin-left: 1160px;
+		margin-bottom: 10px;
+	}
+	.char-group{
+		margin-top: 20px;
 	}
 	.char-group>div{
-		width: 1259px;
-		height: 258px;
+		width: 1580px;
+		height: 358px;
+	}
+	.table-container{
+		margin-top: 30px;
+		width: 1440px;
+		height:381px;
 	}
 </style>

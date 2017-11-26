@@ -12,23 +12,27 @@
                 <Col span="5">用户地址</Col>
                 <Col span="6">操作</Col>
             </Row>
-            <div class="listBox" v-for="item in data1">
+            <div class="listBox" v-for="item in data1" :key="item.id">
                 <div class="bianhao">
                     <i class="iconfont icon-jishiben01"></i>
                     <span class="bhNumber">{{item.bianhao}}</span> 
                 </div>
-                <Table  
-                :columns="columns1" 
+                <i-table 
+                size='small'
+                :columns="columns1"
                 :data="item.blist" 
                 :show-header='false'
-                style = 'margin-left:180px; margin-right:400px;'
-                ></Table>
+                style = 'margin-left:12%; margin-right:24%;'
+                ></i-table>                
                 <div class="listChange">
                     <span>修改</span>
                     <span @click="removeItem(item.index)">删除</span>
-                </div>
-            </div>               
+                </div>                  
+            </div>                    
         </div>
+        <div class="fenYe">
+            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
+        </div>    
     </div>
 </template>
 
@@ -209,58 +213,12 @@
                             }
 
                         ]
-                    },
-                    {
-                        bianhao: '444444-x',
-                        index: '4',
-                        blist: [
-                            {
-                                n1: '123465456',
-                                n2: '10kv',
-                                n3: '10ktv',
-                                n4: '大工业用电',
-                                n5: '第二产业(工业)',
-                                n6: '河南省高新区电子商业大厦'
-                            },
-                            {
-                                n1: '123465456',
-                                n2: '10kv',
-                                n3: '10ktv',
-                                n4: '大工业用电',
-                                n5: '第二产业(工业)',
-                                n6: '河南省高新区电子商业大厦'
-                            },
-                            {
-                                n1: '123465456',
-                                n2: '10kv',
-                                n3: '10ktv',
-                                n4: '大工业用电',
-                                n5: '第二产业(工业)',
-                                n6: '河南省高新区电子商业大厦'
-                            },
-                            {
-                                n1: '123465456',
-                                n2: '10kv',
-                                n3: '10ktv',
-                                n4: '大工业用电',
-                                n5: '第二产业(工业)',
-                                n6: '河南省高新区电子商业大厦'
-                            },
-                            {
-                                n1: '123465456',
-                                n2: '10kv',
-                                n3: '10ktv',
-                                n4: '大工业用电',
-                                n5: '第二产业(工业)',
-                                n6: '河南省高新区电子商业大厦'
-                            }
-
-                        ]
-                    },
+                    }
                 ]
             }
         },
         methods: {
+           
             removeItem (index) {
                 console.log(index);
                 this.data1.splice(index, 1)
@@ -270,17 +228,23 @@
 </script>
 
 <style scoped>
+.ivu-table .table-row-h td{
+    background-color: #2db7f5;
+    color: #fff;
+}
 .saleContract {
     background-color: #fff;
-    margin-left: 178px;
+    margin: 20px;
+    height: 905px;
 }
 .saleContract h3 {
-    height: 60px;
-    line-height: 60px;
-    font-size: 16px;
+    height: 50px;
     border-bottom: 1px solid #E5E5E5;
-    padding-left: 18px;
-    padding-top: 10px;
+    background-color: #fff;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 16px;
+    font-weight: 400;    
 }
 .saleBox {
     margin: 10px;
@@ -313,11 +277,11 @@
     background-color: red;
 }
 .bianhao{
-    width: 64px;
-    height: 64px;
+    width: 50px;
+    height: 50px;
     background-color: #5ecfb8;
     border-radius: 50%;
-    padding-top: 64px;
+    padding-top: 50px;
     position: absolute;
     top: 50%;
     left: 55px;
@@ -326,8 +290,8 @@
 .bianhao i{
     position: absolute;
     top: 4px;
-    left: 14px;
-    font-size: 40px;
+    left: 12px;
+    font-size: 30px;
     color: #fff;
 }
 .bhNumber {
@@ -339,15 +303,37 @@
 .listChange {
     position: absolute;
     top: 50%;
-    right: 150px;
+    right: 10%;
     color: #4fa8f9;
 }
 .listChange span {
     cursor: pointer;
 }
-.ivu-table-wrapper {
-    border-bottom: 0;
-    border-top: 0;
+
+/* .ivu-table-wrapper {
+    border: 0;
+} */
+ .ivu-table:after {
+    display: none!important;
+}
+/* 分页的样式 */
+.fenYe {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+.fenYe table{
+    border: 0;
+}
+.fenYe ul {
+    display: inline-block;
+}
+.fenYe button{
+    top: -12px;
+    left: 12px;
 }
 
 </style>

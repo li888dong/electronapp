@@ -1,8 +1,14 @@
 <script>
     import Weather from '@/components/Weather.vue'
+    import FastBoot from '@/components/FastBoot'
 
     export default {
         name: 'mainheader',
+	    data(){
+          return{
+
+          }
+	    },
         mounted() {
             this.weatherData();
         },
@@ -16,19 +22,23 @@
                 }, err => {
                     console.log(err)
                 })
-            }
+            },
+	        hideFast(){
+                this.$emit('hideFast')
+	        }
         },
         components: {
-            'weather': Weather
+            'weather': Weather,
+            'fast-boot': FastBoot
         }
     }
 </script>
 <template>
 
-	<div class="header fixed height_79">
+	<div class="header">
 		<ul class="absolute">
-			<li class="top_40 icon-menu">
-				<i class="icon iconfont icon-liebiao"></i>
+			<li class="top_40 icon-menu" @click="hideFast" style="cursor: pointer">
+				<i class="icon iconfont icon-caidan" style="font-size: 22px!important;"></i>
 			</li>
 			<li class="search top_40 left_136">
 				<input type="search" placeholder="请输入设备名称/设备编号/厂家名称等关键字">
@@ -53,10 +63,9 @@
 <style scoped>
 	.header {
 		background-color: #fff;
-		right:0;
-		top:0;
-		left: 220px;
-		z-index: 1000;
+		height: 79px;
+		overflow: hidden;
+		position: relative;
 	}
 
 	.header > ul {

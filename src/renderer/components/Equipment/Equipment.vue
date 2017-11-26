@@ -26,47 +26,63 @@ export default {
 
 <template>
 <div class="equipment-box">
-    <div class="equipment-top">
-        <!-- 设备安装情况 -->
-        <EquipmentInstallView></EquipmentInstallView>
-        <!-- 设备库存情况 -->
-        <div class="equipment-stock">
-            设备库存情况
-        </div>
-        <!-- 设备其他情况 -->
-        <div class="equipment-other">
+    <Row class="equipment-top">
+        <Col span="12">
+            <!-- 设备安装情况 -->
+            <EquipmentInstallView></EquipmentInstallView>
+        </Col>
+        <Col span="6" class="equipment-stock">
+            <!-- 设备库存情况 -->
+            <div >
+                设备库存情况
+            </div>
+        </Col>
+        <Col span="6" class="equipment-other">
+            <!-- 设备其他情况 -->
+            <div >
+                其他的设备详情
+            </div>
+        </Col>
+    </Row>
 
-        </div>
-    </div>
-    <!-- 设备运行情况 -->
-    <EquipmentRunView></EquipmentRunView>
-    <!-- 设备安装申请表 -->
-    <div class="equipmentInform">
-        <table>
-            <thead>设备安装申请</thead>
-            <tbody>
-                <tr>
-                    <th> <input type="checkbox" name="" id="" class="check"> 申报主题单位</th>
-                    <th>申报人</th>
-                    <th>联系电话</th>
-                    <th>申报日期</th>
-                    <th>申报安装日期</th>
-                    <th>申报安装数量</th>
-                    <th>状态</th>
-                    <th>审核人</th>
-                    <th>施工人</th>
-                    <th>操作</th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <Row>
+        <Col span="24">
+                    <!-- 设备运行情况 -->
+            <EquipmentRunView></EquipmentRunView>
+        </Col>
+    </Row>
+    <Row>
+        <Col span="24">
+                <!-- 设备安装申请表 -->
+            <div class="equipmentInform">
+                <table>
+                    <thead>设备安装申请</thead>
+                    <tbody>
+                        <tr>
+                            <th> <input type="checkbox" name="" id="" class="check"> 申报主题单位</th>
+                            <th>申报人</th>
+                            <th>联系电话</th>
+                            <th>申报日期</th>
+                            <th>申报安装日期</th>
+                            <th>申报安装数量</th>
+                            <th>状态</th>
+                            <th>审核人</th>
+                            <th>施工人</th>
+                            <th>操作</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
+        </Col>
+    </Row>
+    
 </div>
 </template>
 
 
 <style scoped>
     .equipment-box{
-        width: 1700px;
+        max-width: 1700px;
         padding-left: 18px;
         padding-top: 15px;
         background-color: #E8ECF0;
@@ -76,19 +92,16 @@ export default {
         height: 290px;
         margin-bottom: 10px;
     }
-  
-
-
     .equipment-stock{
-        width: 405px;
+        max-width: 405px;
         height: 290px;
         border: 1px #e5e5e5 solid;
-        background-color: #fff;        
-        margin-right: 18px;
+        background-color: #fff;
+        margin-right: 6px;
         float: left;
     }
     .equipment-other{
-        width: 405px;
+        max-width: 405px;
         height: 290px;
         border: 1px #e5e5e5 solid;
         background-color: #fff;
@@ -122,7 +135,7 @@ export default {
     }
     .equipmentInform .check{
         list-style: none;
-        width: 16px;
+        max-width: 16px;
         height: 16px;
         vertical-align:middle; 
     }

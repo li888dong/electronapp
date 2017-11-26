@@ -23,27 +23,35 @@
                         key: 'month'
                     },
                     {
-                        title: '申报电量',
+                        title: '申报电量(MW.h)',
+	                    width:150,
                         key: 'sbdl'
                     },
                     {
-                        title: '采集电量',
+                        title: '采集电量(MW.h)',
+                        width:150,
+
                         key: 'cjdl'
                     },
                     {
-                        title: '偏差',
+                        title: '偏差(%)',
                         key: 'pc'
                     },
                     {
-                        title: '实用电量',
+                        title: '实用电量(MW.h)',
+                        width:150,
+
                         key: 'sydl'
                     },
                     {
-                        title: '电费单电量',
+                        title: '电费单电量(MW.h)',
+                        width:150,
+
                         key: 'dfddl'
                     },
 	                {
                         title: '申报人',
+		                width:80,
                         key: 'sbr'
                     },
                     {
@@ -54,10 +62,12 @@
 		        columns2: [
                     {
                         title: '用电月',
+                        width:100,
                         key: 'ydy'
                     },
                     {
-                        title: '用电量',
+                        title: '用电量(MW.h)',
+                        width:120,
                         key: 'ydl'
                     },
                     {
@@ -69,7 +79,9 @@
                         key: 'action',
                         align: 'center',
                         render: (h, params) => {
-                            return h('div', [
+                            console.log(params)
+	                        if (params.row.status === 0){
+                                return h('div', [
                                 h('span', {
 
                                     style: {
@@ -99,11 +111,246 @@
                                     }
                                 }, '确认'),
                             ])
+                            }else {
+                                return h('div', [
+                                    h('span', {
+
+                                        style: {
+                                            marginRight: '5px',
+                                            color:'#4fa8f9 ',
+                                            cursor:'pointer'
+                                        },
+                                        on: {
+                                            click: () => {
+                                                console.log(params.index)
+                                                this.gotoDetail()
+                                            }
+                                        }
+                                    }, '查看'),
+                                    h('span', {
+                                        style: {
+                                            marginRight: '5px',
+                                            color:'#999 ',
+                                            cursor:'pointer'
+                                        }
+                                    }, '已确认'),
+                                ])
+
+                            }
                         }
                     }
 
                 ],
+		        columns3:[
+                    {
+                        sortable: true,
+                        title: '测量点名称',
+                        key: 'cldmc'
+                    },
+                    {
+                        title: '安装位置',
+                        key: 'azwz'
+                    },
+                    {
+                        sortable: true,
+                        title: '状态',
+                        key: 'zt'
+                    },
+                    {
+                        title: '所属户号',
+                        key: 'sshh'
+                    },
+                    {
+                        title: '通讯地址',
+                        key: 'txdz'
+                    },
+                    {
+                        title: '端口',
+                        key: 'dk'
+                    },
+                    {
+                        title: '采集成功率（%）',
+                        width:150,
+                        key: 'cjcgl'
+                    },
+                    {
+                        title: '上报比例（%）',
+                        key: 'sbbl'
+                    },
+                    {
+                        title: '采集记录',
+                        key: 'sbbl'
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+
+                                    style: {
+                                        marginRight: '5px',
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+                                            this.gotoTerminalData()
+                                        }
+                                    }
+                                }, '详情'),
+                                h('span', {
+                                    style: {
+                                        marginRight: '5px',
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+
+                                            this.gotoHetong()
+                                        }
+                                    }
+                                }, '编辑'),,
+                                h('span', {
+                                    style: {
+                                        marginRight: '5px',
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+
+                                            this.gotoHetong()
+                                        }
+                                    }
+                                }, '删除'),
+                            ])
+                        }
+                    }
+		        ],
+		        data1:[
+			        {
+			            'month':'01月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'02月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'03月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'04月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'05月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'06月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },{
+			            'month':'07月',
+				        'sbdl':'12132132.00',
+				        'cjdl':'52185651.00' ,
+				        'pc':'3%',
+				        'sydl':'1231564.00',
+				        'dfddl':'312313.111',
+				        'sbr':'某某某',
+				        'sh':'通过'
+			        },
+		        ],
+		        data2:[
+			        {
+			            'ydy':'2017年01月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':0
+			        }, {
+			            'ydy':'2017年02月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':1
+			        }, {
+			            'ydy':'2017年03月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':0
+			        }, {
+			            'ydy':'2017年04月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':0
+			        }, {
+			            'ydy':'2017年05月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':0
+			        }, {
+			            'ydy':'2017年06月',
+				        'ydl':'12132132.00',
+				        'je':'52185.00' ,
+				        'status':0
+			        },
+		        ],
+		        data3:[
+			        {
+			            'cldmc':'测量点名称测量点名称',
+			            'azwz':'安装位置安装位置',
+			            'zt':'未安装',
+			            'sshh':'123456789',
+			            'txdz':'asdas3613asd',
+			            'dk':'8080',
+			            'cjcgl':'100%',
+			            'sbbl':'80%',
+			            'cjjl':'000',
+			        }
+		        ]
 	        }
+		},
+		methods:{
+            gotoTerminalData(){
+                this.$router.push('client-terminal')
+            }
 		}
 	}
 </script>
@@ -111,7 +358,7 @@
 	<div>
 		<div class="detail-container relative">
 			<div class="data-panel client-data-panel user-detail">
-				<h3 class="title">用户基本信息 <small>详情</small></h3>
+				<h3 class="title">用户基本信息 <small @click="$router.push('AddClient')">详情</small></h3>
 				<table cellspacing="5" width="100%">
 					<tbody>
 
@@ -129,7 +376,7 @@
 				</table>
 			</div><!--
 			--><div class="data-panel client-data-panel agreement-detail">
-				<h3 class="title">合同基本情况 <small>详情</small></h3>
+				<h3 class="title">合同基本情况 <small  @click="$router.push('add-hetong')">详情</small></h3>
 				<table  cellspacing="5" width="100%">
 					<tr>
 						<td><span>合同编码 :</span> {{agreementDetail.htbm}}</td>
@@ -143,45 +390,20 @@
 			</div>
 			<div class="data-panel client-data-panel user-apply">
 				<h3 class="title">用户申报记录</h3>
-				<Table :columns="columns"></Table>
+				<Table :columns="columns" :data="data1" height="250"></Table>
 			</div><!--
 			--><div class="data-panel client-data-panel user-bill">
 				<h3 class="title">用户电费单</h3>
-				<Table :columns="columns2" :show-header="true" ></Table>
+				<Table :columns="columns2" :show-header="true" :data="data2" height="250"></Table>
 			</div>
 			<div class="data-panel client-data-panel user-clientlist">
-				<h3 class="title">用户终端列表</h3>
-				<div class="btn-group fr">
-					<button class="button btnSelected">+配置终端</button>
-				</div>
-				<table cellspacing="15" width="100%" style="margin-top: 20px;">
-					<thead>
-					<tr>
-						<th>测量点名称</th>
-						<th>安装位置</th>
-						<th>状态</th>
-						<th>所属户号</th>
-						<th>通讯地址</th>
-						<th>端口</th>
-						<th>采集成功率</th>
-						<th>上报比例</th>
-						<th>采集记录</th>
-						<th>操作</th>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><router-link to="/client-terminal">详情</router-link> 编辑 操作</td>
-					</tr>
-					</thead>
-				</table>
+				<h3 class="title" style="display: inline-block">用户终端列表</h3>
+				<Button type="success" style="float: right;margin:0 10px 10px 0" @click="$router.push('add-celiang')">+ 配置终端</Button>
+				<Row>
+					<Col span="24">
+						<Table :columns="columns3" :data="data3"></Table>
+					</Col>
+				</Row>
 			</div>
 		</div>
 	</div>
@@ -197,6 +419,12 @@
 		font-size: 12px;
 		font-weight:normal;
 		float: right;
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 20px;
+		z-index: 10;
+		cursor: pointer;
 	}
 	.user-detail{
 		width: 940px;
@@ -215,6 +443,10 @@
 		width: 940px;
 		height: 287px;
 		margin-top: 15px;
+		padding: 10px 0;
+	}
+	.user-clientlist .title,.user-bill .title,.user-apply .title{
+		padding:0 0 10px 15px;
 	}
 	.user-apply th{
 		text-align: center;
@@ -228,15 +460,17 @@
 		width: 487px;
 		height: 287px;
 		margin-top: 15px;
+		padding: 10px 0;
 	}
 	.user-bill td{
 		border-top: 1px solid #333333;
 		height: 36px;
 	}
 	.user-clientlist{
-		width: 1447px;
-		height: 425px;
+		width: 1440px;
+		height: 435px;
 		margin-top: 15px;
+		padding: 10px 0;
 	}
 	.user-clientlist th{
 		text-align: center;
