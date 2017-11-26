@@ -4,7 +4,7 @@
 	}
 	.danwei{
 		position: absolute;
-		top: 44px;
+		top: 48px;
 		right: 10px;
 		border: none!important;
 		background-color: transparent!important;
@@ -53,8 +53,8 @@
                         }
                     },
                     legend: {
-                        left:20,
-	                    top:62,
+                        left:35,
+	                    top:42,
 	                    itemWidth:14,
                         data: ['申报电量', '预测电量','长协购电量','竞价购电量', '实时电量', '谷段电量', '平段电量','峰段电量',]
                     },

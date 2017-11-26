@@ -90,7 +90,6 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        
                                     }
                                 }
                             }, '审核'),
@@ -102,7 +101,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.show()
+                                        this.renderM(params)
                                     }
                                 }
                             }, '查看'),
@@ -130,24 +129,26 @@ export default {
                     name: '河南众企联合售电有限公司'
                 },
             ],
-            modal10: false,
+            modal8: false,
             columns5: [
                 {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
+                    title: '申报时间',
+                    width: 110,
+                    key:'time1'
                 },
                 {
                     title: '申报人',
                     key:'people'
                 },
                 {
-                    title: '申报电量',
-                    key:'usePower'
+                    title: '申报时间合计',
+                    width: 110,
+                    key:'heji'
                 },
                 {
-                    title: '申报时间',
-                    key:'useTime'
+                    title: '详情',
+                    width: 160,
+                    key:'xiangQing'
                 },
                 {
                     title: '备注',
@@ -156,31 +157,33 @@ export default {
             ],
             data5: [
                 {
+                    time1: '2017-12-12 12:00:00',
                     people: '王朝辉',
-                    usePower: '11111',
-                    useTime: '2017-11-11',
-                    useNote: '暂无情况'
+                    heji: '11111',
+                    xiangQing: '134564 1233.12Mv时',
+                    useNote: '无备注'
                 },
                 {
-                    people: '利天天',
-                    usePower: '11111',
-                    useTime: '2017-11-11',
-                    useNote: '暂无情况'
+                    time1: '2017-12-12 12:00:00',
+                    people: '王朝辉',
+                    heji: '11111',
+                    xiangQing: '134564 1233.12Mv时',
+                    useNote: '无备注'
                 },
             ],
              
         }
     },
+
     methods: {
-        show(index) {
-            this.$Modal.info({
-                title: '12月份电量申报详情',   
-                content: '企业名称 :   <span>河南众企联合售电有限公司</span> <br>申报记录 : <Table border ref="selection" :columns="columns5" :data="data5"></Table>'
-            })
+        renderM(index) {
+            this.modal8= true
+            console.log(index)
         },
         remove(index){
             this.data4.splice(index, 1);
         }
+
     }
 }           
 </script>
@@ -217,17 +220,16 @@ export default {
             </Col>
         </Row>
     </div>
-
-    <!-- <Button @click="modal10 = true">查看</Button>
     <Modal
         title="12月份电量申报详情"
-        v-model="modal10"
-        class-name="vertical-center-modal"
-        :closable="false"
-        :mask-closable="false">
+        v-model="modal8"
+        width = 666
+        :mask-closable="false"
+        class-name="vertical-center-modal">
         企业名称 :   <span>河南众企联合售电有限公司</span> <br>
-        申报记录 :   <Table border ref="selection" :columns="columns5" :data="data5"></Table>        
-    </Modal> -->
+        申报记录 :   <Table border ref="selection" :columns="columns5" :data="data5"></Table>
+     </Modal>
+
 </div>
 </template>
 

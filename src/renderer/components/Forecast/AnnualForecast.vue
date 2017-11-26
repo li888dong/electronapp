@@ -92,7 +92,7 @@
 									},
 									on: {
 										click: () => {
-											this.modalShow = true
+											this.renderM(params)
 										}
 									}
 								}, '修改')								
@@ -139,7 +139,7 @@
 						n16: '王朝辉',
 						n17: '已确认',
 					},
-				],
+				],				
 				cityList: [
                     {
                         value: 'beijing',
@@ -167,6 +167,7 @@
                     }
                 ],
                 model1: '',
+				modal2: false,
 				timeList: [
 					{
                         value: 'beijing',
@@ -198,7 +199,11 @@
 	    methods:{
             pageListen: function (data) {
                 this.msg = '当前页码：' + data
-            }
+            },
+			renderM(index) {
+				this.modal2= true
+				console.log(index)
+			},
         },
         components:{
             'pagenation':Pagenation
@@ -278,7 +283,117 @@
 						</tbody>
 					</table> -->
 				</div>
-				<div v-if="modalShow" class="modal">
+				<Modal
+					title="河南众企联合售电有限公司"
+					v-model="modal2"
+					width = 1400
+					:mask-closable="false"
+					class-name="vertical-center-modal">
+					<table cellspacing="2" style="margin-top: 15px;">
+							<thead>
+							<tr>
+								<th>2017年月份</th>
+								<th>01月</th>
+								<th>02月</th>
+								<th>03月</th>
+								<th>04月</th>
+								<th>05月</th>
+								<th>06月</th>
+								<th>07月</th>
+								<th>08月</th>
+								<th>09月</th>
+								<th>10月</th>
+								<th>11月</th>
+								<th>12月</th>
+								<th>合计</th>
+
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>户号12345</td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td>355555.55</td>
+								</tr>
+								<tr>
+									<td>户号12345</td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td><input type="text"></td>
+									<td>355555.55</td>
+								</tr>
+								<tr>
+									<td>合计</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355555.55</td>
+								</tr>
+								<tr>
+									<td>系统预测</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355555.55</td>
+								</tr>
+								<tr>
+									<td>偏差值</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355.55</td>
+									<td>355555.55</td>
+								</tr>
+							</tbody>
+						</table>
+				</Modal>
+				<!-- <div v-if="modalShow" class="modal">
 					<div class="header">河南众企联合售电有限公司</div>
 					<div class="table-container">
 						<table width="100%" cellspacing="2" style="margin-top: 15px;">
@@ -389,7 +504,7 @@
 							<button class="button" @click="modalShow = false">取消</button>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<Row class="fenYe">
 					<Col span="5" style="margin: 14px">
 						<Button type="primary" style="margin-left: 20px">批量确认</Button>
@@ -458,33 +573,7 @@
 	text-align: center;
 	height: 30px;
 } 
-.modal{
-		width: 1600px;
-		height: 300px;
-		background-color: #fff;
-		border: 1px solid #828282;
-		position: absolute;
-		top: 20%;
-    	left: 0;
-		z-index: 5;
-	}
-.modal .header{
-	height: 50px;
-	line-height: 50px;
-	padding-left: 20px;
-	background-color: #f6f6f6;
-	margin:0 auto;
-}
-.modal td input{
-	width: 100px;
-	height: 30px;
-}
-.table-page{
-	font-size: 14px;
-	color: #36c;
-	bottom: 20px;
-	right: 300px;
-} 
+
 
 
 /* 分页的样式 */
