@@ -11,16 +11,16 @@
                         }
                     },
                     legend: {
-                        data:['河南众企联合售电'],
-                        left:20,
+                        data:[{name:'河南众企联合售电',icon:'rect'}],
+                        left:22,
                         top:2,
                         itemWidth:14,
                     },
 	                backgroundColor:'#fff',
                     grid: {
                         top:'40',
-                        left: 0,
-                        right: 0,
+                        left: '2%',
+                        right: '2%',
                         bottom: '6%',
                         containLabel: true
                     },
@@ -163,8 +163,9 @@
 			</div>
 		</panel>
 		<Row>
-
-			<Table :columns="columns6" :data="data5" width="1440" height="422"></Table>
+			<Col span="24">
+				<Table :columns="columns6" :data="data5" width="1440" height="422"></Table>
+			</Col>
 		</Row>
 	</div>
 </template>
