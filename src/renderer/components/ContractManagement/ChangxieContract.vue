@@ -14,8 +14,14 @@ export default {
         'myFenye': myFenye
     },
     methods:{
-        change: function (page) {
+        change(page) {
             console.log(page)
+        },
+        ok () {
+            this.$Message.info('点击了确定');
+        },
+        cancel () {
+            this.$Message.info('点击了取消');
         }
     }
 }
@@ -37,7 +43,17 @@ export default {
                     <li>电厂名称：平顶山姚梦电厂有限公司</li>
                     <li class="change">
                         <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
-                        <span>删除</span>
+                        <span>
+                            <!-- 气泡提示模板 -->
+                            <Poptip
+                                placement="left-end"
+                                confirm
+                                title="您确认删除这条内容吗？"
+                                @on-ok="ok"
+                                @on-cancel="cancel">
+                                <span>删除</span>
+                            </Poptip>
+                        </span>
                     </li>
                 </ul>
                 <div class="hetongShuju">
@@ -143,6 +159,7 @@ export default {
     background-color: #E8ECF0;
     overflow: hidden;
     padding: 20px;
+    height: 945px;
 }
 .changxie h3 {
     height: 50px;
@@ -154,7 +171,7 @@ export default {
     font-weight: 400;    
 }
 .hetongList {
-    height: 850px;
+    height: 855px;
     background-color: #fff;
     padding: 10px;
     }

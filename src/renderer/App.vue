@@ -5,8 +5,20 @@
 				<main-sidebar></main-sidebar>
 			</Col>
 			<Col span="21">
-				<main-header v-on:hideFast="hideFast"></main-header>
-				<router-view></router-view>
+				<Row>
+					<div class="frame-top">
+						<span class="hideBtn iconfont" @click="hideApp()">&#xe601;</span>
+						<span class="right_29 closeBtn iconfont" @click="closeApp()">&#xe664;</span>
+					</div>
+				</Row>
+				<Row>
+					<main-header v-on:hideFast="hideFast"></main-header>
+
+				</Row>
+				<Row>
+					<router-view></router-view>
+				</Row>
+
 				<transition name="fade">
 					<fast-boot v-if="fastboot" v-on:hideSelf="hideFast"></fast-boot>
 				</transition>
@@ -17,6 +29,7 @@
 </template>
 
 <script>
+    import {ipcRenderer} from 'electron';
     import MainSidebar from '@/components/MainSidebar'
     import Header from '@/components/Header'
     import FastBoot from '@/components/FastBoot'
@@ -32,7 +45,15 @@
 	    methods:{
 	      hideFast(){
               this.fastboot = !this.fastboot
-	      }
+	      },
+//            用以关闭应用
+            closeApp() {
+                ipcRenderer.send('window-all-closed');
+            },
+//            用以最小化应用
+            hideApp() {
+                ipcRenderer.send('hide-window');
+            },
 	    },
         components: {
             'main-sidebar': MainSidebar,
@@ -63,20 +84,35 @@
 	input,select,textarea,option{
 		outline: none;
 	}
+	.frame-top{
+		width: 100%;
+		height: 25px;
+		background-color: #fff;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: flex-end;
+		padding-right: 15px;
+	}
+	.hideBtn,.closeBtn{
+		font-size: 24px!important;
+		font-weight:bold;
+		color: #000;
+		cursor: pointer;
+		margin-right: 5px;
+
+	}
 	.main-container{
-		height:100%;
+		height: 905px;
 		margin:20px;
 		overflow: hidden;
 		z-index: 998;
 	}
 
 	.client-container{
-		width: 1440px;
 		height: 100%;
 		overflow: hidden;
 		box-sizing: border-box;
-		margin-top: 60px;
-		margin-left: 220px;
+		margin: 60px 20px 20px 20px;
 	}
 	.fixed {
 		top: 0;
@@ -246,11 +282,6 @@
 		position: relative;
 	}
 
-	.icon-shuaxin{
-		font-size: 22px;
-		color: #0089F0;
-		cursor: pointer;
-	}
 	/* 可以设置不同的进入和离开动画 */
 	/* 设置持续时间和动画函数 */
 	.slide-fade-enter-active {
@@ -288,4 +319,20 @@
 		left: 50%;
 		margin-left: -250px;
 	}
+	.menu  .ivu-menu-submenu .ivu-menu-submenu-title .ivu-menu-submenu-title-icon{
+		float: left !important;
+	}
+	.refresh{
+		display: inline-block;
+		vertical-align: middle;
+		margin:0 20px;
+		cursor: pointer;
+
+	}
+	.refresh i{
+		color: #0089F0;
+		font-size: 18px!important;
+		cursor: pointer;
+	}
+
 </style>

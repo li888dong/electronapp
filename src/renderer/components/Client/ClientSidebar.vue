@@ -1,143 +1,143 @@
 <script>
-	export default {
-	    name:'clientsidebar',
-		data(){
-	        return{
-				companyList:[
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-					{
-					    name:'河南众企联合售电有限公司',
-						id:'123456789987654321',
-						avatar:''
-					},
-				]
-	        }
-		}
-	}
+    export default {
+        name:'clientsidebar',
+        data(){
+            return{
+                companyList:[
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司11111',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                ]
+            }
+        }
+    }
 </script>
 <template>
 	<div class="client-sidebar">
@@ -148,11 +148,17 @@
 		<div class="company-list">
 			<ul>
 				<li class="relative" v-for="item in companyList">
-					<div class="avator absolute" style="left: 2px;top: 6px;width: 40px;height: 40px;line-height: 43px;text-align: center;">
-						<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>
-					</div>
-					<p>{{item.name}}</p>
-					<p>{{item.id}}</p>
+					<Row>
+						<Col span="4">
+							<div class="avator">
+								<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>
+							</div>
+						</Col>
+						<Col span="19">
+							<p v-bind:title="item.name">{{item.name}}</p>
+							<p v-bind:title="item.id">{{item.id}}</p>
+						</Col>
+					</Row>
 				</li>
 			</ul>
 		</div>
@@ -160,14 +166,9 @@
 </template>
 <style scoped>
 	.client-sidebar{
-		width: 200px;
-		height: 890px;
+
 		background-color: #fff;
-		display: inline-block;
-		vertical-align: top;
-		position: fixed;
-		left: 242px;
-		top: 82px;
+
 	}
 	.search{
 		width: 205px;
@@ -187,10 +188,10 @@
 		border: solid 1px #ccc;
 		box-sizing: border-box;
 		outline: none;
-		padding-left: 20px;
+		padding-left: 30px;
 	}
 	.company-list ul{
-		width: 200px;
+		width: 205px ;
 		height: 880px;
 		overflow-y: scroll;
 		overflow-x: hidden;
@@ -221,14 +222,28 @@
 		background-color: #E0EBF7;
 	}
 	.company-list li{
-		width: 200px;
-		padding-left: 45px;
-		height: 55px;
-		text-align: left;
+		width: 100%;
+		height: 76px;
 		overflow: hidden;
-		line-height: 28px;
-		word-wrap: break-word;
-		white-space: nowrap;
+		line-height: 38px;
+		text-align: center;
 		border-bottom: solid 1px #eee;
+		cursor: pointer;
+	}
+	.company-list li p{
+		padding-left: 15px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 147px;
+
+
+	}
+	.avator{
+		width: 100%;
+		height: 76px;
+		line-height: 70px;
+		text-align: center;
+		margin: 5px;
 	}
 </style>

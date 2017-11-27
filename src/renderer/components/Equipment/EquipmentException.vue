@@ -5,11 +5,6 @@ export default {
         return{
             columns1: [
                 {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
-                },
-                {
                     "sortable": true,
                     title: '终端编号',
                     key: 'n1'
@@ -120,7 +115,38 @@ export default {
                     n10: '22',
                     n11: '33'
                 },
-            ]
+            ],
+            cityList: [
+                {
+                    value: '所有区域',
+                    label: '所有区域'
+                },
+                {
+                    value: '河南',
+                    label: '河南'
+                },
+                {
+                    value: '河北',
+                    label: '河北'
+                },
+                {
+                    value: '江西',
+                    label: '江西'
+                },
+                {
+                    value: '山东',
+                    label: '山东'
+                },
+                {
+                    value: '山西',
+                    label: '山西'
+                },
+                {
+                    value: '陕西',
+                    label: '陕西'
+                }
+            ],
+            model1: ''
         }
     }
 }
@@ -128,24 +154,27 @@ export default {
 
 <template><!-- 设备异常页面 -->
 <Row class="EquipmentException">
-    设备管理 / 设备异常记录
-    <div class="ExceptionTittle">
-        <h3>设备异常记录</h3>
-    </div>
-    <div class="ExceptionTop">
-        <i class="iconfont icon-search searchPic"></i>
-        <input type="text" name="" id="" class="SearchText" placeholder="终端名称、编号、客户名称、IP地址等"><button>搜索</button>
-        <span>m</span>
-        <select name="" id="">
-            <option value="">所有区域</option>
-            <option value="">河南区域</option>
-            <option value="">全国区域</option>
-        </select>
-        <span><DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker></span>        
-    </div>
-    <div class="ExceptionForm">
-        <Table border :columns='columns1' :data='data1'></Table>
-        <!-- 分页 -->
+    <div class="EquipmentExceptionBox">
+        <Row  class="ExceptionTittle">
+            <Col span="24">
+                <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
+                <h3>设备异常记录</h3>
+            </Col>
+        </Row>
+        <Row class="ExceptionTop">
+            <Col span="5"class="searchBox">
+                <i class="iconfont icon-search" ></i>
+                <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
+            </Col>
+            <span class='refresh'> <i class="iconfont icon-shuaxin"></i> </span>
+            <Select v-model="model1" style="width:100px; margin-right:10px;" placeholder="请选择区域">
+                <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            <DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker>   
+        </Row>
+        <Row class="ExceptionForm">
+            <Table border :columns='columns1' :data='data1'></Table>            
+        </Row>
         <div class="fenYe">
             <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
         </div>
@@ -154,98 +183,83 @@ export default {
 </template>
 
 <style scoped>
-button {
-    outline: none;
-    border: none;
-}
 .EquipmentException{
-    max-width: 1700px;
-    height: 914px;
+    width: 100%;
+    height: 945px;
     background-color: #E8ECF0;
     padding: 15px;
     font-size: 14px;
 }
 .ExceptionTittle{
     background-color: #fff;
-    height: 46px;
     border-bottom: 1px solid #ccc;
-    padding: 20px 10px 0px 10px;
+    line-height: 1;
+    position: relative;
+    height: 40px;
+    padding-left: 20px;
+    line-height: 40px;
 }
 .ExceptionTittle h3{
-    display: inline-block;
+    height: 40px;
+	border-bottom: 1px solid #E5E5E5;
+	background-color: #fff;
     font-size: 16px;
-    font-family: 'MicrosoftYahei'; 
-}
-.ExceptionTittle span {
-    width: 123px;
-    height: 30px;
-    float: right;
-    font-size: 14px;
-    background-color: #108CEE;
-    color: #fff;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
+    font-weight: 400;
+    margin-bottom: 10px;
+    padding-left: 42px;
 }
 
-.ExceptionTop {
-    height: 50px;
-    padding: 10px;
+.EquipmentExceptionBox {
+    height: 905px;
     background-color: #fff;
+}
+
+
+.ExceptionTittle .back{
+    position: absolute;
+    top: 0px;
+    left: -10px;
+    z-index: 9;
+    cursor: pointer;
+    color: #108CEE;
+}
+/* 顶部搜索框样式 */
+.ivu-btn{
+    height: 34px;
+    border-radius: 0;
+}
+.searchBox {
     position: relative;
 }
-.ExceptionTop .SearchText{
-    width: 250px;
-    height: 30px;
-    border: 1px solid #ccc;
-    padding-left: 24px;
-}
-.searchPic {
+.searchBox i {
     position: absolute;
-    left: 15px;
-    top: 13px;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    left: 2%;
+    z-index: 11;
 }
-.ExceptionTop button {
-    width: 60px;
-    height: 30px;
-    background-color: #108CEE;
-    color: #fff;
-}
-.ExceptionTop span{
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-color: #EAF6FE;
-    margin: 0 30px;
-    vertical-align: middle;
-    color: #108CEE;
-    line-height: 30px;
-    text-align: center;
-}
-.ExceptionTop select{
-    width: 94px;
-    height: 30px;
-    background-color: #EAF6FE;
-    color: #108CEE;
-    border: none;
-    outline: none;
+.ExceptionTop {
+    height: 59px;
+    padding: 10px 10px 15px;
+    background-color: #fff;
+    position: relative;
 }
 
 .ExceptionForm{
     background-color: #fff;
-    position: relative;
+    position: relative;    
     max-height: 768px;
     padding: 0 10px;
 }
-
 
 /* 分页的样式 */
 .fenYe {
     width: 100%;
     height: 60px;
-    background-color: #fff;
-    padding-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
     text-align: center;
 }
 .fenYe table{
@@ -258,4 +272,5 @@ button {
     top: -12px;
     left: 12px;
 }
+
 </style>

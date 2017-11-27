@@ -1,3 +1,13 @@
+/* 文件上传样式修改 */
+
+.ivu-upload-list {
+    position: absolute;
+    top: 10px;
+    left: 116px;
+}
+.ivu-upload-list li{
+	display: inline;
+}
 
 /* 模态框居中样式 */
 .vertical-center-modal{
@@ -18,7 +28,9 @@
 	height: 34px;
 	border-radius: 0;
 }
-
+.searchBox .ivu-input {
+	padding-left: 30px;
+}
  .ivu-select-single .ivu-select-selection{
 	border-radius: 0;
 	height: 34px;
@@ -51,5 +63,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+}
+/*添加售电合同弹窗样式重置*/
+.addAgreement-modal .ivu-modal-header{
+	border-bottom:none !important;
+	background-color:#eeeeee !important;
+}
+.addAgreement-modal .ivu-icon-ios-close-empty:before{
+	content: '' !important;
+}
+.addAgreement-modal .ivu-modal-footer{
+     border-top:none !important;
+	 padding-top:20px;
 
 }

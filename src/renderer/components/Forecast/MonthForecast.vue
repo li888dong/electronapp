@@ -6,28 +6,28 @@ export default {
             value: '',
             place: [
                 {
-                    value: 'New York',
-                    label: 'New York'
+                    value: '河南',
+                    label: '河南'
                 },
                 {
-                    value: 'London',
-                    label: 'London'
+                    value: '河北',
+                    label: '河北'
                 },
                 {
-                    value: 'Sydney',
-                    label: 'Sydney'
+                    value: '江西',
+                    label: '江西'
                 },
                 {
-                    value: 'Ottawa',
-                    label: 'Ottawa'
+                    value: '山东',
+                    label: '山东'
                 },
                 {
-                    value: 'Paris',
-                    label: 'Paris'
+                    value: '山西',
+                    label: '山西'
                 },
                 {
-                    value: 'Canberra',
-                    label: 'Canberra'
+                    value: '陕西',
+                    label: '陕西'
                 }
             ],
             model1: '',
@@ -49,25 +49,21 @@ export default {
                 },
                 {
                     width: '150',
-                    title: '人工预测(万kW-h)',
+                    title: '系统预测(万kW-h)',
                     key: 'n1'
                 },
                 {
                     width: '150',
-                    title: '系统预测(万kW-h)',
+                    title: '企业申报',
                     key: 'n2'
                 },
                 {
                     width: '150',
-                    title: '偏差电量(万kW-h)',
+                    title: '人工预测(万kW-h)',
                     key: 'n3'
                 },{
-                    title: '偏差比例',
+                    title: '偏差电量(万kW-h)',
                     key: 'n4'
-                },
-                {
-                    title: '合计',
-                    key: 'all'
                 },
                 {
                     title: '修改人',
@@ -83,7 +79,34 @@ export default {
                 },
                 {
                     title: '操作',
-                    key: 'n8'
+                    key: 'change',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                    }
+                                }
+                            }, '修改'),
+                            h('span', {                                
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                       
+                                    }
+                                }
+                            }, '确认')
+                        ])
+                    }
                 }
             ],
             data1: [
@@ -149,7 +172,6 @@ export default {
 
 <template>
 <div class="MonthForecast">
-
     <div class="layout-content">
         <h3>月度预测</h3>
         <div class="layout-content-top">          
@@ -162,8 +184,9 @@ export default {
                         <Option v-for="item in place" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                     </Select>
                 </Col>
-                <Col span="6" offset='12' style=" text-align: right;">
-                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary" style="border-radius: 0">搜索</Button>
+                <Col span="6" offset='12' class="searchBox">
+                    <i class="iconfont icon-search" ></i>
+                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
                 </Col>
             </Row>
         </div>
@@ -185,6 +208,25 @@ export default {
 </template>
 
 <style scoped>
+
+/* 顶部搜索框样式 */
+.ivu-btn{
+    height: 34px;
+    border-radius: 0;
+}
+.searchBox {
+    position: relative;
+    text-align: right;
+}
+.searchBox i {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    left: 18%;
+    z-index: 11;
+}
+
 
 .MonthForecast {
     width: 100%;

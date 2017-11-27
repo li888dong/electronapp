@@ -26,7 +26,15 @@
                 ></i-table>                
                 <div class="listChange">
                     <span>修改</span>
-                    <span @click="removeItem(item.index)">删除</span>
+                    <Poptip
+                        placement="left-end"
+                        confirm
+                        title="您确认删除这条内容吗？"
+                        @on-ok="ok(item.index)"
+                        @on-cancel="cancel">
+                        <span>删除</span>
+                    </Poptip>
+                    <!-- <span @click="removeItem(item.index)">删除</span> -->
                 </div>                  
             </div>                    
         </div>
@@ -218,11 +226,17 @@
             }
         },
         methods: {
-           
-            removeItem (index) {
-                console.log(index);
+            ok (index) {
                 this.data1.splice(index, 1)
+            },
+            cancel () {
+                this.$Message.info('点击了取消');
             }
+           
+            // removeItem (index) {
+            //     console.log(index);
+            //     this.data1.splice(index, 1)
+            // }
         }
     }
 </script>

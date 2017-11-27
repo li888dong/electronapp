@@ -5,13 +5,7 @@
         name:'clientlist',
         data(){
             return{
-
-                pageData:{
-                    total:100,
-	                current:2
-                },
-                currentCity:'all',
-	            currentTabType:'normal',
+	            showAllCity:false,
                 columns4: [
                     {
                         sortable: true,
@@ -28,39 +22,40 @@
                         title: '申报电量',
                         key: 'shenbao'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '申报偏差',
                         key: 'shenbaopiancha'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '购电量',
                         key: 'goudianliang'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '购电偏差',
                         key: 'goudianpiancha'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '预测电量',
                         key: 'yucedianliang'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '预测偏差',
                         key: 'yucepiancha'
                     },
-	                {
+                    {
                         sortable: true,
                         title: '最低功率因数',
                         key: 'gonglv'
                     },
-	                {
+                    {
                         title: '总览',
                         key: 'zonglan',
+                        width:60,
                         render:(h,params)=>{
                             return h('span', {
                                 attrs:{
@@ -80,17 +75,18 @@
 
                         }
                     },
-	                {
+                    {
                         title: '指数',
+                        width:60,
                         key: 'zhishu',
-		                render:(h,params)=>{
+                        render:(h,params)=>{
                             return h('span', {
-								attrs:{
-								    class:'iconfont icon-zhishufenxiyanpan'
-								},
+                                attrs:{
+                                    class:'iconfont icon-zhishufenxiyanpan'
+                                },
                                 style: {
                                     marginRight: '5px',
-	                                cursor:'pointer'
+                                    cursor:'pointer',
                                 },
                                 on: {
                                     click: () => {
@@ -101,9 +97,9 @@
                                 }
                             }, '')
 
-		                }
+                        }
                     },
-	                {
+                    {
                         title: '操作',
                         key: 'action',
                         align: 'center',
@@ -113,8 +109,8 @@
 
                                     style: {
                                         marginRight: '5px',
-	                                    color:'#4fa8f9 ',
-	                                    cursor:'pointer'
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
                                     },
                                     on: {
                                         click: () => {
@@ -153,57 +149,32 @@
                                 }, '用户')
                             ])
                         }
-	                }
-	                ],
-                data1: [
-                    {
-                        name: 'John Brown',
-                        shiji: '000000',
-                        shenbao: '000000',
-                        shenbaopiancha: '000000',
-                        goudianliang: '000000',
-                        goudianpiancha: '000000',
-                        yucedianliang: '000000',
-                        yucepiancha: '000000',
-                        gonglv: '000000',
-                        zonglan: '000000',
-                        zhishu: '000000',
-                        caozuo: '000000',
-                    },{
-                        name: 'John Brown',
-                        shiji: '000000',
-                        shenbao: '000000',
-                        shenbaopiancha: '000000',
-                        goudianliang: '000000',
-                        goudianpiancha: '000000',
-                        yucedianliang: '000000',
-                        yucepiancha: '000000',
-                        gonglv: '000000',
-                        zonglan: '000000',
-                        zhishu: '000000',
-                        caozuo: '000000',
-                    },
+                    }
                 ],
-                showBorder: false,
-                showStripe: false,
-                showHeader: true,
-                showIndex: true,
-                showCheckbox: true,
-                fixedHeader: false,
-                tableSize: 'default'
             }
         },
+	    mounted(){
+			this.reqData()
+	    },
 	    computed:{
-
+            cityList() {
+                return this.$store.getters.cityList
+            },
+		    tableList(){
+                return this.$store.getters.tableList
+		    },
+		    currentCity(){
+                return this.$store.getters.currentCity
+		    }
 	    },
 	    watch:{
 
 	    },
         methods:{
-            changeSelect(city){
-	            this.currentCity = city;
-	            console.log(city)
-            },
+			reqData(){
+			    this.setTableList();
+			    this.setCityList();
+			},
 			gotoZonglan(){
 			    this.$router.push('/zonglan');
 			},
@@ -221,7 +192,19 @@
 			},
             gotoAddUser(){
                 this.$router.push('/AddClient');
-            }
+            },
+	        pageChange(page){
+                this.$store.dispatch('setTablePage',page);
+	        },
+            changeSelect(city){
+                this.$store.dispatch('setCurrentCity',city);
+            },
+	        setTableList(){
+                this.$store.dispatch('setTableList','zz')
+	        },
+	        setCityList(){
+                this.$store.dispatch('setCityList','zz')
+	        }
         },
         components:{
             Panel,
@@ -230,65 +213,74 @@
     }
 </script>
 <template>
-	<Row>
-		<panel class="main-container">
-			<div class="header relative">
-				<Row>
-					<h3 class="title-lv2">客户列表</h3>
-					<div class="tab-container ">
-						<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('zz')" v-bind:type="currentCity === 'zz'?'disabled':'normal'">郑州 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('kf')" v-bind:type="currentCity === 'kf'?'disabled':'normal'">开封 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('ly')" v-bind:type="currentCity === 'ly'?'disabled':'normal'">洛阳 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('pds')" v-bind:type="currentCity === 'pds'?'disabled':'normal'">平顶山 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('ay')" v-bind:type="currentCity === 'ay'?'disabled':'normal'">安阳 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('hb')" v-bind:type="currentCity === 'hb'?'disabled':'normal'">鹤壁 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('xx')" v-bind:type="currentCity === 'xx'?'disabled':'normal'">新乡 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('lh')" v-bind:type="currentCity === 'lh'?'disabled':'normal'">漯河 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('smx')" v-bind:type="currentCity === 'smx'?'disabled':'normal'">三门峡 <span>(332)</span></my-tab>
-						<my-tab v-on:changeSelect="changeSelect('zmd')" v-bind:type="currentCity === 'zmd'?'disabled':'normal'">驻马店 <span>(332)</span></my-tab>
-						<span class="more">更多 <i class="iconfont icon-xiala"></i></span>
-					</div>
-				</Row>
-			</div>
-			<Row>
-				<div class="form-container">
-					<div class="search-container">
-						<i class="iconfont icon-search"></i><input type="search" placeholder="客户编号或客户名称"></input>
-					</div>
+	<Row class="main-container">
+		<panel>
+			<div class="flex-col" style="height: 905px;">
 
-					<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
-					<i class="iconfont icon-shuaxin shuaxin"></i>
+				<div class="header">
+					<Row>
+						<Col span="2">
+						<h3 class="title-lv2">客户列表</h3>
+
+						</Col>
+						<Col span="20">
+						<div class="tab-container" :class="showAllCity?'h_100':'h_40'">
+
+							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
+							<template v-for="(city,key) in cityList">
+								<my-tab
+										v-on:changeSelect="changeSelect(key)"
+										v-bind:type="currentCity === key?'disabled':'normal'"
+								>{{city.name}} <span>({{city.count}})</span></my-tab>
+							</template>
+						</div>
+						</Col>
+						<Col span="2">
+						<span class="more" @click="showAllCity = !showAllCity">更多 <i class="iconfont icon-xiala"></i></span>
+						</Col>
+
+					</Row>
 				</div>
-			</Row>
+				<div class="table-container">
+					<Row>
+						<div class="form-container">
+							<div class="search-container">
+								<i class="iconfont icon-search"></i>
+								<input type="search" placeholder="客户编号或客户名称"></input>
+							</div>
 
-			<div class="table-container">
-					<Table :columns="columns4" :data="data1"></Table>
+							<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
+							<div class="refresh">
 
-				<div class="page-container">
+								<i class="iconfont icon-shuaxin"></i>
+							</div>
+						</div>
+					</Row>
+					<Table :columns="columns4" :data="tableList.data1"></Table>
 
-					<Page :total="pageData.total" :current="pageData.current" show-total show-elevator></Page>
+					<div class="page-container">
+						<Page
+							:total="tableList.pageData.total"
+							:current="tableList.pageData.current"
+							show-total
+							show-elevator
+							v-on:on-change="pageChange"
+						></Page>
+					</div>
 				</div>
 			</div>
 		</panel>
-
 	</Row>
 </template>
 <style scoped>
-	.main-container{
-		width: 97.7%;
-		position: relative;
-	}
+
 	.header{
 		border-bottom: 1px solid #eeeeee;
 		padding-bottom: 10px;
 	}
-	.header span {
-		font-size: 12px;
-	}
-	.form-container{
-		margin-top: 20px;
 
+	.form-container{
+		margin-bottom: 20px;
 		display: inline-block;
 	}
 	.form-container input[type='search']{
@@ -322,28 +314,33 @@
 
 	.tab-container{
 		display: inline-block;
+		vertical-align: middle;
 		margin-left: 40px;
-		margin-top: 10px;
+		overflow: hidden;
 	}
+
 	.tab-container>span{
-		margin-left: 10px;
+		margin:10px;
 	}
 	.more{
-		position: absolute;
-		right: 35px;
-		top: 18px;
+		cursor: pointer;
+		display: inline-block;
+		vertical-align: middle;
+		margin-top: 16px;
+		margin-left: 73px;
 		color: #4fa8f9;
 	}
 	.more i{
 		font-size: 10px;
 	}
 	.table-container{
+		flex: 1;
 		margin: 20px 20px 0 20px;
-		height: 770px;
 	}
-	.shuaxin{
-		display: inline-block;
-		vertical-align: middle;
-		margin-left: 30px;
+	.h_40{
+		height: 40px;
+	}
+	.h_100{
+		height: 100px;
 	}
 </style>

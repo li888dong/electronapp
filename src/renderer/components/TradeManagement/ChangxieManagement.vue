@@ -86,10 +86,6 @@
 	                {
 	                    title:'查看',
 		                key:'ck'
-	                },
-	                {
-	                    title:'查看',
-		                key:'ck1111'
 	                }
 	            ],
                 data5:[
@@ -281,9 +277,12 @@
 				</div>
 			</Row>
 			<Row className="mgt_15">
-				<Table :columns="column2" height="300"></Table>
-				<div class="page-container">
-					<Page :total="100"></Page>
+				<div style="height: 300px;">
+
+					<Table :columns="column2" ></Table>
+					<div class="page-container">
+						<Page :total="100"></Page>
+					</div>
 				</div>
 			</Row>
 		</panel>

@@ -262,50 +262,47 @@
 </script>
 <template>
 	<div>
-		<div class="piancha-container">
-			<div class="data-panel client-piancha relative">
-				<div class="header">
 
-					<h3 class="title fl">偏差分析</h3>
-					<div class="select">
-						<Select v-model="year" style="width:180px;">
-							<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
-						</Select>
-						<div class="refresh" style="display: inline-block;vertical-align: middle;margin-left: 20px;cursor: pointer">
+		<div class="client-container">
+			<Row>
+				<panel class="client-piancha relative">
+					<div class="header">
 
-							<i class="iconfont icon-shuaxin" style="color: #0089F0;font-size: 22px;"></i>
+						<h3 class="title-lv3">偏差分析</h3>
+						<div class="btn-group">
+							<Select v-model="year" style="width:180px;">
+								<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+							</Select>
+							<div class="refresh">
+								<i class="iconfont icon-shuaxin"></i>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="char-group">
-					<div id="caiji">
+					<div class="char-group">
+						<div id="caiji">
 
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="table-container">
+				</panel>
 
-				<Table :columns="columns4" :data="data1" height="387"></Table>
-			</div>
+			</Row>
+			<Row className="mgt_15">
+				<Table :columns="columns4" :data="data1" height="407"></Table>
+			</Row>
 		</div>
 	</div>
 </template>
 <style scoped>
-	.piancha-container{
-		margin: 60px 20px 20px 220px;
-		background-color: #fff;
-	}
+
 	.client-piancha{
 		width: 1432px;
 		margin: 0;
 	}
 	.client-piancha .header{
+		height: 55px;
 		border-bottom: 1px solid #eeeeee;
 	}
-	.select{
-		margin-left: 1160px;
-		margin-bottom: 10px;
-	}
+
 	.char-group{
 		margin-top: 20px;
 	}
@@ -317,5 +314,11 @@
 		margin-top: 30px;
 		width: 1440px;
 		height:381px;
+	}
+	.refresh{
+		display: inline-block;
+		vertical-align: middle;
+		margin:0 20px;
+		cursor: pointer
 	}
 </style>

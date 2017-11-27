@@ -4,7 +4,7 @@
 </style>
 <template>
 
-	<Row class="main-container">
+	<Row className="main-container">
 		<Row gutter=15>
 			<Col span="17">
 				<Row gutter=15>
@@ -27,7 +27,7 @@
 				<process-plan></process-plan>
 			</Col>
 		</Row>
-		<Row gutter=15 class="mgt_15">
+		<Row gutter=15 className="mgt_15">
 			<!--用电实时进度-->
 			<Col span="9">
 				<power-use></power-use>
@@ -42,7 +42,7 @@
 			</Col>
 		</Row>
 		<!--实时电量负荷-->
-		<Row class="mgt_15">
+		<Row className="mgt_15">
 			<Col span="24">
 				<real-time-power-chart></real-time-power-chart>
 			</Col>

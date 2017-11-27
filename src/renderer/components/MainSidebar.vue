@@ -5,11 +5,12 @@
     }
     .logo {
         height: 80px;
-        background: url("../assets/logo.png") no-repeat center;
-        background-size: cover;
-        background-color: #19233C;
+        background-image: url("../assets/logo蓝底.png");
+        background-repeat:no-repeat;
+        background-position:24px center;
+        background-size: 45%;
+        background-color: #495060;
     }
-
 </style>
 <template>
     <div >
@@ -20,11 +21,11 @@
                 </div>
             </Row>
             <Row>
-                <Menu :theme="'dark'" :open-names="['0']" accordion width="auto"  id="#main-sidebar">
-                    <MenuItem name="01" @click.native="$router.push('home')">
+                <Menu :theme="'dark'" active-name="0-1" accordion width="auto"  id="#main-sidebar">
+                    <MenuItem name="0-1" @click.native="$router.push('home')">
                         <div><i class="iconfont icon-zonglan-hui"></i><span> &nbsp;概况</span></div>
                     </MenuItem>
-                    <MenuItem name="02" @click.native="$router.push('button')">
+                    <MenuItem name="0-2" @click.native="$router.push('button')">
                         <div><i class="iconfont icon-yanjing"></i><span> &nbsp;Button</span></div>
                     </MenuItem>
                     <Submenu name="1">

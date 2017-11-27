@@ -6,7 +6,7 @@
 <template>
 	<div class="layout">
 		<Row>
-			<Col span="3" class="sidebar-left">
+			<Col span="2" class="sidebar-left">
 			<h3 class="title">消息中心</h3>
 			<Menu active-name="1"  width="auto">
 				<MenuItem name="1" @click.native="$router.push('/message-center/')">
@@ -20,7 +20,7 @@
 				</MenuItem>
 			</Menu>
 			</Col>
-			<Col span="21">
+			<Col span="22">
 			<div class="layout-content">
                 <router-view></router-view>
 			 </div>

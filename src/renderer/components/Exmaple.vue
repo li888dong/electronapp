@@ -153,7 +153,7 @@
 	.logo {
 		width: 220px;
 		height: 80px;
-		background: url("../assets/logo.png") no-repeat center;
+		background: url("../assets/logo蓝底.png") no-repeat center;
 		background-size: cover;
 	}
 

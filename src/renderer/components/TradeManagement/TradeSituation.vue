@@ -93,7 +93,7 @@
 			   <Col span="12">
 			      <panel class="height">
 					  <div class="title-lv3 pd">
-						  <h3 class="fl">交易基础数据分析</h3>
+						  <h3 class="fl title-lv3">交易基础数据分析</h3>
 						  <div class="btn-group">
 							  <Button type="primary">2017年</Button>
 							  <Button type="primary">2月</Button>
@@ -309,7 +309,7 @@
 </template>
 <style scoped>
 	.my-panel {
-		width: 260px;
+		width: 270px;
 		height: 180px;
 		background-color: #F6F7FB;
 		margin-top: 5px;

@@ -31,11 +31,11 @@
 		width: 1467px;
 		height: 60px;
 		display: inline-block;
-		margin-left: 225px;
+		margin-left: 25px;
 		padding:0 20px;
 		position: fixed;
 		z-index: 1000;
-		top: 79px;
+		top: 100px;
 	}
 	.client-header .back{
 		position: absolute;

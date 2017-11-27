@@ -25,8 +25,7 @@ export default {
     .panel .title-lv2{
         height:30px;
         line-height:30px;
-        padding-left:10px;
-        padding-right:10px;
+        padding:0 10px;
         font-size:16px;
         display: inline-block;
         vertical-align: middle;

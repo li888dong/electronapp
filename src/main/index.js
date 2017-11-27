@@ -23,8 +23,10 @@ function createWindow() {
         useContentSize: true,
         width: size.width,
         // fullscreen: true,
-        skipTaskbar:false,
-        // movable:false,
+
+        frame:false,//取消顶部任务栏
+        autoHideMenuBar:true,//取消顶部菜单栏
+        movable:false,
         resizable:false,//不可改变窗口大小
     })
 

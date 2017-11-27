@@ -171,7 +171,7 @@ button {
 
 .AssetInfoSearch{
     background-color: #fff;
-    height: 46px;
+    height: 55px;
     padding: 12px 10px;
     position: relative;
 }
@@ -204,12 +204,13 @@ button {
     background-color: #fff;
     max-height: 825px;
     position: relative;
+    padding: 0 10px;
 }
 
 /* 分页的样式 */
 .fenYe {
     width: 100%;
-    height: 60px;
+    height: 40px;
     background-color: #fff;
     padding-top: 10px;
     text-align: center;

@@ -37,16 +37,16 @@
 
 	<div class="header">
 		<ul class="absolute">
-			<li class="top_40 icon-menu" @click="hideFast" style="cursor: pointer">
-				<i class="icon iconfont icon-caidan" style="font-size: 22px!important;"></i>
+			<li class="top_15 icon-menu" @click="hideFast" style="cursor: pointer">
+				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
 			</li>
-			<li class="search top_40 left_136">
+			<li class="search top_15 left_136">
 				<input type="search" placeholder="请输入设备名称/设备编号/厂家名称等关键字">
 			</li>
-			<li class="icon-li top_40">
+			<li class="icon-li top_15">
 				<i class="icon iconfont icon-search"></i>
 			</li>
-			<li class="weather top_40">
+			<li class="weather top_15">
 				<weather></weather>
 			</li>
 			<li class="setting">
@@ -82,7 +82,7 @@
 	.header .icon-menu {
 		width: 78px;
 		height: 50px;
-		padding-top: 12px;
+		padding-top: 6px;
 		box-sizing: border-box;
 		text-align: center;
 		border-right: 1px solid #efefef;
@@ -111,8 +111,8 @@
 		height: 25px;
 	}
 
-	.top_40 {
-		top: 20px;
+	.top_15 {
+		top: 15px;
 	}
 
 	.left_136 {
@@ -152,8 +152,8 @@
 	}
 
 	.header .setting {
-		top: 32px;
-		right: 0;
+		top: 27px;
+		right: 10px;
 	}
 
 	li.setting i {

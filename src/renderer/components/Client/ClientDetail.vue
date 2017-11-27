@@ -355,99 +355,107 @@
 	}
 </script>
 <template>
-	<div>
-		<div class="detail-container relative">
-			<div class="data-panel client-data-panel user-detail">
-				<h3 class="title">用户基本信息 <small @click="$router.push('AddClient')">详情</small></h3>
-				<table cellspacing="5" width="100%">
-					<tbody>
+	<div class="client-container">
+		<Row gutter="15">
+			<Col span="16">
+				<panel class="user-detail">
+					<Row>
 
-						<tr>
-							<td><span>客户编码 :</span> {{userDetail.khbm}}</td>
-							<td><span>所属行业 :</span> {{userDetail.sshy}}</td>
-							<td><span>售电起止时间 :</span> {{userDetail.qzsh}}</td>
-						</tr>
-						<tr>
-							<td><span>客户地址 :</span> {{userDetail.khdz}}</td>
-							<td><span>联系人 :</span> {{userDetail.lxr}}</td>
-							<td><span>联系电话 :</span> {{userDetail.lxdh}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div><!--
-			--><div class="data-panel client-data-panel agreement-detail">
-				<h3 class="title">合同基本情况 <small  @click="$router.push('add-hetong')">详情</small></h3>
-				<table  cellspacing="5" width="100%">
-					<tr>
-						<td><span>合同编码 :</span> {{agreementDetail.htbm}}</td>
-						<td><span>户号个数 :</span> {{agreementDetail.hhgs}}</td>
-					</tr>
-					<tr>
-						<td><span>年用电量 :</span> {{agreementDetail.mydl}} <span class="danwei1">Kw.时</span></td>
-						<td><span>合同模式 :</span> {{agreementDetail.htms}}</td>
-					</tr>
-				</table>
-			</div>
-			<div class="data-panel client-data-panel user-apply">
-				<h3 class="title">用户申报记录</h3>
-				<Table :columns="columns" :data="data1" height="250"></Table>
-			</div><!--
-			--><div class="data-panel client-data-panel user-bill">
-				<h3 class="title">用户电费单</h3>
-				<Table :columns="columns2" :show-header="true" :data="data2" height="250"></Table>
-			</div>
-			<div class="data-panel client-data-panel user-clientlist">
-				<h3 class="title" style="display: inline-block">用户终端列表</h3>
-				<Button type="success" style="float: right;margin:0 10px 10px 0" @click="$router.push('add-celiang')">+ 配置终端</Button>
+						<h3 class="title-lv3">用户基本信息</h3>
+						<div class="btn-group">
+							<span @click="$router.push('AddClient')">详情</span>
+						</div>
+					</Row>
+					<Row>
+
+						<table cellspacing="5" width="100%" style="margin-left: 20px;">
+							<tbody>
+
+							<tr>
+								<td><span>客户编码 :</span> {{userDetail.khbm}}</td>
+								<td><span>所属行业 :</span> {{userDetail.sshy}}</td>
+								<td><span>售电起止时间 :</span> {{userDetail.qzsh}}</td>
+							</tr>
+							<tr>
+								<td><span>客户地址 :</span> {{userDetail.khdz}}</td>
+								<td><span>联系人 :</span> {{userDetail.lxr}}</td>
+								<td><span>联系电话 :</span> {{userDetail.lxdh}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</Row>
+				</panel>
+			</Col>
+			<Col span="8">
+				<panel class="agreement-detail">
+					<Row>
+
+						<h3 class="title-lv3">合同基本情况</h3>
+						<div class="btn-group">
+							<span  @click="$router.push('add-hetong')">详情</span>
+						</div>
+					</Row>
+					<Row>
+						<table  cellspacing="5" width="100%" style="margin-left: 20px;">
+							<tr>
+								<td><span>合同编码 :</span> {{agreementDetail.htbm}}</td>
+								<td><span>户号个数 :</span> {{agreementDetail.hhgs}}</td>
+							</tr>
+							<tr>
+								<td><span>年用电量 :</span> {{agreementDetail.mydl}} <span class="danwei1">Kw.时</span></td>
+								<td><span>合同模式 :</span> {{agreementDetail.htms}}</td>
+							</tr>
+						</table>
+					</Row>
+				</panel>
+			</Col>
+		</Row>
+		<Row gutter="15" className="mgt_15">
+			<Col span="16">
+				<panel class="user-apply">
+					<h3 class="title-lv3">用户申报记录</h3>
+					<Table :columns="columns" :data="data1" height="250"></Table>
+				</panel>
+			</Col>
+			<Col span="8">
+				<panel class="user-bill">
+					<h3 class="title-lv3">用户电费单</h3>
+					<Table :columns="columns2" :show-header="true" :data="data2" height="250"></Table>
+				</panel>
+			</Col>
+		</Row>
+		<Row className="mgt_15">
+			<panel class="user-clientlist">
 				<Row>
-					<Col span="24">
-						<Table :columns="columns3" :data="data3"></Table>
+					<h3 class="title-lv3">用户终端列表</h3>
+					<div class="btn-group">
+
+						<Button type="success" @click="$router.push('add-celiang')">+ 配置终端</Button>
+					</div>
+				</Row>
+				<Row>
+					<Col span="24" class="mgt_15">
+						<div style="height: 404px;">
+
+							<Table :columns="columns3" :data="data3"></Table>
+						</div>
 					</Col>
 				</Row>
-			</div>
-		</div>
+			</panel>
+		</Row>
+
+
 	</div>
 </template>
 <style scoped>
-	.detail-container{
-		top: 40px;
-		left: 205px;
-	}
 
-	.title small{
-		color: #4fa8f9;
-		font-size: 12px;
-		font-weight:normal;
-		float: right;
-		position: relative;
-		display: inline-block;
-		width: 40px;
-		height: 20px;
-		z-index: 10;
-		cursor: pointer;
-	}
-	.user-detail{
-		width: 940px;
-		height: 95px;
-	}
 	.user-detail table td span,
 	.agreement-detail table td span:not(.danwei1){
 		color: #999999;
 	}
-	.agreement-detail{
-		width: 487px;
-		height: 95px;
 
-	}
-	.user-apply{
-		width: 940px;
-		height: 287px;
-		margin-top: 15px;
-		padding: 10px 0;
-	}
-	.user-clientlist .title,.user-bill .title,.user-apply .title{
-		padding:0 0 10px 15px;
-	}
+
+
 	.user-apply th{
 		text-align: center;
 		height: 40px;
@@ -456,22 +464,12 @@
 	.user-apply td{
 		text-align: center;
 	}
-	.user-bill{
-		width: 487px;
-		height: 287px;
-		margin-top: 15px;
-		padding: 10px 0;
-	}
+
 	.user-bill td{
 		border-top: 1px solid #333333;
 		height: 36px;
 	}
-	.user-clientlist{
-		width: 1440px;
-		height: 435px;
-		margin-top: 15px;
-		padding: 10px 0;
-	}
+
 	.user-clientlist th{
 		text-align: center;
 		height: 40px;
@@ -479,5 +477,9 @@
 	}
 	.user-clientlist td{
 		text-align: center;
+	}
+	.btn-group span{
+		color: #0089F0;
+		cursor: pointer;
 	}
 </style>

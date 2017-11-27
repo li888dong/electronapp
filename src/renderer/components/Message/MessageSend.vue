@@ -111,11 +111,12 @@
       margin:0;
 	}
 	.panel .title-lv2{
-		padding-left:20px;
+		padding-left:10px;
 		height:40px;
 		line-height:40px;
-		border-bottom:1px solid #cccccc;
+		border-bottom:1px solid #eeeeee;
 		display: block;
+		margin:0 10px;
 	}
 	.panel .btn-group{
 		float: none;
@@ -126,16 +127,13 @@
 		height:865px;
 	}
 	.container .sendMessage{
-		padding:0 20px 0 20px;
+		padding:0 60px 0 60px;
 		height:865px;
-		margin:0;
-
 	}
 	.sendMessage .sendMain{
-		border-right:1px solid #ccc;
+		border-right:1px solid #eeeeee;
 		height:865px;
 		margin-top:-10px;
-
 	}
 	.message-main{
 		font-size:14px;
@@ -152,7 +150,7 @@
 		width:100%;
 	}
 	#sendMessageFrame .bt-line{
-		border-bottom:1px solid #cccccc;
+		border-bottom:1px solid #eeeeee;
 	}
 	#sendMessageFrame textarea{
 		width: 100%;
@@ -174,6 +172,7 @@
 	.searchRow .search-content input[type=search]{
 		width:100%;
 		height:32px;
+		padding-left:5px;
 	}
 	.message-main label{
 		display: inline-block;

@@ -15,11 +15,16 @@
 	}
 </script>
 <template>
-	<div>
-		<client-sidebar></client-sidebar>
-		<client-header></client-header>
-		<router-view></router-view>
-	</div>
+	<Row>
+		<Col span="3">
+			<client-sidebar></client-sidebar>
+		</Col>
+		<Col span="21">
+			<client-header></client-header>
+			<router-view></router-view>
+		</Col>
+
+	</Row>
 </template>
 <style>
 

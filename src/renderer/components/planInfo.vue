@@ -1,21 +1,34 @@
 <template>
-    <div class="header">
-        <h3 class="title-lv3">计划进度</h3>
-        <div class="containerBox">
+    <div class="main-container">
+        <panel style="height: 892px;">
             <Row>
-            <Col span='24' id="myCharts" :style="{width: '100%', height: '260px'}"></Col>
-            </Row>            
-            <Col span='24'>
-                <Table border :columns='columns1' :data='data1'></Table>
-            </Col>
+
+                <h3 class="title-lv2">计划进度</h3>
+            </Row>
+            <Row>
+
+                <div class="containerBox">
+                    <Row>
+                        <Col span='24'>
+                            <div  id="myCharts" :style="{width: '100%', height: '260px'}">
+
+                            </div>
+                        </Col>
+                    </Row>
+                    <Col span='24'>
+                        <Table border :columns='columns1' :data='data1'></Table>
+                    </Col>
+
+                </div>
+            </Row>
             <!-- 分页 -->
             <Row class="fenYe">
                 <Col span='24'>
-                    <Page :total="66" show-total show-elevator></Page> <Button type="primary">确定</Button>
+                <Page :total="66" show-total show-elevator></Page> <Button type="primary">确定</Button>
                 </Col>
             </Row>
             <!-- <myFenye></myFenye> -->
-        </div>
+        </panel>
     </div>
 </template>
 
@@ -102,7 +115,7 @@
 
                 }               
             ],
-            data1: [
+                data1: [
                 {
                     n1: '2017-12',
                     n2: '2017-11-20',
@@ -130,6 +143,13 @@
         },
         methods: {
             planChart() {
+                let nowYear = new Date().getFullYear();
+                let nowMonth = (new Date().getMonth())+1;
+                let nowDay = (new Date().getDate());
+                console.log(nowYear,nowMonth,nowDay)
+                let  day = new Date(2017,2,0).getDate()+1;
+
+
                 // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myCharts'))
                 // 绘制图表
@@ -142,26 +162,66 @@
                     }
                 },
                 legend: {
-                    data: ['交易月份：2017-12']
+                    data: ['交易月份：2017-12'],
+                    left:10,
+                    top:0
                 },
                 grid: {
                     left: '1%',
                     right: '1%',
-                    top: '5%',
+                    top: '10%',
                     containLabel: true
                 },
                 xAxis: {
                     type: 'value',
-                    data: ['10-21', '10', '10', '10', '10', '10','10','10','10','10','10','10','10','10','10','10',]
+                    min:'0',
+                    max:'31',
+                    scale:true,
+                    maxInterval:1,
+
+                    data: function () {
+                        let list = [];
+                        for (let i = 1;i < day+1; i++){
+                            list.push(i)
+                        }
+                    }
+
                 },
                 yAxis: {
                     type: 'category',
-                    data: ['预测电量日期','客户申报日期','购电确认日期','月度竞价申报日期']
+                    data: ['预测电量日期','客户申报日期','购电确认日期','月度竞价申报日期'],
+                    splitLine:{
+                        show:true
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
                 },
                 series: [
                     {
-                        name: '2011年',
+                        name: '辅助',
                         type: 'bar',
+                        stack: '总量',
+                        itemStyle: {
+                            normal: {
+                                barBorderColor: 'rgba(0,0,0,0)',
+                                color: 'rgba(0,0,0,0)'
+                            },
+                            emphasis: {
+                                barBorderColor: 'rgba(0,0,0,0)',
+                                color: 'rgba(0,0,0,0)'
+                            }
+                        },
+//                        起始日期
+                        data: ['10', '12', '14','8']
+                    },
+                    {
+                        name: '交易月份：2017-12',
+                        type: 'bar',
+                        stack: '总量',
                         barMaxWidth: 20,
                         label: {
                             normal: {
@@ -169,9 +229,10 @@
                                 position: 'inside'
                                 }
                         },
-                        data: ['5', '6', '6']
+//                        距离截止日期还有几天
+                        data: ['5', '6', '6','8']
                     }
-                    ]
+                ]
                 })
                 
             }

@@ -19,9 +19,9 @@
 	}
 </script>
 <template>
-	<div class="addceliang-container relative">
-		<div class="data-panel addceliang-panel">
-			<h3 class="title">配置终端</h3>
+	<div class="client-container">
+		<panel class="addceliang-panel">
+			<h3 class="title-lv3">配置终端</h3>
 			<div class="from-container">
 				<h4 class="title">基本信息</h4>
 				<div class="label-container">
@@ -61,7 +61,9 @@
 				<h4 class="title">设备信息</h4>
 				<div class="label-container">
 					<label><span  class="width_50 text-right">出厂编号</span><Input class="width_183"></Input></label>
-					<label><span  class="width_80 text-right">生产厂家</span><Input class="width_183" placeholder="请选择生产厂家"></Input><span>添加</span></label>
+					<label><span  class="width_80 text-right">生产厂家</span><Select v-model="model1"class="width_183">
+						<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>
+					</Select><span class="add">添加</span></label>
 					<label><span  class="width_80 text-right">采购日期</span><Input class="width_183"></Input></label><br>
 					<label><span  class="width_50 text-right">通信地址</span><Input class="width_183"></Input></label>
 					<label><span  class="width_80 text-right">远程端口</span><Input class="width_183"></Input></label>
@@ -86,27 +88,26 @@
 				</div>
 				<div class="modal-container">
 					<label>
-					<span>变压器名称:</span><input type="text">
+					<span>变压器名称:</span><Input></Input>
 					</label><br>
 					<label>
-					<span>变压器编号:</span><input type="text">
+					<span>变压器编号:</span><Input></Input>
 					</label><br>
 					<label>
-					<span>变压器容量:</span><input type="text"><span>KvA</span>
+					<span>变压器容量:</span><Input></Input><span>KvA</span>
 					</label><br>
 					</div>
 				<div slot="footer">
 					<Button type="primary">保存</Button>
-					<Button type="default">取消</Button>
+					<Button type="default" @click="modal2 = false">取消</Button>
 				</div>
 			</Modal>
-		</div>
+		</panel>
 	</div>
 </template>
 <style scoped>
 	.addceliang-container{
 		top: 40px;
-		left: 205px;
 		overflow: hidden;
 		font-size: 14px;
 	}
@@ -166,11 +167,6 @@
 	.btn-group button{
 		height: 36px;
 	}
-	.modal .header{
-		height: 40px;
-		line-height: 40px;
-		background-color: #f6f6f6;
-	}
 	.modal-container{
 		margin: 20px 40px;
 	}
@@ -182,8 +178,11 @@
 	}
 	.modal-container label input{
 		width: 200px;
-		height: 30px;
 		margin-left: 10px;
+	}
+	.modal-container .ivu-input-type{
+		margin-left:10px;
+		width: 200px;
 	}
 	.ivu-input{
 		width:300px;
@@ -193,5 +192,9 @@
 	}
 	.text-right{
 		text-align: right;
+	}
+	.ivu-modal-header .title{
+		font-size:16px;
+		font-weight:bold;
 	}
 </style>

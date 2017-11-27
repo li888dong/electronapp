@@ -230,8 +230,9 @@
 							</i-select>
 						</Col>
 					</div>
-					<Col span='4' offset="12" class="search-box btn-group relative fr" style="margin: 10px 0 0 0;">
-						<i class="iconfont icon-search absolute"></i><input type="search"><button class="button btnSelected">搜索</button>
+					<Col span="6" offset='10' class="searchBox">
+						<i class="iconfont icon-search" ></i>
+						<Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
 					</Col>
 				</Row>
 				<div class="table-container">
@@ -286,10 +287,10 @@
 				<Modal
 					title="河南众企联合售电有限公司"
 					v-model="modal2"
-					width = 1400
+					width = 95
 					:mask-closable="false"
 					class-name="vertical-center-modal">
-					<table cellspacing="2" style="margin-top: 15px;">
+					<table cellspacing="2" style="width:100%;">
 							<thead>
 							<tr>
 								<th>2017年月份</th>
@@ -529,6 +530,26 @@
 	</div>
 </template>
 <style scoped>
+/* 顶部搜索框样式 */
+.ivu-btn{
+    height: 34px;
+    border-radius: 0;
+}
+.searchBox {
+    position: relative;
+	text-align: right;
+	margin-top: 10px;
+}
+.searchBox i {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    left: 18%;
+    z-index: 11;
+}
+
+
 .main-container-panel{
 	background-color: #fff;
 	padding: 10px;

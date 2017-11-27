@@ -111,24 +111,62 @@ export default {
                 slider: [20, 50],
                 textarea: ''
             },
+            defaultList: [
+                {
+                    'name': 'a42bdcc1178e62b4694c830f028db5c0',
+                    'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
+                },
+                {
+                    'name': 'bc7521e033abdd1e92222d733590f104',
+                    'url': 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
+                }
+            ],
+            imgName: '',
+            visible: false,
+            uploadList: [],
+            tip: ''
         }
     },
     components: {
         "inputs": inputs
     },
     methods: {
-        handleUpload (file) {
-            this.file = file;
-            return false;
+        handleView (name) {
+            this.imgName = name;
+            this.visible = true;
         },
-        upload () {
-            this.loadingStatus = true;
-            setTimeout(() => {
-                this.file = null;
-                this.loadingStatus = false;
-                this.$Message.success('Success')
-            }, 1500);
+        handleRemove (file) {
+            const fileList = this.$refs.upload.fileList;
+            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+        },
+        handleSuccess (res, file) {
+            file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
+            file.name = file.name;
+        },
+        handleFormatError (file) {
+            this.$Notice.warning({
+                title: '文件类型不支持',
+                desc: '文件格式为（ ' + file.name + ' ）不支持, 请上传PDF格式.'
+            });
+        },
+        handleMaxSize (file) {
+            this.$Notice.warning({
+                title: '文件太大',
+                desc: '文件' + file.name + ' 太大，大小不能超过2M.'
+            });
+        },
+        handleBeforeUpload () {
+            const check = this.uploadList.length < 1;
+            if (!check) {
+                this.$Notice.warning({
+                    title: '最多上传一份文件.'
+                });
+            }
+            return check;
         }
+    },
+    mounted () {
+        this.uploadList = this.$refs.upload.fileList;
     }
 }
 </script>
@@ -233,11 +271,32 @@ export default {
             </Row>
             <p>电子合同备查</p>
             <div class="TName">
-                    <span>合同上传 : </span>                    
-                    <div class="up">
+                    <span>合同上传 : </span>
+                    <div class="demo-upload-box">
+                        <div class="demo-upload">                            
+                        </div>
+                        <Upload
+                            ref="upload"
+                            :default-file-list="defaultList"
+                            :on-success="handleSuccess"
+                            :format="['pdf']"
+                            :max-size="2048"
+                            :on-format-error="handleFormatError"
+                            :on-exceeded-size="handleMaxSize"
+                            :before-upload="handleBeforeUpload"
+                            multiple
+                            action="//jsonplaceholder.typicode.com/posts/"
+                            style="display: inline-block;width:80px;">
+                            <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
+                        </Upload>
+                    </div><br>
+                    <!-- <Modal title="查看文件" v-model="visible">
+                        <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
+                    </Modal> -->
+                    <!-- <div class="up">
                         <input type="file" name="" id="">
-                    </div> <br>
-                    <i style="padding-left:114px;">仅支持PDF格式</i><br/>
+                    </div>-->  
+                    <i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
                 </div> <br>
             <p>合同电量分配</p>
                 <Row :gutter="16" class="month" >
@@ -283,6 +342,23 @@ export default {
 </template>
 
 <style scoped>
+
+/* 下载模块样式 */
+.demo-upload-box {
+    width: 564px;
+    height: 34px;
+    margin-top: 10px;
+    margin-left: 110px;
+}
+.demo-upload {
+    width: 480px;
+    height: 34px;
+    display: inline-block;
+    border: 1px solid #dddee1;
+}
+.ivu-upload{
+    vertical-align: top;
+}
 /* 表单每一项的下外边距 */
 
 .ivu-form-item {
@@ -381,6 +457,14 @@ export default {
     font-size: 12px;
     color: #ccc;
 }
+.typeTip {
+    position: absolute;
+    font-style: normal;
+    bottom: 16px;
+    color: #ccc;
+    padding-left: 114px;
+}
+
 /* .TName .myTextarea{
     width: 700px;
     height: 102px;

@@ -174,7 +174,6 @@ export default {
              
         }
     },
-
     methods: {
         renderM(index) {
             this.modal8= true
@@ -183,7 +182,6 @@ export default {
         remove(index){
             this.data4.splice(index, 1);
         }
-
     }
 }           
 </script>
@@ -202,8 +200,9 @@ export default {
                         <Option v-for="item in place" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                     </Select>
                 </Col>
-                <Col span="6" offset='12' style=" text-align: right;">
-                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary" style="border-radius: 0">搜索</Button>
+                <Col span="6" offset='12' class="searchBox">
+                    <i class="iconfont icon-search" ></i>
+                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
                 </Col>
             </Row>
         </div>
@@ -234,6 +233,24 @@ export default {
 </template>
 
 <style scoped>
+/* 顶部搜索框样式 */
+.ivu-btn{
+    height: 34px;
+    border-radius: 0;
+}
+.searchBox {
+    position: relative;
+    text-align: right;
+}
+.searchBox i {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    left: 18%;
+    z-index: 11;
+}
+
 
 .UserForecast {    
     width: 100%;
