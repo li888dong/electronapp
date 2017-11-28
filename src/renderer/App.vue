@@ -75,9 +75,9 @@
 	}
 
 	body::-webkit-scrollbar {
-		width: 0px;
+		width: 5px;
 		/*滚动条宽度（右侧滚动条）*/
-		height: 10px;
+		height: 5px;
 		/*滚动条高度（底部滚动条）*/
 		background-color: #333;
 	}
@@ -102,14 +102,14 @@
 
 	}
 	.main-container{
-		height: 905px;
+		height: 895px;
 		margin:20px;
 		overflow: hidden;
 		z-index: 998;
 	}
 
 	.client-container{
-		height: 100%;
+		height: 895px;
 		overflow: hidden;
 		box-sizing: border-box;
 		margin: 60px 20px 20px 20px;
@@ -152,7 +152,7 @@
 		display: inline-block;
 		vertical-align: top;
 	}
-
+	
 	.data-panel .title {
 		margin: 0;
 		padding: 0;
@@ -315,7 +315,7 @@
 
 	.page-container{
 		position: absolute;
-		bottom: 40px;
+		bottom: 10px;
 		left: 50%;
 		margin-left: -250px;
 	}

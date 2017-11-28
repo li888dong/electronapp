@@ -26,6 +26,8 @@ export default {
                 legend: {
                     orient: 'horizontal',
                     left: 'right',
+                    itemWidth:16,
+                    itemHeight:16,
                     data: ['已经安装','等待安装','设备库存']
                 },
                 series : [

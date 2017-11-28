@@ -164,7 +164,9 @@
                 legend: {
                     data: ['交易月份：2017-12'],
                     left:10,
-                    top:0
+                    top:0,
+                    itemWidth:16,
+                    itemHeight:16,
                 },
                 grid: {
                     left: '1%',

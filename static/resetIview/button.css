@@ -1,6 +1,7 @@
 /*重置按钮样式  Button组件中有例子*/
 .ivu-btn{
 	position: relative;
+	height: 34px;
 }
 .ivu-btn span{
 	position: relative;
@@ -84,7 +85,7 @@
 	font-weight:normal!important;
 }
 .my-tab-disabled{
-	background-color:#F57E6A;
+	background-color:#669bd8;
 	color: #ffffff;
 	border: 1px solid transparent;
 }

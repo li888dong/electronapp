@@ -182,12 +182,7 @@ export default new Router({
             name: 'client-list',
             component: require('@/components/Client/ClientList').default
         },
-
-        {
-            path: '/exmaple',
-            name: 'exmaple',
-            component: require('@/components/Exmaple').default
-        },
+        
         {
             path: '/bid-management',
             name: 'bid-management',
@@ -217,10 +212,6 @@ export default new Router({
             path: '/button',
             name: 'button',
             component: require('@/components/Tool/Button').default
-        },{
-            path: '/table',
-            name: 'table',
-            component: require('@/components/Tool/Table').default
         },
         {
             path: '/home',

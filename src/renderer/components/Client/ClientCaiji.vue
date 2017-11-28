@@ -1,5 +1,4 @@
 <script>
-	import Pagenation from '@/components/Pagenation'
 	export default {
 	    name:'caiji',
         data(){
@@ -67,7 +66,7 @@
             },
         },
 		components:{
-		    'pagenation':Pagenation
+
 		}
 	}
 </script>
@@ -75,7 +74,7 @@
 	<div class="client-container">
 		<panel style="height: 852px;">
 			<Row>
-				<h3 class="title-lv3">终端采集记录 <small style="color: #999">采集记录仅记录最近60天的采集记录</small></h3>
+				<h3 class="title-lv3">终端采集记录 <span style="color: #999;font-weight:normal;font-size: 12px;">采集记录仅记录最近60天的采集记录</span></h3>
 			</Row>
 			<Row>
 				<ul class="pds-container">

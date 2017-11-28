@@ -1,8 +1,8 @@
 <template>
     <!-- 暂时不可用 -->
-    <Row class="myFenye">
+    <Row class="fenYe">               
         <Col span="24">
-            <Page :total="100" show-elevator show-total @on-change="change"></Page><Button type="primary">确定</Button>
+            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
         </Col>
     </Row>
 </template>
@@ -30,12 +30,8 @@
     width: 100%;
     height: 50px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
     text-align: center;
-}
-.fenYe table{
-    border: 0;
 }
 .fenYe ul {
     display: inline-block;

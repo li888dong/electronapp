@@ -129,11 +129,6 @@
 	.panel .btn-group{
 		margin-top:0;
 	}
-    .panel .title-lv2{
-		padding-left:20px;
-		height:40px;
-		line-height:40px;
-	}
 	.title-lv2 span{
 		color:red;
 		font-size:12px;

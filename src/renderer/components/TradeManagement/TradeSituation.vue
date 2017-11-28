@@ -5,6 +5,10 @@
 	    name:'tradesituation',
 		data(){
 	        return{
+                currentPDS:'1',
+				all:100,
+				residue:13.6,
+				totalWidth:0,
                 chartOption2: {
                     tooltip: {
                         trigger: 'axis',
@@ -18,9 +22,9 @@
                         right: '20',
                     },
                     grid: {
-                        left: '3%',
-                        right: '8%',
-                        bottom: '3%',
+                        left: '0',
+                        right: '0',
+                        bottom: '0',
                         containLabel: true
                     },
                     xAxis: {
@@ -80,6 +84,9 @@
                 // 绘制图表
                 monthBar.setOption(option);
             },
+			changeSelect(psd){
+                this.currentPDS = psd;
+			}
         },
 		components:{
 		    'trade-pie':TradePie,
@@ -95,8 +102,7 @@
 					  <div class="title-lv3 pd">
 						  <h3 class="fl title-lv3">交易基础数据分析</h3>
 						  <div class="btn-group">
-							  <Button type="primary">2017年</Button>
-							  <Button type="primary">2月</Button>
+							  <Select placeholder="2017年" style="width:100px;margin-right:20px;" class="selectDate"><Option value="2017年">2017年</Option></Select><Select placeholder="10月" style="width:100px;"  class="selectDate"><Option value="2017年">10月</Option></Select>
 						  </div>
 					  </div>
 					  <div class="container">
@@ -155,19 +161,23 @@
 				<Col span="18">
 				  <panel class="height_2">
 					  <h3 class="title-lv3">每月交易概况</h3>
-					  <div id="month-bar" style="width:100%;height: 250px;">
+					  <div id="month-bar" style="width:100%;height: 270px;">
 					  </div>
 				  </panel>
 			</Col>
 				<Col span="6">
 				<panel class="height_2">
 					<h3 class="title-lv3">月度交易占比</h3>
-					<div class="container center">
-						<Button type="primary">按月</Button>
-						<Button type="default">自定义</Button>
-						<Button type="default">2017年</Button>
-						<Button type="default">10月</Button>
-							<trade-pie-two></trade-pie-two>
+					<div class="center tab-container">
+						<my-tab v-on:changeSelect = "changeSelect('1')" v-bind:type="currentPDS === '1'? 'zd':'normal'" class="mgr-20">按月</my-tab>
+						<my-tab v-on:changeSelect = "changeSelect('2')" v-bind:type="currentPDS === '2'? 'zd':'normal'" class="mgr-20" >自定义</my-tab>
+						<my-tab v-on:changeSelect = "changeSelect('3')" v-bind:type="currentPDS === '3'? 'zd':'normal'" class="mgr-20">2017年</my-tab>
+						<my-tab v-on:changeSelect = "changeSelect('4')" v-bind:type="currentPDS === '4'? 'zd':'normal'" >10月</my-tab>
+					</div>
+					<div class="trade-pie relative">
+						<trade-pie-two></trade-pie-two>
+					</div>
+					<div class="month-all center">
 						<p>月度总交易电量 <span>512532</span>KW.时</p>
 					</div>
 				</panel>
@@ -185,7 +195,7 @@
 								<td class="lr_m">风电</td>
 								<td>100WKw</td>
 								<td class="lr_b">100.00Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -193,7 +203,7 @@
 								<td class="lr_m">燃机</td>
 								<td>23WKw</td>
 								<td class="lr_b">382.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -201,7 +211,7 @@
 								<td class="lr_m">光伏</td>
 								<td>1221WKw</td>
 								<td class="lr_b">32.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -209,7 +219,7 @@
 								<td class="lr_m">风电</td>
 								<td>231WKw</td>
 								<td class="lr_b">322.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -217,7 +227,7 @@
 								<td class="lr_m">风电</td>
 								<td>21WKw</td>
 								<td class="lr_b">322.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -225,7 +235,7 @@
 								<td class="lr_m">风电</td>
 								<td>121WKw</td>
 								<td class="lr_b">222.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -233,7 +243,7 @@
 								<td class="lr_m">风电</td>
 								<td>324231WKw</td>
 								<td class="lr_b">222.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 						</table>
@@ -243,7 +253,7 @@
 								<td class="lr_m">风电</td>
 								<td>100WKw</td>
 								<td class="lr_b">100.00Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -251,7 +261,7 @@
 								<td class="lr_m">燃机</td>
 								<td>23WKw</td>
 								<td class="lr_b">382.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -259,7 +269,7 @@
 								<td class="lr_m">光伏</td>
 								<td>1221WKw</td>
 								<td class="lr_b">32.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -267,7 +277,7 @@
 								<td class="lr_m">风电</td>
 								<td>231WKw</td>
 								<td class="lr_b">322.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -275,7 +285,7 @@
 								<td class="lr_m">风电</td>
 								<td>21WKw</td>
 								<td class="lr_b">322.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -283,7 +293,7 @@
 								<td class="lr_m">风电</td>
 								<td>121WKw</td>
 								<td class="lr_b">222.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 							<tr>
@@ -291,7 +301,7 @@
 								<td class="lr_m">风电</td>
 								<td>324231WKw</td>
 								<td class="lr_b">222.12Mw时</td>
-								<td><span><i></i><span>13.60%</span><em></em></span></td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
 								<td>12315.23Kw时</td>
 							</tr>
 						</table>
@@ -355,24 +365,23 @@
 		height:100%;
 	}
      /*清浮动*/
-	.panel .title-lv3[data-v-a8fa0462]:after{
+	.panel .pd:after{
 		 content: '';
 		 display: block;
 		 clear: both;
 	 }
 	.panel .btn-group{
-		margin-top:-5px;
+		margin-top:0px;
 	}
 	.panel .title-lv3{
 		display: block;
-		height:40px;
-		line-height: 40px;
 	}
 	.panel .title-lv3 h3{
 		padding-left:5px;
 		height:20px;
 		line-height: 20px;
 		border-left:5px solid #3366cc;
+		padding-top:0;
 	}
 	.height{
 		height:250px;
@@ -384,7 +393,7 @@
 		height:300px;
 	}
 	.panel .pd{
-		padding-top:20px;
+		padding-top:5px;
 	}
 	.height .time{
 		text-align: center;
@@ -398,11 +407,10 @@
 		text-align: center;
 		padding-top:5px;
 	}
-	.center p{
+	.month-all  p{
 		font-size:16px;
-		margin-top:10px;
 	}
-	.center p span{
+	.month-all p span{
 		font-size:36px;
 		color:#fea06f;
 	}
@@ -423,20 +431,22 @@
 	.container .myTable td:first-child{
 		padding-top:0;
 	}
-	.container .myTable span i{
+	.container .myTable td  span{
 		display: inline-block;
-		width:15px;
-		height:15px;
+		height:20px;
 		background-color:#14d86b ;
 		vertical-align: middle;
+		width:100px;
+		text-align: right;
+		line-height: 20px;
 	}
-	.container .myTable  td span:nth-child(2){
-		display: inline-block;
-		width:80px;
-		height:15px;
-		line-height: 14px;
+	.container .myTable td .pro-bar{
+		background-color:#fff;
+		height:20px;
+		line-height:20px;
 		text-align: center;
 		border:1px solid #14d86b;
+		margin-top:-4px;
 	}
 	.container .myTable td em{
 		display: inline-block;
@@ -478,5 +488,14 @@
 	}
 	.year{
 		margin-left: 10px;
+	}
+	.panel #month-bar{
+     padding:20px 40px 20px 0px;
+	}
+	.selectDate{
+		color:#1c9af3;
+	}
+	.mgr-20{
+		margin-right:20px;
 	}
 </style>

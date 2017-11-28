@@ -33,9 +33,9 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high" :style="{width:(540*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
 				<div class="progress-bar-frame frame-normal">{{piancha}}</div>
-				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(540*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
+				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(500*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>
 			<div class="deviation-data">
 				<ul>
@@ -55,7 +55,7 @@
 		background-color: #fff;
 	}
 	.power-realTime-progress {
-		width: 540px;
+		width: 500px;
 		height: 140px;
 		display: inline-block;
 		vertical-align: middle;
@@ -69,7 +69,7 @@
 	.power-realTime-progress .legend {
 		position: absolute;
 		top: 40px;
-		left: 20px;
+		left: 0px;
 	}
 
 	.power-realTime-progress .legend li {
@@ -80,8 +80,8 @@
 
 	.power-realTime-progress .legend .square {
 		display: inline-block;
-		width: 15px;
-		height: 15px;
+		width: 16px;
+		height: 16px;
 		margin-right: 5px;
 		vertical-align: -4px;
 		border: none;
@@ -100,7 +100,7 @@
 	}
 
 	.power-realTime-progress .progress-bar {
-		width: 540px;
+		width: 500px;
 		height: 34px;
 		border-radius: 34px;
 		overflow: hidden;

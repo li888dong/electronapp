@@ -5,9 +5,9 @@
 	import JieXianTu from '@/components/Client/JieXianTu'
 	import PowerTimeframe from '@/components/Home/PowerTimeframeYM'
     import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
-    import LineChart1 from '@/components/LineChart1.vue'
-    import LineChart2 from '@/components/LineChart2.vue'
-    import LineChart3 from '@/components/LineChart3.vue'
+    import FuheChart from './FuheChart.vue'
+    import Gonglv from './GonglvChart.vue'
+    import Yougong from './YougongChart.vue'
 
     export default {
 	    name:'zonglan',
@@ -17,14 +17,14 @@
 	        }
 		},
 		components:{
-		    'real-time-power-chart': RealTimePowerChart,
+            'real-time-power-chart': RealTimePowerChart,
             'client-sider':ClientSider,
 			'company-power-progress':CompanyPowerProgress,
 			'jiexiantu':JieXianTu,
             'power-timeframe':PowerTimeframe,
-			'line-chart1':LineChart1,
-			'line-chart2':LineChart2,
-			'line-chart3':LineChart3,
+			'fuhe-chart':FuheChart,
+			'gonglv-chart':Gonglv,
+			'yougong-chart':Yougong,
 			'client-header':ClientHeader
 		}
 	}
@@ -50,15 +50,15 @@
 		</Row>
 		<Row class="mgt_15" gutter=15>
 			<Col span="8">
-			<line-chart1></line-chart1>
+			<fuhe-chart></fuhe-chart>
 			</Col>
 			<Col span="8">
-			<line-chart2></line-chart2>
+			<gonglv-chart></gonglv-chart>
 
 			</Col>
 
 			<Col span="8">
-			<line-chart3></line-chart3>
+			<yougong-chart></yougong-chart>
 
 			</Col>
 

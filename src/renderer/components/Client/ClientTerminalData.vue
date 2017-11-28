@@ -148,8 +148,8 @@
                         icon:'rect',
                         left:5,
                         top:40,
-                        itemWidth: 20,             // 图例图形宽度
-                        itemHeight: 14,            // 图例图形高度
+                        itemWidth:16,
+                        itemHeight:16,
                     },
                     color: ['#0089f0','#31c9d7'],
                     xAxis:{
@@ -187,7 +187,7 @@
                     grid: {
                         top:'80',
                         left: '10',
-                        right: '10%',
+                        right: '13%',
                         bottom: '1%',
                         containLabel: true
                     },
@@ -354,7 +354,7 @@
 							<Col span="10">
 								<div class="left">
 
-								<h4 class="title" style="margin-left: 5px;">测量点：河南银河铝业有限公司__鲁庄镇西候村候地工业园区_02 <small style="font-size: 12px;color: #999999">资产编号:{{cldDetail.zcbj}}</small></h4>
+								<h4 class="title">测量点：河南银河铝业有限公司__鲁庄镇西候村候地工业园区_02 <span style="color: #ccc;">资产编号:{{cldDetail.zcbj}}</span></h4>
 								<ul>
 									<li style="background-color: #0089f0;"><strong>45454</strong><br><span>实际电量</span></li>
 									<li style="background-color: #f57e6a;"><strong>0.9</strong><br><span>功率因数</span></li>
@@ -365,7 +365,7 @@
 							</Col>
 							<Col span="14">
 								<div class="right">
-								<table width="100%" cellspacing="10">
+								<table width="100%" cellspacing="15">
 									<tbody>
 									<tr>
 										<td><span>终端号 : </span> {{cldDetail.zdh}}</td>
@@ -400,34 +400,36 @@
 		<Row>
 
 			<panel class="terminal-chart">
+				<Row style="margin-top: 10px;">
+					<Col span="2">
+						<h3 class="title-lv3">数据图表</h3>
+					</Col>
+					<Col span="18" style="border-bottom: 1px solid #eeeeee;">
+						<div class="power-item" :class="{selected:currentChartType===1}" @click="monitoringShow = false;currentChartType=1">电量</div>
+						<div class="power-item" :class="{selected:currentChartType===2}" @click="monitoringShow = false;currentChartType=2">电流</div>
+						<div class="power-item" :class="{selected:currentChartType===3}" @click="monitoringShow = false;currentChartType=3">电压</div>
+						<div class="power-item" :class="{selected:currentChartType===4}" @click="monitoringShow = false;currentChartType=4">有功功率</div>
+						<div class="power-item" :class="{selected:currentChartType===5}" @click="monitoringShow = false;currentChartType=5">无功功率</div>
+						<div class="power-item" :class="{selected:currentChartType===6}" @click="monitoringShow = false;currentChartType=6">视在功率</div>
+						<div class="power-item" :class="{selected:currentChartType===7}" @click="monitoringShow = false;currentChartType=7">功率因数</div>
+						<div class="power-item" :class="{selected:currentChartType===8}" @click="monitoringShow = false;currentChartType=8">负荷</div>
+						<div class="power-item" :class="{selected:currentChartType===9}" @click="monitoringShow = false;currentChartType=9">最大需量</div>
+					</Col>
+					<Col span="4" style="text-align: center;border-bottom: 1px solid #eeeeee">
+						<div class="power-item" :class="{selected:currentChartType===10}" @click="monitoringShow = false;currentChartType=10">采集监控</div>
+						<div class="power-item" :class="{selected:currentChartType===11}" @click="monitoringShow = true;currentChartType=11">在线监控</div>
+					</Col>
+				</Row>
 
-				<h3 class="title-lv3">数据图表</h3>
-
-				<div class="chart-header">
-					<ul class="fl">
-						<li :class="{selected:currentChartType===1}" @click="monitoringShow = false;currentChartType=1">电量</li>
-						<li :class="{selected:currentChartType===2}" @click="monitoringShow = false;currentChartType=2">电流</li>
-						<li :class="{selected:currentChartType===3}" @click="monitoringShow = false;currentChartType=3">电压</li>
-						<li :class="{selected:currentChartType===4}" @click="monitoringShow = false;currentChartType=4">有功功率</li>
-						<li :class="{selected:currentChartType===5}" @click="monitoringShow = false;currentChartType=5">无功功率</li>
-						<li :class="{selected:currentChartType===6}" @click="monitoringShow = false;currentChartType=6">视在功率</li>
-						<li :class="{selected:currentChartType===7}" @click="monitoringShow = false;currentChartType=7">功率因数</li>
-						<li :class="{selected:currentChartType===8}" @click="monitoringShow = false;currentChartType=8">负荷</li>
-						<li :class="{selected:currentChartType===9}" @click="monitoringShow = false;currentChartType=9">最大需量</li>
-						<li :class="{selected:currentChartType===10}" @click="monitoringShow = false;currentChartType=10" style="margin-left: 500px;">采集监控</li>
-						<li :class="{selected:currentChartType===11}" @click="monitoringShow = true;currentChartType=11" style="cursor: pointer;position: relative;z-index: 999">在线监控</li>
-					</ul>
-				</div>
 				<div v-show="monitoringShow" class="relative" style="height: 500px">
-					<br>
-					<p style="margin: -10px 0 0 10px;">今日在线时长 :<span style="color: #0089f0;font-size: 16px;"> 12小时35分36秒</span></p>
+					<p style="margin: -10px 0 0 10px;clear: both">今日在线时长 :<span style="color: #0089f0;font-size: 16px;"> 12小时35分36秒</span></p>
 					<div class="chart-main" id="chart-jiankong" style="width: 963px;height: 189px;float: left;">
 
 					</div>
-					<div class="unusual-commind fr" style="width: 420px;height: 217px;margin-top: 10px;">
+					<panel class="unusual-commind fr" style="width: 370px;height: 477px;padding-right: 10px;margin-top: -15px;">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
-						<Table :columns="columns2" width="397" height="442" :data="tableData2"></Table>
-					</div >
+						<Table :columns="columns2" :data="tableData2" height="477"></Table>
+					</panel >
 					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
 						<Table :columns="columns" width="947" :data="tableData1" height="232">
@@ -444,7 +446,7 @@
 						</div>
 					</div>
 					<div class="select-time">
-						<ul style="position: relative;z-index: 999;left: 115px">
+						<ul style="position: relative;z-index: 999;left: 40px">
 							<li><span>时间选择 :</span></li>
 							<li><Button type="primary">今天</Button></li>
 							<li><Button type="default">昨天</Button></li>
@@ -456,8 +458,8 @@
 								<span>时间粒度:</span>
 							</li>
 							<li>
-								<Select style="width:100px">
-									<Option v-for="item in timeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+								<Select style="width: 100px">
+									<Option v-for="item in timeList" :value="item.value" :key="item.value" style="width: 80px">{{ item.label }}</Option>
 								</Select>
 							</li>
 						</ul>
@@ -472,12 +474,10 @@
 
 	.terminal-header{
 		height: 50px;
-		background-color: #fff;
 	}
 
 	.pds-container{
 		height: 220px;
-		background-color: #fff;
 		margin-top: 3px;
 		padding-top: 15px;
 	}
@@ -486,7 +486,7 @@
 		vertical-align: middle;
 	}
 	.tab-container{
-		margin-left: 25px;
+		margin-left: 20px;
 		margin-bottom: 20px;
 	}
 	.tab-container span{
@@ -500,7 +500,7 @@
 		margin-left: 20px;
 	}
 	.cld-detail .right{
-		margin-top: 40px;
+		margin-top: 35px;
 		margin-left: -130px;
 	}
 	.cld-detail ul{
@@ -510,7 +510,7 @@
 		width: 87px;
 		height: 87px;
 		text-align: center;
-		margin-left: 10px;
+		margin-right: 10px;
 		box-sizing: border-box;
 		color: #ffffff;
 	}
@@ -527,7 +527,6 @@
 	.terminal-chart{
 		height: 564px;
 		overflow: hidden;
-		padding: 0 20px;
 		background-color: #fff;
 		margin-top: 15px;
 	}
@@ -540,30 +539,27 @@
 		display: inline-block;
 		margin-right: 20px;
 	}
-	.chart-header{
-		height: 30px;
-		margin-top: 10px;
-		clear: both;
-	}
-	.chart-header ul:nth-child(1){
-		margin-left: 50px;
-	}
-	.chart-header ul{
-		height: 30px;
-		border-bottom: 1px solid #eee;
-	}
-	.chart-header li{
+
+	.power-item{
 		display: inline-block;
 		margin-left: 10px;
 		margin-right: 0;
-		height: 30px;
+		height: 31px;
 		text-align: center;
 		line-height: 30px;
 		width: 60px;
 		cursor: pointer;
 		color: #0089f0;
+		position: relative;
+		top: 2px;
+		border: 1px solid transparent;
 	}
-
+	.power-item.selected{
+		color: #666666;
+		border: 1px solid #eee;
+		border-bottom-color:transparent ;
+		background-color: #fff;
+	}
 	.terminal-chart th,.terminal-chart td{
 		text-align: left;
 	}

@@ -11,24 +11,25 @@
                         }
                     },
                     legend: {
-                        data:[{name:'河南众企联合售电',icon:'rect'}],
-                        left:22,
-                        top:2,
-                        itemWidth:14,
+                        left:17,
+                        top:20,
+                        itemWidth:16,
+                        itemHeight:16,
+                        data:['2017','2016','2015','2014'],
                     },
 	                backgroundColor:'#fff',
                     grid: {
-                        top:'40',
-                        left: '2%',
-                        right: '2%',
+                        top:'60',
+                        left: '20',
+                        right: '20',
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#48C3F3'],
+                    color:['#f35e7a','#fc8b40','#ab7aee','#31c9d7','#6ec71e','#14d86b','#818af8','#edb00d'],
                     xAxis: [
                         {
                             type:'category',
-                            boundaryGap : false,
+
                             data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
                             splitLine: {show: false},
                             splitArea: {show: false},
@@ -57,16 +58,29 @@
                     dataZoom:{
                         bottom:-5,
                         start:0,
-                        end:90
+                        end:50
                     },
                     series: [
                         {
-                            name: '河南众企联合售电',
-                            type: 'line',
-                            smooth:true,
-                            itemStyle: {normal: {areaStyle: {type: 'default',opacity:0.3}}},
+                            name: '2017',
+                            type: 'bar',
                             data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
-                        }
+                        },
+                        {
+                            name: '2016',
+                            type: 'bar',
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.9)
+                        },
+                        {
+                            name: '2015',
+                            type: 'bar',
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.8)
+                        },
+                        {
+                            name: '2014',
+                            type: 'bar',
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*1.1)
+                        },
                     ]
                 },
 				columns6:[
@@ -151,30 +165,36 @@
 </script>
 <template>
 	<div class="client-container">
-		<div class="history-chart-container" id="historyChart">
-		</div>
-		<panel class="history-table-container mgt_15">
-			<h3 class="title-lv2">历史用电量数据</h3>
-			<div class="btn-group">
-				<Button type="primary">2017年</Button>
-				<Button type="default">2016年</Button>
-				<Button type="default">2015年</Button>
-				<Button type="default">2014年</Button>
-			</div>
-		</panel>
 		<Row>
 			<Col span="24">
-				<Table :columns="columns6" :data="data5" width="1440" height="422"></Table>
+				<panel>
+					<h3 class="title-lv2">历史用电量趋势</h3>
+					<div class="history-chart-container" id="historyChart">
+					</div>
+				</panel>
+			</Col>
+		</Row>
+
+		<Row className="mgt_15">
+			<panel class="history-table-container">
+				<h3 class="title-lv2">历史用电量数据</h3>
+				<div class="btn-group">
+					<Button type="primary">2017年</Button>
+					<Button type="default">2016年</Button>
+					<Button type="default">2015年</Button>
+					<Button type="default">2014年</Button>
+				</div>
+			</panel>
+			<Col span="24">
+				<panel class="table-container">
+
+					<Table :columns="columns6" :data="data5" height="380"></Table>
+				</panel>
 			</Col>
 		</Row>
 	</div>
 </template>
 <style scoped>
-	.database-container{
-		top: 60px;
-		left: 220px;
-		overflow: hidden;
-	}
 	.history-chart-container{
 		height: 371px;
 		background-color: #fff;
@@ -182,5 +202,7 @@
 	.history-table-container{
 		height: 50px;
 	}
-
+	.table-container{
+		padding:0 10px 10px 10px;
+	}
 </style>

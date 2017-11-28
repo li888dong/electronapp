@@ -23,7 +23,10 @@
                         trigger: 'item',
                         formatter: "{a} <br/>{b}: {c} ({d}%)"
                     },
-                    legend: {},
+                    legend: {
+                        itemWidth:16,
+                        itemHeight:16,
+                    },
                     series: [
                         {
                             name: '交易来源',

@@ -1,5 +1,6 @@
 <script>
-    import Pagenation from '@/components/Pagenation'
+	import myFenye from '@/components/Tool/myFenye'
+	import mySearch from '@/components/Tool/mySearch'
 
     export default {
         name: 'annualforecast',
@@ -205,415 +206,173 @@
 				console.log(index)
 			},
         },
-        components:{
-            'pagenation':Pagenation
-	    }
+		components : {
+			'myFenye': myFenye,
+			'mySearch': mySearch
+		},
     }
 </script>
 <template>
-	<div class="main-container relative">
-		<div class="main-container-panel">
-				<div class="header">
-					<h3>年度预测</h3>
-				</div>
+	<div class="main-container">
+		<panel>
+			<Row>
+				<h3 class="title-lv2">年度预测</h3>
+			</Row>
+			<div class="layout-content">
+				<Row class="layout-content-top">
+					<Col span='8'>
+						<Button class="Button" type="primary">上一年</Button>
+						<i-select :model.sync="model1" style="width:100px" placeholder='年度选择'>								
+							<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
+						</i-select>
+						<Button class="Button" type="primary">下一年</Button>						
+						<i-select :model.sync="model1" style="width:100px" placeholder='区域选择'>								
+							<i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
+						</i-select>
+					</Col>
+					<Col span="6" offset='7'>
+                        <mySearch></mySearch>
+                    </Col>                    
+                    <Col span="3" style="text-align: right;">
+                        <Button type="primary">批量确认</Button>
+						<Button type="primary" style="margin-left: 10px">导入</Button>
+                    </Col>
+				</Row>
 				<Row>
-					<div class="tab">
-						<Col span='8' class="btn-group ">
-							<Button class="Button" type="primary">上一年</Button>
-							<i-select :model.sync="model1" style="width:100px" placeholder='年度选择'>								
-								<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-							</i-select>
-							<Button class="Button" type="primary">下一年</Button>
-							
-							<i-select :model.sync="model1" style="width:100px" placeholder='区域选择'>								
-								<i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-							</i-select>
-						</Col>
-					</div>
-					<Col span="6" offset='10' class="searchBox">
-						<i class="iconfont icon-search" ></i>
-						<Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
-					</Col>
-				</Row>
-				<div class="table-container">
 					<Table border ref="selection" :columns="columns6" :data="data6"></Table>
-					<!-- <table width="100%" cellspacing="2" style="margin-top: 60px;">
-						<thead>
-							<tr>
-								<th>企业名称</th>
-								<th>01月</th>
-								<th>02月</th>
-								<th>03月</th>
-								<th>04月</th>
-								<th>05月</th>
-								<th>06月</th>
-								<th>07月</th>
-								<th>08月</th>
-								<th>09月</th>
-								<th>10月</th>
-								<th>11月</th>
-								<th>12月</th>
-								<th>合计</th>
-								<th>修改人</th>
-								<th>确认人</th>
-								<th>状态</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>河南众企联合售电</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>144.55</td>
-								<td>6665554.12</td>
-								<td>修改人</td>
-								<td>确认人</td>
-								<td>状态</td>
-								<td style="cursor: pointer;color: #36c" @click="modalShow = true">修改</td>
-							</tr>
-						</tbody>
-					</table> -->
-				</div>
-				<Modal
-					title="河南众企联合售电有限公司"
-					v-model="modal2"
-					width = 95
-					:mask-closable="false"
-					class-name="vertical-center-modal">
-					<table cellspacing="2" style="width:100%;">
-							<thead>
-							<tr>
-								<th>2017年月份</th>
-								<th>01月</th>
-								<th>02月</th>
-								<th>03月</th>
-								<th>04月</th>
-								<th>05月</th>
-								<th>06月</th>
-								<th>07月</th>
-								<th>08月</th>
-								<th>09月</th>
-								<th>10月</th>
-								<th>11月</th>
-								<th>12月</th>
-								<th>合计</th>
-
-							</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>户号12345</td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>户号12345</td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>合计</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>系统预测</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>偏差值</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-							</tbody>
-						</table>
-				</Modal>
-				<!-- <div v-if="modalShow" class="modal">
-					<div class="header">河南众企联合售电有限公司</div>
-					<div class="table-container">
-						<table width="100%" cellspacing="2" style="margin-top: 15px;">
-							<thead>
-							<tr>
-								<th>2017年月份</th>
-								<th>01月</th>
-								<th>02月</th>
-								<th>03月</th>
-								<th>04月</th>
-								<th>05月</th>
-								<th>06月</th>
-								<th>07月</th>
-								<th>08月</th>
-								<th>09月</th>
-								<th>10月</th>
-								<th>11月</th>
-								<th>12月</th>
-								<th>合计</th>
-
-							</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>户号12345</td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>户号12345</td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>合计</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>系统预测</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-								<tr>
-									<td>偏差值</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355.55</td>
-									<td>355555.55</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="btn-group" style="margin-left: 40%;">
-							<button class="button btnSelected" @click="modalShow = false">确认</button>
-							<button class="button" @click="modalShow = false">取消</button>
-						</div>
-					</div>
-				</div> -->
-				<Row class="fenYe">
-					<Col span="5" style="margin: 14px">
-						<Button type="primary" style="margin-left: 20px">批量确认</Button>
-						<Button type="primary">导入</Button>
-					</Col>
-					<Col span="10">
-						<Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
-					</Col>
-				</Row>
-			<!-- <div class="table-page absolute">
-				<span>共44444条记录</span><span>123页</span>
-				<span>第 <select name="" id="">
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-							<option value="1">1</option>
-						</select>页</span>
+				</Row>				
+				<myFenye></myFenye>
 			</div>
-			<pagenation class="absolute" style="bottom: 20px;right: 40px; " :cur.sync="cur" :all.sync="all" v-on:btn-click="pageListen"></pagenation> -->
-		</div>		
+		</panel>
+		<Modal
+			title="河南众企联合售电有限公司"
+			v-model="modal2"
+			width = 95
+			:mask-closable="false"
+			class-name="vertical-center-modal">
+			<table cellspacing="2" style="width:100%;">
+					<thead>
+					<tr>
+						<th>2017年月份</th>
+						<th>01月</th>
+						<th>02月</th>
+						<th>03月</th>
+						<th>04月</th>
+						<th>05月</th>
+						<th>06月</th>
+						<th>07月</th>
+						<th>08月</th>
+						<th>09月</th>
+						<th>10月</th>
+						<th>11月</th>
+						<th>12月</th>
+						<th>合计</th>
+
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>户号12345</td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td>355555.55</td>
+						</tr>
+						<tr>
+							<td>户号12345</td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td><input type="text"></td>
+							<td>355555.55</td>
+						</tr>
+						<tr>
+							<td>合计</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355555.55</td>
+						</tr>
+						<tr>
+							<td>系统预测</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355555.55</td>
+						</tr>
+						<tr>
+							<td>偏差值</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355.55</td>
+							<td>355555.55</td>
+						</tr>
+					</tbody>
+				</table>
+		</Modal>	
 	</div>
 </template>
 <style scoped>
-/* 顶部搜索框样式 */
-.ivu-btn{
-    height: 34px;
-    border-radius: 0;
+.layout-content{
+    overflow: hidden;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px;    
+    height: 875px
 }
-.searchBox {
-    position: relative;
-	text-align: right;
-	margin-top: 10px;
+.layout-content-top {
+    padding-bottom: 15px;
 }
-.searchBox i {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 6px;
-    left: 18%;
-    z-index: 11;
-}
-
-
-.main-container-panel{
-	background-color: #fff;
-	padding: 10px;
-	height: 945px;
-}
-
-.header h3{
-	height: 40px;
-	border-bottom: 1px solid #E5E5E5;
-	background-color: #fff;
-	padding-left: 10px;
-	padding-top: 10px;
-	font-size: 16px;
-	font-weight: 400;     
-}
-.tab .btn-group{
-	padding-top: 10px;
-	padding-bottom: 15px;
-}
-
-.tab button i{
-	color: black;
-	font-size: 10px;
-}
-.btn-group input{
-	height: 30px;
-	width: 200px;
-	padding-left: 26px;
-}
-.btn-group i{
-	left: 10px;
-	top: 4px;
-}
-
-
 .table-container th{
 	height: 30px;
 	background-color: #f6f6f6;
-
 }
 .table-container td{
 	text-align: center;
 	height: 30px;
-} 
-
-
-
-/* 分页的样式 */
-.fenYe {
-    width: 100%;
-    height: 40px;
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    text-align: center;
-}
-.fenYe table{
-    border: 0;
-}
-.fenYe ul {
-    display: inline-block;
-}
-.fenYe button{
-    top: -12px;
-    left: 12px;
 }
 </style>

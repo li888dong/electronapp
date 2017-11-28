@@ -5,7 +5,7 @@
             return{
                 companyList:[
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合',
                         id:'123456789987654321',
                         avatar:''
                     },
@@ -15,7 +15,7 @@
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司asdasdasdasdasdsad',
                         id:'123456789987654321',
                         avatar:''
                     },
@@ -149,14 +149,14 @@
 			<ul>
 				<li class="relative" v-for="item in companyList">
 					<Row>
-						<Col span="4">
-							<div class="avator">
-								<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>
-							</div>
-						</Col>
-						<Col span="19">
-							<p v-bind:title="item.name">{{item.name}}</p>
-							<p v-bind:title="item.id">{{item.id}}</p>
+						<!--<Col span="4">-->
+							<!--<div class="avator">-->
+								<!--<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>-->
+							<!--</div>-->
+						<!--</Col>-->
+						<Col span="24">
+							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>
+							<p v-bind:title="item.id" class="company-id">{{item.id}}</p>
 						</Col>
 					</Row>
 				</li>
@@ -171,7 +171,7 @@
 
 	}
 	.search{
-		width: 205px;
+		width: 100%;
 		height: 60px;
 		border-bottom: solid 1px #ccc;
 		line-height: 60px;
@@ -179,11 +179,11 @@
 	}
 	.search i{
 		top: 1px;
-		left: 18px;
+		left: 25px;
 		color: #ccc;
 	}
 	.search input{
-		width: 185px;
+		width: 90%;
 		height: 30px;
 		border: solid 1px #ccc;
 		box-sizing: border-box;
@@ -191,16 +191,16 @@
 		padding-left: 30px;
 	}
 	.company-list ul{
-		width: 205px ;
+		width: 100%;
 		height: 880px;
 		overflow-y: scroll;
 		overflow-x: hidden;
 	}
 	/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 	.company-list ul::-webkit-scrollbar{
-		width: 10px;
+		width: 5px;
 		/*滚动条宽度（右侧滚动条）*/
-		height: 10px;
+		height: 5px;
 		/*滚动条高度（底部滚动条）*/
 		background-color: #eeeeee;
 	}
@@ -226,7 +226,6 @@
 		height: 76px;
 		overflow: hidden;
 		line-height: 38px;
-		text-align: center;
 		border-bottom: solid 1px #eee;
 		cursor: pointer;
 	}
@@ -235,15 +234,20 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		width: 147px;
-
-
+		width: 90%;
 	}
-	.avator{
-		width: 100%;
-		height: 76px;
-		line-height: 70px;
-		text-align: center;
-		margin: 5px;
+	.company-name{
+		font-size: 14px;
+		font-weight: bold;
 	}
+	.company-id{
+		color: #999;
+	}
+	/*.avator{*/
+		/*width: 100%;*/
+		/*height: 76px;*/
+		/*line-height: 70px;*/
+		/*text-align: center;*/
+		/*margin: 5px;*/
+	/*}*/
 </style>

@@ -21,7 +21,6 @@
 </script>
 <template>
 	<div>
-
 		<Row>
 			<Col span="8" offset="4">
 			<Button type="primary">主操作</Button>

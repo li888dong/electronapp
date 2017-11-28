@@ -23,22 +23,22 @@
 /*width: 105px;*/
 /*}*/
 .ivu-table th{
-	background-color: #4FA8F9;
+	background-color: #f2f7fb;
 	text-align: center;
-	color: #fff;
+	color: #444;
 	font-weight:500;
 }
 .ivu-table td{
 	text-align: center;
 }
 .ivu-table-sort i{
-	color: #ffffff;
+	color: #cccccc;
 }
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 .ivu-table-body::-webkit-scrollbar{
-	width: 10px;
+	width: 5px;
 	/*滚动条宽度（右侧滚动条）*/
-	height: 10px;
+	height: 5px;
 	/*滚动条高度（底部滚动条）*/
 	background-color: #eeeeee;
 }

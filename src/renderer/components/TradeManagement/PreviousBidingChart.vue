@@ -15,8 +15,8 @@
                         icon:'rect',
                         left:110,
                         top:0,
-                        itemWidth: 20,             // 图例图形宽度
-                        itemHeight: 14,            // 图例图形高度
+                        itemWidth:16,
+                        itemHeight:16,
                     },
                     grid: {
                         top:'10%',

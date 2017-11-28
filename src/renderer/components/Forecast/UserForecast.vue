@@ -1,10 +1,13 @@
 <script>
+import myFenye from '@/components/Tool/myFenye'
+import mySearch from '@/components/Tool/mySearch'
+
 export default {
     name: 'UserForecast',
     data(){
         return{
             value: '',
-            place: [
+            cityList: [
                 {
                     value: '河南',
                     label: '河南'
@@ -182,43 +185,42 @@ export default {
         remove(index){
             this.data4.splice(index, 1);
         }
-    }
+    },
+    components : {
+        'myFenye': myFenye,
+        'mySearch': mySearch
+    },
 }           
 </script>
 
 <template>
-<div class="UserForecast">
-    <div class="layout-content">
-        <h3>用户申报</h3>
-        <div class="layout-content-top">          
-            <Row>
-                <Col span="3">
-                    <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
-                </Col>
-                <Col span="3">
-                    <Select v-model="model1" style="width:200px">
-                        <Option v-for="item in place" :value="item.value" :key="item.value" >{{ item.label }}</Option>
-                    </Select>
-                </Col>
-                <Col span="6" offset='12' class="searchBox">
-                    <i class="iconfont icon-search" ></i>
-                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
-                </Col>
-            </Row>
-        </div>
-        <div class="layout-content-main">
-            <Table border ref="selection" :columns="columns4" :data="data4"></Table>
-        </div>
-        <Row class="fenYe">
-            <Col span="5" style="margin: 14px">
-                <Button type="primary" style="margin-left: 20px">批量确认</Button>
-                <Button type="primary">导入</Button>
-            </Col>
-            <Col span="10">
-                <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
-            </Col>
+<div class="main-container">    
+    <panel >
+        <Row>
+            <h3 class="title-lv2">用户申报</h3>
         </Row>
-    </div>
+        <div class="layout-content">
+            <Row class="layout-content-top">          
+                <Row>
+                    <Col span="3">
+                        <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
+                    </Col>
+                    <Col span="3">
+                        <Select v-model="model1" style="width:200px" placeholder='全部区域'>
+                            <Option v-for="item in cityList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
+                        </Select>
+                    </Col>
+                    <Col span="6" offset='12'>
+                        <mySearch></mySearch>
+                    </Col>
+                </Row>
+            </Row>
+            <Row class="layout-content-main">
+                <Table border ref="selection" :columns="columns4" :data="data4"></Table>
+            </Row>
+            <myFenye></myFenye>
+        </div>
+    </panel>
     <Modal
         title="12月份电量申报详情"
         v-model="modal8"
@@ -233,69 +235,15 @@ export default {
 </template>
 
 <style scoped>
-/* 顶部搜索框样式 */
-.ivu-btn{
-    height: 34px;
-    border-radius: 0;
-}
-.searchBox {
-    position: relative;
-    text-align: right;
-}
-.searchBox i {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 6px;
-    left: 18%;
-    z-index: 11;
-}
 
-
-.UserForecast {    
-    width: 100%;
-}
 .layout-content{
-    min-height: 200px;
-    margin: 20px;
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
     padding: 10px;    
-    height: 945px;
+    height: 875px
 }
-.layout-content h3{
-	height: 40px;
-	border-bottom: 1px solid #E5E5E5;
-	background-color: #fff;
-	padding-left: 10px;
-    padding-top: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
 .layout-content-top {
     margin-bottom: 15px;
-}
-
-/* 分页的样式 */
-.fenYe {
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    text-align: center;
-}
-.fenYe table{
-    border: 0;
-}
-.fenYe ul {
-    display: inline-block;
-}
-.fenYe button{
-    top: -12px;
-    left: 12px;
 }
 </style>

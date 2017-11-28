@@ -1,14 +1,3 @@
-/* 文件上传样式修改 */
-
-.ivu-upload-list {
-    position: absolute;
-    top: 10px;
-    left: 116px;
-}
-.ivu-upload-list li{
-	display: inline;
-}
-
 /* 模态框居中样式 */
 .vertical-center-modal{
     display: flex;
@@ -19,6 +8,25 @@
     top: -10%;
 }
 
+/* 长协合同文件上传组件样式修改 */
+
+.changXie-upload-box .ivu-upload-list {
+    position: absolute;
+    top: 14px;
+    left: 116px;
+}
+.changXie-upload-box .ivu-upload-list li{
+	display: inline;
+}
+/* 售电合同文件上传组件样式修改 */
+.shouDian-upload-box .ivu-upload-list {
+    position: absolute;
+    top: 0px;
+    left: -480px;
+}
+.shouDian-upload-box .ivu-upload-list li{
+	display: inline;
+}
 
 
 
@@ -78,3 +86,9 @@
 	 padding-top:20px;
 
 }
+/*交易概况下拉菜单样式重置*/
+.selectDate .ivu-select-selection{
+	background-color:#ccf4f9;
+	border:none;
+}
+

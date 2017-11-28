@@ -16,10 +16,10 @@
 </script>
 <template>
 	<Row>
-		<Col span="3">
+		<Col span="4">
 			<client-sidebar></client-sidebar>
 		</Col>
-		<Col span="21">
+		<Col span="20">
 			<client-header></client-header>
 			<router-view></router-view>
 		</Col>

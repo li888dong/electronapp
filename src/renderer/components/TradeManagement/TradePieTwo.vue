@@ -2,17 +2,16 @@
     .tradeFrame2 {
         box-sizing: border-box;
         background-color: #fff;
-        height: 150px;
+        height:180px;
         text-align: center;
     }
 </style>
 <template>
     <div class="tradeFrame2">
-        <div id="tradeFrame2" style="position: absolute;left:-30px;top:35px;bottom: 0;right: 0;">
+        <div id="tradeFrame2" style="position: absolute;left:0px;top:0px;bottom: 0;right: 0;">
         </div>
     </div>
 </template>
-
 <script>
     export default {
         name: 'tradeframe',

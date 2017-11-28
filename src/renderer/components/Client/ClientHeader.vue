@@ -28,7 +28,7 @@
 </template>
 <style scoped>
 	.client-header{
-		width: 1467px;
+		width: 73%;
 		height: 60px;
 		display: inline-block;
 		margin-left: 25px;

@@ -1,10 +1,39 @@
 <script>
+import myFenye from '@/components/Tool/myFenye'
+import mySearch from '@/components/Tool/mySearch'
+
 export default {
     name: 'MonthForecast',
     data(){
         return{
             value: '',
-            place: [
+            timeList: [
+                {
+                    value: 'beijing',
+                    label: '2017年1月'
+                },
+                {
+                    value: 'shanghai',
+                    label: '2017年2月'
+                },
+                {
+                    value: 'shenzhen',
+                    label: '2017年2月'
+                },
+                {
+                    value: 'hangzhou',
+                    label: '2017年3月'
+                },
+                {
+                    value: 'nanjing',
+                    label: '2017年4月'
+                },
+                {
+                    value: 'chongqing',
+                    label: '2017年5月'
+                }
+            ],
+            cityList: [
                 {
                     value: '河南',
                     label: '河南'
@@ -90,6 +119,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
+                                        this.renderM(params)
                                     }
                                 }
                             }, '修改'),
@@ -138,140 +168,116 @@ export default {
                     n7: '22',
                     n8: 'ok'
                 },
-            ]
+            ],
+            modal1: false,
         }
     },
-    // mounted() {
-    //         this.getNewData(data11);
-    //     },
     methods: {
-        // getNewData(){
-        //     var data11 = new Date();
-        //     // var y = data11.getFullYear();
-        //     // var m = data11.getMonth()+1;
-        //     // var d = data11.getDate();
-        //     // if(y < 10){
-        //     //     y = "0"+ y
-        //     // };
-        //     // if(m < 10){
-        //     //     m = "0"+ m
-        //     // };
-        //     // if(d < 10){
-        //     //     d = "0"+ d
-        //     // };
-        //     // var t = y+ '-' +m+ '-' +d;
-        //     return data11;          
-        // }
-        // handleSelectAll (status) {
-        //     this.$refs.selection.selectAll(status);
-        // }
-    }
+        renderM() {
+            this.modal1= true
+        },
+    },
+    components : {
+        'myFenye': myFenye,
+        'mySearch': mySearch
+    },
 }
 
 </script>
 
 <template>
-<div class="MonthForecast">
-    <div class="layout-content">
-        <h3>月度预测</h3>
-        <div class="layout-content-top">          
-            <Row>
-                <Col span="3">
-                    <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
+<div class="main-container">
+    <panel>
+        <Row>
+            <h3 class="title-lv2">月度预测</h3>
+        </Row>
+        <div class="layout-content">
+            <Row class="layout-content-top">
+                <Col span='8'>
+                    <Button class="Button" type="primary">上一月</Button>
+                    <i-select :model.sync="model1" style="width:100px" placeholder='月度选择'>								
+                        <i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
+                    </i-select>
+                    <Button class="Button" type="primary">下一月</Button>						
+                    <i-select :model.sync="model1" style="width:100px" placeholder='全部区域'>								
+                        <i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
+                    </i-select>
                 </Col>
-                <Col span="3">
-                    <Select v-model="model1" style="width:200px">
-                        <Option v-for="item in place" :value="item.value" :key="item.value" >{{ item.label }}</Option>
-                    </Select>
-                </Col>
-                <Col span="6" offset='12' class="searchBox">
-                    <i class="iconfont icon-search" ></i>
-                    <Input v-model="value" placeholder="客户编号或客户名称" class="myInput" style="width: 280px"></Input><Button type="primary">搜索</Button>
+                <Col span="6" offset='7'>
+                    <mySearch></mySearch>
+                </Col>                    
+                <Col span="3" style="text-align: right;">
+                    <Button type="primary">批量确认</Button>
+                    <Button type="primary" style="margin-left: 10px">导入</Button>
                 </Col>
             </Row>
+            <Row class="layout-content-main">
+                <Table border ref="selection" :columns="columns4" :data="data1"></Table>
+            </Row>
+            <myFenye></myFenye>
         </div>
-        <div class="layout-content-main">
-            <Table border ref="selection" :columns="columns4" :data="data1"></Table>
-        </div>
-        <Row class="fenYe">
-            <Col span="5" style="margin: 14px">
-                <Button type="primary" style="margin-left: 20px">批量确认</Button>
-                <Button type="primary">导入</Button>
+    </panel>
+    <Modal
+        title="12月份电量申报详情"
+        v-model="modal1"
+        width = 666
+        :mask-closable="false"
+        class-name="vertical-center-modal">
+        <Row>
+            <Col span="8" class="gongSi">
+                <Row style="margin-top:10px;">
+                    <Col span='12'>企业名称</Col>
+                    <Col span='6'>所属区域</Col>
+                    <Col span='6'>是否购电</Col>
+                </Row>
+                <Row style="margin-top:35px;">
+                    <Col span='12'>郑州大学科技园</Col>
+                    <Col span='6'>郑州</Col>
+                    <Col span='6'>是</Col>
+                </Row>
             </Col>
-            <Col span="10">
-                <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
+            <Col span="16">
+                <table cellspacing="10" cellpadding="10">
+                    <tr>
+                        <td>系统预测合计</td>
+                        <td>企业申报合计</td>
+                        <td>人工预测合计 <input type="checkbox" name="" id=""  checked="checked" >使用客户申报数值</td>
+                    </tr>
+                    <tr>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <input type="text"> </td>
+                    </tr>
+                    <tr>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <span class="num">0</span></td>
+                        <td>1234657498: <input type="text"></td>
+                    </tr>
+                </table>
             </Col>
         </Row>
-    </div>
+     </Modal>
 </div>
 
 </template>
 
 <style scoped>
-
-/* 顶部搜索框样式 */
-.ivu-btn{
-    height: 34px;
-    border-radius: 0;
-}
-.searchBox {
-    position: relative;
-    text-align: right;
-}
-.searchBox i {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 6px;
-    left: 18%;
-    z-index: 11;
-}
-
-
-.MonthForecast {
-    width: 100%;
-}
 .layout-content{
-    margin: 20px;
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
     padding: 10px;    
-    height: 945px;
-}
-
-.layout-content h3{
-    height: 40px;
-	border-bottom: 1px solid #E5E5E5;
-	background-color: #fff;
-	padding-left: 10px;
-	padding-top: 10px;
-	font-size: 16px;
-	font-weight: 400;     
+    height: 875px
 }
 .layout-content-top {
-    padding-top: 10px;
     padding-bottom: 15px;
 }
-
-
-/* 分页的样式 */
-.fenYe {
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    bottom: 50px;
-    left: 0;
+.gongSi div{
     text-align: center;
-}
-.fenYe table{
-    border: 0;
-}
-.fenYe ul {
-    display: inline-block;
-}
-.fenYe button{
-    top: -12px;
-    left: 12px;
 }
 </style>

@@ -29,7 +29,8 @@
                         orient: 'vertical',
                         left: '240',
                         top: '60',
-                        itemWidth: 14,
+                        itemWidth:16,
+                        itemHeight:16,
                         data: ['市场竞价(月)', '长协(月)', '市场竞价(年)', '长协(年)']
                     },
                     series: [

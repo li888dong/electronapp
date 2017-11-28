@@ -28,7 +28,8 @@
                     legend: {
                         left: 18,
                         top: 5,
-                        itemWidth: 14,
+                        itemWidth:16,
+                        itemHeight:16,
                         data: ['今年', '去年']
                     },
                     color: ['#0089f0', '#31c9d7'],
@@ -67,7 +68,7 @@
                     grid: {
                         top: '50',
                         left: '20',
-                        right: '0',
+                        right: '40',
                         bottom: '3%',
                         containLabel: true
                     },
@@ -96,7 +97,8 @@
                         left: 5,
                         top: 0,
                         orient: 'verital',
-                        itemWidth: 14,
+                        itemWidth:16,
+                        itemHeight:16,
                         data: ['今天', '昨天']
                     },
                     color: ['#14d86b', '#ca94ec'],
@@ -163,7 +165,8 @@
                         left: 5,
                         top: 0,
                         orient: 'verital',
-                        itemWidth: 14,
+                        itemWidth:16,
+                        itemHeight:16,
                         data: ['本月', '上月']
                     },
                     color: ['#818af8', '#f35e7a'],
@@ -256,7 +259,7 @@
 		<Row>
 			<panel class="data-index">
 				<Row>
-					<h3 class="title-lv2">户号指数</h3>
+					<h3 class="title-lv3">户号指数</h3>
 				</Row>
 				<Row type="flex" justify="space-around" gutter="20">
 					<Col span="3">
@@ -276,138 +279,139 @@
 					</Col>
 					<Col span="6">
 						<Row className="data-title">
-						<Col span="9">
-							<span class="count">使用电量(Mw.h)</span>
-						</Col>
-						<Col span="7">
-							<span class="tongbi-rate">同比</span>
-						</Col>
-						<Col span="7">
-							<span class="huanbi-rate">环比</span>
-						</Col>
-					</Row>
+							<Col span="10">
+								<span class="count">使用电量(Mw.h)</span>
+							</Col>
+							<Col span="7">
+								<span class="tongbi-rate">同比</span>
+							</Col>
+							<Col span="7">
+								<span class="huanbi-rate">环比</span>
+							</Col>
+						</Row>
+
 						<Row className="data-content">
-						<Col span="8">
-						<span class="count">{{indexData.shijiliang}}</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
-						                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-						<Col span="8">
-						<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
-						                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
-						</Col>
-					</Row>
+							<Col span="10">
+								<span class="count">{{indexData.shijiliang}}</span>
+							</Col>
+							<Col span="7">
+								<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
+							                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+							<Col span="7">
+								<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
+							                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+							</Col>
+						</Row>
 						<Row className="data-content">
-						<Col span="8">
-						<span class="count">{{indexData.shijiliang}}</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
-						                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-						<Col span="8">
-						<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
-						                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
-						</Col>
-					</Row>
+							<Col span="10">
+								<span class="count">{{indexData.shijiliang}}</span>
+							</Col>
+							<Col span="7">
+								<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
+							                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+							<Col span="7">
+								<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
+							                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+							</Col>
+						</Row>
 					</Col>
 					<Col span="6">
 						<Row className="data-title">
-						<Col span="8">
-						<span class="count">申报月偏差</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">同比</span>
-						</Col>
-						<Col span="8">
-						<span class="huanbi-rate">环比</span>
-						</Col>
-					</Row>
+							<Col span="8">
+								<span class="count">申报月偏差</span>
+							</Col>
+							<Col span="8">
+								<span class="tongbi-rate">同比</span>
+							</Col>
+							<Col span="8">
+								<span class="huanbi-rate">环比</span>
+							</Col>
+						</Row>
 						<Row className="data-content">
-						<Col span="8">
-						<span class="count">{{indexData.shenbaoPiancha}}</span>
-						</Col>
-						<Col span="8">
-						<span
-							class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-						<Col span="8">
-						<span
-							class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
-							class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-					</Row>
+							<Col span="8">
+							<span class="count">{{indexData.shenbaoPiancha}}</span>
+							</Col>
+							<Col span="8">
+							<span
+								class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+							<Col span="8">
+							<span
+								class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+						</Row>
 						<Row className="data-content">
-						<Col span="8">
-						<span class="count">{{indexData.shenbaoPiancha}}</span>
-						</Col>
-						<Col span="8">
-						<span
-							class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							<Col span="8">
+								<span class="count">{{indexData.shenbaoPiancha}}</span>
+							</Col>
+							<Col span="8">
+								<span
+								class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 
-						</Col>
-						<Col span="8">
-						<span
-							class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
-							class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-					</Row>
+							</Col>
+							<Col span="8">
+								<span
+								class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+						</Row>
 					</Col>
 					<Col span="6">
 						<Row className="data-title">
-						<Col span="8">
-						<span class="count">购电月偏差</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">同比</span>
-						</Col>
+							<Col span="8">
+								<span class="count">购电月偏差</span>
+							</Col>
+							<Col span="8">
+								<span class="tongbi-rate">同比</span>
+							</Col>
 
-						<Col span="8">
-						<span
-							class="huanbi-rate">环比</span>
-						</Col>
+							<Col span="8">
+							<span
+								class="huanbi-rate">环比</span>
+							</Col>
 
-					</Row>
+						</Row>
 						<Row className="data-content">
-						<Col span="8">
+							<Col span="8">
 
-						<span class="count">{{indexData.goudianPiancha}}</span>
-						</Col>
+								<span class="count">{{indexData.goudianPiancha}}</span>
+							</Col>
 
-						<Col span="8">
-						<span
-							class="tongbi-rate">{{indexData.goudianTongbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
+							<Col span="8">
+							<span
+								class="tongbi-rate">{{indexData.goudianTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
 
-						<Col span="8">
-						<span
-							class="huanbi-rate">{{indexData.goudianHuanbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
+							<Col span="8">
+							<span
+								class="huanbi-rate">{{indexData.goudianHuanbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
 
 
-					</Row>
+						</Row>
 						<Row className="data-content">
-						<Col span="8">
-						<span class="count">{{indexData.goudianPiancha}}</span>
-						</Col>
-						<Col span="8">
-						<span
-							class="tongbi-rate">{{indexData.goudianTongbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
-						<Col span="8">
-						<span
-							class="huanbi-rate">{{indexData.goudianHuanbi}}<i
-							class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-						</Col>
+							<Col span="8">
+								<span class="count">{{indexData.goudianPiancha}}</span>
+							</Col>
+							<Col span="8">
+								<span
+								class="tongbi-rate">{{indexData.goudianTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
+							<Col span="8">
+								<span
+								class="huanbi-rate">{{indexData.goudianHuanbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+							</Col>
 
-					</Row>
+						</Row>
 					</Col>
 				</Row>
 			</panel>
@@ -417,7 +421,7 @@
 				<panel>
 					<h3 class="title-lv3">日电量同比</h3>
 					<span class="danwei1">单位:Mw.h</span>
-					<div id="compare-bar-1" style="width: 924px;height: 525px;">
+					<div id="compare-bar-1" style="width: 924px;height: 515px;">
 
 					</div>
 				</panel>
@@ -497,6 +501,6 @@
 	#compare-bar-2,
 	#compare-bar-3 {
 		width: 178px;
-		height: 520px;
+		height: 515px;
 	}
 </style>

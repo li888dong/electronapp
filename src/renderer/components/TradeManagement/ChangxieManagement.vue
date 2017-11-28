@@ -1,6 +1,4 @@
 <script>
-    import Pagenation from '@/components/Pagenation'
-
     export default {
         name: 'changxie',
         data() {
@@ -246,7 +244,7 @@
             this.drawChart();
         },
 	    components:{
-            'pagenation':Pagenation
+
         }
     }
 </script>

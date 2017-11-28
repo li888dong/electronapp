@@ -29,7 +29,8 @@
                         data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
                         align: 'left',
                         left: 10,
-                        itemWidth:14,
+                        itemWidth:16,
+                        itemHeight:16,
                     },
 	                color:['#0089f0','#31c9d7','#f35e7a'],
                     tooltip: {

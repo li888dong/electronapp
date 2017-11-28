@@ -1,11 +1,12 @@
 <script>
-    import Pagenation from '@/components/Pagenation'
-    import ISelect from "../../../../node_modules/iview/src/components/select/select.vue";
 
     export default {
 	    name:'trade-matching',
 		data(){
 	        return{
+                components:{
+
+                },
                yearList:[
 	               {
 	                   label:'2017年',
@@ -150,10 +151,7 @@
                 this.msg = '当前页码：' + data
             }
         },
-	    components:{
-            ISelect,
-            'pagenation':Pagenation
-	    }
+
 	}
 </script>
 <template>

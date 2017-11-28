@@ -26,7 +26,55 @@
 					}
 				],
 				modal1:false,
-	        }
+				defaultList: [
+					{
+						'name': 'agoodgirlpic.jpg',
+						'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
+					}
+				],
+				imgName: '',
+				visible: false,
+				uploadList: [],
+				tip: ''
+				}
+		},
+		methods: {
+			handleView (name) {
+				this.imgName = name;
+				this.visible = true;
+			},
+			handleRemove (file) {
+				const fileList = this.$refs.upload.fileList;
+				this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+			},
+			handleSuccess (res, file) {
+				file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
+				file.name = file.name;
+			},
+			handleFormatError (file) {
+				this.$Notice.warning({
+					title: '文件类型不支持',
+					desc: '文件格式为（ ' + file.name + ' ）不支持, 请上传PDF格式.'
+				});
+			},
+			handleMaxSize (file) {
+				this.$Notice.warning({
+					title: '文件太大',
+					desc: '文件' + file.name + ' 太大，大小不能超过2M.'
+				});
+			},
+			handleBeforeUpload () {
+				const check = this.uploadList.length < 1;
+				if (!check) {
+					this.$Notice.warning({
+						title: '最多上传一份文件.'
+					});
+				}
+				return check;
+			}
+		},
+		mounted () {
+			this.uploadList = this.$refs.upload.fileList;
 		}
 	}
 </script>
@@ -110,11 +158,28 @@
 					</label><br>
 					<label>
 						<span class="width-120">合同上传 :</span>
-						<input type="file">
+						<div class="shouDian-upload-box">
+                            <div class="shouDian-upload"></div>
+                            <Upload
+                                ref="upload"
+                                :default-file-list="defaultList"
+                                :on-success="handleSuccess"
+                                :format="['pdf']"
+                                :max-size="2048"
+                                :on-format-error="handleFormatError"
+                                :on-exceeded-size="handleMaxSize"
+                                :before-upload="handleBeforeUpload"
+                                multiple
+                                action="//jsonplaceholder.typicode.com/posts/"
+                                style="display: inline-block;width:80px;">
+                                <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
+                            </Upload>
+                        </div><br>
+						<i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
 					</label><br>
 					<label>
 						<span class="width-120">用户户号 :</span>
-						<table class="fr" cellspacing="10" width="1000">
+						<table class="fr" width="800" cellspacing="0">
 							<thead>
 								<tr>
 									<th>营销用户编号</th>
@@ -170,6 +235,8 @@
 	</div>
 </template>
 <style scoped>
+
+
 	.main-container{
 		height:900px;
 	}
@@ -284,4 +351,40 @@
 	.ivu-modal-footer .add-btn-group{
 		text-align: center;
 	  }
+	label {
+		position: relative;		
+	}
+
+	/* 下载模块样式 */
+	.shouDian-upload-box {
+		width: 570px;
+		height: 34px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.shouDian-upload {
+		width: 480px;
+		height: 34px;
+		display: inline-block;
+		border: 1px solid #dddee1;
+	}
+	
+	.ivu-upload{
+		vertical-align: top;
+		margin-left: 6px;
+		position: relative;
+	}
+	.ivu-upload .ivu-upload-list {
+		position: absolute;
+		top: 6px;
+		left: -480px;
+	}
+	.typeTip {
+		position: absolute;
+		font-style: normal;
+		bottom: 0px;
+		left: 40px;
+		color: #ccc;
+		padding-left: 114px;
+	}
 </style>

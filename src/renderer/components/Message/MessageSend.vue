@@ -45,7 +45,6 @@
 							<Row class="sendRow bt-line">
 								<Col span="2">
 								 消息类型：
-
 							</Col>
 								<Col span="22">
 								<Checkbox>通知</Checkbox><Checkbox>私信</Checkbox><Checkbox>公告</Checkbox>

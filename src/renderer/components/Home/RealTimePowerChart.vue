@@ -4,7 +4,7 @@
 	}
 	.danwei{
 		position: absolute;
-		top: 60px;
+		top: 40px;
 		right: 10px;
 		border: none!important;
 		background-color: transparent!important;
@@ -16,16 +16,19 @@
 </style>
 <template>
 	<panel class="chart-container">
-		<h3 class="title-lv3">实时电量负荷</h3>
-		<div class="btn-group relative">
-			<Button v-bind:type="powerRealtimeType==='月'?'primary':'default'" @click="powerRealtimeTypeSwitch('月')">月</Button>
+		<Row>
 
-			<Button v-bind:type="powerRealtimeType==='日'?'primary':'default'" @click="powerRealtimeTypeSwitch('日')">日</Button>
+			<h3 class="title-lv3">实时电量负荷</h3>
+			<div class="btn-group relative">
+				<Button v-bind:type="powerRealtimeType==='月'?'primary':'default'" @click="powerRealtimeTypeSwitch('月')">月</Button>
 
-			<Button v-bind:type="powerRealtimeType==='15'?'primary':'default'" @click="powerRealtimeTypeSwitch('15')">15</Button>
+				<Button v-bind:type="powerRealtimeType==='日'?'primary':'default'" @click="powerRealtimeTypeSwitch('日')">日</Button>
 
-			<span class="danwei">单位Mw.h</span>
-		</div>
+				<Button v-bind:type="powerRealtimeType==='15'?'primary':'default'" @click="powerRealtimeTypeSwitch('15')">15</Button>
+
+				<span class="danwei">单位Mw.h</span>
+			</div>
+		</Row>
 		<div id="powerChart" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;">
 
 		</div>
@@ -37,7 +40,6 @@
 
     export default {
         name: 'powerChart',
-	    props:['cwidth','cheight'],
         data() {
             return {
                 chartWidth:1000,
@@ -53,15 +55,141 @@
                         }
                     },
                     legend: {
-                        left:37,
-	                    top:62,
-	                    itemWidth:14,
+                        left:17,
+	                    top:40,
+	                    itemWidth:16,
+	                    itemHeight:16,
+
+                        data: [{name:'实时电量',icon:'rect'}]
+                    },
+                    grid: {
+                        top:'80',
+                        left: '20',
+                        right: '20',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            boundaryGap : false,
+                            data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            position:'right',
+                            type: 'value',
+                            boundaryGap: 0
+                        }
+                    ],
+//          设置可拖动区间
+                    dataZoom: [ {
+                        type: 'slider',
+	                    bottom:0,
+                        startValue: '1968/10/4',
+                        endValue: '1968/10/28'
+                    }],
+	                color:['#5ECFB8'],
+                    series:[
+                        {
+                            name: '实时电量',
+                            type: 'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default',opacity:0.3}}},
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48].map((i) => i * 3),
+                        }
+                    ]
+                },
+	            chartOption2: {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        left:17,
+	                    top:40,
+                        itemWidth:16,
+                        itemHeight:16,
+
+                        data: ['实时电量', '谷段电量', '平段电量','峰段电量',]
+                    },
+                    grid: {
+                        top:'80',
+                        left: '20',
+                        right: '20',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            position:'right',
+                            type: 'value',
+                            boundaryGap: 0
+                        }
+                    ],
+//          设置可拖动区间
+                    dataZoom: [ {
+                        type: 'slider',
+	                    bottom:0,
+                        startValue: '1968/10/4',
+                        endValue: '1968/10/28'
+                    }],
+	                color:['#5ECFB8','#14d86b','#818af8','#edb00d'],
+                    series:[
+                        {
+                            name: '实时电量',
+                            type: 'bar',
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48].map((i) => i * 3),
+                        },
+                        {
+                            name: '谷段电量',
+                            type: 'bar',
+                            stack: '实时电量',
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                        },
+                        {
+                            name: '平段电量',
+                            type: 'bar',
+                            stack: '实时电量',
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                        },
+                        {
+                            name: '峰段电量',
+                            type: 'bar',
+                            stack: '实时电量',
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                        }
+
+                    ]
+                },
+	            chartOption3: {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        left:17,
+	                    top:40,
+                        itemWidth:16,
+                        itemHeight:16,
+
                         data: ['申报电量', '预测电量','长协购电量','竞价购电量', '实时电量', '谷段电量', '平段电量','峰段电量',]
                     },
                     grid: {
-                        top:'110',
-                        left: '40',
-                        right: '1%',
+                        top:'80',
+                        left: '20',
+                        right: '20',
                         bottom: '3%',
                         containLabel: true
                     },
@@ -86,7 +214,7 @@
                         endValue: '1968/10/28'
                     }],
 	                color:['#f35e7a','#fc8b40','#ab7aee','#31c9d7','#6ec71e','#14d86b','#818af8','#edb00d'],
-                    series: [
+                    series:[
                         {
                             name: '申报电量',
                             type: 'bar',
@@ -97,7 +225,7 @@
                             type: 'bar',
                             data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
                         },
-	                    {
+                        {
                             name: '长协购电量',
                             type: 'bar',
                             data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
@@ -111,7 +239,7 @@
                             type: 'bar',
                             data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48].map((i) => i * 3),
                         },
-	                    {
+                        {
                             name: '谷段电量',
                             type: 'bar',
                             barWidth : "3%",
@@ -141,11 +269,12 @@
 	    },
         mounted() {
             this.initData();
-            this.drawLine(this.chartOption1);
+            this.drawLine();
         },
         methods: {
             powerRealtimeTypeSwitch(type) {
-                this.powerRealtimeType = type
+                this.powerRealtimeType = type;
+                this.drawLine();
             },
             initData() {
                 var base = +new Date(1968, 9, 3);
@@ -160,11 +289,18 @@
                 this.powerdate = date;
                 this.powerdata = data;
             },
-            drawLine(option = this.chartOption1) {
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let powerChart = this.$echarts.init(document.getElementById('powerChart'));
+                if (this.powerRealtimeType === '15'){
+                    powerChart.setOption(this.chartOption1,true);
+                }else if (this.powerRealtimeType === '日'){
+                    powerChart.setOption(this.chartOption2,true);
+                }else {
+                    powerChart.setOption(this.chartOption3,true);
+                }
                 // 绘制图表
-                powerChart.setOption(option);
+
             }
         }
     }

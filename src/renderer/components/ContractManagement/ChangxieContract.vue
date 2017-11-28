@@ -1,7 +1,7 @@
 
 <script>
 
-import myFenye from '@/components/Tool/myFenye.vue';
+import myFenye from '@/components/Tool/myFenye'
 
 export default {
     name: 'ChangxieContract',
@@ -28,9 +28,11 @@ export default {
 </script>
 
 <template>
-<div class="ChangxieContract">
-    <div class="changxie">
-        <h3>长协合同</h3>
+<div class="main-container">
+    <panel>
+        <Row>
+            <h3 class="title-lv2">长协合同</h3>
+        </Row>
         <div class="hetongList">
             <div class="hetongForm">
                 <ul class="hetongIfno">
@@ -138,46 +140,22 @@ export default {
                         <li>2223.45</li>
                     </ul>
                 </div>
-            </div>
-            <!-- <div class="fenYe">
-                <Page :total="100" show-total show-elevator @on-change='change'></Page> <Button type="primary">确定</Button>
-            </div>             -->
-        <!-- <myFenye></myFenye> -->
-            
-        </div>
-        <Row class="fenYe">
-            <col span="24">
-            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
-            </Col>
-        </Row>
-    </div>
+            </div>            
+            <myFenye></myFenye>            
+        </div>        
+    </panel>
 </div>
 </template>
 
 <style scoped>
-.changxie {
-    background-color: #E8ECF0;
-    overflow: hidden;
-    padding: 20px;
-    height: 945px;
-}
-.changxie h3 {
-    height: 50px;
-    border-bottom: 1px solid #E5E5E5;
-    background-color: #fff;
-    padding-left: 20px;
-    padding-top: 20px;
-    font-size: 16px;
-    font-weight: 400;    
-}
 .hetongList {
-    height: 855px;
+    height: 875px;
     background-color: #fff;
     padding: 10px;
     }
 .hetongIfno{
     height: 44px;
-    background-color: #F6F7FB;
+    background-color: #f2f7fb;
     padding-left: 15px;
     position: relative;
 }
@@ -235,26 +213,4 @@ export default {
     padding-right: 70px;
     line-height: 25px;
 }
-
-
-/* 分页的样式 */
-.fenYe {
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-}
-.fenYe table{
-    border: 0;
-}
-.fenYe ul {
-    display: inline-block;
-}
-.fenYe button{
-    top: -12px;
-    left: 12px;
-}
-
 </style>

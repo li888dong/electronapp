@@ -1,8 +1,14 @@
 <script>
 	import MyTab from '@/components/Tool/MyTab'
+    import mySearch from '@/components/Tool/mySearch'
     import Panel from "../Tool/Panel.vue";
     export default {
         name:'clientlist',
+        components:{
+            Panel,
+            'my-tab':MyTab,
+	        'my-search':mySearch
+        },
         data(){
             return{
 	            showAllCity:false,
@@ -10,7 +16,24 @@
                     {
                         sortable: true,
                         title: '客户名称',
-                        key: 'name'
+                        key: 'name',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+
+                                    style: {
+                                        color:'#4fa8f9 ',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params)
+                                            this.gotoDetail()
+                                        }
+                                    }
+                                }, params.row.name)
+                            ])
+                        }
                     },
                     {
                         sortable: true,
@@ -106,20 +129,6 @@
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
-
-                                    style: {
-                                        marginRight: '5px',
-                                        color:'#4fa8f9 ',
-                                        cursor:'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            console.log(params.index)
-                                            this.gotoDetail()
-                                        }
-                                    }
-                                }, '详情'),
-                                h('span', {
                                     style: {
                                         marginRight: '5px',
                                         color:'#4fa8f9 ',
@@ -206,10 +215,7 @@
                 this.$store.dispatch('setCityList','zz')
 	        }
         },
-        components:{
-            Panel,
-            'my-tab':MyTab
-        }
+
     }
 </script>
 <template>
@@ -242,21 +248,31 @@
 					</Row>
 				</div>
 				<div class="table-container">
-					<Row>
-						<div class="form-container">
-							<div class="search-container">
-								<i class="iconfont icon-search"></i>
-								<input type="search" placeholder="客户编号或客户名称"></input>
-							</div>
+					<Row className="mgt_15">
+						<Col span="24">
+							<Row>
+								<Col span="6" offset="14">
+									<my-search></my-search>
+								</Col>
 
-							<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
-							<div class="refresh">
+								<Col span="2" offset="1">
+									<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
+								</Col>
 
-								<i class="iconfont icon-shuaxin"></i>
-							</div>
-						</div>
+								<Col span="1">
+									<div class="refresh">
+
+										<i class="iconfont icon-shuaxin"></i>
+									</div>
+								</Col>
+
+							</Row>
+						</Col>
 					</Row>
-					<Table :columns="columns4" :data="tableList.data1"></Table>
+					<Row className="mgt_15">
+
+						<Table :columns="columns4" :data="tableList.data1"></Table>
+					</Row>
 
 					<div class="page-container">
 						<Page
@@ -303,7 +319,6 @@
 	.search-container{
 		display: inline-block;
 		vertical-align: middle;
-		margin-right: 40px;
 	}
 	.search-container i{
 		position: relative;
