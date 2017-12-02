@@ -223,6 +223,9 @@
 				this.modal2= true
 				console.log(index)
 			},
+			toDaoru() {
+				this.$router.push("/import-data")
+			}
         },
 		components : {
 			'myFenye': myFenye,
@@ -233,23 +236,23 @@
 <template>
 	<div class="main-container">
 		<Card>
-			<p slot="title">年度预测</p>
+			<h3 slot="title">年度预测</h3>
 			<div class="layout-content">
 				<div class="layout-content-top">
 					<div class="fl">
 						<Button class="Button" type="primary">上一年</Button>
-						<i-select :model.sync="model1" style="width:100px;margin:0 10px;" placeholder='年度选择'>								
-							<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-						</i-select>
+						<Select :model.sync="model1" style="width:100px;" placeholder='年度选择'>								
+							<Option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
+						</Select>
 						<Button class="Button" type="primary">下一年</Button>						
-						<i-select :model.sync="model1" style="width:100px;margin-left: 10px" placeholder='区域选择'>								
-							<i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-						</i-select>
+						<Select :model.sync="model1" style="width:100px;margin-left: 30px" placeholder='区域选择'>								
+							<Option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
+						</Select>
 					</div>
 					<div class="fr">
                         <mySearch class="fl" style="margin-right: 30px;" placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
 						<Button class="fl" type="primary">批量确认</Button>
-						<Button  class="fl" type="primary" style="margin-left: 10px">导入</Button>
+						<Button  class="fl" type="primary" style="margin-left: 10px" @click="toDaoru()">导入</Button>
                     </div>
 				</div>
 				<Row>
@@ -393,7 +396,7 @@
 	border-collapse:collapse;
 }
 .vertical-center-modal th{
-	background-color: #f2f7fb;
+	background-color: #f8f8f9;
 }
 .vertical-center-modal td,.vertical-center-modal th{
 	border: 1px solid #ccc;

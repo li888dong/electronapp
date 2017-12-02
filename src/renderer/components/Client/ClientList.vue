@@ -221,14 +221,14 @@
 <template>
 	<Row class="main-container">
 		<Card>
-			<div class="flex-col" style="height: 905px;">
+			<div class="flex-col" style="height: 862px;">
 				<div class="header">
 					<Row>
-						<Col span="2">
+						<Col span="1">
 						<h3 class="title-lv2">客户列表</h3>
 
 						</Col>
-						<Col span="20">
+						<Col span="23">
 						<div class="tab-container" :class="showAllCity?'h_100':'h_40'">
 
 							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
@@ -240,9 +240,7 @@
 							</template>
 						</div>
 						</Col>
-						<Col span="2">
-						<span class="more" @click="showAllCity = !showAllCity">更多 <i class="iconfont icon-xiala"></i></span>
-						</Col>
+
 
 					</Row>
 				</div>
@@ -254,7 +252,7 @@
 								<my-search style="text-align: left" placeholder="客户编号或客户名称"></my-search>
 								</Col>
 
-								<Button type="primary" size="large" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
+								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
 
 								<Button type="primary" class="refresh" style="margin-left: 7px;">
 
@@ -292,12 +290,12 @@
 		display: inline-block;
 		vertical-align: middle;
 		margin-top: -15px;
-		margin-left: 40px;
+
 		overflow: hidden;
 	}
 
 	.tab-container>span{
-		margin:10px;
+		margin:10px 0 10px 5px;
 	}
 	.more{
 		cursor: pointer;
@@ -317,5 +315,16 @@
 	}
 	.h_100{
 		height: 100px;
+	}
+	.title-lv2{
+		display: inline-block;
+		height: 20px;
+		line-height: 20px;
+		font-size: 16px;
+		color: #1c2438;
+		font-weight: 700;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 </style>

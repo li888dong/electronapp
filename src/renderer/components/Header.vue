@@ -23,9 +23,9 @@
                     console.log(err)
                 })
             },
-	        hideFast(){
-                this.$emit('hideFast')
-	        }
+            toggleFast(){
+                this.$store.dispatch('setFastboot');
+            },
         },
         components: {
             'weather': Weather,
@@ -37,7 +37,7 @@
 
 	<div class="header">
 		<ul class="absolute">
-			<li class="top_15 icon-menu" @click="hideFast" style="cursor: pointer">
+			<li class="top_15 icon-menu" @click="toggleFast" style="cursor: pointer">
 				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
 			</li>
 			<li class="search top_15 left_136">

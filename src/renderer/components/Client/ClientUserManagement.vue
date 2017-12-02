@@ -1,4 +1,5 @@
 <script>
+import myFenye from '@/components/Tool/myFenye'
 	export default {
 	    name:'usermanager',
 		data(){
@@ -149,18 +150,25 @@
 			        }
 		        ]
 	        }
-		}
+		},
+		components : {
+			'myFenye': myFenye,
+		},
 	}
 </script>
 <template>
 	<div class="client-container">
-
-		<panel>
-			<h3 class="title-lv3">用户管理</h3>
-			<Table :columns="column1" :data="tableData" height="830"></Table>
-		</panel>
+		<Card>
+			<h3 slot="title">用户管理</h3>
+			<div class="main">
+                <Table :columns="column1" :data="tableData"></Table>
+                <myFenye></myFenye>
+            </div>
+		</Card>
 	</div>
 </template>
 <style scoped>
-
+.main {
+    height: 780px;
+}
 </style>

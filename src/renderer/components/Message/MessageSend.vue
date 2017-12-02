@@ -19,11 +19,14 @@
 		},
 		components:{
             'mySearch': mySearch
-		}
+		},
+        mounted (){
+
+		},
 	}
 </script>
 <template>
-	<Card class="main-container">
+	<Card>
 			<h3  slot="title" class="title">发送消息</h3>
 			<div class="container">
 				<Row class="sendMessage">
@@ -59,11 +62,7 @@
 							</Row>
 							<Row class="sendRow">
 								<div id="text">
-									<!--<editor id="editor_id" height="500px" width="100%" :content="editorText"-->
-											<!--:afterChange="afterChange()"-->
-											<!--pluginsPath="/static/kindeditor/plugins/"-->
-											<!--:loadStyleMode="false"-->
-											<!--@on-content-change="onContentChange"></editor>-->
+									<textarea id="articleEditor"></textarea>
 								</div>
 							</Row>
 							<Row class="sendRow">
@@ -171,5 +170,17 @@
 		height:60px;
 		line-height: 60px;
 		text-align: center;
+	}
+	#articleEditor{
+		width:100%;
+		height:500px;
+		resize: none;
+	}
+	.mgl_20{
+		margin-left:20px;
+	}
+	.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
+		color:black;
+		border-right: none;
 	}
 </style>

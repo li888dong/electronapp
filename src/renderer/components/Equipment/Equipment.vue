@@ -127,13 +127,13 @@ export default {
         <Col span="6" >
             <!-- 设备库存情况 -->
             <Card class="equipment-stock">
-                <p slot="title">设备库存情况</p>
+                <h3 slot="title">设备库存情况</h3>
             </Card>                
         </Col>
         <Col span="6" >
             <!-- 设备其他情况 -->
             <Card class="equipment-other">
-                <p slot="title">其他的设备详情</p>
+                <h3 slot="title">其他的设备详情</h3>
             </Card>                
         </Col>
     </Row>
@@ -147,7 +147,7 @@ export default {
     <Row class="mgt_15">
         <Col span="24">
             <Card>
-                <p slot="title">设备安装申请</p>
+                <h3 slot="title">设备安装申请</h3>
                 <Row>
                     <Col span="24">
                         <Table border height=200 :columns="columnsEq" :data="dataEq"></Table> 

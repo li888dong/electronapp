@@ -43,7 +43,5 @@
 </script>
 
 <style>
-    #myCharts{
-        margin: 0 auto;
-    }
+
 </style>

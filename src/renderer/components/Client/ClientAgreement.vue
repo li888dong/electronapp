@@ -88,9 +88,9 @@ import myFenye from '@/components/Tool/myFenye'
 <template>
 	<div class="client-container relative">
 		<Card class="ht-container">
-			<p slot="title">合同管理</p>
+			<h3 slot="title">合同管理</h3>
 			<div class="btn-group" slot="extra">
-				<Button type="primary"><Icon type="plus"></Icon><router-link to="/add-hetong" tag="span"> 添加合同</router-link></Button>
+				<Button type="primary" style="top: -8px;"><Icon type="plus"></Icon><router-link to="/add-hetong" tag="span"> 添加合同</router-link></Button>
 			</div>
 			<div class="ht-list">
 				<Row className="ht-content">

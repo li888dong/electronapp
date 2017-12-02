@@ -125,7 +125,7 @@ export default {
 <template>
 <div class="equipment-run">
     <Card class="equipmentBox">
-        <p slot="title">设备运行状态概况</p>
+        <h3 slot="title">设备运行状态概况</h3>
         <!-- 折线图盒子 -->
         <Col span="24">
             <div id="runChart" :style="{width: '100%', height: '220px'}"></div>

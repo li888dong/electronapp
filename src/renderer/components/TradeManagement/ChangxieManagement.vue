@@ -83,7 +83,42 @@
 	                },
 	                {
 	                    title:'查看',
-		                key:'ck'
+                        align:'center',
+		                key:'ck',
+                         render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                     attrs:{
+                                    class:'iconfont icon-zhuzhuangtutubiao'
+                                    },
+                                    style: {
+                                        marginRight: '10px',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+                                            this.gotoZonglan()
+                                        }
+                                    }
+                                }, ''),
+                                h('span', {
+                                    attrs:{
+                                    class:'iconfont icon-zhishufenxiyanpan'
+                                     },
+                                    style: {
+                                        marginRight: '0px',
+                                        cursor:'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            console.log(params.index)
+                                            this.gotoZhishu()
+                                        }
+                                    }
+                                }, '')
+                            ])
+                        }
 	                }
 	            ],
                 data5:[
@@ -276,7 +311,13 @@
             drawChart() {
                 let cxChart = this.$echarts.init(document.getElementById('cxchart'));
                 cxChart.setOption(this.chartOption)
-            }
+            },
+            gotoZonglan(){
+                this.$router.push('/client-zonglan');
+            },
+            gotoZhishu(){
+                this.$router.push('/client-compare');
+            },
         },
         mounted() {
             this.drawChart();

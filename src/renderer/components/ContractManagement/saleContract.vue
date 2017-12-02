@@ -1,7 +1,7 @@
 <template>
     <div class="main-container">
         <Card>
-            <p slot="title">售电合同</p>
+            <h3 slot="title">售电合同</h3>
             <div class="saleBox">
                 <div class="listBox" v-for="item in data1" :key="item.id">
                     <ul class="hetongNav">
@@ -13,7 +13,7 @@
                         <li>本年度预计电量：10000 MWh</li>
                         <li>本年度预计最大负荷：11</li>
                         <li class="change">
-                            <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
+                            <router-link to="/add-hetong" tag="span" style="cursor: pointer; ">修改</router-link>
                             <span>
                                 <!-- 气泡提示模板 -->
                                 <Poptip
@@ -79,7 +79,7 @@
                         ></i-table>
                     </div>
                 </div>
-                <myFenye></myFenye>                   
+                <myFenye></myFenye>
             </div>            
         </Card> 
     </div>

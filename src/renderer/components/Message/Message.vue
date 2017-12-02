@@ -21,7 +21,7 @@
 			</Menu>
 			</Col>
 			<Col span="21">
-			<div class="layout-content">
+			<div class="main-container">
                 <router-view></router-view>
 			 </div>
 			</Col>

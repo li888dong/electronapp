@@ -226,7 +226,7 @@ export default {
 <template>
 <div class="main-container">    
     <Card>
-        <p slot="title">用户申报</p>
+        <h3 slot="title">用户申报</h3>
         <div class="layout-content">
             <Row class="layout-content-top">          
                 <Row>
@@ -234,7 +234,7 @@ export default {
                         <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
                     </Col>
                     <Col span="3">
-                        <Select v-model="model1" style="width:200px" placeholder='全部区域'>
+                        <Select v-model="model1" style="width:100px;margin-left:30px" placeholder='全部区域'>
                             <Option v-for="item in cityList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                         </Select>
                     </Col>

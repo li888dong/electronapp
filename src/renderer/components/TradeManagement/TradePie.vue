@@ -21,7 +21,8 @@
 //          鼠标悬浮提示
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b}: {c} ({d}%)",
+                        position: [-20, -20]
                     },
                     legend: {
                         itemWidth:16,
@@ -32,7 +33,7 @@
                             name: '交易来源',
                             type: 'pie',
                             selectedMode: 'single',
-                            radius: ['0', '45px'],
+                            radius: ['0px', '45%'],
                             center: ['50%', '50%'],
                             itemStyle: {
                                 normal: {
@@ -76,7 +77,7 @@
                         {
                             name: '访问来源',
                             type: 'pie',
-                            radius: ['65px', '80px'],
+                            radius: ['66%', '86%'],
                             label: {
                                 normal: {
                                     show: false

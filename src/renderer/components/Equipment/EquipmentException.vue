@@ -164,7 +164,7 @@ export default {
 <div class="main-container">
     <Card>
         <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
-        <p slot="title" style="padding-left:40px">设备异常记录</p>
+        <h3 slot="title" style="padding-left:40px">设备异常记录</h3>
         <div class="EquipmentExceptionBox">
             <div class="ExceptionTop">
                 <div class="search"><mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch></div>

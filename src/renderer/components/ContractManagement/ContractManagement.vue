@@ -47,8 +47,8 @@ export default {
     overflow: hidden;
 }
 .ConNavBar{
-    max-height: 945px;
-    height: 945px;
+    max-height: 935px;
+    height: 935px;
     background-color: #fff;
     border-right: 1px solid #E5E5E5;    
 }

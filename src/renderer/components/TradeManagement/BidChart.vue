@@ -13,9 +13,10 @@
                     legend: {
                         data:['电厂报价', '售电公司报价'],
                         icon:'rect',
-                        left:0,
+                        left:-5,
                         top:0,
-                        itemWidth: 16,             // 图例图形宽度
+                        itemWidth: 16,
+	                    itemHeight: 16,             // 图例图形宽度
                     },
                     grid: {
                         top:'40',
@@ -351,6 +352,5 @@
 		background-color: #fff;
 		width:100%;
 		height:310px;
-		padding:20px 30px 0px 10px;
 	}
 </style>

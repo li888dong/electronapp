@@ -6,11 +6,6 @@ export default {
     name: 'ContractManagement',
     data(){
         return{
-            formRight: {
-                    input1: '',
-                    input2: '',
-                    input3: ''
-                },
             value: "",
             columns1: [
                 {
@@ -102,15 +97,79 @@ export default {
             file: null,
             loadingStatus: false,
             formItem: {
-                input: '',
-                select: '',
-                radio: 'male',
-                checkbox: [],
-                switch: true,
-                date: '',
-                time: '',
-                slider: [20, 50],
-                textarea: ''
+                htNum: '',
+                htNian: '',
+                htDianchang: '',
+                htDianliang: '',
+                htStatus: '',
+                htDate: '',
+                htQianyue: '',
+                htZhixing: '',
+                htPerson: '',
+                htIphone: '',
+                htNote: '',
+            },
+            ruleVa: {
+                htNum: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htNian: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htDianchang: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htDianliang: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htStatus: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htDate: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htQianyue: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htZhixing: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htPerson: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htIphone: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                htNote: [
+                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
+                ],
+                
+
+
+                // htNian: [
+                //     { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
+                //     { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+                // ],
+                // city: [
+                //     { required: true, message: 'Please select the city', trigger: 'change' }
+                // ],
+                // gender: [
+                //     { required: true, message: 'Please select gender', trigger: 'change' }
+                // ],
+                // interest: [
+                //     { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
+                //     { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
+                // ],
+                // date: [
+                //     { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
+                // ],
+                // time: [
+                //     { required: true, type: 'date', message: 'Please select time', trigger: 'change' }
+                // ],
+                // desc: [
+                //     { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
+                //     { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
+                // ]
             },
             defaultList: [
                 {
@@ -160,7 +219,8 @@ export default {
                 });
             }
             return check;
-        }
+        },
+        
     },
     mounted () {
         this.uploadList = this.$refs.upload.fileList;
@@ -171,129 +231,127 @@ export default {
 <template>
 <Row class="main-container">
     <Card>
-        <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 12px;left: 10px;"></i>
-        <p slot="title" style="margin-left:40px;">添加长协合同</p>
+        <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 10px;left: 10px;"></i>
+        <h3 slot="title" style="padding-left: 40px;">添加长协合同</h3>
         <Row class="ContractBox">
             <div class="ContractBox-main">            
-                <i-form :model="formItem" :label-width="110">
-                <p>基本信息</p>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="合同编号">
-                            <i-input :value.sync="formItem.input" placeholder="请输入合同编号"></i-input>
-                            
+                <Form ref="formItem" :model="formItem" :rules='ruleVa' :label-width="110">
+                    <p>基本信息</p>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="合同编号" prop='htNum'>
+                                <Input v-model="formItem.htNum" placeholder="请输入合同编号"></Input>                                
+                            </Form-item>
+                        </Col>
+                        <Col span="8">
+                            <Form-item label="合同年度" prop='htNian'>
+                                <Input v-model="formItem.htNian" placeholder="请输入合同年度"></Input>
+                            </Form-item>
+                        </Col>               
+                    </Row>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="签约电厂" prop='htDianchang'>
+                                <Select :model.sync="formItem.htDianchang" placeholder="请选择签约电厂">
+                                    <Option value="beijing">郑州市电厂</Option>
+                                    <Option value="shanghai">广东市电厂</Option>
+                                    <Option value="shenzhen">北京市电厂</Option>
+                                </Select>
+                            </Form-item>
+                        </Col>
+                        <Col span="8">
+                            <Form-item label="签约电量" prop='htDianliang'>
+                                <Input v-model="formItem.htDianliang" placeholder="请输入签约电量"></Input>   <i class="wkw">万KVA</i>                    
+                            </Form-item>
+                        </Col>
+                        
+                    </Row>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="合同状态" prop='htStatus'>
+                                <Input v-model="formItem.htStatus" placeholder="请输入合同状态"></Input>
+                            </Form-item>
+                        </Col>
+                        <Col span="8">
+                            <Form-item label="签约日期" prop='htDate'>
+                                <Input v-model="formItem.htDate" placeholder="请输入签约日期"></Input>
+                            </Form-item>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="签约价格" prop='htQianyue'>
+                                <Input v-model="formItem.htQianyue" placeholder="请输入签约价格"></Input>
+                            </Form-item>
+                        </Col>
+                        <Col span="8">
+                            <Form-item label="执行日期" prop='htZhixing'>
+                                <Input v-model="formItem.htZhixing" placeholder="请输入执行日期"></Input>
+                            </Form-item>
+                        </Col>
+                    </Row>
+                    <p>联系信息</p>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="业务代表" prop='htPerson'>
+                                <Input v-model="formItem.htPerson" placeholder="请输入业务代表"></Input>
+                            </Form-item>
+                        </Col>
+                        <Col span="8">
+                            <Form-item label="联系电话" prop='htIphone'>
+                                <Input v-model="formItem.htIphone" placeholder="请输入联系电话"></Input>
+                            </Form-item>
+                        </Col>
+                    </Row>
+                    <Row :gutter="10">
+                        <Form-item label="电厂地址">
+                            <Col span="2">
+                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
+                            </Col>
+                            <Col span="2">
+                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
+                            </Col>
+                            <Col span="8">
+                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
+                            </Col>
                         </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="合同年度">
-                            <i-input :value.sync="formItem.input" placeholder="请输入合同年度"></i-input>
-                        </Form-item>
-                    </i-col>               
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="签约电厂">
-                            <i-select :model.sync="formItem.select" placeholder="请选择签约电厂">
-                                <i-option value="beijing">郑州市电厂</i-option>
-                                <i-option value="shanghai">广东市电厂</i-option>
-                                <i-option value="shenzhen">北京市电厂</i-option>
-                            </i-select>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="签约电量">
-                            <i-input :value.sync="formItem.input" placeholder="请输入签约电量"></i-input>   <i class="wkw">万KVA</i>                    
-                        </Form-item>
-                    </i-col>
-                    
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="合同状态">
-                            <i-input :value.sync="formItem.input" placeholder="请输入合同状态"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="签约日期">
-                            <i-input :value.sync="formItem.input" placeholder="请输入签约日期"></i-input>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="签约价格">
-                            <i-input :value.sync="formItem.input" placeholder="请输入签约价格"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="执行日期">
-                            <i-input :value.sync="formItem.input" placeholder="请输入执行日期"></i-input>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <p>联系信息</p>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="业务代表">
-                            <i-input :value.sync="formItem.input" placeholder="请输入业务代表"></i-input>
-                        </Form-item>
-                    </i-col>
-                    <i-col span="8">
-                        <Form-item label="联系电话">
-                            <i-input :value.sync="formItem.input" placeholder="请输入联系电话"></i-input>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <Row :gutter="10">
-
-                    <Form-item label="电厂地址">
-                        <i-col span="2">
-                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
-                        </i-col>
-                        <i-col span="2">
-                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
-                        </i-col>
-                        <i-col span="8">
-                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
-                        </i-col>
-                    </Form-item>
-                </Row>
-                <Row>
-                    <i-col span="8">
-                        <Form-item label="合同备注">
-                            <i-input :value.sync="formItem.input" placeholder="请输入合同备注"></i-input>
-                        </Form-item>
-                    </i-col>
-                </Row>
-                <p>电子合同备查</p>
-                <div class="TName">
-                        <span>合同上传 : </span>
-                        <div class="changXie-upload-box">
-                            <div class="changXie-upload"></div>
-                            <Upload
-                                ref="upload"
-                                :default-file-list="defaultList"
-                                :on-success="handleSuccess"
-                                :format="['pdf']"
-                                :max-size="2048"
-                                :on-format-error="handleFormatError"
-                                :on-exceeded-size="handleMaxSize"
-                                :before-upload="handleBeforeUpload"
-                                multiple
-                                action="//jsonplaceholder.typicode.com/posts/"
-                                style="display: inline-block;width:80px;">
-                                <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
-                            </Upload>
-                        </div><br>
-                        <!-- <Modal title="查看文件" v-model="visible">
-                            <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-                        </Modal> -->
-                        <!-- <div class="up">
-                            <input type="file" name="" id="">
-                        </div>-->  
-                        <i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
-                    </div> <br>
-                <p>合同电量分配</p>
+                    </Row>
+                    <Row>
+                        <Col span="8">
+                            <Form-item label="合同备注" prop='htNote'>
+                                <Input v-model="formItem.htNote" placeholder="请输入合同备注"></Input>
+                            </Form-item>
+                        </Col>
+                    </Row>
+                    <p>电子合同备查</p>
+                    <div class="TName">
+                            <span>合同上传 : </span>
+                            <div class="changXie-upload-box">
+                                <div class="changXie-upload"></div>
+                                <Upload
+                                    ref="upload"
+                                    :default-file-list="defaultList"
+                                    :on-success="handleSuccess"
+                                    :format="['pdf']"
+                                    :max-size="2048"
+                                    :on-format-error="handleFormatError"
+                                    :on-exceeded-size="handleMaxSize"
+                                    :before-upload="handleBeforeUpload"
+                                    multiple
+                                    action="//jsonplaceholder.typicode.com/posts/"
+                                    style="display: inline-block;width:80px;">
+                                    <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
+                                </Upload>
+                            </div><br>
+                            <!-- <Modal title="查看文件" v-model="visible">
+                                <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
+                            </Modal> -->
+                            <!-- <div class="up">
+                                <input type="file" name="" id="">
+                            </div>-->  
+                            <i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
+                        </div> <br>
+                    <p>合同电量分配</p>
                     <Row class="month" >
                         <div>一月</div>
                         <div>二月</div>
@@ -330,7 +388,7 @@ export default {
                         <Button type="primary">保存</Button>
                         <Button type="ghost">取消</Button>
                     </div>            
-                </i-form>
+                </Form>
             </div>
         </Row>
     </Card>
@@ -360,7 +418,7 @@ export default {
 /* 表单每一项的下外边距 */
 
 .ivu-form-item {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
  .layout-breadcrumb{

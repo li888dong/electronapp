@@ -161,33 +161,9 @@
 
 </template>
 <style scoped>
-
-
-	.ranklist-container ul{
-		margin: 20px 0 0 10px;
-	}
-
-
-	.ranklist-container li .ranking{
-		width: 40px;
-		text-align: right;
-	}
 	.ranklist-container li .city{
 		padding:0 20px ;
 	}
-	.market-shares{
-		height: 400px;
-		overflow: hidden;
-	}
-	.rate{
-		min-width: 30px;
-		text-align: right;
-		margin-left: 10px;
-		color:  #48C3F3;
-	}
-
-
-
 	.company-name{
 		width: 185px;
 		overflow: hidden;

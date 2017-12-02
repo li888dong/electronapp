@@ -7,11 +7,11 @@
 			<Row>
 				<div class="frame-top">
 					<span class="hideBtn iconfont" @click="hideApp()">&#xe601;</span>
-					<span class="right_29 closeBtn iconfont" @click="closeApp()">&#xe664;</span>
+					<span class="closeBtn iconfont" @click="closeApp()">&#xe664;</span>
 				</div>
 			</Row>
 			<Row>
-				<main-header v-on:hideFast="hideFast"></main-header>
+				<main-header></main-header>
 
 			</Row>
 			<Row>
@@ -19,7 +19,7 @@
 			</Row>
 
 			<transition name="fade">
-				<fast-boot v-if="fastboot" v-on:hideSelf="hideFast"></fast-boot>
+				<fast-boot v-if="fastboot"></fast-boot>
 			</transition>
 		</div>
 	</Row>
@@ -35,14 +35,16 @@
         name: 'main',
         data(){
             return{
-                fastboot:false
 
             }
         },
+	    computed:{
+            fastboot:function () {
+	            return this.$store.getters.fastboot
+            }
+	    },
         methods:{
-            hideFast(){
-                this.fastboot = !this.fastboot
-            },
+
 //            用以关闭应用
             closeApp() {
                 ipcRenderer.send('window-all-closed');

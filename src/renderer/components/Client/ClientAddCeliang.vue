@@ -4,14 +4,88 @@
 		data(){
 	        return{
 				addShow:false,
-				dataList:[
+				dataList1:[
 					{
                         value: '1',
                         label: '1'
 
                     }
 				],
+				dataList2:[
+				   {
+                      value:'1',
+                      label:'1'
+				   },{
+                      value:'1',
+                      label:'1',
+				   }
+				],
+				dataList3:[
+				   {
+				   	value:'1',
+				   	label:'1',
+				   },{
+				   	value:'1',
+				   	label:'1'
+				   },{
+				   	 value:'1',
+				   	 label:'1',
+				   }
+				],
+				dataList4:[
+				   {
+				   	value:'1',
+				   	label:'1',
+				   },{
+				   	value:'1',
+				   	label:'1'
+				   },{
+				   	 value:'1',
+				   	 label:'1',
+				   },
+				   {
+				   	 value:'1',
+				   	 label:'1',
+				   }
+				],
+				dataList5:[
+				   {
+				   	value:'1',
+				   	label:'1',
+				   },{
+				   	value:'1',
+				   	label:'1'
+				   },{
+				   	 value:'1',
+				   	 label:'1',
+				   },
+				   {
+				   	 value:'1',
+				   	 label:'1',
+				   }
+				],
+				dataList6:[
+				   {
+				   	value:'1',
+				   	label:'1',
+				   },{
+				   	value:'1',
+				   	label:'1'
+				   },{
+				   	 value:'1',
+				   	 label:'1',
+				   },
+				   {
+				   	 value:'1',
+				   	 label:'1',
+				   }
+				],
                 model1:'',
+                model2:'',
+                model3:'',
+                model4:'',
+                model5:'',
+                model6:'',
                 modal2: false
 
             }
@@ -34,25 +108,25 @@
 							<Input placeholder="设置出厂编号"></Input>
 						</FormItem>
 						<FormItem label="户号信息">
-							<Select v-model="model1" style="width:300px" placeholder="请选择户号信息">-->
-							<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>-->
+							<Select v-model="model1" style="width:300px" placeholder="请选择户号信息">
+							<Option v-for="item in dataList1" :value="item.value" :key="item.value">{{item.label}}</Option>
 							</Select>
 						</FormItem>
 						<FormItem label="变压器信息">
-							 <Select v-model="model1" style="width:300px" placeholder="请选择变压器名称">-->
-							 <Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>-->
-							 </Select><span class="add" @click="modal2 = true" style="cursor: pointer;">添加</span> <span style="">变压器容量单位: <span class="add">10KVA</span></span>
+							 <Select v-model="model2" style="width:300px" placeholder="请选择变压器名称">
+							 <Option v-for="item in dataList2" :value="item.value" :key="item.value">{{item.label}}</Option>
+							 </Select><span class="add" @click="modal2 = true" style="cursor: pointer;margin-left:10px;">添加</span> <span style="">变压器容量单位: <span class="add" style="margin-left: 10px;">10KVA</span></span>
 						</FormItem>
 						<FormItem label="终端类型">
-							<Select v-model="model1" style="width:300px" placeholder="请选择终端类型">-->
-								<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>
+							<Select v-model="mode3" style="width:300px" placeholder="请选择终端类型">
+								<Option v-for="item in dataList3" :value="item.value" :key="item.value">{{item.label}}</Option>
 							</Select>
 						</FormItem>
 						<FormItem label="监测位置">
-							<Select v-model="model1" style="width:300px" placeholder="请选择终端位置">
-								<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>
-								</Select><Select v-model="model1" style="width:150px;margin-left:10px;" placeholder="接线方式">
-							<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>
+							<Select v-model="model4" style="width:300px" placeholder="请选择终端位置">
+								<Option v-for="item in dataList4" :value="item.value" :key="item.value">{{item.label}}</Option>
+								</Select><Select v-model="model5" style="width:150px;margin-left:10px;" placeholder="接线方式">
+							<Option v-for="item in dataList5" :value="item.value" :key="item.value">{{item.label}}</Option>
 							</Select>
 						</FormItem>
 						<h3 class="sub_title">设备参数</h3>
@@ -64,8 +138,8 @@
 						<h3 class="sub_title">设备信息</h3>
 						<FormItem label="出厂编号">
 							<Input class="width_183"></Input>
-							<span class="input_span">生产厂家</span><Select v-model="model1"class="width_183" placeholder="请选择生产厂家">
-							<Option v-for="item in dataList" :value="item.value" :key="item.value">{{item.label}}</Option>
+							<span class="input_span">生产厂家</span><Select v-model="model6"class="width_183" placeholder="请选择生产厂家">
+							<Option v-for="item in dataList6" :value="item.value" :key="item.value">{{item.label}}</Option>
 						     </Select>
 							<span class="input_span">采购日期</span><Input class="width_183"></Input>
 						</FormItem>
@@ -83,7 +157,7 @@
 			</div>
 			<div class="btn-group" style="text-align: center;">
 				<Button type="primary">保存并继续添加</Button>
-				<Button type="default">保存</Button>
+				<Button type="default" class="mglr_10">保存</Button>
 				<Button type="default">取消</Button>
 			</div>
 			<Modal
@@ -210,5 +284,9 @@
 	}
 	.vertical-center-modal .ivu-modal{
 		top: 0;
+	}
+	.mglr_10{
+		margin-left: 10px;
+		margin-right:10px;
 	}
 </style>

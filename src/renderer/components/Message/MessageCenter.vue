@@ -82,7 +82,7 @@
 			<h3 slot="title" class="title">{{msgSource}} <span>（{{msgCount}}未读消息）</span></h3>
 			<div class="message-main">
 				<ul id="msg-content">
-					<li v-for="(msg,index) in msgs">
+					<li v-for="(msg,index) in msgs" class="clear">
 						<p :id="index">
 							<router-link to="/message-detail">
 								<span class="warning">{{msg.warning}}</span>
@@ -149,7 +149,7 @@
      .relative .page-center{
 		text-align: center;
 		position: absolute;
-		bottom:18px;
+		bottom:0px;
 		left:0;
 		right:0;
 	}
@@ -187,7 +187,6 @@
 		color:#6f6f6f;
 	}
 	.time{
-		font-size:10px;
 		line-height: 14px;
 		display:inline-block;
 		vertical-align: baseline;
@@ -209,5 +208,10 @@
 		width:100%;
 		height:100%;
 		color:#669bd8;
+	}
+	.clear{
+		content:'';
+		display: block;
+		clear: both;
 	}
 </style>

@@ -202,16 +202,16 @@ export default {
 <template>
 <div class="main-container">
     <Card>        
-        <p slot="title">月度预测</p>       
+        <h3 slot="title">月度预测</h3>       
         <div class="layout-content">
             <div class="layout-content-top">
                 <div class="fl">
                     <Button class="Button" type="primary">上一年</Button>
-                    <i-select :model.sync="model1" style="width:100px;margin:0 10px;" placeholder='年度选择'>								
+                    <i-select :model.sync="model1" style="width:100px;" placeholder='年度选择'>								
                         <i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
                     </i-select>
-                    <Button class="Button" type="primary">下一年</Button>						
-                    <i-select :model.sync="model1" style="width:100px;margin-left: 10px" placeholder='区域选择'>								
+                    <Button class="Button" type="primary">下一年</Button>                    						
+                    <i-select :model.sync="model1" style="width:100px;margin-left: 30px" placeholder='区域选择'>								
                         <i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
                     </i-select>
                 </div>

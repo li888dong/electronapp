@@ -174,9 +174,7 @@
 </template>
 <style scoped>
 	.client-sidebar{
-
 		background-color: #fff;
-
 	}
 	.search{
 		width: 100%;
@@ -200,7 +198,7 @@
 	}
 	.company-list ul{
 		width: 100%;
-		height: 880px;
+		height: 870px;
 		overflow-y: scroll;
 		overflow-x: hidden;
 	}

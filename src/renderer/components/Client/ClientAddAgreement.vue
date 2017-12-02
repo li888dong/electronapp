@@ -82,7 +82,7 @@
 	<div class="main-container relative">
 		<Card class="main-container-panel">
 			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
-			<p slot="title" style="padding-left:40px">添加售电合同</p>
+			<h3 slot="title" style="padding-left:40px">添加售电合同</h3>
 			<div class="container">
 				<div class="form-container">
 					<h3 class="title">基本信息</h3>
@@ -171,7 +171,7 @@
                                 multiple
                                 action="//jsonplaceholder.typicode.com/posts/"
                                 style="display: inline-block;width:80px;">
-                                <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
+                                <Button type="primary" style="vertical-align: top;">选择文件</Button>
                             </Upload>
                         </div><br>
 						<i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
@@ -243,7 +243,9 @@
 		cursor: pointer;
 		/* color: #108CEE; */
 	}
-
+	.title {
+		display: block;
+	}
 	.main-container{
 		height:900px;
 	}
@@ -297,7 +299,7 @@
 	.btn-save{
 		float: none;
 		margin-top:0;
-		margin-left:20px;
+		margin-left:10px;
 		display: inline-block;
 	}
 	.width-90{
@@ -360,15 +362,16 @@
 	/* 下载模块样式 */
 	.shouDian-upload-box {
 		width: 570px;
-		height: 34px;
+		height: 32px;
 		display: inline-block;
 		vertical-align: middle;
 	}
 	.shouDian-upload {
 		width: 480px;
-		height: 34px;
+		height: 32px;
 		display: inline-block;
 		border: 1px solid #dddee1;
+		border-radius: 4px;
 	}
 	
 	.ivu-upload{

@@ -47,7 +47,7 @@
                             name: '交易来源',
                             type: 'pie',
                             selectedMode: 'single',
-                            radius: ['0', '45px'],
+                            radius: ['0', '40px'],
                             center: ['50%', '50%'],
                             itemStyle: {
                                 normal: {
@@ -91,7 +91,7 @@
                         {
                             name: '访问来源',
                             type: 'pie',
-                            radius: ['65px', '80px'],
+                            radius: ['56px', '70px'],
                             label: {
                                 normal: {
                                     show: false

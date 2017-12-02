@@ -93,28 +93,28 @@
 				],
                 timeList: [
                     {
-                        value: 'beijing',
+                        value: '2017年1月',
                         label: '2017年1月'
                     },
                     {
-                        value: 'shanghai',
+                        value: '2017年2月',
                         label: '2017年2月'
                     },
                     {
-                        value: 'shenzhen',
-                        label: '2017年2月'
-                    },
-                    {
-                        value: 'hangzhou',
+                        value: '2017年3月',
                         label: '2017年3月'
                     },
                     {
-                        value: 'nanjing',
+                        value: '2017年4月',
                         label: '2017年4月'
                     },
                     {
-                        value: 'chongqing',
+                        value: '2017年5月',
                         label: '2017年5月'
+                    },
+                    {
+                        value: '2017年6月',
+                        label: '2017年6月'
                     }
                 ],
 	        }
@@ -132,10 +132,13 @@
 			showCurrent:function (value) {
 				this.show=value;
             },
+            add(){
+            	console.log(this.model1);
+            }
 		},
 		components:{
 		    'bid-chart':BidChart,
-            'previous-biding-chart':PreviousBidingChart
+            'previous-biding-chart':PreviousBidingChart,
 		}
 	}
 </script>
@@ -151,15 +154,13 @@
 						</Radio-group>
 					</div>
 				<div slot="extra" class="btn-group">
-					<Button class="Button" type="primary">上一月</Button>
-					<i-select :model.sync="model1" style="width:100px" placeholder='月度选择'>
+					<Button class="Button" type="primary" @click="add()">上一月</Button>
+					<i-select v-model="model1" style="width:100px" placeholder='月度选择'>
 						<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
 					</i-select>
 					<Button class="Button" type="primary">下一月</Button>
 				</div>
-				<div class="container">
 				<previous-biding-chart></previous-biding-chart>
-				</div>
 				</Card>
 			</Row>
 			 <Row gutter=15 style="height: 100%" v-if="show==='本月竞价模拟'">
@@ -171,15 +172,13 @@
 							 <Radio label="本月竞价模拟">本月竞价模拟</Radio>
 						 </Radio-group>
 					 </div>
-				 <div class="container">
-					 <div class="sub-title">
-						 <span>供需比 12:12</span>
-						 <span>推荐报价方案A：123.321</span>
-						 <span>推荐报价方案B：123.321</span>
-						 <span>推荐报价方案C：123.321</span>
-					 </div>
-				     <bid-chart></bid-chart>
+				 <div class="sub-title">
+					 <span>供需比 12:12</span>
+					 <span>推荐报价方案A：123.321</span>
+					 <span>推荐报价方案B：123.321</span>
+					 <span>推荐报价方案C：123.321</span>
 				 </div>
+			     <bid-chart></bid-chart>
 				 </Card>
 				 </Col>
 				 <Col span="6" style="height: 100%;">
@@ -214,10 +213,16 @@
 			 </Row>
 		</Row>
 		<Row class="mgt_15">
-			<Card class="height">
+			<Card class="height relative">
 				<h3 slot="title">上期交易结果公式</h3>
 				<div class="result">
 					<Table :columns="columns1" :data="data1"></Table>
+				</div>
+				<div class="page-center">
+					<!--分页-->
+					<div class="fenYe">
+						<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
+					</div>
 				</div>
 			</Card>
 		</Row>
@@ -292,5 +297,34 @@
 	.btn-group2 {
 		margin-top:-8px;
 		z-index: 10;
+	}
+	.relative .page-center{
+		text-align: center;
+		position: absolute;
+		bottom: 65px;
+		left:0;
+		right:0;
+	}
+	/* 分页的样式 */
+	.page-center  .fenYe {
+		width: 100%;
+		height: 60px;
+		background-color: #fff;
+		padding-top: 10px;
+		text-align: center;
+	}
+	.fenYe table{
+		border: 0;
+	}
+	.fenYe ul {
+		display: inline-block;
+	}
+	.fenYe button{
+		top: -12px;
+		left: 12px;
+	}
+	.ivu-radio-wrapper{
+		width:120px;
+		text-align: center;
 	}
 </style>

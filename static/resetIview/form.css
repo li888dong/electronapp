@@ -37,19 +37,26 @@
 	display: inline;
 }
 
-
-
-
+.inType .ivu-slider-wrap {
+	margin: 0;
+	height: 32px;
+}
+.inType  .ivu-slider-bar {
+	height: 32px;
+}
+.inType  .ivu-slider-button-wrap {
+	display: none;
+}
 /* 输入框*/
 
 .ivu-input{
-	height: 34px;
+	/* height: 34px; */
 }
 .searchBox .ivu-input {
 	padding-left: 30px;
 }
  .ivu-select-single .ivu-select-selection{
-	height: 34px;
+	/* height: 34px; */
 }
 .ivu-input-group{
 	top: 0;
@@ -59,20 +66,6 @@
 	width: 700px;
 	height: 102px;
 	resize:none;
-}
-
-/* 地市选择器 */
-.mySelect{
-	width: 100px;
-	height: 34px;
-}
-.mySelect .ivu-select-selection .ivu-select-placeholder, .mySelect .ivu-select-selection .ivu-select-selected-value{
-	height: 32px;
-	line-height: 32px;
-}
-.mySelect .ivu-select-selection{
-	height: 34px;
-	border-radius: 0;
 }
 
 
@@ -106,3 +99,4 @@
 	display: inline-block;
 	width:80px;
 }
+

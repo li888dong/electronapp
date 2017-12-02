@@ -168,8 +168,8 @@ export default {
 <template><!-- 设备统计日志页面 -->
 <div class="main-container">
     <Card>
-        <p slot="title">设备统计日志</p>
-        <Button slot="extra" type="primary" @click="toYichang()">设备异常记录</Button>
+        <h3 slot="title">设备统计日志</h3>
+        <Button slot="extra" type="primary" style="top:-8px;" @click="toYichang()">设备异常记录</Button>
         <div class="EquipmentStatusBox">
             <div class="statusTop">
                 <div class="fl">

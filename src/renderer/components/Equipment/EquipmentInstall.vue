@@ -3,7 +3,8 @@ export default {
     name: "equipmentInstall",
     data() {
         return{
-
+            value1: 66,
+            value2: 88,
         }
     },
     mounted(){
@@ -15,7 +16,7 @@ export default {
             let myChart = this.$echarts.init(document.getElementById('myCharts'))
             // 绘制图表
             myChart.setOption({
-                color: ['#f57e6a','#6ec71e','#0089f0'],
+                color: ['#4fa8f9','#6ec71e','#f56e6a'],
                 tooltip : {
                     trigger: 'item'
                 },
@@ -39,9 +40,9 @@ export default {
                         radius : '66%',
                         center: ['20%', '48%'],
                         data:[
-                            {value:335, name:'等待安装'},
-                            {value:100, name:'设备库存'},
-                            {value:1548, name:'已经安装'}
+                            {value:335, name:'已经安装'},
+                            {value:100, name:'等待安装'},
+                            {value:148, name:'设备库存'}
                         ],
                         itemStyle: {
                             emphasis: {
@@ -60,7 +61,7 @@ export default {
 
 <template>
     <Card class="equipmentInstall">
-        <p slot="title">设备安装概况</p>
+        <h3 slot="title">设备安装概况</h3>
         <Row>
             <Col>
                 <div id="myCharts" :style="{width: '100%', height: '220px'}"></div>
@@ -70,11 +71,11 @@ export default {
         <div class="inType">
             <p class="oneType">
                 三相三线
-                <i></i>
+                <Slider v-model="value1"></Slider>
             </p>
-            <p>
+            <p class="oneType">
                 三相四丝
-                <i></i>
+                <Slider v-model="value2"></Slider>
             </p>
             
         </div>
@@ -106,11 +107,8 @@ export default {
         font-family: '微软雅黑';
         margin-top: 10px;
     }
-    .inType i{
-        display: block;
-        height: 34px;
+    .oneType {
         width: 300px;
-        background-color: skyblue;
     }
     .indata{
         position: absolute;

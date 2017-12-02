@@ -26,9 +26,10 @@ function createWindow() {
         height = size.height;
     }
     mainWindow = new BrowserWindow({
+        width: width,
         height: height,
         useContentSize: false,
-        width: width,
+
         // fullscreen: true,
 
         frame:false,//取消顶部任务栏
@@ -59,10 +60,10 @@ ipcMain.on('login-failed',()=>{
     isLogin =false
     var size = screen.getPrimaryDisplay().workAreaSize;
     mainWindow.setBounds({
-        x:size.width/2 -140,
-        y:size.height/2 -242,
-        width:280,
-        height:484
+        x:size.width/2 -150,
+        y:size.height/2 -221,
+        width:300,
+        height:442
     })
 });
 //退出

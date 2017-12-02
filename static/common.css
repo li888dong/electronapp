@@ -8,8 +8,8 @@ body {
 	background-color: #F0F0F0;
 	font-size: 12px;
 	font-family: "Helvetica Neue",Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
-	overflow: hidden;
-	/*overflow-x: hidden;*/
+	/*overflow: hidden;*/
+	overflow-x: hidden;
 }
 h1,h2,h3,h4,h5,h6{
 
@@ -54,7 +54,7 @@ input,select,textarea,option{
 }
 
 .client-container{
-	height: 895px;
+	height: 855px;
 	overflow: hidden;
 	box-sizing: border-box;
 	margin: 60px 20px 20px 20px;
@@ -163,23 +163,6 @@ span.rate{
 	opacity: 0;
 }
 
-/* placeholder 字体默认颜色 */
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	color: #CCCCCC; opacity:1;
-}
-
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-	color: #CCCCCC;opacity:1;
-}
-
-input:-ms-input-placeholder{
-	color: #CCCCCC;opacity:1;
-}
-
-input::-webkit-input-placeholder{
-	color: #CCCCCC;opacity:1;
-}
-
 .menu  .ivu-menu-submenu .ivu-menu-submenu-title .ivu-menu-submenu-title-icon{
 	float: left !important;
 }
@@ -199,9 +182,9 @@ input::-webkit-input-placeholder{
 	cursor: pointer;
 	background-color: #0089f0;
 	text-align: center;
-	padding:5px 0;
+	padding:3px 0;
 	width: 56px;
-	height: 34px;
+	height: 32px;
 }
 .refresh i{
 	color: #fff;

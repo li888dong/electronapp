@@ -164,18 +164,18 @@
            <Row gutter=15>
 			   <Col span="12">
 			      <Card class="height">
-						  <h3 slot="title" class="">交易基础数据分析</h3>
+						  <h3 slot="title">交易基础数据分析</h3>
 						  <div class="btn-group relative" slot="extra">
 							  <Select placeholder="2017年" style="width:100px;margin-right:5px;" class="selectDate"><Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.label }}</Option></Select><Select placeholder="10月" style="width:80px;"  class="selectDate"><Option v-for="item in monthList" :value="item.value" :key="item.value">{{ item.label }}</Option></Select>
 						  </div>
 					  </div>
 					  <div class="container">
-						  <Row>
+						  <Row type="flex" justify="space-around" align="center">
 							  <Col span="6">
 							    <trade-pie></trade-pie>
 							  </Col>
-							  <Col span="18">
-								  <Card class="month fr my-panel">
+							  <Col span="9">
+								  <Card class="month my-panel">
 									  <h4 slot="title">月度</h4>
 										  <ul class="cx relative">
 											  <li><span class="name">长协</span></li>
@@ -188,7 +188,9 @@
 											  <li class="ml absolute rate_main2"><span class="rate">12.55%</span></li>
 										  </ul>
 								  </Card>
-							      <Card class="year fr my-panel">
+							  </Col>
+							  <Col span="9">
+								  <Card class="year my-panel">
 									  <h4 slot="title">年度</h4>
 									  <ul class="cx relative">
 										  <li><span class="name">长协</span></li>
@@ -200,7 +202,7 @@
 										  <li><span class="count">213424.125</span></li>
 										  <li class="ml absolute rate_main2"><span class="rate">12.55%</span></li>
 									  </ul>
-							  </Card>
+								  </Card>
 							  </Col>
 						  </Row>
 					  </div>
@@ -241,98 +243,100 @@
 		<Row class="mgt_15">
 			<Card class="height_3 relative">
 				<h3 slot="title" class="title-lv3">发电集团剩余电量</h3>
-				<div class="container">
-					<div class="surplus-list">
-						<table class="ivu-table fl" cellspacing="0">
-							<tr>
-								<th>公司名称</th>
-								<th>用电方式</th>
-								<th>电量</th>
-								<th>每小时消耗电量</th>
-								<th>剩余电量</th>
-								<th>消耗电量</th>
-							</tr>
-							<tr>
-								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-								<td>风电</td>
-								<td>100WKw</td>
-								<td>100.00Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>汕头华能南澳风力发电有限公司</td>
-								<td>燃机</td>
-								<td>23WKw</td>
-								<td>382.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>孟州市电厂</td>
-								<td>光伏</td>
-								<td>1221WKw</td>
-								<td>32.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>中国国电集团公司荆门热电厂</td>
-								<td>风电</td>
-								<td>231WKw</td>
-								<td>322.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-						</table>
-						<table class="ivu-table fr" cellspacing="0">
-							<tr>
-								<th>公司名称</th>
-								<th>用电方式</th>
-								<th>电量</th>
-								<th>每小时消耗电量</th>
-								<th>剩余电量</th>
-								<th>消耗电量</th>
-							</tr>
-							<tr>
-								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-								<td>风电</td>
-								<td>100WKw</td>
-								<td>100.00Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>汕头华能南澳风力发电有限公司</td>
-								<td>燃机</td>
-								<td>23WKw</td>
-								<td>382.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>孟州市电厂</td>
-								<td>光伏</td>
-								<td>1221WKw</td>
-								<td>32.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>中国国电集团公司荆门热电厂</td>
-								<td>风电</td>
-								<td>231WKw</td>
-								<td>322.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-						</table>
-					</div>
-					<div class="page-center">
-						<!--分页-->
-						<div class="fenYe">
-							<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
-						</div>
+				<Row gutter="15">
+					<Col span="12">
+					<table class="mytable" cellspacing="0">
+						<tr>
+							<th>公司名称</th>
+							<th>用电方式</th>
+							<th>电量</th>
+							<th>每小时消耗电量</th>
+							<th>剩余电量</th>
+							<th>消耗电量</th>
+						</tr>
+						<tr>
+							<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
+							<td>风电</td>
+							<td>100WKw</td>
+							<td>100.00Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>汕头华能南澳风力发电有限公司</td>
+							<td>燃机</td>
+							<td>23WKw</td>
+							<td>382.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>孟州市电厂</td>
+							<td>光伏</td>
+							<td>1221WKw</td>
+							<td>32.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>中国国电集团公司荆门热电厂</td>
+							<td>风电</td>
+							<td>231WKw</td>
+							<td>322.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+					</table>
+					</Col>
+					<Col span="12">
+					<table class="mytable" cellspacing="0">
+						<tr>
+							<th>公司名称</th>
+							<th>用电方式</th>
+							<th>电量</th>
+							<th>每小时消耗电量</th>
+							<th>剩余电量</th>
+							<th>消耗电量</th>
+						</tr>
+						<tr>
+							<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
+							<td>风电</td>
+							<td>100WKw</td>
+							<td>100.00Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>汕头华能南澳风力发电有限公司</td>
+							<td>燃机</td>
+							<td>23WKw</td>
+							<td>382.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>孟州市电厂</td>
+							<td>光伏</td>
+							<td>1221WKw</td>
+							<td>32.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+						<tr>
+							<td>中国国电集团公司荆门热电厂</td>
+							<td>风电</td>
+							<td>231WKw</td>
+							<td>322.12Mw时</td>
+							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+							<td>12315.23Kw时</td>
+						</tr>
+					</table>
+					</Col>
+				</Row>
+				<div class="page-center">
+					<!--分页-->
+					<div class="fenYe">
+						<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
 					</div>
 				</div>
 			</Card>
@@ -340,8 +344,12 @@
 	</Row>
 </template>
 <style scoped>
+table,th,tr,td{
+	margin:0;
+	padding:0;
+}
 	.my-panel {
-		width: 270px;
+		/*width: 270px;*/
 		height: 170px;
 		background-color: #F6F7FB;
 	}
@@ -355,9 +363,7 @@
 	.cx span{
 		vertical-align: bottom;
 	}
-	.ml{
-		margin-left:60px;
-	}
+
 	.jj li span{
 		vertical-align: top;
 	}
@@ -369,10 +375,6 @@
 		font-size: 20px;
 		font-weight: bold;
 		color: #C6D0D4;
-	}
-	.year{
-		margin-right: 20px;
-		margin-left: 10px;
 	}
 	.height{
 		height:250px;
@@ -404,64 +406,70 @@
 	.panel .tp_line{
 		border-top: 1px solid #ccc;
 	}
-	.container .ivu-table th:first-child{
+	.mytable{
+		width:100%;
+	}
+	.mytable th:first-child{
 		border-left:1px solid #e9eaec;
 	}
-	.container .ivu-table th:last-child{
+	.mytable th:last-child{
 		 border-right:1px solid #e9eaec;
 	}
-	.container .ivu-table td:first-child{
+	.mytable td:first-child{
 		border-left:1px solid #e9eaec;
 		text-align: left;
 		padding-left: 5px;
 	}
-	.container .ivu-table td:last-child{
+	.mytable td:last-child{
 		border-right:1px solid #e9eaec;
 	}
-	.container .ivu-table th{
+	.mytable th{
 		 height:30px;
+		 text-align: center;
 		border-top:1px solid #e9eaec;
+		background-color: #f8f8f9;
 	}
-	.container .ivu-table td{
+	.mytable td{
 		vertical-align: middle;
 		height:30px;
 		line-height: 30px;
 		text-align: center;
-		padding-left:16px;
-		padding-right:16px;
+		padding-left:14px;
+		padding-right:14px;
 	}
-	.container .ivu-table span{
+	.mytablespan{
 		vertical-align: middle;
 	}
 	/*集团剩余电量*/
-	.container .ivu-table td{
+	.mytable td{
 		font-size: 12px;
+		border-bottom: 1px solid #eeeeee;
 	}
-	.container .ivu-table td:first-child{
+	.mytable td:first-child{
 		padding-top:0;
 	}
-	.container .ivu-table td  span{
+	.mytable td  span{
 		display: inline-block;
 		height:20px;
-		background-color:#14d86b ;
+		background-color:#6ec71e ;
 		vertical-align: middle;
 		width:100px;
 		text-align: right;
 		line-height: 20px;
 	}
-	.container .ivu-table td .pro-bar{
+	.mytable td .pro-bar{
 		background-color:#fff;
 		height:20px;
 		line-height:20px;
 		text-align: center;
-		border:1px solid #14d86b;
+		border:1px solid #6ec71e;
 		margin-top:-2px;
 	}
-	.container .ivu-table td em{
+	.mytable td em{
 		display: inline-block;
 		width:2px;
 		height:5px;
-		background-color:#14d86b ;
+		background-color:#6ec71e ;
 		vertical-align: middle;
 	}
 	/* 分页的样式 */
@@ -489,11 +497,8 @@
 		top: -12px;
 		left: 12px;
 	}
-	.selectDate{
-		color:#1c9af3;
-	}
 	.mgr-20{
-		margin-right:20px;
+		margin-right:100px;
 	}
 	.rate_main{
 		right:0;
@@ -506,5 +511,10 @@
 	.btn-group{
 		z-index: 10;
 		margin-top: -8px;
+	}
+	.clear::after{
+		content:'';
+		display: block;
+		clear: both;
 	}
 </style>

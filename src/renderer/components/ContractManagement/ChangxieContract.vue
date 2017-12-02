@@ -30,7 +30,7 @@ export default {
 <template>
 <div class="main-container">
     <Card>
-        <p slot="title">长协合同</p>
+        <h3 slot="title">长协合同</h3>
         <div class="hetongList">
             <div class="hetongForm">
                 <ul class="hetongIfno">

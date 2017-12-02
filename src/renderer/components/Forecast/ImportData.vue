@@ -67,7 +67,8 @@
 <template>
 	<div class="main-container relative">
 		<Card>
-			<p slot="title">导入数据</p>
+			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 10px;left: 10px;"></i>
+			<h3 slot="title" style="padding-left: 40px;">导入数据</h3>
 			<div class="main-container-panel">
 				<Form :model="formItem" label-position="right" :label-width="100">
 					<FormItem label="导入目标数据:">

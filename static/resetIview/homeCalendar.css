@@ -21,9 +21,29 @@
 }
 .calendar-input-container #calendar .days span.select{
 	border-radius: 50%!important;
-	background-color: #F78181!important;
 	color: white!important;
 
+}
+.calendar-input-container #calendar .days span.select1{
+	background-color: #4f8af9!important;
+	border-radius: 50%!important;
+	color: white!important;
+}
+.calendar-input-container #calendar .days span.select2{
+	background-color: #6ec71e!important;
+	border-radius: 50%!important;
+	color: white!important;
+
+}
+.calendar-input-container #calendar .days span.select3{
+	background-color: #f56e6a!important;
+	border-radius: 50%!important;
+	color: white!important;
+}
+.calendar-input-container #calendar .days span.select4{
+	background-color: #fc8b40!important;
+	border-radius: 50%!important;
+	color: white!important;
 }
 .calendar-input-container #calendar .days span{
 	height: 20px!important;
@@ -32,9 +52,7 @@
 }
 
 .calendar-input-container #calendar .days span:hover{
-	border-radius: 50%!important;
-	background-color: #F78181!important;
-	color: white!important;
+	background-color: #fff;
 	transition: none;
 }
 .calendar-input-container input{

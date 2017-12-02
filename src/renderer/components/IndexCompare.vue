@@ -21,12 +21,7 @@
 	    computed:{
             chartOption2:function () {
 	            return{
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                    tooltip:this.$store.getters.chartOption.lineTooltip,
                     legend: {
                         left:-5,
                         top:0,
@@ -34,7 +29,6 @@
                         itemHeight:16,
                         data: ['整体趋势','竞价趋势','长协趋势']
                     },
-                    backgroundColor:'#fff',
                     grid: {
                         top:40,
                         left: 0,
@@ -42,7 +36,7 @@
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                     xAxis: [
                         {
                             type:'category',
@@ -72,11 +66,7 @@
                             },
                         }
                     ],
-                    dataZoom:{
-                        bottom:-5,
-                        start:0,
-                        end:90
-                    },
+                    dataZoom:this.$store.getters.chartOption.dataZoom,
                     series: [
                         {
                             name: '整体趋势',
@@ -110,14 +100,11 @@
                 }
 
 	            return {
-
-                    tooltip: {
-                        trigger: 'axis'
-                    },
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     grid: {
                         top:20,
                         left: 0,
-                        right: 20,
+                        right: 30,
                         bottom: 80,
                         containLabel: true
                     },
@@ -136,11 +123,11 @@
                     ],
                     yAxis: [
                         {
-                            position:'right',
+                            position:'left',
                             type: 'value'
                         }
                     ],
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                     series: [
 
                         {
@@ -418,14 +405,10 @@
 				<Row className="mgt_15">
 					<Card>
 						<h3 slot="title">售电量行业占比 </h3>
+						<div id="rateChart" style="height: 360px;margin: 0;">
 
-						<Row>
-							<Col span="24">
-								<div id="rateChart" style="height: 360px;">
+						</div>
 
-								</div>
-							</Col>
-						</Row>
 					</Card>
 				</Row>
 			</Col>

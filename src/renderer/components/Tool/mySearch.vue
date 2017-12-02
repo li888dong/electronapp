@@ -1,7 +1,7 @@
 <template>
     <div class="searchBox flex-row">
         <i class="iconfont icon-search" ></i>
-        <Input autosize="true" :value="search" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size">
+        <Input :value="search" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size">
             <Button slot="append">搜索</Button>
         </Input>
     </div>
