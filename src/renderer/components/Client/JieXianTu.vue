@@ -449,14 +449,7 @@
             initScroll: function () {
                 let mychart = this.$echarts.init(document.getElementById('mybox'));
                 mychart.setOption({
-                    title: {
-                        text: "接线图",
-                        textStyle: {
-                            fontSize: '14'
-                        },
-                        left: '5',
-                        top: '5'
-                    },
+
                     tooltip: {
                         trigger: 'item',
                         triggerOn: 'mousemove'

@@ -25,11 +25,8 @@
 </script>
 <template>
 
-	<panel class="data-index relative">
-		<Row>
-			<h3 class="title-lv3">数据指数</h3>
-
-		</Row>
+	<Card class="data-index relative">
+		<h3 slot="title">数据指数</h3>
 		<Row>
 
 		<Col span="9">
@@ -76,7 +73,7 @@
 		<Col span="5">
 			<Row className="data-title">
 				<Col span="12">
-					<span >预测月偏差</span>|
+					<span >预测月偏差</span>
 				</Col>
 				<Col span="12">
 					<span >环比</span>
@@ -134,18 +131,17 @@
 		</Col>
 		</Row>
 
-	</panel>
+	</Card>
 
 </template>
 <style scoped>
 	/*数据指数*/
 	.data-index {
-		height: 115px;
-		background-color: #fff;
+		height: 129px;
 	}
 
 	.data-title{
-		background-color: #F6F7FB;
+		background-color:#f2f7fb;
 	}
 	.data-content,.data-title{
 		height: 30px;
@@ -156,8 +152,6 @@
 	.data-index h3{
 		margin-bottom: 10px;
 	}
-
-
 	.trend {
 		display: inline-block;
 		width: 15px;

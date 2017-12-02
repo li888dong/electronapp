@@ -16,26 +16,28 @@ export default {
             // 绘制图表
             myChart.setOption({
                 color: ['#f57e6a','#6ec71e','#0089f0'],
-                title: { 
-                    text: '设备安装概况',
-                    x: "left",
-            },
                 tooltip : {
                     trigger: 'item'
                 },
                 legend: {
                     orient: 'horizontal',
-                    left: 'right',
+                    left: 'left',
                     itemWidth:16,
                     itemHeight:16,
                     data: ['已经安装','等待安装','设备库存']
+                },
+                grid: {
+                    left: '40',
+                    right: '20',
+                    bottom: '40',
+                    top: '40',
                 },
                 series : [
                     {
                         name: '访问来源',
                         type: 'pie',
-                        radius : '55%',
-                        center: ['18%', '52%'],
+                        radius : '66%',
+                        center: ['20%', '48%'],
                         data:[
                             {value:335, name:'等待安装'},
                             {value:100, name:'设备库存'},
@@ -57,8 +59,13 @@ export default {
 </script>
 
 <template>
-<Row class="equipmentInstall">
-        <Col span='24' id="myCharts" :style="{width: '780px', height: '260px'}"></Col>
+    <Card class="equipmentInstall">
+        <p slot="title">设备安装概况</p>
+        <Row>
+            <Col>
+                <div id="myCharts" :style="{width: '100%', height: '220px'}"></div>
+            </Col>
+        </Row>        
         <!-- 安装的种类 -->
         <div class="inType">
             <p class="oneType">
@@ -77,26 +84,20 @@ export default {
             <span>待安装: <i>6,145.61</i></span>
             <span>已申报: <i>-5,145.61</i></span>
         </div>    
-</Row>
-
+    </Card>
 </template>
 
 <style scoped>
     .equipmentInstall{
-        max-width: 820px;
         height: 290px;
         border: 1px #e5e5e5 solid;
-        float: left;
-        background-color: #fff;
-        margin-right: 18px;
-        padding: 20px;
         position: relative;
+        overflow: hidden;
     }
     .inType{
-        max-width: 460px;
         height: 136px;
         position: absolute;
-        top: 46px;
+        top: 66px;
         right: 40px;        
         padding: 10px;
     }

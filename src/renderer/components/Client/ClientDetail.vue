@@ -353,14 +353,9 @@
 	<div class="client-container">
 		<Row gutter="15">
 			<Col span="16">
-				<panel class="user-detail">
-					<Row>
-
-						<h3 class="title-lv3">用户基本信息</h3>
-						<div class="btn-group">
-							<span @click="$router.push('AddClient')">详情</span>
-						</div>
-					</Row>
+				<Card class="user-detail">
+					<h3 slot="title">用户基本信息</h3>
+					<span slot="extra" class="detail-btn" @click="$router.push('AddClient')">详情</span>
 					<Row>
 						<table cellspacing="5" width="100%" style="margin-left: 20px;">
 							<tbody>
@@ -378,17 +373,13 @@
 							</tbody>
 						</table>
 					</Row>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="8">
-				<panel class="agreement-detail">
-					<Row>
+				<Card class="agreement-detail">
+					<h3 slot="title">合同基本情况</h3>
+					<span slot="extra" class="detail-btn"  @click="$router.push('add-hetong')">详情</span>
 
-						<h3 class="title-lv3">合同基本情况</h3>
-						<div class="btn-group">
-							<span  @click="$router.push('add-hetong')">详情</span>
-						</div>
-					</Row>
 					<Row>
 						<table  cellspacing="5" width="100%" style="margin-left: 20px;">
 							<tr>
@@ -401,79 +392,58 @@
 							</tr>
 						</table>
 					</Row>
-				</panel>
+				</Card>
 			</Col>
 		</Row>
 		<Row gutter="15" className="mgt_15">
 			<Col span="16">
-				<panel class="user-apply">
-					<h3 class="title-lv3">用户申报记录</h3>
+				<Card class="user-apply">
+					<h3 slot="title">用户申报记录</h3>
 					<Table :columns="columns" :data="data1" height="250"></Table>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="8">
-				<panel class="user-bill">
-					<h3 class="title-lv3">用户电费单</h3>
+				<Card class="user-bill">
+					<h3 slot="title">用户电费单</h3>
 					<Table :columns="columns2" :show-header="true" :data="data2" height="250"></Table>
-				</panel>
+				</Card>
 			</Col>
 		</Row>
 		<Row className="mgt_15">
-			<panel class="user-clientlist">
-				<Row>
-					<h3 class="title-lv3">用户终端列表</h3>
-					<div class="btn-group">
+			<Card class="user-clientlist">
 
-						<Button type="success" @click="$router.push('add-celiang')">+ 配置终端</Button>
-					</div>
-				</Row>
+				<h3 slot="title">用户终端列表</h3>
+				<div slot="extra" class="btn-group">
+
+					<Button type="primary" @click="$router.push('add-celiang')">+ 配置终端</Button>
+				</div>
+
 				<Row>
-					<Col span="24" class="mgt_15">
-						<div style="height: 404px;">
+					<Col span="24">
+						<div style="height: 290px;">
 
 							<Table :columns="columns3" :data="data3"></Table>
 						</div>
 					</Col>
 				</Row>
-			</panel>
+			</Card>
 		</Row>
 
 
 	</div>
 </template>
 <style scoped>
-
+	.detail-btn{
+		color: #0089F0;
+		cursor: pointer;
+	}
 	.user-detail table td span,
 	.agreement-detail table td span:not(.danwei1){
 		color: #999999;
 	}
 
 
-
-	.user-apply th{
-		text-align: center;
-		height: 40px;
-		background-color: #F6F7FB;
-	}
-	.user-apply td{
-		text-align: center;
-	}
-
-	.user-bill td{
-		border-top: 1px solid #333333;
-		height: 36px;
-	}
-
-	.user-clientlist th{
-		text-align: center;
-		height: 40px;
-		background-color: #F6F7FB;
-	}
-	.user-clientlist td{
-		text-align: center;
-	}
-	.btn-group span{
-		color: #0089F0;
-		cursor: pointer;
+	.btn-group{
+		margin-top: -9px;
 	}
 </style>

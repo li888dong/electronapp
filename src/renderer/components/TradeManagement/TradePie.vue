@@ -2,11 +2,11 @@
     .tradeFrame {
         box-sizing: border-box;
         background-color: #fff;
-        height: 200px;
+        height: 170px;
     }
 </style>
 <template>
-    <div class="tradeFrame">
+    <div class="tradeFrame relative">
         <div id="tradeFrame" style="position: absolute;left:0px;top:0px;bottom: 0;right: 0;">
         </div>
     </div>

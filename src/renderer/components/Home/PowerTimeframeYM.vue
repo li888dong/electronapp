@@ -4,7 +4,7 @@
 	    props:['baseWidth'],
         data() {
             return {
-                powerFrameType: 'month',
+                powerFrameType: '月',
 	            totalWidth:0,
                 barWidth: '',
 	            guduanData:200,
@@ -17,7 +17,7 @@
             this.changeType()
 	    },
         methods: {
-            changeType(type='month') {
+            changeType(type='月') {
                 this.powerFrameType = type;
                 console.log(this.powerFrameType);
             }
@@ -25,11 +25,13 @@
     }
 </script>
 <template>
-	<panel class="power-timeframe">
-		<h3 class="title-lv3">用电实时段分布</h3>
-		<div class="btn-group btn-switch">
-			<Button v-bind:type="powerFrameType==='month'?'primary':'default'"@click="changeType('month')">月</Button>
-			<Button v-bind:type="powerFrameType==='year'?'primary':'default'"@click="changeType('year')">年</Button>
+	<Card class="power-timeframe">
+		<h3 slot="title">用电实时段分布</h3>
+		<div slot="extra" class="btn-group">
+			<RadioGroup v-model="powerFrameType" type="button" v-on:on-change="changeType">
+				<Radio label="月"></Radio>
+				<Radio label="年"></Radio>
+			</RadioGroup>
 		</div>
 		<div class="power-timeframe-bar" :style="{width:totalWidth+'px'}">
 			<div class="power-timeframe-bar-low">谷段 <span><span class="bar" v-if="guduanData !==0"
@@ -42,34 +44,24 @@
 			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">50%</span>228Mw.时</span>
 			</div>
 		</div>
-	</panel>
+	</Card>
 </template>
 <style scoped>
 	.power-timeframe {
 		height: 202px;
-		display: inline-block;
-		vertical-align: top;
 	}
-
-	.power-timeframe .title {
-		margin-left: -10px;
+	.btn-group{
+		margin-top: -8px;
 	}
-
-	.power-timeframe h3 {
-		display: inline-block;
-	}
-
-
 	.power-timeframe .power-timeframe-bar {
-		height: 150px;
-		margin-top: 22px;
+		height: 120px;
 		margin-left: 20px;
 	}
 
 	.power-timeframe .power-timeframe-bar > div {
 		white-space: nowrap;
 		width: 100%;
-		height: 50px;
+		height: 42px;
 	}
 
 	.power-timeframe .power-timeframe-bar > div > span {
@@ -77,7 +69,7 @@
 		vertical-align: middle;
 		background-color: #eee;
 		width: 92%;
-		line-height: 37px;
+		line-height: 34px;
 		color: #a8a8a8;
 		margin-left: 15px;
 	}

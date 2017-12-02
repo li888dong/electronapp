@@ -27,6 +27,16 @@
 .shouDian-upload-box .ivu-upload-list li{
 	display: inline;
 }
+/* 年度/月度预测导入组件样式修改 */
+.yuceDaoru-upload-box .ivu-upload-list {
+    position: absolute;
+    top: -6px;
+    left: 6px;
+}
+.yuceDaoru-upload-box .ivu-upload-list li{
+	display: inline;
+}
+
 
 
 
@@ -34,16 +44,16 @@
 
 .ivu-input{
 	height: 34px;
-	border-radius: 0;
 }
 .searchBox .ivu-input {
 	padding-left: 30px;
 }
  .ivu-select-single .ivu-select-selection{
-	border-radius: 0;
 	height: 34px;
 }
-
+.ivu-input-group{
+	top: 0;
+}
 /*文本域状态,使用时 *** + .myTextarea 前面加上父级文件名称（否则优先级不够）*/
 .myTextarea textarea{
 	width: 700px;
@@ -86,9 +96,13 @@
 	 padding-top:20px;
 
 }
-/*交易概况下拉菜单样式重置*/
-.selectDate .ivu-select-selection{
-	background-color:#ccf4f9;
-	border:none;
+/*设备管理—设备匹配页面表格样式重置*/
+.myTable_Trade .ivu-table th:first-child,
+.myTable_Trade .ivu-table td:first-child{
+	width:120px;
+	text-align: center;
 }
-
+.myTable_Trade .ivu-table td:first-child .ivu-table-cell span{
+	display: inline-block;
+	width:80px;
+}

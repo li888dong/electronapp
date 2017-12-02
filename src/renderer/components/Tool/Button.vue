@@ -83,29 +83,6 @@
 		cursor: pointer;
 	}
 
-	.my-tab-disabled {
-		background-color: #F57E6A;
-		color: #ffffff;
-	}
-
-	.my-tab-normal {
-		background-color: #F8F8F8;
-		color: #000;
-		border: 1px solid #CACACA;
-		font-weight: bold;
-	}
-
-	.my-tab-hl {
-		background-color: #DEDEDE;
-		color: #8D8D8D;
-		border: 1px solid #CACACA;
-	}
-
-	.my-tab-zd {
-		background-color: #31C9D7;
-		color: #ffffff;
-	}
-
 	.ivu-btn {
 		position: relative;
 	}

@@ -80,13 +80,12 @@
 </script>
 <template>
 	<div class="main-container relative">
-		<panel class="main-container-panel">
-			<div class="title-lv2">
-				添加售电合同
-			</div>
+		<Card class="main-container-panel">
+			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
+			<p slot="title" style="padding-left:40px">添加售电合同</p>
 			<div class="container">
 				<div class="form-container">
-					<h3 class="title" style="display:block;border-left: 5px solid #3EC7F5;padding-left: 10px">基本信息</h3>
+					<h3 class="title">基本信息</h3>
 					<label>
 						<span class="width-120">客户名称 :</span>
 						<Input></Input>
@@ -129,8 +128,8 @@
 						<Input class="width-90" placeholder="输入服务费率"></Input><span>/kw.h</span>
 					</div>
 					<div class="btn-save">
-							<Button type="primary">保存</Button>
-						</div>
+						<Button type="primary">保存</Button>
+					</div>
 					<br>
 					<label>
 						<span class="width-120">客户名称 :</span>
@@ -179,7 +178,7 @@
 					</label><br>
 					<label>
 						<span class="width-120">用户户号 :</span>
-						<table class="fr" width="800" cellspacing="0">
+						<table class="fr biaoFrom" width="800" cellspacing="0">
 							<thead>
 								<tr>
 									<th>营销用户编号</th>
@@ -231,11 +230,19 @@
 					<Button type="default" @click="modal1=false">取消</Button>
 				</div>
 			</Modal>
-		</panel>
+		</Card>
 	</div>
 </template>
 <style scoped>
-
+	/* 返回键样式 */
+	.back{
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		z-index: 9;
+		cursor: pointer;
+		/* color: #108CEE; */
+	}
 
 	.main-container{
 		height:900px;
@@ -243,15 +250,8 @@
 	.main-container-panel{
 		height: 900px;
 	}
-	.main-container-panel .title-lv2{
-		height: 60px;
-		line-height: 60px;
-		display: block;
-		font-weight: bold;
-		border-bottom:1px solid #eeeeee;
-	}
 	.form-container{
-		 margin-left:60px;
+		margin-left:12%;
 		margin-top:20px;
 	}
 	.form-container label{
@@ -294,7 +294,7 @@
 	.ivu-input-wrapper{
 		width:200px;
 	}
-	.panel .btn-save{
+	.btn-save{
 		float: none;
 		margin-top:0;
 		margin-left:20px;
@@ -308,7 +308,7 @@
 		margin-right:15px;
 		margin-left:15px;
 	}
-	.panel .btn-group{
+	.btn-group{
 		width:100%;
 		float: none;
 		text-align: center;
@@ -354,7 +354,9 @@
 	label {
 		position: relative;		
 	}
-
+	.biaoFrom td{
+		height: 34px;
+	}
 	/* 下载模块样式 */
 	.shouDian-upload-box {
 		width: 570px;

@@ -1,4 +1,5 @@
 <script>
+    import mySearch from '@/components/Tool/mySearch'
 	export default {
 
 		data(){
@@ -6,25 +7,28 @@
 			    clientList:['河南众企售电有限公司','河南众企售电有限公司','河南众企售电有限公司'],
 				businessList:['河南众企售电有限公司','河南众企售电有限公司','河南众企售电有限公司'],
                 theme2: 'light',
+                editorText: '',
             }
 		},
 		methods:{
-
+            onContentChange (val) {
+                this.editorText = val
+            },
+            afterChange () {
+            }
+		},
+		components:{
+            'mySearch': mySearch
 		}
 	}
 </script>
 <template>
-	<div class="message-container">
-		<panel>
-			<h3 class="title-lv2">发送消息</h3>
+	<Card class="main-container">
+			<h3  slot="title" class="title">发送消息</h3>
 			<div class="container">
 				<Row class="sendMessage">
 					<Col span="20" class="sendMain">
 					<div class="message-main">
-						<div class="btn-group">
-							<Button type="primary">发送</Button>
-							<Button type="default">取消</Button>
-						</div>
 						<form action="" id="sendMessageFrame">
 							<Row class="sendRow bt-line">
 								<Col span="2">
@@ -54,7 +58,13 @@
 								消息内容
 							</Row>
 							<Row class="sendRow">
-								<textarea placeholder="消息内容"></textarea>
+								<div id="text">
+									<!--<editor id="editor_id" height="500px" width="100%" :content="editorText"-->
+											<!--:afterChange="afterChange()"-->
+											<!--pluginsPath="/static/kindeditor/plugins/"-->
+											<!--:loadStyleMode="false"-->
+											<!--@on-content-change="onContentChange"></editor>-->
+								</div>
 							</Row>
 							<Row class="sendRow">
 								<Col span="2">
@@ -66,18 +76,18 @@
 								<Checkbox>公告</Checkbox>
 							</Col>
 							</Row>
+							<Row>
+								<div class="center-btn">
+									<Button type="primary">发送</Button>
+									<Button type="default" class="mgl_20">取消</Button>
+								</div>
+							</Row>
 						</form>
 					</div>
 				</Col>
 					<Col span="4" class="address-list">
 					<Row class="searchRow">
-						<Col span="18" class="relative search-content">
-						<input type="search" placeholder="客户编号或客户名称">
-						<i class="iconfont icon-search absolute"></i>
-					</Col>
-						<Col span="4">
-						<Button type="primary">搜索</Button>
-					</Col>
+						<mySearch></mySearch>
 					</Row>
 					<Row class="sendRow">
 						<Menu :theme="theme2" class="menu">
@@ -98,41 +108,18 @@
 					</Col>
 				</Row>
 			</div>
-		</panel>
-	</div>
+	</Card>
 </template>
 <style scoped>
-	.layout-content .message-container{
-		width:100%;
-		height:905px;
+	.container{
+		height:820px;
 	}
-	.panel{
-      margin:0;
-	}
-	.panel .title-lv2{
-		padding-left:10px;
-		height:40px;
-		line-height:40px;
-		border-bottom:1px solid #eeeeee;
-		display: block;
-		margin:0 10px;
-	}
-	.panel .btn-group{
-		float: none;
-		padding:20px 10px 10px;
-		margin-top:0;
-	}
-	.panel .container{
-		height:865px;
-	}
-	.container .sendMessage{
-		padding:0 60px 0 60px;
-		height:865px;
+	.sendMessage{
+		height:100%;
 	}
 	.sendMessage .sendMain{
 		border-right:1px solid #eeeeee;
-		height:865px;
-		margin-top:-10px;
+		height: 100%;
 	}
 	.message-main{
 		font-size:14px;
@@ -140,8 +127,7 @@
 		height:100%;
 	}
 	.message-main #sendMessageFrame{
-		padding-left:10px;
-		padding-right: 40px;
+		padding-right: 16px;
 
 	}
 	#sendMessageFrame .sendRow{
@@ -151,11 +137,6 @@
 	#sendMessageFrame .bt-line{
 		border-bottom:1px solid #eeeeee;
 	}
-	#sendMessageFrame textarea{
-		width: 100%;
-		height:400px;
-		resize: none;
-	}
 	input,	select {
 		vertical-align: middle;
 	}
@@ -164,14 +145,6 @@
 	}
 	.address-list .searchRow{
 		padding:10px;
-	}
-	.searchRow .search-content{
-		margin-right:10px;
-	}
-	.searchRow .search-content input[type=search]{
-		width:100%;
-		height:32px;
-		padding-left:5px;
 	}
 	.message-main label{
 		display: inline-block;
@@ -187,16 +160,16 @@
 	.message-main textarea{
 		vertical-align: top;
 	}
-	.icon-search{
-		position: absolute;
-		top: 50%;
-		right:5px;
-		margin-top:-10px;
-	}
 	.ivu-menu-vertical.ivu-menu-light:after{
 		width:0;
 	}
 	.menu{
 		width:100% !important;
+	}
+	.center-btn{
+		width: 100%;
+		height:60px;
+		line-height: 60px;
+		text-align: center;
 	}
 </style>

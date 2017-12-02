@@ -30,7 +30,7 @@
     width: 100%;
     height: 50px;
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     text-align: center;
 }
 .fenYe ul {

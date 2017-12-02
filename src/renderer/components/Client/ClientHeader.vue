@@ -35,7 +35,7 @@
 		padding:0 20px;
 		position: fixed;
 		z-index: 1000;
-		top: 100px;
+		top: 105px;
 	}
 	.client-header .back{
 		position: absolute;
@@ -47,7 +47,6 @@
 	.client-header h1{
 		height: 26px;
 		font-size: 24px;
-		font-weight:normal;
 		line-height: 26px;
 		padding:0 15px;
 		margin-left:30px;

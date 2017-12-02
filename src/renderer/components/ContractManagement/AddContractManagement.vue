@@ -170,10 +170,9 @@ export default {
 
 <template>
 <Row class="main-container">
-    <panel>
-        <Row>
-            <h3 class="title-lv2">添加长协合同</h3>
-        </Row>
+    <Card>
+        <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 12px;left: 10px;"></i>
+        <p slot="title" style="margin-left:40px;">添加长协合同</p>
         <Row class="ContractBox">
             <div class="ContractBox-main">            
                 <i-form :model="formItem" :label-width="110">
@@ -194,7 +193,11 @@ export default {
                 <Row>
                     <i-col span="8">
                         <Form-item label="签约电厂">
-                            <i-input :value.sync="formItem.input" placeholder="请输入签约电厂"></i-input>
+                            <i-select :model.sync="formItem.select" placeholder="请选择签约电厂">
+                                <i-option value="beijing">郑州市电厂</i-option>
+                                <i-option value="shanghai">广东市电厂</i-option>
+                                <i-option value="shenzhen">北京市电厂</i-option>
+                            </i-select>
                         </Form-item>
                     </i-col>
                     <i-col span="8">
@@ -242,23 +245,16 @@ export default {
                     </i-col>
                 </Row>
                 <Row :gutter="10">
+
                     <Form-item label="电厂地址">
                         <i-col span="2">
-                            <i-select :model.sync="formItem.select" placeholder="请选择">
-                                <i-option value="beijing">北京市</i-option>
-                                <i-option value="shanghai">上海市</i-option>
-                                <i-option value="shenzhen">深圳市</i-option>
-                            </i-select>
+                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
                         </i-col>
                         <i-col span="2">
-                        <i-select :model.sync="formItem.select" placeholder="请选择">
-                            <i-option value="beijing">北京市</i-option>
-                            <i-option value="shanghai">上海市</i-option>
-                            <i-option value="shenzhen">深圳市</i-option>
-                        </i-select>
+                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
                         </i-col>
                         <i-col span="8">
-                            <i-input :value.sync="formItem.input" placeholder="请输入详细通讯地址"></i-input>
+                            <i-input disabled :value.sync="formItem.input" placeholder="-"></i-input>
                         </i-col>
                     </Form-item>
                 </Row>
@@ -337,7 +333,7 @@ export default {
                 </i-form>
             </div>
         </Row>
-    </panel>
+    </Card>
     
 </Row>
 </template>
@@ -349,7 +345,7 @@ export default {
     width: 570px;
     height: 34px;
     margin-top: 10px;
-    margin-left: 110px;
+    margin-left: 110px;    
 }
 .changXie-upload {
     width: 480px;
@@ -388,9 +384,9 @@ export default {
     border-bottom: 1px solid #E5E5E5;
 }
 .ContractBox-main form {
-    padding-left: 12%;
+    padding-left: 18%;
     position: relative;
-    padding-right: 20%;
+    padding-right: 17%;
 }
 .ContractBox-main form p{
     font-size: 14px;

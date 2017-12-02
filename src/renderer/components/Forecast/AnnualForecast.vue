@@ -14,75 +14,93 @@
 					{
 						title: '企业名称',
 						width: 200,
-						key: 'n1'
+						key: 'n1',
+                    	align: 'center'
 					},
 					{
 						title: '1月',
-						key: 'n2'
+						key: 'n2',
+                    	align: 'center'
 					},
 					{
 						title: '2月',
-						key: 'n3'
+						key: 'n3',
+                    	align: 'center'
 					},
 					{
 						title: '3月',
-						key: 'n4'
+						key: 'n4',
+                    	align: 'center'
 					},
 					{
 						title: '4月',
-						key: 'n5'
+						key: 'n5',
+                    	align: 'center'
 					},
 					{
 						title: '5月',
-						key: 'n6'
+						key: 'n6',
+                    	align: 'center'
 					},
 					{
 						title: '6月',
-						key: 'n7'
+						key: 'n7',
+                    	align: 'center'
 					},
 					{
 						title: '7月',
-						key: 'n8'
+						key: 'n8',
+                    	align: 'center'
 					},
 					{
 						title: '8月',
-						key: 'n9'
+						key: 'n9',
+                    	align: 'center'
 					},
 					{
 						title: '9月',
-						key: 'n10'
+						key: 'n10',
+                    	align: 'center'
 					},
 					{
 						title: '10月',
-						key: 'n11'
+						key: 'n11',
+                    	align: 'center'
 					},
 					{
 						title: '11月',
-						key: 'n12'
+						key: 'n12',
+                    	align: 'center'
 					},
 					{
 						title: '12月',
-						key: 'n13'
+						key: 'n13',
+                    	align: 'center'
 					},
 					{
 						title: '合计',
-						key: 'n14'
+						key: 'n14',
+                    	align: 'center'
 					},
 					{
 						title: '修改人',
-						key: 'n15'
+						key: 'n15',
+                    	align: 'center'
 					},
 					{
 						title: '确认人',
-						key: 'n16'
+						key: 'n16',
+                    	align: 'center'
 					},     
 					{
 						title: '状态',
-						key: 'n17'
+						key: 'n17',
+                    	align: 'center'
 					},               
 					{
 						title: '操作',
 						key: 'change',
+                    	align: 'center',
 						render: (h, params) => {
 							return h('div', [
 								h('span', {
@@ -214,44 +232,40 @@
 </script>
 <template>
 	<div class="main-container">
-		<panel>
-			<Row>
-				<h3 class="title-lv2">年度预测</h3>
-			</Row>
+		<Card>
+			<p slot="title">年度预测</p>
 			<div class="layout-content">
-				<Row class="layout-content-top">
-					<Col span='8'>
+				<div class="layout-content-top">
+					<div class="fl">
 						<Button class="Button" type="primary">上一年</Button>
-						<i-select :model.sync="model1" style="width:100px" placeholder='年度选择'>								
+						<i-select :model.sync="model1" style="width:100px;margin:0 10px;" placeholder='年度选择'>								
 							<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
 						</i-select>
 						<Button class="Button" type="primary">下一年</Button>						
-						<i-select :model.sync="model1" style="width:100px" placeholder='区域选择'>								
+						<i-select :model.sync="model1" style="width:100px;margin-left: 10px" placeholder='区域选择'>								
 							<i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
 						</i-select>
-					</Col>
-					<Col span="6" offset='7'>
-                        <mySearch></mySearch>
-                    </Col>                    
-                    <Col span="3" style="text-align: right;">
-                        <Button type="primary">批量确认</Button>
-						<Button type="primary" style="margin-left: 10px">导入</Button>
-                    </Col>
-				</Row>
+					</div>
+					<div class="fr">
+                        <mySearch class="fl" style="margin-right: 30px;" placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
+						<Button class="fl" type="primary">批量确认</Button>
+						<Button  class="fl" type="primary" style="margin-left: 10px">导入</Button>
+                    </div>
+				</div>
 				<Row>
 					<Table border ref="selection" :columns="columns6" :data="data6"></Table>
 				</Row>				
 				<myFenye></myFenye>
 			</div>
-		</panel>
+		</Card>
 		<Modal
 			title="河南众企联合售电有限公司"
 			v-model="modal2"
-			width = 95
+			width = 54
 			:mask-closable="false"
 			class-name="vertical-center-modal">
-			<table cellspacing="2" style="width:100%;">
-					<thead>
+			<table>
+				<thead>
 					<tr>
 						<th>2017年月份</th>
 						<th>01月</th>
@@ -267,92 +281,91 @@
 						<th>11月</th>
 						<th>12月</th>
 						<th>合计</th>
-
 					</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>户号12345</td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td>355555.55</td>
-						</tr>
-						<tr>
-							<td>户号12345</td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td><input type="text"></td>
-							<td>355555.55</td>
-						</tr>
-						<tr>
-							<td>合计</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355555.55</td>
-						</tr>
-						<tr>
-							<td>系统预测</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355555.55</td>
-						</tr>
-						<tr>
-							<td>偏差值</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355.55</td>
-							<td>355555.55</td>
-						</tr>
-					</tbody>
-				</table>
+				</thead>
+				<tbody>
+					<tr>
+						<td>户号12345</td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td>355555.55</td>
+					</tr>
+					<tr>
+						<td>户号12345</td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td><input placeholder='-' type="text"></td>
+						<td>355555.55</td>
+					</tr>
+					<tr>
+						<td>合计</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355555.55</td>
+					</tr>
+					<tr>
+						<td>系统预测</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355555.55</td>
+					</tr>
+					<tr>
+						<td>偏差值</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355.55</td>
+						<td>355555.55</td>
+					</tr>
+				</tbody>
+			</table>
 		</Modal>	
 	</div>
 </template>
@@ -360,12 +373,11 @@
 .layout-content{
     overflow: hidden;
     background: #fff;
-    border-radius: 4px;
-    padding: 10px;    
-    height: 875px
+    height: 810px;
 }
 .layout-content-top {
     padding-bottom: 15px;
+	overflow: hidden; 
 }
 .table-container th{
 	height: 30px;
@@ -374,5 +386,24 @@
 .table-container td{
 	text-align: center;
 	height: 30px;
+}
+.vertical-center-modal table {
+	text-align: center;
+	border: 1px solid #ccc;
+	border-collapse:collapse;
+}
+.vertical-center-modal th{
+	background-color: #f2f7fb;
+}
+.vertical-center-modal td,.vertical-center-modal th{
+	border: 1px solid #ccc;
+	width: 70px;
+	height: 30px;
+}
+.vertical-center-modal input{
+	width: 70px;
+	height: 30px;
+	border: 1px solid #edb00d;
+	text-align: center;
 }
 </style>

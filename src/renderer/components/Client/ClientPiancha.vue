@@ -28,11 +28,12 @@
                     legend: {
                         data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
                         align: 'left',
-                        left: 10,
+	                    top:0,
+                        left: 0,
                         itemWidth:16,
                         itemHeight:16,
                     },
-	                color:['#0089f0','#31c9d7','#f35e7a'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -60,8 +61,9 @@
                         bottom:0
 	                },
                     grid: {
-                        left: 40,
-	                    top:40,
+                        right:10,
+                        left: 30,
+	                    top:50,
 	                    bottom:60
                     },
                     series: [
@@ -118,7 +120,6 @@
                 columns4: [
                     {
                         title: '类别',
-	                    width:200,
                         key: 'category'
                     },
                     {
@@ -168,6 +169,10 @@
                     {
                         title: '12月',
                         key: 'December'
+                    },
+                    {
+                        title: '合计',
+                        key: 'all'
                     }
                 ],
                 data1: [
@@ -185,6 +190,7 @@
                         October:1000000,
                         November:1000000,
                         December:1000000,
+	                    all:80000
                     },
                     {
                         category: 'John Brown',
@@ -200,6 +206,7 @@
                         October:1000000,
                         November:1000000,
                         December:1000000,
+                        all:80000
                     },
                     {
                         category: 'John Brown',
@@ -215,6 +222,7 @@
                         October:1000000,
                         November:1000000,
                         December:1000000,
+                        all:80000
                     },
                     {
                         category: 'John Brown',
@@ -230,6 +238,7 @@
                         October:1000000,
                         November:1000000,
                         December:1000000,
+                        all:80000
                     },
                     {
                         category: 'John Brown',
@@ -245,6 +254,7 @@
                         October:1000000,
                         November:1000000,
                         December:1000000,
+                        all:80000
                     },
                 ]
 	        }
@@ -266,60 +276,45 @@
 
 		<div class="client-container">
 			<Row>
-				<panel class="client-piancha relative">
-					<div class="header">
-
-						<h3 class="title-lv3">偏差分析</h3>
-						<div class="btn-group">
-							<Select v-model="year" style="width:180px;">
-								<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
-							</Select>
-							<div class="refresh">
-								<i class="iconfont icon-shuaxin"></i>
-							</div>
-						</div>
+				<Card class="client-piancha relative">
+					<h3 slot="title">偏差分析</h3>
+					<div slot="extra" class="btn-group">
+						<Select v-model="year" style="width:180px;">
+							<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
+						</Select>
+						<Button type="primary" class="refresh">
+							<i class="iconfont icon-shuaxin"></i>
+						</Button>
 					</div>
-					<div class="char-group">
+					<Row className="char-group">
 						<div id="caiji">
 
 						</div>
-					</div>
-				</panel>
+					</Row>
+				</Card>
 
 			</Row>
 			<Row className="mgt_15">
-				<Table :columns="columns4" :data="data1" height="407"></Table>
+				<Card>
+
+					<Table :columns="columns4" :data="data1" height="370"></Table>
+				</Card>
 			</Row>
 		</div>
 	</div>
 </template>
 <style scoped>
-
-	.client-piancha{
-		width: 1432px;
-		margin: 0;
-	}
-	.client-piancha .header{
-		height: 55px;
-		border-bottom: 1px solid #eeeeee;
-	}
-
-	.char-group{
-		margin-top: 20px;
+	.btn-group{
+		margin-top: -9px;
 	}
 	.char-group>div{
-		width: 1580px;
 		height: 358px;
 	}
-	.table-container{
-		margin-top: 30px;
-		width: 1440px;
-		height:381px;
-	}
+
 	.refresh{
 		display: inline-block;
 		vertical-align: middle;
-		margin:0 20px;
+		margin-left: 5px;
 		cursor: pointer
 	}
 </style>

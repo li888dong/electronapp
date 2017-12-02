@@ -1,4 +1,7 @@
 <script>
+import myFenye from '@/components/Tool/myFenye'
+import mySearch from '@/components/Tool/mySearch'
+
 export default {
     name: 'AssetInfo',
     data(){
@@ -128,102 +131,52 @@ export default {
     },
     methods: {
         infoTo(index) {
-            this.$router.push('EquipmentStatus')    
+            // this.$router.push('EquipmentStatus')    
         },
         moreTo(index) {
-            this.$router.push('EquipmentException')
+            // this.$router.push('EquipmentException')
         }
-    }
+    },
+    components : {
+        'myFenye': myFenye,
+        'mySearch': mySearch
+    },
 }
 </script>
 
 <template>
-<div class="AssetInfo main-container"> <!-- 这是设备资产信息页面 -->
-    <Row class="AssetInfoSearch">
-        <Col span='24'>
-            <button class="apply">申请设备入库</button> <i class="iconfont icon-search"></i> <input class="AsSearchText " type="text" name="" id="" placeholder="资产号 | IP地址 | 企业名字"><button type="submit" class="AsSearch">搜索</button>
-        </Col>
-    </Row>
-    <Row class="AssetInfoForm">
-        <Col span='24'>
-            <Table border :columns='columns1' :data='data1'></Table>
-        </Col>        
-    </Row>
-    <!-- 分页 -->
-    <Row class="page-container">
-        <Col span='24' class="fenYe">
-            <Page :total="100" show-total show-elevator></Page> <Button type="primary">确定</Button>
-        </Col>
-    </Row>
+<div class="main-container"> <!-- 这是设备资产信息页面 -->
+    <Card>
+        <div class="AssetInfo">
+            <div class="AssetInfoSearch">
+                <Button type="primary" class="fl">申请设备入库</Button>
+                <mySearch class="fr" placeholder="请输入公司名称或关键字" swidth="340"></mySearch>        
+            </div>
+            <Row class="AssetInfoForm">
+                <Col span='24'>
+                    <Table border :columns='columns1' :data='data1'></Table>
+                </Col>        
+            </Row>
+        </div>        
+        <!-- 分页 -->
+        <myFenye></myFenye>       
+    </Card>
 </div>
 
 </template>
 
 <style scoped>
-button {
-    outline: none;
-    border: none;
-}
+
 .AssetInfo{
-    height: 905px;
-    background-color:#fff;
+    height: 862px;
+    background-color: #fff;
 }
 
 .AssetInfoSearch{
-    background-color: #fff;
-    height: 55px;
-    padding: 12px 10px;
-    position: relative;
-}
-.AssetInfoSearch i{
-    position: absolute;
-    top: 5px;
-    left: 142px;
-}
-.apply{
-    width: 120px;
-    height: 30px;
-    background-color: #108CEE;    
-    color: #fff;
-}
-.AsSearchText{
-    width: 184px;
-    height: 30px;
-    border: 1px solid #ccc;
-    margin-left: 10px;
-    padding-left: 26px;
-}
-.AsSearch{
-    width: 60px;
-    height: 30px;
-    background-color: #108CEE;
-    color: #fff;
+    overflow: hidden;
+    height: 34px;
+    margin-bottom: 15px;
 }
 
-.AssetInfoForm{
-    background-color: #fff;
-    max-height: 825px;
-    position: relative;
-    padding: 0 10px;
-}
-
-/* 分页的样式 */
-.fenYe {
-    width: 100%;
-    height: 40px;
-    background-color: #fff;
-    padding-top: 10px;
-    text-align: center;
-}
-.fenYe table{
-    border: 0;
-}
-.fenYe ul {
-    display: inline-block;
-}
-.fenYe button{
-    top: -12px;
-    left: 12px;
-}
 
 </style>

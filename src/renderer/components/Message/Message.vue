@@ -6,9 +6,9 @@
 <template>
 	<div class="layout">
 		<Row>
-			<Col span="2" class="sidebar-left">
-			<h3 class="title">消息中心</h3>
+			<Col span="3" class="sidebar-left">
 			<Menu active-name="1"  width="auto">
+				<h3 class="title">消息中心</h3>
 				<MenuItem name="1" @click.native="$router.push('/message-center/')">
 						<span class="layout-text">系统消息</span>
 				</MenuItem>
@@ -20,7 +20,7 @@
 				</MenuItem>
 			</Menu>
 			</Col>
-			<Col span="22">
+			<Col span="21">
 			<div class="layout-content">
                 <router-view></router-view>
 			 </div>
@@ -41,10 +41,7 @@
 	}
 	.layout-content{
 		min-height: 200px;
-		height:905px;
-		margin: 20px;
 		overflow: hidden;
-		background: #fff;
 	}
 
 	.layout-content-main{
@@ -82,6 +79,7 @@
 		line-height:52px;
 		text-align: center;
 		font-size:16px;
+		display: block;
 	}
 	.ivu-menu-vertical.ivu-menu-light:after{
 		width:0;

@@ -1,48 +1,87 @@
 <template>
     <div class="main-container">
-        <panel>
-            <Row>
-                <h3 class="title-lv2">售电合同</h3>
-            </Row>        
+        <Card>
+            <p slot="title">售电合同</p>
             <div class="saleBox">
-                <Row class="saleNav">
-                    <Col span="3">合同编号</Col>
-                    <Col span="2">营销用户编号</Col>
-                    <Col span="2">用户电压等级</Col>
-                    <Col span="2">报装容量</Col>
-                    <Col span="2">用户类型</Col>
-                    <Col span="2">用户单元类型</Col>
-                    <Col span="5">用户地址</Col>
-                    <Col span="6">操作</Col>
-                </Row>
                 <div class="listBox" v-for="item in data1" :key="item.id">
-                    <div class="bianhao">
-                        <i class="iconfont icon-jishiben01"></i>
-                        <span class="bhNumber">{{item.bianhao}}</span> 
+                    <ul class="hetongNav">
+                        <li>平顶山姚梦电厂有限公司</li>
+                        <li>合同编号：31654641-7</li>
+                        <li>合同方式：''</li>
+                        <li>上年用电量：10000 MWh</li>
+                        <li>上年最大负荷：10000 MWh</li>
+                        <li>本年度预计电量：10000 MWh</li>
+                        <li>本年度预计最大负荷：11</li>
+                        <li class="change">
+                            <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
+                            <span>
+                                <!-- 气泡提示模板 -->
+                                <Poptip
+                                    placement="left-end"
+                                    confirm
+                                    title="您确认删除这条内容吗？"
+                                    @on-ok="ok"
+                                    @on-cancel="cancel">
+                                    <span>删除</span>
+                                </Poptip>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="htData">
+                        <div class="saleSee" @click="toSale()">
+                            <i class="iconfont icon-jishiben01"></i>
+                            <span class="bhNumber">查看</span> 
+                        </div>
+                        <i-table 
+                        border
+                        size='small'
+                        :columns="columns1"
+                        :data="item.blist" 
+                        style = 'margin-left:20%;'
+                        ></i-table>
                     </div>
-                    <i-table 
-                    size='small'
-                    :columns="columns1"
-                    :data="item.blist" 
-                    :show-header='false'
-                    style = 'margin-left:12%; margin-right:24%;'
-                    ></i-table>                
-                    <div class="listChange">
-                        <span>修改</span>
-                        <Poptip
-                            placement="left-end"
-                            confirm
-                            title="您确认删除这条内容吗？"
-                            @on-ok="ok(item.index)"
-                            @on-cancel="cancel">
-                            <span>删除</span>
-                        </Poptip>
-                        <!-- <span @click="removeItem(item.index)">删除</span> -->
-                    </div>                  
+                </div>
+                <div class="listBox" v-for="item in data1" :key="item.id">
+                    <ul class="hetongNav">
+                        <li>平顶山姚梦电厂有限公司</li>
+                        <li>合同编号：31654641-7</li>
+                        <li>合同方式：''</li>
+                        <li>上年用电量：10000 MWh</li>
+                        <li>上年最大负荷：10000 MWh</li>
+                        <li>本年度预计电量：10000 MWh</li>
+                        <li>本年度预计最大负荷：11</li>
+                        <li class="change">
+                            <router-link to="/add-hetong" tag="span" style="cursor: pointer; ">修改</router-link>
+                            <span>
+                                <!-- 气泡提示模板 -->
+                                <Poptip
+                                    placement="left-end"
+                                    confirm
+                                    title="您确认删除这条内容吗？"
+                                    @on-ok="ok"
+                                    @on-cancel="cancel">
+                                    <span>删除</span>
+                                </Poptip>
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="htData">
+                        <div class="saleSee" @click="toSale()">
+                            <i class="iconfont icon-jishiben01"></i>
+                            <span class="bhNumber">查看</span> 
+                        </div>
+                        <i-table 
+                        border
+                        size='small'
+                        :columns="columns1"
+                        :data="item.blist" 
+                        style = 'margin-left:20%;'
+                        ></i-table>
+                    </div>
                 </div>
                 <myFenye></myFenye>                   
             </div>            
-        </panel> 
+        </Card> 
     </div>
 </template>
 
@@ -56,129 +95,40 @@ export default {
                 {
                     title: '营销用户编号',
                     key: 'n1',
-                    width: '140px'
+                    width: '140',
+                    align: 'center'
                 },
                 {
                     title: '用户电压等级',
                     key: 'n2',
-                    width: '130px'
+                    width: '140',
+                    align: 'center'
                 },
                 {
                     title: '报装容量',
                     key: 'n3',
-                    width: '130px'
+                    width: '140',
+                    align: 'center'
                 },
                 {
                     title: '用户类型',
                     key: 'n4',
-                    width: '130px'
+                    width: '140',
+                    align: 'center'
                 },
                 {
                     title: '用户单元类型',
                     key: 'n5',
-                    width: '150px'
+                    width: '140',
+                    align: 'center'
                 },
                 {
                     title: '用户地址',
                     key: 'n6',
-                    width: '300px'
+                    align: 'center'
                 }
             ],
-            data1: [
-                {
-                    bianhao: '11111-x',
-                    index: '1',
-                    blist: [
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        }
-
-                    ]
-                },
-                {
-                    bianhao: '22222-x',
-                    index: '2',
-                    blist: [
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        },
-                        {
-                            n1: '123465456',
-                            n2: '10kv',
-                            n3: '10ktv',
-                            n4: '大工业用电',
-                            n5: '第二产业(工业)',
-                            n6: '河南省高新区电子商业大厦'
-                        }
-
-                    ]
-                },
+            data1: [               
                 {
                     bianhao: '333333-x',
                     index: '3',
@@ -223,9 +173,28 @@ export default {
                             n5: '第二产业(工业)',
                             n6: '河南省高新区电子商业大厦'
                         }
+                        ,
+                        {
+                            n1: '123465456',
+                            n2: '10kv',
+                            n3: '10ktv',
+                            n4: '大工业用电',
+                            n5: '第二产业(工业)',
+                            n6: '河南省高新区电子商业大厦'
+                        }
+                        ,
+                        {
+                            n1: '123465456',
+                            n2: '10kv',
+                            n3: '10ktv',
+                            n4: '大工业用电',
+                            n5: '第二产业(工业)',
+                            n6: '河南省高新区电子商业大厦'
+                        }
 
                     ]
                 }
+
             ]
         }
     },
@@ -235,8 +204,10 @@ export default {
         },
         cancel () {
             this.$Message.info('点击了取消');
+        },
+        toSale() {
+            this.$router.push("/add-hetong")
         }
-        
         // removeItem (index) {
         //     console.log(index);
         //     this.data1.splice(index, 1)
@@ -250,16 +221,28 @@ export default {
 
 <style scoped>
 .saleBox {
-    margin: 10px;    
-    height: 875px;
+    height: 811px;
 }
-.saleNav div{
-    height: 44px;
-    background-color: #f2f7fb;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 44px;
-    text-align: center;
+.hetongNav{
+    height: 50px;
+    background-color: #f8f8f9;
+    padding-left: 15px;
+    position: relative;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.hetongNav li{
+    float: left;
+    line-height: 50px;
+    padding-right: 40px;
+}
+.hetongNav .change{
+    position: absolute;
+    right: 30px;
+    top: 0;
+    color: #108CEE;
+    cursor: pointer;
 }
 .saleList div{
     height: 44px;
@@ -273,10 +256,13 @@ export default {
     border: 1px solid #000;
 }
 .listBox {
-    position: relative;
-    border-bottom: 1px solid #E5E5E5;
+    margin-bottom: 10px;
 }
-.bianhao{
+.htData {
+    position: relative;
+    border: 1px solid #e9eaec;
+}
+.saleSee{
     width: 50px;
     height: 50px;
     background-color: #5ecfb8;
@@ -284,21 +270,23 @@ export default {
     padding-top: 50px;
     position: absolute;
     top: 50%;
-    left: 55px;
+    left: 8%;
     margin-top: -50px;
+    cursor: pointer;
 }
-.bianhao i{
+.saleSee i{
     position: absolute;
-    top: 4px;
-    left: 12px;
-    font-size: 30px;
+    top: 7px;
+    left: 13px;
+    font-size: 26px;
     color: #fff;
 }
 .bhNumber {
-    width: 100px;
+    width: 90px;
     text-align: center;
     display: inline-block;
     margin-left: -20px;
+    color:#108CEE;
 }
 .listChange {
     position: absolute;

@@ -21,12 +21,13 @@
 	}
 </script>
 <template>
-	<panel class="power-use">
+	<Card class="power-use">
+		<h3 slot="title">
+			用电实时进度
+			<small>单位：<span style="color: #4FA8F9;display:inline;vertical-align:bottom">Mw.h</span> (每十五分钟一更新)</small>
+		</h3>
 		<div class="power-realTime-progress relative">
-			<h3 class="title-lv3">
-				用电实时进度
-				<small>单位：<span style="color: #4FA8F9;display:inline;vertical-align:bottom">Mw.h</span> (每十五分钟已更新)</small>
-			</h3>
+
 			<ul class="legend">
 				<li> <i class="square legend-yigou"></i>已购电量</li>
 				<li> <i class="square legend-yiyong"></i>已用电量</li>
@@ -46,36 +47,35 @@
 				</ul>
 			</div>
 		</div>
-	</panel>
+	</Card>
 </template>
 <style scoped>
 	/*用电实时进度*/
 	.power-use {
 		height: 202px;
-		background-color: #fff;
 	}
-	.power-realTime-progress {
-		width: 500px;
-		height: 140px;
-		display: inline-block;
-		vertical-align: middle;
-	}
+	/*.power-realTime-progress {*/
+		/*width: 500px;*/
+		/*height: 140px;*/
+		/*display: inline-block;*/
+		/*vertical-align: middle;*/
+	/*}*/
 
-	.power-realTime-progress small {
+	small {
 		color: #999999;
 		font-weight:normal;
 	}
 
 	.power-realTime-progress .legend {
 		position: absolute;
-		top: 40px;
+		top: 10px;
 		left: 0px;
 	}
 
 	.power-realTime-progress .legend li {
 		display: inline-block;
 		vertical-align: top;
-		margin-left: 20px;
+		margin-left: 15px;
 	}
 
 	.power-realTime-progress .legend .square {
@@ -105,8 +105,8 @@
 		border-radius: 34px;
 		overflow: hidden;
 		background-color: #EEEEEE;
-		top: 80px;
-		left: 20px;
+		top: 50px;
+		left: 15px;
 	}
 
 	.power-realTime-progress .progress-bar .progress-bar-frame {
@@ -122,7 +122,7 @@
 	}
 
 	.frame-high {
-		background-color: #108CEE;
+		background-color: #4fa8f9;
 		border-radius: 34px;
 		border:1px solid transparent;
 		top: 0;
@@ -149,7 +149,7 @@
 
 	.deviation-data {
 		position: relative;
-		top: 140px;
+		top: 120px;
 		width: 600px;
 		height: 30px;
 	}
@@ -179,7 +179,7 @@
 
 	.deviation-data li strong {
 		font-size: 24px;
-		color: #178FEF;
+		color: #0089F0;
 		position: absolute;
 		top: -11px;
 		left: 34px;

@@ -1,13 +1,13 @@
 <script>
 	import HenanMap from '@/components/HenanMap'
 	import MyTab from '@/components/Tool/MyTab'
-    import Panel from "../Tool/Panel.vue";
+    import Search from "../Tool/mySearch.vue";
 	export default {
 		name:'clientsituation',
 		components:{
-            Panel,
             'my-tab':MyTab,
-            'henan-map':HenanMap
+            'henan-map':HenanMap,
+			'Search':Search
 		},
 		data(){
 		  return{
@@ -23,32 +23,27 @@
 </script>
 <template>
 	<div class="main-container">
-		<Row>
+		<Row gutter="15">
 			<Col span="8">
-				<panel class="search-container">
-					<h3 class="title-lv2">检索客户 </h3><sub style="font-size: 12px;"><span style="color: #4fa8f9">全国</span> > 河南</sub>
+				<Card class="search-container">
+					<h3 slot="title">检索客户<span style="font-size: 12px;padding-left: 5px;"><span style="color: #4fa8f9">全国</span> > 河南</span> </h3>
 
-					<Row type="flex" align="middle" style="margin-top: 200px;">
-						<i class="iconfont icon-search search-i"></i>
-						<input
-							class="large-search"
-							type="search"
-							placeholder="公司名称或关键字、企业编号、合同编号等"
-							v-model="searchKey"><my-tab type="primary" style="height: 36px;width: 68px;line-height: 28px;">搜索</my-tab>
+					<Row type="flex" align="middle" style="margin-top:160px;">
+						<Search placeholder="公司名称或关键字、企业编号、合同编号等" swidth="460" ></Search>
 					</Row>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="10">
-				<panel class="map-container relative">
-					<h3 class="title-lv2">客户分布</h3>
+				<Card class="map-container relative">
+					<h3 slot="title">客户分布</h3>
 					<henan-map v-on:hoverCity="hoverCity" style="margin-top: 50px;"></henan-map>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="6">
-				<panel class="ranklist-container">
-					<h3 class="title-lv2">客户总量排行榜</h3>
+				<Card class="ranklist-container">
+					<h3 slot="title">客户总量排行榜</h3>
 					<ul>
-						<li><span class="ranking">1.&nbsp; </span><span class="city">信阳市</span><span class="rate">88.33%</span>
+						<li><span class="ranking">1.&nbsp; </span><span class="city">郑州市</span><span class="rate">88.33%</span>
 							<span class="ranklist-bar" :style="{width:200*0.88+'px'}"></span></li>
 						<li><span class="ranking">2.&nbsp; </span><span class="city">洛阳市</span><span class="rate">77.33%</span>
 							<span class="ranklist-bar" :style="{width:200*0.77+'px'}"></span></li>
@@ -68,13 +63,29 @@
 							<span class="ranklist-bar" :style="{width:200*0.05+'px'}"></span></li>
 						<li><span class="ranking">10.&nbsp; </span><span class="city">南阳市</span><span class="rate">1.33%</span>
 							<span class="ranklist-bar" :style="{width:200*0.01+'px'}"></span></li>
+						<li><span class="ranking">11.&nbsp; </span><span class="city">漯河市</span><span class="rate">66.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.66+'px'}"></span></li>
+						<li><span class="ranking">12.&nbsp; </span><span class="city">许昌市</span><span class="rate">55.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.55+'px'}"></span></li>
+						<li><span class="ranking">13.&nbsp; </span><span class="city">焦作市</span><span class="rate">44.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.44+'px'}"></span></li>
+						<li><span class="ranking">14.&nbsp; </span><span class="city">鹤壁市</span><span class="rate">33.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.33+'px'}"></span></li>
+						<li><span class="ranking">15.&nbsp; </span><span class="city">濮阳市</span><span class="rate">22.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.22+'px'}"></span></li>
+						<li><span class="ranking">16.&nbsp; </span><span class="city">开封市</span><span class="rate">11.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.11+'px'}"></span></li>
+						<li><span class="ranking">17.&nbsp; </span><span class="city">信阳市</span><span class="rate">5.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.05+'px'}"></span></li>
+						<li><span class="ranking">18.&nbsp; </span><span class="city">安阳市</span><span class="rate">1.33%</span>
+							<span class="ranklist-bar" :style="{width:200*0.01+'px'}"></span></li>
 					</ul>
-				</panel>
+				</Card>
 			</Col>
 		</Row>
 		<Row className="mgt_15">
-			<panel>
-				<h3 class="title-lv2">客户区域分布概况</h3>
+			<Card>
+				<h3 slot="title">客户区域分布概况</h3>
 				<div class="flex-col">
 					<div class="flex-row">
 						<div class="newItem">
@@ -173,7 +184,7 @@
 						</div>
 					</div>
 				</div>
-			</panel>
+			</Card>
 		</Row>
 	</div>
 </template>
@@ -200,14 +211,13 @@
 	}
 
 	.map-container{
-		width:100%;
 		height: 456px;
 		overflow: hidden;
 	}
 
 	.newItem{
 		width: 245px;
-		height: 115px;
+		height: 111px;
 		background-color:#F6F7FB;
 	}
 	.newItem p{
@@ -234,12 +244,18 @@
 		color: #f38900;
 	}
 	.flex-row{
-		height: 132px;
+		height: 120px;
 	}
 	.ranklist-container{
 		height: 456px;
 	}
+	.ranklist-container ul{
+		margin-top: 0;
+	}
 	.ranklist-container li{
-		height: 40px;
+		height: 21px;
+	}
+	.ranklist-container li .city{
+		padding: 0 20px;
 	}
 </style>

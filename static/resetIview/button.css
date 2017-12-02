@@ -72,6 +72,12 @@
 	content: "";
 }
 
+
+.ivu-input-group-append, .ivu-input-group-prepend{
+	background-color:#0089f0;
+	color: #fff;
+	border: 1px solid #0089f0;
+}
 /*全局tab样式 button组件中有例子*/
 .my-tab{
 	display: inline-block;
@@ -83,9 +89,22 @@
 	cursor: pointer;
 	font-size: 12px;
 	font-weight:normal!important;
+	position: relative;
+	border-radius: 4px;
+}
+.my-tab:hover::after{
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.1);
+	color: #ffffff;
+	content: "";
 }
 .my-tab-disabled{
-	background-color:#669bd8;
+	background-color:#0089f0;
 	color: #ffffff;
 	border: 1px solid transparent;
 }

@@ -35,54 +35,64 @@ export default {
             ],
             model1: '',
             columns4: [
-
                 {
                     title: '企业名称',
-                    key: 'name',
-                    width: 200
+                    key: 'n1',
+                    width: 200,
+                    align: 'center'
                 },
                 {
                     title: '上月申报电量(万KW-h)',
-                    key: 'name',
-                    width: 180
+                    key: 'n2',
+                    width: 180,
+                    align: 'center'
                 },
                 {
                     title: '上月用电量(万KW-h)',
-                    key: 'name',
-                    width: 150
+                    key: 'n3',
+                    width: 150,
+                    align: 'center'
                 },
                 {
                     title: '预测电量(万kW-h)',
-                    key: 'name',
-                    width: 150
+                    key: 'n4',
+                    width: 150,
+                    align: 'center'
                 },
                 {
                     title: '申报电量(万kW-h)',
-                    key: 'name',
-                    width: 150
+                    key: 'n5',
+                    width: 150,
+                    align: 'center'
                 },
                 {
                     title: '购电量(万kW-h)',
-                    key: 'sale'
+                    key: 'n6',
+                    align: 'center'
                 },{
                     title: '申报时间',
-                    key: 'time'
+                    key: 'n7',
+                    align: 'center'
                 },
                 {
                     title: '申报状态',
-                    key: 'name'
+                    key: 'n8',
+                    align: 'center'
                 },
                 {
                     title: '审核状态',
-                    key: 'name'
+                    key: 'n9',
+                    align: 'center'
                 },
                 {
                     title: '确认人',
-                    key: 'name'
+                    key: 'n10',
+                    align: 'center'
                 },               
                 {
                     title: '操作',
-                    key: 'change',
+                    key: 'n11',
+                    align: 'center',
                     render: (h, params) => {
                         return h('div', [
                             h('span', {
@@ -126,10 +136,30 @@ export default {
             ],
             data4: [
                 {
-                    name: '河南众企联合售电有限公司'
+                    n1: '河南众企联合售电有限公司',
+                    n2: '-',
+                    n3: '-',
+                    n4: '-',
+                    n5: '-',
+                    n6: '-',
+                    n7: '-',
+                    n8: '-',
+                    n9: '-',
+                    n10: '-',
+                    n11: '-'
                 },
-                {                
-                    name: '河南众企联合售电有限公司'
+                {
+                    n1: '河南众企联合售电有限公司',
+                    n2: '-',
+                    n3: '-',
+                    n4: '-',
+                    n5: '-',
+                    n6: '-',
+                    n7: '-',
+                    n8: '-',
+                    n9: '-',
+                    n10: '-',
+                    n11: '-'
                 },
             ],
             modal8: false,
@@ -195,10 +225,8 @@ export default {
 
 <template>
 <div class="main-container">    
-    <panel >
-        <Row>
-            <h3 class="title-lv2">用户申报</h3>
-        </Row>
+    <Card>
+        <p slot="title">用户申报</p>
         <div class="layout-content">
             <Row class="layout-content-top">          
                 <Row>
@@ -210,8 +238,8 @@ export default {
                             <Option v-for="item in cityList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                         </Select>
                     </Col>
-                    <Col span="6" offset='12'>
-                        <mySearch></mySearch>
+                    <Col span="5" offset='13'>
+                        <mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
                     </Col>
                 </Row>
             </Row>
@@ -220,7 +248,7 @@ export default {
             </Row>
             <myFenye></myFenye>
         </div>
-    </panel>
+    </Card>
     <Modal
         title="12月份电量申报详情"
         v-model="modal8"
@@ -239,9 +267,7 @@ export default {
 .layout-content{
     overflow: hidden;
     background: #fff;
-    border-radius: 4px;
-    padding: 10px;    
-    height: 875px
+    height: 810px;
 }
 .layout-content-top {
     margin-bottom: 15px;

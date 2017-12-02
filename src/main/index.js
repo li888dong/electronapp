@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'development') {
     global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+let mainWindow,isLogin=false;
 const winURL = process.env.NODE_ENV === 'development'
     ? `http://localhost:9080`
     : `file://${__dirname}/index.html`
@@ -17,16 +17,23 @@ function createWindow() {
     /**
      * Initial window options
      */
+    var width = 300,
+        height = 442;
+
     var size = screen.getPrimaryDisplay().workAreaSize;
+    if(isLogin){
+        width = size.width;
+        height = size.height;
+    }
     mainWindow = new BrowserWindow({
-        height: size.height,
-        useContentSize: true,
-        width: size.width,
+        height: height,
+        useContentSize: false,
+        width: width,
         // fullscreen: true,
 
         frame:false,//取消顶部任务栏
-        autoHideMenuBar:true,//取消顶部菜单栏
-        movable:false,
+        // autoHideMenuBar:true,//取消顶部菜单栏
+        // movable:false,
         resizable:false,//不可改变窗口大小
     })
 
@@ -37,6 +44,27 @@ function createWindow() {
     })
 }
 
+ipcMain.on('login-succeed',()=>{
+    isLogin =true;
+    var size = screen.getPrimaryDisplay().workAreaSize;
+    mainWindow.setBounds({
+        x:0,
+        y:0,
+        width:size.width,
+        height:size.height
+    });
+    mainWindow.reload();
+});
+ipcMain.on('login-failed',()=>{
+    isLogin =false
+    var size = screen.getPrimaryDisplay().workAreaSize;
+    mainWindow.setBounds({
+        x:size.width/2 -140,
+        y:size.height/2 -242,
+        width:280,
+        height:484
+    })
+});
 //退出
 ipcMain.on('window-all-closed', () => {
     app.quit();

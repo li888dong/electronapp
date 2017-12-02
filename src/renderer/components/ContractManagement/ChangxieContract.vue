@@ -29,20 +29,18 @@ export default {
 
 <template>
 <div class="main-container">
-    <panel>
-        <Row>
-            <h3 class="title-lv2">长协合同</h3>
-        </Row>
+    <Card>
+        <p slot="title">长协合同</p>
         <div class="hetongList">
             <div class="hetongForm">
                 <ul class="hetongIfno">
+                    <li>平顶山姚梦电厂有限公司</li>
                     <li>合同编号：31654641-7</li>
                     <li>合同年度：2017年度</li>
                     <li>签约电量：10000 MWh</li>
                     <li>业务代表：王辉朝</li>
                     <li>联系电话：18637177720</li>
                     <li>合同状态：已签约</li>
-                    <li>电厂名称：平顶山姚梦电厂有限公司</li>
                     <li class="change">
                         <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
                         <span>
@@ -97,13 +95,13 @@ export default {
             </div>
             <div class="hetongForm">
                 <ul class="hetongIfno">
+                    <li>平顶山姚梦电厂有限公司</li>
                     <li>合同编号：31654641-7</li>
                     <li>合同年度：2017年度</li>
                     <li>签约电量：10000 MWh</li>
                     <li>业务代表：王辉朝</li>
                     <li>联系电话：18637177720</li>
                     <li>合同状态：已签约</li>
-                    <li>电厂名称：平顶山姚梦电厂有限公司</li>
                     <li class="change"><span>修改</span> <span>删除</span></li>
                 </ul>
                 <div class="hetongShuju">
@@ -143,7 +141,7 @@ export default {
             </div>            
             <myFenye></myFenye>            
         </div>        
-    </panel>
+    </Card>
 </div>
 </template>
 
@@ -151,17 +149,17 @@ export default {
 .hetongList {
     height: 875px;
     background-color: #fff;
-    padding: 10px;
     }
 .hetongIfno{
-    height: 44px;
-    background-color: #f2f7fb;
+    height: 50px;
+    background-color: #f8f8f9;
     padding-left: 15px;
     position: relative;
+    font-size: 14px;
 }
 .hetongIfno li{
     float: left;
-    line-height: 44px;
+    line-height: 50px;
     padding-right: 40px;
 }
 .hetongIfno .change{
@@ -205,12 +203,25 @@ export default {
 }
 .hetongData li{
     float: left;
-    padding-right: 75px;
+    width: 100px;
     line-height: 25px;
+    text-align: center;    
+    border-right: 1px solid #e9eaec;
+    border-top: 1px solid #e9eaec;
+}
+.hetongData li:first-child {
+    border-left: 1px solid #e9eaec;
 }
 .hetongNumber li{
     float: left;
-    padding-right: 70px;
-    line-height: 25px;
+    width: 100px;
+    text-align: center;
+    line-height: 25px;    
+    border-right: 1px solid #e9eaec;
+    border-top: 1px solid #e9eaec;
+    border-bottom: 1px solid #e9eaec;
+}
+.hetongNumber li:first-child {
+    border-left: 1px solid #e9eaec;
 }
 </style>

@@ -1,16 +1,25 @@
 <style>
 	.powerTimeFrame {
-		box-sizing: border-box;
-		background-color: #fff;
 		height: 202px;
+	}
+	.title{
+		display: inline-block;
+		height: 20px;
+		line-height: 20px;
+		font-size: 16px;
+		color: #1c2438;
+		font-weight: 700;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 </style>
 <template>
-	<panel class="powerTimeFrame">
-		<h3 class="title-lv3">交易分布</h3>
+	<Card class="powerTimeFrame">
+		<h3 class="title">交易分布</h3>
 		<div id="powerTimeFrame" style="position: absolute;left: 0;top: 0;bottom: 0;right: 0;">
 		</div>
-	</panel>
+	</Card>
 
 </template>
 
@@ -39,7 +48,7 @@
                             type: 'pie',
                             selectedMode: 'single',
                             radius: ['0', '45px'],
-                            center: ['135', '115'],
+                            center: ['135', '105'],
                             itemStyle: {
                                 normal: {
                                     offset:5
@@ -88,7 +97,7 @@
                                     show: false
                                 }
                             },
-                            center: ['135', '115'],
+                            center: ['135', '105'],
                             data: [
                                 {
                                     value: 335,

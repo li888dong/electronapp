@@ -8,6 +8,7 @@
 	            currentPDS:'1',
 		        currentChartType:1,
 		        selectDate:'',
+                timeType:'今天',
 				cldDetail:{
 					zcbj:'1705A0010052',
 					zdh:'1705A0010052',
@@ -151,7 +152,7 @@
                         itemWidth:16,
                         itemHeight:16,
                     },
-                    color: ['#0089f0','#31c9d7'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis:{
                         type: 'category',
                         data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月',],
@@ -330,8 +331,8 @@
 			<panel class="terminal-header">
 				<h3 class="title-lv3">终端详情</h3>
 				<div class="btn-group">
-					<Button type="error" style="height: 28px;line-height: 16px"><router-link to="/caiji-detail" tag="span">数据采集记录</router-link></Button>
-					<Button type="primary" style="height: 28px;line-height: 16px"><router-link to="/add-celiang" tag="span">+配置测量点</router-link></Button>
+					<Button type="primary" style="height: 28px;line-height: 16px" @click="$router.push('caiji-detail')">数据采集记录</Button>
+					<Button type="primary" style="height: 28px;line-height: 16px" @click="$router.push('add-celiang')">+配置测量点</Button>
 				</div>
 			</panel>
 		</Row>
@@ -340,12 +341,12 @@
 				<Row>
 
 					<div class="tab-container">
-						<my-tab v-on:changeSelect="changeSelect('1')" v-bind:type="currentPDS === '1'?'zd':'normal'">10KV配电室-1</my-tab>
-						<my-tab v-on:changeSelect="changeSelect('2')" v-bind:type="currentPDS === '2'?'zd':'normal'">10KV配电室-2  </my-tab>
-						<my-tab v-on:changeSelect="changeSelect('3')" v-bind:type="currentPDS === '3'?'zd':'normal'">10KV配电室-3  </my-tab>
-						<my-tab v-on:changeSelect="changeSelect('4')" v-bind:type="currentPDS === '4'?'zd':'normal'">10KV配电室-4  </my-tab>
-						<my-tab v-on:changeSelect="changeSelect('5')" v-bind:type="currentPDS === '5'?'zd':'normal'">10KV配电室-5 </my-tab>
-						<my-tab v-on:changeSelect="changeSelect('6')" v-bind:type="currentPDS === '6'?'zd':'normal'">10KV配电室-6  </my-tab>
+						<my-tab v-on:changeSelect="changeSelect('1')" v-bind:type="currentPDS === '1'?'disabled':'normal'">10KV配电室-1</my-tab>
+						<my-tab v-on:changeSelect="changeSelect('2')" v-bind:type="currentPDS === '2'?'disabled':'normal'">10KV配电室-2  </my-tab>
+						<my-tab v-on:changeSelect="changeSelect('3')" v-bind:type="currentPDS === '3'?'disabled':'normal'">10KV配电室-3  </my-tab>
+						<my-tab v-on:changeSelect="changeSelect('4')" v-bind:type="currentPDS === '4'?'disabled':'normal'">10KV配电室-4  </my-tab>
+						<my-tab v-on:changeSelect="changeSelect('5')" v-bind:type="currentPDS === '5'?'disabled':'normal'">10KV配电室-5 </my-tab>
+						<my-tab v-on:changeSelect="changeSelect('6')" v-bind:type="currentPDS === '6'?'disabled':'normal'">10KV配电室-6  </my-tab>
 					</div>
 				</Row>
 				<Row>
@@ -420,52 +421,58 @@
 						<div class="power-item" :class="{selected:currentChartType===11}" @click="monitoringShow = true;currentChartType=11">在线监控</div>
 					</Col>
 				</Row>
+				<Row className="terminal-chart-content">
 
-				<div v-show="monitoringShow" class="relative" style="height: 500px">
-					<p style="margin: -10px 0 0 10px;clear: both">今日在线时长 :<span style="color: #0089f0;font-size: 16px;"> 12小时35分36秒</span></p>
-					<div class="chart-main" id="chart-jiankong" style="width: 963px;height: 189px;float: left;">
+					<div v-show="monitoringShow" class="relative" style="height: 500px">
+						<p style="margin: -10px 0 10px 10px;clear: both">今日在线时长 :<span style="color: #0089f0;font-size: 16px;"> 12小时35分36秒</span></p>
+						<div class="chart-main" id="chart-jiankong" style="width: 1000px;height: 189px;float: left;">
 
-					</div>
-					<panel class="unusual-commind fr" style="width: 370px;height: 477px;padding-right: 10px;margin-top: -15px;">
-						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
-						<Table :columns="columns2" :data="tableData2" height="477"></Table>
-					</panel >
-					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
-						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
-						<Table :columns="columns" width="947" :data="tableData1" height="232">
-						</Table>
-					</div>
-				</div>
-				<div v-show="!monitoringShow" class="relative">
-
-					<div class="totalCount">
-						当前月度总电量 :
-						<span style="font-size: 16px;color: #0089f0">123654.00</span>Kw.h
-						<div class="refresh"  style="float: right;margin-right: 20px;">
-							<i class="iconfont icon-shuaxin"></i>
+						</div>
+						<panel class="unusual-commind fr" style="width: 400px;height: 477px;padding-right: 20px;margin-top: -15px;">
+							<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
+							<Table :columns="columns2" :data="tableData2" height="468"></Table>
+						</panel >
+						<div class="shebei-log absolute" style="left: 5px;top: 255px;">
+							<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
+							<Table :columns="columns" width="990" :data="tableData1" height="232">
+							</Table>
 						</div>
 					</div>
-					<div class="select-time">
-						<ul style="position: relative;z-index: 999;left: 40px">
-							<li><span>时间选择 :</span></li>
-							<li><Button type="primary">今天</Button></li>
-							<li><Button type="default">昨天</Button></li>
-							<li><Button type="default">近7天</Button></li>
-							<li><Button type="default">近15天</Button></li>
-							<li><Button type="default">近30天</Button></li>
-							<li> <DatePicker :value="selectDate" type="daterange" placeholder="选择时间区间"></DatePicker></li>
-							<li>
-								<span>时间粒度:</span>
-							</li>
-							<li>
-								<Select style="width: 100px">
-									<Option v-for="item in timeList" :value="item.value" :key="item.value" style="width: 80px">{{ item.label }}</Option>
-								</Select>
-							</li>
-						</ul>
+					<div v-show="!monitoringShow" class="relative">
+
+						<div class="totalCount">
+							当前月度总电量 :
+							<span style="font-size: 16px;color: #0089f0">123654.00</span>Kw.h
+							<div class="refresh"  style="float: right;margin-right: -15px;">
+								<i class="iconfont icon-shuaxin"></i>
+							</div>
+						</div>
+						<div class="select-time">
+							<ul style="position: relative;z-index: 999;left: 30px">
+								<li><span>时间选择 :</span></li>
+								<li>
+									<RadioGroup v-model="timeType" type="button" v-on:on-change="timeTypeSwitch">
+										<Radio label="今天"></Radio>
+										<Radio label="昨天"></Radio>
+										<Radio label="近7天"></Radio>
+										<Radio label="近15天"></Radio>
+										<Radio label="近30天"></Radio>
+									</RadioGroup>
+								</li>
+								<li> <DatePicker :value="selectDate" type="daterange" placeholder="选择时间区间"></DatePicker></li>
+								<li>
+									<span>时间粒度:</span>
+								</li>
+								<li>
+									<Select style="width: 100px">
+										<Option v-for="item in timeList" :value="item.value" :key="item.value" style="width: 80px">{{ item.label }}</Option>
+									</Select>
+								</li>
+							</ul>
+						</div>
+						<div class="chart-main" id="chart-main" style="width: 1640px;height: 430px;"></div>
 					</div>
-					<div class="chart-main" id="chart-main" style="width: 1547px;height: 430px;"></div>
-				</div>
+				</Row>
 			</panel>
 		</Row>
 	</div>
@@ -530,9 +537,12 @@
 		background-color: #fff;
 		margin-top: 15px;
 	}
-
+	.terminal-chart-content{
+		padding-left: 15px;
+		margin-top: 15px;
+	}
 	.select-time{
-		padding:10px 0 10px 400px;
+		padding:10px 0 10px 600px;
 		border-bottom: 1px solid #eee
 	}
 	.terminal-chart li{

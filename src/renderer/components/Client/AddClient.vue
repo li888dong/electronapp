@@ -63,8 +63,8 @@ export default {
 
 <template>
 <div class="AddClient">
-    <div class="AddClientBox">
-        <h3>添加新客户</h3>
+    <Card class="AddClientBox">
+        <p slot="title">添加新客户</p>
         <i-form :model="formItem" :label-width="110">
             <h4>基本信息</h4>
             <Row>
@@ -168,14 +168,14 @@ export default {
                         </i-select>
                     </i-col>
                     <i-col span="2">
-                    <i-select :model.sync="formItem.select" placeholder="请选择">
+                    <i-select :model.sync="formItem.select" placeholder="请选择地区">
                         <i-option value="beijing">北京市</i-option>
                         <i-option value="shanghai">上海市</i-option>
                         <i-option value="shenzhen">深圳市</i-option>
                     </i-select>
                     </i-col>
                     <i-col span="8">
-                        <i-input :value.sync="formItem.input" placeholder="详细通讯地址"></i-input>
+                        <i-input :value.sync="formItem.input" placeholder="请输入详细通讯地址"></i-input>
                     </i-col>
                     <i-col span="2">
                         <i-input :value.sync="formItem.input" placeholder="邮政编码"></i-input>
@@ -185,14 +185,14 @@ export default {
             <Row>
                 <i-col span="8">
                     <Form-item label="联系人">
-                        <i-input :value.sync="formItem.input" placeholder="联系人姓名"></i-input>
+                        <i-input :value.sync="formItem.input" placeholder="请输入联系人姓名"></i-input>
                     </Form-item>
                 </i-col>
             </Row>
             <Row>
                 <i-col span="8">
                     <Form-item label="联系人电话">
-                        <i-input :value.sync="formItem.input" placeholder="联系人手机号码"></i-input>
+                        <i-input :value.sync="formItem.input" placeholder="请输入联系人手机号码"></i-input>
                     </Form-item>
                 </i-col>
                 <i-col span="12" class="hint2">
@@ -202,7 +202,7 @@ export default {
             <Row>
                 <i-col span="8">
                     <Form-item label="电子邮箱">
-                        <i-input :value.sync="formItem.input" placeholder="联系人邮箱号码"></i-input>
+                        <i-input :value.sync="formItem.input" placeholder="请输入联系人邮箱号码"></i-input>
                     </Form-item>
                 </i-col>
                 <i-col span="12" class="hint2">
@@ -213,22 +213,22 @@ export default {
                 <i-col span="8">
                     <Form-item label="办公电话">
                         <i-col span="8">
-                            <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
+                            <i-input :value.sync="formItem.input" placeholder="-"></i-input>
                         </i-col>
                         <i-col span="1" style="text-align: center;line-height: 34px;">-</i-col>    
                         <i-col span="15">
-                            <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
+                            <i-input :value.sync="formItem.input" placeholder="请输入办公电话"></i-input>
                         </i-col>
                     </Form-item>
                 </i-col>
                 <i-col span="8">
                     <Form-item label="传真号码">
                         <i-col span="8">
-                            <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
+                            <i-input :value.sync="formItem.input" placeholder="-"></i-input>
                         </i-col>
                         <i-col span="1" style="text-align: center;line-height: 34px;">-</i-col>    
                         <i-col span="15">
-                            <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
+                            <i-input :value.sync="formItem.input" placeholder="请输入传真号码"></i-input>
                         </i-col>
                     </Form-item>
                 </i-col>
@@ -237,13 +237,13 @@ export default {
                 <i-col span="12" style="text-align: center;line-height: 34px;">
                     <Form-item>
                         <i-button type="primary">保存并添加合同</i-button>
-                        <i-button type="primary">保存</i-button>
-                        <i-button type="ghost" style="margin-left: 8px">取消</i-button>
+                        <i-button type="primary" style="margin-left: 30px">保存</i-button>
+                        <i-button type="ghost" style="margin-left: 30px">取消</i-button>
                     </Form-item>
                 </i-col>
             </Row>
         </i-form>
-    </div>
+    </Card>
 </div>  
 </template>
 
@@ -263,7 +263,7 @@ export default {
 }
 .AddClientBox{
     background-color: #fff;
-    height: 914px;
+    height: 905px;
     overflow: hidden;
 }
 .AddClientBox h3{
@@ -297,6 +297,7 @@ export default {
     color: #ccc;
     top: -12px;
     left: 12px;
+    font-size: 12px;
 }
 .hint2 {
     color: #ccc;

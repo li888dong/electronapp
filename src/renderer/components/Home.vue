@@ -34,7 +34,7 @@
 			</Col>
 			<!--用电时段分布-->
 			<Col span="8">
-				<power-timeframe baseWidth="500"></power-timeframe>
+				<power-timeframe baseWidth="460"></power-timeframe>
 			</Col>
 			<!--交易分步--> 
 			<Col span="7">

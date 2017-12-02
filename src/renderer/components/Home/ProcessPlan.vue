@@ -19,11 +19,11 @@
 	}
 </script>
 <template>
-	<panel class="process-plan">
-		<h3 class="title-lv3">计划进度提醒</h3>
-		<div class="btn-group" @click="toPlanInfo">
+	<Card class="process-plan">
+		<h3 slot="title">计划进度提醒</h3>
+		<span class="se" slot="extra" @click.prevent="toPlanInfo">
 			<i class="iconfont icon-shezhi"></i>
-		</div>
+		</span>
 		<div class="deadline">
 			<p class="nowDate">{{nowDate}} 星期{{week}}</p>
 			<p>距离 <strong>本月竞价</strong> 还有</p>
@@ -32,12 +32,12 @@
 		<div id="rili" @click="toPlanInfo">
 			<home-calendar></home-calendar>
 		</div>
-	</panel>
+	</Card>
 </template>
 <style scoped>
 	/*计划进度提醒*/
 	.process-plan {
-		height: 288px;
+		height: 302px;
 	}
 
 	.process-plan > div {
@@ -45,12 +45,12 @@
 	}
 
 	.process-plan .deadline {
-		height: 225px;
+		height: 203px;
 		width: 140px;
 		background-color: #5ecfb8;
 		position: absolute;
-		top: 45px;
-		left: 40px;
+		top: 67px;
+		left: 16px;
 		padding: 10px;
 		box-sizing: border-box;
 		color: white;
@@ -99,18 +99,13 @@
 		height: 210px;
 		overflow: hidden;
 		position: absolute;
-		top: 45px;
-		left: 211px;
-		bottom:0;
+		top: 64px;
+		left: 194px;
+		bottom: 0;
 		right: 0;
 		border: solid transparent;
 	}
-	.btn-group{
-		width: 20px;
-		height: 20px;
-		margin-top:5px;
-		cursor: pointer;
-	}
+
 	.btn-group i{
 		font-weight:bold;
 		font-size: 20px;

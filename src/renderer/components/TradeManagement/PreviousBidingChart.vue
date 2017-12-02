@@ -4,70 +4,325 @@
         data() {
             return {
                 chartOption2: {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                       tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross'
+                            }
+                        },
                     legend: {
                         data:['电厂报价', '售电公司报价'],
                         icon:'rect',
-                        left:110,
+                        left:0,
                         top:0,
-                        itemWidth:16,
-                        itemHeight:16,
+                        itemWidth: 16,             // 图例图形宽度
                     },
                     grid: {
-                        top:'10%',
-                        left: "5%",
-                        right: "5%",
-                        bottom: '10%',
+                        top:'40',
+                        left: "0",
+                        right: "0",
+                        bottom: '',
                         containLabel: true
                     },
-                    xAxis: [
-                        {
-                            boundaryGap : false,
-                            axisLine: {onZero: false},
+                        xAxis:  {
+                            show:false,
                             type: 'category',
-                            data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0,
-
+                            boundaryGap: false,
+                            data: ['0', '50', '100', '150', '200', '250', '300', '350', '400', '450', '500', '550', '600', '650', '700', '750', '800', '850', '900', '950','1000'],
                             axisLabel: {
-                                color:'#999'
+                                formatter: '{value}kw'
                             },
+                        },
+                        yAxis: {
+                            type: 'value',
+                            axisLabel: {
+                                formatter: '{value}'
+                            },
+                            axisPointer: {
+                                snap: true
+                            },
+                           position:'right',
                             axisLine: {
                                 show: false
                             },
                             axisTick: {
                                 show: false
                             },
-                        }
-                    ],
-//          设置可拖动区间
-                    color: ['#0089f0','#f35e7a'],
-                    series: [
-                        {
-                            name: '电厂报价',
-                            type: 'line',
-                            smooth:true,
-                            itemStyle: {normal: {areaStyle: {type: 'default',opacity:0.3}}},
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
                         },
-                        {
-                            name: '售电公司报价',
-                            type: 'line',
-                            smooth:true,
-                            itemStyle: {normal: {areaStyle: {type: 'default',opacity:0.3}}},
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.9)
-                        },
-                    ]
+                        color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                        series: [
+                            {
+                                name:'电厂报价',
+                                type:'line',
+                                smooth: true,
+                                data: [ 280, 280, 280, 350, 350, 350, 350, 550, 550, 550,550, 390, 390, 600, 600, 600, 600, 600, 600, 400,400],
+                                markLine: {
+                                    symbol:['circle','circle'],
+                                    data: [ [{
+                                        name: '100kw',
+                                        coord:[0,0],
+										itemStyle:{
+                                            normal:{
+                                                color:'#31c9d7',
+											}
+										},
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+										lineStyle:{
+                                            normal:{
+                                                type:'solid',
+												width:2,
+											}
+										}
+                                    }, {
+                                        coord:['150',0],
+                                    }], [{
+                                        name: '300kw',
+                                       coord:['150',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#6ec71e',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['350',0],
+                                    }], [{
+                                        name: '500kw',
+                                       coord:['350',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#fc8b40',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                       coord:['550',0],
+                                    }], [{
+                                        name: '600kw',
+                                       coord:['550',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#818af8',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                       coord:['650',0],
+                                    }] ,[{
+                                        name: '900kw',
+                                        coord:['650',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#0089fc',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['950',0],
+                                    }],[{
+                                        name: '1000kw',
+                                        coord:['950',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#ab7aee',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['1000',0],
+                                    }]  ],
+                                }
+                            }, {
+                                name:'售电公司报价',
+                                type:'line',
+                                smooth: true,
+                                data: [280, 280, 280, 350, 350, 350, 350, 550, 550, 550,550, 390, 390, 600, 600, 600, 600, 600, 600, 400,400].map(i=>i*1.5),
+                                markLine: {
+                                    symbol:['circle','circle'],
+                                    data: [ [{
+                                        name: '100kw',
+                                        coord:[0,0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#31c9d7',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['150',0],
+                                    }], [{
+                                        name: '300kw',
+                                        coord:['150',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#6ec71e',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['350',0],
+                                    }], [{
+                                        name: '500kw',
+                                        coord:['350',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#fc8b40',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['550',0],
+                                    }], [{
+                                        name: '600kw',
+                                        coord:['550',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#818af8',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['650',0],
+                                    }] ,[{
+                                        name: '900kw',
+                                        coord:['650',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#0089fc',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['950',0],
+                                    }],[{
+                                        name: '1000kw',
+                                        coord:['950',0],
+                                        itemStyle:{
+                                            normal:{
+                                                color:'#ab7aee',
+                                            }
+                                        },
+                                        label:{
+                                            normal:{
+                                                position:'middle',
+                                            }
+                                        },
+                                        lineStyle:{
+                                            normal:{
+                                                type:'solid',
+                                                width:2,
+                                            }
+                                        }
+                                    }, {
+                                        coord:['1000',0],
+                                    }]  ],
+                                }
+                            },
+                        ]
                 },
 
             }
@@ -87,24 +342,14 @@
 </script>
 <template>
 	<div class="bid-simulation relative">
-		<div class="fr">
-			<Button type="normal">上一月</Button>
-			<Button type="primary">2017年6月</Button>
-			<Button type="normal">下一月</Button>
-		</div>
-		<div id="bid-previous-chart" style="width: 1150px;height: 263px;"></div>
+		<div id="bid-previous-chart" style="position: absolute;left:0;right:0;bottom:0;top:0;"></div>
 	</div>
 </template>
 <style>
 	.bid-simulation {
-		width: 1190px;
-		height: 303px;
+		width:100%;
+		height:310px;
 		background-color: #fff;
-		margin-bottom: 15px;
-	}
-	.bid-simulation button{
-		background-color: #EAF6FE;
-
 	}
 
 </style>

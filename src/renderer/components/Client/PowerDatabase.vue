@@ -3,6 +3,7 @@
 	    name:'database',
 		data(){
 	        return{
+	            year:'2017年',
                 chartOption2: {
                     tooltip: {
                         trigger: 'axis',
@@ -11,21 +12,21 @@
                         }
                     },
                     legend: {
-                        left:17,
-                        top:20,
+                        left:-5,
+                        top:10,
                         itemWidth:16,
                         itemHeight:16,
                         data:['2017','2016','2015','2014'],
                     },
 	                backgroundColor:'#fff',
                     grid: {
-                        top:'60',
-                        left: '20',
-                        right: '20',
+                        top: 50,
+                        left: 0,
+                        right: 0,
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#f35e7a','#fc8b40','#ab7aee','#31c9d7','#6ec71e','#14d86b','#818af8','#edb00d'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: [
                         {
                             type:'category',
@@ -167,42 +168,44 @@
 	<div class="client-container">
 		<Row>
 			<Col span="24">
-				<panel>
-					<h3 class="title-lv2">历史用电量趋势</h3>
-					<div class="history-chart-container" id="historyChart">
-					</div>
-				</panel>
+				<Card>
+					<h3 slot="title">历史用电量趋势</h3>
+					<Row>
+
+						<div class="history-chart-container" id="historyChart">
+						</div>
+					</Row>
+				</Card>
 			</Col>
 		</Row>
 
 		<Row className="mgt_15">
-			<panel class="history-table-container">
-				<h3 class="title-lv2">历史用电量数据</h3>
-				<div class="btn-group">
-					<Button type="primary">2017年</Button>
-					<Button type="default">2016年</Button>
-					<Button type="default">2015年</Button>
-					<Button type="default">2014年</Button>
+			<Card class="history-table-container">
+				<h3 slot="title">历史用电量数据</h3>
+				<div slot="extra" class="btn-group">
+					<RadioGroup v-model="year" type="button">
+						<Radio label="2017年"></Radio>
+						<Radio label="2016年"></Radio>
+						<Radio label="2015年"></Radio>
+						<Radio label="2014年"></Radio>
+					</RadioGroup>
 				</div>
-			</panel>
-			<Col span="24">
-				<panel class="table-container">
 
-					<Table :columns="columns6" :data="data5" height="380"></Table>
-				</panel>
-			</Col>
+				<Table :columns="columns6" :data="data5" height="320"></Table>
+
+			</Card>
+
 		</Row>
 	</div>
 </template>
 <style scoped>
 	.history-chart-container{
 		height: 371px;
-		background-color: #fff;
 	}
 	.history-table-container{
-		height: 50px;
+		height:395px;
 	}
-	.table-container{
-		padding:0 10px 10px 10px;
+	.btn-group{
+		margin-top: -8px;
 	}
 </style>

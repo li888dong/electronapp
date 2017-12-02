@@ -26,13 +26,20 @@
                         }
                     },
                     legend: {
-                        left: 18,
-                        top: 5,
+                        left: -5,
+                        top: 0,
                         itemWidth:16,
                         itemHeight:16,
                         data: ['今年', '去年']
                     },
-                    color: ['#0089f0', '#31c9d7'],
+                    grid: {
+                        top: '50',
+                        left: 0,
+                        right: 0,
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: {
                         type: 'category',
                         data: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
@@ -65,13 +72,7 @@
                             boundaryGap: 0
                         }
                     ],
-                    grid: {
-                        top: '50',
-                        left: '20',
-                        right: '40',
-                        bottom: '3%',
-                        containLabel: true
-                    },
+
                     series: [
                         {
                             name: '今年',
@@ -94,14 +95,21 @@
                         }
                     },
                     legend: {
-                        left: 5,
+                        left: -5,
                         top: 0,
-                        orient: 'verital',
                         itemWidth:16,
                         itemHeight:16,
                         data: ['今天', '昨天']
                     },
-                    color: ['#14d86b', '#ca94ec'],
+                    grid: {
+                        top: '60',
+                        left: 0,
+                        right: '0',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+//                    color: ['#14d86b', '#ca94ec'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: {
                         type: 'category',
                         data: ["今天", "昨天"],
@@ -128,13 +136,7 @@
                             show: false
                         },
                     },
-                    grid: {
-                        top: '60',
-                        left: '10',
-                        right: '0',
-                        bottom: '3%',
-                        containLabel: true
-                    },
+
                     series: [
                         {
                             name: '今天',
@@ -162,14 +164,20 @@
                         }
                     },
                     legend: {
-                        left: 5,
+                        left: -5,
                         top: 0,
-                        orient: 'verital',
                         itemWidth:16,
                         itemHeight:16,
                         data: ['本月', '上月']
                     },
-                    color: ['#818af8', '#f35e7a'],
+                    grid: {
+                        top: '60',
+                        left: 0,
+                        right: '0',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: {
                         type: 'category',
                         data: ["本月", "上月"],
@@ -196,13 +204,7 @@
                             show: false
                         },
                     },
-                    grid: {
-                        top: '60',
-                        left: '10',
-                        right: '0',
-                        bottom: '3%',
-                        containLabel: true
-                    },
+
                     series: [
                         {
                             name: '本月',
@@ -257,14 +259,12 @@
 <template>
 	<div class="client-container">
 		<Row>
-			<panel class="data-index">
-				<Row>
-					<h3 class="title-lv3">户号指数</h3>
-				</Row>
+			<Card class="data-index">
+				<h3 slot="title">户号指数</h3>
 				<Row type="flex" justify="space-around" gutter="20">
 					<Col span="3">
 
-						<Row className="data-content">
+						<Row className="data-title">
 							<span class="huhao" style="color: #444444">户号</span>
 						</Row>
 
@@ -414,35 +414,35 @@
 						</Row>
 					</Col>
 				</Row>
-			</panel>
+			</Card>
 		</Row>
 		<Row className="mgt_15" gutter="20">
 			<Col span="16">
-				<panel>
-					<h3 class="title-lv3">日电量同比</h3>
+				<Card>
+					<h3 slot="title">日电量同比</h3>
 					<span class="danwei1">单位:Mw.h</span>
-					<div id="compare-bar-1" style="width: 924px;height: 515px;">
+					<div id="compare-bar-1" style="width: 924px;height: 465px;">
 
 					</div>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="4">
-				<panel>
-					<h3 class="title-lv3">日对比</h3>
+				<Card>
+					<h3 slot="title">日对比</h3>
 					<span class="danwei">单位:Mw.h</span>
 					<div id="compare-bar-2">
 
 					</div>
-				</panel>
+				</Card>
 			</Col>
 			<Col span="4">
-				<panel>
-					<h3 class="title-lv3">月对比</h3>
+				<Card>
+					<h3 slot="title">月对比</h3>
 					<span class="danwei">单位:Mw.h</span>
 					<div id="compare-bar-3">
 
 					</div>
-				</panel>
+				</Card>
 			</Col>
 		</Row>
 	</div>
@@ -462,7 +462,7 @@
 	}
 
 	.data-index .huhao {
-		color: #31c9d7;
+		color:#0089f0;
 	}
 
 	.data-index .trend {
@@ -475,7 +475,7 @@
 	}
 
 	.data-title {
-		background-color: #F6F7FB;
+		background-color: #f2f7fb;
 	}
 
 	.data-content, .data-title {
@@ -487,20 +487,20 @@
 	.danwei1{
 		position: relative;
 		top: 20px;
-		right: 30px;
+		right: 10px;
 		color: #999999;
 		float: right;
 	}
 	.danwei{
 		position: relative;
 		top: 20px;
-		right: 50px;
+		right: 10px;
 		color: #999999;
 		float: right;
 	}
 	#compare-bar-2,
 	#compare-bar-3 {
 		width: 178px;
-		height: 515px;
+		height: 465px;
 	}
 </style>

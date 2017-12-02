@@ -3,48 +3,51 @@
 	    name:'fastboot',
 	    data(){
 	        return{
-
+               show:true,
 	        }
 	    },
 		methods:{
             hideSelf(){
 	            this.$emit('hideSelf')
-	        }
+	        },
+			showFast(){
+                this.show= !this.show;
+			},
 		}
 	}
 </script>
 <template>
-	<div class="fast-boot" @click.self="hideSelf">
+	<div class="fast-boot" @click.self="hideSelf" v-show="show">
 		<div class="item-container">
 			<div class="box" style="background-color: #ab7aee;">
 				<span class="title absolute">星期天 17</span>
 			</div>
-			<div class="box" style="background-color: #0089f0;">
-				<router-link to="/home">
+			<div class="box" style="background-color: #0089f0;" @click="showFast">
+				<router-link   to="/planInfo">
 					<i class="iconfont icon-bianyaqiyunhangpingjia"></i>
 					<span class="title absolute">工作计划</span>
 				</router-link>
 			</div>
 			<br>
-			<div class="box" style="background-color: #5ecfb8;" >
+			<div class="box" style="background-color: #5ecfb8;" @click="showFast">
 				<router-link to="/AddClient">
 					<i class="iconfont icon-tianjiakehu"></i>
 					<span class="title absolute">添加客户</span>
 				</router-link>
 			</div>
-			<div class="box" style="background-color: #14d86b;">
+			<div class="box" style="background-color: #14d86b;" @click="showFast">
 				<router-link to="/add-hetong">
 					<i class="iconfont icon-contract-add-o"></i>
 					<span class="title absolute">添加客户合同</span>
 				</router-link>
 			</div>
-			<div class="box" style="background-color: #6ec71e;">
+			<div class="box" style="background-color: #6ec71e;" @click="showFast">
 				 <router-link to="/AddContractManagement">
 					 <i class="iconfont icon-tianjiaxiaoshoudan"></i>
 					 <span class="title absolute">添加电厂合同</span>
 				 </router-link>
 			</div>
-			<div class="box" style="background-color: #edb00d;">
+			<div class="box" style="background-color: #edb00d;" @click="showFast">
 				<router-link to="/add-celiang">
 					<i class="iconfont icon-diannao"></i>
 					<span class="title absolute">添加终端</span>
@@ -55,19 +58,19 @@
 				<span class="title absolute">申请终端入库</span>
 
 			</div>
-			<div class="box" style="background-color: #f57e6a;">
+			<div class="box" style="background-color: #f57e6a;" @click="showFast">
 				<router-link to="/annual-forecast">
 					<i class="iconfont icon-wenjianxiazai"></i>
 					<span class="title absolute">导入年度预测</span>
 				</router-link>
 			</div>
-			<div class="box" style="background-color: #f35e7a;">
+			<div class="box" style="background-color: #f35e7a;" @click="showFast">
 				<router-link to="/import-data">
 					<i class="iconfont icon-daoru"></i>
 					<span class="title absolute">导入月度预测</span>
 				</router-link>
 			</div>
-			<div class="box" style="background-color: #ab7aee;">
+			<div class="box" style="background-color: #ab7aee;" @click="showFast">
 				<router-link to="/UserForecast">
 					<i class="iconfont icon-shenhe"></i>
 					<span class="title absolute">用户预测审核</span>
@@ -127,5 +130,10 @@
 		display: inline-block;
 		margin-top: 20px;
 		font-size: 32px;
+	}
+	.box a{
+		display: inline-block;
+		width:100%;
+		height:100%;
 	}
 </style>

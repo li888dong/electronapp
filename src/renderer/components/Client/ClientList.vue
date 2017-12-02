@@ -185,7 +185,7 @@
 			    this.setCityList();
 			},
 			gotoZonglan(){
-			    this.$router.push('/zonglan');
+			    this.$router.push('/client-zonglan');
 			},
 			gotoZhishu(){
 			    this.$router.push('/client-compare');
@@ -220,9 +220,8 @@
 </script>
 <template>
 	<Row class="main-container">
-		<panel>
+		<Card>
 			<div class="flex-col" style="height: 905px;">
-
 				<div class="header">
 					<Row>
 						<Col span="2">
@@ -251,21 +250,16 @@
 					<Row className="mgt_15">
 						<Col span="24">
 							<Row>
-								<Col span="6" offset="14">
-									<my-search></my-search>
+								<Col span="5" style="margin-left: 1126px;">
+								<my-search style="text-align: left" placeholder="客户编号或客户名称"></my-search>
 								</Col>
 
-								<Col span="2" offset="1">
-									<Button type="primary" size="large" @click="gotoAddUser">+新增用户</Button>
-								</Col>
+								<Button type="primary" size="large" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
 
-								<Col span="1">
-									<div class="refresh">
+								<Button type="primary" class="refresh" style="margin-left: 7px;">
 
-										<i class="iconfont icon-shuaxin"></i>
-									</div>
-								</Col>
-
+									<i class="iconfont icon-shuaxin"></i>
+								</Button>
 							</Row>
 						</Col>
 					</Row>
@@ -285,7 +279,7 @@
 					</div>
 				</div>
 			</div>
-		</panel>
+		</Card>
 	</Row>
 </template>
 <style scoped>
@@ -294,42 +288,10 @@
 		border-bottom: 1px solid #eeeeee;
 		padding-bottom: 10px;
 	}
-
-	.form-container{
-		margin-bottom: 20px;
-		display: inline-block;
-	}
-	.form-container input[type='search']{
-		display: inline-block;
-		width: 300px;
-		height: 32px;
-		line-height: 1.5;
-		padding: 4px 30px;
-		font-size: 12px;
-		border: 1px solid #dddee1;
-		border-radius: 16px;
-		color: #495060;
-		background-color: #EEEEEE;
-		background-image: none;
-		position: relative;
-		cursor: text;
-		transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
-	}
-
-	.search-container{
-		display: inline-block;
-		vertical-align: middle;
-	}
-	.search-container i{
-		position: relative;
-		z-index: 999;
-		left: 30px;
-		color: #999999;
-	}
-
 	.tab-container{
 		display: inline-block;
 		vertical-align: middle;
+		margin-top: -15px;
 		margin-left: 40px;
 		overflow: hidden;
 	}
@@ -341,7 +303,6 @@
 		cursor: pointer;
 		display: inline-block;
 		vertical-align: middle;
-		margin-top: 16px;
 		margin-left: 73px;
 		color: #4fa8f9;
 	}
@@ -350,7 +311,6 @@
 	}
 	.table-container{
 		flex: 1;
-		margin: 20px 20px 0 20px;
 	}
 	.h_40{
 		height: 40px;

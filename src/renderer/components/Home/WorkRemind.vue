@@ -1,4 +1,5 @@
 <script>
+    import CountTo from 'vue-count-to'
 	export default {
 	    name:'workremind',
 		data(){
@@ -6,24 +7,25 @@
                 electricity: "123",
                 electricityBill: "321"
 	        }
-		}
+		},
+        components:{
+            CountTo
+        }
 	}
 </script>
 <template>
-	<panel class="work-reminder">
-		<h3 class="title-lv3">工作提醒</h3>
-		<ul>
-			<li><span>电量申报</span> <strong class="ft_35c">{{electricity}}</strong></li>
-			<li><span>电费单</span> <strong class="ft_35c">{{electricityBill}}</strong></li>
-			<li><span>电费单</span> <strong class="ft_35c">{{electricityBill}}</strong></li>
-		</ul>
-	</panel>
+	<Card class="work-reminder">
+			<h3 slot="title">工作提醒</h3>
+			<ul>
+				<li><span>电量申报</span> <strong class="ft_35c"><CountTo :startVal='0' :endVal='electricity' :duration='2000'></CountTo></strong></li>
+				<li><span>电费单</span> <strong class="ft_35c"><CountTo :startVal='0' :endVal='electricityBill' :duration='2000'></CountTo></strong></li>
+			</ul>
+	</Card>
 </template>
 <style scoped>
 	/*工作提醒*/
 	.work-reminder {
-		width: 100%;
-		height: 157px;
+		height: 158px;
 	}
 
 	.work-reminder li {
@@ -51,8 +53,9 @@
 		width: 50%;
 	}
 
-	.work-reminder strong {
+	.work-reminder strong span{
 		font-size: 24px;
+		font-weight: bold;
 		color: #108CEE;
 		width: 40%;
 	}

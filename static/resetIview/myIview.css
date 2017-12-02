@@ -2,9 +2,22 @@
 @import "form.css";
 @import "button.css";
 @import "table.css";
-
+@import "Radio.css";
 @import "homeCalendar.css";
 
+.ivu-card{
+	font-size:12px;
+}
+.ivu-card-head{
+	font-size: 14px;
+}
 
-
-
+/*圆角控制*/
+.ivu-select-single .ivu-select-selection,
+.ivu-btn,
+.ivu-input-group-append, .ivu-input-group-prepend,
+.ivu-input,
+.ivu-radio-group-button .ivu-radio-wrapper:first-child,
+.ivu-radio-group-button .ivu-radio-wrapper:last-child{
+	/*border-radius: 0;*/
+}

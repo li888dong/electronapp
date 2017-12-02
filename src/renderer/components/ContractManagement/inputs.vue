@@ -55,6 +55,7 @@ export default {
 </template>
 
 <style>
+
 /* 输入框*/
 .myInput input{
     width: 270px;

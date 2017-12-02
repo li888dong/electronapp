@@ -1,48 +1,49 @@
 <script>
+    import CountTo from 'vue-count-to'
 	export default {
 	    name:"fivedata",
 		data(){
 	        return{
-                offlineWarning: "00",
+                offlineWarning: "999",
                 dataException: "11",
                 powerDeviation: "22",
                 powerFactor: "33",
-                abnormalLoad: "44"
+                abnormalLoad: "4"
 	        }
+		},
+		components:{
+		    CountTo
 		}
 	}
 </script>
 <template>
-	<panel>
-		<Row class-name="five-data" type="flex" justify="space-between" align="middle">
+	<Row class-name="five-data">
+		<Card>
+			<Row type="flex" justify="space-between" align="middle">
 
-			<div class="data-item lxyj"><strong class="offline-warning">{{offlineWarning}}</strong><br><span>离线预警</span></div>
+				<Col span="4" class="data-item lxyj"><strong class="offline-warning"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span>离线预警</span></Col>
 
-			<div class="data-item sjyc"><strong class="data-exception">{{dataException}}</strong><br><span>数据异常</span></div>
+				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='dataException' :duration='2000'></CountTo></strong><span>数据异常</span></Col>
 
-			<div class="data-item dlpc"><strong class="power-deviation">{{powerDeviation}}</strong><br> <span>电量偏差</span></div>
+				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='powerDeviation' :duration='2000'></CountTo></strong><br> <span>电量偏差</span></Col>
 
-			<div class="data-item glys"><strong class="power-factor">{{powerFactor}}</strong><br><span>功率因数</span></div>
+				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='powerFactor' :duration='2000'></CountTo></strong><br><span>功率因数</span></Col>
 
-			<div class="data-item fhyc"><strong class="abnormal-load">{{abnormalLoad}}</strong><br><span>负荷异常</span></div>
+				<Col span="4" class="data-item fhyc"><strong class="abnormal-load"><CountTo :startVal='0' :endVal='abnormalLoad' :duration='2000'></CountTo></strong><br><span>负荷异常</span></Col>
+			</Row>
+		</Card>
 
-		</Row>
-	</panel>
+	</Row>
 </template>
 <style scoped>
 	/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/
-	.five-data {
+
+	.five-data{
 		height: 158px;
-		vertical-align: top;
-		background-color: #fff;
-		padding:0 20px;
 	}
 	.data-item {
-		width: 18%;
-		height: 140px;
+		height: 125px;
 		text-align: center;
-		display: inline-block;
-		vertical-align: top;
 		color: #fff;
 		cursor: pointer;
 	}
@@ -72,10 +73,13 @@
 	/*background: #CFEAFC;*/
 	/*}*/
 
-	.five-data div strong {
+	.five-data div strong span{
 		font-size: 64px;
+		display: inline-block;
+		text-align: center;
+		width: 100%;
 	}
-	.five-data div span{
+	.five-data div>span{
 		opacity: 0.7;
 		font-weight:300;
 	}

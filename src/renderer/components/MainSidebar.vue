@@ -79,16 +79,15 @@
                             <i class="iconfont icon-shebei1"></i>
                             设备管理
                         </template>
-
-
                         <MenuItem name="4-1" @click.native="$router.push('equipment')">
                             <li><i class="iconfont icon-shebei"></i><span> &nbsp;设备概况</span></li>
                         </MenuItem>
                         <MenuItem name="4-2" @click.native="$router.push('AssetInfo')">
                             <li><i class="iconfont icon-lifangti"></i><span> &nbsp;资产信息</span></li>
-
                         </MenuItem>
-
+                        <MenuItem name="4-3" @click.native="$router.push('EquipmentStatus')">
+                            <li><i class="iconfont icon-lifangti"></i><span> &nbsp;统计日志</span></li>
+                        </MenuItem>
                     </Submenu>
                     <MenuItem name="03" @click.native="$router.push('index-compare')">
                         <li>

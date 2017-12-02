@@ -4,8 +4,8 @@
 	}
 </style>
 <template>
-	<panel class="relative">
-		<span style="font-size: 14px;font-weight: bold;position: absolute;top: 5px;left: 15px;width: 100px;">有功功率</span>
+	<Card class="relative">
+		<h3 slot="title" style="position: absolute;top: 5px;left: 15px;">有功功率</h3>
 		<div @click="modal3 = true;drawModal1()" style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
 			<Icon type="qr-scanner"></Icon> &nbsp;全屏
 		</div>
@@ -19,10 +19,10 @@
 
 			</div>
 		</Modal>
-		<div id="lineChart3" :style="{width: '449px', height: '253px'}">
+		<div id="lineChart3" :style="{width: '449px', height: '183px'}">
 
 		</div>
-	</panel>
+	</Card>
 
 </template>
 
@@ -43,22 +43,17 @@
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
-                    legend: {
-                        left:20,
-                        top:22,
-                        itemWidth:16,
-                        itemHeight:16,
-                    },
+
                     grid: {
-                        top:'40',
-                        left: 15,
-                        right: 20,
-                        bottom: '6%',
+                        top:5,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
                         containLabel: true
                     },
                     xAxis: [
                         {
-                            boundaryGap : false,
+                            boundaryGap : true,
                             axisLine: {onZero: false},
                             type: 'category',
                             data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
@@ -82,7 +77,7 @@
                         }
                     ],
 //          设置可拖动区间
-                    color:['#48C3F3'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     dataZoom:{
                         bottom:-3,
                         start:0,
@@ -119,7 +114,7 @@
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#48C3F3','#31c9d7','#f35e7a','#6ec71e','#f57e6a','#818af8'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: [
                         {
                             type:'category',

@@ -3,6 +3,7 @@
         name:'clientsidebar',
         data(){
             return{
+                selectedName:'河南众企联合',
                 companyList:[
                     {
                         name:'河南众企联合',
@@ -15,7 +16,22 @@
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司asdasdasdasdasdsad',
+                        name:'河南众企联合售电有限公司驻马点城市观察呢个',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司1',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司2',
+                        id:'123456789987654321',
+                        avatar:''
+                    },
+                    {
+                        name:'河南众企联合售电有限公司3',
                         id:'123456789987654321',
                         avatar:''
                     },
@@ -25,118 +41,108 @@
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司4',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司5',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司6',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司7',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司8',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司11',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司22',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司33',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司44',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司55',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司66',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司77',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司nn',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司aa',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司ss',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司dd',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司f',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司ee',
                         id:'123456789987654321',
                         avatar:''
                     },
                     {
-                        name:'河南众企联合售电有限公司',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司',
+                        name:'河南众企联合售电有限公司sl',
                         id:'123456789987654321',
                         avatar:''
                     },
                 ]
             }
-        }
+        },
+	    methods:{
+            changeCompany(name){
+                this.selectedName = name
+            }
+	    }
     }
 </script>
 <template>
@@ -147,19 +153,21 @@
 		</div>
 		<div class="company-list">
 			<ul>
-				<li class="relative" v-for="item in companyList">
-					<Row>
-						<!--<Col span="4">-->
+				<template v-for="item in companyList">
+
+					<li class="relative" v-bind:class="{selected:selectedName == item.name}" @click="changeCompany(item.name)">
+						<Row>
+							<!--<Col span="4">-->
 							<!--<div class="avator">-->
-								<!--<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>-->
+							<!--<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>-->
 							<!--</div>-->
-						<!--</Col>-->
-						<Col span="24">
+							<!--</Col>-->
+							<Col span="24">
 							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>
-							<p v-bind:title="item.id" class="company-id">{{item.id}}</p>
-						</Col>
-					</Row>
-				</li>
+							</Col>
+						</Row>
+					</li>
+				</template>
 			</ul>
 		</div>
 	</div>
@@ -196,9 +204,16 @@
 		overflow-y: scroll;
 		overflow-x: hidden;
 	}
+	.company-list ul:hover::-webkit-scrollbar{
+		width: 5px;
+		/*滚动条宽度（右侧滚动条）*/
+		height: 5px;
+		/*滚动条高度（底部滚动条）*/
+		background-color: #eeeeee;
+	}
 	/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 	.company-list ul::-webkit-scrollbar{
-		width: 5px;
+		width: 0px;
 		/*滚动条宽度（右侧滚动条）*/
 		height: 5px;
 		/*滚动条高度（底部滚动条）*/
@@ -218,27 +233,33 @@
 		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
 		background-color: #ccc;
 	}
-	.company-list li:nth-of-type(1){
+	.company-list li.selected{
 		background-color: #E0EBF7;
+		border-left: 4px solid #108CEE !important;
+		border-top: solid 1px #eee;
+		color: #108CEE ;
 	}
 	.company-list li{
 		width: 100%;
-		height: 76px;
+		min-height: 40px;
 		overflow: hidden;
-		line-height: 38px;
+		border-left: 4px solid transparent;
+		border-top: solid 1px transparent;
 		border-bottom: solid 1px #eee;
+		box-sizing: border-box;
 		cursor: pointer;
+
+	}
+	.company-list li:hover{
+		background-color: #E0EBF7;
+		color: #108CEE ;
 	}
 	.company-list li p{
-		padding-left: 15px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		width: 90%;
+		padding: 10px 0 10px 15px;
+		margin-left: 5px;
 	}
 	.company-name{
-		font-size: 14px;
-		font-weight: bold;
+		font-size: 12px;
 	}
 	.company-id{
 		color: #999;

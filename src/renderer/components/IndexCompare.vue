@@ -3,6 +3,7 @@
         name: 'indexCompare',
         data() {
             return {
+                dateType:'90天',
                 indexData: {
                     shijiliang: '12311.00',
                     shijiTongbi: '12.21%',
@@ -14,23 +15,34 @@
                     goudianTongbi: '12.21%',
                     goudianHuanbi: '12.21%',
                 },
-                chartOption2: {
+
+            }
+        },
+	    computed:{
+            chartOption2:function () {
+	            return{
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
-
+                    legend: {
+                        left:-5,
+                        top:0,
+                        itemWidth:16,
+                        itemHeight:16,
+                        data: ['整体趋势','竞价趋势','长协趋势']
+                    },
                     backgroundColor:'#fff',
                     grid: {
-                        top:'40',
-                        left: "5%",
-                        right:'5%',
+                        top:40,
+                        left: 0,
+                        right:20,
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#48C3F3'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: [
                         {
                             type:'category',
@@ -48,7 +60,7 @@
                     ],
                     yAxis: [
                         {
-                            position:'right',
+                            position:'left',
                             type: 'value',
                             boundaryGap: 0,
                             splitArea: {show: false},
@@ -67,32 +79,59 @@
                     },
                     series: [
                         {
-                            name: '河南众企联合售电',
+                            name: '整体趋势',
                             type: 'line',
                             smooth:true,
                             itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
-                        }
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*Math.random().toFixed(2))
+                        },
+                        {
+                            name: '竞价趋势',
+                            type: 'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*Math.random().toFixed(2))
+                        },
+                        {
+                            name: '长协趋势',
+                            type: 'line',
+                            smooth:true,
+                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*Math.random().toFixed(2))
+                        },
                     ]
-                },
-                chartOption1: {
+                }
+            },
+            chartOption1:function () {
+                let hangye=['城镇居民','乡村居民','农林牧渔','工业','建筑业','交通运输、仓储和邮政业','信息传输、计算机服务和软件业','商业、住宿和餐饮业','金融、房地产、商务及居民服务业','公共事业及管理组织','关口','趸售'],
+	                hangyeData=[];
+                for (let i=0;i<12;i++){
+                    hangyeData.push(1000*Math.random().toFixed(2));
+                }
+
+	            return {
 
                     tooltip: {
                         trigger: 'axis'
                     },
                     grid: {
-                        top:'10',
-                        left: '40',
-                        right: '5%',
-                        bottom: '0',
+                        top:20,
+                        left: 0,
+                        right: 20,
+                        bottom: 80,
                         containLabel: true
                     },
                     backgroundColor: '#fff',
                     calculable: true,
                     xAxis: [
                         {
+                            boundaryGap : true,
                             type: 'category',
-                            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                            axisLabel: {
+                                interval: 0,
+                                rotate:20
+                            },
+                            data:hangye
                         }
                     ],
                     yAxis: [
@@ -101,24 +140,28 @@
                             type: 'value'
                         }
                     ],
-                    color: ['#48C3F3'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     series: [
 
                         {
                             name: '行业销量',
                             type: 'bar',
-	                        barWidth:30,
-                            data: [1320, 1132, 601, 234, 120, 90, 20]
+	                        barWidth:'30',
+                            data: hangyeData
                         }
                     ]
-                },
-
+                }
             }
+
         },
         mounted() {
+
             this.drawChart();
         },
         methods: {
+            dateTypeSwitch(type){
+                console.log(type)
+            },
             drawChart() {
                 // 基于准备好的dom，初始化echarts实例
                 let trendChart = this.$echarts.init(document.getElementById('trendChart'));
@@ -127,7 +170,8 @@
                 // 基于准备好的dom，初始化echarts实例
                 let rateChart = this.$echarts.init(document.getElementById('rateChart'));
                 // 绘制图表
-                rateChart.setOption(this.chartOption1);
+
+                rateChart.setOption(this.chartOption1,true);
             }
         }
     }
@@ -135,25 +179,23 @@
 <template>
 	<div class="main-container">
 		<Row>
-			<panel class="data-index" style="height: 200px;">
-				<Row>
-					<h3 class="title-lv3">售电量指数概况
-						<small style="color: #999999"> 每月月初会发布上个月度河南区域售电行业整体指数数据</small>
+			<Card class="data-index" style="height: 200px;">
+					<h3 slot="title">售电量指数概况
+						<span style="color: #999999;font-size: 12px;padding-left: 5px;"> 每月月初会发布上个月度河南区域售电行业整体指数数据</span>
 					</h3>
-				</Row>
 				<Row type="flex" justify="space-around" gutter="20">
 					<Col span="3">
 
-						<Row className="data-content">
-							<Button type="primary" size="large"><i class="iconfont icon-dingwei"></i>河南区域</Button>
+						<Row className="data-title">
+							<span>河南区域</span>
 						</Row>
 
 						<Row className="data-content">
-							<span>2017</span>
+							<span>2017年11月</span>
 						</Row>
 
 						<Row className="data-content">
-							<span>2016</span>
+							<span>2017年10月</span>
 						</Row>
 
 					</Col>
@@ -349,61 +391,47 @@
 						</Row>
 					</Col>
 				</Row>
-			</panel>
+			</Card>
 		</Row>
 		<Row className="mgt_15" gutter=20>
 			<Col span="18">
 				<Row>
-					<panel>
-						<Row>
-							<h3 class="title-lv3">售电量指数趋势</h3>
-						</Row>
-						<Row>
-							<Col span="2" offset="1">
-							<Button size="large" type="primary"><i class="iconfont icon-tubiaobingzhuangtu"></i>整体趋势</Button>
-							</Col>
-							<Col span="2" offset="1">
-							<Button size="large" type="normal"><i class="iconfont icon-diannaopcxianshiqi"></i>长协趋势</Button>
-							</Col>
-							<Col span="2" offset="1">
-							<Button size="large" type="normal"><i class="iconfont icon-shouji"></i>竞价趋势</Button>
-							</Col>
-							<Col span="4" offset="10">
-								<span class="circle selected">90天</span>
-								<span class="circle">半年</span>
-								<span class="circle">全部</span>
-							</Col>
-						</Row>
+					<Card>
+
+						<h3 slot="title">售电量指数趋势</h3>
+						<div slot="extra" class="btn-group">
+
+							<RadioGroup v-model="dateType" type="button" v-on:on-change="dateTypeSwitch">
+								<Radio label="90天"></Radio>
+								<Radio label="半年"></Radio>
+								<Radio label="全部"></Radio>
+							</RadioGroup>
+						</div>
+
 						<Row style="height: 240px">
 							<div id="trendChart" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;">
 
 							</div>
 						</Row>
-					</panel>
+					</Card>
 				</Row>
 				<Row className="mgt_15">
-					<panel>
-						<Row>
-							<h3 class="title-lv3">售电量行业占比 </h3>
-						</Row>
-						<Row>
-							<Col span="2" offset="1">
-								<Button size="large" type="primary"><i class="iconfont icon-dingwei"></i>行业占比</Button>
-							</Col>
-						</Row>
+					<Card>
+						<h3 slot="title">售电量行业占比 </h3>
+
 						<Row>
 							<Col span="24">
-								<div id="rateChart" style="height: 300px;">
+								<div id="rateChart" style="height: 360px;">
 
 								</div>
 							</Col>
 						</Row>
-					</panel>
+					</Card>
 				</Row>
 			</Col>
 			<Col span="6">
-			<panel class="ranklist-container">
-				<h3 class="title-lv3">区域参与电量排行</h3>
+			<Card class="ranklist-container">
+				<h3 slot="title">区域参与电量排行</h3>
 				<ul>
 					<li><span class="ranking">1.&nbsp; </span><span class="city">信阳市</span><span class="rate">88.33%</span>
 						<span class="ranklist-bar" :style="{width:200*0.88+'px'}"></span></li>
@@ -425,22 +453,34 @@
 						<span class="ranklist-bar" :style="{width:200*0.05+'px'}"></span></li>
 					<li><span class="ranking">10.&nbsp; </span><span class="city">南阳市</span><span class="rate">1.33%</span>
 						<span class="ranklist-bar" :style="{width:200*0.01+'px'}"></span></li>
+					<li><span class="ranking">3.&nbsp; </span><span class="city">驻马店</span><span class="rate">66.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.66+'px'}"></span></li>
+					<li><span class="ranking">4.&nbsp; </span><span class="city">周口市</span><span class="rate">55.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.55+'px'}"></span></li>
+					<li><span class="ranking">5.&nbsp; </span><span class="city">商丘市</span><span class="rate">44.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.44+'px'}"></span></li>
+					<li><span class="ranking">6.&nbsp; </span><span class="city">三门峡</span><span class="rate">33.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.33+'px'}"></span></li>
+					<li><span class="ranking">7.&nbsp; </span><span class="city">新乡市</span><span class="rate">22.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.22+'px'}"></span></li>
+					<li><span class="ranking">8.&nbsp; </span><span class="city">平顶山</span><span class="rate">11.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.11+'px'}"></span></li>
+					<li><span class="ranking">9.&nbsp; </span><span class="city">郑州市</span><span class="rate">5.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.05+'px'}"></span></li>
+					<li><span class="ranking">10.&nbsp; </span><span class="city">南阳市</span><span class="rate">1.33%</span>
+						<span class="ranklist-bar" :style="{width:200*0.01+'px'}"></span></li>
 				</ul>
-			</panel>
+			</Card>
 			</Col>
 		</Row>
 	</div>
 </template>
 <style scoped>
-	.situation-container{
-		text-align: center;
-		margin-top: 20px;
-	}
 	.ranklist-container{
 		height:680px;
 	}
 	.ranklist-container li {
-		height: 60px;
+		height:34px;
 	}
 	.data-content, .data-title {
 		height: 30px;
@@ -448,22 +488,7 @@
 		text-align: center;
 		margin-top: 10px;
 	}
-	.circle.selected{
-		background-color: #0089F0;
-		color: #ffffff;
-	}
-	.circle{
-		display: inline-block;
-		width: 34px;
-		height: 34px;
-		border-radius: 34px;
-		line-height: 34px;
-		border: 1px solid #cccccc;
-		text-align: center;
-		background-color: #eeeeee;
-		margin-left: 10px;
-		cursor: pointer;
-	}
+
 	/*数据指数*/
 	.data-index {
 		height: 295px;
@@ -489,6 +514,9 @@
 	}
 
 	.data-title {
-		background-color: #F6F7FB;
+		background-color: #f2f7fb;
+	}
+	.btn-group{
+		margin-top: -8px;
 	}
 </style>

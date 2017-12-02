@@ -67,7 +67,7 @@
 	                },
 	                {
 	                    title:'签约日期',
-		                key:'qydl'
+		                key:'qyrq'
 	                },
 	                {
 	                    title:'执行日期',
@@ -136,6 +136,44 @@
                         all:'1',
                     },
                 ],
+                data2:[
+					{
+                        htbh:'-',
+                        dcmc:'-',
+                        qydl:'-',
+                        qyrq:'-',
+                        zxrq:'-',
+                        lxr:'-',
+                        lxdh:'-',
+                        ck:'-'
+					}
+				],
+                timeList: [
+                    {
+                        value: 'beijing',
+                        label: '2011'
+                    },
+                    {
+                        value: 'shanghai',
+                        label: '2012'
+                    },
+                    {
+                        value: 'shenzhen',
+                        label: '2013'
+                    },
+                    {
+                        value: 'hangzhou',
+                        label: '2014'
+                    },
+                    {
+                        value: 'nanjing',
+                        label: '2015'
+                    },
+                    {
+                        value: 'chongqing',
+                        label: '2016'
+                    }
+                ],
                 chartOption: {
                     tooltip: {
                         trigger: 'axis',
@@ -145,16 +183,16 @@
                     },
                     legend: {
                         data: ['电厂1', '电厂2', '电厂3', '电厂4', '电厂5'],
-                        orient: 'vertical',
-                        right: '10',
-	                    bottom:'60'
+						left:'0',
+						right:'0',
+						itemWidth:16,
                     },
-	                color:['#0089f0','#6ec71e','#f57e6a','#fc8b40','#818af8'],
+                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     grid: {
-                        top:'20',
-                        left: '3%',
-                        right: '8%',
-                        bottom: '8%',
+                        top:'40',
+                        left: '0',
+                        right: '0',
+                        bottom: '0',
                         containLabel: true
                     },
                     xAxis: {
@@ -250,40 +288,43 @@
 </script>
 <template>
 	<div class="main-container">
-		<panel>
-			<h3 class="title-lv2">长协统计</h3>
-			<div class="btn-group fr">
-				<Button type="primary">上一年</Button>
-				<Button type="primary">2017年</Button>
-				<Button type="primary">下一年</Button>
-			</div>
-			<div id="cxchart" class="chart-container" style="width: 1550px;height: 300px;">
-
-			</div>
-
-		</panel>
+		<Row>
+			<Card>
+				<h3 slot="title">长协统计</h3>
+				<div slot="extra" class="btn-group">
+					<Button class="Button" type="primary">上一年</Button>
+					<i-select :model.sync="model1" style="width:100px" placeholder='年度选择'>
+						<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
+					</i-select>
+					<Button class="Button" type="primary">下一年</Button>
+				</div>
+				<div class="chart-container">
+					<div id="cxchart" style="width:100%;height: 100%;">
+					</div>
+				</div>
+			</Card>
+		</Row>
 		<Row className="mgt_15">
 
 			<Table :columns="columns6" :data="data5"  height="180"></Table>
 		</Row>
-		<panel class="mgt_15" >
-			<Row>
-
-				<h3 class="title-lv2">签约统计</h3>
-				<div class="btn-group fr">
-					<Button type="primary">长协合同</Button>
-				</div>
-			</Row>
-			<Row className="mgt_15">
-				<div style="height: 300px;">
-
-					<Table :columns="column2" ></Table>
-					<div class="page-container">
-						<Page :total="100"></Page>
+		<Row class="mgt_15">
+			<Card class="relative">
+					<h3 slot="title">签约统计</h3>
+					<div slot="extra" class="btn-group">
+						<Button type="primary"  @click.native="$router.push('ContractManagement')">长协合同</Button>
+					</div>
+					<div style="height: 230px;">
+						<Table :columns="column2" :data="data2"></Table>
+					</div>
+				<div class="page-center">
+					<!--分页-->
+					<div class="fenYe">
+						<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
 					</div>
 				</div>
-			</Row>
-		</panel>
+			</Card>
+		</Row>
 	</div>
 </template>
 <style scoped>
@@ -295,5 +336,37 @@
 
 	.fr{
 		clear: both;
+	}
+	.chart-container{
+		height: 300px;
+	}
+	.btn-group{
+		margin-top:-9px;
+		z-index:10;
+	}
+	.relative .page-center{
+		text-align: center;
+		position: absolute;
+		bottom: 0;
+		left:0;
+		right:0;
+	}
+	/* 分页的样式 */
+	.page-center  .fenYe {
+		width: 100%;
+		height: 60px;
+		background-color: #fff;
+		padding-top: 10px;
+		text-align: center;
+	}
+	.fenYe table{
+		border: 0;
+	}
+	.fenYe ul {
+		display: inline-block;
+	}
+	.fenYe button{
+		top: -12px;
+		left: 12px;
 	}
 </style>
