@@ -130,6 +130,15 @@
             }
         },
         mounted() {
+            this.$http.post(this.$api.BID_FRAME,{com_id:this.$store.getters.com_id,type:'内圈'})
+                .then(res => {
+                    console.log('交易分布',res)
+                }, err => {
+                    this.$api.errcallback(err)
+                })
+                .catch(err=>{
+                    this.$api.errcallback(err)
+                })
             this.drawLine(this.chartOption2);
         },
         methods: {

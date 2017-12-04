@@ -29,11 +29,11 @@
 				<div class="days">
           <span v-for="(item, index) in renderData"
                 :class="{
-            weekend: index % 7 === 0 || index % 7 === 6, 
+            weekend: index % 7 === 0 || index % 7 === 6,
             unselect: unselectArr.includes(index),
             select1: item === truePlanDate.plan1,
             select2: item === truePlanDate.plan2,
-            select3: item === truePlanDate.plan3,
+            select3: item >= truePlanDate.plan3_start&&item <= truePlanDate.plan3_end,
             select4: item === truePlanDate.plan4,
           }"
                 @click="changeSelectDay(index)">
@@ -77,7 +77,7 @@
             containerStyle: { //组件容器样式
                 type: Object
             },
-            planDate:{
+            planDate: {
                 type: Object
             }
         },
@@ -131,8 +131,8 @@
             }
         },
         computed: {
-            truePlanDate:function () {
-	            return this.planDate
+            truePlanDate: function () {
+                return this.planDate
             },
             trueSelectYear: function () {
                 if (this.selectYear < this.limit.minYear) return this.limit.minYear;

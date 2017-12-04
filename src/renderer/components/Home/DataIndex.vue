@@ -20,6 +20,17 @@
 		        trendUp:true,
 		        trendDown:true
 	        }
+		},
+		mounted(){
+            this.$http.post(this.$api.DATA_INDEX,{com_id:this.$store.getters.com_id})
+                .then(res => {
+                    console.log('数据指数',res)
+                }, err => {
+                    this.$api.errcallback(err)
+                })
+                .catch(err=>{
+                    this.$api.errcallback(err)
+                })
 		}
 	}
 </script>

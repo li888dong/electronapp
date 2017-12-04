@@ -147,11 +147,14 @@ export default {
 <template>
 <div class="main-container"> <!-- 这是设备资产信息页面 -->
     <Card>
+        <div slot="title">
+        <Button type="primary">申请设备入库</Button>
+               
+        </div>
+        <div slot="extra">
+             <mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
+        </div>
         <div class="AssetInfo">
-            <div class="AssetInfoSearch">
-                <Button type="primary" class="fl">申请设备入库</Button>
-                <mySearch class="fr" placeholder="请输入公司名称或关键字" swidth="340"></mySearch>        
-            </div>
             <Row class="AssetInfoForm">
                 <Col span='24'>
                     <Table border :columns='columns1' :data='data1'></Table>
@@ -168,7 +171,7 @@ export default {
 <style scoped>
 
 .AssetInfo{
-    height: 862px;
+    height: 800px;
     background-color: #fff;
 }
 

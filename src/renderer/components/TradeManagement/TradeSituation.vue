@@ -243,100 +243,108 @@
 		<Row class="mgt_15">
 			<Card class="height_3 relative">
 				<h3 slot="title" class="title-lv3">发电集团剩余电量</h3>
-				<Row gutter="15">
-					<Col span="12">
-					<table class="mytable" cellspacing="0">
-						<tr>
-							<th>公司名称</th>
-							<th>用电方式</th>
-							<th>电量</th>
-							<th>每小时消耗电量</th>
-							<th>剩余电量</th>
-							<th>消耗电量</th>
-						</tr>
-						<tr>
-							<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-							<td>风电</td>
-							<td>100WKw</td>
-							<td>100.00Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>汕头华能南澳风力发电有限公司</td>
-							<td>燃机</td>
-							<td>23WKw</td>
-							<td>382.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>孟州市电厂</td>
-							<td>光伏</td>
-							<td>1221WKw</td>
-							<td>32.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>中国国电集团公司荆门热电厂</td>
-							<td>风电</td>
-							<td>231WKw</td>
-							<td>322.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-					</table>
-					</Col>
-					<Col span="12">
-					<table class="mytable" cellspacing="0">
-						<tr>
-							<th>公司名称</th>
-							<th>用电方式</th>
-							<th>电量</th>
-							<th>每小时消耗电量</th>
-							<th>剩余电量</th>
-							<th>消耗电量</th>
-						</tr>
-						<tr>
-							<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-							<td>风电</td>
-							<td>100WKw</td>
-							<td>100.00Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>汕头华能南澳风力发电有限公司</td>
-							<td>燃机</td>
-							<td>23WKw</td>
-							<td>382.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>孟州市电厂</td>
-							<td>光伏</td>
-							<td>1221WKw</td>
-							<td>32.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-						<tr>
-							<td>中国国电集团公司荆门热电厂</td>
-							<td>风电</td>
-							<td>231WKw</td>
-							<td>322.12Mw时</td>
-							<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-							<td>12315.23Kw时</td>
-						</tr>
-					</table>
-					</Col>
-				</Row>
-				<div class="page-center">
-					<!--分页-->
-					<div class="fenYe">
-						<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
+				<div slot="extra">
+				   <Select placeholder="选择发电集团" style='width:150px;' class='chooseBtn'>
+				     <Option value='1'>
+				     1
+				     </Option>
+				   </Select>
+				</div>
+						<Row gutter='15'>
+							<Col span="12">
+							<table class="mytable" cellspacing="0">
+							<tr>
+								<th>公司名称</th>
+								<th>用电方式</th>
+								<th>电量</th>
+								<th>每小时消耗电量</th>
+								<th>剩余电量</th>
+								<th>消耗电量</th>
+							</tr>
+							<tr>
+								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
+								<td>风电</td>
+								<td>100WKw</td>
+								<td>100.00Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>汕头华能南澳风力发电有限公司</td>
+								<td>燃机</td>
+								<td>23WKw</td>
+								<td>382.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>孟州市电厂</td>
+								<td>光伏</td>
+								<td>1221WKw</td>
+								<td>32.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>中国国电集团公司荆门热电厂</td>
+								<td>风电</td>
+								<td>231WKw</td>
+								<td>322.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+						</table>
+						</Col>
+						<Col span="12">
+						  <table class="mytable" cellspacing="0">
+							<tr>
+								<th>公司名称</th>
+								<th>用电方式</th>
+								<th>电量</th>
+								<th>每小时消耗电量</th>
+								<th>剩余电量</th>
+								<th>消耗电量</th>
+							</tr>
+							<tr>
+								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
+								<td>风电</td>
+								<td>100WKw</td>
+								<td>100.00Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>汕头华能南澳风力发电有限公司</td>
+								<td>燃机</td>
+								<td>23WKw</td>
+								<td>382.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>孟州市电厂</td>
+								<td>光伏</td>
+								<td>1221WKw</td>
+								<td>32.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+							<tr>
+								<td>中国国电集团公司荆门热电厂</td>
+								<td>风电</td>
+								<td>231WKw</td>
+								<td>322.12Mw时</td>
+								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
+								<td>12315.23Kw时</td>
+							</tr>
+						</table>
+						</Col>
+						</Row>
+					<div class="page-center">
+						<!--分页-->
+						<div class="fenYe">
+							<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
+						</div>
 					</div>
 				</div>
 			</Card>
@@ -516,5 +524,9 @@ table,th,tr,td{
 		content:'';
 		display: block;
 		clear: both;
+	}
+	.chooseBtn{
+		margin-top: -8px;
+		z-index: 10;
 	}
 </style>

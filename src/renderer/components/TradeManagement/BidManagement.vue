@@ -190,7 +190,6 @@
 				 <Radio label="添加需求侧价格"></Radio>
 				 </Radio-group>
 				 </div>
-				 <div class="container">
 				 <div class="input-container">
 				 <Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="电厂名称" v-model="dcmc" style="width:120px;"></Input>
 				 <Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="供应量" v-model="gyl" style="width:75px;margin-right:4px;margin-left:4px;"></Input>
@@ -207,7 +206,6 @@
 				 <li class="baojia">{{mockData.baojia}}</li>
 				 <li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
 				 </ul>
-				 </div>
 				 </Card>
 			 </Col>
 			 </Row>
@@ -229,9 +227,6 @@
 	</div>
 </template>
 <style scoped>
-	.input-container{
-		margin-top: 15px;
-	}
 	.input-container input{
 		border: 1px solid #999999;
 		margin-left: 10px;

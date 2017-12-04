@@ -175,6 +175,7 @@
 <style scoped>
 	.client-sidebar{
 		background-color: #fff;
+		margin: 3px;
 	}
 	.search{
 		width: 100%;

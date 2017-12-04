@@ -17,7 +17,39 @@
 		methods:{
 		    hoverCity(params){
 		        console.log(params.name)
+		    },
+			searchCustomer(){
+                this.$http.post(this.$api.CLIENT_SEARCH,{keyword:'众企联合',Type:'检索客户'}).then(res=>{
+                    console.log('检索客户',res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                });
+			},
+		    customersTop10(){
+                 this.$http.post(this.$api.CLIENT_TOP10).then(res=>{
+                 	    console.log('客户总量top10',res);
+                 },err=>{
+                 	  this.$api.errcallback(err);
+                 }).catch(err=>{
+                 	this.$api.errcallback(err);
+                 });
+		    },
+		    customersDisArea(){
+		    	this.$http.post(this.$api.CLIENT_DIS).then(res=>{
+		    		console.log('客户分布区域',res);
+		    	},err=>{
+		    		this.$api.errcallback(err);
+		    	}).catch(err=>{
+                    this.$api.errcallback(err);
+		    	})
 		    }
+		},
+		mounted(){
+			this.customersTop10();
+			this.customersDisArea();
+			this.searchCustomer();
 		}
 	}
 </script>

@@ -85,20 +85,7 @@
                                         }
                                     }
 
-                                }, '编辑'),
-                                h('span', {
-                                    style: {
-                                        marginRight: '5px',
-                                        color: '#36c',
-                                        cursor: 'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-
-                                        }
-                                    }
-
-                                }, '生成月电量数据')
+                                }, '编辑')
                             ]);
                         }
 

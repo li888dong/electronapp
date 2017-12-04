@@ -237,10 +237,22 @@
             }
         },
         mounted() {
+            this.doAjax();
             this.initData();
             this.drawLine(this.chartOption1);
         },
         methods: {
+            doAjax(){
+                this.$http.post(this.$api.CLIENT_CURVE_3,{cus_id:this.$store.getters.cus_id,type:'负荷'})
+                    .then(res => {
+                        console.log('负荷曲线',res)
+                    }, err => {
+                        this.$api.errcallback(err)
+                    })
+                    .catch(err=>{
+                        this.$api.errcallback(err)
+                    })
+            },
             powerRealtimeTypeSwitch(type) {
                 this.powerRealtimeType = type
             },

@@ -48,7 +48,7 @@ input,select,textarea,option{
 }
 .main-container{
 	height: 895px;
-	margin:20px;
+	margin:20px 20px 0 20px;
 	overflow: hidden;
 	z-index: 998;
 }

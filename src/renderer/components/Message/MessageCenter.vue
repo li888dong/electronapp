@@ -78,7 +78,7 @@
     }
 </script>
 <template>
-		<Card class="relative main-container">
+		<Card class="relative main-container msg-center">
 			<h3 slot="title" class="title">{{msgSource}} <span>（{{msgCount}}未读消息）</span></h3>
 			<div class="message-main">
 				<ul id="msg-content">
@@ -121,7 +121,7 @@
 	}
 	.message-main li{
 		border-top:1px solid #eeeeee;
-		padding:30px 40px 20px 20px;
+		padding:20px;
 	}
 	.message-main li:hover{
 		background-color: #eeeeee;
@@ -131,7 +131,6 @@
 	}
 	.message-main li:first-child{
 		border-top:none;
-		padding-top:15px;
 	}
 	.message-main li .warning{
 		display: inline-block;
@@ -209,7 +208,7 @@
 		height:100%;
 		color:#669bd8;
 	}
-	.clear{
+	.clear:after{
 		content:'';
 		display: block;
 		clear: both;

@@ -5,8 +5,34 @@
 		data(){
 	        return{
 				nowDate: new Date().Format('yyyy-MM-dd'),
-		        week:new Date().getWeek(new Date().getDay())
+		        week:new Date().getWeek(new Date().getDay()),
+		        planDate:{
+                    bid_day: "",
+                    fore_cycle: "2017-12-20",
+                    decl_cycle_start: "",
+                    decl_cycle_end: "",
+                    cf_cycle: "",
+                    biddays: 0
+		        }
 	        }
+		},
+        mounted(){
+            this.$http.post(this.$api.PLAN_REMIND,{com_id:this.$store.getters.com_id})
+                .then(res => {
+                    console.log('计划进度',res);
+                    this.planDate.bid_day = res.data[0].bid_day;
+                    this.planDate.fore_cycle_start = res.data[0].fore_cycle.split('\/')[0];
+                    this.planDate.fore_cycle_end = res.data[0].fore_cycle.split('\/')[1];
+                    this.planDate.decl_cycle = res.data[0].decl_cycle;
+                    this.planDate.cf_cycle = res.data[0].cf_cycle;
+                    this.planDate.biddays = res.data[0].biddays;
+
+                }, err => {
+                    this.$api.errcallback(err)
+                })
+                .catch(err=>{
+                    this.$api.errcallback(err)
+                })
 		},
 		components:{
             'home-calendar':HomeCalendar
@@ -27,10 +53,10 @@
 		<div class="deadline">
 			<p class="nowDate">{{nowDate}} 星期{{week}}</p>
 			<p>距离 <strong>本月竞价</strong> 还有</p>
-			<span class="count-down">20</span><span>天</span>
+			<span class="count-down">{{planDate.biddays}}</span><span>天</span>
 		</div>
 		<div id="rili" @click="toPlanInfo">
-			<home-calendar></home-calendar>
+			<home-calendar :planDate="planDate" ></home-calendar>
 		</div>
 	</Card>
 </template>

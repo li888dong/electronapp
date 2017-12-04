@@ -1,4 +1,5 @@
 const state = {
+    cus_id:1,
     currentCity:'zz',
     cityList: {
         zz: {
@@ -124,6 +125,9 @@ const mutations = {
     },
     setCurrentCity(state ,res){
         state.currentCity = res
+    },
+    setCusId(state ,res){
+        state.cus_id = res||1
     }
 }
 
@@ -141,6 +145,9 @@ const actions = {
     },
     'setCurrentCity':function({commit},res){
         commit('setCurrentCity',res)
+    },
+    'setCusId':function({commit},res){
+        commit('setCusId',res)
     }
 }
 
@@ -157,6 +164,9 @@ export default {
         },
         currentCity:state =>{
             return state.currentCity
+        },
+        cus_id:state =>{
+            return state.cus_id
         }
     }
 }

@@ -1,11 +1,13 @@
 const state = {
-    login:false
+    login:false,
+    com_id:1
 }
 
 const mutations = {
 
     setLogin(state ,res){
-        state.login = res
+        state.login = res[0];
+        state.com_id=res[1]
     }
 }
 
@@ -26,6 +28,9 @@ export default {
     getters: {
         login: state => {
             return state.login
+        },
+        com_id: state=> {
+            return state.com_id
         }
     }
 }

@@ -6,6 +6,7 @@
         name: 'jiexiantu',
         mounted() {
             this.initScroll();
+            this.hookupShow();
         },
         data() {
             return {
@@ -494,8 +495,17 @@
                 mychart.on('click', function (params) {
                     console.log(params)
                 })
+            },
+            hookupShow(){
+                this.$http.post(this.$api.CLIENT_HOOKUP).then(res=>{
+                          console.log(res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
             }
-        }
+        },
     }
 </script>
 <template>

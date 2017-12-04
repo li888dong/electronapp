@@ -1,10 +1,11 @@
 <script>
 	export default {
 	    name:'poweruse',
+		props:['belong'],
 		data(){
 	        return{
-				yigou:95145.66,
-		        yiyong:109000.00,
+				yigou:0,
+		        yiyong:0,
 		        chaochu:0,
 		        piancha:0,
 		        yiyongRate:0,
@@ -12,11 +13,41 @@
 	        }
 		},
 		mounted(){
+            this.doAjax(this.belong);
             this.chaochu=parseInt(Math.max(this.yiyong - this.yigou,0)*100)/100;
 			this.piancha=parseInt((this.chaochu/this.yigou)*100)/100;
-			this.yiyongRate = parseInt((this.yiyong/(Math.max(this.yigou,this.yiyong)+this.chaochu))*100)/100;
+			this.yiyongRate = parseInt((this.yiyong/(Math.max(this.yigou,this.yiyong)+this.chaochu))*100)/100||0;
 			this.chaochuRate = parseInt((this.chaochu/(this.chaochu + this.yigou))*100)/100;
-			console.log(this.yiyong,this.yigou+this.chaochu)
+		},
+		methods:{
+		    doAjax(belong){
+		        if (belong === 'com'){
+                    this.$http.post(this.$api.USED_SCHEDULE,{com_id:this.$store.getters.com_id})
+                        .then(res => {
+                            console.log('公司用电实时进度',res)
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+		        }else if (belong === 'cus'){
+                    this.$http.post(this.$api.CLIENT_USED,{cus_id:this.$store.getters.cus_id})
+                        .then(res => {
+                            console.log('用户用电实时进度',res);
+                            this.yigou = res.data.data.purchase;
+                            this.yiyong = res.data.data.has_used;
+                            this.chaochu = res.data.data.over_used;
+                            this.piancha = res.data.data.used_dev;
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+		        }
+
+		    }
 		}
 	}
 </script>

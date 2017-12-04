@@ -126,14 +126,16 @@ export default {
 <div class="equipment-run">
     <Card class="equipmentBox">
         <h3 slot="title">设备运行状态概况</h3>
+        <div slot='extra'>
+            <RadioGroup class="qieHuan" v-model="isType" v-on:on-change='isShow' type="button">
+            <Radio label='1'>终端在线率曲线</Radio>
+            <Radio label='2'>实时采集量统计</Radio>
+        </RadioGroup>
+        </div>
         <!-- 折线图盒子 -->
         <Col span="24">
             <div id="runChart" :style="{width: '100%', height: '220px'}"></div>
         </Col>
-        <RadioGroup class="qieHuan" v-model="isType" v-on:on-change='isShow' type="button">
-            <Radio label='1'>终端在线率曲线</Radio>
-            <Radio label='2'>实时采集量统计</Radio>
-        </RadioGroup>
     </Card>
 </div>
 </template>
@@ -146,8 +148,7 @@ export default {
         height: 290px;
     }
     .qieHuan {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+        margin-top: -8px;
+        z-index: 10px;
     }
 </style>

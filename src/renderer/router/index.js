@@ -160,7 +160,7 @@ export default new Router({
                         },
                         {
                             path: '*',
-                            redirect: '/client-detail'
+                            redirect: '/client-zonglan'
                         }
                     ]
                 },

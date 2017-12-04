@@ -1,5 +1,13 @@
 import Vue from 'vue'
+
+// 网络请求配置
 import axios from 'axios'
+import * as api from './Api'
+const instance = axios.create({
+    baseURL:"http://192.168.2.111/",
+    timeout:3000
+});
+
 // 引入echarts
 import echarts from 'echarts'
 // 引入iview
@@ -26,7 +34,8 @@ Vue.use(iView);
 Vue.use(iviewArea);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = axios
+Vue.http = Vue.prototype.$http = instance
+Vue.api = Vue.prototype.$api = api
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
 Vue.component('my-tab',MyTab);

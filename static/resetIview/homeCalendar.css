@@ -36,9 +36,28 @@
 
 }
 .calendar-input-container #calendar .days span.select3{
-	background-color: #f56e6a!important;
-	border-radius: 50%!important;
-	color: white!important;
+	position: relative;
+}
+/*.calendar-input-container #calendar .days span.select3::after{*/
+	/*content: "";*/
+	/*position: absolute;*/
+	/*display: inline-block;*/
+	/*width: 5px;*/
+	/*height: 5px;*/
+	/*left: 0;*/
+	/*top: 0;*/
+	/*border-radius: 50%!important;*/
+	/*background-color: #F78181;*/
+/*}*/
+.calendar-input-container #calendar .days span.select3::after{
+	content: "";
+	position: absolute;
+	display: inline-block;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border-bottom: 2px solid #F78181;
 }
 .calendar-input-container #calendar .days span.select4{
 	background-color: #fc8b40!important;

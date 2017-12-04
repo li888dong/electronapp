@@ -163,7 +163,8 @@
             }
         },
 	    mounted(){
-			this.reqData()
+			this.reqData();
+            this.clientList();
 	    },
 	    computed:{
             cityList() {
@@ -213,7 +214,16 @@
 	        },
 	        setCityList(){
                 this.$store.dispatch('setCityList','zz')
-	        }
+	        },
+            clientList(){
+                this.$http.post(this.$api.CLIENT_LIST,{com_id:this.$store.getters.com_id}).then(res=>{
+                    console.log('客户列表',res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            }
         },
 
     }

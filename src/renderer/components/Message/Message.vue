@@ -33,7 +33,7 @@
 		color:black;
 	}
 	.layout{
-		height:945px;
+		height:935px;
 		background: #f5f7f9;
 		position: relative;
 		border-radius: 4px;

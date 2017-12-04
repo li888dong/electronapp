@@ -33,7 +33,35 @@ export default {
                     label: '陕西'
                 }
             ],
+            timeList: [
+                {
+                    value: 'beijing',
+                    label: '2017年1月'
+                },
+                {
+                    value: 'shanghai',
+                    label: '2017年2月'
+                },
+                {
+                    value: 'shenzhen',
+                    label: '2017年2月'
+                },
+                {
+                    value: 'hangzhou',
+                    label: '2017年3月'
+                },
+                {
+                    value: 'nanjing',
+                    label: '2017年4月'
+                },
+                {
+                    value: 'chongqing',
+                    label: '2017年5月'
+                }
+            ],
             model1: '',
+            model2:'',
+
             columns4: [
                 {
                     title: '企业名称',
@@ -230,15 +258,17 @@ export default {
         <div class="layout-content">
             <Row class="layout-content-top">          
                 <Row>
-                    <Col span="3">
-                        <DatePicker :value="new Date()" format="yyyy年MM月dd日" type="date" placeholder="value1" style="width: 200px;height:30px;"></DatePicker>
+                    <Col span="2">
+                        <Select :model.sync="model2" style="width:100px;" placeholder='月度选择'>
+                            <Option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
+                        </Select>
                     </Col>
-                    <Col span="3">
-                        <Select v-model="model1" style="width:100px;margin-left:30px" placeholder='全部区域'>
+                    <Col span="2">
+                        <Select v-model="model1" style="width:100px;" placeholder='全部区域'>
                             <Option v-for="item in cityList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
                         </Select>
                     </Col>
-                    <Col span="5" offset='13'>
+                    <Col span="5" offset='15'>
                         <mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
                     </Col>
                 </Row>

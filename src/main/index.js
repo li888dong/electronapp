@@ -29,7 +29,8 @@ function createWindow() {
         width: width,
         height: height,
         useContentSize: false,
-
+        // 开发环境的跨域请求
+        webPreferences: {webSecurity: false},
         // fullscreen: true,
 
         frame:false,//取消顶部任务栏

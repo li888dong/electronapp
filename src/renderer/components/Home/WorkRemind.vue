@@ -8,6 +8,18 @@
                 electricityBill: "321"
 	        }
 		},
+		mounted(){
+            this.$http.post(this.$api.WORK_REMIND,{com_id:this.$store.getters.com_id})
+                .then(res => {
+                    this.electricity = res.data[0].declar;
+                    this.electricityBill = res.data[0].electbill
+                }, err => {
+                    this.$api.errcallback(err)
+                })
+                .catch(err=>{
+                    this.$api.errcallback(err)
+                })
+		},
         components:{
             CountTo
         }

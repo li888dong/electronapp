@@ -30,21 +30,21 @@
 	}
 </script>
 <template>
-		<div class="client-container">
+	<div class="client-container">
 		<Row gutter=15>
 			<Col span="7">
 			<jiexiantu></jiexiantu>
 			</Col>
 			<Col span="10">
-			<company-power-progress></company-power-progress>
+			<company-power-progress belong="cus"></company-power-progress>
 			</Col>
 			<Col span="7">
-			<power-timeframe baseWidth="323"></power-timeframe>
+			<power-timeframe baseWidth="323" belong="cus"></power-timeframe>
 			</Col>
 		</Row>
 		<Row class="mgt_15">
 			<Col span="24">
-				<real-time-power-chart></real-time-power-chart>
+				<real-time-power-chart belong="cus"></real-time-power-chart>
 			</Col>
 
 		</Row>

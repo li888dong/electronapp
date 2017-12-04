@@ -89,7 +89,13 @@
                 modal2: false
 
             }
+		},
+		methods:{
+			showUnit:function(value){
+             this.model2 = value;
+             this.addShow = true;
 		}
+	 }
 	}
 </script>
 <template>
@@ -113,9 +119,9 @@
 							</Select>
 						</FormItem>
 						<FormItem label="变压器信息">
-							 <Select v-model="model2" style="width:300px" placeholder="请选择变压器名称">
+							 <Select v-model="model2" style="width:300px" placeholder="请选择变压器名称" v-on:on-change='showUnit'>
 							 <Option v-for="item in dataList2" :value="item.value" :key="item.value">{{item.label}}</Option>
-							 </Select><span class="add" @click="modal2 = true" style="cursor: pointer;margin-left:10px;">添加</span> <span style="">变压器容量单位: <span class="add" style="margin-left: 10px;">10KVA</span></span>
+							 </Select><span class="add" @click="modal2 = true" style="cursor: pointer;margin-left:10px;">添加</span> <span v-show='addShow'>变压器容量单位: <span class="add" style="margin-left: 10px;">10KVA</span></span>
 						</FormItem>
 						<FormItem label="终端类型">
 							<Select v-model="mode3" style="width:300px" placeholder="请选择终端类型">
@@ -131,9 +137,9 @@
 						</FormItem>
 						<h3 class="sub_title">设备参数</h3>
 						<FormItem label="PT系数">
-							<Input style="width:150px;"></Input>
-							<span class="input_span">PT变化</span><Input style="width:56px;"></Input> : <Input style="width:56px;"></Input><span class="input_span">CT系数</span><Input style="width:150px;"></Input>
-							<span class="input_span">CT变化</span><Input style="width:56px;"></Input> : <Input style="width:56px;"></Input>
+							<Input style="width:120px;"></Input>
+							<span class="input_span">PT变化</span><Input style="width:56px;"></Input> : <Input style="width:56px;"></Input><span class="input_span">CT系数</span><Input style="width:120px;"></Input>
+							<span class="input_span">CT变化</span><Input style="width:56px;"></Input> : <Input style="width:56px;"></Input><span class="input_span">用户倍率</span><Input style="width:120px;"></Input>
 						</FormItem>
 						<h3 class="sub_title">设备信息</h3>
 						<FormItem label="出厂编号">
@@ -146,7 +152,6 @@
 						<FormItem label="通信地址">
 							<Input class="width_183"></Input>
 							<span class="input_span">远程端口</span><Input class="width_183"></Input>
-							<span class="input_span">波特率</span><Input class="width_183"></Input>
 						</FormItem>
 						<FormItem label="SIM卡号" class="last">
 							<Input class="width_183"></Input>

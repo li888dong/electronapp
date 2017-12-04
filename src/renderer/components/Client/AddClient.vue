@@ -4,16 +4,32 @@ export default {
     data(){
         return{
             formItem: {
-                    input: '',
-                    select: '',
-                    radio: 'male',
-                    checkbox: [],
+                    name: '',
+                    sn:'',
+                    sn_sp:'',
+                    tyshxydm:'',
+                    legal_person:'',
+                    organization:'',
+                    bank: '',
+                    bank_card: '',
+                    category: '',
+                    grade:'',
+                    contact:'',
+                    res_s:[],
+                    address:'',
+                    zipcode:'',
+                    telphone:'',
+                    email:'',
+                    officephone1:'',
+                    officephone2:'',
+                    fax1:'',
+                    fax2:'',
                     switch: true,
                     date: '',
                     time: '',
                     slider: [20, 50],
                     textarea: '',
-                    res_s:[]
+                    
                 },
             bankList: [
                     {
@@ -58,6 +74,49 @@ export default {
                 model11: '',
                 model22: '',
         }
+    },
+    methods:{
+         addClient(){
+            //手机号正则表达式
+            var tel_reg = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+            //邮箱的正则表达式
+            var email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+            //固定电话的正则验证
+            var officephone_reg = /^[0-9]{3,4}\-[0-9]{3,8}$/;
+            //传真号的正则验证
+            var fax_reg = /^(\d{3,4}-)?\d{7,8}$/;
+            this.$http.post(this.$api.CLIENT_ADD,{
+                com_id:1,
+                name:this.formItem.name,
+                sn:this.formItem.sn,
+                tyshxydm:this.formItem.tyshxydm,
+                legal_person:this.formItem.legal_person,
+                organization:this.formItem.organization,
+                bank:this.formItem.bank,
+                bank_card:this.formItem.bank_card,
+                category:this.formItem.category,
+                grade:this.formItem.grade,
+                contact:this.formItem.contact,
+                province:this.formItem.res_s[0].name,
+                city:this.formItem.res_s[1].name,
+                county:this.formItem.res_s[2].name,
+                address:this.formItem.address,
+                zipcode:this.formItem.zipcode,
+                telphone:this.formItem.telphone,
+                email:this.formItem.email,
+                officephone:this.formItem.officephone1+this.formItem.officephone,
+                fax:this.formItem.fax1+this.formItem.fax2,
+            }).then(res=>{
+                console.log(res);
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+            
+         },
+    },
+    mounted(){
     }
 }
 </script>
@@ -72,13 +131,13 @@ export default {
             <Row>
                 <Col span="12">
                     <Form-item label="企业全称">
-                        <i-input :value.sync="formItem.input" placeholder="请输入企业全称"></i-input>
+                        <i-input v-model="formItem.name" placeholder="请输入企业全称"></i-input>
                         
                     </Form-item>
                 </Col>
                 <Col span="5">
                     <Form-item label="企业简称">
-                        <i-input :value.sync="formItem.input" placeholder="请输入企业简称"></i-input>
+                        <i-input v-model="formItem.sn" placeholder="请输入企业简称"></i-input>
                     </Form-item>
                 </Col>
                 <Col span="20" offset='2' class="hint">
@@ -88,29 +147,30 @@ export default {
             <Row>
                 <Col span="12">
                     <Form-item label="统一社会信用代码">
-                        <i-input :value.sync="formItem.input" placeholder="请输入15位或18位的统一社会信用代码"></i-input>
+                        <i-input v-model="formItem.tyshxydm" placeholder="请输入15位或18位的统一社会信用代码"></i-input>
                     </Form-item>
                 </Col>
             </Row>
             <Row>
                 <Col span="8">
                     <Form-item label="法人代表姓名">
-                        <i-input :value.sync="formItem.input" placeholder="与营业执照上一致"></i-input>
+                        <i-input v-model="formItem.legal_person" placeholder="与营业执照上一致"></i-input>
                     </Form-item>
                 </Col>
                 <Col span="8">
                     <Form-item label="组织机构代码">
-                        <i-input :value.sync="formItem.input" placeholder="与营业执照上一致"></i-input>
+                        <i-input v-model="formItem.organization" placeholder="与营业执照上一致"></i-input>
                     </Form-item>
                 </Col>
             </Row>        
             <Row>
                 <Col span="8">
                     <Form-item label="开户银行">
-                        <Select :model.sync="formItem.select" placeholder="请选择">
+                        <Select v-model="formItem.bank" placeholder="请选择">
                             <Option value="beijing">北京市</Option>
                             <Option value="shanghai">上海市</Option>
                             <Option value="shenzhen">深圳市</Option>
+                            <Option value="工商">工商</Option>
                         </Select>
                     </Form-item>
                 </Col>
@@ -118,7 +178,7 @@ export default {
             <Row>
                 <Col span="8">
                     <Form-item label="开户账号">
-                        <i-input :value.sync="formItem.input" placeholder="请如实填写"></i-input>
+                        <i-input v-model="formItem.bank_card" placeholder="请如实填写"></i-input>
                     </Form-item>
                 </Col>
             </Row>
@@ -126,21 +186,22 @@ export default {
             <Row :gutter="10">                
                 <Form-item label="所属行业">
                     <Col span="5">
-                        <Select :model.sync="formItem.select" placeholder="请选择">
+                        <Select v-model="formItem.category" placeholder="请选择">
                             <Option value="beijing">北京市</Option>
                             <Option value="shanghai">上海市</Option>
                             <Option value="shenzhen">深圳市</Option>
+                            <Option value="1">1</Option>
                         </Select>
                     </Col>
                     <Col span="4">
-                    <Select :model.sync="formItem.select" placeholder="请选择">
+                    <Select v-model="formItem.select" placeholder="请选择">
                         <Option value="beijing">北京市</Option>
                         <Option value="shanghai">上海市</Option>
                         <Option value="shenzhen">深圳市</Option>
                     </Select>
                     </Col>
                     <Col span="4">
-                    <Select :model.sync="formItem.select" placeholder="请选择">
+                    <Select v-model="formItem.select" placeholder="请选择">
                         <Option value="beijing">北京市</Option>
                         <Option value="shanghai">上海市</Option>
                         <Option value="shenzhen">深圳市</Option>
@@ -151,7 +212,7 @@ export default {
             <Row>
                 <Col span="8">
                     <Form-item label="用电等级">
-                        <Select :model.sync="formItem.select" placeholder="请选择">
+                        <Select v-model="formItem.grade" placeholder="请选择">
                             <Option value="beijing">一级</Option>
                             <Option value="shanghai">二级</Option>
                             <Option value="shenzhen">三级</Option>
@@ -162,28 +223,28 @@ export default {
             <h4>联系信息</h4>
             <Row :gutter="10">
                 <Form-item label="通讯地址">
-                    <Col span="4">
-                        <al-selector v-model="res_s" level=1 />
+                    <Col span="8">
+                        <al-selector v-model="formItem.res_s" level=2 />
                     </Col>
                     <Col span="8">
-                        <i-input :value.sync="formItem.input" placeholder="请输入详细通讯地址"></i-input>
+                        <i-input v-model="formItem.address" placeholder="请输入详细通讯地址"></i-input>
                     </Col>
                     <Col span="2">
-                        <i-input :value.sync="formItem.input" placeholder="邮政编码"></i-input>
+                        <i-input v-model="formItem.zipcode" placeholder="邮政编码"></i-input>
                     </Col>
                 </Form-item>
             </Row>
             <Row>
                 <Col span="8">
                     <Form-item label="联系人">
-                        <i-input :value.sync="formItem.input" placeholder="请输入联系人姓名"></i-input>
+                        <i-input v-model="formItem.contact" placeholder="请输入联系人姓名"></i-input>
                     </Form-item>
                 </Col>
             </Row>
             <Row>
                 <Col span="8">
                     <Form-item label="联系人电话">
-                        <i-input :value.sync="formItem.input" placeholder="请输入联系人手机号码"></i-input>
+                        <i-input v-model="formItem.telphone" placeholder="请输入联系人手机号码"></i-input>
                     </Form-item>
                 </Col>
                 <Col span="12" class="hint2">
@@ -193,7 +254,7 @@ export default {
             <Row>
                 <Col span="8">
                     <Form-item label="电子邮箱">
-                        <i-input :value.sync="formItem.input" placeholder="请输入联系人邮箱号码"></i-input>
+                        <i-input v-model="formItem.email" placeholder="请输入联系人邮箱号码"></i-input>
                     </Form-item>
                 </Col>
                 <Col span="12" class="hint2">
@@ -204,22 +265,22 @@ export default {
                 <Col span="8">
                     <Form-item label="办公电话">
                         <Col span="8">
-                            <i-input :value.sync="formItem.input" placeholder="-"></i-input>
+                            <i-input v-model="formItem.officephone1" placeholder="-"></i-input>
                         </Col>
                         <Col span="1" style="text-align: center;line-height: 34px;">-</Col>    
                         <Col span="15">
-                            <i-input :value.sync="formItem.input" placeholder="请输入办公电话"></i-input>
+                            <i-input v-model="formItem.officephone2" placeholder="请输入办公电话"></i-input>
                         </Col>
                     </Form-item>
                 </Col>
                 <Col span="8">
                     <Form-item label="传真号码">
                         <Col span="8">
-                            <i-input :value.sync="formItem.input" placeholder="-"></i-input>
+                            <i-input v-model="formItem.fax1" placeholder="-"></i-input>
                         </Col>
                         <Col span="1" style="text-align: center;line-height: 34px;">-</Col>    
                         <Col span="15">
-                            <i-input :value.sync="formItem.input" placeholder="请输入传真号码"></i-input>
+                            <i-input v-model="formItem.fax2" placeholder="请输入传真号码"></i-input>
                         </Col>
                     </Form-item>
                 </Col>
@@ -228,7 +289,7 @@ export default {
                 <Col span="12" style="text-align: center;line-height: 34px;">
                     <Form-item>
                         <i-button type="primary">保存并添加合同</i-button>
-                        <i-button type="primary" style="margin-left: 30px">保存</i-button>
+                        <i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
                         <i-button type="ghost" style="margin-left: 30px">取消</i-button>
                     </Form-item>
                 </Col>

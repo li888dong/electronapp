@@ -40,9 +40,11 @@
 
     export default {
         name: 'powerChart',
+	    props:['belong'],
         data() {
             return {
                 powerRealtimeType: '15',
+	            type:'15分钟',
                 powerdata: [],
                 powerdate: [],
             }
@@ -238,12 +240,44 @@
             }
 	    },
         mounted() {
+	        this.doAjax(this.belong);
             this.initData();
             this.drawLine();
         },
         methods: {
+            doAjax(belong){
+                if (belong === 'com'){
+                    this.$http.post(this.$api.REALTIME_POWER_CURVE,{com_id:this.$store.getters.com_id,type:this.type})
+                        .then(res => {
+                            console.log('企业实时电量负荷曲线',res)
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+                }else if (belong === 'cus'){
+                    this.$http.post(this.$api.CLIENT_REALTIME_CURVE,{com_id:this.$store.getters.com_id,type:this.type})
+                        .then(res => {
+                            console.log('用户实时电量负荷曲线',res)
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+                }
+
+            },
             powerRealtimeTypeSwitch(type) {
-                this.powerRealtimeType = type;
+                if (type==='15'){
+                    this.type = '15分钟';
+                }else if (type === '日'){
+                    this.type = '日'
+                }else if (type === '月'){
+                    this.type = '月'
+                }
+                this.doAjax(this.belong);
                 this.drawLine();
             },
             initData() {

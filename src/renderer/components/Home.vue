@@ -30,11 +30,11 @@
 		<Row gutter=15 className="mgt_15">
 			<!--用电实时进度-->
 			<Col span="9">
-				<power-use></power-use>
+				<power-use  belong="com"></power-use>
 			</Col>
 			<!--用电时段分布-->
 			<Col span="8">
-				<power-timeframe baseWidth="460"></power-timeframe>
+				<power-timeframe belong="com" baseWidth="460"></power-timeframe>
 			</Col>
 			<!--交易分步--> 
 			<Col span="7">
@@ -44,7 +44,7 @@
 		<!--实时电量负荷-->
 		<Row className="mgt_15">
 			<Col span="24">
-				<real-time-power-chart></real-time-power-chart>
+				<real-time-power-chart  belong="com"></real-time-power-chart>
 			</Col>
 		</Row>
 	</Row>
@@ -74,32 +74,10 @@
             }
         },
         mounted() {
-            this.weatherData();
-//      this.reqData('half');
+
         },
         methods: {
-            weatherData(city = '郑州') {
-                this.$http.get('http://www.sojson.com/open/api/weather/json.shtml?city=%E9%83%91%E5%B7%9E').then(res => {
-                    console.log(res.data.data.forecast[0].type)
-                    this.weather.city = res.data.city;
-                    this.weather.nowWeather = res.data.data.forecast[0].type;
-                    this.weather.temperature = res.data.data.wendu;
-                    this.weather.humidity = res.data.data.shidu;
-                }, err => {
-                    console.log(err)
-                })
-            }
-//      ,reqData(periodicTime){
-//        this.$http.get('test.json').then(response => {
-//          this.periodicTime = periodicTime;
-//          console.log(response.data.timeData);
-//          this.$store.dispatch('SET_TIME_DATA',response.data.timeData);
-//          this.drawLine();
-//        }, response => {
-//          // error callback
-//          console.log(response)
-//        })
-//      }
+
         },
         components: {
             'real-time-power-chart': RealTimePowerChart,

@@ -207,13 +207,13 @@ export default {
             <div class="layout-content-top">
                 <div class="fl">
                     <Button class="Button" type="primary">上一年</Button>
-                    <i-select :model.sync="model1" style="width:100px;" placeholder='年度选择'>								
-                        <i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-                    </i-select>
+                    <Select :model.sync="model1" style="width:100px;" placeholder='年度选择'>
+                        <Option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
+                    </Select>
                     <Button class="Button" type="primary">下一年</Button>                    						
-                    <i-select :model.sync="model1" style="width:100px;margin-left: 30px" placeholder='区域选择'>								
-                        <i-option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-                    </i-select>
+                    <Select :model.sync="model1" style="width:100px;margin-left: 30px" placeholder='区域选择'>
+                        <Option v-for="item in cityList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
+                    </Select>
                 </div>
                 <div class="fr">
                     <mySearch class="fl" style="margin-right: 30px;" placeholder="请输入公司名称或关键字" swidth="340"></mySearch>

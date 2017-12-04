@@ -5,10 +5,11 @@
 	<div id="homeCalendar">
 		<calendar-input
 			:planDate="{
-                plan1: new Date('2017-12-5').getDate(),
-                plan2: new Date('2017-12-10').getDate(),
-                plan3: new Date('2017-12-15').getDate(),
-                plan4: new Date('2017-12-20').getDate()
+                plan1: new Date(planDate.bid_day).getDate(),
+                plan2: new Date(planDate.decl_cycle).getDate(),
+                plan3_start: new Date(planDate.fore_cycle_start).getDate(),
+                plan3_end: new Date(planDate.fore_cycle_end).getDate(),
+                plan4: new Date(planDate.cf_cycle).getDate()
 		}"></calendar-input>
 	</div>
 </template>
@@ -18,13 +19,8 @@ import calendarInput from './calendar-plugin/calendar-input.vue';
 
     export default {
         name: 'homeCalendar',
-	    mounted(){
-        },
-        data(){
-            return{
-
-            }
-        },components: {
+	    props:['planDate'],
+	    components: {
             'calendar-input':calendarInput
         }
     }

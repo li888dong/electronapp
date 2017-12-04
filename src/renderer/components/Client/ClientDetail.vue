@@ -345,7 +345,19 @@
 		methods:{
             gotoTerminalData(){
                 this.$router.push('client-terminal')
+            },
+            clientBasicInfor(){
+            	this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:1}).then(res=>{
+            		console.log(res);
+            	},err=>{
+            	this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
             }
+		},
+		mounted(){
+			this.clientBasicInfor();
 		}
 	}
 </script>

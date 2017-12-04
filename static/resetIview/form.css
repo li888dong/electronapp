@@ -99,4 +99,7 @@
 	display: inline-block;
 	width:80px;
 }
-
+/*消息中心页面样式重置*/
+.msg-center .ivu-card-body{
+	padding: 0;
+}

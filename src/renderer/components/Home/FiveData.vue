@@ -11,6 +11,26 @@
                 abnormalLoad: "4"
 	        }
 		},
+		mounted(){
+			this.doAjax()
+		},
+		methods:{
+			doAjax(){
+                this.$http.post(this.$api.WARNING_INFO,{com_id:this.$store.getters.com_id})
+	                .then(res => {
+	                    console.log('数据异常提醒',res);
+		                this.dataException = res.data[0].abnormal;
+		                this.powerDeviation = res.data[0].deviation;
+		                this.powerFactor = res.data[0].powerfactor;
+		                this.offlineWarning = res.data[0].offline;
+	                }, err => {
+	                    this.$api.errcallback(err)
+	                })
+	                .catch(err=>{
+                        this.$api.errcallback(err)
+	                })
+			}
+		},
 		components:{
 		    CountTo
 		}
@@ -21,7 +41,7 @@
 		<Card>
 			<Row type="flex" justify="space-between" align="middle">
 
-				<Col span="4" class="data-item lxyj"><strong class="offline-warning"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span>离线预警</span></Col>
+				<Col span="4" class="data-item lxyj"><strong class="offline-warning" @click="doAjax"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span>离线预警</span></Col>
 
 				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='dataException' :duration='2000'></CountTo></strong><span>数据异常</span></Col>
 

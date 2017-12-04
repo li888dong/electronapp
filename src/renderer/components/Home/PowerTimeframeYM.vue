@@ -1,25 +1,53 @@
 <script>
     export default {
         name: 'powertimeframe',
-	    props:['baseWidth'],
+	    props:['baseWidth','belong'],
         data() {
             return {
                 powerFrameType: '月',
 	            totalWidth:0,
                 barWidth: '',
-	            guduanData:200,
-	            pingduanData:300,
-	            fengduanData:500,
+	            guduanData:0,
+	            pingduanData:0,
+	            fengduanData:0,
             }
         },
 	    mounted(){
+            this.doAjax(this.belong);
             this.totalWidth = this.baseWidth;
             this.changeType()
 	    },
         methods: {
+	        doAjax(belong){
+	            if (belong === 'com'){
+                    this.$http.post(this.$api.POWER_FRAME,{com_id:this.$store.getters.com_id,type:this.powerFrameType})
+                        .then(res => {
+                            console.log('企业用电时段分布',res);
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+                }else if (belong === 'cus'){
+                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{com_id:this.$store.getters.cus_id,type:this.powerFrameType})
+                        .then(res => {
+                            console.log('用户用电时段分布',res);
+                            this.guduanData = res.data.data.e1;
+                            this.pingduanData = res.data.data.e2;
+                            this.fengduanData = res.data.data.e3;
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+	            }
+
+            },
             changeType(type='月') {
                 this.powerFrameType = type;
-                console.log(this.powerFrameType);
+                this.doAjax(this.belong)
             }
         }
     }
@@ -35,13 +63,13 @@
 		</div>
 		<div class="power-timeframe-bar" :style="{width:totalWidth+'px'}">
 			<div class="power-timeframe-bar-low">谷段 <span><span class="bar" v-if="guduanData !==0"
-			                                                    v-bind:style="{width: totalWidth*guduanData/(guduanData+pingduanData+fengduanData) + 'px'}">20%</span>228Mw.时</span>
+			                                                    v-bind:style="{width: totalWidth*guduanData/(guduanData+pingduanData+fengduanData) + 'px'}">20%</span>{{guduanData}}Mw.时</span>
 			</div>
 			<div class="power-timeframe-bar-normal">平段 <span><span class="bar" v-if="pingduanData !==0"
-			                                                       v-bind:style="{width: totalWidth*pingduanData/(guduanData+pingduanData+fengduanData) + 'px'}">30%</span>228Mw.时</span>
+			                                                       v-bind:style="{width: totalWidth*pingduanData/(guduanData+pingduanData+fengduanData) + 'px'}">30%</span>{{pingduanData}}Mw.时</span>
 			</div>
 			<div class="power-timeframe-bar-high">峰段 <span><span class="bar" v-if="fengduanData !==0"
-			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">50%</span>228Mw.时</span>
+			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">50%</span>{{fengduanData}}Mw.时</span>
 			</div>
 		</div>
 	</Card>
