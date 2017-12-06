@@ -23,6 +23,7 @@
 		                this.powerDeviation = res.data[0].deviation;
 		                this.powerFactor = res.data[0].powerfactor;
 		                this.offlineWarning = res.data[0].offline;
+		                this.abnormalLoad = res.data[0].activePower
 	                }, err => {
 	                    this.$api.errcallback(err)
 	                })
@@ -37,19 +38,19 @@
 	}
 </script>
 <template>
-	<Row class-name="five-data">
+	<Row className="five-data">
 		<Card>
 			<Row type="flex" justify="space-between" align="middle">
 
-				<Col span="4" class="data-item lxyj"><strong class="offline-warning" @click="doAjax"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span>离线预警</span></Col>
+				<Col span="4" class="data-item lxyj"><strong class="offline-warning" @click="doAjax"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span class="data-title">离线预警</span></Col>
 
-				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='dataException' :duration='2000'></CountTo></strong><span>数据异常</span></Col>
+				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='dataException' :duration='2000'></CountTo></strong><span class="data-title">数据异常</span></Col>
 
-				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='powerDeviation' :duration='2000'></CountTo></strong><br> <span>电量偏差</span></Col>
+				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='powerDeviation' :duration='2000'></CountTo></strong><br> <span class="data-title">电量偏差</span></Col>
 
-				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='powerFactor' :duration='2000'></CountTo></strong><br><span>功率因数</span></Col>
+				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='powerFactor' :duration='2000'></CountTo></strong><br><span class="data-title">功率因数</span></Col>
 
-				<Col span="4" class="data-item fhyc"><strong class="abnormal-load"><CountTo :startVal='0' :endVal='abnormalLoad' :duration='2000'></CountTo></strong><br><span>负荷异常</span></Col>
+				<Col span="4" class="data-item fhyc"><strong class="abnormal-load"><CountTo :startVal='0' :endVal='abnormalLoad' :duration='2000'></CountTo></strong><br><span class="data-title">负荷异常</span></Col>
 			</Row>
 		</Card>
 
@@ -66,6 +67,7 @@
 		text-align: center;
 		color: #fff;
 		cursor: pointer;
+		position: relative;
 	}
 
 	.five-data div.lxyj {
@@ -94,12 +96,18 @@
 	/*}*/
 
 	.five-data div strong span{
-		font-size: 64px;
-		display: inline-block;
+		font-size: 36px;
 		text-align: center;
-		width: 100%;
+		left: 0;
+		right: 0;
+		position: absolute;
+		top: 20%;
 	}
-	.five-data div>span{
+	.data-title{
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 10%;
 		opacity: 0.7;
 		font-weight:300;
 	}

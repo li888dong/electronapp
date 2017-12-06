@@ -86,7 +86,7 @@ export default {
             //传真号的正则验证
             var fax_reg = /^(\d{3,4}-)?\d{7,8}$/;
             this.$http.post(this.$api.CLIENT_ADD,{
-                com_id:1,
+                com_id:this.$store.getters.com_id,
                 name:this.formItem.name,
                 sn:this.formItem.sn,
                 tyshxydm:this.formItem.tyshxydm,
@@ -104,7 +104,7 @@ export default {
                 zipcode:this.formItem.zipcode,
                 telphone:this.formItem.telphone,
                 email:this.formItem.email,
-                officephone:this.formItem.officephone1+this.formItem.officephone,
+                officephone:this.formItem.officephone1+this.formItem.officephone2,
                 fax:this.formItem.fax1+this.formItem.fax2,
             }).then(res=>{
                 console.log(res);
@@ -230,7 +230,7 @@ export default {
                         <i-input v-model="formItem.address" placeholder="请输入详细通讯地址"></i-input>
                     </Col>
                     <Col span="2">
-                        <i-input v-model="formItem.zipcode" placeholder="邮政编码"></i-input>
+                        <i-input v-model="formItem.zipcode" placeholder="邮政编码" maxlength="6"></i-input>
                     </Col>
                 </Form-item>
             </Row>

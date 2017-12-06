@@ -45,7 +45,6 @@ function createWindow() {
         mainWindow = null
     })
 }
-
 ipcMain.on('login-succeed',()=>{
     isLogin =true;
     var size = screen.getPrimaryDisplay().workAreaSize;

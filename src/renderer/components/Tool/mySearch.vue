@@ -1,8 +1,8 @@
 <template>
-    <div class="searchBox flex-row">
+    <div class="searchBox flex-row" v-on:keyup.enter="doSearch">
         <i class="iconfont icon-search" ></i>
-        <Input :value="search" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size">
-            <Button slot="append">搜索</Button>
+        <Input v-model="value" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size">
+            <Button slot="append" @click="doSearch">搜索</Button>
         </Input>
     </div>
 </template>
@@ -10,14 +10,17 @@
 <script>
     export default {
         name: 'mySearch',
-        props:['search','placeholder','swidth','size'],
+        props:['keyword','placeholder','swidth','size'],
         data(){
             return{
                 value:''
             }
         },
-        mounted(){
-            this.value=this.search
+        methods:{
+            doSearch(){
+                this.$store.dispatch('setSearchKey',this.value);
+                this.$emit('doSearch')
+            }
         }
     }
 </script>

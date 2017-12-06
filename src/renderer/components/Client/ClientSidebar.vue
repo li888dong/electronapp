@@ -3,165 +3,43 @@
         name:'clientsidebar',
         data(){
             return{
-                selectedName:'河南众企联合',
-                companyList:[
-                    {
-                        name:'河南众企联合',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司11111',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司驻马点城市观察呢个',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司1',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司2',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司3',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司4',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司5',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司6',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司7',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司8',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司11',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司22',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司33',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司44',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司55',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司66',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司77',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司nn',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司aa',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司ss',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司dd',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司f',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司ee',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                    {
-                        name:'河南众企联合售电有限公司sl',
-                        id:'123456789987654321',
-                        avatar:''
-                    },
-                ]
+
             }
         },
-	    methods:{
-            changeCompany(name){
-                this.selectedName = name
+	    computed:{
+            selectedId:function () {
+	            return this.$store.getters.cus_id
+            },
+            companyList:function () {
+	            return this.$store.getters.cusList.tableData
+            },
+		    searchKey:function () {
+                return this.$store.getters.searchKey
             }
-	    }
+	    },
+	    methods:{
+            changeCompany(id){
+                this.$store.dispatch('setCusId',id);
+            },
+	    },
+        mounted(){
+
+        }
+
     }
 </script>
 <template>
 	<div class="client-sidebar">
 		<div class="search relative">
 			<i class="iconfont icon-search absolute"></i>
-			<input type="search" placeholder="客户编号或客户名称">
+			<input type="search" placeholder="客户编号或客户名称" :value="searchKey">
 		</div>
 		<div class="company-list">
 			<ul>
 				<template v-for="item in companyList">
 
-					<li class="relative" v-bind:class="{selected:selectedName == item.name}" @click="changeCompany(item.name)">
+					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id)">
 						<Row>
-							<!--<Col span="4">-->
-							<!--<div class="avator">-->
-							<!--<i class="iconfont icon-touxiang2" style="font-size: 36px!important;color: #669BD8"></i>-->
-							<!--</div>-->
-							<!--</Col>-->
 							<Col span="24">
 							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>
 							</Col>

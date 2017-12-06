@@ -36,49 +36,26 @@ import myFenye from '@/components/Tool/myFenye'
                         sortable:true,
 
                         key:'yhmm',
-                        render: (h, params) => {
-
-                                return h('div', [
-                                    h('span', {
-
-                                        style: {
-                                            marginRight: '5px',
-                                            color:'#4fa8f9 ',
-                                            cursor:'pointer'
-                                        },
-                                        on: {
-                                            click: () => {
-                                                console.log(params.index)
-                                                this.gotoDetail()
-                                            }
-                                        }
-                                    }, '未审核'),
-                                    h('span', {
-                                        style: {
-                                            marginRight: '5px',
-                                            color:'#4fa8f9 ',
-                                            cursor:'pointer'
-                                        },
-                                        on: {
-                                            click: () => {
-                                                console.log(params.index)
-
-                                                this.gotoHetong()
-                                            }
-                                        }
-                                    }, '删除'),
-                                ])
-                            }
 					},{
 					    title:'审核状态',
                         sortable:true,
+                        key:'shzt',
+                        render:(h,params)=>{
+                            if(params.row.shzt ===0){
+                                return h('span',{
 
-                        key:'shzt'
+                                },'未审核')
+                            }else{
+                                return h('span',{
+
+                                },'已审核')
+                            }
+                        }
 					},{
 					    title:'操作',
                         key:'cz',
                         render: (h, params) => {
-                            if (params.row.status === 0){
+                            if (params.row.shzt === 0){
                                 return h('div', [
                                     h('span', {
 
@@ -89,8 +66,8 @@ import myFenye from '@/components/Tool/myFenye'
                                         },
                                         on: {
                                             click: () => {
-                                                console.log(params.index)
-                                                this.gotoDetail()
+                                                console.log(params.row.dlid);
+                                                this.userCheck(params.row.dlid,params.row.shzt);
                                             }
                                         }
                                     }, '未审核'),
@@ -104,7 +81,6 @@ import myFenye from '@/components/Tool/myFenye'
                                             click: () => {
                                                 console.log(params.index)
 
-                                                this.gotoHetong()
                                             }
                                         }
                                     }, '删除'),
@@ -115,21 +91,20 @@ import myFenye from '@/components/Tool/myFenye'
 
                                         style: {
                                             marginRight: '5px',
-                                            color:'#4fa8f9 ',
-                                            cursor:'pointer'
+                                            color:'#999 ',
                                         },
-                                        on: {
-                                            click: () => {
-                                                console.log(params.index)
-                                                this.gotoDetail()
-                                            }
-                                        }
                                     }, '审核'),
                                     h('span', {
                                         style: {
                                             marginRight: '5px',
-                                            color:'#999 ',
+                                            color:'#4fa8f9 ',
                                             cursor:'pointer'
+                                        },
+                                        on:{
+                                            click:()=>{
+                                                console.log(params.row.dlid);
+                                                this.userDelect(params.row.dlid);
+                                            }
                                         }
                                     }, '删除'),
                                 ])
@@ -146,7 +121,7 @@ import myFenye from '@/components/Tool/myFenye'
 				        bdwx:'13188888888',
 				        scdlsj:'2017-10-10 10:10:00',
 				        yhmm:'88888888',
-				        shzt:'已审核'
+				        shzt:1
 			        }
 		        ]
 	        }
@@ -154,6 +129,55 @@ import myFenye from '@/components/Tool/myFenye'
 		components : {
 			'myFenye': myFenye,
 		},
+        methods:{
+            userManage(){
+            this.$http.post(this.$api.CLIENT_MANAGE,{cus_id:1}).then(res=>{
+            console.log("用户管理",res);
+            var data = res.data.data;
+            for(var i=0;i<data.length;i++){
+                var obj = {
+                    dlid:data[i].id,
+                    sqsj:data[i].created_at,
+                    sjhm:'1234567890',
+                    bdwx:data[i].weixin,
+                    scdlsj:data[i].last_logintime,
+                    yhmm:data[i].password,
+                    shzt:data[i].status
+                }
+                this.tableData.push(obj);
+            }
+          },err=>{
+            this.$api.errcallback(err);
+          }).catch(err=>{
+            this.$api.errcallback(err);
+          })
+            },
+            userCheck(id,status){
+                this.$http.put(this.$api.CLIENT_CHECK+id).then(res=>{
+                    console.log("审核用户信息",res);
+                    if(res.data.status){
+                        status =1
+                    }
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            },
+            userDelect(id){
+                this.$http.delete(this.$api.CLIENT_DELECT_USER+id).then(res=>{
+                    console.log("删除成功",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            }
+         
+        },
+        mounted(){
+             this.userManage();
+        }
 	}
 </script>
 <template>

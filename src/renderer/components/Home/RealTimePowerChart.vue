@@ -49,7 +49,15 @@
                 powerdate: [],
             }
         },
+        watch:{
+            cus_id:function () {
+                this.doAjax(this.belong);
+            }
+        },
 	    computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            },
             chartOption1:function () {
 	            return {
                     tooltip: this.$store.getters.chartOption.lineTooltip,
@@ -241,15 +249,15 @@
 	    },
         mounted() {
 	        this.doAjax(this.belong);
-            this.initData();
-            this.drawLine();
         },
         methods: {
             doAjax(belong){
                 if (belong === 'com'){
                     this.$http.post(this.$api.REALTIME_POWER_CURVE,{com_id:this.$store.getters.com_id,type:this.type})
                         .then(res => {
-                            console.log('企业实时电量负荷曲线',res)
+                            console.log('企业实时电量负荷曲线',res);
+                            this.initData();
+                            this.drawLine();
                         }, err => {
                             this.$api.errcallback(err)
                         })
@@ -257,9 +265,11 @@
                             this.$api.errcallback(err)
                         })
                 }else if (belong === 'cus'){
-                    this.$http.post(this.$api.CLIENT_REALTIME_CURVE,{com_id:this.$store.getters.com_id,type:this.type})
+                    this.$http.post(this.$api.CLIENT_REALTIME_CURVE,{com_id:this.cus_id,type:this.type})
                         .then(res => {
-                            console.log('用户实时电量负荷曲线',res)
+                            console.log('用户实时电量负荷曲线',res);
+                            this.initData();
+                            this.drawLine();
                         }, err => {
                             this.$api.errcallback(err)
                         })

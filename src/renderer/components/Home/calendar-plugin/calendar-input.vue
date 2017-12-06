@@ -32,9 +32,9 @@
             weekend: index % 7 === 0 || index % 7 === 6,
             unselect: unselectArr.includes(index),
             select1: item === truePlanDate.plan1,
-            select2: item === truePlanDate.plan2,
+            select2: item >= truePlanDate.plan2_start&&item <= truePlanDate.plan2_end,
             select3: item >= truePlanDate.plan3_start&&item <= truePlanDate.plan3_end,
-            select4: item === truePlanDate.plan4,
+            select4: item >= truePlanDate.plan4_start&&item <= truePlanDate.plan4_end
           }"
                 @click="changeSelectDay(index)">
             {{item}}

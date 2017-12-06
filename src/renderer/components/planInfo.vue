@@ -7,7 +7,7 @@
 			</div>
 
 			<Row>
-				<Table border :columns='columns1' :data='data1'></Table>
+				<Table border :columns='columns1' :data='tableData'></Table>
 			</Row>
 
 			<!-- 分页 -->
@@ -18,6 +18,31 @@
 				</Col>
 			</Row>
 		</Card>
+		<Modal
+				v-model="modal1"
+				:title="`${editMonth} 计划进度`"
+				@on-ok="saveEdit"
+				@on-cancel="cancel">
+			<Row>
+				<Col span="10" class="text-right">月度集中竞价日期：</Col>
+				<Col span="14"><DatePicker  type="date" placeholder="Select date" v-model="edit_bid_day"></DatePicker></Col>
+			</Row>
+			<Row className="mgt_15">
+				<Col span="10" class="text-right">预测电量周期：</Col>
+				<Col span="14"><DatePicker type="daterange" placeholder="Select date" v-model="edit_fore_cycle"></DatePicker></Col>
+
+			</Row>
+			<Row className="mgt_15">
+				<Col span="10" class="text-right">客户申报周期：</Col>
+				<Col span="14"><DatePicker type="daterange" placeholder="Select date" v-model="decl_cycle"></DatePicker></Col>
+
+			</Row>
+			<Row className="mgt_15">
+				<Col span="10" class="text-right">购电量确认开始周期：</Col>
+				<Col span="14"><DatePicker type="daterange" placeholder="Select date" v-model="edit_cf_cycle"></DatePicker></Col>
+
+			</Row>
+		</Modal>
 	</div>
 </template>
 
@@ -29,6 +54,12 @@
         name: 'planInfo',
         data() {
             return {
+                modal1:false,
+	            editMonth:'',
+                edit_bid_day:'',
+                edit_fore_cycle:[],
+                edit_decl_cycle:[],
+                edit_cf_cycle:[],
                 columns1: [
                     {
                         title: '交易月份',
@@ -81,7 +112,9 @@
                                     },
                                     on: {
                                         click: () => {
-
+                                            this.modal1 = true;
+                                            this.editMonth = params.row.n1;
+											console.log(params.row.n1)
                                         }
                                     }
 
@@ -90,27 +123,30 @@
                         }
 
                     }
-                ],
-                data1: [
-                    {
-                        n1: '2017-12',
-                        n2: '2017-11-20',
-                        n3: '2017-12-01~2017-12-31',
-                        n4: '2017-11-07~2017-09-30',
-                        n5: '2017-11-18~2017-11-24',
-                        n6: '进行中'
-                    },
-                    {
-                        n1: '2017-11',
-                        n2: '2017-11-20',
-                        n3: '2017-12-01~2017-12-31',
-                        n4: '2017-11-07~2017-09-30',
-                        n5: '2017-11-18~2017-11-24',
-                        n6: '已完成'
-                    }
                 ]
             }
         },
+	    computed:{
+            //TODO:多条计划进度时的展现
+            tableData:function () {
+                let arr = [];
+                let obj = {};
+                obj.n1 = new Date().getFullYear()+'-'+(new Date().getMonth()+1);
+                obj.n2 = this.$route.query.planDate.bid_day;
+                obj.n3 = this.$route.query.planDate.fore_cycle_start+'~'+this.$route.query.planDate.fore_cycle_end;
+                obj.n4 = this.$route.query.planDate.decl_cycle_start+'~'+this.$route.query.planDate.decl_cycle_end;
+                obj.n5 = this.$route.query.planDate.cf_cycle_start+'~'+this.$route.query.planDate.cf_cycle_end;
+                obj.n6 = this.$route.query.planStatus ==='1'?'进行中':'已确定';
+                arr.push(obj);
+	            return arr
+            },
+            planDate:function () {
+	            return this.$route.query.planDate
+            },
+            planStatus:function () {
+	            return this.$route.query.planStatus
+            },
+	    },
         mounted() {
             this.planChart();
         },
@@ -118,27 +154,40 @@
             'myFenye': myFenye
         },
         methods: {
+            saveEdit(){
+                this.$http.post(this.$api.ADD_SCHEDULE,{
+                    com_id:this.$store.getters.com_id,
+	                month:this.editMonth,
+	                bid_day:this.edit_bid_day.Format('yyyy-MM-dd'),
+                    fore_cycle:this.edit_fore_cycle[0].Format('yyyy-MM-dd')+`/`+this.edit_fore_cycle[1].Format('yyyy-MM-dd'),
+                    decl_cycle:this.edit_decl_cycle[0].Format('yyyy-MM-dd')+`/`+this.edit_decl_cycle[1].Format('yyyy-MM-dd'),
+                    cf_cycle:this.edit_cf_cycle[0].Format('yyyy-MM-dd')+`/`+this.edit_cf_cycle[1].Format('yyyy-MM-dd'),
+                })
+                    .then(res => {
+                        console.log('设置计划进度',res);
+
+                    }, err => {
+                        this.$api.errcallback(err)
+                    })
+                    .catch(err=>{
+                        this.$api.errcallback(err)
+                    })
+            },
             planChart() {
                 let nowYear = new Date().getFullYear();
                 let nowMonth = (new Date().getMonth()) + 1;
                 let nowDay = (new Date().getDate());
-                console.log(nowYear, nowMonth, nowDay)
-                let day = new Date(2017, 2, 0).getDate() + 1;
+                let day = new Date(nowYear, nowMonth, 0).getDate() + 1;
 
 
                 // 基于准备好的dom，初始化echarts实例
-                let myChart = this.$echarts.init(document.getElementById('myCharts'))
+                let myChart = this.$echarts.init(document.getElementById('myCharts'));
                 // 绘制图表
                 myChart.setOption({
-                    color: ['#4f8af9', '#6ec71e', '#f56e6a', '#fc8b40', '#818af8', '#31c9d7', '#f35e7a', '#ab7aee', '#14d68b', '#edb00d'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow'
-                        }
-                    },
+                    color:this.$store.getters.chartOption.colorList,
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     legend: {
-                        data: ['交易月份：2017-12'],
+                        data: ['交易月份：'+nowYear+'-'+nowMonth],
                         left: -5,
                         top: 0,
                         itemWidth: 16,
@@ -199,7 +248,7 @@
                                 }
                             },
 //                        起始日期
-                            data: ['10', '12', '14', '8']
+                            data: [this.planDate.fore_cycle_start.slice(-2), this.planDate.decl_cycle_start.slice(-2), this.planDate.cf_cycle_start.slice(-2), nowDay]
                         },
                         {
                             name: '交易月份：2017-12',
@@ -213,7 +262,7 @@
                                 }
                             },
 //                        距离截止日期还有几天
-                            data: ['5', '6', '6', '8']
+                            data: [this.planDate.fore_cycle_end.slice(-2) - this.planDate.fore_cycle_start.slice(-2),this.planDate.decl_cycle_end.slice(-2)-this.planDate.decl_cycle_start.slice(-2), this.planDate.cf_cycle_end.slice(-2)- this.planDate.cf_cycle_start.slice(-2) , this.planDate.biddays]
                         }
                     ]
                 })
@@ -245,5 +294,10 @@
 	.fenYe button {
 		top: -12px;
 		left: 12px;
+	}
+	.text-right{
+		text-align: right;
+		height: 30px;
+		line-height: 30px;
 	}
 </style>

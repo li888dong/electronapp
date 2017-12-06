@@ -227,11 +227,72 @@
             }
         },
         mounted() {
-            this.drawBar1(this.chartOption1);
-            this.drawBar2(this.chartOption2);
-            this.drawBar3(this.chartOption3);
+            this.huhao();
+            this.daytb();
+            this.daycompare();
+            this.monthcompare();
+        },
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            }
+        },
+        watch:{
+            cus_id:function () {
+                this.huhao();
+                this.daytb();
+                this.daycompare();
+                this.monthcompare();
+            }
         },
         methods: {
+//            户号指数
+	        huhao(){
+                this.$http.post(this.$api.CLIENT_DATA_INDEX,{cus_id:this.cus_id}).then(res=>{
+                    console.log('户号指数',res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        },
+//            日电量同比
+	        daytb(){
+                this.$http.post(this.$api.CLIENT_DAYTB,{cus_id:this.cus_id}).then(res=>{
+                    console.log('日电量同比',res);
+                    this.drawBar1(this.chartOption1);
+
+
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        },
+//            日对比
+	        daycompare(){
+                this.$http.post(this.$api.CLIENT_DAY_COMPARE,{cus_id:this.cus_id}).then(res=>{
+                    this.drawBar2(this.chartOption2);
+
+                    console.log('日电量同比',res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        },
+//            月对比
+	        monthcompare(){
+                this.$http.post(this.$api.CLIENT_MONTH_COMPARE,{cus_id:this.cus_id}).then(res=>{
+                    console.log('月电量同比',res);
+                    this.drawBar3(this.chartOption3);
+
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        },
             drawBar1(option = this.chartOption1) {
                 // 基于准备好的dom，初始化echarts实例
                 let compare1Chart = this.$echarts.init(document.getElementById('compare-bar-1'));

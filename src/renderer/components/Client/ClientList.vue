@@ -27,8 +27,8 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params)
-                                            this.gotoDetail()
+                                            this.gotoZonglan();
+                                            this.$store.dispatch('setCusId',params.row.id);
                                         }
                                     }
                                 }, params.row.name)
@@ -90,7 +90,6 @@
                                 },
                                 on: {
                                     click: () => {
-                                        console.log(params.index)
                                         this.gotoZonglan()
                                     }
                                 }
@@ -170,11 +169,14 @@
             cityList() {
                 return this.$store.getters.cityList
             },
-		    tableList(){
-                return this.$store.getters.tableList
+		    cusList(){
+                return this.$store.getters.cusList
 		    },
 		    currentCity(){
                 return this.$store.getters.currentCity
+		    },
+		    searchKey(){
+		        return this.$store.getters.searchKey
 		    }
 	    },
 	    watch:{
@@ -182,7 +184,6 @@
 	    },
         methods:{
 			reqData(){
-			    this.setTableList();
 			    this.setCityList();
 			},
 			gotoZonglan(){
@@ -208,22 +209,59 @@
 	        },
             changeSelect(city){
                 this.$store.dispatch('setCurrentCity',city);
+
+                if (this.currentCity ==='all'){
+	                this.clientList();
+	            }else {
+                    this.$http.post(this.$api.CLIENT_LIST,{
+                        com_id:this.$store.getters.com_id,
+                        type:2,
+                        area:this.currentCity
+                    }).then(res=>{
+                        console.log('客户列表区域选择',res);
+                        this.setcusList(res.data[0]);
+                    },err=>{
+                        this.$api.errcallback(err);
+                    }).catch(err=>{
+                        this.$api.errcallback(err);
+                    })
+	            }
+
+
             },
-	        setTableList(){
-                this.$store.dispatch('setTableList','zz')
+	        setcusList(res){
+                this.$store.dispatch('setcusList',res)
 	        },
 	        setCityList(){
                 this.$store.dispatch('setCityList','zz')
 	        },
             clientList(){
-                this.$http.post(this.$api.CLIENT_LIST,{com_id:this.$store.getters.com_id}).then(res=>{
-                    console.log('客户列表',res);
+                this.$http.post(this.$api.CLIENT_LIST,{
+                    com_id:this.$store.getters.com_id
+                }).then(res=>{
+                    console.log('客户列表默认',res);
+                    this.setcusList(res.data[0]);
+
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
                     this.$api.errcallback(err);
                 })
-            }
+            },
+	        comSearch(){
+                this.$http.post(this.$api.CLIENT_LIST,{
+                    com_id:this.$store.getters.com_id,
+                    type:1,
+                    keyword:this.$store.getters.searchKey
+                }).then(res=>{
+                    console.log('客户列表搜索',res);
+                    this.setcusList(res.data[0]);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        }
         },
 
     }
@@ -244,8 +282,8 @@
 							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
 							<template v-for="(city,key) in cityList">
 								<my-tab
-										v-on:changeSelect="changeSelect(key)"
-										v-bind:type="currentCity === key?'disabled':'normal'"
+										v-on:changeSelect="changeSelect(city.name)"
+										v-bind:type="currentCity === city.name?'disabled':'normal'"
 								>{{city.name}} <span>({{city.count}})</span></my-tab>
 							</template>
 						</div>
@@ -258,13 +296,13 @@
 					<Row className="mgt_15">
 						<Col span="24">
 							<Row>
-								<Col span="5" style="margin-left: 1126px;">
-								<my-search style="text-align: left" placeholder="客户编号或客户名称"></my-search>
+								<Col span="5" >
+								<my-search style="text-align: left" placeholder="客户编号或客户名称" v-on:doSearch="comSearch"></my-search>
 								</Col>
 
 								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
 
-								<Button type="primary" class="refresh" style="margin-left: 7px;">
+								<Button type="primary" class="refresh" style="margin-left: 1147px;" @click="clientList">
 
 									<i class="iconfont icon-shuaxin"></i>
 								</Button>
@@ -273,13 +311,13 @@
 					</Row>
 					<Row className="mgt_15">
 
-						<Table :columns="columns4" :data="tableList.data1"></Table>
+						<Table :columns="columns4" :data="cusList.tableData"></Table>
 					</Row>
 
 					<div class="page-container">
 						<Page
-							:total="tableList.pageData.total"
-							:current="tableList.pageData.current"
+							:total="cusList.pageData.total"
+							:current="cusList.pageData.current"
 							show-total
 							show-elevator
 							v-on:on-change="pageChange"
@@ -305,17 +343,7 @@
 	}
 
 	.tab-container>span{
-		margin:10px 0 10px 5px;
-	}
-	.more{
-		cursor: pointer;
-		display: inline-block;
-		vertical-align: middle;
-		margin-left: 73px;
-		color: #4fa8f9;
-	}
-	.more i{
-		font-size: 10px;
+		margin:10px 0 10px 9px;
 	}
 	.table-container{
 		flex: 1;

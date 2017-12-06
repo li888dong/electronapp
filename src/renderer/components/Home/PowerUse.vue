@@ -14,17 +14,35 @@
 		},
 		mounted(){
             this.doAjax(this.belong);
-            this.chaochu=parseInt(Math.max(this.yiyong - this.yigou,0)*100)/100;
-			this.piancha=parseInt((this.chaochu/this.yigou)*100)/100;
-			this.yiyongRate = parseInt((this.yiyong/(Math.max(this.yigou,this.yiyong)+this.chaochu))*100)/100||0;
-			this.chaochuRate = parseInt((this.chaochu/(this.chaochu + this.yigou))*100)/100;
 		},
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            }
+        },
+        watch:{
+            cus_id:function () {
+                this.doAjax(this.belong);
+            }
+        },
 		methods:{
 		    doAjax(belong){
 		        if (belong === 'com'){
                     this.$http.post(this.$api.USED_SCHEDULE,{com_id:this.$store.getters.com_id})
                         .then(res => {
-                            console.log('公司用电实时进度',res)
+                            console.log('公司用电实时进度',res);
+                            this.yigou = res.data.data.purchased;
+                            this.yiyong = res.data.data.actual_used;
+                            this.chaochu = res.data.data.beyond;
+                            this.piancha = res.data.data.dev;
+
+                            if (this.yigou<this.yiyong&&this.chaochu===0){
+                                this.chaochu=parseInt(Math.abs(this.yiyong - this.yigou)*100)/100||0;
+                                this.piancha=parseInt((this.chaochu/this.yigou)*100)/100||0;
+                            }
+
+                            this.yiyongRate = parseInt(Math.min(this.yiyong,this.yigou)/(this.yigou+this.chaochu)*100)/100||0;
+                            this.chaochuRate = parseInt((this.chaochu/this.yiyong)*100)/100||0;
                         }, err => {
                             this.$api.errcallback(err)
                         })
@@ -32,13 +50,21 @@
                             this.$api.errcallback(err)
                         })
 		        }else if (belong === 'cus'){
-                    this.$http.post(this.$api.CLIENT_USED,{cus_id:this.$store.getters.cus_id})
+                    this.$http.post(this.$api.CLIENT_USED,{cus_id:this.cus_id})
                         .then(res => {
                             console.log('用户用电实时进度',res);
                             this.yigou = res.data.data.purchase;
                             this.yiyong = res.data.data.has_used;
                             this.chaochu = res.data.data.over_used;
                             this.piancha = res.data.data.used_dev;
+
+                            if (this.yigou<this.yiyong&&this.chaochu===0){
+                                this.chaochu=parseInt(Math.abs(this.yiyong - this.yigou)*100)/100||0;
+                                this.piancha=parseInt((this.chaochu/this.yigou)*100)/100||0;
+                            }
+
+                            this.yiyongRate = parseInt(Math.min(this.yiyong,this.yigou)/(this.yigou+this.chaochu)*100)/100||0;
+                            this.chaochuRate = parseInt((this.chaochu/this.yiyong)*100)/100||0;
                         }, err => {
                             this.$api.errcallback(err)
                         })
@@ -65,7 +91,7 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px'}">{{yiyongRate*100+'%'}}</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px',maxWidth:500+'px'}">{{(yiyong>yigou?100:yiyongRate*100)+'%'}}</div>
 				<div class="progress-bar-frame frame-normal">{{piancha}}</div>
 				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(500*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>

@@ -24,99 +24,7 @@
                         value: '2012',
                     }
 	            ],
-                option : {
-                    legend: {
-                        data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
-                        align: 'left',
-	                    top:0,
-                        left: 0,
-                        itemWidth:16,
-                        itemHeight:16,
-                    },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    xAxis: {
-                        type:'category',
-                        data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
-                        axisLine: {onZero: true},
-                        splitLine: {show: false},
-                        splitArea: {show: false}
-                    },
-                    yAxis: {
-                        inverse: true,
-                        splitArea: {show: false},
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-	                dataZoom:{
-                        bottom:0
-	                },
-                    grid: {
-                        right:10,
-                        left: 30,
-	                    top:50,
-	                    bottom:60
-                    },
-                    series: [
-                        {
-                            name: '采集偏差',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                },
-                                emphasis: {
-                                    barBorderWidth: 1,
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowOffsetY: 0,
-                                    shadowColor: 'rgba(0,0,0,0.5)'
-                                }
-                            },
-                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6]
-                        },
-                        {
-                            name: '客户预测偏差',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                },
-                                emphasis: {
-                                    barBorderWidth: 1,
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowOffsetY: 0,
-                                    shadowColor: 'rgba(0,0,0,0.5)'
-                                }
-                            },
-                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6].map((i)=>i*2)
-                        },
-                        {
-                            name: '公司预测偏差',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                },
-                                emphasis: {
-                                    barBorderWidth: 1,
-                                    shadowBlur: 10,
-                                    shadowOffsetX: 0,
-                                    shadowOffsetY: 0,
-                                    shadowColor: 'rgba(0,0,0,0.5)'
-                                }
-                            },
-                            data: [1,2,-1,-2,3,4,-5,-3,5,4,3,6].map((i)=>i*0.5)
-                        }
-                    ]
-                },
+		        chartData:{},
                 columns4: [
                     {
                         title: '类别',
@@ -259,13 +167,137 @@
                 ]
 	        }
 		},
+		computed:{
+		    cus_id:function () {
+			    return this.$store.getters.cus_id
+            },
+		    option:function () {
+		        let monthList = [],
+			        caijiList = [],
+			        cyuceList = [],
+			        gyuceList = [];
+		        for (let k in this.chartData){
+		            monthList.push(k);
+		            for (let i = 0;i<this.chartData[k].dev.length;i++){
+                        caijiList.push(this.chartData[k].dev[i].declare_dev);
+						cyuceList.push(this.chartData[k].dev[i].fore_dev);
+                        gyuceList.push(this.chartData[k].dev[i].monitor_dev);
+                    }
+
+		        }
+			    return{
+                    legend: {
+                        data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
+                        align: 'left',
+                        top:20,
+                        left: 0,
+                        itemWidth:16,
+                        itemHeight:16,
+                    },
+                    color:this.$store.getters.chartOption.colorList,
+                    tooltip: this.$store.getters.chartOption.barTooltip,
+                    xAxis: {
+                        type:'category',
+                        data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
+                        axisLine: {onZero: true},
+                        splitLine: {show: false},
+                        splitArea: {show: false}
+                    },
+                    yAxis: {
+                        inverse: true,
+                        splitArea: {show: false},
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                    },
+                    grid: {
+                        right:10,
+                        left: 30,
+                        top:80,
+                        bottom:20
+                    },
+                    series: [
+                        {
+                            name: '采集偏差',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                },
+                                emphasis: {
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                }
+                            },
+                            data: caijiList
+                        },
+                        {
+                            name: '客户预测偏差',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                },
+                                emphasis: {
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                }
+                            },
+                            data: cyuceList
+                        },
+                        {
+                            name: '公司预测偏差',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                },
+                                emphasis: {
+                                    barBorderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowOffsetY: 0,
+                                    shadowColor: 'rgba(0,0,0,0.5)'
+                                }
+                            },
+                            data: gyuceList
+                        }
+                    ]
+                }
+            }
+		},
 		mounted(){
-			this.drawBar()
+		    this.reqChart();
+		    this.reqTable();
         },
+		watch:{
+		    cus_id:function () {
+                this.reqChart();
+                this.reqTable();
+            }
+		},
 		methods:{
+		    reqChart(){
+                this.$http.post(this.$api.CLIENT_PIANCHA_CHART,{cus_id:this.cus_id}).then(res=> {
+                    console.log('偏差图表',res.data.citys);
+                    this.chartData = res.data.citys;
+                    this.drawBar()
+
+                })
+		    },
+			reqTable(){
+                this.$http.post(this.$api.CLIENT_PIANCHA_TABLE,{cus_id:this.cus_id}).then(res=> {
+                    console.log('偏差表格',res);
+                })
+			},
 		    drawBar(){
                 let compare1Chart = this.$echarts.init(document.getElementById('caiji'));
-
                 compare1Chart.setOption(this.option);
             }
 		}

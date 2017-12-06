@@ -4,13 +4,14 @@
 	    name:'workremind',
 		data(){
 	        return{
-                electricity: "123",
-                electricityBill: "321"
+                electricity: "0",
+                electricityBill: "0"
 	        }
 		},
 		mounted(){
             this.$http.post(this.$api.WORK_REMIND,{com_id:this.$store.getters.com_id})
                 .then(res => {
+                    console.log('工作提醒',res);
                     this.electricity = res.data[0].declar;
                     this.electricityBill = res.data[0].electbill
                 }, err => {

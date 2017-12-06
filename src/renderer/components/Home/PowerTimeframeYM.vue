@@ -13,10 +13,19 @@
             }
         },
 	    mounted(){
-            this.doAjax(this.belong);
             this.totalWidth = this.baseWidth;
             this.changeType()
 	    },
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            }
+        },
+        watch:{
+            cus_id:function () {
+                this.doAjax(this.belong)
+            }
+        },
         methods: {
 	        doAjax(belong){
 	            if (belong === 'com'){
@@ -30,7 +39,7 @@
                             this.$api.errcallback(err)
                         })
                 }else if (belong === 'cus'){
-                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{com_id:this.$store.getters.cus_id,type:this.powerFrameType})
+                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{com_id:this.cus_id,type:this.powerFrameType})
                         .then(res => {
                             console.log('用户用电时段分布',res);
                             this.guduanData = res.data.data.e1;

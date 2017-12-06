@@ -219,11 +219,50 @@
             },
             powerType(type){
                 console.log(this.powerType)
+            },
+            terminalCollectRecord(type){
+                var typeNum = 0;
+                switch(type){
+                    case "综合":
+                     typeNum=0;
+                     break;
+                     case "电量":
+                      typeNum = 1;
+                      break;
+                      case "电流":
+                       typeNum=2;
+                       break;
+                       case "电压":
+                       typeNum=3;
+                       break;
+                       case "功率":
+                        typeNum = 4;
+                        break;
+                        case "功率因数":
+                         typeNum=5;
+                         break;
+                         default:
+                         break;
+                }
+                this.$http.post(this.$api.CLIENT_TERMINAL_RECORD,{
+                    cus_id:this.$store.getters.cus_id,
+                    clientid:this.$store.getters.clientid,
+                    type:typeNum,
+                }).then(res=>{
+                    console.log("终端采集记录",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
             }
         },
 		components:{
-
-		}
+             
+		},
+        mounted(){
+            // this.terminalCollectRecord();
+        }
 	}
 </script>
 <template>
@@ -231,7 +270,7 @@
 		<Card style="height: 852px;" class="relative">
 			<h3 slot="title">终端采集记录 <span style="color: #999;font-weight:normal;font-size: 12px;">采集记录仅记录最近60天的采集记录</span></h3>
 			<div slot="extra" class="btn-group">
-				<RadioGroup v-model="powerType" type="button" v-on:on-change="powerTypeSwitch">
+				<RadioGroup v-model="powerType" type="button" v-on:on-change="terminalCollectRecord">
 					<Radio label="综合"></Radio>
 					<Radio label="电量"></Radio>
 					<Radio label="电流"></Radio>

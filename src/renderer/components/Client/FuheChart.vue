@@ -238,14 +238,25 @@
         },
         mounted() {
             this.doAjax();
-            this.initData();
-            this.drawLine(this.chartOption1);
+
+        },
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            }
+        },
+        watch:{
+            cus_id:function () {
+                this.doAjax();
+            }
         },
         methods: {
             doAjax(){
-                this.$http.post(this.$api.CLIENT_CURVE_3,{cus_id:this.$store.getters.cus_id,type:'负荷'})
+                this.$http.post(this.$api.CLIENT_CURVE_3,{cus_id:this.cus_id,type:'1'})
                     .then(res => {
-                        console.log('负荷曲线',res)
+                        console.log('负荷曲线',res);
+                        this.initData();
+                        this.drawLine(this.chartOption1);
                     }, err => {
                         this.$api.errcallback(err)
                     })

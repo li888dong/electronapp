@@ -28,7 +28,21 @@
         name: 'powertimeframe',
         data() {
             return {
-                chartOption2: {
+	            tradeData:{
+	                month:{
+						bidding:0,
+		                longpact:0
+	                },
+		            year:{
+                        bidding:0,
+                        longpact:0
+		            }
+	            }
+            }
+        },
+	    computed:{
+            chartOption:function () {
+                return {
 //          鼠标悬浮提示
                     tooltip: {
                         trigger: 'item',
@@ -63,7 +77,7 @@
 
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.tradeData.year.longpact,
                                     name: '长协(年)',
                                     itemStyle: {
                                         normal: {
@@ -75,7 +89,7 @@
                                     }
                                 },
                                 {
-                                    value: 679,
+                                    value: this.tradeData.year.bidding,
                                     name: '市场竞价(年)',
                                     itemStyle: {
                                         normal: {
@@ -100,7 +114,7 @@
                             center: ['135', '105'],
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.tradeData.month.longpact,
                                     name: '长协(月)',
                                     itemStyle: {
                                         normal: {
@@ -112,7 +126,7 @@
                                     }
                                 },
                                 {
-                                    value: 310,
+                                    value: this.tradeData.month.bidding,
                                     name: '市场竞价(月)',
                                     itemStyle: {
                                         normal: {
@@ -126,23 +140,26 @@
                             ]
                         }
                     ]
-                }
+                };
             }
-        },
+	    },
         mounted() {
-            this.$http.post(this.$api.BID_FRAME,{com_id:this.$store.getters.com_id,type:'内圈'})
+
+            this.$http.post(this.$api.BID_FRAME,{com_id:this.$store.getters.com_id})
                 .then(res => {
-                    console.log('交易分布',res)
+	                this.tradeData= res.data.data;
+                    console.log('交易分布',this.tradeData);
+                    this.drawLine(this.chartOption);
                 }, err => {
                     this.$api.errcallback(err)
                 })
                 .catch(err=>{
                     this.$api.errcallback(err)
                 })
-            this.drawLine(this.chartOption2);
+
         },
         methods: {
-            drawLine(option = this.chartOption2) {
+            drawLine(option = this.chartOption) {
                 // 基于准备好的dom，初始化echarts实例
                 let powerFrameChart = this.$echarts.init(document.getElementById('powerTimeFrame'));
                 // 绘制图表

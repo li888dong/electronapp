@@ -8,6 +8,10 @@
 		        selectDate:'',
                 timeType:'今天',
 				cldDetail:{
+                    sjdl:'45452',
+                    glys:'0.9',
+                    dqzdxl:'3453',
+                    dqzt:'运行中',
 					zcbj:'1705A0010052',
 					zdh:'1705A0010052',
 					sccj:'深电能',
@@ -428,6 +432,11 @@
             this.drawBar2(this.chartOption2);
             this.drawBar3(this.chartOption3);
             this.drawBar4(this.chartOption4);
+            this.getTerminalDetail();
+            this.onLineJiankng();
+            this.equipmentAbnomal();
+            this.equipmentLog();
+            this.collectJiankongData();
 
         },
 		methods:{
@@ -458,6 +467,83 @@
             changeSelect(pds){
                 this.currentPDS = pds;
             },
+            getTerminalDetail(){
+                var id = this.$store.getters.term_id;
+                console.log(id);
+                this.$http.get(this.$api.CLIENT_TERMINAL_DETAIL+id).then(res=>{
+                    var data = res.data.data;
+                    console.log(data);
+                    this.cldDetail={
+                    sjdl:'45452',
+                    glys:data.power_factor,
+                    dqzdxl:'3453',
+                    dqzt:'运行中',
+                    zcbj:'1705A0010052',
+                    zdh:data.clientid,
+                    sccj:data.factory,
+                    ccbh:data.serial_no,
+                    sblx:data.type,
+                    cgrq:'2012-12-12',
+                    ycip:'122.97.176.20',
+                    txdz:data.mailing_address,
+                    ycdk:data.port,
+                    btl:'9600',
+                    sxrq:'2017-10-21 18:36:40',
+                    sshh:data.user_no,
+                    gddw:'巩义市供电局',
+                    byqrl:'120KW',
+                    zt:'已启用'
+                    }
+                    console.log("2",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            },
+            onLineJiankng(){
+                var clientid = this.$store.getters.clientid;
+                this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE,{clientid:clientid}).then(res=>{
+                    console.log("在线监控",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            },
+            equipmentAbnomal(){
+                this.$http.post(this.$api.CLIENT_EQUIPMENT_REMIND).then(res=>{
+                    console.log("设备异常提醒",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            },
+            equipmentLog(){
+                var clientid = this.$store.getters.clientid;
+                this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG,{clientid:'clientid'}).then(res=>{
+                     console.log("设备日志",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            },
+            collectJiankongData(){
+                var clientid = this.$store.getters.clientid;
+                this.$http.post(this.$api.CLIENT_COLLECT_DATA,{
+                    type:1,
+                    time:1,
+                    clientid:'fghgf'
+                }).then(res=>{
+                    console.log("采集监控",res);
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+            }
 		}
 	}
 </script>
@@ -490,10 +576,10 @@
 
 									<h4 class="title">测量点：河南银河铝业有限公司__鲁庄镇西候村候地工业园区_02 <span style="color: #ccc;">资产编号:{{cldDetail.zcbj}}</span></h4>
 									<ul>
-										<li style="background-color: #0089f0;"><strong>45454</strong><br><span>实际电量</span></li>
-										<li style="background-color: #f57e6a;"><strong>0.9</strong><br><span>功率因数</span></li>
-										<li style="background-color: #ab7aee;"><strong>3453</strong><br><span>当前最大需量</span></li>
-										<li style="background-color: #6ec71e;"><strong>运行中</strong><br><span>当前状态</span></li>
+										<li style="background-color: #0089f0;"><strong>{{cldDetail.sjdl}}</strong><br><span>实际电量</span></li>
+										<li style="background-color: #f57e6a;"><strong>{{cldDetail.glys}}</strong><br><span>功率因数</span></li>
+										<li style="background-color: #ab7aee;"><strong>{{cldDetail.dqzdxl}}</strong><br><span>当前最大需量</span></li>
+										<li style="background-color: #6ec71e;"><strong>{{cldDetail.dqzt}}</strong><br><span>当前状态</span></li>
 									</ul>
 								</div>
 								</Col>

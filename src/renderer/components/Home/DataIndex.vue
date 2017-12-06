@@ -3,20 +3,7 @@
 	    name:'dataindex',
 		data(){
 	        return{
-				indexData:{
-				    shijiliang:'12311.00',
-					shijiTongbi:'12.21%',
-					shijiHuanbi:'12.21%',
-					yucePiancha:'11.00',
-                    yuceTongbi:'12.21%',
-                    yuceHuanbi:'12.21%',
-					shenbaoPiancha:'11.00',
-					shenbaoTongbi:'12.21%',
-					shenbaoHuanbi:'12.21%',
-					goudianPiancha:'11.00',
-					goudianTongbi:'12.21%',
-					goudianHuanbi:'12.21%',
-				},
+				indexData:{},
 		        trendUp:true,
 		        trendDown:true
 	        }
@@ -24,7 +11,8 @@
 		mounted(){
             this.$http.post(this.$api.DATA_INDEX,{com_id:this.$store.getters.com_id})
                 .then(res => {
-                    console.log('数据指数',res)
+                    console.log('数据指数',res);
+                    this.indexData = res.data.data
                 }, err => {
                     this.$api.errcallback(err)
                 })
@@ -38,7 +26,7 @@
 
 	<Card class="data-index relative">
 		<h3 slot="title">数据指数</h3>
-		<Row>
+		<Row gutter="15">
 
 		<Col span="9">
 			<Row className="data-title">
@@ -60,21 +48,21 @@
 			</Row>
 			<Row className="data-content">
 				<Col span="6">
-				<span >{{indexData.shijiliang}}</span>
+				<span >{{indexData[1].num}}</span>
 				</Col>
 
 				<Col span="6">
-				<span>{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-
-				</Col>
-
-				<Col span="6">
-				<span>{{indexData.shijiTongbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[1].devratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 
 				</Col>
 
 				<Col span="6">
-				<span>{{indexData.shijiHuanbi}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+				<span>{{indexData[1].chainratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+
+				</Col>
+
+				<Col span="6">
+				<span>{{indexData[1].yearonyear}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
 
 				</Col>
 
@@ -92,11 +80,11 @@
 			</Row>
 			<Row className="data-content">
 				<Col span="12">
-				<span>{{indexData.yucePiancha}}%</span>
+				<span>{{indexData[2].fordev}}</span>
 
 				</Col>
 				<Col span="12">
-				<span>{{indexData.yuceHuanbi}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+				<span>{{indexData[2].chainratio}}%<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
 
 				</Col>
 			</Row>
@@ -112,11 +100,11 @@
 			</Row>
 			<Row className="data-content">
 				<Col span="12">
-				<span>{{indexData.shenbaoPiancha}}%</span>
+				<span>{{indexData[3].num}}</span>
 
 				</Col>
 				<Col span="12">
-				<span>{{indexData.shenbaoHuanbi}}<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[3].chainratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 
 				</Col>
 			</Row>
@@ -132,10 +120,10 @@
 			</Row>
 			<Row className="data-content">
 				<Col span="12">
-				<span>{{indexData.goudianPiancha}}%</span>
+				<span>{{indexData[4].chainratio}}</span>
 				</Col>
 				<Col span="12">
-				<span>{{indexData.goudianHuanbi}}<i class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[4].mdev}}%<i class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 
 				</Col>
 			</Row>

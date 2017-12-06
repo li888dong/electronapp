@@ -1,11 +1,8 @@
 <script>
-    import Panel from "../Tool/Panel.vue";
 
     export default {
-        components: {Panel},
         name: 'jiexiantu',
         mounted() {
-            this.initScroll();
             this.hookupShow();
         },
         data() {
@@ -402,16 +399,26 @@
                     ]
 
                 },
-                dragParams: {
-                    currentX: '',
-                    nowX: '',
-                    disX: '',
-                    drag: {},
-                    currentLeft: 0,
-                    dragFlag: false,
-                    to: 0,
-                    min: ''
-                }
+//                dragParams: {
+//                    currentX: '',
+//                    nowX: '',
+//                    disX: '',
+//                    drag: {},
+//                    currentLeft: 0,
+//                    dragFlag: false,
+//                    to: 0,
+//                    min: ''
+//                }
+            }
+        },
+	    computed:{
+            cus_id:function () {
+	            return this.$store.getters.cus_id
+            }
+	    },
+	    watch:{
+            cus_id:function () {
+                this.hookupShow();
             }
         },
         methods: {
@@ -497,8 +504,9 @@
                 })
             },
             hookupShow(){
-                this.$http.post(this.$api.CLIENT_HOOKUP).then(res=>{
-                          console.log(res);
+                this.$http.post(this.$api.CLIENT_HOOKUP,{cus_id:this.cus_id}).then(res=>{
+					console.log('接线图',res);
+					this.initScroll();
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -509,11 +517,11 @@
     }
 </script>
 <template>
-	<panel class="jiexiantu">
+	<Card class="jiexiantu">
 
 		<div id="mybox" style="position: absolute;top: 0;left: 0;right: 0px;bottom: 0"></div>
 
-	</panel>
+	</Card>
 </template>
 <style scoped>
 	.jiexiantu {

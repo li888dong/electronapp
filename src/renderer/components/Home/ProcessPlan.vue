@@ -8,12 +8,15 @@
 		        week:new Date().getWeek(new Date().getDay()),
 		        planDate:{
                     bid_day: "",
-                    fore_cycle: "2017-12-20",
+                    fore_cycle_start: "",
+                    fore_cycle_end: "",
                     decl_cycle_start: "",
                     decl_cycle_end: "",
-                    cf_cycle: "",
+                    cf_cycle_start: "",
+                    cf_cycle_end: "",
                     biddays: 0
-		        }
+		        },
+		        planStatus:1
 	        }
 		},
         mounted(){
@@ -23,9 +26,12 @@
                     this.planDate.bid_day = res.data[0].bid_day;
                     this.planDate.fore_cycle_start = res.data[0].fore_cycle.split('\/')[0];
                     this.planDate.fore_cycle_end = res.data[0].fore_cycle.split('\/')[1];
-                    this.planDate.decl_cycle = res.data[0].decl_cycle;
-                    this.planDate.cf_cycle = res.data[0].cf_cycle;
+                    this.planDate.decl_cycle_start = res.data[0].decl_cycle.split('\/')[0];
+                    this.planDate.decl_cycle_end = res.data[0].decl_cycle.split('\/')[1];
+                    this.planDate.cf_cycle_start = res.data[0].cf_cycle.split('\/')[0];
+                    this.planDate.cf_cycle_end = res.data[0].cf_cycle.split('\/')[1];
                     this.planDate.biddays = res.data[0].biddays;
+                    this.planStatus = res.data.status
 
                 }, err => {
                     this.$api.errcallback(err)
@@ -39,7 +45,7 @@
 		},
 		methods:{
 			toPlanInfo() {
-				this.$router.push('planInfo')
+				this.$router.push({path:'planInfo',query:{planDate:this.planDate,planStatus:this.planStatus}})
 			}
 		}
 	}
@@ -122,10 +128,10 @@
 	}
 
 	#rili {
-		height: 210px;
+		height: 243px;
 		overflow: hidden;
 		position: absolute;
-		top: 64px;
+		top: 46px;
 		left: 194px;
 		bottom: 0;
 		right: 0;

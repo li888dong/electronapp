@@ -3,20 +3,18 @@
 	    name:'client-detail',
 		data(){
 	        return{
-				userDetail:{
-				    khbm:'00000-000ZZ',
-					sshy:'二级    电力、热力的生产和供应业',
-					qzsh:'2018.12.12~2015.12.12',
-					khdz:'郑州市中原区大学园18#  450000',
-					lxr:'丁军鹏',
-					lxdh:'15890191652'
-				},
+				userDetail:{},
 		        agreementDetail:{
 				    htbm:'00000-000ZZ',
 			        hhgs:'2个',
 			        mydl:'10000',
 			        htms:'服务费模式'
 		        },
+		        deleteTerminalModal:false,
+		        deleteTerminalName:'',
+		        deleteTerminalId:'',
+		        billModal:false,
+		        carousel:0,
                 columns: [
                     {
                         title: '申报月份',
@@ -47,34 +45,41 @@
 	                {
                         title: '申报人',
 		                width:80,
-                        key: 'sbr'
+                        key: 'confirmor'
                     },
                     {
                         title: '审核',
-                        key: 'sh'
+                        key: 'status',
+                        render:(h,params)=>{
+							let status = '未审核';
+                            if (params.row.status ==='0'){
+                                status = '已审核'
+                            }
+                            return h('span'
+	                            ,status)
+                        }
                     }
                 ],
 		        columns2: [
                     {
                         title: '用电月',
                         width:100,
-                        key: 'ydy'
+                        key: 'month'
                     },
                     {
                         title: '用电量(MW.h)',
                         width:120,
-                        key: 'ydl'
+                        key: 'used_num'
                     },
                     {
                         title: '金额',
-                        key: 'je'
+                        key: 'price'
                     },
                     {
                         title: '操作',
                         key: 'action',
                         align: 'center',
                         render: (h, params) => {
-                            console.log(params)
 	                        if (params.row.status === 0){
                                 return h('div', [
                                 h('span', {
@@ -87,7 +92,7 @@
                                     on: {
                                         click: () => {
                                             console.log(params.index)
-                                            this.gotoDetail()
+                                            this.billModal = true
                                         }
                                     }
                                 }, '查看'),
@@ -118,7 +123,7 @@
                                         on: {
                                             click: () => {
                                                 console.log(params.index)
-                                                this.gotoDetail()
+                                                this.billModal = true
                                             }
                                         }
                                     }, '查看'),
@@ -140,41 +145,73 @@
                     {
                         sortable: true,
                         title: '测量点名称',
-                        key: 'cldmc'
+                        key: 'mea_name'
                     },
                     {
                         title: '安装位置',
-                        key: 'azwz'
+                        key: 'clientid'
                     },
                     {
                         sortable: true,
                         title: '状态',
-                        key: 'zt'
+                        key: 'is_install',
+                        render:(h,params)=>{
+                            if(params.row.zt==0){
+                                return h('span',{
+                                    style:{
+
+                                    }
+                                },"未安装")
+                            }else{
+                               return h('span',{
+                                    style:{
+
+                                    }
+                                },"已安装")
+                            }
+                        }
                     },
                     {
                         title: '所属户号',
-                        key: 'sshh'
+                        key: 'user_no'
                     },
                     {
                         title: '通讯地址',
-                        key: 'txdz'
+                        key: 'mailing_address'
                     },
                     {
                         title: '端口',
-                        key: 'dk'
+                        key: 'port'
                     },
                     {
                         title: '采集成功率（%）',
                         width:150,
-                        key: 'cjcgl'
+                        key: 'success_rate'
                     },
                     {
                         title: '上报比例（%）',
-                        key: 'sbbl'
+                        key: 'report_rate'
                     },
                     {
                         title: '采集记录',
-                        key: 'sbbl'
+                        key: 'sbbl',
+                        render:(h,params)=>{
+                            return h('span',{
+                                    on:{
+                                        click:()=>{
+                                            this.gotoCaiji()
+                                        }
+                                    },
+                                    attrs:{
+                                        class:'iconfont icon-zhuzhuangtutubiao'
+                                    },
+	                                style:{
+                                        color:'#0089f0',
+		                                cursor:'pointer'
+	                                }
+	                            }
+                                ,'')
+                        }
                     },
                     {
                         title: '操作',
@@ -191,8 +228,13 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.index)
-                                            this.gotoTerminalData()
+                                            console.log(params.row);
+                                            this.$store.dispatch('setTemID',params.row.id);
+                                           this.$store.dispatch('setClientId',params.row.cldm);
+                                            console.log(this.$store.getters.term_id);
+                                            console.log(this.$store.getters.clientid);
+                                            this.gotoTerminalData();
+
                                         }
                                     }
                                 }, '详情'),
@@ -209,7 +251,7 @@
                                             this.gotoHetong()
                                         }
                                     }
-                                }, '编辑'),,
+                                }, '编辑'),
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
@@ -218,9 +260,9 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.index)
-
-                                            this.gotoHetong()
+	                                        this.deleteTerminalName = params.row.clientid;
+	                                        this.deleteTerminalId = params.row.id;
+	                                        this.deleteTerminalModal = true
                                         }
                                     }
                                 }, '删除'),
@@ -228,136 +270,111 @@
                         }
                     }
 		        ],
-		        data1:[
-			        {
-			            'month':'01月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'02月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'03月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'04月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'05月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'06月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },{
-			            'month':'07月',
-				        'sbdl':'12132132.00',
-				        'cjdl':'52185651.00' ,
-				        'pc':'3%',
-
-				        'dfddl':'312313.111',
-				        'sbr':'某某某',
-				        'sh':'通过'
-			        },
-		        ],
-		        data2:[
-			        {
-			            'ydy':'2017年01月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':0
-			        }, {
-			            'ydy':'2017年02月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':1
-			        }, {
-			            'ydy':'2017年03月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':0
-			        }, {
-			            'ydy':'2017年04月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':0
-			        }, {
-			            'ydy':'2017年05月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':0
-			        }, {
-			            'ydy':'2017年06月',
-				        'ydl':'12132132.00',
-				        'je':'52185.00' ,
-				        'status':0
-			        },
-		        ],
-		        data3:[
-			        {
-			            'cldmc':'测量点名称测量点名称',
-			            'azwz':'安装位置安装位置',
-			            'zt':'未安装',
-			            'sshh':'123456789',
-			            'txdz':'asdas3613asd',
-			            'dk':'8080',
-			            'cjcgl':'100%',
-			            'sbbl':'80%',
-			            'cjjl':'000',
-			        }
-		        ]
+		        applyData:[],
+		        billData:[],
+		        terminalListData:[]
 	        }
 		},
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            }
+        },
+        watch:{
+            cus_id:function () {
+                this.clientBasicInfor();
+                this.clinentContractInfor();
+                this.clientElecBill();
+                this.clientDeclareRecord();
+                this.clientTerminalList();
+            }
+        },
 		methods:{
             gotoTerminalData(){
                 this.$router.push('client-terminal')
             },
+            gotoCaiji(){
+                this.$router.push('caiji-detail')
+            },
+            //用户基本信息
             clientBasicInfor(){
-            	this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:1}).then(res=>{
-            		console.log(res);
+            	this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.cus_id}).then(res=>{
+            		console.log('用户基本信息',res);
+            		this.userDetail = res.data.data
             	},err=>{
             	this.$api.errcallback(err);
             	}).catch(err=>{
             		this.$api.errcallback(err);
             	})
-            }
+            },
+            //合同基本情况
+            clinentContractInfor(){
+            	this.$http.post(this.$api.CLIENT_CONTRACT_INFO,{cus_id:this.cus_id}).then(res=>{
+            		console.log("合同基本情况",res);
+                    var data = res.data.data;
+                     this.agreementDetail = {
+                          htbm:data.con_no,
+                          hhgs:data.user_nums,
+                          mydl:data.ly_used,
+                          htms:data.way
+                     }
+
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            },
+            //用户电费单
+            clientElecBill(){
+            	this.$http.post(this.$api.CLIENT_ELE_BILL,{cus_id:this.cus_id}).then(res=>{
+            	     console.log('用户电费单',res.data);
+            	     this.billData = res.data[0]
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            },
+            //用户申报记录
+            clientDeclareRecord(){
+            	this.$http.post(this.$api.CLIENT_DECLARE_RECORD,{cus_id:this.cus_id}).then(res=>{
+            		console.log('用户申报记录',res);
+            		this.applyData = res.data[0]
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            },
+            //用户终端列表
+            clientTerminalList(){
+            	this.$http.post(this.$api.CLIENT_TERMINAL_LIST,{cus_id:this.cus_id}).then(res=>{
+                    console.log('用户终端列表',res.data[0]);
+                    this.terminalListData = res.data[0];
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            },
+			deleteTerminal(){
+                this.$http.delete(this.$api.CLIENT_TERMINAL_DELETE+this.deleteTerminalId).then(res=>{
+					console.log('删除终端',res);
+					this.clientTerminalList();
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+			}
 		},
 		mounted(){
 			this.clientBasicInfor();
+			this.clinentContractInfor();
+			this.clientElecBill();
+			this.clientDeclareRecord();
+			this.clientTerminalList();
 		}
 	}
 </script>
@@ -373,14 +390,14 @@
 							<tbody>
 
 							<tr>
-								<td><span>客户编码 :</span> {{userDetail.khbm}}</td>
-								<td><span>所属行业 :</span> {{userDetail.sshy}}</td>
-								<td><span>售电起止时间 :</span> {{userDetail.qzsh}}</td>
+								<td><span>客户编码 :</span> {{userDetail.category}}</td>
+								<td><span>所属行业 :</span> {{userDetail.industry}}</td>
+								<td><span>售电起止时间 :</span> {{userDetail.exec_time}}</td>
 							</tr>
 							<tr>
-								<td><span>客户地址 :</span> {{userDetail.khdz}}</td>
-								<td><span>联系人 :</span> {{userDetail.lxr}}</td>
-								<td><span>联系电话 :</span> {{userDetail.lxdh}}</td>
+								<td><span>客户地址 :</span> {{userDetail.address}}</td>
+								<td><span>联系人 :</span> {{userDetail.contact}}</td>
+								<td><span>联系电话 :</span> {{userDetail.telphone}}</td>
 							</tr>
 							</tbody>
 						</table>
@@ -411,13 +428,13 @@
 			<Col span="16">
 				<Card class="user-apply">
 					<h3 slot="title">用户申报记录</h3>
-					<Table :columns="columns" :data="data1" height="250"></Table>
+					<Table :columns="columns" :data="applyData" height="250"></Table>
 				</Card>
 			</Col>
 			<Col span="8">
 				<Card class="user-bill">
 					<h3 slot="title">用户电费单</h3>
-					<Table :columns="columns2" :show-header="true" :data="data2" height="250"></Table>
+					<Table :columns="columns2" :show-header="true" :data="billData" height="250"></Table>
 				</Card>
 			</Col>
 		</Row>
@@ -432,16 +449,42 @@
 
 				<Row>
 					<Col span="24">
-						<div style="height: 290px;">
+						<div>
 
-							<Table :columns="columns3" :data="data3"></Table>
+							<Table :columns="columns3" :data="terminalListData" height='280'></Table>
 						</div>
 					</Col>
 				</Row>
 			</Card>
 		</Row>
 
-
+		<Modal
+				v-model="deleteTerminalModal"
+				title="确认删除？"
+				@on-ok="deleteTerminal">
+			<p>要删除的终端测量点名称:</p>
+			<p>{{deleteTerminalName}}</p>
+		</Modal>
+		<Modal
+				width="1200"
+				v-model="billModal">
+			<div>
+				<Carousel v-model="carousel" loop>
+					<CarouselItem>
+						<div class="demo-carousel">1</div>
+					</CarouselItem>
+					<CarouselItem>
+						<div class="demo-carousel">2</div>
+					</CarouselItem>
+					<CarouselItem>
+						<div class="demo-carousel">3</div>
+					</CarouselItem>
+					<CarouselItem>
+						<div class="demo-carousel">4</div>
+					</CarouselItem>
+				</Carousel>
+			</div>
+		</Modal>
 	</div>
 </template>
 <style scoped>
@@ -457,5 +500,11 @@
 
 	.btn-group{
 		margin-top: -9px;
+	}
+	.demo-carousel{
+		margin:0 auto;
+		width: 1000px;
+		height: 600px;
+		background-color: red;
 	}
 </style>
