@@ -148,7 +148,6 @@
                         com_id: this.$store.getters.com_id,
                         cus_id: this.$store.getters.cus_id,
                         clientid: this.terminalList.ztbh,
-                        serial_no: this.terminalList.ztwz,
                         user_no: this.terminalList.user_no,
                         trans_id: this.no,
                         type: this.terminalList.type,
@@ -159,7 +158,7 @@
                         ct: this.terminalList.ctxs,
                         ct_ratio1: this.terminalList.ct1,
                         ct_ratio2: this.terminalList.ct2,
-                        erial_no: this.terminalList.ccbh,
+                        serial_no: this.terminalList.ccbh,
                         factory: this.terminalList.sccj,
                         pur_date: this.terminalList.cgrq,
                         mailing_address: this.terminalList.txdz,
@@ -171,6 +170,7 @@
                         mea_name: this.terminalList.ztmc,
                         userratio: this.terminalList.origratio,
                         used_com: '1',
+                        mea_address:this.terminalList.ztwz
                     }).then(res => {
                         console.log("添加终端", res);
                         this.$router.push('client-detail')

@@ -18,8 +18,9 @@
             }
 	    },
 	    methods:{
-            changeCompany(id){
+            changeCompany(id,name){
                 this.$store.dispatch('setCusId',id);
+                this.$store.dispatch('setCusName',name);
             },
 	    },
         mounted(){
@@ -38,7 +39,7 @@
 			<ul>
 				<template v-for="item in companyList">
 
-					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id)">
+					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id,item.name)">
 						<Row>
 							<Col span="24">
 							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>

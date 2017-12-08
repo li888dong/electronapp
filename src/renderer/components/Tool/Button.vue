@@ -1,21 +1,35 @@
 <script>
     import MyTab from './MyTab.vue'
 	import Panel from './Panel.vue'
+	import MyUpload from './upLoad.vue'
 
     export default {
         components: {
             'my-tab': MyTab,
 			'panel':Panel,
+			'my-upload':MyUpload
         },
         name: 'button',
         data() {
-            return {}
+            return {
+              file:'',
+            }
         },
         methods: {
             log() {
                 console.log(1)
-            }
+            },
+            uploadComplete(status, result ,flag,file) {
+                if (status == 200) { //
+                    console.log(result);
+                    this.file = file;
+                } else {
+                    //失败处理
+                }
+            },
         },
+        mounted(){
+        }
 
     }
 </script>
@@ -70,6 +84,14 @@
 			</panel>
 		</Col>
 		</Row>
+		<Row>
+		   <Col span="8" offset="4">
+			
+		</Col><my-upload @complete="uploadComplete">
+			<Input placeholder='请选择文件' class='file' v-model='file'></Input>
+			<a>选择文件</a>
+			</my-upload>
+		</Row>
 	</div>
 </template>
 <style>
@@ -82,7 +104,6 @@
 		height: 30px;
 		cursor: pointer;
 	}
-
 	.ivu-btn {
 		position: relative;
 	}

@@ -112,7 +112,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.index)
+                                            console.log(params.index);
                                             this.gotoZhishu()
                                         }
                                     }

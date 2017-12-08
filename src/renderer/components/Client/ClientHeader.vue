@@ -6,7 +6,11 @@
 
 	        }
 		},
-
+		computed:{
+		    cus_name:function () {
+			    return this.$store.getters.cus_name
+            }
+		},
 		methods:{
 		    changePage(page){
 		        this.$router.push(page)
@@ -16,7 +20,7 @@
 </script>
 <template>
 	<div class="client-header">
-		<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i><h1>河南众企联合售电有限公司</h1>
+		<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i><h1>{{cus_name}}</h1>
 		<div class="span-group fr">
 
 			<span :class="{selected:$route.name==='client-zonglan'}" @click="changePage('client-zonglan')"><i class="iconfont icon-zonglan-hui"></i> 总览</span>

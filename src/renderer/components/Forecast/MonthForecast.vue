@@ -75,12 +75,6 @@ export default {
                 },
                 {
                     width: '150',
-                    title: '是否参与购电',
-                    key: 'sales',
-                    align: 'center'
-                },
-                {
-                    width: '150',
                     title: '系统预测(万kW-h)',
                     key: 'n1',
                     align: 'center'
@@ -93,28 +87,46 @@ export default {
                 },
                 {
                     width: '150',
-                    title: '人工预测(万kW-h)',
+                    title: '年度月预测(万kW-h)',
                     key: 'n3',
                     align: 'center'
                 },{
-                    title: '偏差电量(万kW-h)',
+                    title: '月度预测记录(万kW-h)',
                     key: 'n4',
+                    align: 'center'
+                },{
+                    title: '月度预测(万kW-h)',
+                    key: 'n4-1',
                     align: 'center'
                 },
                 {
                     title: '修改人',
                     key: 'n5',
+                    width:80,
                     align: 'center'
                 },
                 {
                     title: '确认人',
                     key: 'n6',
+                    width:80,
                     align: 'center'
                 },
                 {
                     title: '状态',
                     key: 'n7',
-                    align: 'center'
+                    width:80,
+                    align: 'center',
+                    render: (h, params) => {
+                        return h('select', [
+                            h('option', {
+                            }, '已购电'),
+                            h('option', {
+                            }, '已确认'),
+                            h('option', {
+                            }, '未确认'),
+                        ])
+                    }
+
                 },
                 {
                     title: '操作',
@@ -207,7 +219,7 @@ export default {
             <div class="layout-content-top">
                 <div class="fl">
                     <Button class="Button" type="primary">上一年</Button>
-                    <Select :model.sync="model1" style="width:100px;" placeholder='年度选择'>
+                    <Select :model.sync="model1" style="width:100px;" placeholder='月度选择'>
                         <Option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
                     </Select>
                     <Button class="Button" type="primary">下一年</Button>                    						

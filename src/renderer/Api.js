@@ -135,12 +135,68 @@ export const CLIENT_PIANCHA_CHART = '/api/devanalysis/chart';
 // 表格
 export const CLIENT_PIANCHA_TABLE = '/api/devanalysis/index';
 
-
 /*
 * 客户中心结束
 * */
 
 
+/*
+* 交易管理
+* */
+
+//竞价管理
+
+//本月竞价模拟
+export const MONTH_BIDDING = '/api/bidding/simulation';
+
+//添加模拟竞价交易
+export const ADD_MOCK_BIDDING = '/api/bidding/addbidprice';
+
+//往期竞价结果
+export const OLD_BIDDING = '/api/bidding/oldsimulation';
+
+//上期交易结果公示
+export const BIDDING_LIST = '/api/bidding/bidlist';
+
+/*
+* 交易管理结束
+* */
+//电量数据库开始
+//历史用电趋势
+export const HISTORY_ELECTRIC = '/api/stat/historicalPower';
+
+
+//电量数据库结束
+
+//预测分析开始
+// 用户申报月度
+export const USER_DECLARE = '/api/predictive/userdeclare';
+// 用户申报详情记录
+export const DECLARE_DETAIL = '/api/predictive/declareinfo';
+// 用户申报确认
+export const DECLARE_CONFIRM = '/api/predictive/confirm';
+// 用户申报删除
+export const DECLARE_DELETE = '/api/predictive/del';
+// 年度预测
+export const YEAR_FORECAST = '/api/predictive/yearfore';
+// 年度预测确认
+export const YEAR_CONFIRM = '/api/predictive/aconfirm';
+//预测分析结束
+//售电合同开始
+export const POWER_ADD_COMPACT = '/api/contract/store';
+//合同上传
+export const UPLOAD_COMPACT = '/api/file/upload';
+//用户户号添加
+export const USER_NUM_ADD = '/api/contract/add_usernums';
+//售电合同结束
+//添加长协合同开始
+//电厂下拉列表
+export const CHANGXIE_ADD_PLANT = '/api/powerplant';
+//添加电厂地址
+export const POWER_PLANT_ADDRESS = '/api/powerplant/';
+//添加长协合同
+export const CHANGXIE_ADD_COMPACT = '/api/contract/add_lpcontract';
+//添加长协合同结束
 
 export const errcallback = function (err) {
     console.error("请求出错"+err)

@@ -191,3 +191,7 @@ span.rate{
 	font-size: 18px!important;
 	cursor: pointer;
 }
+select{
+	border: 1px solid #eee;
+	border-radius: 4px;
+}

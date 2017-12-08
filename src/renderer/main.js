@@ -5,7 +5,7 @@ import axios from 'axios'
 import * as api from './Api'
 const instance = axios.create({
     baseURL:"http://192.168.2.111/",
-    timeout:3000
+    timeout:10000
 });
 
 // 引入echarts

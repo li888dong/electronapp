@@ -6,122 +6,70 @@ export default {
     name: 'UserForecast',
     data(){
         return{
-            value: '',
-            cityList: [
-                {
-                    value: '河南',
-                    label: '河南'
-                },
-                {
-                    value: '河北',
-                    label: '河北'
-                },
-                {
-                    value: '江西',
-                    label: '江西'
-                },
-                {
-                    value: '山东',
-                    label: '山东'
-                },
-                {
-                    value: '山西',
-                    label: '山西'
-                },
-                {
-                    value: '陕西',
-                    label: '陕西'
-                }
-            ],
-            timeList: [
-                {
-                    value: 'beijing',
-                    label: '2017年1月'
-                },
-                {
-                    value: 'shanghai',
-                    label: '2017年2月'
-                },
-                {
-                    value: 'shenzhen',
-                    label: '2017年2月'
-                },
-                {
-                    value: 'hangzhou',
-                    label: '2017年3月'
-                },
-                {
-                    value: 'nanjing',
-                    label: '2017年4月'
-                },
-                {
-                    value: 'chongqing',
-                    label: '2017年5月'
-                }
-            ],
-            model1: '',
-            model2:'',
-
+            detailModal: false,
+            delModal:false,
+            confirmModal:false,
+            delId:'',
+            detailModalName:'',
+            confirmIdList:[],
+            selectMonth:new Date().Format('yyyy-MM'),
+            selectArea:'郑州',
             columns4: [
                 {
+                    type: 'selection',
+                    width: 60,
+                    align: 'center'
+                },
+                {
                     title: '企业名称',
-                    key: 'n1',
+                    key: 'com_name',
                     width: 200,
                     align: 'center'
                 },
                 {
                     title: '上月申报电量(万KW-h)',
-                    key: 'n2',
+                    key: 'sysb',
                     width: 180,
                     align: 'center'
                 },
                 {
                     title: '上月用电量(万KW-h)',
-                    key: 'n3',
+                    key: 'syydl',
                     width: 150,
                     align: 'center'
                 },
                 {
                     title: '预测电量(万kW-h)',
-                    key: 'n4',
+                    key: 'ycdl',
                     width: 150,
                     align: 'center'
                 },
                 {
                     title: '申报电量(万kW-h)',
-                    key: 'n5',
+                    key: 'sbdl',
                     width: 150,
                     align: 'center'
                 },
                 {
                     title: '购电量(万kW-h)',
-                    key: 'n6',
+                    key: 'gdl',
                     align: 'center'
                 },{
                     title: '申报时间',
-                    key: 'n7',
+                    key: 'created_at',
                     align: 'center'
                 },
                 {
                     title: '申报状态',
-                    key: 'n8',
-                    align: 'center'
-                },
-                {
-                    title: '审核状态',
-                    key: 'n9',
-                    align: 'center'
-                },
-                {
-                    title: '确认人',
-                    key: 'n10',
-                    align: 'center'
-                },               
-                {
-                    title: '操作',
-                    key: 'n11',
+                    key: 'dstatus',
                     align: 'center',
                     render: (h, params) => {
+                        let text= '未申报';
+                        if (params.row.dstatus===0){
+                            text = '未申报'
+                        }else if (params.row.dstatus===1){
+                            text = '已申报'
+                        }
                         return h('div', [
                             h('span', {
                                 style: {
@@ -133,7 +81,47 @@ export default {
                                     click: () => {
                                     }
                                 }
-                            }, '审核'),
+                            }, text)
+                        ])
+                    }
+                },
+                {
+                    title: '审核状态',
+                    key: 'status',
+                    align: 'center',
+                    render: (h, params) => {
+                        let text= '未审核';
+                        if (params.row.status===0){
+                            text = '未审核'
+                        }else if (params.row.status===1){
+                            text = '已审核'
+                        }
+                        return h('div', [
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                    }
+                                }
+                            }, text)
+                        ])
+                    }
+                },
+                {
+                    title: '确认人',
+                    key: 'confirmor',
+                    align: 'center'
+                },               
+                {
+                    title: '操作',
+                    key: 'n11',
+                    align: 'center',
+                    render: (h, params) => {
+                        return h('div', [
                             h('span', {                                
                                 style: {
                                     marginRight: '5px',
@@ -142,7 +130,9 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.renderM(params)
+                                        this.detailModal= true;
+                                        this.detailModalName = params.row.com_name;
+                                        this.renderM(params.row.cus_id)
                                     }
                                 }
                             }, '查看'),
@@ -154,7 +144,8 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.remove(params.index)
+                                        this.delId = params.row.cus_id;
+                                        this.delModal = true;
                                     }
                                 }
                             }, '删除')
@@ -162,87 +153,106 @@ export default {
                     }
                 }
             ],
-            data4: [
-                {
-                    n1: '河南众企联合售电有限公司',
-                    n2: '-',
-                    n3: '-',
-                    n4: '-',
-                    n5: '-',
-                    n6: '-',
-                    n7: '-',
-                    n8: '-',
-                    n9: '-',
-                    n10: '-',
-                    n11: '-'
-                },
-                {
-                    n1: '河南众企联合售电有限公司',
-                    n2: '-',
-                    n3: '-',
-                    n4: '-',
-                    n5: '-',
-                    n6: '-',
-                    n7: '-',
-                    n8: '-',
-                    n9: '-',
-                    n10: '-',
-                    n11: '-'
-                },
-            ],
-            modal8: false,
             columns5: [
                 {
                     title: '申报时间',
                     width: 110,
-                    key:'time1'
+                    key:'updated_at'
                 },
                 {
                     title: '申报人',
-                    key:'people'
+                    key:'confirmor'
                 },
                 {
-                    title: '申报时间合计',
+                    title: '申报电量合计',
                     width: 110,
-                    key:'heji'
+                    key:'total'
                 },
                 {
                     title: '详情',
                     width: 160,
-                    key:'xiangQing'
+                    key:'sbdlinfo'
                 },
                 {
                     title: '备注',
                     key:'useNote'
                 }
             ],
-            data5: [
-                {
-                    time1: '2017-12-12 12:00:00',
-                    people: '王朝辉',
-                    heji: '11111',
-                    xiangQing: '134564 1233.12Mv时',
-                    useNote: '无备注'
-                },
-                {
-                    time1: '2017-12-12 12:00:00',
-                    people: '王朝辉',
-                    heji: '11111',
-                    xiangQing: '134564 1233.12Mv时',
-                    useNote: '无备注'
-                },
-            ],
+            tableData1: [],
+            tableData2:[],
+
              
         }
     },
     methods: {
         renderM(index) {
-            this.modal8= true
-            console.log(index)
+            this.$http.post(this.$api.DECLARE_DETAIL,{
+                id:index
+            }).then(res=>{
+                console.log("用户申报详情",res);
+                this.tableData2 = res.data.citys
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        confirmShenbao(){
+            this.$http.post(this.$api.DECLARE_CONFIRM,{
+                id:this.confirmIdList
+            }).then(res=>{
+                console.log("用户申报确认",res);
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        deleteShenbao(){
+            this.$http.post(this.$api.DECLARE_DELETE,{
+                id:this.delId
+            }).then(res=>{
+                console.log("用户申报删除",res);
+                this.userShenBao();
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
         },
         remove(index){
             this.data4.splice(index, 1);
-        }
+        },
+        userShenBao(){
+            this.$http.post(this.$api.USER_DECLARE,{
+                com_id:this.$store.getters.com_id,
+                time:this.selectMonth,
+                area:this.selectArea,
+                keyword:this.$store.getters.searchKey
+            }).then(res=>{
+                   console.log("用户申报",res);
+                   this.tableData1 = res.data.citys
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        monthSelect(month){
+            this.selectMonth = month;
+            console.log(this.selectMonth);
+            this.userShenBao()
+        },
+        areaSelect(area){
+            this.selectArea = area[1].name.replace(/市/,'');
+            console.log(this.selectArea);
+
+            this.userShenBao()
+        },
+
+    },
+    mounted(){
+        this.userShenBao();
     },
     components : {
         'myFenye': myFenye,
@@ -257,38 +267,40 @@ export default {
         <h3 slot="title">用户申报</h3>
         <div class="layout-content">
             <Row class="layout-content-top">          
-                <Row>
+                <Row gutter="10">
                     <Col span="2">
-                        <Select :model.sync="model2" style="width:100px;" placeholder='月度选择'>
-                            <Option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</Option>
-                        </Select>
+                        <DatePicker type="month" placeholder="请选择月份" @on-change="monthSelect"></DatePicker>
                     </Col>
-                    <Col span="2">
-                        <Select v-model="model1" style="width:100px;" placeholder='全部区域'>
-                            <Option v-for="item in cityList" :value="item.value" :key="item.value" >{{ item.label }}</Option>
-                        </Select>
+                    <Col span="4">
+                        <al-selector level=1 @on-change="areaSelect"/>
                     </Col>
-                    <Col span="5" offset='15'>
-                        <mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
+                    <Col span="6">
+
+                         <mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="userShenBao"></mySearch>
                     </Col>
+
                 </Row>
             </Row>
             <Row class="layout-content-main">
-                <Table border ref="selection" :columns="columns4" :data="data4"></Table>
+                <Table border ref="selection" :columns="columns4" :data="tableData1"></Table>
             </Row>
             <myFenye></myFenye>
         </div>
     </Card>
     <Modal
-        title="12月份电量申报详情"
-        v-model="modal8"
-        width = 666
+        :title="detailModalName+'电量申报详情'"
+        v-model="detailModal"
+        width = '666'
         :mask-closable="false"
         class-name="vertical-center-modal">
-        企业名称 :   <span>河南众企联合售电有限公司</span> <br>
-        申报记录 :   <Table border ref="selection" :columns="columns5" :data="data5"></Table>
+        申报记录 :   <Table border ref="selection" :columns="columns5" :data="tableData2"></Table>
      </Modal>
-
+    <Modal
+            v-model="delModal"
+            title="删除提醒"
+            @on-ok="deleteShenbao">
+        <p>确认删除该条记录？</p>
+    </Modal>
 </div>
 </template>
 

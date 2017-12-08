@@ -28,6 +28,7 @@
 <style scoped>
 /* 顶部搜索框样式 */
 .searchBox {
+    width: 340px;
     margin-right: 0;
     position: relative;
 }

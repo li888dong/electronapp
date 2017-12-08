@@ -7,7 +7,7 @@ const mutations = {
 
     setLogin(state ,res){
         state.login = res[0];
-        state.com_id=res[1]
+        state.com_id=res[1]||1
     }
 }
 

@@ -7,7 +7,7 @@
 <script>
     import Cookies from 'js-cookie';
     import {ipcRenderer} from 'electron';
-    import Main from './components/Main'
+    import Main from './components/MainPage'
 	import Login from './components/login.vue'
     export default {
         name: 'smartpower',

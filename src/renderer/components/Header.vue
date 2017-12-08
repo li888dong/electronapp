@@ -10,19 +10,8 @@
           }
 	    },
         mounted() {
-            this.weatherData();
         },
         methods: {
-            weatherData(city = '郑州') {
-                this.$http.get('http://www.sojson.com/open/api/weather/json.shtml?city=' + city).then(res => {
-                    this.weather.city = res.data.city;
-                    this.weather.nowWeather = res.data.data.forecast[0].type;
-                    this.weather.temperature = res.data.data.wendu;
-                    this.weather.humidity = res.data.data.shidu;
-                }, err => {
-                    console.log(err)
-                })
-            },
             toggleFast(){
                 this.$store.dispatch('setFastboot');
             },

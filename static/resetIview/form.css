@@ -103,3 +103,14 @@
 .msg-center .ivu-card-body{
 	padding: 0;
 }
+/*重置售电合同表单样式*/
+.ivu-form-item-required .ivu-form-item-label:before{
+	content:'';
+}
+.add_hetong .ivu-input-icon-normal+.ivu-input{
+	padding-right:26px;
+}
+.add_hetong .ivu-input-large{
+	padding:2px 2px;
+	height:34px;
+}

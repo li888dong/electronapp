@@ -1,5 +1,6 @@
 <script>
 import inputs from '@/components/ContractManagement/inputs'
+import MyUpload from '../Tool/upLoad.vue'
 
 
 export default {
@@ -7,6 +8,8 @@ export default {
     data(){
         return{
             value: "",
+            dcList:[],
+            powerId:'',
             columns1: [
                 {
                     title: '01月',
@@ -94,7 +97,6 @@ export default {
                 }
             ],
             model3: '',
-            file: null,
             loadingStatus: false,
             formItem: {
                 htNum: '',
@@ -107,8 +109,25 @@ export default {
                 htZhixing: '',
                 htPerson: '',
                 htIphone: '',
+                address:'',
                 htNote: '',
+                file:''
             },
+            month:{
+                month01:'',
+                month02:'',
+                month03:'',
+                month04:'',
+                month05:'',
+                month06:'',
+                month07:'',
+                month08:'',
+                month09:'',
+                month10:'',
+                month11:'',
+                month12:''
+            },
+            allMonth:'',
             ruleVa: {
                 htNum: [
                     { required: true, message: '这个选项不能为空', trigger: 'blur' }
@@ -143,87 +162,78 @@ export default {
                 htNote: [
                     { required: true, message: '这个选项不能为空', trigger: 'blur' }
                 ],
-                
-
-
-                // htNian: [
-                //     { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                //     { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
-                // ],
-                // city: [
-                //     { required: true, message: 'Please select the city', trigger: 'change' }
-                // ],
-                // gender: [
-                //     { required: true, message: 'Please select gender', trigger: 'change' }
-                // ],
-                // interest: [
-                //     { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-                //     { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-                // ],
-                // date: [
-                //     { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-                // ],
-                // time: [
-                //     { required: true, type: 'date', message: 'Please select time', trigger: 'change' }
-                // ],
-                // desc: [
-                //     { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                //     { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                // ]
             },
-            defaultList: [
-                {
-                    'name': 'a42bdcc1178e62b4694c830f028db5c0',
-                    'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
-                }
-            ],
-            imgName: '',
             visible: false,
-            uploadList: [],
-            tip: ''
         }
     },
     components: {
-        "inputs": inputs
+        "inputs": inputs,
+        'my-upload':MyUpload
     },
     methods: {
-        handleView (name) {
-            this.imgName = name;
-            this.visible = true;
+        //文件上传
+            uploadComplete(status, result ,flag,file) {
+                if (status == 200) { //
+                    console.log(result);
+                    this.addList.htid = result;
+                    this.formItem.file = file;
+                } else {
+                    //失败处理
+                }
+            },  
+        powerPlant(){
+            this.$http.get(this.$api.CHANGXIE_ADD_PLANT).then(res=>{
+                console.log("电厂列表",res);
+                var data = res.data;
+                console.log(data);
+                if(data.status){
+                   var list = data[0];
+                   for (var i=0;i<list.length;i++){
+                      var obj = {
+                         label:list[i].pp_name,
+                         value:list[i].id
+                      }
+                      this.dcList.push(obj);
+                   }
+                }
+                
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
         },
-        handleRemove (file) {
-            const fileList = this.$refs.upload.fileList;
-            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+        powerAddress(value){
+            this.powerId = value;
+            this.$http.get(this.$api.POWER_PLANT_ADDRESS+this.powerId).then(res=>{
+                console.log('电厂地址',res);
+                if(res.data.status){
+                    this.formItem.address = res.data[0].address;
+                }
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
         },
-        handleSuccess (res, file) {
-            file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
-            file.name = file.name;
+        upLoadPowerCompact(){
+           if(!this.isEmpty(this.formItem)&& !this.isEmpty(this.month)){
+               for(let key in this.month){
+                  this.allMonth += this.month[key];
+               }
+           }
         },
-        handleFormatError (file) {
-            this.$Notice.warning({
-                title: '文件类型不支持',
-                desc: '文件格式为（ ' + file.name + ' ）不支持, 请上传PDF格式.'
-            });
-        },
-        handleMaxSize (file) {
-            this.$Notice.warning({
-                title: '文件太大',
-                desc: '文件' + file.name + ' 太大，大小不能超过2M.'
-            });
-        },
-        handleBeforeUpload () {
-            const check = this.uploadList.length < 1;
-            if (!check) {
-                this.$Notice.warning({
-                    title: '最多上传一份文件.'
-                });
-            }
-            return check;
-        },
-        
+        isEmpty(obj){
+                for (let key in obj){
+                    if (obj[key] !== ""){
+                        return false
+                    }
+                }
+                return true
+            },
     },
     mounted () {
-        this.uploadList = this.$refs.upload.fileList;
+        this.powerPlant();
     }
 }
 </script>
@@ -252,10 +262,8 @@ export default {
                     <Row>
                         <Col span="8">
                             <Form-item label="签约电厂" prop='htDianchang'>
-                                <Select :model.sync="formItem.htDianchang" placeholder="请选择签约电厂">
-                                    <Option value="beijing">郑州市电厂</Option>
-                                    <Option value="shanghai">广东市电厂</Option>
-                                    <Option value="shenzhen">北京市电厂</Option>
+                                <Select :model.sync="formItem.htDianchang" placeholder="请选择签约电厂" v-on:on-change='powerAddress'>
+                                    <Option  v-for='item in dcList' :value="item.value" :key = 'item.valueChange'>{{item.label}}</Option>
                                 </Select>
                             </Form-item>
                         </Col>
@@ -305,14 +313,8 @@ export default {
                     </Row>
                     <Row :gutter="10">
                         <Form-item label="电厂地址">
-                            <Col span="2">
-                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
-                            </Col>
-                            <Col span="2">
-                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
-                            </Col>
                             <Col span="8">
-                                <Input disabled v-model="formItem.input" placeholder="-"></Input>
+                                <Input disabled v-model="formItem.address" placeholder="-"></Input>
                             </Col>
                         </Form-item>
                     </Row>
@@ -324,33 +326,14 @@ export default {
                         </Col>
                     </Row>
                     <p>电子合同备查</p>
-                    <div class="TName">
-                            <span>合同上传 : </span>
-                            <div class="changXie-upload-box">
-                                <div class="changXie-upload"></div>
-                                <Upload
-                                    ref="upload"
-                                    :default-file-list="defaultList"
-                                    :on-success="handleSuccess"
-                                    :format="['pdf']"
-                                    :max-size="2048"
-                                    :on-format-error="handleFormatError"
-                                    :on-exceeded-size="handleMaxSize"
-                                    :before-upload="handleBeforeUpload"
-                                    multiple
-                                    action="//jsonplaceholder.typicode.com/posts/"
-                                    style="display: inline-block;width:80px;">
-                                    <Button type="primary" style="vertical-align: top; height: 34px;">选择文件</Button>
-                                </Upload>
-                            </div><br>
-                            <!-- <Modal title="查看文件" v-model="visible">
-                                <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-                            </Modal> -->
-                            <!-- <div class="up">
-                                <input type="file" name="" id="">
-                            </div>-->  
-                            <i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
-                        </div> <br>
+                            <FormItem label='合同上传' class='myTab'>
+                       <my-upload @complete="uploadComplete">
+            <Input placeholder='请选择文件' class='file' v-model='formItem.file'></Input>
+            <a>选择文件</a>
+            </my-upload>
+                       <br>
+                        <i class="typeTip">仅支持PDF格式</i><br/>
+                    </FormItem>
                     <p>合同电量分配</p>
                     <Row class="month" >
                         <div>一月</div>
@@ -368,19 +351,19 @@ export default {
                         <div>总计</div>
                     </Row>
                     <Row class="monthData">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">
-                        <input type="text" name="" id="" placeholder="-">                    
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month01'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month02'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month03'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month04'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month05'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month06'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month07'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month08'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month09'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month10'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month11'>
+                        <input type="text" name="" id="" placeholder="-" v-model='month.month12'>
+                        <input type="text" name="" id="" placeholder="-" v-model = 'this.allMonth'>                    
                     </Row>                
                     <i class="tiShi">十二个月购电量分配合计与签约电量不一致！</i>
                     <div class="save">
@@ -515,7 +498,6 @@ export default {
     font-style: normal;
     bottom: 8px;
     color: #ccc;
-    padding-left: 114px;
 }
 
 /* .TName .myTextarea{

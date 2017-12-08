@@ -7,8 +7,8 @@ export default new Router({
     routes: [
         {
             path: '/main',
-            name: 'main',
-            component: require('@/components/Main').default,
+            name: 'mainPage',
+            component: require('@/components/MainPage').default,
             children:[
                 {
                     path: '/planInfo',
@@ -148,11 +148,7 @@ export default new Router({
                             name: 'user-manager',
                             component: require('@/components/Client/ClientUserManagement').default
                         },
-                        {
-                            path: '/database',
-                            name: 'database',
-                            component: require('@/components/Client/PowerDatabase').default
-                        },
+
                         {
                             path: '/matching-management',
                             name: 'matching-management',
@@ -163,6 +159,11 @@ export default new Router({
                             redirect: '/client-zonglan'
                         }
                     ]
+                },
+                {
+                    path: '/database',
+                    name: 'database',
+                    component: require('@/components/Client/PowerDatabase').default
                 },
                 {
                     path: '/add-hetong',

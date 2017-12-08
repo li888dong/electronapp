@@ -27,8 +27,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoZonglan();
-                                            this.$store.dispatch('setCusId',params.row.id);
+                                            this.gotoClientPage('client-zonglan',params);
                                         }
                                     }
                                 }, params.row.name)
@@ -90,7 +89,7 @@
                                 },
                                 on: {
                                     click: () => {
-                                        this.gotoZonglan()
+                                        this.gotoClientPage('client-zonglan',params)
                                     }
                                 }
                             }, '')
@@ -112,9 +111,7 @@
                                 },
                                 on: {
                                     click: () => {
-                                        console.log(params.index)
-
-                                        this.gotoZhishu()
+                                        this.gotoClientPage('client-compare',params);
                                     }
                                 }
                             }, '')
@@ -135,9 +132,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.index)
-
-                                            this.gotoHetong()
+                                            this.gotoClientPage('hetong',params)
                                         }
                                     }
                                 }, '合同'),
@@ -149,9 +144,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.index)
-
-                                            this.gotoYonghu()
+                                            this.gotoClientPage('user-manager',params)
                                         }
                                     }
                                 }, '用户')
@@ -186,21 +179,11 @@
 			reqData(){
 			    this.setCityList();
 			},
-			gotoZonglan(){
-			    this.$router.push('/client-zonglan');
-			},
-			gotoZhishu(){
-			    this.$router.push('/client-compare');
-			},
-			gotoDetail(){
-			    this.$router.push('/client-detail');
-			},
-			gotoHetong(){
-			    this.$router.push('/hetong');
-			},
-			gotoYonghu(){
-			    this.$router.push('/user-manager');
-			},
+	        gotoClientPage(page,params){
+                this.$store.dispatch('setCusId',params.row.id);
+                this.$store.dispatch('setCusName',params.row.name);
+                this.$router.push(page);
+	        },
             gotoAddUser(){
                 this.$router.push('/AddClient');
             },

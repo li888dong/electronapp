@@ -217,9 +217,9 @@
             changeSelect(pds){
                 this.currentPDS = pds;
             },
-            powerType(type){
-                console.log(this.powerType)
-            },
+            // powerTypeFn(type){
+            //     console.log(this.powerType)
+            // },
             terminalCollectRecord(type){
                 var typeNum = 0;
                 switch(type){
@@ -261,7 +261,7 @@
              
 		},
         mounted(){
-            // this.terminalCollectRecord();
+            this.terminalCollectRecord(0);
         }
 	}
 </script>

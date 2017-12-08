@@ -76,7 +76,7 @@ export default {
         }
     },
     methods:{
-         addClient(){
+         addClient(goht){
             //手机号正则表达式
             var tel_reg = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
             //邮箱的正则表达式
@@ -108,6 +108,9 @@ export default {
                 fax:this.formItem.fax1+this.formItem.fax2,
             }).then(res=>{
                 console.log(res);
+                if (goht){
+                    this.$router.push('add-hetong')
+                }
             },err=>{
                 this.$api.errcallback(err);
             }).catch(err=>{
@@ -288,7 +291,7 @@ export default {
             <Row>
                 <Col span="12" style="text-align: center;line-height: 34px;">
                     <Form-item>
-                        <i-button type="primary">保存并添加合同</i-button>
+                        <i-button type="primary" @click="addClient('goht')">保存并添加合同</i-button>
                         <i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
                         <i-button type="ghost" style="margin-left: 30px">取消</i-button>
                     </Form-item>

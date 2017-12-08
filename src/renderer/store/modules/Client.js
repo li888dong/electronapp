@@ -1,7 +1,8 @@
 const state = {
     cus_id:1,
+    cus_name:'',
     term_id:1,
-    cliendid:'fghgf',
+    clientid:'fghgf',
     currentCity:'all',
     searchKey:'',
     cityList: {
@@ -79,7 +80,7 @@ const state = {
         }
     },
     cusList:{
-    tableData: [],
+        tableData: [],
         pageData:{
             total:100,
             current:2
@@ -108,11 +109,15 @@ const mutations = {
         state.cus_id = res||1;
         console.log('当前客户id',state.cus_id)
     },
+    setCusName(state ,res){
+        state.cus_name = res;
+        console.log('当前客户名称',state.cus_name)
+    },
     setTemID(state,res){
         state.term_id = res || 1
     },
     setClientId(state,res){
-        state.cliendid = res||'fghgf'
+        state.clientid = res
     }
 }
 
@@ -136,6 +141,9 @@ const actions = {
     },
     'setCusId':function({commit},res){
         commit('setCusId',res)
+    },
+    'setCusName':function({commit},res){
+        commit('setCusName',res)
     },
     'setTemID':function({commit},res){
         commit('setTemID',res)
@@ -165,11 +173,14 @@ export default {
         cus_id:state =>{
             return state.cus_id
         },
+        cus_name:state =>{
+            return state.cus_name
+        },
         term_id:state=>{
              return state.term_id
         },
-        cliendid:state=>{
-            return state.cliendid
+        clientid:state=>{
+            return state.clientid
         }
 
     }
