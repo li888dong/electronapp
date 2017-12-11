@@ -218,7 +218,7 @@
 
 			</div>
 			<div class="box" style="background-color: #f57e6a;" @click="hideSelf">
-				<router-link to="/annual-forecast">
+				<router-link to="/year-forecast">
 					<i class="iconfont icon-wenjianxiazai"></i>
 					<span class="title absolute">导入年度预测</span>
 				</router-link>

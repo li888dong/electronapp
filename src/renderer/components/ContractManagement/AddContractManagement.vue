@@ -1,549 +1,603 @@
 <script>
-import inputs from '@/components/ContractManagement/inputs'
-import MyUpload from '../Tool/upLoad.vue'
+    import inputs from '@/components/ContractManagement/inputs'
+    import MyUpload from '../Tool/upLoad.vue'
 
 
-export default {
-    name: 'ContractManagement',
-    data(){
-        return{
-            value: "",
-            dcList:[],
-            powerId:'',
-            columns1: [
-                {
-                    title: '01月',
-                    key: 'one'
+    export default {
+        name: 'ContractManagement',
+        data() {
+            return {
+                value: "",
+                dcList: [],
+                powerId: '',
+                model3: '',
+                formItem: {
+                    lpcon_no: '',
+                    lpcon_year: '',
+                    powerplant: '',
+                    signed_num: '',
+                    signed_status: '',
+                    signed_day: '',
+                    signed_price: '',
+                    exec_date: '',
+                    business: '',
+                    tel: '',
+                    address: '',
+                    htscdz: '',
+                    d_id: '',
+                    remarks: '',
+                    com_id: this.$store.getters.com_id,
                 },
-                {
-                    title: '02月',
-                    key: 'one'
+                file: '',
+                month: {
+                    month01: '',
+                    month02: '',
+                    month03: '',
+                    month04: '',
+                    month05: '',
+                    month06: '',
+                    month07: '',
+                    month08: '',
+                    month09: '',
+                    month10: '',
+                    month11: '',
+                    month12: ''
                 },
-                {
-                    title: '03月',
-                    key: 'one'
+                allMonth: 0,
+                equality: false,
+                ruleVa: {
+                    lpcon_no: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    lpcon_year: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    powerplant: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    signed_num: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    signed_status: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    signed_day: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    signed_price: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    exec_date: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    business: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    tel: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
+                    remarks: [
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                    ],
                 },
-                {
-                    title: '04月',
-                    key: 'one'
-                },
-                {
-                    title: '05月',
-                    key: 'one'
-                },
-                {
-                    title: '06月',
-                    key: 'one'
-                },
-                {
-                    title: '07月',
-                    key: 'one'
-                },
-                {
-                    title: '08月',
-                    key: 'one'
-                },
-                {
-                    title: '09月',
-                    key: 'one'
-                },
-                {
-                    title: '10月',
-                    key: 'one'
-                },
-                {
-                    title: '11月',
-                    key: 'one'
-                },
-                {
-                    title: '12月',
-                    key: 'one'
-                },
-                {
-                    title: '总计',
-                    key: 'zongji'
+                hint: false,
+                bol: false,
+                isGo: true,
+            }
+        },
+        components: {
+            "inputs": inputs,
+            'my-upload': MyUpload
+        },
+        methods: {
+            //文件上传
+            uploadComplete(result) {
+                console.log(result);
+                this.formItem.htscdz = result.fileid;
+                this.upLoadPowerCompact();
+                this.bol = false;
+            },
+            selectSuccess(file) {
+                this.file = file;
+            },
+            changeStatus() {
+                if(this.file != "" && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
+                     this.bol = true;
+                     this.isGo = false
+                }else{
+                    this.hint = true;
                 }
-            ],
-            data1: [
-                {
-                    one: '22',
-                    zongji: '1111'
-                }               
-            ],
-            cityList: [
-                {
-                    value: 'New York',
-                    label: 'New York'
-                },
-                {
-                    value: 'London',
-                    label: 'London'
-                },
-                {
-                    value: 'Sydney',
-                    label: 'Sydney'
-                },
-                {
-                    value: 'Ottawa',
-                    label: 'Ottawa'
-                },
-                {
-                    value: 'Paris',
-                    label: 'Paris'
-                },
-                {
-                    value: 'Canberra',
-                    label: 'Canberra'
+            },
+            powerPlant() {
+                this.$http.get(this.$api.CHANGXIE_ADD_PLANT).then(res => {
+                    console.log("电厂列表", res);
+                    var data = res.data;
+                    console.log(data);
+                    if (data.status) {
+                        var list = data[0];
+                        for (var i = 0; i < list.length; i++) {
+                            var obj = {
+                                label: list[i].pp_name,
+                                value: list[i].id
+                            }
+                            this.dcList.push(obj);
+                        }
+                    }
+
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
+            },
+            powerAddress(value) {
+                if (value.value != '' && value.label != "") {
+                    console.log(value);
+                    this.powerId = value.value;
+                    this.formItem.powerplant = value.label;
+                    console.log(this.powerId, this.formItem.powerplant);
+                    this.$http.get(this.$api.POWER_PLANT_ADDRESS + this.powerId).then(res => {
+                        console.log('电厂地址', res);
+                        if (res.data.status) {
+                            this.formItem.address = res.data[0].address;
+                        }
+                    }, err => {
+                        this.$api.errcallback(err);
+                    }).catch(err => {
+                        this.$api.errcallback(err);
+                    })
                 }
-            ],
-            model3: '',
-            loadingStatus: false,
-            formItem: {
-                htNum: '',
-                htNian: '',
-                htDianchang: '',
-                htDianliang: '',
-                htStatus: '',
-                htDate: '',
-                htQianyue: '',
-                htZhixing: '',
-                htPerson: '',
-                htIphone: '',
-                address:'',
-                htNote: '',
-                file:''
             },
-            month:{
-                month01:'',
-                month02:'',
-                month03:'',
-                month04:'',
-                month05:'',
-                month06:'',
-                month07:'',
-                month08:'',
-                month09:'',
-                month10:'',
-                month11:'',
-                month12:''
-            },
-            allMonth:'',
-            ruleVa: {
-                htNum: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htNian: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htDianchang: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htDianliang: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htStatus: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htDate: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htQianyue: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htZhixing: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htPerson: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htIphone: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-                htNote: [
-                    { required: true, message: '这个选项不能为空', trigger: 'blur' }
-                ],
-            },
-            visible: false,
-        }
-    },
-    components: {
-        "inputs": inputs,
-        'my-upload':MyUpload
-    },
-    methods: {
-        //文件上传
-            uploadComplete(status, result ,flag,file) {
-                if (status == 200) { //
-                    console.log(result);
-                    this.addList.htid = result;
-                    this.formItem.file = file;
+            upLoadPowerCompact() {
+                console.log(this.formItem);
+                if (!this.isEmpty(this.formItem)) {
+                    this.formItem.signed_num = parseInt(this.formItem.signed_num);
+                    if (!this.isEmpty(this.month)) {
+                        this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
+                            console.log("电量分配", res);
+                            if (res.data.status) {
+                                this.formItem.d_id = res.data.id;
+                                this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
+                                    console.log('添加长协合同', res);
+                                    if (res.data.status && this.isGo) {
+                                        this.success();
+                                        this.$router.push('/ChangxieContract');
+                                    } else {
+                                        this.success();
+                                        for (let k in this.formItem) {
+                                            this.formItem[k] = '';
+                                        }
+                                        this.file = '';
+                                        for (let k in this.month) {
+                                            this.month[k] = '';
+                                        }
+                                    }
+                                }, err => {
+                                    this.$api.errcallback(err);
+                                }).catch(err => {
+                                    this.$api.errcallback(err);
+                                })
+                            }
+                        }, err => {
+                            this.$api.errcallback(err);
+                        }).catch(err => {
+                            this.$api.errcallback(err);
+                        })
+                    }
                 } else {
-                    //失败处理
+                    this.hint = true;
                 }
-            },  
-        powerPlant(){
-            this.$http.get(this.$api.CHANGXIE_ADD_PLANT).then(res=>{
-                console.log("电厂列表",res);
-                var data = res.data;
-                console.log(data);
-                if(data.status){
-                   var list = data[0];
-                   for (var i=0;i<list.length;i++){
-                      var obj = {
-                         label:list[i].pp_name,
-                         value:list[i].id
-                      }
-                      this.dcList.push(obj);
-                   }
-                }
-                
-            },err=>{
-                this.$api.errcallback(err);
-            }).catch(err=>{
-                this.$api.errcallback(err);
-            })
-        },
-        powerAddress(value){
-            this.powerId = value;
-            this.$http.get(this.$api.POWER_PLANT_ADDRESS+this.powerId).then(res=>{
-                console.log('电厂地址',res);
-                if(res.data.status){
-                    this.formItem.address = res.data[0].address;
-                }
-            },err=>{
-                this.$api.errcallback(err);
-            }).catch(err=>{
-                this.$api.errcallback(err);
-            })
-        },
-        upLoadPowerCompact(){
-           if(!this.isEmpty(this.formItem)&& !this.isEmpty(this.month)){
-               for(let key in this.month){
-                  this.allMonth += this.month[key];
-               }
-           }
-        },
-        isEmpty(obj){
-                for (let key in obj){
-                    if (obj[key] !== ""){
+            },
+            isEmpty(obj) {
+                for (let key in obj) {
+                    if (obj[key] !== "") {
                         return false
                     }
                 }
                 return true
             },
-    },
-    mounted () {
-        this.powerPlant();
+            execDate(value) {
+                this.formItem.exec_date = value;
+                // console.log(this.formItem.exec_date);
+            },
+            singnedDay(value) {
+                this.formItem.signed_day = value;
+            },
+            hintChange() {
+                var _this = this;
+                var timer = setTimeout(function () {
+                    _this.hint = false;
+                    if (_this.hint = false) {
+                        clearTimeout(timer);
+                    }
+                }, 3000)
+            },
+            signStatus(value) {
+                this.formItem.signed_status = value;
+            },
+            changeEmpty() {
+                this.bol = true;
+                this.isGo = false;
+            },
+            cancel() {
+                for (let k in this.formItem) {
+                    this.formItem[k] = '';
+                }
+                this.file = '';
+                for (let k in this.month) {
+                    this.month[k] = '';
+                }
+            },
+            success() {
+                this.$Message.success('添加成功');
+            },
+        },
+        watch: {
+            hint: function () {
+                this.hintChange();
+            },
+        },
+        computed: {
+            isEquality: function () {
+                for (var k in this.month) {
+                    if (this.month[k] === '') {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        },
+        mounted() {
+            this.powerPlant();
+
+            this.$Message.config({
+                top: 200,
+                duration: 3
+            });
+        }
     }
-}
 </script>
 
 <template>
-<Row class="main-container">
-    <Card>
-        <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 10px;left: 10px;"></i>
-        <h3 slot="title" style="padding-left: 40px;">添加长协合同</h3>
-        <Row class="ContractBox">
-            <div class="ContractBox-main">            
-                <Form ref="formItem" :model="formItem" :rules='ruleVa' :label-width="110">
-                    <p>基本信息</p>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="合同编号" prop='htNum'>
-                                <Input v-model="formItem.htNum" placeholder="请输入合同编号"></Input>                                
-                            </Form-item>
-                        </Col>
-                        <Col span="8">
-                            <Form-item label="合同年度" prop='htNian'>
-                                <Input v-model="formItem.htNian" placeholder="请输入合同年度"></Input>
-                            </Form-item>
-                        </Col>               
-                    </Row>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="签约电厂" prop='htDianchang'>
-                                <Select :model.sync="formItem.htDianchang" placeholder="请选择签约电厂" v-on:on-change='powerAddress'>
-                                    <Option  v-for='item in dcList' :value="item.value" :key = 'item.valueChange'>{{item.label}}</Option>
-                                </Select>
-                            </Form-item>
-                        </Col>
-                        <Col span="8">
-                            <Form-item label="签约电量" prop='htDianliang'>
-                                <Input v-model="formItem.htDianliang" placeholder="请输入签约电量"></Input>   <i class="wkw">万KVA</i>                    
-                            </Form-item>
-                        </Col>
-                        
-                    </Row>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="合同状态" prop='htStatus'>
-                                <Input v-model="formItem.htStatus" placeholder="请输入合同状态"></Input>
-                            </Form-item>
-                        </Col>
-                        <Col span="8">
-                            <Form-item label="签约日期" prop='htDate'>
-                                <Input v-model="formItem.htDate" placeholder="请输入签约日期"></Input>
-                            </Form-item>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="签约价格" prop='htQianyue'>
-                                <Input v-model="formItem.htQianyue" placeholder="请输入签约价格"></Input>
-                            </Form-item>
-                        </Col>
-                        <Col span="8">
-                            <Form-item label="执行日期" prop='htZhixing'>
-                                <Input v-model="formItem.htZhixing" placeholder="请输入执行日期"></Input>
-                            </Form-item>
-                        </Col>
-                    </Row>
-                    <p>联系信息</p>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="业务代表" prop='htPerson'>
-                                <Input v-model="formItem.htPerson" placeholder="请输入业务代表"></Input>
-                            </Form-item>
-                        </Col>
-                        <Col span="8">
-                            <Form-item label="联系电话" prop='htIphone'>
-                                <Input v-model="formItem.htIphone" placeholder="请输入联系电话"></Input>
-                            </Form-item>
-                        </Col>
-                    </Row>
-                    <Row :gutter="10">
-                        <Form-item label="电厂地址">
-                            <Col span="8">
-                                <Input disabled v-model="formItem.address" placeholder="-"></Input>
-                            </Col>
-                        </Form-item>
-                    </Row>
-                    <Row>
-                        <Col span="8">
-                            <Form-item label="合同备注" prop='htNote'>
-                                <Input v-model="formItem.htNote" placeholder="请输入合同备注"></Input>
-                            </Form-item>
-                        </Col>
-                    </Row>
-                    <p>电子合同备查</p>
-                            <FormItem label='合同上传' class='myTab'>
-                       <my-upload @complete="uploadComplete">
-            <Input placeholder='请选择文件' class='file' v-model='formItem.file'></Input>
-            <a>选择文件</a>
-            </my-upload>
-                       <br>
-                        <i class="typeTip">仅支持PDF格式</i><br/>
-                    </FormItem>
-                    <p>合同电量分配</p>
-                    <Row class="month" >
-                        <div>一月</div>
-                        <div>二月</div>
-                        <div>三月</div>
-                        <div>四月</div>
-                        <div>五月</div>
-                        <div>六月</div>
-                        <div>七月</div>
-                        <div>八月</div>
-                        <div>九月</div>
-                        <div>十月</div>
-                        <div>十一月</div>
-                        <div>十二月</div>
-                        <div>总计</div>
-                    </Row>
-                    <Row class="monthData">
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month01'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month02'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month03'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month04'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month05'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month06'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month07'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month08'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month09'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month10'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month11'>
-                        <input type="text" name="" id="" placeholder="-" v-model='month.month12'>
-                        <input type="text" name="" id="" placeholder="-" v-model = 'this.allMonth'>                    
-                    </Row>                
-                    <i class="tiShi">十二个月购电量分配合计与签约电量不一致！</i>
-                    <div class="save">
-                        <Button type="primary">保存并继续添加</Button>
-                        <Button type="primary">保存</Button>
-                        <Button type="ghost">取消</Button>
-                    </div>            
-                </Form>
-            </div>
-        </Row>
-    </Card>
-    
-</Row>
+	<Row class="main-container">
+		<Card>
+			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"
+			   style="position: absolute;top: 10px;left: 10px;"></i>
+			<h3 slot="title" style="padding-left: 40px;">添加长协合同</h3>
+			<Row class="ContractBox">
+				<div class="ContractBox-main">
+					<Form ref="formItem" :model="formItem" :rules='ruleVa' :label-width="110">
+						<p>基本信息</p>
+						<Row>
+							<Col span="8">
+							<Form-item label="合同编号" prop='htNum'>
+								<Input v-model="formItem.lpcon_no" placeholder="请输入合同编号"></Input>
+							</Form-item>
+							</Col>
+							<Col span="8">
+							<Form-item label="合同年度" prop='lpcon_year'>
+								<Input v-model="formItem.lpcon_year" placeholder="请输入合同年度"></Input>
+							</Form-item>
+							</Col>
+						</Row>
+						<Row>
+							<Col span="8">
+							<Form-item label="签约电厂" prop='powerplant'>
+								<Select v-model="formItem.powerplant" placeholder="请选择签约电厂"
+								        v-on:on-change='powerAddress' label-in-value>
+									<Option v-for='item in dcList' :value="item.value" :key='item.value'>
+										{{item.label}}
+									</Option>
+								</Select>
+							</Form-item>
+							</Col>
+							<Col span="8">
+							<Form-item label="签约电量" prop='signed_num'>
+								<Input v-model="formItem.signed_num" placeholder="请输入签约电量"></Input> <i
+									class="wkw">万KVA</i>
+							</Form-item>
+							</Col>
+
+						</Row>
+						<Row>
+							<Col span="8">
+							<Form-item label="合同状态" prop='signed_status'>
+								<Select v-model='formItem.signed_status' placeholder='请输入合同状态'
+								        v-on:on-change='signStatus'>
+									<Option value='1'>已签</Option>
+									<Option value='0'>未签</Option>
+								</Select>
+							</Form-item>
+							</Col>
+							<Col span="8">
+							<Form-item label="签约日期" prop='signed_day'>
+								<DatePicker type="date" placeholder="请输入签约日期" style='width: 100%;'
+								            v-on:on-change='singnedDay'></DatePicker>
+							</Form-item>
+							</Col>
+						</Row>
+						<Row>
+							<Col span="8">
+							<Form-item label="签约价格" prop='signed_price'>
+								<Input v-model="formItem.signed_price" placeholder="请输入签约价格"></Input>
+							</Form-item>
+							</Col>
+							<Col span="8">
+							<Form-item label="执行日期" prop='exec_date'>
+								<DatePicker type="date" placeholder="请输入执行日期" style='width: 100%;'
+								            v-on:on-change='execDate'></DatePicker>
+							</Form-item>
+							</Col>
+						</Row>
+						<p>联系信息</p>
+						<Row>
+							<Col span="8">
+							<Form-item label="业务代表" prop='business'>
+								<Input v-model="formItem.business" placeholder="请输入业务代表"></Input>
+							</Form-item>
+							</Col>
+							<Col span="8">
+							<Form-item label="联系电话" prop='tel'>
+								<Input v-model="formItem.tel" placeholder="请输入联系电话"></Input>
+							</Form-item>
+							</Col>
+						</Row>
+						<Row :gutter="10">
+							<Form-item label="电厂地址">
+								<Col span="8">
+								<Input disabled v-model="formItem.address" placeholder="-"></Input>
+								</Col>
+							</Form-item>
+						</Row>
+						<Row>
+							<Col span="8">
+							<Form-item label="合同备注" prop='remarks'>
+								<Input v-model="formItem.remarks" placeholder="请输入合同备注"></Input>
+							</Form-item>
+							</Col>
+						</Row>
+						<p>电子合同备查</p>
+						<FormItem label='合同上传' class='myTab'>
+							<my-upload @complete="uploadComplete" :url='$api.UPLOAD_COMPACT' :beginUpload='bol'
+							           @selectComplete='selectSuccess'>
+								<Input placeholder='请选择文件' class='file' v-model='file'></Input>
+								<a>选择文件</a>
+							</my-upload>
+							<br>
+							<i class="typeTip">仅支持PDF格式</i><br/>
+						</FormItem>
+						<p>合同电量分配</p>
+						<Row class="month">
+							<div>一月</div>
+							<div>二月</div>
+							<div>三月</div>
+							<div>四月</div>
+							<div>五月</div>
+							<div>六月</div>
+							<div>七月</div>
+							<div>八月</div>
+							<div>九月</div>
+							<div>十月</div>
+							<div>十一月</div>
+							<div>十二月</div>
+							<div>总计</div>
+						</Row>
+						<Row class="monthData">
+							<Input class='input' number v-model='month.month01' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month02' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month03' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month04' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month05' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month06' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month07' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month08' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month09' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month10' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month11' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month12' placeholder='-'></Input>
+							<Input class='input' number disabled
+							       :value='allMonth=month.month01+month.month02+month.month03+month.month04+month.month05+month.month06+month.month07+month.month08+month.month09+month.month10+month.month11+month.month12'
+							       placeholder='-' v-model='allMonth' v-on:on-change='isEquality'></Input>
+						</Row>
+						<i class="tiShi" v-if='allMonth != formItem.signed_num && isEquality'>十二个月购电量分配合计与签约电量不一致！</i>
+						<div class="save">
+							<Button type="primary" @click='changeEmpty'>保存并继续添加</Button>
+							<Button type="primary" @click='changeStatus'>保存</Button>
+							<Button type="ghost" @click='cancel'>取消</Button>
+						</div>
+						<div v-if='hint'>
+							<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red'>内容不能为空
+							</Alert>
+						</div>
+					</Form>
+				</div>
+			</Row>
+		</Card>
+
+	</Row>
 </template>
 
 <style scoped>
 
-/* 下载模块样式 */
-.changXie-upload-box {
-    width: 570px;
-    height: 34px;
-    margin-top: 10px;
-    margin-left: 110px;    
-}
-.changXie-upload {
-    width: 480px;
-    height: 34px;
-    display: inline-block;
-    border: 1px solid #dddee1;
-}
-.ivu-upload{
-    vertical-align: top;
-    margin-left: 6px;
-}
-/* 表单每一项的下外边距 */
+	/* 下载模块样式 */
+	.changXie-upload-box {
+		width: 570px;
+		height: 34px;
+		margin-top: 10px;
+		margin-left: 110px;
+	}
 
-.ivu-form-item {
-    margin-bottom: 20px;
-}
+	.changXie-upload {
+		width: 480px;
+		height: 34px;
+		display: inline-block;
+		border: 1px solid #dddee1;
+	}
 
- .layout-breadcrumb{
-    padding: 10px 15px 0;
-}
-.ContractBox{
-    height: 905px;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 4px;
-    line-height: 1;
-}
-.layout-copy{
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
-}
-.ContractBox-main  h3{
-    height: 30px;
-    font-size: 14px;
-    border-bottom: 1px solid #E5E5E5;
-}
-.ContractBox-main form {
-    padding-left: 18%;
-    position: relative;
-    padding-right: 17%;
-}
-.ContractBox-main form p{
-    font-size: 14px;
-    font-weight: 700;
-    padding-left: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.myInput {
-    margin-top: 10px;
-    margin-left: 110px;
-}
-.beizhu {
-    margin-top: 40px;
-}
-.beizhu input{
-    width: 700px;
-    margin-top: 10px;    
-    margin-left: 110px;
-    height: 34px;
-    border: 1px solid #E5E5E5;
-}
-.adress {
-    position: relative;
-}
-.beizhu {
-    position: relative;
-}
-.adress input {
-    height: 34px;
-    margin-left: 10px;
-    vertical-align: top;
-    border: 1px solid #E5E5E5;
-    width: 480px;
-}
-.beizhu span, .adress span{
-    position: absolute ; 
-    top: 20px;
-    left: 40px;
-    font-size: 14px;
-    color: #000;
-}
-.mySelect {
-    margin-left: 4px;
-}
-.TName{
-    position: relative;
-    display: inline-block;
-    width: 34%;
-}
-.TName span{
-    position: absolute ; 
-    top: 20px;
-    left: 40px;
-    font-size: 14px;
-    color: #000;
-}
-.wkw{
-    position: absolute; 
-    right: -46px;
-    top: 0px;
-    font-style: normal;
-    font-size: 12px;
-    color: #ccc;
-}
-.typeTip {
-    position: absolute;
-    font-style: normal;
-    bottom: 8px;
-    color: #ccc;
-}
+	.ivu-upload {
+		vertical-align: top;
+		margin-left: 6px;
+	}
 
-/* .TName .myTextarea{
-    width: 700px;
-    height: 102px;
-    resize:none;
-    margin-top: 10px;
-    margin-left: 110px; 
-} */
+	/* 表单每一项的下外边距 */
 
-.up input{
-    margin-left: 110px;
-    margin-top: 16px;
-}
-.powerFenpei {
-    margin-top: 10px;
-}
-.tiShi {
-    color: #E19D0C;
-    margin-left: 10px;
-}
-.save {
-    text-align: center;
-    margin-top: 20px;
-}
-.save button{
-    margin-right: 30px;
-}
-.month div{    
-    display: inline-block;
-    width: 60px;
-    height: 32px;
-    background-color: #f6f7fb;
-    line-height: 32px;
-    text-align: center;
-    margin-left: 10px;
-}
-.monthData input{    
-    width: 60px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    border: 1px solid #E5E5E5;
-    margin-top: 10px;
-    margin-left: 10px;
-}
+	.ivu-form-item {
+		margin-bottom: 20px;
+	}
+
+	.layout-breadcrumb {
+		padding: 10px 15px 0;
+	}
+
+	.ContractBox {
+		height: 905px;
+		overflow: hidden;
+		background: #fff;
+		border-radius: 4px;
+		line-height: 1;
+	}
+
+	.layout-copy {
+		text-align: center;
+		padding: 10px 0 20px;
+		color: #9ea7b4;
+	}
+
+	.ContractBox-main h3 {
+		height: 30px;
+		font-size: 14px;
+		border-bottom: 1px solid #E5E5E5;
+	}
+
+	.ContractBox-main form {
+		padding-left: 18%;
+		position: relative;
+		padding-right: 17%;
+	}
+
+	.ContractBox-main form p {
+		font-size: 14px;
+		font-weight: 700;
+		padding-left: 5px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.myInput {
+		margin-top: 10px;
+		margin-left: 110px;
+	}
+
+	.beizhu {
+		margin-top: 40px;
+	}
+
+	.beizhu input {
+		width: 700px;
+		margin-top: 10px;
+		margin-left: 110px;
+		height: 34px;
+		border: 1px solid #E5E5E5;
+	}
+
+	.adress {
+		position: relative;
+	}
+
+	.beizhu {
+		position: relative;
+	}
+
+	.adress input {
+		height: 34px;
+		margin-left: 10px;
+		vertical-align: top;
+		border: 1px solid #E5E5E5;
+		width: 480px;
+	}
+
+	.beizhu span, .adress span {
+		position: absolute;
+		top: 20px;
+		left: 40px;
+		font-size: 14px;
+		color: #000;
+	}
+
+	.mySelect {
+		margin-left: 4px;
+	}
+
+	.TName {
+		position: relative;
+		display: inline-block;
+		width: 34%;
+	}
+
+	.TName span {
+		position: absolute;
+		top: 20px;
+		left: 40px;
+		font-size: 14px;
+		color: #000;
+	}
+
+	.wkw {
+		position: absolute;
+		right: -46px;
+		top: 0px;
+		font-style: normal;
+		font-size: 12px;
+		color: #ccc;
+	}
+
+	.typeTip {
+		position: absolute;
+		font-style: normal;
+		bottom: 8px;
+		color: #ccc;
+	}
+
+	.up input {
+		margin-left: 110px;
+		margin-top: 16px;
+	}
+
+	.powerFenpei {
+		margin-top: 10px;
+	}
+
+	.tiShi {
+		color: #E19D0C;
+		margin-left: 10px;
+	}
+
+	.save {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.save button {
+		margin-right: 30px;
+	}
+
+	.month div {
+		display: inline-block;
+		width: 60px;
+		height: 32px;
+		background-color: #f6f7fb;
+		line-height: 32px;
+		text-align: center;
+		margin-left: 10px;
+	}
+
+	.monthData .input {
+		width: 60px;
+		text-align: center;
+		margin-top: 10px;
+		margin-left: 10px;
+	}
 </style>
 
 

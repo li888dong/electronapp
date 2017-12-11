@@ -29,10 +29,10 @@
                 ],
                 dataList4: [
                     {
-                        value: '高压侧',
+                        value: '高压测',
                         label: '高压侧',
                     }, {
-                        value: '低压侧',
+                        value: '低压测',
                         label: '低压侧'
                     }
                 ],
@@ -84,6 +84,8 @@
                     origratio: ''
                 },
                 hint: false,
+                wiringList:[
+                ]
 
             }
         },
@@ -103,7 +105,7 @@
             showWay: function (value) {
                 this.model4 = value;
                 this.wayShow = true;
-                if (value === "高压侧") {
+                if (value === "高压测") {
                     this.dataList5 = [
                         {
                             value: '三相三线',
@@ -113,7 +115,7 @@
                             label: '三相四线'
                         }
                     ]
-                } else if (value === '低压侧') {
+                } else if (value === '低压测') {
                     this.dataList5 = [{
                         value: '三相四线',
                         label: '三相四线'
@@ -121,7 +123,6 @@
                 }
             },
             addTerminal() {
-
                 if (!this.isEmpty(this.terminalList)) {
                     this.terminalList.cgrq = this.terminalList.cgrq.Format('yyyy-MM-dd');
                     this.terminalList.azrq = this.terminalList.azrq.Format('yyyy-MM-dd');
@@ -129,21 +130,11 @@
                     this.terminalList.ptxs = parseInt(this.terminalList.ptxs);
                     this.terminalList.ctxs = parseInt(this.terminalList.ctxs);
                     this.terminalList.origratio = parseFloat(this.terminalList.origratio);
-                    var wir_name = this.model4 + ":" + this.model5;
-                    var wir_id = 0;
-                    switch (wir_name) {
-                        case "高压侧：三相三线":
-                            wir_id = 1;
-                            break;
-                        case "高压侧：三相四线":
-                            wir_id = 3;
-                            break;
-                        case "低压侧：三相四线":
-                            wir_id = 2;
-                            break;
-                        default:
-                            break;
-                    };
+                    for(var i=0;i<this.wiringList.length;i++){
+                    	 if(this.model4 + this.model5 == this.wiringList[i].wiring){
+                    	 	  this.terminalList.wir_id = this.wiringList[i].id;
+                    	 }
+                    }
                     this.$http.post(this.$api.CLIENT_ADD_TERMINAL, {
                         com_id: this.$store.getters.com_id,
                         cus_id: this.$store.getters.cus_id,
@@ -151,7 +142,7 @@
                         user_no: this.terminalList.user_no,
                         trans_id: this.no,
                         type: this.terminalList.type,
-                        wir_id: wir_id,
+                        wir_id: this.terminalList.wir_id,
                         pt: this.terminalList.ptxs,
                         pt_ratio1: this.terminalList.pt1,
                         pt_ratio2: this.terminalList.pt2,
@@ -169,7 +160,7 @@
                         install_date: this.terminalList.azrq,
                         mea_name: this.terminalList.ztmc,
                         userratio: this.terminalList.origratio,
-                        used_com: '1',
+                        used_com: this.$store.getters.cus_id,
                         mea_address:this.terminalList.ztwz
                     }).then(res => {
                         console.log("添加终端", res);
@@ -222,7 +213,26 @@
                     this.$api.errcallback(err);
                 })
             },
-
+            wiringWay(){
+            	this.$http.post(this.$api.TERMINAL_WIRING_WAY).then(res=>{
+            		console.log("接线方式",res);
+            		var data = res.data.data;
+            		if(res.data.status){
+            				for(var i = 0;i<data.length;i++){
+            					var obj ={
+            						id:data[i].id,
+            						wiring:data[i].location + data[i].wiring
+            					}
+            					this.wiringList.push(obj);
+            				}
+            		}
+            		
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            }
 
         },
         watch: {
@@ -233,6 +243,7 @@
         mounted() {
 
             this.userNum();
+            this.wiringWay();
         }
     }
 </script>

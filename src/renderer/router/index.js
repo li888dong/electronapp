@@ -211,9 +211,9 @@ export default new Router({
                     component: require('@/components/TradeManagement/TradeSituation').default
                 },
                 {
-                    path: '/annual-forecast',
-                    name: 'annual-forecast',
-                    component: require('@/components/Forecast/AnnualForecast').default
+                    path: '/year-forecast',
+                    name: 'year-forecast',
+                    component: require('@/components/Forecast/YearForecast').default
                 },
                 {
                     path: '/weather',

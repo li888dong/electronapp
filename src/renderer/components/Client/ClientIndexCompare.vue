@@ -5,20 +5,32 @@
         name: 'clientindex',
         data() {
             return {
-                indexData: {
-                    shijiliang: '12311.00',
-                    shijiTongbi: '12.21%',
-                    shijiHuanbi: '12.21%',
-                    shenbaoPiancha: '12311.00',
-                    shenbaoTongbi: '12.21%',
-                    shenbaoHuanbi: '12.21%',
-                    goudianPiancha: '12311.00',
-                    goudianTongbi: '12.21%',
-                    goudianHuanbi: '12.21%',
-                },
+                indexData: '',
                 trendUp: true,
                 trendDown: true,
-                chartOption1: {
+	            dayTongbi:{
+                    year:[],
+		            lastyear:[]
+	            },
+	            dayCompare:{
+                    today:0,
+                    yesterday:0
+	            },
+	            monthCompare:{
+                    curmonth:0,
+		            lastmonth:0
+	            }
+            }
+        },
+        mounted() {
+            this.huhao();
+            this.daytb();
+            this.daycompare();
+            this.monthcompare();
+        },
+        computed:{
+            chartOption1:function () {
+	            return  {
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -42,7 +54,7 @@
                     color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     xAxis: {
                         type: 'category',
-                        data: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"],
+                        data: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
                         nameTextStyle: {
                             fontSize: 12
                         },
@@ -77,59 +89,61 @@
                         {
                             name: '今年',
                             type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
+                            data: this.dayTongbi.year
                         },
                         {
                             name: '去年',
                             type: 'bar',
-                            data: [276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14]
+                            data: this.dayTongbi.lastyear
                         }
 
                     ]
-                },
-                chartOption2: {
+                }
+            },
+            chartOption2:function () {
+                return {
                     tooltip: {
                         trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
                     legend: {
                         left: -5,
-                        top: 0,
-                        itemWidth:16,
-                        itemHeight:16,
-                        data: ['今天', '昨天']
+                            top: 0,
+                            itemWidth:16,
+                            itemHeight:16,
+                            data: ['今天', '昨天']
                     },
                     grid: {
                         top: '60',
-                        left: 0,
-                        right: '0',
-                        bottom: '3%',
-                        containLabel: true
+                            left: 0,
+                            right: '0',
+                            bottom: '3%',
+                            containLabel: true
                     },
 //                    color: ['#14d86b', '#ca94ec'],
                     color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
-                    xAxis: {
-                        type: 'category',
+                        xAxis: {
+                    type: 'category',
                         data: ["今天", "昨天"],
                         nameTextStyle: {
-                            fontSize: 12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
+                        fontSize: 12
                     },
+//	                    控制x轴隔几个显示
+                    axisLabel: {
+                        interval: 0
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                },
                     yAxis: {
                         show: true,
-                        axisLine: {
+                            axisLine: {
                             show: false
                         },
                         axisTick: {
@@ -144,19 +158,21 @@
                             barWidth: 30,
                             barGap: '-100%',
                             data: [
-                                ['今天', '183']
+                                ['今天', this.dayCompare.today]
                             ]
                         }, {
                             name: '昨天',
                             type: 'bar',
                             barWidth: 30,
                             data: [
-                                ['昨天', '168']
+                                ['昨天', this.dayCompare.yesterday]
                             ]
                         }
                     ]
-                },
-                chartOption3: {
+                }
+            },
+            chartOption3:function(){
+                return  {
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -212,27 +228,21 @@
                             barWidth: 30,
                             barGap: '-100%',
                             data: [
-                                ['本月', '183']
+                                ['本月', this.monthCompare.curmonth]
                             ]
                         }, {
                             name: '上月',
                             type: 'bar',
                             barWidth: 30,
                             data: [
-                                ['上月', '168']
+                                ['上月', this.monthCompare.lastmonth]
                             ]
                         }
                     ]
-                },
-            }
-        },
-        mounted() {
-            this.huhao();
-            this.daytb();
-            this.daycompare();
-            this.monthcompare();
-        },
-        computed:{
+                }
+
+            },
+
             cus_id:function () {
                 return this.$store.getters.cus_id
             }
@@ -249,7 +259,9 @@
 //            户号指数
 	        huhao(){
                 this.$http.post(this.$api.CLIENT_DATA_INDEX,{cus_id:this.cus_id}).then(res=>{
-                    console.log('户号指数',res);
+
+                    this.indexData = res.data.data;
+                    console.log('户号指数',this.indexData);
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -260,9 +272,13 @@
 	        daytb(){
                 this.$http.post(this.$api.CLIENT_DAYTB,{cus_id:this.cus_id}).then(res=>{
                     console.log('日电量同比',res);
+                    let data = res.data.data;
+                    for(let k in data){
+                        this.dayTongbi.year.push(data[k].year);
+                        this.dayTongbi.lastyear.push(data[k].lastyear);
+                    }
+                    console.log(this.dayTongbi)
                     this.drawBar1(this.chartOption1);
-
-
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -272,9 +288,10 @@
 //            日对比
 	        daycompare(){
                 this.$http.post(this.$api.CLIENT_DAY_COMPARE,{cus_id:this.cus_id}).then(res=>{
+                    console.log('日对比',res);
+					this.dayCompare = res.data.data;
                     this.drawBar2(this.chartOption2);
 
-                    console.log('日电量同比',res);
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -284,7 +301,9 @@
 //            月对比
 	        monthcompare(){
                 this.$http.post(this.$api.CLIENT_MONTH_COMPARE,{cus_id:this.cus_id}).then(res=>{
-                    console.log('月电量同比',res);
+                    console.log('月对比',res);
+                    this.monthCompare = res.data.data;
+
                     this.drawBar3(this.chartOption3);
 
                 },err=>{
@@ -329,12 +348,8 @@
 							<span class="huhao" style="color: #444444">户号</span>
 						</Row>
 
-						<Row className="data-content">
-							<span class="huhao">0000000000</span>
-						</Row>
-
-						<Row className="data-content">
-							<span class="huhao">0000000000</span>
+						<Row className="data-content" v-for="item in indexData">
+							<span class="huhao">{{item.user_no}}</span>
 						</Row>
 
 					</Col>
@@ -351,29 +366,16 @@
 							</Col>
 						</Row>
 
-						<Row className="data-content">
+						<Row className="data-content" v-for="item in indexData">
 							<Col span="10">
-								<span class="count">{{indexData.shijiliang}}</span>
+								<span class="count">{{item[1].num}}</span>
 							</Col>
 							<Col span="7">
-								<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
+								<span class="tongbi-rate">{{item[1].chainratio}}<i class="trend"
 							                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 							</Col>
 							<Col span="7">
-								<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
-							                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
-							</Col>
-						</Row>
-						<Row className="data-content">
-							<Col span="10">
-								<span class="count">{{indexData.shijiliang}}</span>
-							</Col>
-							<Col span="7">
-								<span class="tongbi-rate">{{indexData.shijiTongbi}}<i class="trend"
-							                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-							</Col>
-							<Col span="7">
-								<span class="huanbi-rate">{{indexData.shijiHuanbi}}<i class="trend"
+								<span class="huanbi-rate">{{item[1].yearonyear}}<i class="trend"
 							                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
 							</Col>
 						</Row>
@@ -390,34 +392,18 @@
 								<span class="huanbi-rate">环比</span>
 							</Col>
 						</Row>
-						<Row className="data-content">
+						<Row className="data-content" v-for="item in indexData">
 							<Col span="8">
-							<span class="count">{{indexData.shenbaoPiancha}}</span>
+							<span class="count">{{item[2].num}}</span>
 							</Col>
 							<Col span="8">
 							<span
-								class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
+								class="tongbi-rate">{{item[2].chainratio}}<i
 								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 							</Col>
 							<Col span="8">
 							<span
-								class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
-								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-							</Col>
-						</Row>
-						<Row className="data-content">
-							<Col span="8">
-								<span class="count">{{indexData.shenbaoPiancha}}</span>
-							</Col>
-							<Col span="8">
-								<span
-								class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-
-							</Col>
-							<Col span="8">
-								<span
-								class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
+								class="huanbi-rate">{{item[2].yearonyear}}<i
 								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 							</Col>
 						</Row>
@@ -437,42 +423,27 @@
 							</Col>
 
 						</Row>
-						<Row className="data-content">
+						<Row className="data-content" v-for="item in indexData">
 							<Col span="8">
 
-								<span class="count">{{indexData.goudianPiancha}}</span>
+								<span class="count">{{item[3].num}}</span>
 							</Col>
 
 							<Col span="8">
 							<span
-								class="tongbi-rate">{{indexData.goudianTongbi}}<i
+								class="tongbi-rate">{{item[3].chainratio}}<i
 								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 							</Col>
 
 							<Col span="8">
 							<span
-								class="huanbi-rate">{{indexData.goudianHuanbi}}<i
+								class="huanbi-rate">{{item[3].yearonyear}}<i
 								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
 							</Col>
 
 
 						</Row>
-						<Row className="data-content">
-							<Col span="8">
-								<span class="count">{{indexData.goudianPiancha}}</span>
-							</Col>
-							<Col span="8">
-								<span
-								class="tongbi-rate">{{indexData.goudianTongbi}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-							</Col>
-							<Col span="8">
-								<span
-								class="huanbi-rate">{{indexData.goudianHuanbi}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
-							</Col>
 
-						</Row>
 					</Col>
 				</Row>
 			</Card>

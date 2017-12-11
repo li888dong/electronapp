@@ -13,7 +13,7 @@ export default {
             detailModalName:'',
             confirmIdList:[],
             selectMonth:new Date().Format('yyyy-MM'),
-            selectArea:'郑州',
+            selectArea:'',
             columns4: [
                 {
                     type: 'selection',

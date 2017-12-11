@@ -7,7 +7,58 @@ export default {
     name: 'ChangxieContract',
     data(){
         return{
-            
+            columns1:[
+              {
+                title:'01月',
+                key:'month01',
+              },{
+                 title:'02月',
+                 key:'month02',
+
+              },{
+                 title:'03月',
+                 key:'month03'
+              },{
+                 title:'04月',
+                 key:'month04',
+              },{
+                 title:'05月',
+                 key:'month05',
+              },{
+                 title:'06月',
+                 key:'month06'
+              },{
+                title:'07月',
+                key:'month07'
+              },{
+                 title:'08月',
+                 key:'month08'
+              },{
+                title:'09月',
+                key:'month09'
+              },{
+                 title:'10月',
+                 key:'month10',
+              },{
+                 title:'11月',
+                 key:'month11'
+              },{
+                 title:'12月',
+                 key:'month12'
+              },{
+                 title:'合计',
+                 key:'total',
+                 render:(h,params)=>{
+                    console.log(params.row);
+                    var total = 0;
+                    total = params.row.month01+params.row.month02+params.row.month03+params.row.month04+params.row.month05+params.row.month06+params.row.month07+params.row.month08+params.row.month09+params.row.month10+params.row.month11+params.row.month12;
+                    return ('span',{
+
+                    },total)
+                 }
+              }
+            ],
+            hetongList:[],
         }
     },
     components : {
@@ -17,12 +68,51 @@ export default {
         change(page) {
             console.log(page)
         },
-        ok () {
-            this.$Message.info('点击了确定');
+        ok (index) {
+            console.log(index);
+            console.log(this.hetongList[index].id);
+            this.$http.post(this.$api.CHANGXIE_LIST_DEL,{id:this.hetongList[index].id}).then(res=>{
+                console.log("长协合同删除成功",res);
+                if(res.data.status){
+                   this.hetongList.splice(index,1);
+                }
+                // this.changxieList();
+            },err=>{
+               this.$api.errcallback(err);
+            }).catch(err=>{
+              this.$api.errcallback(err);
+            })
+            this.$Message.info('删除成功');
         },
         cancel () {
-            this.$Message.info('点击了取消');
+            this.$Message.info('取消删除');
+        },
+        changxieList(){
+            this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.$store.getters.com_id}).then(res=>{
+                console.log('长协列表',res);
+                var data = res.data.data;
+                if(res.data.status){
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].signed_status == 0){
+                            data[i].signed_status ='未签约';
+                        }else if(data[i].signed_status == 1){
+                            data[i].signed_status ='签约';
+                        }
+                        this.hetongList.push(data[i]);
+                    }
+                }
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        toChangxie(){
+            this.$router.push('/AddContractManagement');
         }
+    },
+    mounted(){
+        this.changxieList();
     }
 }
 </script>
@@ -32,15 +122,15 @@ export default {
     <Card>
         <h3 slot="title">长协合同</h3>
         <div class="hetongList">
-            <div class="hetongForm">
+            <div class="hetongForm" v-for='(item,index) in hetongList'>
                 <ul class="hetongIfno">
                     <li>平顶山姚梦电厂有限公司</li>
-                    <li>合同编号：31654641-7</li>
-                    <li>合同年度：2017年度</li>
-                    <li>签约电量：10000 MWh</li>
-                    <li>业务代表：王辉朝</li>
-                    <li>联系电话：18637177720</li>
-                    <li>合同状态：已签约</li>
+                    <li>合同编号：{{item.lpcon_no}}</li>
+                    <li>合同年度：{{item.lpcon_year}}</li>
+                    <li>签约电量：{{item.signed_num}} MWh</li>
+                    <li>业务代表：{{item.business}}</li>
+                    <li>联系电话：{{item.tel}}</li>
+                    <li>合同状态：{{item.signed_status}}</li>
                     <li class="change">
                         <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
                         <span>
@@ -49,7 +139,7 @@ export default {
                                 placement="left-end"
                                 confirm
                                 title="您确认删除这条内容吗？"
-                                @on-ok="ok"
+                                @on-ok="ok(index)"
                                 @on-cancel="cancel">
                                 <span>删除</span>
                             </Poptip>
@@ -57,88 +147,12 @@ export default {
                     </li>
                 </ul>
                 <div class="hetongShuju">
-                    <span class="hetongChat">
-                        <i class="iconfont icon-jishiben01 seeicon"></i>
-                        <router-link to="AddContractManagement" tag="a" style="cursor: pointer; ">查看</router-link>
-                    </span>
-                    <ul class="hetongData">
-                        <li>01月</li>
-                        <li>02月</li>
-                        <li>03月</li>
-                        <li>04月</li>
-                        <li>05月</li>
-                        <li>06月</li>
-                        <li>07月</li>
-                        <li>08月</li>
-                        <li>09月</li>
-                        <li>10月</li>
-                        <li>11月</li>
-                        <li>12月</li>
-                        <li>合计</li>
-                    </ul>
-                    <ul class="hetongNumber">
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>2223.45</li>
-                    </ul>
+                    <div class="changxieSee" @click="toChangxie()">
+                            <i class="iconfont icon-jishiben01"></i>
+                            </div>
+                    <Table :columns = 'columns1' style='margin-left: 10%;height:100%' size='small' :data='item.lpdist'></Table>
                 </div>
-            </div>
-            <div class="hetongForm">
-                <ul class="hetongIfno">
-                    <li>平顶山姚梦电厂有限公司</li>
-                    <li>合同编号：31654641-7</li>
-                    <li>合同年度：2017年度</li>
-                    <li>签约电量：10000 MWh</li>
-                    <li>业务代表：王辉朝</li>
-                    <li>联系电话：18637177720</li>
-                    <li>合同状态：已签约</li>
-                    <li class="change"><span>修改</span> <span>删除</span></li>
-                </ul>
-                <div class="hetongShuju">
-                    <span class="hetongChat">
-                        <i class="iconfont icon-jishiben01 seeicon"></i><a href="">查看</a></span>
-                    <ul class="hetongData">
-                        <li>01月</li>
-                        <li>02月</li>
-                        <li>03月</li>
-                        <li>04月</li>
-                        <li>05月</li>
-                        <li>06月</li>
-                        <li>07月</li>
-                        <li>08月</li>
-                        <li>09月</li>
-                        <li>10月</li>
-                        <li>11月</li>
-                        <li>12月</li>
-                        <li>合计</li>
-                    </ul>
-                    <ul class="hetongNumber">
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>56.30</li>
-                        <li>2223.45</li>
-                    </ul>
-                </div>
-            </div>            
+            </div>          
             <myFenye></myFenye>            
         </div>        
     </Card>
@@ -147,7 +161,7 @@ export default {
 
 <style scoped>
 .hetongList {
-    height: 875px;
+    height: 818px;
     background-color: #fff;
     }
 .hetongIfno{
@@ -156,6 +170,8 @@ export default {
     padding-left: 15px;
     position: relative;
     font-size: 14px;
+    border:1px solid #e9eaec;
+    border-bottom: none;
 }
 .hetongIfno li{
     float: left;
@@ -170,58 +186,25 @@ export default {
     cursor: pointer;
 }
 .hetongShuju {
-    height: 110px;
     position: relative;
-    padding: 26px 0;
+    border: 1px solid #e9eaec;
+    margin-bottom:10px;
 }
-.hetongChat {
-    position: absolute ;
-    top: 20px;
-    left: 25px;
-    text-align: center;
-    line-height: 1.1;
+.changxieSee{
     width: 50px;
     height: 50px;
-    background-color: #ca94ec;
-    border-radius: 50%;
-    color: #fff;
     padding-top: 50px;
-}
-.seeicon {    
-    font-size: 30px;
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 50%;
+    left: 3%;
+    margin-top: -25px;
+    cursor: pointer;
 }
-.hetongNumber {
-    overflow: hidden;
-    padding-left: 110px;
-}
-.hetongData {
-    overflow: hidden;
-    padding-left: 110px;
-}
-.hetongData li{
-    float: left;
-    width: 100px;
-    line-height: 25px;
-    text-align: center;    
-    border-right: 1px solid #e9eaec;
-    border-top: 1px solid #e9eaec;
-}
-.hetongData li:first-child {
-    border-left: 1px solid #e9eaec;
-}
-.hetongNumber li{
-    float: left;
-    width: 100px;
-    text-align: center;
-    line-height: 25px;    
-    border-right: 1px solid #e9eaec;
-    border-top: 1px solid #e9eaec;
-    border-bottom: 1px solid #e9eaec;
-}
-.hetongNumber li:first-child {
-    border-left: 1px solid #e9eaec;
+.changxieSee i{
+    position: absolute;
+    top: 7px;
+    left: 13px;
+    font-size: 30px;
+    color: #ccc;
 }
 </style>

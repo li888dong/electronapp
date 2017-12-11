@@ -9,7 +9,18 @@
 				all:100,
 				residue:13.6,
 				totalWidth:0,
-                chartOption2: {
+				month:'',
+                chartCX:[0,0,0,0,0,0],
+				chartJJ:[0,0,0,0,0,0]
+
+	        }
+		},
+		computed:{
+		    monthBar:function () {
+			    return  this.$echarts.init(document.getElementById('month-bar'));
+            },
+		    barOption:function () {
+			    return  {
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -19,9 +30,9 @@
                     legend: {
                         data: ['长协', '竞价'],
                         orient: 'horizontal',
-						left:'20',
+                        left:'20',
                         right: '0',
-						itemWidth:16,
+                        itemWidth:16,
                     },
                     grid: {
                         left: '-20',
@@ -35,7 +46,7 @@
                     },
                     yAxis: {
                         type: 'value',
-						show:false,
+                        show:false,
                     },
                     color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     series: [
@@ -43,14 +54,14 @@
                             name: '长协',
                             type: 'bar',
                             stack: '总量',
-							barWidth:20,
+                            barWidth:20,
                             label: {
                                 normal: {
                                     show: false,
                                     position: 'insideRight'
                                 }
                             },
-                            data: [600, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390]
+                            data: this.chartCX
                         },
                         {
                             name: '竞价',
@@ -63,95 +74,64 @@
                                     position: 'insideRight'
                                 }
                             },
-                            data: [120, 132, 101, 134, 90, 120, 132, 101, 134, 90, 230, 210]
+                            data: this.chartJJ
                         },
                     ]
-                },
-                yearList:[
-                    {
-                        value:'2010年',
-                        label:'2010年',
-                    },{
-                        value:'2011年',
-                        label:'2011年',
-                    },{
-                        value:'2012年',
-                        label:'2012年',
-                    },{
-                        value:'2013年',
-                        label:'2013年',
-                    },{
-                        value:'2014年',
-                        label:'2014年',
-                    },{
-                        value:'2015年',
-                        label:'2015年',
-                    },{
-                        value:'2016年',
-                        label:'2016年',
-                    },{
-                        value:'2017年',
-                        label:'2017年',
-                    }
-                ],
-                monthList:[
-                    {
-                        value:'1月',
-                        label:'1月',
-                    },{
-                        value:'2月',
-                        label:'2月',
-                    },{
-                        value:'3月',
-                        label:'3月',
-                    },{
-                        value:'3月',
-                        label:'3月',
-                    },{
-                        value:'4月',
-                        label:'4月',
-                    },{
-                        value:'5月',
-                        label:'5月',
-                    },{
-                        value:'6月',
-                        label:'6月',
-                    },{
-                        value:'7月',
-                        label:'7月',
-                    },{
-                        value:'8月',
-                        label:'8月',
-                    },{
-                        value:'9月',
-                        label:'9月',
-                    },{
-                        value:'10月',
-                        label:'10月',
-                    },{
-                        value:'11月',
-                        label:'11月',
-                    },{
-                        value:'12月',
-                        label:'12月',
-                    }
-
-                ]
-	        }
+                }
+            }
 		},
 		mounted() {
-            this.drawBar(this.chartOption2);
+            this.drawBar();
+            this.reqMonth();
+            this.reqAnalysis();
         },
         methods: {
-            drawBar(option = this.chartOption2) {
+            drawBar() {
                 // 基于准备好的dom，初始化echarts实例
-                let monthBar = this.$echarts.init(document.getElementById('month-bar'));
+                this.monthBar.clear();
                 // 绘制图表
-                monthBar.setOption(option);
+                this.monthBar.setOption(this.barOption);
             },
 			changeSelect(psd){
                 this.currentPDS = psd;
 			},
+			reqAnalysis(){
+                this.$http.post(this.$api.TRADE_MONTH,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
+                    console.log("交易分析饼图",res);
+
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+			},
+	        reqMonth(){
+                this.$http.post(this.$api.TRADE_MONTH,{com_id:this.$store.getters.com_id}).then(res=>{
+                    console.log("每月交易概况图表",res);
+                    let data = res.data.data;
+                    this.chartCX = [];
+
+	                this.chartCX.push(data.lpdata.month01);
+	                this.chartCX.push(data.lpdata.month02);
+	                this.chartCX.push(data.lpdata.month03);
+	                this.chartCX.push(data.lpdata.month04);
+	                this.chartCX.push(data.lpdata.month05);
+	                this.chartCX.push(data.lpdata.month06);
+	                this.chartCX.push(data.lpdata.month07);
+	                this.chartCX.push(data.lpdata.month08);
+	                this.chartCX.push(data.lpdata.month09);
+	                this.chartCX.push(data.lpdata.month10);
+	                this.chartCX.push(data.lpdata.month11);
+	                this.chartCX.push(data.lpdata.month12);
+
+                    this.chartJJ = Object.values(data.biddata);
+                    this.drawBar();
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        }
         },
 		components:{
 		    'trade-pie':TradePie,
@@ -166,7 +146,7 @@
 			      <Card class="height">
 						  <h3 slot="title">交易基础数据分析</h3>
 						  <div class="btn-group relative" slot="extra">
-							  <Select placeholder="2017年" style="width:100px;margin-right:5px;" class="selectDate"><Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.label }}</Option></Select><Select placeholder="10月" style="width:80px;"  class="selectDate"><Option v-for="item in monthList" :value="item.value" :key="item.value">{{ item.label }}</Option></Select>
+							  <DatePicker type="month" placeholder="请选择月份" @on-change="yearSelect"></DatePicker>
 						  </div>
 					  </div>
 					  <div class="container">

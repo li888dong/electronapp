@@ -5,16 +5,16 @@
 	        return{
 				userDetail:{},
 		        agreementDetail:{
-				    htbm:'00000-000ZZ',
-			        hhgs:'2个',
-			        mydl:'10000',
-			        htms:'服务费模式'
+				    htbm:'',
+			        hhgs:'',
+			        mydl:'',
+			        htms:''
 		        },
 		        deleteTerminalModal:false,
 		        deleteTerminalName:'',
 		        deleteTerminalId:'',
 		        billModal:false,
-		        carousel:0,
+		        carousel:2,
                 columns: [
                     {
                         title: '申报月份',
@@ -471,7 +471,7 @@
 			<div>
 				<Carousel v-model="carousel" loop>
 					<CarouselItem>
-						<div class="demo-carousel">1</div>
+						<div class="demo-carousel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio expedita labore molestias mollitia nam officiis vero! Accusamus consectetur deserunt dolorum enim et fugit illo nam repudiandae, saepe unde ut voluptate?</div>
 					</CarouselItem>
 					<CarouselItem>
 						<div class="demo-carousel">2</div>
@@ -502,7 +502,6 @@
 		margin-top: -9px;
 	}
 	.demo-carousel{
-		margin:0 auto;
 		width: 1000px;
 		height: 600px;
 		background-color: red;

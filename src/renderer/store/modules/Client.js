@@ -2,7 +2,7 @@ const state = {
     cus_id:1,
     cus_name:'',
     term_id:1,
-    clientid:'fghgf',
+    clientid:'999600CC',
     currentCity:'all',
     searchKey:'',
     cityList: {

@@ -3,7 +3,26 @@
 	    name:'dataindex',
 		data(){
 	        return{
-				indexData:{},
+				indexData:{
+                    "1": {
+                        "num": 13,
+                        "chainratio": 0,
+                        "yearonyear": 0,
+                        "devratio": 0
+                    },
+                    "2": {
+                        "fordev": -1,
+                        "chainratio": "1.00"
+                    },
+                    "3": {
+                        "num": -1,
+                        "chainratio": "1.00"
+                    },
+                    "4": {
+                        "mdev": 0,
+                        "chainratio": "0.00"
+                    }
+				},
 		        trendUp:true,
 		        trendDown:true
 	        }

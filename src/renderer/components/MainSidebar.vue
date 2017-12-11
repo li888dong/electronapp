@@ -48,7 +48,7 @@
                         <MenuItem name="2-1" @click.native="$router.push('UserForecast')">
                             <div><i class="iconfont icon-fenxi"></i><span> &nbsp;用户申报</span></div>
                         </MenuItem>
-                        <MenuItem name="2-2" @click.native="$router.push('annual-forecast')">
+                        <MenuItem name="2-2" @click.native="$router.push('year-forecast')">
                             <div><i class="iconfont icon-xieyi"></i><span> &nbsp;年度预测</span></div>
                         </MenuItem>
                         <MenuItem name="2-3" @click.native="$router.push('MonthForecast')">

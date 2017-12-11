@@ -3,6 +3,7 @@
         name: 'changxie',
         data() {
             return {
+                year:new Date().getFullYear(),
                 columns6:[
                     {
                         title:'类型',
@@ -55,31 +56,31 @@
 	            column2:[
 	                {
 	                    title:'合同编号',
-		                key:'htbh'
+		                key:'lpcon_no'
 	                },
 	                {
 	                    title:'电厂名称',
-		                key:'dcmc'
+		                key:'powerplant'
 	                },
 	                {
 	                    title:'签约电量',
-		                key:'qydl'
+		                key:'signed_num'
 	                },
 	                {
 	                    title:'签约日期',
-		                key:'qyrq'
+		                key:'signed_day'
 	                },
 	                {
 	                    title:'执行日期',
-		                key:'zxrq'
+		                key:'exec_date'
 	                },
 	                {
 	                    title:'联系人',
-		                key:'lxr'
+		                key:'business'
 	                },
 	                {
 	                    title:'联系电话',
-		                key:'lxdh'
+		                key:'tel'
 	                },
 	                {
 	                    title:'查看',
@@ -171,18 +172,7 @@
                         all:'1',
                     },
                 ],
-                data2:[
-					{
-                        htbh:'-',
-                        dcmc:'-',
-                        qydl:'-',
-                        qyrq:'-',
-                        zxrq:'-',
-                        lxr:'-',
-                        lxdh:'-',
-                        ck:'-'
-					}
-				],
+                qyTable:[],
                 timeList: [
                     {
                         value: 'beijing',
@@ -209,7 +199,20 @@
                         label: '2016'
                     }
                 ],
-                chartOption: {
+
+	            chartData:{
+                    xData:['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+		            yData:[],
+		            dcList:[]
+	            }
+            }
+        },
+	    computed:{
+            cxChart:function () {
+	            return this.$echarts.init(document.getElementById('cxchart'))
+            },
+            chartOption:function(){
+                return {
                     tooltip: {
                         trigger: 'axis',
                         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -217,10 +220,10 @@
                         }
                     },
                     legend: {
-                        data: ['电厂1', '电厂2', '电厂3', '电厂4', '电厂5'],
-						left:'0',
-						right:'0',
-						itemWidth:16,
+                        data: this.chartData.dcList,
+                        left:'0',
+                        right:'0',
+                        itemWidth:16,
                     },
                     color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     grid: {
@@ -232,85 +235,26 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月',]
+                        data: this.chartData.xData
 
                     },
                     yAxis: {
                         type: 'value'
                     },
-                    series: [
-                        {
-                            name: '电厂1',
-                            type: 'bar',
-                            stack: '总量',
-	                        barWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [320, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390]
-                        },
-                        {
-                            name: '电厂2',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [120, 132, 101, 134, 90, 120, 132, 101, 134, 90, 230, 210]
-                        },
-                        {
-                            name: '电厂3',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [220, 182, 191, 234, 290, 330, 310]
-                        },
-                        {
-                            name: '电厂4',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [150, 212, 201, 154, 190, 330, 410]
-                        },
-                        {
-                            name: '电厂5',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [820, 832, 901, 934, 1290, 1330, 1320]
-                        }
-                    ]
+                    series: this.chartData.yData
                 }
+
             }
-        },
+	    },
         methods: {
             pageListen: function (data) {
                 this.msg = '当前页码：' + data
             },
+            yearSelect(year){
+                this.year = year
+            },
             drawChart() {
-                let cxChart = this.$echarts.init(document.getElementById('cxchart'));
-                cxChart.setOption(this.chartOption)
+                this.cxChart.setOption(this.chartOption)
             },
             gotoZonglan(){
                 this.$router.push('/client-zonglan');
@@ -318,9 +262,49 @@
             gotoZhishu(){
                 this.$router.push('/client-compare');
             },
+	        qianyueList(){
+                this.$http.post(this.$api.CX_QY,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
+                    console.log("长协签约表格",res);
+                    this.qyTable = res.data.data
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        },
+	        doAjax(){
+                this.$http.post(this.$api.CX_CHART,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
+                    console.log("长协统计图表",res);
+                    let data = res.data.data;
+                    data.map(i=>{
+                        this.chartData.dcList.push(i.powerplant);
+                        this.chartData.yData.push({
+                            name: i.powerplant,
+                            type: 'bar',
+                            stack: '总量',
+                            barWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: Object.values(i.info[0])
+                        });
+                    });
+                    console.log(this.chartData);
+                    this.drawChart();
+
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+                })
+	        }
         },
         mounted() {
-            this.drawChart();
+            this.doAjax();
+            this.qianyueList();
         },
 	    components:{
 
@@ -333,11 +317,7 @@
 			<Card>
 				<h3 slot="title">长协统计</h3>
 				<div slot="extra" class="btn-group">
-					<Button class="Button" type="primary">上一年</Button>
-					<i-select :model.sync="model1" style="width:100px" placeholder='年度选择'>
-						<i-option v-for="item in timeList" :value="item.value" :key = 'item.id'>{{ item.label }}</i-option>
-					</i-select>
-					<Button class="Button" type="primary">下一年</Button>
+					<DatePicker type="year" placeholder="请选择年份" @on-change="yearSelect"></DatePicker>
 				</div>
 				<div class="chart-container">
 					<div id="cxchart" style="width:100%;height: 100%;">
@@ -355,15 +335,15 @@
 					<div slot="extra" class="btn-group">
 						<Button type="primary"  @click.native="$router.push('ContractManagement')">长协合同</Button>
 					</div>
-					<div style="height: 230px;">
-						<Table :columns="column2" :data="data2"></Table>
+					<div>
+						<Table :columns="column2" :data="qyTable" height="230"></Table>
 					</div>
-				<div class="page-center">
-					<!--分页-->
-					<div class="fenYe">
-						<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
-					</div>
-				</div>
+				<!--<div class="page-center">-->
+					<!--&lt;!&ndash;分页&ndash;&gt;-->
+					<!--<div class="fenYe">-->
+						<!--<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>-->
+					<!--</div>-->
+				<!--</div>-->
 			</Card>
 		</Row>
 	</div>

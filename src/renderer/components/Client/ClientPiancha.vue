@@ -4,26 +4,6 @@
 		data(){
 	        return{
 	            year:'2017',
-	            yearList:[
-                    {
-                        value: '2017',
-                    },
-                    {
-                        value: '2016',
-                    },
-                    {
-                        value: '2015',
-                    },
-                    {
-                        value: '2014',
-                    },
-                    {
-                        value: '2013',
-                    },
-                    {
-                        value: '2012',
-                    }
-	            ],
 		        chartData:{},
                 columns4: [
                     {
@@ -32,141 +12,71 @@
                     },
                     {
                         title: '1月',
-                        key: 'January'
+                        key: 'month01'
                     },
                     {
                         title: '2月',
-                        key: 'February'
+                        key: 'month02'
                     },
                     {
                         title: '3月',
-                        key: 'March'
+                        key: 'month03'
                     },
                     {
                         title: '4月',
-                        key: 'April'
+                        key: 'month04'
                     },
                     {
                         title: '5月',
-                        key: 'May'
+                        key: 'month05'
                     },
                     {
                         title: '6月',
-                        key: 'June'
+                        key: 'month06'
                     },
                     {
                         title: '7月',
-                        key: 'July'
+                        key: 'month07'
                     },
                     {
                         title: '8月',
-                        key: 'August'
+                        key: 'month08'
                     },
                     {
                         title: '9月',
-                        key: 'September'
+                        key: 'month09'
                     },
                     {
                         title: '10月',
-                        key: 'October'
+                        key: 'month10'
                     },
                     {
                         title: '11月',
-                        key: 'November'
+                        key: 'month11'
                     },
                     {
                         title: '12月',
-                        key: 'December'
+                        key: 'month12'
                     },
                     {
                         title: '合计',
                         key: 'all'
                     }
                 ],
-                data1: [
-                    {
-                        category: 'John Brown',
-                        January: 1000000,
-                        February: 100000,
-                        March: 100000,
-                        April:100000,
-                        May:100000,
-                        June:1000000,
-                        July:100000,
-                        August:10000,
-                        September:1000000,
-                        October:1000000,
-                        November:1000000,
-                        December:1000000,
-	                    all:80000
-                    },
-                    {
-                        category: 'John Brown',
-                        January: 1000000,
-                        February: 100000,
-                        March: 100000,
-                        April:100000,
-                        May:100000,
-                        June:1000000,
-                        July:100000,
-                        August:10000,
-                        September:1000000,
-                        October:1000000,
-                        November:1000000,
-                        December:1000000,
-                        all:80000
-                    },
-                    {
-                        category: 'John Brown',
-                        January: 1000000,
-                        February: 100000,
-                        March: 100000,
-                        April:100000,
-                        May:100000,
-                        June:1000000,
-                        July:100000,
-                        August:10000,
-                        September:1000000,
-                        October:1000000,
-                        November:1000000,
-                        December:1000000,
-                        all:80000
-                    },
-                    {
-                        category: 'John Brown',
-                        January: 1000000,
-                        February: 100000,
-                        March: 100000,
-                        April:100000,
-                        May:100000,
-                        June:1000000,
-                        July:100000,
-                        August:10000,
-                        September:1000000,
-                        October:1000000,
-                        November:1000000,
-                        December:1000000,
-                        all:80000
-                    },
-                    {
-                        category: 'John Brown',
-                        January: 1000000,
-                        February: 100000,
-                        March: 100000,
-                        April:100000,
-                        May:100000,
-                        June:1000000,
-                        July:100000,
-                        August:10000,
-                        September:1000000,
-                        October:1000000,
-                        November:1000000,
-                        December:1000000,
-                        all:80000
-                    },
-                ]
+		        data1:[],
+		        tableData:[
+		            {category:'采集电量'},
+			        {category:'申报电量'},
+			        {category:'申报偏差'},
+			        {category:'预测电量'},
+			        {category:'预测偏差'},
+			        {category:'监测电量'},
+			        {category:'监测偏差'}
+			        ],
+		        tableData1:[]
 	        }
 		},
+
 		computed:{
 		    cus_id:function () {
 			    return this.$store.getters.cus_id
@@ -294,6 +204,30 @@
 			reqTable(){
                 this.$http.post(this.$api.CLIENT_PIANCHA_TABLE,{cus_id:this.cus_id}).then(res=> {
                     console.log('偏差表格',res);
+
+                    let data = res.data.citys;
+
+                    for (let k in data){
+
+                        for (let i = 0;i<data[k].length;i++){
+//	                        申报电量
+							this.tableData[0][k.replace('2017-','month')]=data[k][i].declare;
+//                          申报偏差
+							this.tableData[1][k.replace('2017-','month')]=data[k][i].declare_dev;
+//							监测电量
+							this.tableData[2][k.replace('2017-','month')]=data[k][i].monitor;
+//							监测偏差
+							this.tableData[3][k.replace('2017-','month')]=data[k][i].monitor_dev;
+//							预测电量
+							this.tableData[4][k.replace('2017-','month')]=data[k][i].forecast;
+//							预测偏差
+							this.tableData[5][k.replace('2017-','month')]=data[k][i].fore_dev;
+//							采集电量
+							this.tableData[6][k.replace('2017-','month')]=data[k][i].actual_used;
+                        }
+
+                    }
+	                this.tableData1 = this.tableData;
                 })
 			},
 		    drawBar(){
@@ -311,9 +245,7 @@
 				<Card class="client-piancha relative">
 					<h3 slot="title">偏差分析</h3>
 					<div slot="extra" class="btn-group">
-						<Select v-model="year" style="width:180px;">
-							<Option v-for="item in yearList" :value="item.value" :key="item.value">{{ item.value }}</Option>
-						</Select>
+						<DatePicker type="year" placeholder="请选择年份" style="width: 180px"></DatePicker>
 						<Button type="primary" class="refresh">
 							<i class="iconfont icon-shuaxin"></i>
 						</Button>
@@ -329,7 +261,7 @@
 			<Row className="mgt_15">
 				<Card>
 
-					<Table :columns="columns4" :data="data1" height="370"></Table>
+					<Table :columns="columns4" :data="tableData1" height="370"></Table>
 				</Card>
 			</Row>
 		</div>

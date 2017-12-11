@@ -70,9 +70,13 @@ export default {
                         value: '三级',
                         label: '二级'
                     }
-                ],                
+                ],
+                categoryList:[],           
                 model11: '',
                 model22: '',
+                category1:'',
+                category2:'',
+                hint:false,
         }
     },
     methods:{
@@ -85,6 +89,8 @@ export default {
             var officephone_reg = /^[0-9]{3,4}\-[0-9]{3,8}$/;
             //传真号的正则验证
             var fax_reg = /^(\d{3,4}-)?\d{7,8}$/;
+            if(!this.isEmpty(this.formItem) && this.category1 != "" && this.category2 !=""){
+            this.formItem.category = this.category1 + "," + this.category2;
             this.$http.post(this.$api.CLIENT_ADD,{
                 com_id:this.$store.getters.com_id,
                 name:this.formItem.name,
@@ -108,16 +114,78 @@ export default {
                 fax:this.formItem.fax1+this.formItem.fax2,
             }).then(res=>{
                 console.log(res);
-                if (goht){
+                if(res.data.status){
+                    if (goht){
                     this.$router.push('add-hetong')
+                   }else{
+                      for(let k in this.formItem){
+                          this.formItem[k] = "";
+                      }
+                      this.category1 = '';
+                      this.category2 ='';
+                   }
                 }
             },err=>{
                 this.$api.errcallback(err);
             }).catch(err=>{
                 this.$api.errcallback(err);
             })
+           }else{
+              this.hint = true;
+           }
             
          },
+         changeCategory(value){
+            if(value == "农、林、牧、渔业"){
+                this.categoryList = [{
+                    value:'农业',
+                    label:'农业'
+                },{
+                    value:'林业',
+                    label:'林业'
+                },{
+                    value:'畜牧业',
+                    label:'畜牧业'
+                },{
+                    value:'渔业',
+                    label:'渔业'
+                },{
+                    value:'农、林、牧、渔服务业',
+                    label:'农、林、牧、渔服务业'
+                }]
+            }
+            if(value == "工业"){
+                 this.categoryList=[{
+                    value:'轻工业',
+                    label:'轻工业'
+                 },{
+                    value:'重工业',
+                    label:'重工业'
+                 }]
+            }
+         },
+         isEmpty(obj) {
+                for (let key in obj) {
+                    if (obj[key] !== "") {
+                        return false
+                    }
+                }
+                return true
+            },
+            changeHint(){
+                var _this = this;
+                var timer = setTimeout(function(){
+                    _this.hint = false;
+                    if(_this.hint = false){
+                        clearTimeout(timer);
+                    }
+                },3000)
+            }
+    },
+    watch:{
+        hint:function(){
+            this.changeHint();
+        }
     },
     mounted(){
     }
@@ -170,10 +238,7 @@ export default {
                 <Col span="8">
                     <Form-item label="开户银行">
                         <Select v-model="formItem.bank" placeholder="请选择">
-                            <Option value="beijing">北京市</Option>
-                            <Option value="shanghai">上海市</Option>
-                            <Option value="shenzhen">深圳市</Option>
-                            <Option value="工商">工商</Option>
+                            <Option :value="item.value" v-for='item in bankList'>{{item.label}}</Option>
                         </Select>
                     </Form-item>
                 </Col>
@@ -189,18 +254,14 @@ export default {
             <Row :gutter="10">                
                 <Form-item label="所属行业">
                     <Col span="5">
-                        <Select v-model="formItem.category" placeholder="请选择">
-                            <Option value="beijing">北京市</Option>
-                            <Option value="shanghai">上海市</Option>
-                            <Option value="shenzhen">深圳市</Option>
-                            <Option value="1">1</Option>
+                        <Select v-model="category1" placeholder="请选择" v-on:on-change='changeCategory'>
+                            <Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
+                            <Option value="工业">工业</Option>
                         </Select>
                     </Col>
                     <Col span="4">
-                    <Select v-model="formItem.select" placeholder="请选择">
-                        <Option value="beijing">北京市</Option>
-                        <Option value="shanghai">上海市</Option>
-                        <Option value="shenzhen">深圳市</Option>
+                    <Select v-model="category2" placeholder="请选择">
+                        <Option :value='item.value' v-for='item in categoryList'>{{item.label}}</Option>
                     </Select>
                     </Col>
                     <Col span="4">
@@ -216,9 +277,18 @@ export default {
                 <Col span="8">
                     <Form-item label="用电等级">
                         <Select v-model="formItem.grade" placeholder="请选择">
-                            <Option value="beijing">一级</Option>
-                            <Option value="shanghai">二级</Option>
-                            <Option value="shenzhen">三级</Option>
+                            <Option value="0.4kV">0.4kV</Option>
+                            <Option value="6.3kV">6.3kV</Option>
+                            <Option value="10kV">10kV</Option>
+                            <Option value="20kV">20kV</Option>
+                            <Option value="35kV">35kV</Option>
+                            <Option value="66kV">66kV</Option>
+                            <Option value="110kV">110kV</Option>
+                            <Option value="220kV">220kV</Option>
+                            <Option value="330kV">330kV</Option>
+                           <Option value="500kV">500kV</Option>
+                           <Option value="750kV">750kV</Option>
+                            <Option value="1000kV">1000kV</Option>
                         </Select>
                     </Form-item>
                 </Col>
@@ -295,6 +365,10 @@ export default {
                         <i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
                         <i-button type="ghost" style="margin-left: 30px">取消</i-button>
                     </Form-item>
+                        <div v-if='hint' style="margin-left: 150px;">
+                            <Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red;'>内容不能为空
+                            </Alert>
+                        </div>
                 </Col>
             </Row>
         </Form>

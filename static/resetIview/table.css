@@ -77,12 +77,35 @@
 .saleBox .ivu-table::before,.saleBox .ivu-table::after{
     display: none;
 }
-.htData .ivu-table-row td:last-child{
+.htData tr td:last-child{
 	border-right: 0;
 }
-.htData .ivu-table-row:last-child td {
+.htData tr:last-child td {
 	border-bottom: 0;
 }
-.htData .ivu-table-border th{
+.htData .ivu-table-border th:last-child{
 	border-right: 0;
+}
+/*重置售电合同表格样式*/
+.hetongShuju .ivu-table th,
+.hetongShuju .ivu-table td{
+	border-right:1px solid #e9eaec;
+}
+.hetongShuju .ivu-table th:last-child{
+	border-right:0;
+}
+.hetongShuju .ivu-table tr:last-child td{
+	border-bottom: 0;
+}
+.hetongShuju tr td:last-child{
+	border-right: 0;
+}
+.hetongShuju .ivu-table-wrapper {
+	border-top: 0;
+}
+.hetongShuju  .ivu-table:before{
+	height: 0;
+}
+.hetongShuju  .ivu-table:after{
+	width: 0;
 }
