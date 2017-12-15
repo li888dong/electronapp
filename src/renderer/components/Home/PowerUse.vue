@@ -36,12 +36,13 @@
                             this.chaochu = res.data.data.beyond;
                             this.piancha = res.data.data.dev;
 
-                            if (this.yigou<this.yiyong&&this.chaochu===0){
-                                this.chaochu=parseInt(Math.abs(this.yiyong - this.yigou)*100)/100||0;
-                                this.piancha=parseInt((this.chaochu/this.yigou)*100)/100||0;
-                            }
+//                            if (this.yigou<this.yiyong&&this.chaochu===0){
+//                                this.chaochu=parseInt(Math.abs(this.yiyong - this.yigou)*100)/100||0;
+//                                this.piancha=parseInt((this.chaochu/this.yigou)*100)/100||0;
+//                            }
 
                             this.yiyongRate = parseInt(Math.min(this.yiyong,this.yigou)/(this.yigou+this.chaochu)*100)/100||0;
+                            console.log('++++++',this.yiyongRate)
                             this.chaochuRate = parseInt((this.chaochu/this.yiyong)*100)/100||0;
                         }, err => {
                             this.$api.errcallback(err)
@@ -91,8 +92,8 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px',maxWidth:500+'px'}">{{(yiyong>yigou?100:yiyongRate*100)+'%'}}</div>
-				<div class="progress-bar-frame frame-normal">{{piancha}}</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px',maxWidth:500+'px'}">{{(yiyong>yigou?100:(yiyongRate*100).toFixed(2))+'%'}}</div>
+				<div class="progress-bar-frame frame-normal"></div>
 				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(500*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>
 			<div class="deviation-data">

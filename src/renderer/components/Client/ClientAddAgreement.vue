@@ -5,6 +5,13 @@
         components: {'my-upload': MyUpload},
         name: 'addAgreement',
         data() {
+          const lengthNum = (rule,val,callback)=>{
+             if(val.length > 10 || val.length < 10){
+                 return callback(new Error("营销户号必须为10位!"));
+             }else{
+               callback();
+             }
+          };
             return {
                 htfs: '',
                 file: '',
@@ -21,6 +28,8 @@
                     deadline: '',
                     htid: '',
                 },
+                index:'',
+                id:'',
                 hint2: false,
                 hint: false,
                 isKong: false,
@@ -56,6 +65,7 @@
                 ],
                 modal1: false,
                 modal2: false,
+                modal3:false,
                 tip: '',
                 user_nums: [],
                 user_num: '',
@@ -63,23 +73,33 @@
                     {
                         title: '营销用户编号',
                         key: 'user_id',
+                        align:'center',
                         width: '150'
 
                     }, {
                         title: '用户电压等级',
-                        key: 'user_grade'
+                        key: 'user_grade',
+                        align:'center',
+                        width:'120'
                     },
                     {
                         title: '报装容量',
                         key: 'bzrl',
+                        align:'center',
+                        width:'90'
                     }, {
                         title: '用电类别',
-                        key: 'ydlb'
+                        key: 'ydlb',
+                        width:'150',
+                        align:'center'
                     }, {
                         title: '用电单位类型',
-                        key: 'yddwlb'
+                        key: 'yddwlb',
+                        width:'150',
+                        align:'center'
                     }, {
                         title: '用电地址',
+                        align:'center',
                         key: 'yddz'
                     }, {
                         title: '操作',
@@ -93,12 +113,32 @@
                                         color: '#3EC7F5',
                                         cursor: 'pointer',
                                         marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.modal3 = true;
+                                            this.id = params.row.id;
+                                            this.addTableList.user_id = params.row.user_id;
+                                            this.addTableList.user_grade = params.row.user_grade;
+                                            this.addTableList.bzrl = params.row.bzrl;
+                                            this.addTableList.ydlb = params.row.ydlb;
+                                            this.addTableList.yddwlb = params.row.yddwlb;
+                                            var arr = params.row.yddz.split(" ");
+                                            console.log(arr);
+                                            this.addTableList.yddz = [arr[0],arr[1],arr[2]];
+                                            this.addTableList.stree = arr[3];
+                                        }
                                     }
                                 }, '修改'),
                                 h('span', {
                                     style: {
                                         color: '#3EC7F5',
                                         cursor: 'pointer',
+                                    },
+                                    on:{
+                                      click:()=>{
+                                        this.deleteUserNum(params.row.id,params.index);
+                                      }
                                     }
                                 }, '删除')
                             ])
@@ -112,9 +152,9 @@
                     bzrl: '',
                     ydlb: '',
                     yddwlb: '',
-                    yddz: '',
+                    yddz: ["河南省","郑州市","中原区"],
+                    stree: '',
                 },
-                stree: '',
                 addValidate: {
                     user_name: [
                         {required: true, message: '内容不能为空', trigger: 'blur'}
@@ -135,6 +175,19 @@
                         {required: true, message: '内容不能为空', trigger: 'blur'}
                     ]
 
+                },
+                defaultAddress:'true',
+                address1:'',
+                address2:'',
+                address3:'',
+                way:'',
+                modalValidator:{
+                    user_id:[{required: true, message: '内容不能为空', trigger: 'blur'},{validator:lengthNum,trigger:'blur'}],
+                    user_grade:[{required: true, message: '内容不能为空', trigger: 'change'}],
+                    bzrl:[{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ydlb:[{required: true, message: '内容不能为空', trigger: 'change'}],
+                    yddwlb:[{required: true, message: '内容不能为空', trigger: 'change'}],
+                    stree:[{required: true, message: '内容不能为空', trigger: 'blur'}]
                 }
             }
         },
@@ -150,52 +203,102 @@
                 this.file = file;
             },
 			addCompact(){
-				if(!this.isEmpty(this.addList)){
-					if(this.way_param !=''){
-						if(this.user_nums.length > 0){
-							this.addList.ly_used = parseFloat(this.addList.ly_used);
-							this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
-							this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
-							this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
-							var user_nums = this.user_nums.join(',');
-							var deadline =this.addList.deadline[0].Format('yyyy-MM-dd') + '/' + this.addList.deadline[1].Format('yyyy-MM-dd')
-                           this.$http.post(this.$api.POWER_ADD_COMPACT,{
-               	    cus_name:this.addList.user_name,
-               	    con_no:this.addList.con_no,
-               	    way:this.addList.way,
-               	    way_param:this.way_param,
-					ly_used:this.addList.ly_used,
-					ly_maxload:this.addList.ly_maxload,
-					bndyjdl:this.addList.bndyjdl,
-					bndyjzdfh:this.addList.bndyjzdfh,
-					htscdz:this.addList.htid,
-					user_nums:user_nums,
-					deadline:deadline
+        if(this.$route.query.id){
+            if(!this.isEmpty(this.addList)){
+          if(this.way_param !=''){
+            if(this.user_nums.length > 0){
+              this.addList.ly_used = parseFloat(this.addList.ly_used);
+              this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
+              this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
+              this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
+              var user_nums = this.user_nums.join(',');
+              var deadline =this.addList.deadline[0]+ '/' + this.addList.deadline[1];
+              this.$http.post(this.$api.POWER_ADD_COMPACT,{
+                    id:this.$route.query.id,
+                    cus_name:this.addList.user_name,
+                    con_no:this.addList.con_no,
+                    way:this.addList.way,
+                    way_param:this.way_param,
+          ly_used:this.addList.ly_used,
+          ly_maxload:this.addList.ly_maxload,
+          bndyjdl:this.addList.bndyjdl,
+          bndyjzdfh:this.addList.bndyjzdfh,
+          htscdz:this.addList.htid,
+          user_nums:user_nums,
+          deadline:deadline
 
                }).then(res=>{
-               	 console.log('添加合同',res);
-               	 var msg = res.data.msg;
-               	 if(msg == "添加成功!"){
+                 console.log('修改成功',res);
+                 var msg = res.data.msg;
+                 if(res.data.status){
                       for(let key in this.addList){
-                      	this.addList[key] = '';
+                        this.addList[key] = '';
                       }
                       this.file='';
                       for(let key in this.data1){
-                      	 this.data1 = ''
+                         this.data1 = ''
                       }
                       this.$router.push('/saleContract');
-               	 }else if(msg == '客户名称不存在!'){
-                         this.modal2 = true;
-               	 }
+                 }
                },err=>{
-               	 this.$api.errcallback(err);
+                 this.$api.errcallback(err);
                }).catch(err=>{
-               	  this.$api.errcallback(err);
+                  this.$api.errcallback(err);
                })
-						}
-					}
-				}
-				this.hint2 = true;           
+            }
+          }
+        }else{
+           this.hint2 = true;
+        }
+        }else{
+          if(!this.isEmpty(this.addList)){
+          if(this.way_param !=''){
+            if(this.user_nums.length > 0){
+              this.addList.ly_used = parseFloat(this.addList.ly_used);
+              this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
+              this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
+              this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
+              var user_nums = this.user_nums.join(',');
+              var deadline =this.addList.deadline[0]+ '/' + this.addList.deadline[1];
+              this.$http.post(this.$api.POWER_ADD_COMPACT,{
+                    cus_name:this.addList.user_name,
+                    con_no:this.addList.con_no,
+                    way:this.addList.way,
+                    way_param:this.way_param,
+          ly_used:this.addList.ly_used,
+          ly_maxload:this.addList.ly_maxload,
+          bndyjdl:this.addList.bndyjdl,
+          bndyjzdfh:this.addList.bndyjzdfh,
+          htscdz:this.addList.htid,
+          user_nums:user_nums,
+          deadline:deadline
+
+               }).then(res=>{
+                 console.log('添加合同',res);
+                 var msg = res.data.msg;
+                 if(msg == "添加成功!"){
+                      for(let key in this.addList){
+                        this.addList[key] = '';
+                      }
+                      this.file='';
+                      for(let key in this.data1){
+                         this.data1 = ''
+                      }
+                      this.$router.push('/hetong');
+                 }else if(msg == '客户名称不存在!'){
+                         this.modal2 = true;
+                 }
+               },err=>{
+                 this.$api.errcallback(err);
+               }).catch(err=>{
+                  this.$api.errcallback(err);
+               })
+            }
+          }
+        }else{
+           this.hint2 = true;   
+        }
+        }      
 			},
 			changeStatus(){
         if(this.file != ""){
@@ -212,6 +315,7 @@
 				        for(var i=0;i<div.length;i++){
 					      div[i].style.display = 'none';
 				          }
+                  this.way = "分成模式";
 					 }else{
 					this.isKong = true;
 				    }
@@ -222,6 +326,7 @@
 				        for(var i=0;i<div.length;i++){
 					      div[i].style.display = 'none';
 				          }
+                  this.way = "保底模式";
 					}
 				}else if(this.addList.way == '分成保底'){
 					if(this.way_param4 != '' && this.way_param5 !=''&&this.way_param6 != ''){
@@ -230,6 +335,7 @@
 				        for(var i=0;i<div.length;i++){
 					      div[i].style.display = 'none';
 				          }
+                   this.way = "分成保底";
 					}		
 				}else if(this.addList.way == '分成叠加'){
                      if(this.way_param7 != ''&&this.way_param8 != '' && this.way_param9 != ''){
@@ -238,7 +344,8 @@
 				        for(var i=0;i<div.length;i++){
 					      div[i].style.display = 'none';
 				          }
-                     }
+                   this.way = "分成叠加";
+ }
 				}else if(this.addList.way =='固定服务'){
 					if(this.way_param10 != ''){
 						this.way_param = this.way_param10;
@@ -246,30 +353,26 @@
 				        for(var i=0;i<div.length;i++){
 					      div[i].style.display = 'none';
 				          }
+                   this.way = "固定服务";
 					}	
 				}		
 			},
 			saveData(){
 				if(!this.isEmpty(this.addTableList)){
-				   var arr = this.addTableList.yddz;
-               	  
-               	  var address = ''
-               	  for(var i = 0; i < arr.length;i++){
-               	  	 address += arr[i].name;
-               	  }
-               	    address += this.stree
+				          var arr = this.addTableList.yddz;
+               	  var address = arr.join(' ')+' '+this.addTableList.stree;
                	   this.addTableList.yddz = address;
-               	   var data1 = {
-               	   	  user_id:this.addTableList.user_id,
-               	   	  user_grade:this.addTableList.user_grade,
-               	   	  bzrl:this.addTableList.bzrl,
-					  ydlb:this.addTableList.ydlb,
-					  yddwlb:this.addTableList.yddwlb,
-					  yddz:this.addTableList.yddz
-
-               	   };
+                   var data1 = {
+                               id:'',
+                               user_id:this.addTableList.user_id,
+                               user_grade:this.addTableList.user_grade,
+                               bzrl:this.addTableList.bzrl,
+                               ydlb:this.addTableList.ydlb,
+                               yddwlb:this.addTableList.yddwlb,
+                              yddz:this.addTableList.yddz
+                           };
                	   this.$http.post(this.$api.USER_NUM_ADD,{
-               	   	     cus_id:this.$store.getters.cus_id,
+               	   	     cus_id:this.cus_id,
                	   	     user_no:data1.user_id,
                	   	     vol_level:data1.user_grade,
                	   	     packing_capacity:data1.bzrl,
@@ -279,9 +382,18 @@
                	   }).then(res=>{
                        console.log('用户户号添加',res);
                        if(res.data.status){
+                          console.log(res.data.id);
+                           data1["id"] = res.data.id;
                        	   this.data1.push(data1);
                        	   this.user_nums.push(res.data.id);
                        }
+                       this.addTableList.yddz = [];
+                       this.addTableList.user_id = '';
+                       this.addTableList.user_grade = '';
+                      this.addTableList.bzrl = '';
+                       this.addTableList.ydlb = '';
+                        this.addTableList.yddwlb = '';
+                        this.addTableList.stree = '';
                        
                	   this.modal1 = false;
                	   },err=>{
@@ -289,16 +401,11 @@
                	   }).catch(err=>{
                	   	this.$api.errcallback(err);
                	   })
-				}else{
-                    this.hint = true;
-                }
-                this.addTableList.yddz = [];
-                this.addTableList.user_id = '';
-                this.addTableList.user_grade = '';
-                this.addTableList.bzrl = '';
-                this.addTableList.ydlb = '';
-                this.addTableList.yddwlb = '';
-                this.stree = '';
+				       }else if(this.isEmpty(this.addTableList)){
+                   this.hint = true;
+               }
+                
+                
             },
             isEmpty(obj) {
                 for (let key in obj) {
@@ -337,8 +444,148 @@
             },
             cancel() {
                 this.modal2 = false;
+            },
+            isDefaultAddress(value){
+               if(value == true){
+                  this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.cus_id}).then(res=>{
+                console.log('用户基本信息',res);
+                 this.address1 = res.data.data.province;
+                 this.address2=res.data.data.city;
+                 this.address3 =res.data.data.county; 
+                 this.defaultAddress = 'true'; 
+                 this.addTableList.yddz = [this.address1,this.address2,this.address3];
+                 console.log(this.addTableList.yddz);
+                 this.addTableList.stree = res.data.data.address;
+              },err=>{
+              this.$api.errcallback(err);
+              }).catch(err=>{
+                this.$api.errcallback(err);
+              })
+               }else{
+                 this.defaultAddress = 'false';
+                 this.addTableList.stree = '';
+               }
+                  this.addTableList.yddz = [this.address1,this.address2,this.address3];
+            },
+            saveUpdate(){
+               var arr = this.addTableList.yddz;
+                  var address = arr.join(' ')+' '+this.addTableList.stree;
+                  this.addTableList.yddz = address;
+                  var data1 = {
+                               id:this.id,
+                               user_id:this.addTableList.user_id,
+                               user_grade:this.addTableList.user_grade,
+                               bzrl:this.addTableList.bzrl,
+                               ydlb:this.addTableList.ydlb,
+                               yddwlb:this.addTableList.yddwlb,
+                              yddz:this.addTableList.yddz
+                           };
+               this.$http.post(this.$api.USER_NUM_ADD,{id:this.id,cus_id:this.cus_id,
+                         user_no:this.addTableList.user_id,
+                         vol_level:this.addTableList.user_grade,
+                         packing_capacity:this.addTableList.bzrl,
+                         category:this.addTableList.ydlb,
+                         unit_type:this.addTableList.yddwlb,
+                         address:this.addTableList.yddz }).then(res=>{
+                 console.log("修改",res);
+                 if(res.data.status){
+                      this.data1.splice(this.index,1,data1); 
+                 }
+                        this.addTableList.yddz = [];
+                       this.addTableList.user_id = '';
+                       this.addTableList.user_grade = '';
+                       this.addTableList.bzrl = '';
+                       this.addTableList.ydlb = '';
+                        this.addTableList.yddwlb = '';
+                        this.addTableList.stree = '';
+                        this.modal13 = false;
+               },err=>{
+                 this.$api.errcallback(err);
+               }).catch(err=>{
+                   this.$api.errcallback(err);
+               })
+            },
+            deleteUserNum(id,index){
+               this.$http.post(this.$api.USER_NUM_DEL,{id:id}).then(res=>{
+                    console.log("删除",res);
+                    if(res.data.status){
+                       this.data1.splice(index,1);
+                    }
+               },err=>{
+                   this.$api.errcallback(err);
+               }).catch(err=>{
+                   this.$api.errcallback(err);
+               })
+            },
+            timeArea(value){
+               this.addList.deadline = value;
+               console.log(value);
+            },
+            updateCompact(){
+               if(this.$route.query.id){
+              console.log(this.$route.query);
+             this.addList.cus_name  = this.$route.query.cus_name;
+              var div = document.getElementById('name');
+            var input = div.getElementsByClassName('ivu-input')[0];
+            input.readOnly = true;
+             this.addList.con_no =this.$route.query.con_no;
+              this.addList.way = this.$route.query.way;
+              this.addList.ly_used = this.$route.query.ly_used;
+              this.addList.ly_maxload = this.$route.query.ly_maxload;
+              this.addList.bndyjdl = this.$route.query.bndyjdl;
+              this.addList.bndyjzdfh = this.$route.query.bndyjzdfh;
+              var arr4 = this.$route.query.deadline.split('/');
+              this.addList.deadline = [arr4[0],arr4[1]];
+              var arr = [];
+              var arr2 = [];
+              switch(this.addList.way){
+                case "分成模式" :
+                  arr = this.$route.query.way_param.split(':');
+                  this.way_param1 = arr[0];
+                  this.way_param2 = arr[1];
+                break;
+                case "保底模式": 
+                 this.way_param3 =this.$route.query.way_param;
+                 break;
+                 case "分成保底":
+                 arr = this.$route.query.way_param.split(',');
+                 arr2 = arr[1].split(":");
+                 this.way_param4 = arr[0];
+                 this.way_param5 = arr2[0];
+                 this.way_param6 = arr2[1];
+                 break;
+                 case "分成叠加":
+                  arr = this.$route.query.way_param.split(',');
+                  arr2 = arr[0].split(":");
+                  this.way_param7 = arr2[0];
+                  this.way_param8 = arr2[1];
+                  this.way_param9 = arr[1];
+                  break;
+                  case "固定服务":
+                   this.way_param10 = this.$route.query.way_param;
+                   break;
+                   default:
+                   break;
+              }
+              for(let i =0;i<this.$route.query.usernos.length;i++){
+                   var obj = {
+                     id:this.$route.query.usernos[i].id,
+                     user_id:this.$route.query.usernos[i].user_no,
+                     user_grade:this.$route.query.usernos[i].vol_level,
+                     bzrl:this.$route.query.usernos[i].packing_capacity,
+                     ydlb:this.$route.query.usernos[i].category,
+                    yddwlb:this.$route.query.usernos[i].unit_type,
+                     yddz:this.$route.query.usernos[i].address
+              };
+               this.data1.push(obj);
+               var arr3 = this.$route.query.user_nums.split(',');
+               for(let i = 0;i < arr3.length;i++){
+                  this.user_nums.push(arr3[i]);
+                }
+              }
             }
-        },
+           },
+          },
         watch: {
             hint: function () {
                 this.timeout();
@@ -348,8 +595,29 @@
             },
             hint2: function () {
                 this.disappear();
+            },
+            cus_id:function(){
+              this.saveData();
             }
-        }
+        },
+       computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            },
+        },
+        mounted(){
+         if(this.$route.query.cus_name){
+            this.addList.user_name = this.$route.query.cus_name
+            var div = document.getElementById('name');
+            var input = div.getElementsByClassName('ivu-input')[0];
+            input.readOnly = true;
+            // console.log(this.$route.query.cus_id)
+            this.cus_id = this.$route.query.cus_id;
+          }else{
+             this.addList.user_name = '';
+          }
+             this.updateCompact();
+          }
     }
 </script>
 <template>
@@ -360,15 +628,17 @@
 			<Form class="form-container" :label-width='130' ref='addList' :model='addList' :rules='addValidate'>
 				<h3 class="title">基本信息</h3>
 				<FormItem label='客户名称' prop="user_name">
-					<Input v-model='addList.user_name'></Input>
+					<Input v-model='addList.user_name' id='name'></Input>
 				</FormItem>
 				<FormItem label='合同编号' prop="con_no">
 					<Input v-model='addList.con_no'></Input>
 				</FormItem>
-				<FormItem label='合同方式' prop='way'>
+				<FormItem label='合同方式' prop='way' class='mgb_0'>
+
 					<Select v-model="addList.way" style="width:200px;" placeholder="合同模式">
 						<Option v-for="item in htfsList" :value="item.value" :key="item.value">{{item.label}} </Option>
 					</Select>
+
 					<div class="htfs-container" v-show="addList.way === '分成模式'">
 						<span>分成比例:</span>
 						<Input class="width-90" placeholder="售电公司占比" v-model='way_param1'></Input> ：
@@ -400,15 +670,20 @@
 						<Button type="primary" @click='saveBtn'>保存</Button>
 						<span v-if='isKong' style="font-size: 12px;color:red;margin-left:5px;">内容不能为空</span>
 					</div>
+           <div style="height: 24px;line-height: 24px;color: #ccc;">
+           <span v-if='way == "分成模式"'>分成比例：{{way_param1}} : {{way_param2}}</span>
+           <span v-if='way == "保底模式"'>保底价格：{{way_param3}} </span>
+           <span v-if='way == "分成保底"'>保底价格：{{way_param4}},分成比例：{{way_param5}} : {{way_param6}} </span>
+           <span v-if='way == "分成叠加"'>分成比例：{{way_param7}} : {{way_param8}},叠加价格:{{way_param9}} </span>
+           <span v-if='way == "固定服务"'>服务费率:{{way_param10}}</span>
+           </div>
 				</FormItem>
 				<FormItem label='合同起止日期'>
 					<DatePicker
 							type="daterange"
 							placement="bottom-end"
 							placeholder="请选择合同起止日期"
-							v-model='addList.deadline'
-							format="yyyy-MM-dd"
-							size='large' class='add_hetong'></DatePicker>
+							size='large' class='add_hetong' v-on:on-change="timeArea" :value='addList.deadline'></DatePicker>
 				</FormItem>
 				<FormItem label='上年度用电量' prop='ly_used'>
 					<Input v-model='addList.ly_used'></Input>
@@ -436,7 +711,7 @@
 					<i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
 				</FormItem>
 				<FormItem label='用户户号' class='myTab'>
-					<Table :columns='columns1' :data='data1' width='1000' height='130'></Table>
+					<Table :columns='columns1' :data='data1' width='1000' height='150'></Table>
 					<div style="width:1000px;text-align: right;">
 						<Button type="primary" style='margin-top:10px;' @click='modal1=true'>添加</Button>
 					</div>
@@ -456,10 +731,9 @@
 			<!--遮罩层-->
 			<Modal v-model="modal1" :styles="{top:'280px'}" class="addAgreement-modal" width="850px;">
 				<h3 slot="header" class="title">添加营销用户编号</h3>
-				<ul class="add-msg">
-					<li><label>营销用户编号:</label><Input class="width-200" placeholder="用户户号"
-					                                 v-model='addTableList.user_id'></Input></li>
-					<li><label>用户电压等级:</label><Select class="width-200" v-model='addTableList.user_grade'>
+				<Form class="add-msg" :model = 'addTableList' :label-width='100' :rules='modalValidator'>
+					<FormItem label='营销用户编号:' prop='user_id'><Input class="width-200" placeholder="用户户号" v-model='addTableList.user_id'></Input></FormItem>
+					<FormItem label='用户电压等级:' prop='user_grade'><Select class="width-200" v-model='addTableList.user_grade'>
 						<Option value="0.4kV">0.4kV</Option>
                             <Option value="6.3kV">6.3kV</Option>
                             <Option value="10kV">10kV</Option>
@@ -472,10 +746,9 @@
                            <Option value="500kV">500kV</Option>
                            <Option value="750kV">750kV</Option>
                             <Option value="1000kV">1000kV</Option>
-					</Select></li>
-					<li><label>报装容量:</label><Input class="width-200"
-					                               v-model='addTableList.bzrl'></Input><span>KVA</span></li>
-					<li><label>用电类别:</label><Select class="width-200" v-model='addTableList.ydlb'>
+					</Select></FormItem>
+					<FormItem label='报装容量:' prop='bzrl'><Input class="width-200" v-model='addTableList.bzrl'></Input><span>KVA</span></FormItem>
+					<FormItem label='用电类别:' prop='ydlb'><Select class="width-200" v-model='addTableList.ydlb'>
 						<Option value="居民生活用电">居民生活用电</Option>
             <Option value="大工业中小化肥">大工业中小化肥</Option>
             <Option value="大工业其它优待">大工业其它优待</Option>
@@ -503,19 +776,31 @@
             <Option value="抽水蓄能">抽水蓄能</Option>
              <Option value="售邻省">售邻省</Option>
               <Option value="其他">其他</Option>
-					</Select></li>
-					<li><label>用电单元类型:</label><Select class="width-200" v-model='addTableList.yddwlb'>
+					</Select></FormItem>
+					<FormItem label='用电单元类型:' prop='yddwlb'><Select class="width-200" v-model='addTableList.yddwlb'>
 						<Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
             <Option value="工业">工业</Option>
-					</Select></li>
-					<li><label>用户地址:</label>
-						<al-selector v-model='addTableList.yddz' level=2  class='address'/>
-						<Input placeholder="街道等详细地址" style='width:250px;' v-model='stree'></Input>
-					</li>
-					<li><label style="margin-right:0;"></label>
-						<Radio class="default-radio">企业默认地址</Radio>
-					</li>
-				</ul>
+					</Select></FormItem>
+					<FormItem label='用户地址:' class='user_address' >
+           <Row>
+            <Col span='13'>
+            <FormItem prop='yddz'>
+            <al-selector  level=2  class='address' data-type='name' v-model='addTableList.yddz' v-if='defaultAddress == "true"'/>
+            </FormItem>
+            </Col>
+            <Col span='8' style='margin-left: 15px'>
+            <FormItem prop='stree'>
+            <Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;' v-model='addTableList.stree'></Input>
+            </FormItem>
+            </Col>
+           </Row>
+					</FormItem>
+					<FormItem label=''>
+            <Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress">
+            <span>企业默认地址</span>
+            </Checkbox>
+					</FormItem>
+				</Form>
 				<div slot="footer" class="add-btn-group">
 					<Button type="primary" @click="saveData">保存</Button>
 					<Button type="default" @click="modal1=false">取消</Button>
@@ -524,6 +809,86 @@
 					</div>
 				</div>
 			</Modal>
+      <Modal v-model="modal3" :styles="{top:'280px'}" class="addAgreement-modal" width="850px;">
+        <h3 slot="header" class="title">添加营销用户编号</h3>
+        <Form class="add-msg" :model = 'addTableList' :label-width='100' :rules='modalValidator'>
+          <FormItem label='营销用户编号:' prop='user_id'><Input class="width-200" placeholder="用户户号" v-model='addTableList.user_id'></Input></FormItem>
+          <FormItem label='用户电压等级:' prop='user_grade'><Select class="width-200" v-model='addTableList.user_grade'>
+            <Option value="0.4kV">0.4kV</Option>
+                            <Option value="6.3kV">6.3kV</Option>
+                            <Option value="10kV">10kV</Option>
+                            <Option value="20kV">20kV</Option>
+                            <Option value="35kV">35kV</Option>
+                            <Option value="66kV">66kV</Option>
+                            <Option value="110kV">110kV</Option>
+                            <Option value="220kV">220kV</Option>
+                            <Option value="330kV">330kV</Option>
+                           <Option value="500kV">500kV</Option>
+                           <Option value="750kV">750kV</Option>
+                            <Option value="1000kV">1000kV</Option>
+          </Select></FormItem>
+          <FormItem label='报装容量:' prop='bzrl'><Input class="width-200" v-model='addTableList.bzrl'></Input><span>KVA</span></FormItem>
+          <FormItem label='用电类别:' prop='ydlb'><Select class="width-200" v-model='addTableList.ydlb'>
+            <Option value="居民生活用电">居民生活用电</Option>
+            <Option value="大工业中小化肥">大工业中小化肥</Option>
+            <Option value="大工业其它优待">大工业其它优待</Option>
+            <Option value="乡村居民生活用电">乡村居民生活用电</Option>
+            <Option value="城镇居民生活用电">城镇居民生活用电</Option>
+            <Option value="中小学教学用电">中小学教学用电</Option>
+            <Option value="农业生产用电">农业生产用电</Option>
+            <Option value="农业排灌">农业排灌</Option>
+            <Option value="贫困县农业排灌用电">贫困县农业排灌用电</Option>
+            <Option value="一般工商业">一般工商业</Option>
+            <Option value="非工业">非工业</Option>
+            <Option value="普通工业中小化肥">普通工业中小化肥</Option>
+            <Option value="商业用电">商业用电</Option>
+            <Option value="趸售">趸售</Option>
+            <Option value="趸售大工业">趸售大工业</Option>
+            <Option value="趸售普工、非普工业">趸售普工、非普工业</Option>
+            <Option value="趸售非居民">趸售非居民</Option>
+            <Option value="趸售居民生活用电">趸售居民生活用电</Option>
+            <Option value="趸售农业生产用电">趸售农业生产用电</Option>
+            <Option value="趸售商业用电">趸售商业用电</Option>
+            <Option value="其它用电">其它用电</Option>
+            <Option value="大用户直购电">大用户直购电</Option>
+            <Option value="考核">考核</Option>
+            <Option value="大工业用电">大工业用电</Option>
+            <Option value="抽水蓄能">抽水蓄能</Option>
+             <Option value="售邻省">售邻省</Option>
+              <Option value="其他">其他</Option>
+          </Select></FormItem>
+          <FormItem label='用电单元类型:' prop='yddwlb'><Select class="width-200" v-model='addTableList.yddwlb'>
+            <Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
+            <Option value="工业">工业</Option>
+          </Select></FormItem>
+          <FormItem label='用户地址:' class='user_address' >
+           <Row>
+            <Col span='13'>
+            <FormItem prop='yddz'>
+            <al-selector  level=2  class='address' data-type='name' v-model='addTableList.yddz' v-if='defaultAddress == "true"'/>
+            </FormItem>
+            </Col>
+            <Col span='8' style='margin-left: 15px'>
+            <FormItem prop='stree'>
+            <Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;' v-model='addTableList.stree'></Input>
+            </FormItem>
+            </Col>
+           </Row>
+          </FormItem>
+          <FormItem label=''>
+            <Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress">
+            <span>企业默认地址</span>
+            </Checkbox>
+          </FormItem>
+        </Form>
+        <div slot="footer" class="add-btn-group">
+          <Button type="primary" @click="saveUpdate">保存</Button>
+          <Button type="default" @click="modal3=false">取消</Button>
+          <div v-if='hint'>
+            <Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red'>内容不能为空</Alert>
+          </div>
+        </div>
+      </Modal>
 			<!-- 错误提示蒙版 -->
 			<Modal v-model="modal2" width="360" class-name="vertical-center-modal">
 				<p slot="header" style="color:#f60;text-align:center">
@@ -655,22 +1020,6 @@
 		width: 100px;
 	}
 
-	.add-msg li {
-		margin-top: 10px;
-		vertical-align: middle;
-	}
-
-	.add-msg li label {
-		display: inline-block;
-		width: 100px;
-		text-align: right;
-		margin-right: 10px;
-	}
-
-	.add-msg li label:last-child {
-		margin-right: 0;
-	}
-
 	.ivu-modal-footer .add-btn-group {
 		text-align: center;
 	}
@@ -689,16 +1038,18 @@
 		text-align: left;
 	}
 
-	li div {
-		display: inline-block;
-		vertical-align: middle;
-	}
-
 	.myTab {
 		margin-bottom: 10px;
 	}
 
 	.address {
-		width: 350px;
+		width: 400px;
+    display: inline-block;
 	}
+  .mgb_0{
+    margin-bottom: 0;
+  }
+  .user_address{
+    margin-bottom: 0px;
+  }
 </style>

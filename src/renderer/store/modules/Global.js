@@ -1,5 +1,6 @@
 const state = {
-    fastboot:false
+    fastboot:false,
+    access_token:''
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
     },
     setFastboot(state, res) {
        state.fastboot = !state.fastboot
+    },
+    setToken(state, res) {
+       state.access_token = res
     }
 }
 
@@ -21,6 +25,9 @@ const actions = {
     },
     'setFastboot': function ({commit}, res) {
         commit('setFastboot', res)
+    },
+    'setToken': function ({commit}, res) {
+        commit('setToken', res)
     }
 }
 
@@ -31,6 +38,9 @@ export default {
     getters: {
         fastboot: state => {
             return state.fastboot
-        }
+        },
+        access_token: state => {
+            return state.access_token
+        },
     }
 }

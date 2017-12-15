@@ -17,7 +17,17 @@
         name: 'powertimeframe',
         data() {
             return {
-                chartOption2: {
+
+            }
+        },
+        props:['month','pieData'],
+        computed:{
+            powerFrameChart:function () {
+                return this.$echarts.init(document.getElementById('tradeFrame'));
+
+            },
+            chartOption:function () {
+                return {
 //          鼠标悬浮提示
                     tooltip: {
                         trigger: 'item',
@@ -25,16 +35,20 @@
                         position: [-20, -20]
                     },
                     legend: {
+                        orient: 'vertical',
+                        left: '0',
+                        top: '20',
                         itemWidth:16,
                         itemHeight:16,
+                        data: ['市场竞价(月)', '长协(月)', '市场竞价(年)', '长协(年)']
                     },
                     series: [
                         {
-                            name: '交易来源',
+                            name: '年度',
                             type: 'pie',
                             selectedMode: 'single',
                             radius: ['0px', '45%'],
-                            center: ['50%', '50%'],
+                            center: ['60%', '50%'],
                             itemStyle: {
                                 normal: {
                                     offset:5,
@@ -49,7 +63,7 @@
 
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.pieData.year.longpact,
                                     name: '长协(年)',
                                     itemStyle: {
                                         normal: {
@@ -61,7 +75,7 @@
                                     }
                                 },
                                 {
-                                    value: 679,
+                                    value: this.pieData.year.bidding,
                                     name: '市场竞价(年)',
                                     itemStyle: {
                                         normal: {
@@ -75,7 +89,7 @@
                             ],
                         },
                         {
-                            name: '访问来源',
+                            name: '月度',
                             type: 'pie',
                             radius: ['66%', '86%'],
                             label: {
@@ -83,10 +97,10 @@
                                     show: false
                                 }
                             },
-                            center: ['50%', '50%'],
+                            center: ['60%', '50%'],
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.pieData.month.longpact,
                                     name: '长协(月)',
                                     itemStyle: {
                                         normal: {
@@ -98,7 +112,7 @@
                                     }
                                 },
                                 {
-                                    value: 310,
+                                    value: this.pieData.month.bidding,
                                     name: '市场竞价(月)',
                                     itemStyle: {
                                         normal: {
@@ -116,14 +130,19 @@
             }
         },
         mounted() {
-            this.drawLine(this.chartOption2);
+            this.drawPie();
+        },
+        watch:{
+            pieData:function () {
+                this.drawPie()
+            }
         },
         methods: {
-            drawLine(option = this.chartOption2) {
+            drawPie() {
+                this.powerFrameChart.clear();
                 // 基于准备好的dom，初始化echarts实例
-                let powerFrameChart = this.$echarts.init(document.getElementById('tradeFrame'));
                 // 绘制图表
-                powerFrameChart.setOption(option);
+                this.powerFrameChart.setOption(this.chartOption);
             }
         }
     }

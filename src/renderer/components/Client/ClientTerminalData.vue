@@ -3,60 +3,58 @@
         name: 'terminalData',
         data() {
             return {
-                currentPDS: '1',
-                currentChartType: 1,
+                currentPDS: 0,
+                currentChartType: 11,
                 timeType: '今天',
-                cldDetail: {
-                    sjdl: '45452',
-                    glys: '0.9',
-                    dqzdxl: '3453',
-                    dqzt: '运行中',
-                    zcbj: '1705A0010052',
-                    zdh: '1705A0010052',
-                    sccj: '深电能',
-                    ccbh: '236413132165',
-                    sblx: '终端表计',
-                    cgrq: '2012-12-12',
-                    ycip: '122.97.176.20',
-                    txdz: '1705A0010052',
-                    ycdk: '37173',
-                    btl: '9600',
-                    sxrq: '2017-10-21 18:36:40',
-                    sshh: '7020620794',
-                    gddw: '巩义市供电局',
-                    byqrl: '120KW',
-                    zt: '已启用'
-                },
+	            todayTime:'0',
+                cldDetail: {},
+                clientId: '',
+                clientIndex: '',
                 monitoringShow: 2,
+                eTotal: 0,
+                origratio: 0,
+                ratio: {
+                    pt: 0,
+                    pt_ratio1: 0,
+                    pt_ratio2: 0,
+                    ct: 0,
+                    ct_ratio1: 0,
+                    ct_ratio2: 0,
+                },
                 timeList: [
                     {
                         label: '15分钟',
                         value: '15'
                     },
                     {
-                        label: '一天',
+                        label: '天',
                         value: '24'
                     },
                     {
-                        label: '一个月',
+                        label: '月',
                         value: '30'
                     },
                 ],
-                columns: [
+                logColumns: [
                     {
                         title: '掉线时间',
                         sortable: true,
-                        key: 'dxsj'
+                        key: 'off_time'
                     },
                     {
                         title: '上线时间',
                         sortable: true,
-                        key: 'sxsj'
+                        key: 'on_time'
                     },
                     {
                         title: '在线时长',
                         sortable: true,
-                        key: 'zxsc'
+                        key: 'total',
+                        render: (h, params) => {
+                            let text = this.formatDuring(params.row.total * 1000);
+
+                            return h('span', text)
+                        }
                     },
 
                 ],
@@ -64,120 +62,147 @@
                     {
                         title: '日期时间',
                         sortable: true,
-                        key: 'rqsj'
+                        key: 'off_time'
                     },
                     {
                         title: '事件',
                         sortable: true,
                         width: '80',
-                        key: 'sj'
+                        key: 'name'
                     },
                     {
                         title: '处理结果',
                         sortable: true,
-                        key: 'cljg'
-                    },
-                ],
-                tableData1: [
-                    {
-                        dxsj: '07-09-23 00:00:00',
-                        sxsj: '07-09-23 00:00:00',
-                        zxsc: '20天20小时20分钟20秒',
-                        ycip: '192.168.222.222',
-                        dk: '8080'
-                    },
-                    {
-                        dxsj: '07-09-23 00:00:00',
-                        sxsj: '07-09-23 00:00:00',
-                        zxsc: '20天20小时20分钟20秒',
-                        ycip: '192.168.222.222',
-                        dk: '8080'
-                    },
-                    {
-                        dxsj: '07-09-23 00:00:00',
-                        sxsj: '07-09-23 00:00:00',
-                        zxsc: '20天20小时20分钟20秒',
-                        ycip: '192.168.222.222',
-                        dk: '8080'
-                    },
-                    {
-                        dxsj: '07-09-23 00:00:00',
-                        sxsj: '07-09-23 00:00:00',
-                        zxsc: '20天20小时20分钟20秒',
-                        ycip: '192.168.222.222',
-                        dk: '8080'
-                    },
-                    {
-                        dxsj: '07-09-23 00:00:00',
-                        sxsj: '07-09-23 00:00:00',
-                        zxsc: '20天20小时20分钟20秒',
-                        ycip: '192.168.222.222',
-                        dk: '8080'
-                    },
-                ],
-                tableData2: [
-                    {
-                        rqsj: '07-09-23 00:00:00',
-                        sj: '掉线',
-                        cljg: '已自动登录'
-                    },
-                    {
-                        rqsj: '07-09-23 00:00:00',
-                        sj: '掉线',
-                        cljg: '已自动登录'
-                    },
-                    {
-                        rqsj: '07-09-23 00:00:00',
-                        sj: '掉线',
-                        cljg: '已自动登录'
-                    },
-                    {
-                        rqsj: '07-09-23 00:00:00',
-                        sj: '掉线',
-                        cljg: '已自动登录'
-                    },
-                ],
-                chartOption1: {
-
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        key: 'status',
+                        render: (h, params) => {
+                            let text;
+                            if (params.row.status === 0) {
+                                text = '掉线已自动登录'
+                            } else if (params.row.status === 1) {
+                                text = '掉线未自动登录'
+                            }
+                            return h('span', text)
                         }
                     },
+                ],
+                logData: [],
+                tableData2: [],
+                dianliangData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+                },
+                dianliuData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    curaData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    curbData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    curcData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                dianyaData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                yougongData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                wugongData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                shizaiData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                yinshuData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                fuheData: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                onlineData: {
+                    xData: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
+                    yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                },
+                terminalList: []
+            }
+        },
+        computed: {
+            time: function () {
+                if (this.timeType === '今天') {
+                    return 1
+                } else if (this.timeType === '昨天') {
+                    return 2
+                } else if (this.timeType === '近7天') {
+                    return 3
+                } else if (this.timeType === '时间区间') {
+                    return 6
+                }
+            },
+            cus_id: function () {
+                return this.$store.getters.cus_id
+            },
+            dianliangChart: function () {
+                return this.$echarts.init(document.getElementById('dianliang-chart'));
+            },
+            dianliuChart: function () {
+                return this.$echarts.init(document.getElementById('dianliu-chart'));
+            },
+            dianyaChart: function () {
+                return this.$echarts.init(document.getElementById('dianya-chart'));
+            },
+            yougongChart: function () {
+                return this.$echarts.init(document.getElementById('yougong-chart'));
+            },
+            wugongChart: function () {
+                return this.$echarts.init(document.getElementById('wugong-chart'));
+            },
+            shizaiChart: function () {
+                return this.$echarts.init(document.getElementById('shizai-chart'));
+            },
+            yinshuChart: function () {
+                return this.$echarts.init(document.getElementById('yinshu-chart'));
+            },
+            fuheChart: function () {
+                return this.$echarts.init(document.getElementById('fuhe-chart'));
+            },
+            onlineChart: function () {
+                return this.$echarts.init(document.getElementById('chart-jiankong'));
+            },
+            dianliangOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     legend: {
                         data: ['采集电量'],
                         icon: 'rect',
                         left: 5,
-                        top: 40,
+                        top: 20,
                         itemWidth: 16,
                         itemHeight: 16,
                     },
-                    color: ['#4f8af9', '#6ec71e', '#f56e6a', '#fc8b40', '#818af8', '#31c9d7', '#f35e7a', '#ab7aee', '#14d68b', '#edb00d'],
+                    color: this.$store.getters.chartOption.colorList,
                     xAxis: {
-                        type: 'category',
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月',],
-                        nameTextStyle: {
-                            fontSize: 12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-
+                        ...this.$store.getters.chartOption.colorList,
+                        data: this.dianliangData.xData,
                     }
                     ,
                     yAxis: [
                         {
                             position: 'left',
                             type: 'value',
-                            boundaryGap: 0,
                             axisLine: {
                                 show: false
                             },
@@ -186,6 +211,7 @@
                             },
                         }
                     ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
                     grid: {
                         top: '80',
                         left: '10',
@@ -198,44 +224,431 @@
                             name: '采集电量',
                             type: 'bar',
                             barWidth: 30,
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
+                            data: this.dianliangData.yData
                         }
                     ]
-                },
-                chartOption2: {
+                }
 
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
+            },
+            dianliuOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
                     },
                     grid: {
-                        top: '10',
+                        top: '80',
                         left: '10',
-                        right: '13',
+                        right: '13%',
                         bottom: '15',
                         containLabel: true
                     },
+                    color: this.$store.getters.chartOption.colorList,
                     xAxis: {
-                        type: 'category',
-                        data: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
-                        nameTextStyle: {
-                            fontSize: 12
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.dianliuData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: 'A相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianliuData.curaData
+
                         },
-//	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
+                        {
+                            name: 'B相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianliuData.curbData
+
                         },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
+                        {
+                            name: 'C相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianliuData.curcData
+
                         },
 
+                    ]
+                }
+            },
+            dianyaOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.dianyaData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: 'A相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianyaData.aData
+
+                        },
+                        {
+                            name: 'B相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianyaData.bData
+
+                        },
+                        {
+                            name: 'C相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.dianyaData.cData
+                        },
+
+                    ]
+                }
+            },
+            yougongOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.yougongData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: 'A相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yougongData.aData
+
+                        },
+                        {
+                            name: 'B相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yougongData.bData
+
+                        },
+                        {
+                            name: 'C相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yougongData.cData
+
+                        },
+                    ]
+                }
+            },
+            wugongOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.wugongData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: 'A相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.wugongData.aData
+
+                        },
+                        {
+                            name: 'B相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.wugongData.bData
+
+                        },
+                        {
+                            name: 'C相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.wugongData.cData
+
+                        },
+                    ]
+                }
+            },
+            shizaiOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.shizaiData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: '视在功率',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.shizaiData.yData
+
+                        }
+                    ]
+                }
+            },
+            yinshuOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    legend: {
+                        data: ['A相', 'B相', 'C相',],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.yinshuData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: 'A相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yinshuData.aData
+
+                        },
+                        {
+                            name: 'B相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yinshuData.bData
+
+                        },
+                        {
+                            name: 'C相',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.yinshuData.cData
+
+                        },
+                    ]
+                }
+            },
+            fuheOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    xAxis: {
+                        ...this.$store.getters.chartOption.xAxis,
+                        data: this.fuheData.xData
+                    },
+                    yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: '功率因数',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.fuheData.yData
+
+                        }
+                    ]
+                }
+            },
+            onlineOption: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.barTooltip,
+                    grid: {
+                        top: '20',
+                        left: '10',
+                        right: 5,
+                        bottom: 0,
+                        containLabel: true
+                    },
+                    xAxis: {
+	                    ...this.$store.getters.chartOption.barTooltip,
+						data:this.onlineData.xData,
                     }
                     ,
+	                color:this.$store.getters.chartOption.colorList,
                     yAxis: [
                         {
                             position: 'left',
@@ -252,251 +665,181 @@
                             },
                         }
                     ],
-                    dataZoom: [
-                        {
-                            type: 'slider',
-                            bottom: 0,
-                            start: 0,
-                            end: 80
-                        }
-                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
                     series: [
                         {
-                            name: '今年',
+                            name: '在线时长',
                             type: 'bar',
-                            barWidth: '30',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [0, 6, 12, 18, 24, 0, 6, 12, 18, 24, 0, 6, 12, 18, 24, 0, 6, 12, 18, 24, 0, 6, 12, 18, 24, 0, 6, 12, 18]
+	                        barMaxWidth:40,
+                            data: this.onlineData.yData
                         }
 
                     ]
-                },
-                chartOption3: {
-
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        top: '40',
-                        left: '10',
-                        right: '13%',
-                        bottom: 0,
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
-
-//	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-
-                    }
-                    ,
-                    yAxis: [
-                        {
-                            position: 'left',
-                            type: 'value',
-                            boundaryGap: 0,
-                            max: 24,
-                            interval: 6,
-                            minInterval: 1,
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                        }
-                    ],
-                    dataZoom: [
-                        {
-                            type: 'slider',
-                            bottom: 0,
-                            start: 0,
-                            end: 80
-                        }
-                    ],
-                    series: [
-                        {
-                            name: '今年',
-                            type: 'line',
-                            data: [10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18]
-                        }
-
-                    ]
-                },
-                chartOption4: {
-
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    grid: {
-                        top: '40',
-                        left: '10',
-                        right: '13%',
-                        bottom: 0,
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
-
-//	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-
-                    }
-                    ,
-                    yAxis: [
-                        {
-                            position: 'left',
-                            type: 'value',
-                            boundaryGap: 0,
-                            max: 24,
-                            interval: 6,
-                            minInterval: 1,
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                        }
-                    ],
-                    dataZoom: [
-                        {
-                            type: 'slider',
-                            bottom: 0,
-                            start: 0,
-                            end: 80
-                        }
-                    ],
-                    series: [
-                        {
-                            name: '今年',
-                            type: 'line',
-                            data: [10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18, 24, 10, 6, 12, 18]
-                        }
-
-                    ]
-                },
+                }
             }
         },
         mounted() {
+            this.clientId = this.$route.query.clientId || this.terminalList[0].clientid;
+            this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
+            this.clientTerminalList();
+        },
+        watch: {
+            cus_id: function () {
+                this.clientTerminalList()
+            },
+            clientId: function () {
+                console.log('clientId 改变',this.clientId)
 
-            this.getTerminalDetail();
-            this.onLineJiankng();
-            this.equipmentAbnomal();
-            this.equipmentLog();
-            this.collectJiankongData('init');
-
+            }
         },
         methods: {
-            drawBar1(option = this.chartOption1) {
-                // 基于准备好的dom，初始化echarts实例
-                let compare1Chart = this.$echarts.init(document.getElementById('chart-main1'));
+            drawDianliang() {
+                this.dianliangChart.clear();
                 // 绘制图表
-                compare1Chart.setOption(option);
+                this.dianliangChart.setOption(this.dianliangOption);
+                this.dianliangChart.hideLoading();
             },
-            drawBar2(option = this.chartOption2) {
-                // 基于准备好的dom，初始化echarts实例
-                let compare1Chart = this.$echarts.init(document.getElementById('chart-jiankong'));
+            drawDianliu() {
+                this.dianliuChart.clear();
                 // 绘制图表
-                compare1Chart.setOption(option);
+                this.dianliuChart.setOption(this.dianliuOption);
+                this.dianliuChart.hideLoading();
             },
-            drawBar3(option = this.chartOption3) {
-                // 基于准备好的dom，初始化echarts实例
-                let compare1Chart = this.$echarts.init(document.getElementById('chart-main2'));
+            drawDianya() {
+                this.dianyaChart.clear();
                 // 绘制图表
-                compare1Chart.setOption(option);
+                this.dianyaChart.setOption(this.dianyaOption);
+                this.dianyaChart.hideLoading();
             },
-            drawBar4(option = this.chartOption4) {
-                // 基于准备好的dom，初始化echarts实例
-                let compare1Chart = this.$echarts.init(document.getElementById('chart-main3'));
+            drawYougong() {
+                this.yougongChart.clear();
                 // 绘制图表
-                compare1Chart.setOption(option);
+                this.yougongChart.setOption(this.yougongOption);
+                this.yougongChart.hideLoading();
             },
-            changeSelect(pds) {
+            drawWugong() {
+                this.wugongChart.clear();
+                // 绘制图表
+                this.wugongChart.setOption(this.wugongOption);
+                this.wugongChart.hideLoading();
+            },
+            drawShizai() {
+                this.shizaiChart.clear();
+                // 绘制图表
+                this.shizaiChart.setOption(this.shizaiOption);
+                this.shizaiChart.hideLoading();
+            },
+            drawYinshu() {
+                this.yinshuChart.clear();
+                // 绘制图表
+                this.yinshuChart.setOption(this.yinshuOption);
+                this.yinshuChart.hideLoading();
+            },
+            drawFuhe() {
+                this.fuheChart.clear();
+                // 绘制图表
+                this.fuheChart.setOption(this.fuheOption);
+                this.fuheChart.hideLoading();
+            },
+            drawOnline() {
+                this.onlineChart.clear();
+                this.onlineChart.setOption(this.onlineOption);
+                this.onlineChart.hideLoading();
+            },
+            changeSelect(pds, clientIndex, clientId) {
                 this.currentPDS = pds;
+                this.clientIndex = clientIndex;
+                this.clientId = clientId;
+                this.getTerminalDetail();
+                this.onLineJiankng();
+                this.equipmentAbnomal();
+                this.equipmentLog();
+                this.collectJiankongData();
+                this.getRatio();
+            },
+            //用户终端列表
+            clientTerminalList() {
+                this.$http.post(this.$api.CLIENT_TERMINAL_LIST, {cus_id: this.$store.getters.cus_id}).then(res => {
+                    console.log('用户终端列表', res.data[0]);
+                    this.terminalList = res.data[0].data;
+                    this.getTerminalDetail();
+                    this.onLineJiankng();
+                    this.equipmentAbnomal();
+                    this.equipmentLog();
+                    this.collectJiankongData('init');
+                    this.getRatio();
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
+            },
+//	        获取倍率
+            getRatio() {
+                this.$http.post(this.$api.CLIENT_TERMINAL_RATIO, {clientid: this.clientId}).then(res => {
+                    let data = res.data.data;
+                    let pt_ratio = data.pt_ratio.split('/');
+                    let ct_ratio = data.ct_ratio.split('/');
+                    this.ratio.pt = data.pt;
+                    this.ratio.pt_ratio1 = pt_ratio[0];
+                    this.ratio.pt_ratio2 = pt_ratio[1];
+                    this.ratio.ct = data.ct;
+                    this.ratio.ct_ratio1 = ct_ratio[0];
+                    this.ratio.ct_ratio2 = ct_ratio[1];
+                    console.log('倍率', data);
+                    console.log(this.ratio)
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
+            },
+            //	        修正ct倍率
+            setCTRatio() {
+                this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
+                    clientid: this.clientId,
+                    type: 'ct',
+                    ct: this.ratio.ct_ratio1 / this.ratio.ct_ratio2,
+                    ct_ratio1: this.ratio.ct_ratio1,
+                    ct_ratio2: this.ratio.ct_ratio2,
+                }).then(res => {
+                    console.log('修正ct倍率', res);
+                    this.getRatio();
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
+            },
+            //	        修正pt倍率
+            setPTRatio() {
+                this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
+                    clientid: this.clientId,
+                    type: 'pt',
+                    pt: this.ratio.pt_ratio1 / this.ratio.pt_ratio2,
+                    pt_ratio1: this.ratio.pt_ratio1,
+                    pt_ratio2: this.ratio.pt_ratio2,
+                }).then(res => {
+                    console.log('修正ct倍率', res);
+                    this.getRatio();
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
             },
             getTerminalDetail() {
-                var id = this.$store.getters.term_id;
-                console.log(id);
-                this.$http.get(this.$api.CLIENT_TERMINAL_DETAIL + id).then(res => {
-                    var data = res.data.data;
-                    console.log('终端详情', data);
-                    if (data.status == 0) {
+                this.$http.get(this.$api.CLIENT_TERMINAL_DETAIL + this.clientIndex).then(res => {
+                    let data = res.data.data;
+                    console.log('终端详情', res);
+                    if (data.status === 0) {
                         data.status = "未启用";
 
-                    } else if (data.status == 1) {
+                    } else if (data.status === 1) {
                         data.status = "已启用";
                     }
-                    this.cldDetail = {
-                        sjdl: data.electricity,
-                        glys: data.power_factor,
-                        dqzdxl: data.maxdemand,
-                        dqzt: data.status,
-                        zcbj: '1705A0010052',
-                        zdh: data.clientid,
-                        sccj: data.factory,
-                        ccbh: data.serial_no,
-                        sblx: data.type,
-                        cgrq: '2012-12-12',
-                        ycip: '122.97.176.20',
-                        txdz: data.mailing_address,
-                        ycdk: data.port,
-                        btl: '9600',
-                        sxrq: '2017-10-21 18:36:40',
-                        sshh: data.user_no,
-                        gddw: data.powerplant,
-                        byqrl: data.capacity,
-                        zt: data.status,
-                    }
-                    console.log("2", res);
+                    this.cldDetail = data;
+                    console.log(this.cldDetail)
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -504,18 +847,26 @@
                 })
             },
             onLineJiankng() {
-                var clientid = this.$store.getters.clientid;
-                this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE, {clientid: clientid}).then(res => {
+                this.onlineChart.showLoading();
+                this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE, {clientid: this.clientId}).then(res => {
                     console.log("在线监控", res);
+                    let data = res.data.data;
+                    this.onlineData.xData = Object.keys(data);
+                    this.onlineData.yData = Object.values(data).map(i=>parseInt((i / 3600)));
+                    this.todayTime = this.formatDuring(Object.values(data).pop()*1000);
+                    this.drawOnline()
                 }, err => {
+                    this.drawOnline();
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.drawOnline();
                     this.$api.errcallback(err);
                 })
             },
             equipmentAbnomal() {
                 this.$http.post(this.$api.CLIENT_EQUIPMENT_REMIND).then(res => {
                     console.log("设备异常提醒", res);
+                    this.tableData2 = res.data.data;
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -523,9 +874,9 @@
                 })
             },
             equipmentLog() {
-                var clientid = this.$store.getters.clientid;
-                this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: 'clientid'}).then(res => {
+                this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: this.clientId}).then(res => {
                     console.log("设备日志", res);
+                    this.logData = res.data.data;
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -533,51 +884,139 @@
                 })
             },
             collectJiankongData(dataType) {
-                let time = 1,
-	                start= '',
-	                end= '';
-                switch (dataType) {
-	                case 'init':
-	                    time = 1;
-	                    break;
-                    case '今天':
-                        time = 1;
-                        break;
-                    case '昨天':
-                        time = 2;
-                        break;
-                    case '近7天':
-                        time = 3;
-                        break;
-                    case '近15天':
-                        time = 4;
-                        break;
-                    case '近30天':
-                        time = 5;
-                        break;
-                    default:
-                        time = 6;
-                        start = dataType[0];
-                        end = dataType[1];
+                let start = '',
+                    end = '';
+                if (Array.isArray(dataType)) {
+                    this.timeType = '时间区间';
+                    start = dataType[0];
+                    end = dataType[1];
                 }
+                this.dianliangChart.showLoading();
+                this.dianliuChart.showLoading();
+                this.dianyaChart.showLoading();
+                this.wugongChart.showLoading();
+                this.yougongChart.showLoading();
+                this.shizaiChart.showLoading();
+                this.yinshuChart.showLoading();
                 this.$http.post(this.$api.CLIENT_COLLECT_DATA, {
                     type: this.currentChartType,
-                    time: time,
-                    clientid:this.$store.getters.clientid,
+                    time: this.time,
+                    clientid: this.clientId,
                     start: start,
                     end: end
                 }).then(res => {
-                    console.log("采集监控", res);
-                    this.drawBar1(this.chartOption1);
-                    this.drawBar2(this.chartOption2);
-                    this.drawBar3(this.chartOption3);
-                    this.drawBar4(this.chartOption4);
+                    let data = Object.values(res.data.data);
+                    this.eTotal = res.data.total;
+                    this.origratio = res.data.origratio;
+                    if (this.currentChartType === 1) {
+                        this.dianliangData.xData = [];
+                        this.dianliangData.yData = [];
+                        data.map(i => {
+                            this.dianliangData.xData.push(i.collect_time);
+                            this.dianliangData.yData.push(i.electricity);
+                        });
+                        console.log("采集监控  电量", res);
+                        this.drawDianliang();
+                    } else if (this.currentChartType === 2) {
+                        this.dianliuData.xData = [];
+                        this.dianliuData.curaData = [];
+                        this.dianliuData.curbData = [];
+                        this.dianliuData.curcData = [];
+                        data.map(i => {
+                            this.dianliuData.xData.push(i.updated_at);
+                            this.dianliuData.curaData.push(i.cur_a);
+                            this.dianliuData.curbData.push(i.cur_b);
+                            this.dianliuData.curcData.push(i.cur_c);
+                        });
+                        console.log("采集监控  电流", res);
+                        console.log(this.dianliuData);
+                        this.drawDianliu();
+                    } else if (this.currentChartType === 3) {
+                        this.dianyaData.xData = [];
+                        this.dianyaData.aData = [];
+                        this.dianyaData.bData = [];
+                        this.dianyaData.cData = [];
+                        data.map(i => {
+                            this.dianyaData.xData.push(i.updated_at);
+                            this.dianyaData.aData.push(i.vol_a);
+                            this.dianyaData.bData.push(i.vol_b);
+                            this.dianyaData.cData.push(i.vol_c);
+                        });
+                        console.log("采集监控  电压", res);
+                        this.drawDianya();
+                    } else if (this.currentChartType === 5) {
+                        this.wugongData.xData = [];
+                        this.wugongData.aData = [];
+                        this.wugongData.bData = [];
+                        this.wugongData.cData = [];
+                        data.map(i => {
+                            this.wugongData.xData.push(i.updated_at);
+                            this.wugongData.aData.push(i.rpa);
+                            this.wugongData.bData.push(i.rpb);
+                            this.wugongData.cData.push(i.rpc);
+                        });
+                        console.log("采集监控  无功功率", res);
+                        this.drawWugong();
+                    } else if (this.currentChartType === 6) {
+                        this.shizaiData.xData = [];
+                        this.shizaiData.yData = [];
+                        data.map(i => {
+                            this.shizaiData.xData.push(i.updated_at);
+                            this.shizaiData.yData.push(i.rpa);
+                        });
+                        console.log("采集监控  视在功率", res);
+                        this.drawWugong();
+                    } else if (this.currentChartType === 7) {
+                        this.yinshuData.xData = [];
+                        this.yinshuData.aData = [];
+                        this.yinshuData.bData = [];
+                        this.yinshuData.cData = [];
+                        data.map(i => {
+                            this.yinshuData.xData.push(i.updated_at);
+                            this.yinshuData.aData.push(i.pfa);
+                            this.yinshuData.bData.push(i.pfb);
+                            this.yinshuData.cData.push(i.pfc);
+                        });
+                        console.log("采集监控  功率因数", res);
+                        this.drawYinshu();
+                    } else if (this.currentChartType === 8) {
+                        this.yougongData.xData = [];
+                        this.yougongData.aData = [];
+                        this.yougongData.bData = [];
+                        this.yougongData.cData = [];
+                        data.map(i => {
+                            this.yougongData.xData.push(i.updated_at);
+                            this.yougongData.aData.push(i.apa);
+                            this.yougongData.bData.push(i.apb);
+                            this.yougongData.cData.push(i.apc);
+                        });
+                        console.log("采集监控  负荷", res);
+                        this.drawYougong();
+                    }
                 }, err => {
+                    if (this.monitoringShow === 2) {
+                        this.dianliangData.xData = ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'];
+                        this.dianliangData.yData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+                        this.drawDianliang();
+                    } else if (this.monitoringShow === 3) {
+                        this.dianliuData.xData = ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'];
+                        this.dianliuData.curaData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+                        this.dianliuData.curbData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+                        this.dianliuData.curcData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+                        this.drawDianliu();
+                    }
                     this.$api.errcallback(err);
                 }).catch(err => {
                     this.$api.errcallback(err);
                 })
             },
+            formatDuring(mss) {
+                let days = parseInt(mss / (1000 * 60 * 60 * 24));
+                let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = (mss % (1000 * 60)) / 1000;
+                return days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
+            }
         }
     }
 </script>
@@ -598,24 +1037,12 @@
 				<div class="pds-container">
 					<Row>
 						<div class="tab-container">
-							<my-tab v-on:changeSelect="changeSelect('1')"
-							        v-bind:type="currentPDS === '1'?'disabled':'normal'">10KV配电室-1
-							</my-tab>
-							<my-tab v-on:changeSelect="changeSelect('2')"
-							        v-bind:type="currentPDS === '2'?'disabled':'normal'">10KV配电室-2
-							</my-tab>
-							<my-tab v-on:changeSelect="changeSelect('3')"
-							        v-bind:type="currentPDS === '3'?'disabled':'normal'">10KV配电室-3
-							</my-tab>
-							<my-tab v-on:changeSelect="changeSelect('4')"
-							        v-bind:type="currentPDS === '4'?'disabled':'normal'">10KV配电室-4
-							</my-tab>
-							<my-tab v-on:changeSelect="changeSelect('5')"
-							        v-bind:type="currentPDS === '5'?'disabled':'normal'">10KV配电室-5
-							</my-tab>
-							<my-tab v-on:changeSelect="changeSelect('6')"
-							        v-bind:type="currentPDS === '6'?'disabled':'normal'">10KV配电室-6
-							</my-tab>
+							<template v-for="(item,index) in terminalList">
+								<my-tab v-on:changeSelect="changeSelect(index,item.id,item.clientid)"
+								        v-bind:type="currentPDS === index?'disabled':'normal'">{{item.mea_name}}
+								</my-tab>
+							</template>
+
 						</div>
 					</Row>
 					<Row>
@@ -624,17 +1051,19 @@
 								<Col span="10">
 								<div class="left">
 
-									<h4 class="title">测量点：河南银河铝业有限公司__鲁庄镇西候村候地工业园区_02 <span
-											style="color: #ccc;">资产编号:{{cldDetail.zcbj}}</span></h4>
+									<h4 class="title">测量点：{{cldDetail.mea_address}} <span
+											style="color: #999999;font-weight: 400;">资产编号:{{cldDetail.serial_no}}</span>
+									</h4>
 									<ul>
 										<li style="background-color: #0089f0;">
-											<strong>{{cldDetail.sjdl}}</strong><br><span>实际电量</span></li>
+											<strong>{{cldDetail.electricity}}</strong><br><span>实际电量</span></li>
 										<li style="background-color: #f57e6a;">
-											<strong>{{cldDetail.glys}}</strong><br><span>功率因数</span></li>
-										<li style="background-color: #ab7aee;"><strong>{{cldDetail.dqzdxl}}</strong><br><span>当前最大需量</span>
+											<strong>{{cldDetail.power_factor}}</strong><br><span>功率因数</span></li>
+										<li style="background-color: #ab7aee;">
+											<strong>{{cldDetail.maxdemand}}</strong><br><span>当前最大需量</span>
 										</li>
 										<li style="background-color: #6ec71e;">
-											<strong>{{cldDetail.dqzt}}</strong><br><span>当前状态</span></li>
+											<strong>{{cldDetail.status}}</strong><br><span>当前状态</span></li>
 									</ul>
 								</div>
 								</Col>
@@ -643,24 +1072,24 @@
 									<table width="100%" cellspacing="15">
 										<tbody>
 										<tr>
-											<td><span>终端号 : </span> {{cldDetail.zdh}}</td>
-											<td><span>生产厂家 : </span> {{cldDetail.sccj}}</td>
-											<td><span>出厂编号 : </span> {{cldDetail.ccbh}}</td>
+											<td><span>终端号 : </span> {{cldDetail.clientid}}</td>
+											<td><span>生产厂家 : </span> {{cldDetail.factory}}</td>
+											<td><span>出厂编号 : </span> {{cldDetail.serial_no}}</td>
 											<td><span>设备类型 : </span> {{cldDetail.sblx}}</td>
 											<td><span>采购日期 : </span> {{cldDetail.cgrq}}</td>
 										</tr>
 										<tr>
-											<td><span>通信地址 : </span> {{cldDetail.txdz}}</td>
-											<td><span>远程端口 : </span> {{cldDetail.ycdk}}</td>
-											<td><span> 上线日期 :</span> {{cldDetail.btl}}</td>
-											<td><span>所属户号 : </span> {{cldDetail.sshh}}</td>
-											<td><span>供电单位 : </span> {{cldDetail.gddw}}</td>
+											<td><span>通信地址 : </span> {{cldDetail.mailing_address}}</td>
+											<td><span>远程端口 : </span> {{cldDetail.port}}</td>
+											<td><span> 上线日期 :</span> {{cldDetail.sxrq}}</td>
+											<td><span>所属户号 : </span> {{cldDetail.user_no}}</td>
+											<td><span>供电单位 : </span> {{cldDetail.powerplant}}</td>
 
 										</tr>
 										<tr>
 
-											<td><span>所属变压器容量 : </span> {{cldDetail.byqrl}}KW</td>
-											<td><span>状态 : </span> {{cldDetail.zt}}</td>
+											<td><span>所属变压器容量 : </span> {{cldDetail.capacity}}KW</td>
+											<td><span>状态 : </span> {{cldDetail.status}}</td>
 
 										</tr>
 										</tbody>
@@ -689,9 +1118,6 @@
 						<div class="power-item" :class="{selected:currentChartType===3}"
 						     @click="monitoringShow = 3;currentChartType=3;collectJiankongData()">电压
 						</div>
-						<div class="power-item" :class="{selected:currentChartType===4}"
-						     @click="monitoringShow = 3;currentChartType=4;collectJiankongData()">有功功率
-						</div>
 						<div class="power-item" :class="{selected:currentChartType===5}"
 						     @click="monitoringShow = 3;currentChartType=5;collectJiankongData()">无功功率
 						</div>
@@ -719,9 +1145,9 @@
 				</Row>
 			</div>
 			<Row className="terminal-chart-content">
-				<div v-show="monitoringShow===1" class="relative" style="height: 500px">
+				<div v-show="currentChartType===11" class="relative" style="height: 500px">
 					<p style="margin: -10px 0 10px 10px;clear: both">今日在线时长 :<span
-							style="color: #0089f0;font-size: 16px;"> 12小时35分36秒</span></p>
+							style="color: #0089f0;font-size: 16px;"> {{todayTime}}</span></p>
 					<div class="chart-main" id="chart-jiankong" style="width: 1000px;height: 189px;float: left;">
 
 					</div>
@@ -732,29 +1158,30 @@
 					</div>
 					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
-						<Table :columns="columns" width="990" :data="tableData1" height="232">
+						<Table :columns="logColumns" width="990" :data="logData" height="232">
 						</Table>
 					</div>
 				</div>
-				<div v-show="monitoringShow===2" class="relative">
-
+				<div v-show="currentChartType===1" class="relative">
 					<div class="totalCount">
-						当前月度总电量 :
-						<span style="font-size: 16px;color: #0089f0">123654.00</span>Kw.h
-						<Button class="refresh" type="primary" style="float: right;margin-right: -15px;">
+						<span>当前月度总电量 ：<span style="font-size: 16px;color: #0089f0">{{eTotal}}</span>Kw.h
+						</span>
+						<span style="margin-left: 20px;">当前倍率:<span
+								style="font-size: 16px;color: #0089f0">{{origratio}}</span></span>
+
+						<Button class="refresh" type="primary"
+						        style="float: right;margin-right: -15px;position: relative;z-index: 100"
+						        @click="collectJiankongData">
 							<i class="iconfont icon-shuaxin"></i>
 						</Button>
 					</div>
 					<div class="select-time">
-						<ul style="position: relative;z-index: 999;left: 30px">
-							<li><span>时间选择 :</span></li>
+						<ul style="position: relative;left: 240px">
 							<li>
 								<RadioGroup v-model="timeType" type="button" v-on:on-change="collectJiankongData">
 									<Radio label="今天"></Radio>
 									<Radio label="昨天"></Radio>
 									<Radio label="近7天"></Radio>
-									<Radio label="近15天"></Radio>
-									<Radio label="近30天"></Radio>
 								</RadioGroup>
 							</li>
 							<li>
@@ -765,9 +1192,6 @@
 										v-on:on-change="collectJiankongData"></DatePicker>
 							</li>
 							<li>
-								<span>时间粒度:</span>
-							</li>
-							<li>
 								<Select style="width: 100px">
 									<Option v-for="item in timeList" :value="item.value" :key="item.value"
 									        style="width: 80px">{{ item.label }}
@@ -776,13 +1200,56 @@
 							</li>
 						</ul>
 					</div>
-					<div class="chart-main" id="chart-main1" style="width: 1640px;height: 430px;"></div>
+					<div class="chart-main" id="dianliang-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
-				<div v-show="monitoringShow===3" class="relative">
+				<div v-show="currentChartType===2" class="relative">
+					<span style="margin-left: 10px;">当前CT系数:<span
+							style="font-size: 16px;color: #0089f0">{{ratio.ct}}</span></span>
+					<span style="margin: 0 10px;">当前CT比</span>
+					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio1"/> :
+					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio2"/>
+					<Button type="primary" @click="setCTRatio">修正</Button>
 					<Button class="refresh fr" type="primary">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="chart-main2" style="width: 1640px;height: 430px;"></div>
+					<div class="chart-main" id="dianliu-chart" style="width: 1640px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===3" class="relative">
+					<span style="margin-left: 10px;">当前PT系数:<span
+							style="font-size: 16px;color: #0089f0">{{ratio.pt}}</span></span>
+					<span style="margin: 0 10px;">当前PT比</span>
+					<Input style="width: 80px" size="small" v-model="ratio.pt_ratio1"/> :
+					<Input style="width: 80px" size="small" v-model="ratio.pt_ratio2"/>
+
+					<Button type="primary" @click="setPTRatio">修正</Button>
+					<Button class="refresh fr" type="primary">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="dianya-chart" style="width: 1640px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===5" class="relative">
+					<Button class="refresh fr" type="primary">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="wugong-chart" style="width: 1640px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===6" class="relative">
+					<Button class="refresh fr" type="primary">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="shizai-chart" style="width: 1640px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===7" class="relative">
+					<Button class="refresh fr" type="primary">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="yinshu-chart" style="width: 1640px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===8" class="relative">
+					<Button class="refresh fr" type="primary">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="yougong-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
 				<div v-show="monitoringShow===4" class="relative">
 					<Button class="refresh fr" type="primary">
@@ -909,8 +1376,7 @@
 	.totalCount {
 		position: absolute;
 		width: 1405px;
-		top: 63px;
+		top: 0;
 		left: 9px;
-		z-index: 999;
 	}
 </style>

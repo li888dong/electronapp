@@ -8,6 +8,10 @@ export default {
         return{
             value: '',
             modalShow: false,
+            spinShow:false,
+            currentPage:1,
+            limit:11,
+            totalPage:1,
             selectList: [],
             modifyList:[],
             selectMonth: new Date().Format('yyyy-MM'),
@@ -58,18 +62,19 @@ export default {
                 {
                     width: '150',
                     title: '企业申报',
-                    key: 'n2',
+                    key: 'declare',
                     align: 'center'
                 },
                 {
                     width: '150',
                     title: '年度月预测(万kW-h)',
-                    key: 'n3',
+                    key: 'forecast',
                     align: 'center'
                 },{
                     title: '月度预测记录(万kW-h)',
-                    key: 'n4',
-                    align: 'center'
+                    key: 'log',
+                    align: 'center',
+git
                 },{
                     title: '月度预测(万kW-h)',
                     key: 'p_predict',
@@ -156,18 +161,25 @@ export default {
     },
     methods: {
         monthData() {
+            this.spinShow=true;
             this.$http.post(this.$api.MONTH_FORECAST, {
                 com_id: this.$store.getters.com_id,
                 month: this.selectMonth,
+                page:this.currentPage,
+                limit:this.limit,
                 area: this.selectArea,
                 keyword: this.$store.getters.searchKey
             }).then(res => {
+                this.spinShow=false;
                 console.log("月度预测", res);
-                this.tableData1 = res.data.data;
-
+                this.tableData1 = res.data.data.data;
+                this.totalPage = res.data.data.total;
+                this.currentPage = res.data.data.current_page
             }, err => {
+                this.spinShow=false;
                 this.$api.errcallback(err);
             }).catch(err => {
+                this.spinShow=false;
                 this.$api.errcallback(err);
             })
         },
@@ -246,7 +258,12 @@ export default {
         },
         toDaoru() {
             this.$router.push({path:"/import-data",query:{type:'month'}})
-        }
+        },
+        pageChange(page){
+            this.currentPage = page;
+            this.monthData();
+            console.log(page)
+        },
     },
     components : {
         'myFenye': myFenye,
@@ -283,8 +300,17 @@ export default {
             </div>
             <Row class="layout-content-main">
                 <Table border @on-selection-change="selectItem" :columns="columns4" :data="tableData1"></Table>
+                <Spin size="large" fix v-if="spinShow"></Spin>
             </Row>
-            <myFenye></myFenye>
+            <div class="page-container">
+                <Page
+                        :total="totalPage"
+                        :current="currentPage"
+                        show-total
+                        show-elevator
+                        v-on:on-change="pageChange"
+                ></Page>
+            </div>
         </div>
     </Card>
     <Modal
@@ -293,7 +319,7 @@ export default {
         width = '846px'
         :mask-closable="false"
         class-name="vertical-center-modal">
-        <Row class="gongSiBox">
+        <Row class="gongSiBox" v-if="modal1">
             <Col span="8" class="gongSi">
                 <Row class="comName">
                     <Col span='10'>企业名称</Col>

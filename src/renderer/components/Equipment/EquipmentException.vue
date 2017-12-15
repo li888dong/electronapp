@@ -10,36 +10,43 @@ export default {
                 {
                     "sortable": true,
                     title: '终端编号',
-                    key: 'n1'
+                    key: 'clientid'
                 },
                 {
                     "sortable": true,
                     title: '生产厂家',                    
                     width: 200,
-                    key: 'n2'
+                    key: 'factory'
                 },
                 {
                     "sortable": true,
                     title: '当前状态',
-                    key: 'n3'
+                    key: 'status',
+                    render:(h,params)=>{
+                        if(params.row.status == 0){
+                            return h('span',{},'异常')
+                        }else{
+                            return h('span',{},'无异常')
+                        }
+                    }
                 },
                 { 
                     title: '异常编码',
-                    key: 'n4'
+                    key: 'coding'
                 },
                 {
                     "sortable": true,
                     title: '异常类别',
-                    key: 'n5'
+                    key: 'type'
                 },
                 {
                     title: '异常出现时间',
-                    key: 'n6'
+                    key: 'error_time'
                 },
                 {
                     "sortable": true,
                     title: '操作人',
-                    key: 'n7'
+                    key: 'operator'
                 },
                 
                 {
@@ -78,47 +85,7 @@ export default {
 
                 }               
             ],
-            data1: [
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-            ],
+            data1:[],
             cityList: [
                 {
                     value: '所有区域',
@@ -150,24 +117,79 @@ export default {
                 }
             ],
             model1: '',
-            value: ''
+            value: '',
+            totalPage:0,
+            currentPage:1,
+            limit:14,
+            loading:true
         }
+    },
+    methods:{
+       equipmentAbnormal(){
+          this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
+             console.log("设备异常记录列表",res);
+             if(res.data.status){
+                 this.data1 = res.data.data.data;
+                 this.totalPage = res.data.data.total;
+                 this.loading = false;
+             }else{
+                 this.loading = false;
+             }
+          },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+          }).catch(err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+          })
+       },
+       pageChange(value){
+          this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+             console.log("设备异常记录列表",res);
+             if(res.data.status){
+                 this.data1 = res.data.data.data;
+                 this.totalPage = res.data.data.total;
+                 this.currentPage = res.data.data.current_page;
+                 this.loading = false;
+             }else{
+                 this.loading = false;
+             }
+          },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+          }).catch(err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+          })
+
+       }
+    },
+    watch:{
+      
+    },
+    computed:{
+       com_id:function(){
+          return this.$store.getters.com_id;
+       }
     },
     components : {
         'myFenye': myFenye,
         'mySearch': mySearch
     },
+    mounted(){
+        this.equipmentAbnormal();
+    }
 }
 </script>
 
 <template><!-- 设备异常页面 -->
-<div class="main-container">
+<div class="main-container relative">
     <Card>
         <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
         <h3 slot="title" style="padding-left:40px">设备异常记录</h3>
         <div class="EquipmentExceptionBox">
             <div class="ExceptionTop">
-                <div class="search"><mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch></div>
+                <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
                 <Button type="primary" class="refresh" style="margin-left: 10px;"><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
                 <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
                     <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -175,10 +197,15 @@ export default {
                 <DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker>
             </div>
             <Row class="ExceptionForm">
-                <Table border :columns='columns1' :data='data1'></Table>            
+                <Table border :columns='columns1' :data='data1' :loading='loading'></Table>            
             </Row>
         </div>
-        <myFenye></myFenye>
+       <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div> 
     </Card>
 </div>
 </template>
@@ -206,4 +233,29 @@ export default {
     position: relative;
     margin-bottom: 15px;
 }
+.relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

@@ -1,5 +1,4 @@
 <script>
-import myFenye from '@/components/Tool/myFenye'
 import mySearch from '@/components/Tool/mySearch'
 
 export default {
@@ -15,26 +14,26 @@ export default {
                 {
                     "sortable": true,
                     title: '资产号',
-                    key: 'n1'
+                    key: 'clientid'
                 },
                 {
                     title: '生产厂家',                    
                     width: 200,
-                    key: 'n2'
+                    key: 'factory'
                 },
                 {
                     "sortable": true,
                     title: '出厂编号',
-                    key: 'n3'
+                    key: 'serial_no'
                 },
                 {
                     "sortable": true,
                     title: '采购日期',
-                    key: 'n4'
+                    key: 'pur_date'
                 },
                 {
                     title: '接线方式',
-                    key: 'n5'
+                    key: 'wiring'
                 },
                 {
                     title: 'IP地址',
@@ -47,24 +46,18 @@ export default {
                 {
                     title: '是否已安装',
                     width: '112',
-                    key: 'n8',
-                    filters: [
-                        {
-                            label: '安装',
-                            value: 1
-                        },
-                        {
-                            label: '未安装',
-                            value: 2
+                    key: 'is_install',
+                    render:(h,params)=>{
+                        if(params.row.is_install == 1){
+                            return h('span',{
+
+                           },'安装')
+                        }else{
+                            return h('span',{
+
+                            },'未安装')
                         }
-                    ],
-                    filterMultiple: false,
-                    filterMethod (value, row) {
-                        if (value === 1) {
-                            return row.n8 ==='安装';
-                        } else if (value === 2) {
-                            return row.n8 ==='未安装';
-                        }
+                        
                     }
                 },
                 {
@@ -81,7 +74,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.infoTo(params.index)
+                                        this.infoTo(params.row.clientid)
                                     }
                                 }
                             }, '详情'),
@@ -93,7 +86,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.moreTo(params.index)
+                                        // this.moreTo(params.row.clientid);
                                     }
                                 }                            
 
@@ -103,66 +96,101 @@ export default {
 
                 }               
             ],
-            data1: [
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '安装',
-                    n9: '123456'
-                },
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '未安装',
-                    n9: '123456'
-                }
-            ]
+            data1: [],
+            totalPage:0,
+            currentPage:1,
+            limit:14,
+            loading:true
         }
     },
     methods: {
-        infoTo(index) {
-            // this.$router.push('EquipmentStatus')    
+        infoTo(id) {
+            this.$router.push({path:'/EquipmentStatus',query:{id:id}});    
         },
         moreTo(index) {
-            // this.$router.push('EquipmentException')
+            // this.$router.push({path:'/EquipmentException',query:{id:id}});
+        },
+        equipmentList(){
+           this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status){
+                 this.data1 = data.data;
+                 this.totalPage = data.total;
+                 this.loading = false;
+             }
+           },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.loading = false;
+              this.$api.errcallback(err);
+           })
+        },
+        pageChange(value){
+            this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status){
+                 this.data1 = data.data;
+                 this.loading = false;
+                 this.totalPage = data.total;
+                 this.currentPage = data.current_page;
+             }else{
+                 this.loading = false;
+             }
+           },err=>{
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.$api.errcallback(err);
+           })
+
         }
     },
+    watch:{
+      com_id:function(){
+         this.equipmentList();
+      }
+    },
+    computed:{
+        com_id:function(){
+            return this.$store.getters.com_id;
+        }
+
+    },
     components : {
-        'myFenye': myFenye,
         'mySearch': mySearch
     },
+    mounted(){
+        this.equipmentList();
+    }
 }
 </script>
 
 <template>
-<div class="main-container"> <!-- 这是设备资产信息页面 -->
+<div class="main-container relative"> <!-- 这是设备资产信息页面 -->
     <Card>
         <div slot="title">
-        <Button type="primary">申请设备入库</Button>
+        <!-- <Button type="primary">申请设备入库</Button> -->
+        <h3>资产信息</h3>
                
         </div>
         <div slot="extra">
-             <mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch>
+             <mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>
         </div>
         <div class="AssetInfo">
             <Row class="AssetInfoForm">
                 <Col span='24'>
-                    <Table border :columns='columns1' :data='data1'></Table>
+                    <Table border :columns='columns1' :data='data1' :loading='loading'></Table>
                 </Col>        
             </Row>
-        </div>        
-        <!-- 分页 -->
-        <myFenye></myFenye>       
+        </div>
+        <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div>           
     </Card>
 </div>
 
@@ -180,6 +208,29 @@ export default {
     height: 34px;
     margin-bottom: 15px;
 }
-
-
+.relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

@@ -11,7 +11,93 @@
         },
         data(){
             return{
-	            showAllCity:false,
+                spinShow:false,
+	            reqType:'',
+                currentCity:'all',
+	            currentPage:1,
+	            totalPage:5,
+	            pageLimit:14,
+                cityList: {
+                    zz: {
+                        name: '郑州',
+                        count: '11'
+                    },
+                    kf: {
+                        name: '开封',
+                        count: '22'
+                    },
+                    ly: {
+                        name: '洛阳',
+                        count: '33'
+                    },
+                    ny: {
+                        name: '南阳',
+                        count: '44'
+                    },
+                    lh: {
+                        name: '漯河',
+                        count: '55'
+                    },
+                    xc: {
+                        name: '许昌',
+                        count: '11'
+                    },
+                    smx: {
+                        name: '三门峡',
+                        count: '22'
+                    },
+                    pds: {
+                        name: '平顶山',
+                        count: '33'
+                    },
+                    zk: {
+                        name: '周口',
+                        count: '44'
+                    },
+                    zmd: {
+                        name: '驻马店',
+                        count: '55'
+                    },
+                    xx: {
+                        name: '新乡',
+                        count: '6'
+                    },
+                    hb: {
+                        name: '鹤壁',
+                        count: '11'
+                    },
+                    jz: {
+                        name: '焦作',
+                        count: '22'
+                    },
+                    py: {
+                        name: '濮阳',
+                        count: '33'
+                    },
+                    ay: {
+                        name: '安阳',
+                        count: '44'
+                    },
+                    sq: {
+                        name: '商丘',
+                        count: '55'
+                    },
+                    xy: {
+                        name: '信阳',
+                        count: '66'
+                    },
+                    jy: {
+                        name: '济源',
+                        count: '11'
+                    }
+                },
+                cusList:{
+                    tableData: [],
+                    pageData:{
+                        total:100,
+                        current:2
+                    }
+                },
                 columns4: [
                     {
                         sortable: true,
@@ -37,42 +123,42 @@
                     {
                         sortable: true,
                         title: '实际用电量',
-                        key: 'shiji'
+                        key: 'actual_used'
                     },
                     {
                         sortable: true,
                         title: '申报电量',
-                        key: 'shenbao'
+                        key: 'declare'
                     },
                     {
                         sortable: true,
                         title: '申报偏差',
-                        key: 'shenbaopiancha'
+                        key: 'dec_dev'
                     },
                     {
                         sortable: true,
                         title: '购电量',
-                        key: 'goudianliang'
+                        key: 'purchase'
                     },
                     {
                         sortable: true,
                         title: '购电偏差',
-                        key: 'goudianpiancha'
+                        key: 'pur_dev'
                     },
                     {
                         sortable: true,
                         title: '预测电量',
-                        key: 'yucedianliang'
+                        key: 'forecast'
                     },
                     {
                         sortable: true,
                         title: '预测偏差',
-                        key: 'yucepiancha'
+                        key: 'fore_dev'
                     },
                     {
                         sortable: true,
                         title: '最低功率因数',
-                        key: 'gonglv'
+                        key: 'power_factor'
                     },
                     {
                         title: '总览',
@@ -155,19 +241,9 @@
             }
         },
 	    mounted(){
-			this.reqData();
             this.clientList();
 	    },
 	    computed:{
-            cityList() {
-                return this.$store.getters.cityList
-            },
-		    cusList(){
-                return this.$store.getters.cusList
-		    },
-		    currentCity(){
-                return this.$store.getters.currentCity
-		    },
 		    searchKey(){
 		        return this.$store.getters.searchKey
 		    }
@@ -176,9 +252,9 @@
 
 	    },
         methods:{
-			reqData(){
-			    this.setCityList();
-			},
+            setcusList(res){
+                this.$store.dispatch('setcusList',res)
+            },
 	        gotoClientPage(page,params){
                 this.$store.dispatch('setCusId',params.row.id);
                 this.$store.dispatch('setCusName',params.row.name);
@@ -187,63 +263,114 @@
             gotoAddUser(){
                 this.$router.push('/AddClient');
             },
-	        pageChange(page){
-                this.$store.dispatch('setTablePage',page);
-	        },
             changeSelect(city){
-                this.$store.dispatch('setCurrentCity',city);
-
+                this.spinShow = true;
+                this.currentCity = city;
+                this.reqType = 2;
                 if (this.currentCity ==='all'){
 	                this.clientList();
 	            }else {
                     this.$http.post(this.$api.CLIENT_LIST,{
                         com_id:this.$store.getters.com_id,
-                        type:2,
-                        area:this.currentCity
+                        type:this.reqType,
+                        area:this.currentCity,
+                        page:this.currentPage,
+                        limit:this.pageLimit
                     }).then(res=>{
+                        this.spinShow = false;
                         console.log('客户列表区域选择',res);
-                        this.setcusList(res.data[0]);
+                        let data = res.data[0].data;
+                        this.totalPage = res.data[0].total;
+                        this.currentPage = res.data[0].currentPage;
+                        this.cusList.tableData = data;
+                        this.setcusList(data);
                     },err=>{
+                        this.spinShow = false;
+
                         this.$api.errcallback(err);
                     }).catch(err=>{
+                        this.spinShow = false;
                         this.$api.errcallback(err);
                     })
 	            }
 
 
             },
-	        setcusList(res){
-                this.$store.dispatch('setcusList',res)
-	        },
-	        setCityList(){
-                this.$store.dispatch('setCityList','zz')
-	        },
             clientList(){
+	            this.spinShow = true;
+	            this.reqType = 0;
                 this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id
+                    com_id:this.$store.getters.com_id,
+                    type:this.reqType,
+	                page:this.currentPage,
+	                limit:this.pageLimit
                 }).then(res=>{
+                    this.spinShow =false;
                     console.log('客户列表默认',res);
-                    this.setcusList(res.data[0]);
-
+                    let data = res.data[0].data;
+                    this.totalPage = res.data[0].total;
+                    this.currentPage = res.data[0].currentPage;
+                    this.cusList.tableData = data;
+                    this.setcusList(data);
                 },err=>{
+                    this.spinShow =false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.spinShow =false;
+
                     this.$api.errcallback(err);
                 })
             },
 	        comSearch(){
+                this.spinShow = true;
+                this.reqType = 1;
                 this.$http.post(this.$api.CLIENT_LIST,{
                     com_id:this.$store.getters.com_id,
-                    type:1,
-                    keyword:this.$store.getters.searchKey
+                    type:this.reqType,
+                    keyword:this.$store.getters.searchKey,
+                    page:this.currentPage,
+                    limit:this.pageLimit
                 }).then(res=>{
+                    this.spinShow =false;
                     console.log('客户列表搜索',res);
-                    this.setcusList(res.data[0]);
+                    let data = res.data[0].data;
+                    this.totalPage = res.data[0].total;
+                    this.currentPage = res.data[0].currentPage;
+                    this.cusList.tableData = data;
+                    this.setcusList(data);
                 },err=>{
+                    this.spinShow =false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.spinShow =false;
                     this.$api.errcallback(err);
                 })
+	        },
+	        pageChange(page){
+                this.spinShow = true;
+                this.$http.post(this.$api.CLIENT_LIST,{
+                    com_id:this.$store.getters.com_id,
+                    type:this.reqType,
+                    area:this.currentCity,
+                    keyword:this.$store.getters.searchKey,
+                    page:page,
+                    limit:this.pageLimit
+                }).then(res=>{
+                    this.spinShow =false;
+                    console.log('客户列表分页',res);
+                    let data = res.data[0].data;
+                    this.totalPage = res.data[0].total;
+                    this.currentPage = res.data[0].currentPage;
+                    this.cusList.tableData = data;
+                    this.setcusList(data);
+                },err=>{
+                    this.spinShow =false;
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.spinShow =false;
+                    this.$api.errcallback(err);
+                });
+	            console.log(page)
 	        }
         },
 
@@ -252,7 +379,7 @@
 <template>
 	<Row class="main-container">
 		<Card>
-			<div class="flex-col" style="height: 862px;">
+			<div style="height: 862px;">
 				<div class="header">
 					<Row>
 						<Col span="1">
@@ -260,7 +387,7 @@
 
 						</Col>
 						<Col span="23">
-						<div class="tab-container" :class="showAllCity?'h_100':'h_40'">
+						<div class="tab-container">
 
 							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
 							<template v-for="(city,key) in cityList">
@@ -295,12 +422,13 @@
 					<Row className="mgt_15">
 
 						<Table :columns="columns4" :data="cusList.tableData"></Table>
+						<Spin size="large" fix v-if="spinShow"></Spin>
 					</Row>
 
 					<div class="page-container">
 						<Page
-							:total="cusList.pageData.total"
-							:current="cusList.pageData.current"
+							:total="totalPage"
+							:current="currentPage"
 							show-total
 							show-elevator
 							v-on:on-change="pageChange"
@@ -329,14 +457,9 @@
 		margin:10px 0 10px 9px;
 	}
 	.table-container{
-		flex: 1;
+
 	}
-	.h_40{
-		height: 40px;
-	}
-	.h_100{
-		height: 100px;
-	}
+
 	.title-lv2{
 		display: inline-block;
 		height: 20px;

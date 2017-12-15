@@ -3,30 +3,46 @@
         name:'clientsidebar',
         data(){
             return{
-
+                spinShow:false,
+				companyList:[]
             }
         },
 	    computed:{
             selectedId:function () {
 	            return this.$store.getters.cus_id
             },
-            companyList:function () {
-	            return this.$store.getters.cusList.tableData
-            },
+
 		    searchKey:function () {
                 return this.$store.getters.searchKey
             }
+	    },
+	    mounted(){
+            this.clientList()
 	    },
 	    methods:{
             changeCompany(id,name){
                 this.$store.dispatch('setCusId',id);
                 this.$store.dispatch('setCusName',name);
             },
+            clientList(){
+                this.spinShow = true;
+                this.$http.post(this.$api.CLIENT_LIST,{
+                    com_id:this.$store.getters.com_id,
+                    type:3,
+                }).then(res=>{
+                    this.spinShow = false;
+                    console.log('客户 名称列表',res);
+                    this.companyList = res.data[0];
+                },err=>{
+                    this.spinShow =false;
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.spinShow =false;
+
+                    this.$api.errcallback(err);
+                })
+            },
 	    },
-        mounted(){
-
-        }
-
     }
 </script>
 <template>
@@ -48,6 +64,7 @@
 					</li>
 				</template>
 			</ul>
+			<Spin size="large" fix v-if="spinShow"></Spin>
 		</div>
 	</div>
 </template>

@@ -1,12 +1,13 @@
 <style scoped>
-	.relative{
+	.relative {
 		background-color: #fff;
 	}
 </style>
 <template>
 	<Card class="relative">
 		<h3 slot="title" style="position: absolute;top: 5px;left: 15px;">功率因数</h3>
-		<div @click="modal2 = true;drawModal1()" style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
+		<div @click="showModal"
+		     style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
 			<Icon type="qr-scanner"></Icon> &nbsp;全屏
 		</div>
 		<Modal v-model="modal2"
@@ -19,7 +20,7 @@
 
 			</div>
 		</Modal>
-		<div id="lineChart2" :style="{width: '449px', height: '183px'}">
+		<div id="lineChart2" :style="{width: '690px', height: '183px'}">
 
 		</div>
 	</Card>
@@ -32,190 +33,172 @@
         name: 'lineChart',
         data() {
             return {
-                modal2:false,
-                powerRealtimeType: '15',
-                powerdata: [],
-                powerdate: [],
-                chartOption1: {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                modal2: false,
+                modalName: [ '河南众企联合售电'],
+                modalxData: ['2017年01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'],
+                modalyData: [
+                    {
+                        name: '河南众企联合售电',
+                        type: 'line',
+                        smooth: true,
+                        data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
+                    }
+                ],
+            }
+        },
+        props: ['power_factor', 'updated_at'],
+        computed: {
+            powerChart: function () {
+                return this.$echarts.init(document.getElementById('lineChart2'));
+            },
+            powerModalChart: function () {
+                return this.$echarts.init(document.getElementById('lineModalChart2'));
+            },
+            chartOption1: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
                     grid: {
-                        top:5,
+                        top: 5,
                         left: 0,
                         right: 0,
-                        bottom: 0,
+                        bottom: '8%',
                         containLabel: true
                     },
                     xAxis: [
                         {
-                            boundaryGap : true,
+                            boundaryGap: true,
                             axisLine: {onZero: false},
                             type: 'category',
-                            data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
+                            data: this.updated_at
                         }
                     ],
                     yAxis: [
                         {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0,
+                            ...this.$store.getters.chartOption.yAxis,
+                            position: 'right',
 
-                            axisLabel: {
-                                color:'#999'
-                            },
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
                         }
                     ],
 //          设置可拖动区间
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
-                    dataZoom:{
-                        bottom:-3,
-                        start:0,
-                        end:10
-                    },
+                    color: this.$store.getters.chartOption.colorList,
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
                     series: [
                         {
-                            name: '申报电量',
+                            name: '功率因数',
                             type: 'line',
-                            smooth:true,
-                            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.power_factor
                         }
                     ]
-                },
-                chartOption2: {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            chartOption2: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
+                    legend: {
+                        data: this.modalName,
+                        left: 0,
+                        top: 2,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    toolbox: {
+                        feature: {
+                            myTool2: {
+                                show: true,
+                                title: '自定义扩展方法',
+                                icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                                onclick: function () {
+                                    alert('myToolHandler2')
+                                }
+                            }
                         }
                     },
-                    legend: {
-                        data:['河南众企联合售电','111111111','22222222222','asdasdasda','dasfsdgdafasd'],
-                        left:0,
-                        top:2,
-                        itemWidth:16,
-                        itemHeight:16,
-                    },
                     grid: {
-                        top:'80',
+                        top: '80',
                         left: 5,
                         right: 0,
                         bottom: '6%',
                         containLabel: true
                     },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color: this.$store.getters.chartOption.colorList,
                     xAxis: [
                         {
-                            type:'category',
-                            boundaryGap : false,
-                            data: ['2017年01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
-                            splitLine: {show: false},
-                            splitArea: {show: false},
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
+                            ...this.$store.getters.chartOption.xAxis,
+                            data: this.modalxData,
                         }
                     ],
-                    yAxis: [
-                        {
-                            position:'left',
-                            type: 'value',
-                            boundaryGap: 0,
-                            splitArea: {show: false},
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
-                        }
-                    ],
-                    dataZoom:{
-                        bottom:-5,
-                        start:0,
-                        end:90
-                    },
-                    series: [
-                        {
-                            name: '河南众企联合售电',
-                            type: 'line',
-                            smooth:true,
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48]
-                        },
-                        {
-                            name: '111111111',
-                            type: 'line',
-                            smooth:true,
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.8)
-                        },
-                        {
-                            name: '22222222222',
-                            type: 'line',
-                            smooth:true,
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*0.9)
-                        },
-                        {
-                            name: 'asdasdasda',
-                            type: 'line',
-                            smooth:true,
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*1.1)
-                        },
-                        {
-                            name: 'dasfsdgdafasd',
-                            type: 'line',
-                            smooth:true,
-                            data: [184, 160, 174, 160, 207, 158, 175, 156, 217, 253, 298, 130, 187, 130, 194, 169, 153, 161, 145, 109, 103, 162, 32, 228, 270, 226, 179, 226, 206, 165, 134, 177, 115, 185, 126, 158, 276, 284, 261, 149, 166, 175, 146, 275, 158, 112, 210, 114, 48].map(i=>i*1.5)
-                        },
-                    ]
+                    yAxis: this.$store.getters.chartOption.yAxis,
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: this.modalyData
                 }
-
             }
         },
         mounted() {
-            this.initData();
-            this.drawLine(this.chartOption1);
+            this.drawLine();
+        },
+        watch: {
+            power_factor: function () {
+                this.drawLine();
+            }
         },
         methods: {
-            powerRealtimeTypeSwitch(type) {
-                this.powerRealtimeType = type
-            },
-            initData() {
-                var base = +new Date(1968, 9, 3);
-                var oneDay = 24 * 3600 * 1000;
-                var date = [];
-                var data = [];
-                for (var i = 1; i < 50; i++) {
-                    var now = new Date(base += oneDay);
-                    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-                    data.push(Math.round((Math.random() * 300)));
-                }
-                this.powerdate = date;
-                this.powerdata = data;
-            },
-            drawLine(option = this.chartOption1) {
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
-                let powerChart = this.$echarts.init(document.getElementById('lineChart2'));
                 // 绘制图表
-                powerChart.setOption(option);
-            }, drawModal1(option = this.chartOption2){
-                console.log(1)
+                this.powerChart.clear();
+                this.powerChart.setOption(this.chartOption1);
+            },
+            showModal() {
+                this.modal2 = true;
+                this.$http.post(this.$api.CLIENT_CURVE_MODAL, {cus_id: this.$store.getters.cus_id})
+                    .then(res => {
+                        this.modalyData = [];
+                        let data = res.data.data,
+                            usernolist = Object.keys(data),
+                            usernoData = Object.values(data),
+                            active_power = [],
+                            power_factor = [];
+                        usernoData.map(i => {
+                            this.modalxData = Object.values(i).map(j => j.collect_time);
+                            active_power.push(Object.values(i).map(j => j.active_power));
+                            power_factor.push(Object.values(i).map(j => j.power_factor));
+                        });
+                        usernolist.map((v,i) => {
+                            this.modalName.push({name: v, icon: 'rect'});
+                            this.modalyData.push({
+                                name: v,
+                                type: 'line',
+                                smooth: true,
+                                data: power_factor[i]
+                            })
+                        });
+						this.modalName.unshift(this.$store.getters.cus_name);
+						this.modalxData.unshift(this.updated_at);
+						this.modalyData.unshift({
+                            name: this.$store.getters.cus_name,
+                            type: 'line',
+                            smooth: true,
+                            data: this.power_factor
+                        });
+						console.log(this.modalyData)
+                        console.log('功率曲线 户号', res);
+                        this.drawModal1()
+                    }, err => {
+                        this.drawModal1();
+                        this.$api.errcallback(err)
+                    })
+                    .catch(err => {
+                        this.$api.errcallback(err)
+                    });
+
+            },
+            drawModal1() {
                 // 基于准备好的dom，初始化echarts实例
-                let powerChart = this.$echarts.init(document.getElementById('lineModalChart2'));
                 // 绘制图表
-                powerChart.setOption(option);
+                this.powerModalChart.clear();
+                this.powerModalChart.setOption(this.chartOption2);
             }
         }
     }

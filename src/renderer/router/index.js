@@ -149,16 +149,17 @@ export default new Router({
                             component: require('@/components/Client/ClientUserManagement').default
                         },
 
-                        {
-                            path: '/matching-management',
-                            name: 'matching-management',
-                            component: require('@/components/TradeManagement/MatchingManagement').default
-                        },
+
                         {
                             path: '*',
                             redirect: '/client-zonglan'
                         }
                     ]
+                },
+                {
+                    path: '/matching-management',
+                    name: 'matching-management',
+                    component: require('@/components/TradeManagement/MatchingManagement').default
                 },
                 {
                     path: '/database',

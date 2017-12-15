@@ -10,6 +10,20 @@
 				residue:13.6,
 				totalWidth:0,
 				month:'',
+		        pieData:{
+                    month:{
+                        "bidding": 0,
+                        "longpact": 0,
+                        "bid_ratio": 0,
+                        "lp_ratio": 0
+                    },
+			        year:{
+                        "bidding": 0,
+                        "longpact": 0,
+                        "bid_ratio": 0,
+                        "lp_ratio": 0
+			        }
+		        },
                 chartCX:[0,0,0,0,0,0],
 				chartJJ:[0,0,0,0,0,0]
 
@@ -30,24 +44,21 @@
                     legend: {
                         data: ['长协', '竞价'],
                         orient: 'horizontal',
-                        left:'20',
+                        left:0,
                         right: '0',
                         itemWidth:16,
                     },
                     grid: {
-                        left: '-20',
+                        left: 0,
                         right: '20',
-                        bottom: '10',
+                        bottom: '8%',
                         containLabel: true
                     },
                     xAxis: {
                         type: 'category',
                         data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月',],
                     },
-                    yAxis: {
-                        type: 'value',
-                        show:false,
-                    },
+                    yAxis: this.$store.getters.chartOption.yAxis,
                     color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
                     series: [
                         {
@@ -85,6 +96,12 @@
             this.reqMonth();
             this.reqAnalysis();
         },
+        watch:{
+            month:function () {
+                this.reqMonth();
+                this.reqAnalysis();
+            }
+        },
         methods: {
             drawBar() {
                 // 基于准备好的dom，初始化echarts实例
@@ -92,19 +109,21 @@
                 // 绘制图表
                 this.monthBar.setOption(this.barOption);
             },
-			changeSelect(psd){
-                this.currentPDS = psd;
-			},
-			reqAnalysis(){
-                this.$http.post(this.$api.TRADE_MONTH,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
+            monthSelect(month){
+                  this.month = month;
+            },
+
+            reqAnalysis(){
+                this.$http.post(this.$api.TRADE_ANALYSIS,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
                     console.log("交易分析饼图",res);
+                    this.pieData = res.data.data;
 
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
                     this.$api.errcallback(err);
                 })
-			},
+            },
 	        reqMonth(){
                 this.$http.post(this.$api.TRADE_MONTH,{com_id:this.$store.getters.com_id}).then(res=>{
                     console.log("每月交易概况图表",res);
@@ -142,193 +161,191 @@
 <template>
 	<Row class="main-container">
            <Row gutter=15>
-			   <Col span="12">
+			   <Col span="18">
 			      <Card class="height">
 						  <h3 slot="title">交易基础数据分析</h3>
 						  <div class="btn-group relative" slot="extra">
-							  <DatePicker type="month" placeholder="请选择月份" @on-change="yearSelect"></DatePicker>
+							  <DatePicker type="month" placeholder="请选择月份" @on-change="monthSelect"></DatePicker>
 						  </div>
 					  </div>
-					  <div class="container">
+					  <div style="margin-top: 30px;">
 						  <Row type="flex" justify="space-around" align="center">
 							  <Col span="6">
-							    <trade-pie></trade-pie>
+							    <trade-pie :month="month" :pieData="pieData"></trade-pie>
 							  </Col>
-							  <Col span="9">
+							  <Col span="6">
 								  <Card class="month my-panel">
 									  <h4 slot="title">月度</h4>
 										  <ul class="cx relative">
 											  <li><span class="name">长协</span></li>
-											  <li><span class="count">213424.125</span></li>
-											  <li class="ml absolute rate_main"><span class="rate">12.55%</span></li>
+											  <li><span class="count">{{pieData.month.longpact}}</span></li>
+											  <li class="ml absolute rate_main"><span class="rate">{{pieData.month.lp_ratio}}%</span></li>
 										  </ul>
 										  <ul class="jj relative">
 											  <li><span class="name">竞价</span></li>
-											  <li><span class="count">213424.125</span></li>
-											  <li class="ml absolute rate_main2"><span class="rate">12.55%</span></li>
+											  <li><span class="count">{{pieData.month.bidding}}</span></li>
+											  <li class="ml absolute rate_main2"><span class="rate">{{pieData.month.bid_ratio}}%</span></li>
 										  </ul>
 								  </Card>
 							  </Col>
-							  <Col span="9">
+							  <Col span="6">
 								  <Card class="year my-panel">
 									  <h4 slot="title">年度</h4>
 									  <ul class="cx relative">
 										  <li><span class="name">长协</span></li>
-										  <li><span class="count">213424.125</span></li>
-										  <li class="ml absolute rate_main"><span class="rate">12.55%</span></li>
+										  <li><span class="count">{{pieData.year.longpact}}</span></li>
+										  <li class="ml absolute rate_main"><span class="rate">{{pieData.year.lp_ratio}}%</span></li>
 									  </ul>
 									  <ul class="jj relative">
 										  <li><span class="name">竞价</span></li>
-										  <li><span class="count">213424.125</span></li>
-										  <li class="ml absolute rate_main2"><span class="rate">12.55%</span></li>
+										  <li><span class="count">{{pieData.year.bidding}}</span></li>
+										  <li class="ml absolute rate_main2"><span class="rate">{{pieData.year.bid_ratio}}%</span></li>
 									  </ul>
 								  </Card>
 							  </Col>
 						  </Row>
 					  </div>
 				  </Card>
-		   </Col>
-			   <Col span="6">
-			   <Card class="height">
-			   </Card>
-			   </Col>
-			   <Col span="6">
-			    <Card class="height">
-                       <h3 slot="title">距12月竞价交易还有</h3>
-					   <div class="container time"><span>12</span>天</div>
-				</Card>
+		        </Col>
+	           <Col span="6">
+	           <Card>
+		           <h3 slot="title">月度交易占比</h3>
+		           <div class="trade-pie relative">
+			           <trade-pie-two></trade-pie-two>
+		           </div>
+
+	           </Card>
+	           </Col>
+			   <!--<Col span="6">-->
+			   <!--<Card class="height">-->
+			   <!--</Card>-->
+			   <!--</Col>-->
+			   <!--<Col span="6">-->
+			    <!--<Card class="height">-->
+                       <!--<h3 slot="title">距12月竞价交易还有</h3>-->
+					   <!--<div class="container time"><span>12</span>天</div>-->
+				<!--</Card>-->
 		   </Col>
 		   </Row>
-		    <Row class="mgt_15" gutter='15'>
-				<Col span="18">
+	    <Row class="mgt_15" gutter='15'>
+			<Col span="24">
 				  <Card class="height_2">
 					  <h3 slot="title">每月交易概况</h3>
-					  <div id="month-bar" style="width:100%;height: 225px;">
+					  <div id="month-bar" style="width:100%;height: 525px;">
 					  </div>
 				  </Card>
 			</Col>
-				<Col span="6">
-				<Card class="height_2">
-					<h3 slot="title">月度交易占比</h3>
-					<div class="trade-pie relative">
-						<trade-pie-two></trade-pie-two>
-					</div>
-					<div class="month-all center">
-						<p>月度总交易电量 <span>512532</span>KW.时</p>
-					</div>
-				</Card>
-			</Col>
 
-			</Row>
-		<Row class="mgt_15">
-			<Card class="height_3 relative">
-				<h3 slot="title" class="title-lv3">发电集团剩余电量</h3>
-				<div slot="extra">
-				   <Select placeholder="选择发电集团" style='width:150px;' class='chooseBtn'>
-				     <Option value='1'>
-				     1
-				     </Option>
-				   </Select>
-				</div>
-						<Row gutter='15'>
-							<Col span="12">
-							<table class="mytable" cellspacing="0">
-							<tr>
-								<th>公司名称</th>
-								<th>用电方式</th>
-								<th>电量</th>
-								<th>每小时消耗电量</th>
-								<th>剩余电量</th>
-								<th>消耗电量</th>
-							</tr>
-							<tr>
-								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-								<td>风电</td>
-								<td>100WKw</td>
-								<td>100.00Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>汕头华能南澳风力发电有限公司</td>
-								<td>燃机</td>
-								<td>23WKw</td>
-								<td>382.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>孟州市电厂</td>
-								<td>光伏</td>
-								<td>1221WKw</td>
-								<td>32.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>中国国电集团公司荆门热电厂</td>
-								<td>风电</td>
-								<td>231WKw</td>
-								<td>322.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-						</table>
-						</Col>
-						<Col span="12">
-						  <table class="mytable" cellspacing="0">
-							<tr>
-								<th>公司名称</th>
-								<th>用电方式</th>
-								<th>电量</th>
-								<th>每小时消耗电量</th>
-								<th>剩余电量</th>
-								<th>消耗电量</th>
-							</tr>
-							<tr>
-								<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>
-								<td>风电</td>
-								<td>100WKw</td>
-								<td>100.00Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>汕头华能南澳风力发电有限公司</td>
-								<td>燃机</td>
-								<td>23WKw</td>
-								<td>382.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>孟州市电厂</td>
-								<td>光伏</td>
-								<td>1221WKw</td>
-								<td>32.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-							<tr>
-								<td>中国国电集团公司荆门热电厂</td>
-								<td>风电</td>
-								<td>231WKw</td>
-								<td>322.12Mw时</td>
-								<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>
-								<td>12315.23Kw时</td>
-							</tr>
-						</table>
-						</Col>
-						</Row>
-					<div class="page-center">
-						<!--分页-->
-						<div class="fenYe">
-							<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
-						</div>
-					</div>
-				</div>
-			</Card>
-		</Row>
+	    </Row>
+		<!--<Row class="mgt_15">-->
+			<!--<Card class="height_3 relative">-->
+				<!--<h3 slot="title" class="title-lv3">发电集团剩余电量</h3>-->
+				<!--<div slot="extra">-->
+				   <!--<Select placeholder="选择发电集团" style='width:150px;' class='chooseBtn'>-->
+				     <!--<Option value='1'>-->
+				     <!--1-->
+				     <!--</Option>-->
+				   <!--</Select>-->
+				<!--</div>-->
+						<!--<Row gutter='15'>-->
+							<!--<Col span="12">-->
+							<!--<table class="mytable" cellspacing="0">-->
+							<!--<tr>-->
+								<!--<th>公司名称</th>-->
+								<!--<th>用电方式</th>-->
+								<!--<th>电量</th>-->
+								<!--<th>每小时消耗电量</th>-->
+								<!--<th>剩余电量</th>-->
+								<!--<th>消耗电量</th>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>-->
+								<!--<td>风电</td>-->
+								<!--<td>100WKw</td>-->
+								<!--<td>100.00Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>汕头华能南澳风力发电有限公司</td>-->
+								<!--<td>燃机</td>-->
+								<!--<td>23WKw</td>-->
+								<!--<td>382.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>孟州市电厂</td>-->
+								<!--<td>光伏</td>-->
+								<!--<td>1221WKw</td>-->
+								<!--<td>32.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>中国国电集团公司荆门热电厂</td>-->
+								<!--<td>风电</td>-->
+								<!--<td>231WKw</td>-->
+								<!--<td>322.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+						<!--</table>-->
+						<!--</Col>-->
+						<!--<Col span="12">-->
+						  <!--<table class="mytable" cellspacing="0">-->
+							<!--<tr>-->
+								<!--<th>公司名称</th>-->
+								<!--<th>用电方式</th>-->
+								<!--<th>电量</th>-->
+								<!--<th>每小时消耗电量</th>-->
+								<!--<th>剩余电量</th>-->
+								<!--<th>消耗电量</th>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>国电河南电力有限公司济源新能源分公司（大岭风电长）</td>-->
+								<!--<td>风电</td>-->
+								<!--<td>100WKw</td>-->
+								<!--<td>100.00Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>汕头华能南澳风力发电有限公司</td>-->
+								<!--<td>燃机</td>-->
+								<!--<td>23WKw</td>-->
+								<!--<td>382.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>孟州市电厂</td>-->
+								<!--<td>光伏</td>-->
+								<!--<td>1221WKw</td>-->
+								<!--<td>32.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>中国国电集团公司荆门热电厂</td>-->
+								<!--<td>风电</td>-->
+								<!--<td>231WKw</td>-->
+								<!--<td>322.12Mw时</td>-->
+								<!--<td><span><span class="pro-bar"  v-if="residue !==0" v-bind:style="{width: (all-residue) + 'px'}">13.60%</span></span><em></em></td>-->
+								<!--<td>12315.23Kw时</td>-->
+							<!--</tr>-->
+						<!--</table>-->
+						<!--</Col>-->
+						<!--</Row>-->
+					<!--<div class="page-center">-->
+						<!--&lt;!&ndash;分页&ndash;&gt;-->
+						<!--<div class="fenYe">-->
+							<!--<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</Card>-->
+		<!--</Row>-->
 	</Row>
 </template>
 <style scoped>
@@ -363,12 +380,13 @@ table,th,tr,td{
 		font-size: 20px;
 		font-weight: bold;
 		color: #C6D0D4;
+		margin-left: 40px;
 	}
 	.height{
-		height:250px;
+		height:311px;
 	}
 	.height_2{
-		height:300px;
+		height:640px;
 	}
 	.height_3{
 		height:300px;
@@ -381,16 +399,7 @@ table,th,tr,td{
 	.height .time span{
 		font-size:36px;
 	}
-	.center{
-		text-align: center;
-	}
-	.month-all  p{
-		font-size:12px;
-	}
-	.month-all p span{
-		font-size:22px;
-		color:#fea06f;
-	}
+
 	.panel .tp_line{
 		border-top: 1px solid #ccc;
 	}

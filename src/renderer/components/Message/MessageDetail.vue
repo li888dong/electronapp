@@ -8,7 +8,6 @@
                         item:'勒索病毒',
                         content:'这是消息内容展示区域',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云',
                     }
                 ],
             }
@@ -25,7 +24,6 @@
             <div class="time_header">
                 <span>{{msg.date}}</span>
             </div>
-                <h3 class="title">{{msg.item}}</h3>
                 <p class="msg-content">
                     {{msg.content}}
                 </p>
@@ -46,11 +44,8 @@
     .container .time_header{
           padding-bottom: 10px;
           text-align: center;
-    }
-    .container .title{
-            font-size:16px;
-    }
+      }
     .container .msg-content{
-        margin:20px;
+        margin:15px;
     }
 </style>

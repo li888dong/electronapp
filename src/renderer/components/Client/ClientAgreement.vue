@@ -1,6 +1,4 @@
 <script>
-import myFenye from '@/components/Tool/myFenye'
-
 	export default {
 	    name:'agreementmanage',
 		data(){
@@ -8,80 +6,103 @@ import myFenye from '@/components/Tool/myFenye'
 				single:false,
 		        modal1:false,
                 column1: [
+                    {
+                      title:'营销用户编号',
+                      key:'user_no'
+                    },
 
                     {
                         title: '用户电压等级',
-                        key: 'n2',
+                        key: 'vol_level',
                     },
                     {
                         title: '报装容量',
-                        key: 'n3',
+                        key: 'packing_capacity',
                     },
                     {
                         title: '用户类型',
-                        key: 'n4',
+                        key: 'unit_type',
                     },
                     {
                         title: '用户单元类型',
-                        key: 'n5',
+                        key: 'category',
                     },
                     {
                         title: '用户地址',
-                        key: 'n6',
+                        key: 'address',
+                        width:'350'
                     }
                 ],
-		        data1:[
-                {
+		        agreementList:[{
+		        	con_no:'',
+		        	data1:[]
 
-                    n2: '10kv',
-                    n3: '10ktv',
-                    n4: '大工业用电',
-                    n5: '第二产业(工业)',
-                    n6: '河南省高新区电子商业大厦'
-                },
-                {
-
-                    n2: '10kv',
-                    n3: '10ktv',
-                    n4: '大工业用电',
-                    n5: '第二产业(工业)',
-                    n6: '河南省高新区电子商业大厦'
-                },
-                {
-
-                    n2: '10kv',
-                    n3: '10ktv',
-                    n4: '大工业用电',
-                    n5: '第二产业(工业)',
-                    n6: '河南省高新区电子商业大厦'
-                },
-                {
-
-                    n2: '10kv',
-                    n3: '10ktv',
-                    n4: '大工业用电',
-                    n5: '第二产业(工业)',
-                    n6: '河南省高新区电子商业大厦'
-                },
-                {
-
-                    n2: '10kv',
-                    n3: '10ktv',
-                    n4: '大工业用电',
-                    n5: '第二产业(工业)',
-                    n6: '河南省高新区电子商业大厦'
-                }
-
-            ]
+		        },],
+            pageTotal:0,
+            limit:16,
+            currentPage:1,
+            loading:true
 	        }
 		},
 		methods:{
 		    showModal(){
 		        this.modal1 = true
+		    },
+		    userAgreement(){
+		      this.$http.post(this.$api.CLIENT_CONTRACT_AGREEMENT,{cus_id:this.cus_id,page:this.currentPage,limit:this.limit}).then(res=>{
+		       	     console.log("合同管理",res);
+		       	     if(res.data.status){
+		    		 	 this.agreementList[0].con_no = res.data.con_no;
+		    		 	 this.agreementList[0].data1 = res.data.data.data;
+		    		 	 this.pageTotal = res.data.data.total;
+		    		 	 this.loading = false;
+ 		    		 }else{
+ 		    		 	 this.loading = false;
+ 		    		 }
+		       },err=>{
+		       	   this.loading = false;
+		       	   this.$api.errcallback(err);
+		       }).catch(err=>{
+		       	    this.loading = false;
+		       	    this.$api.errcallback(err);
+		       })
+		    },
+		    pageChange(value){
+		    	this.$http.post(this.$api.CLIENT_CONTRACT_AGREEMENT,{cus_id:this.cus_id,page:value,limit:this.limit}).then(res=>{
+		    		 console.log('合同管理分页',res);
+		    		if(res.data.status){
+		    		 	 this.agreementList[0].con_no = res.data.con_no;
+		    		 	 this.agreementList[0].data1 = res.data.data.data;
+		    		 	 this.pageTotal = res.data.data.total;
+		    		 	 this.currentPage = res.data.data.current_page;
+		    		 	 this.loading = false;
+ 		    		 }else{
+ 		    		 	 this.loading = false;
+ 		    		 }
+
+		    	},err=>{
+		    		 this.loading = false;
+		    		 this.$api.errcallback(err);
+		    	}).catch(err=>{
+		    		 this.loading = false;
+		    		 this.$api.errcallback(err);
+		    	})
 		    }
 		},
+		computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
+            },
+        },
+        watch:{
+        	cus_id:function(){
+        		this.userAgreement();
+        	}
+        },
 		components : {
-			'myFenye': myFenye,
+		},
+		mounted(){
+			 this.userAgreement();
 		}
 	}
 </script>
@@ -92,33 +113,28 @@ import myFenye from '@/components/Tool/myFenye'
 			<div class="btn-group" slot="extra">
 				<Button type="primary" style="top: -8px;"><Icon type="plus"></Icon><router-link to="/add-hetong" tag="span"> 添加合同</router-link></Button>
 			</div>
-			<div class="ht-list">
-				<Row className="ht-content">
-					<Col span="4" class="border" style="border-right: 0;">
-						<div class="hetongChat">
-							<div class="header">营销用户编号</div>
-							<div style="margin-top: 35%;">
-								<!-- <Checkbox v-model="single"></Checkbox> -->
-								<span class="icon-container">
-									<i class="iconfont icon-jishiben01" style="font-size: 32px;vertical-align: middle"></i>
-								</span>
-								<p style="width: 166px"><a style="padding-left: 70px;">12315848-99</a></p>
-							</div>
-						</div>
-					</Col>
-					<Col span="16">
-						<Table border="true" :columns="column1" :data="data1"></Table>
-					</Col>
-					<Col span="4" class="RigthBorder border">
-						<div class="hetongChat">
+			<div class="ht-list relative" v-for='item in agreementList'>
+						<div class="saleSee">
+                            <i class="iconfont icon-jishiben01"></i>
+                            <p style="text-align: center;margin-top:-5px;">{{item.con_no}}</p>
+                        </div> 
+						  <div class="tableBox">
+						       <Table border size='small' :columns="column1" :data="item.data1"></Table>
+						  </div>
+						 
+						<div class="caozuoBox">
 							<div class="header">操作</div>
-							<div class="caozuo">
+						</div>	
+						<div class="caozuo">
 								<p><router-link to="/add-hetong" tag="a">修改</router-link><a>删除</a></p>
-							</div>
-						</div>
-					</Col>				
-				</Row>
-				<myFenye></myFenye>
+					</div>	
+					<Spin fix v-if='loading'></Spin>	
+			     </div>
+			<div class="page-center">
+				<!--分页-->
+				<div class="fenYe">
+					<Page :total="pageTotal" :page-size='limit' :current='currentPage' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+				</div>
 			</div>
 		</Card>
 	</div>
@@ -132,43 +148,94 @@ import myFenye from '@/components/Tool/myFenye'
 		text-align: center;
 	}
 	.ht-list {
+       border:1px solid #ccc;
 
 	}
 	.ht-content{
 
 	}
-	.hetongChat{
-		background-color: #fff;
-		height: 279px;
-		width: 237px;
-		text-align: center;
+	.saleSee{
+    width: 50px;
+    height: 50px;
+    padding-top: 50px;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    margin-top: -25px;
+  }
+   .saleSee i{
+    position: absolute;
+    top: 7px;
+    left: 13px;
+    font-size: 30px;
+    color: #ccc;
+     }
+	.tableBox{
+      width:80%;
+      height: 100%;
+      margin-left:11%;
 	}
-	.hetongChat .header{
+	.caozuoBox .header{
 		background-color: #f8f8f9;
-		height: 40px;
+		height: 32px;
 		text-align: center;
-		line-height: 40px;
+		line-height: 32px;
 		border-bottom: 1px solid #dddee1;
 	}
-	.border{
-		border: 1px solid #dddee1;
+	.caozuoBox{
+		 width:130px;
+		 position: absolute;
+		 right:0;
+		 top:0;
 	}
-	.RigthBorder {
-		border-left: 0;
+	.caozuo{
+		width: 100px;
+		position: absolute;
+		top:50%;
+		right:10px;
+	}
+	.caozuo p{
+		text-align: center;
+		position: absolute;
+		top:0;
+		left:0;
+		bottom: 0;
+		right:0;
+		display: flex;
+		justify-content: center;
 	}
 	.caozuo a{
 		display: inline-block;
 		width: 40px;
-		margin-top: 50%;
 	}
-	.icon-container{
+	.relative .page-center{
+		text-align: center;
+		position: absolute;
+		bottom:0px;
+		left:0;
+		right:0;
+	}
+	/* 分页的样式 */
+	.page-center  .fenYe {
+		width: 100%;
+		height: 60px;
+		background-color: #fff;
+		padding-top: 10px;
+		text-align: center;
+	}
+	.fenYe table{
+		border: 0;
+	}
+	.fenYe ul {
 		display: inline-block;
-		width: 64px;
-		height: 64px;
-		background-color: #31C8D8;
-		border-radius: 50%;
-		color: #ffffff;
-		line-height: 64px;
-		margin-bottom: 6px;
 	}
+	.fenYe button{
+		top: -12px;
+		left: 12px;
+	}
+	.ivu-table-wrapper{
+		 height: 100%;
+		 border-top:none;
+	}
+	
 </style>

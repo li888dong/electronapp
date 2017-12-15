@@ -4,11 +4,13 @@
 	    name:"fivedata",
 		data(){
 	        return{
-                offlineWarning: "999",
-                dataException: "11",
-                powerDeviation: "22",
-                powerFactor: "33",
-                abnormalLoad: "4"
+	            fiveData:{
+                    abnormal:0,
+                    deviation:0,
+                    powerfactor:0,
+                    offline:0,
+                    activepower:0
+	            }
 	        }
 		},
 		mounted(){
@@ -19,11 +21,8 @@
                 this.$http.post(this.$api.WARNING_INFO,{com_id:this.$store.getters.com_id})
 	                .then(res => {
 	                    console.log('数据异常提醒',res);
-		                this.dataException = res.data[0].abnormal;
-		                this.powerDeviation = res.data[0].deviation;
-		                this.powerFactor = res.data[0].powerfactor;
-		                this.offlineWarning = res.data[0].offline;
-		                this.abnormalLoad = res.data[0].activePower
+	                    this.fiveData = res.data[0];
+						console.log('*****',this.fiveData)
 	                }, err => {
 	                    this.$api.errcallback(err)
 	                })
@@ -42,15 +41,15 @@
 		<Card>
 			<Row type="flex" justify="space-between" align="middle">
 
-				<Col span="4" class="data-item lxyj"><strong class="offline-warning" @click="doAjax"><CountTo :startVal='0' :endVal='offlineWarning' :duration='2000'></CountTo></strong><span class="data-title">离线预警</span></Col>
+				<Col span="4" class="data-item lxyj"><strong class="offline-warning"><CountTo :startVal='0' :endVal='fiveData.offline' :duration='2000'></CountTo></strong><span class="data-title">离线预警</span></Col>
 
-				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='dataException' :duration='2000'></CountTo></strong><span class="data-title">数据异常</span></Col>
+				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='fiveData.abnormal' :duration='2000'></CountTo></strong><span class="data-title">数据异常</span></Col>
 
-				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='powerDeviation' :duration='2000'></CountTo></strong><br> <span class="data-title">电量偏差</span></Col>
+				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='fiveData.activepower' :duration='2000'></CountTo></strong> <span class="data-title">电量偏差</span></Col>
 
-				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='powerFactor' :duration='2000'></CountTo></strong><br><span class="data-title">功率因数</span></Col>
+				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='fiveData.powerfactor' :duration='2000'></CountTo></strong><span class="data-title">功率因数</span></Col>
 
-				<Col span="4" class="data-item fhyc"><strong class="abnormal-load"><CountTo :startVal='0' :endVal='abnormalLoad' :duration='2000'></CountTo></strong><br><span class="data-title">负荷异常</span></Col>
+				<Col span="4" class="data-item fhyc"><strong class="abnormal-load"><CountTo :startVal='0' :endVal='fiveData.deviation' :duration='2000'></CountTo></strong><span class="data-title">负荷异常</span></Col>
 			</Row>
 		</Card>
 

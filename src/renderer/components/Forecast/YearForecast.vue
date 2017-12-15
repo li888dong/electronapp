@@ -7,6 +7,10 @@
         name: 'annualforecast',
         data() {
             return {
+                spinShow:false,
+                currentPage:1,
+	            limit:11,
+	            totalPage:1,
                 modalShow: false,
                 selectList: [],
 	            modifyList:[],
@@ -188,17 +192,28 @@
             this.yearData()
         },
         methods: {
+            pageChange(page){
+                this.currentPage = page;
+				this.yearData();
+                console.log(page)
+            },
             yearData() {
+                this.spinShow = true;
                 this.$http.post(this.$api.YEAR_FORECAST, {
                     com_id: this.$store.getters.com_id,
                     year: this.selectYear,
                     area: this.selectArea,
+	                page:this.currentPage,
+	                limit:this.limit,
                     keyword: this.$store.getters.searchKey
                 }).then(res => {
+                    this.spinShow = false;
                     console.log("年度预测", res);
-                    this.tableData1 = res.data.data;
-
+                    this.tableData1 = res.data.data.data;
+	                this.totalPage = res.data.data.total;
+	                this.currentPage = res.data.data.current_page;
                 }, err => {
+                    this.spinShow = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
                     this.$api.errcallback(err);
@@ -311,8 +326,17 @@
 				</div>
 				<Row>
 					<Table border @on-selection-change="selectItem" :columns="columns6" :data="tableData1"></Table>
+					<Spin size="large" fix v-if="spinShow"></Spin>
 				</Row>
-				<myFenye></myFenye>
+				<div class="page-container">
+					<Page
+						:total="totalPage"
+						:current="currentPage"
+						show-total
+						show-elevator
+						v-on:on-change="pageChange"
+					></Page>
+				</div>
 			</div>
 		</Card>
 		<Modal
@@ -322,7 +346,7 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal"
 				@on-ok="modifyData">
-			<table>
+			<table v-if="modifyModal">
 				<thead>
 				<tr>
 					<th>2017年月份</th>

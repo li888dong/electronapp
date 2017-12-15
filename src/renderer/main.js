@@ -3,10 +3,33 @@ import Vue from 'vue'
 // 网络请求配置
 import axios from 'axios'
 import * as api from './Api'
-const instance = axios.create({
-    baseURL:"http://192.168.2.111/",
-    timeout:10000
-});
+
+let instance,token;
+if (!token){
+    axios.post('http://192.168.2.111/oauth/token',{
+        grant_type:'client_credentials',
+        client_id:1,
+        client_secret:'5o5ZVZZg3mHSSI3zD1ORjFKnlfHWgKBIXz6Yv0uM',
+        scope:''
+
+    }).then(res=>{
+        console.log('xxxxxxx',res);
+        instance = axios.create({
+            headers:{
+                common:{
+                    Authorization:res.data.access_token
+                }
+            },
+            baseURL:"http://192.168.2.111/",
+            timeout:10000
+        });
+        Vue.http = Vue.prototype.$http = instance;
+        token = res.data.access_token
+    },err=>{
+        console.log(err)
+    });
+
+}
 
 // 引入echarts
 import echarts from 'echarts'
@@ -34,7 +57,7 @@ Vue.use(iView);
 Vue.use(iviewArea);
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = instance
+
 Vue.api = Vue.prototype.$api = api
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts

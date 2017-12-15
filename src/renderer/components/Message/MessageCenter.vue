@@ -12,45 +12,25 @@
 				show:false,
 	            msgs:[
 	                {
-	                    checked:false,
-		                warning:'!',
-		                public:'公告',
-						title:'安全预警通告',
+						title:'这是一封来自系统的邮件！',
 		                msg:'勒索病毒 ',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云'
 	                },{
-                        checked:false,
-                        warning:'!',
-                        public:'公告',
-                        title:'安全预警通告',
+                        title:'这是一封来自系统的邮件！',
                         msg:'勒索病毒 ',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云'
 	                },{
-                        checked:false,
-                        warning:'!',
-                        public:'公告',
-                        title:'安全预警通告',
+                        title:'这是一封来自系统的邮件！',
                         msg:'勒索病毒 ',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云'
 	                },{
-                        checked:false,
-                        warning:'!',
-                        public:'公告',
-                        title:'安全预警通告',
+                        title:'这是一封来自系统的邮件！',
                         msg:'勒索病毒 ',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云'
 	                },{
-                        checked:false,
-                        warning:'!',
-                        public:'公告',
-                        title:'安全预警通告',
+                        title:'这是一封来自系统的邮件！',
                         msg:'勒索病毒 ',
                         date:'2017-10-26 14:32:59',
-                        source:'来自百度云'
 	                },
 	                ]
             }
@@ -68,13 +48,22 @@
 			showCont:function () {
                   this.show = !this.show;
             },
+            messageList(){
+            	this.$http.post(this.$api.MESSAGE_LIST,{n_cateid:1}).then(res=>{
+            		console.log("消息列表",res);
+            	},err=>{
+            		this.$api.errcallback(err);
+            	}).catch(err=>{
+            		this.$api.errcallback(err);
+            	})
+            }
         },
 	    components:{
 
 	    },
-		mounted:function () {
-
-        }
+		mounted(){
+			this.messageList();
+		}
     }
 </script>
 <template>
@@ -85,10 +74,7 @@
 					<li v-for="(msg,index) in msgs" class="clear">
 						<p :id="index">
 							<router-link to="/message-detail">
-								<span class="warning">{{msg.warning}}</span>
-								<span>[{{msg.public}}]</span>
-								<span>【{{msg.title}}】</span>
-								<span>{{msg.msg}}</span>
+								<span>{{msg.title}}</span>
 							</router-link>
 						</p>
 						<Button type="default" class="fr btnRead">标记为已读</Button>
@@ -131,19 +117,6 @@
 	}
 	.message-main li:first-child{
 		border-top:none;
-	}
-	.message-main li .warning{
-		display: inline-block;
-		height: 18px;
-		width:18px;
-		text-align: center;
-		border-radius: 50%;
-		border:2px solid #fd8c41;
-		line-height: 16px;
-		margin-left:10px;
-		margin-right:20px;
-		font-size:8px;
-		color:#fd8c41;
 	}
      .relative .page-center{
 		text-align: center;

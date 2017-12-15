@@ -109,3 +109,9 @@
 .hetongShuju  .ivu-table:after{
 	width: 0;
 }
+.ht-list .ivu-table:before{
+     height: 0;
+}
+.ht-list .ivu-table-row:last-child td{
+	border-bottom: none;
+}

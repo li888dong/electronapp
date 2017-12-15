@@ -187,7 +187,6 @@
 					<span class="title absolute">工作计划</span>
 				</router-link>
 			</div>
-			<br>
 			<div class="box" style="background-color: #5ecfb8;" @click="hideSelf">
 				<router-link to="/AddClient">
 					<i class="iconfont icon-tianjiakehu"></i>
@@ -212,11 +211,11 @@
 					<span class="title absolute">添加终端</span>
 				</router-link>
 			</div>
-			<div class="box" style="background-color: #fc8b40;width: 205px">
+			<!-- <div class="box" style="background-color: #fc8b40;width: 205px">
 				<i class="iconfont icon-ruku"></i>
 				<span class="title absolute">申请终端入库</span>
 
-			</div>
+			</div> -->
 			<div class="box" style="background-color: #f57e6a;" @click="hideSelf">
 				<router-link to="/year-forecast">
 					<i class="iconfont icon-wenjianxiazai"></i>
@@ -264,9 +263,10 @@
 	}
 
 	.item-container {
-		width: 380px;
-		height: 490px;
+		width: 350px;
+		height: 350px;
 		padding-left: 20px;
+        padding-top:10px;
 		background-color: #fff;
 		position: absolute;
 		z-index: 999;

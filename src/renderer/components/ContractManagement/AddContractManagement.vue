@@ -6,9 +6,20 @@
     export default {
         name: 'ContractManagement',
         data() {
+            const telphone = (rule,val,callback)=>{
+             console.log(val);
+             if(!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)){
+                return callback(new Error("输入的手机号格式不对"));
+             }else{
+               callback();
+             }
+        };
             return {
                 value: "",
-                dcList: [],
+                dcList: [{
+                    label:'1',
+                    value:'1'
+                }],
                 powerId: '',
                 model3: '',
                 formItem: {
@@ -74,7 +85,9 @@
                         {required: true, message: '这个选项不能为空', trigger: 'blur'}
                     ],
                     tel: [
-                        {required: true, message: '这个选项不能为空', trigger: 'blur'}
+                        {required: true, message: '这个选项不能为空', trigger: 'blur'},
+                        {type:'string',min:11,message:'手机号必须为11位',trigger:'blur'},
+                        { validator: telphone, trigger: 'blur' },
                     ],
                     remarks: [
                         {required: true, message: '这个选项不能为空', trigger: 'blur'}
@@ -115,14 +128,20 @@
                     console.log(data);
                     if (data.status) {
                         var list = data[0];
+                        var arr =[];
                         for (var i = 0; i < list.length; i++) {
                             var obj = {
                                 label: list[i].pp_name,
                                 value: list[i].id
-                            }
-                            this.dcList.push(obj);
+                            };
+                            
+                            arr.push(obj);
                         }
+                        
+                       
                     }
+                    this.dcList = arr;
+                     console.log(this.dcList);
 
                 }, err => {
                     this.$api.errcallback(err);
@@ -149,8 +168,11 @@
                 }
             },
             upLoadPowerCompact() {
-                console.log(this.formItem);
-                if (!this.isEmpty(this.formItem)) {
+                 if(this.$route.query.id){
+                    this.formItem["id"] = this.$route.query.id;
+                    console.log(this.formItem);
+                      var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
+                if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
                     this.formItem.signed_num = parseInt(this.formItem.signed_num);
                     if (!this.isEmpty(this.month)) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
@@ -158,9 +180,8 @@
                             if (res.data.status) {
                                 this.formItem.d_id = res.data.id;
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
-                                    console.log('添加长协合同', res);
-                                    if (res.data.status && this.isGo) {
-                                        this.success();
+                                    console.log('修改长协合同', res);
+                                    if (res.data.status && !this.isGo) {
                                         this.$router.push('/ChangxieContract');
                                     } else {
                                         this.success();
@@ -168,6 +189,8 @@
                                             this.formItem[k] = '';
                                         }
                                         this.file = '';
+                                        this.formItem.signed_day = '';
+                                        this.formItem.exec_date='';
                                         for (let k in this.month) {
                                             this.month[k] = '';
                                         }
@@ -180,6 +203,7 @@
                             }
                         }, err => {
                             this.$api.errcallback(err);
+                            this.fail();
                         }).catch(err => {
                             this.$api.errcallback(err);
                         })
@@ -187,6 +211,53 @@
                 } else {
                     this.hint = true;
                 }
+
+
+                 }else{
+                    console.log(this.formItem);
+                var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
+                if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
+                    this.formItem.signed_num = parseInt(this.formItem.signed_num);
+                    if (!this.isEmpty(this.month)) {
+                        this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
+                            console.log("电量分配", res);
+                            if (res.data.status) {
+                                this.formItem.d_id = res.data.id;
+                                this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
+                                    console.log('添加长协合同', res);
+                                    if (res.data.status && !this.isGo) {
+                                        this.$router.push('/ChangxieContract');
+                                    } else {
+                                        this.success();
+                                        for (let k in this.formItem) {
+                                            this.formItem[k] = '';
+                                        }
+                                        this.file = '';
+                                        this.formItem.signed_day = '';
+                                        this.formItem.exec_date='';
+                                        for (let k in this.month) {
+                                            this.month[k] = '';
+                                        }
+                                    }
+                                }, err => {
+                                    this.$api.errcallback(err);
+                                }).catch(err => {
+                                    this.$api.errcallback(err);
+                                })
+                            }
+                        }, err => {
+                            this.$api.errcallback(err);
+                            this.fail();
+                        }).catch(err => {
+                            this.$api.errcallback(err);
+                        })
+                    }
+                } else {
+                    this.hint = true;
+                }
+
+                 }
+                
             },
             isEmpty(obj) {
                 for (let key in obj) {
@@ -198,7 +269,7 @@
             },
             execDate(value) {
                 this.formItem.exec_date = value;
-                // console.log(this.formItem.exec_date);
+                console.log(this.formItem.exec_date);
             },
             singnedDay(value) {
                 this.formItem.signed_day = value;
@@ -231,11 +302,20 @@
             success() {
                 this.$Message.success('添加成功');
             },
+            fail(){
+                this.$Message.success("添加失败");
+            }
         },
         watch: {
             hint: function () {
                 this.hintChange();
             },
+            com_id:function(){
+                this.upLoadPowerCompact();
+            },
+            dcList:function(){
+               return this.dcList
+            }
         },
         computed: {
             isEquality: function () {
@@ -246,11 +326,54 @@
                 }
 
                 return true;
-            }
+            },
+            com_id:function(){
+                return this.$store.getters.com_id;
+            },
         },
         mounted() {
             this.powerPlant();
-
+            if(this.$route.query.id){
+                    this.formItem.lpcon_no = this.$route.query.lpcon_no;
+                    this.formItem.lpcon_year=this.$route.query.lpcon_year;
+                    
+                    console.log(this.formItem.powerplant);
+                    this.formItem.signed_num = this.$route.query.signed_num;
+                    if(this.$route.query.signed_status == "签约"){
+                        this.formItem.signed_status = "1";
+                    }else{
+                         this.formItem.signed_status = "0";
+                    }
+                    
+                    this.formItem.signed_day = this.$route.query.signed_day;
+                    this.formItem.signed_price = this.$route.query.signed_price;
+                    this.formItem.exec_date = this.$route.query.exec_date;
+                    this.formItem.business = this.$route.query.business;
+                    this.formItem.tel = this.$route.query.tel;
+                    var arr = this.$route.query.list;
+                    console.log(arr[0]);
+                    this.month01 = arr[0].month01;
+                    this.month02 = arr[0].month02;
+                    this.month03 = arr[0].month03;
+                    this.month04 = arr[0].month04;
+                    this.month05 = arr[0].month05;
+                    this.month06 = arr[0].month06;
+                    this.month07 = arr[0].month07;
+                    this.month08 = arr[0].month08;
+                    this.month09 = arr[0].month09;
+                    this.month10 = arr[0].month10;
+                    this.month11 = arr[0].month11;
+                    this.month12 = arr[0].month12;
+                    
+            }else{
+                 for(let k in this.formItem){
+                    this.formItem[k] = '';
+                 };
+                 for(let k in this.month){
+                     this.month[k] = '';
+                 }
+            }
+            console.log(this.$route.query);
             this.$Message.config({
                 top: 200,
                 duration: 3
@@ -313,7 +436,7 @@
 							<Col span="8">
 							<Form-item label="签约日期" prop='signed_day'>
 								<DatePicker type="date" placeholder="请输入签约日期" style='width: 100%;'
-								            v-on:on-change='singnedDay'></DatePicker>
+								            v-on:on-change='singnedDay' :value='formItem.signed_day'></DatePicker>
 							</Form-item>
 							</Col>
 						</Row>
@@ -326,7 +449,7 @@
 							<Col span="8">
 							<Form-item label="执行日期" prop='exec_date'>
 								<DatePicker type="date" placeholder="请输入执行日期" style='width: 100%;'
-								            v-on:on-change='execDate'></DatePicker>
+								            v-on:on-change='execDate' :value='formItem.exec_date'></DatePicker>
 							</Form-item>
 							</Col>
 						</Row>

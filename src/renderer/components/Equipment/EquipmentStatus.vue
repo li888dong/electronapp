@@ -10,50 +10,59 @@ export default {
                 {
                     "sortable": true,
                     title: '终端编号',
-                    key: 'n1'
+                    key: 'clientid'
                 },
                 {
                     "sortable": true,
                     title: '生产厂家',
-                    key: 'n2'
+                    key: 'factory'
                 },
                 {
                     "sortable": true,
                     title: '登陆IP：端口',
-                    key: 'n3'
+                    key: 'port'
                 },
                 { 
                     title: '最新上线时间',
-                    key: 'n4'
+                    key: 'on_time',
+                    width:'200'
                 },
                 {
                     "sortable": true,
                     title: '当前在线时长',
-                    key: 'n5'
+                    key: 'cur_on_time'
                 },
                 {
                     "sortable": true,
                     title: '合计在线时长',
-                    key: 'n6'
+                    key: 'all_on_time'
                 },
                 {
                     "sortable": true,
                     title: '当前状态',
-                    key: 'n7'
+                    key: 'status',
+                    render:(h,params)=>{
+                        if(params.row.status == 1){
+                            return h('span',{},'在线')
+                        }else{
+                            return h('span',{},'已掉线')
+                        }
+                    }
                 },
                 {
                     title: '掉线时间',
-                    key: 'n8'
+                    key: 'off_time',
+                    width:'200'
                 },
                 {
                     "sortable": true,
                     title: '采集成功率',
-                    key: 'n9'
+                    key: 'succeed_ratio'
                 },
                 {
                     "sortable": true,
                     title: '上报比例',
-                    key: 'n10'
+                    key: 'report_ratio'
                 },
                 {
                     title: '操作',
@@ -78,47 +87,7 @@ export default {
 
                 }               
             ],
-            data1: [
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-                {
-                    n1: '123456',
-                    n2: '2017-11-12',
-                    n3: '123456',
-                    n4: '2017-11-12',
-                    n5: '123456',
-                    n6: '2017-11-12',
-                    n7: '123456',
-                    n8: '2017-11-12',
-                    n9: '123456',
-                    n10: '22',
-                    n11: '33'
-                },
-            ],
+            data1: [],
             cityList: [
                 {
                     value: '所有区域',
@@ -150,30 +119,101 @@ export default {
                 }
             ],
             model1:'',
-            value: ''
+            value: '',
+            totalPage:0,
+            currentPage:1,
+            limit:14,
+            loading:true
         }
     },
     methods:{
         toYichang(){
             this.$router.push("/EquipmentException");
+        },
+        equipmentInfo(){
+            if(this.$route.query.id){
+                this.$http.post(this.$api.EQUIPMENT_INFO,{clientid:this.$route.query.id}).then(res=>{
+                     console.log("设备详情",res);
+                     if(res.data.status){
+                         this.data1 = res.data.data;
+                         this.loading = false;
+                     }else{
+                          this.loading = false;
+                     }
+                },err=>{
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                     this.loading = false;
+                     this.$api.errcallback(err);
+                })
+
+            }else{
+                 this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status){
+                    this.data1 = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.loading = false;
+                }else{
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+          }
+        },
+        pageChange(value){
+            this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status){
+                    this.data1 = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.current_page;
+                    this.loading = false;
+                }else{
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        }
+    },
+    watch:{
+        com_id:function(){
+            this.equipmentInfo();
+        }
+    },
+    computed:{
+        com_id:function(){
+            return this.$store.getters.com_id;
         }
     },
     components : {
         'myFenye': myFenye,
         'mySearch': mySearch
     },
+    mounted(){
+        this.equipmentInfo();
+    }
 }
 </script>
 
 <template><!-- 设备统计日志页面 -->
-<div class="main-container">
+<div class="main-container relative">
     <Card>
         <h3 slot="title">设备统计日志</h3>
         <Button slot="extra" type="primary" style="top:-8px;" @click="toYichang()">设备异常记录</Button>
         <div class="EquipmentStatusBox">
             <div class="statusTop">
                 <div class="fl">
-                    <div class="search"><mySearch placeholder="请输入公司名称或关键字" swidth="340"></mySearch></div>
+                    <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
                     <Button type="primary" class="refresh" style="margin-left: 10px;"><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
                     <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
                         <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -186,10 +226,15 @@ export default {
                 </div>    
             </div>
             <Row class="statusForm">
-                <Table border :columns='columns1' :data='data1'></Table>            
+                <Table border :columns='columns1' :data='data1' :loading='loading'></Table>            
             </Row>           
         </div>
-        <myFenye></myFenye>
+        <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div> 
     </Card>
 </div>
 </template>
@@ -241,5 +286,30 @@ export default {
     background-color: #fff;
     position: relative;
 }
+.relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 
 </style>

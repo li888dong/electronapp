@@ -29,18 +29,18 @@
                         title: '采集电量(MW.h)',
                         width:150,
 
-                        key: 'cjdl'
+                        key: 'monitor'
                     },
                     {
                         title: '偏差(%)',
-                        key: 'pc'
+                        key: 'declare_dev'
                     },
 
                     {
                         title: '电费单电量(MW.h)',
                         width:150,
 
-                        key: 'dfddl'
+                        key: 'actual_used'
                     },
 	                {
                         title: '申报人',
@@ -148,7 +148,7 @@
                         key: 'mea_name'
                     },
                     {
-                        title: '安装位置',
+                        title: '逻辑地址',
                         key: 'clientid'
                     },
                     {
@@ -156,7 +156,7 @@
                         title: '状态',
                         key: 'is_install',
                         render:(h,params)=>{
-                            if(params.row.zt==0){
+                            if(params.row.zt===0){
                                 return h('span',{
                                     style:{
 
@@ -228,30 +228,11 @@
                                     },
                                     on: {
                                         click: () => {
-                                            console.log(params.row);
-                                            this.$store.dispatch('setTemID',params.row.id);
-                                           this.$store.dispatch('setClientId',params.row.cldm);
-                                            console.log(this.$store.getters.term_id);
-                                            console.log(this.$store.getters.clientid);
-                                            this.gotoTerminalData();
 
+                                            this.gotoTerminalData(params.row.clientid,params.row.id);
                                         }
                                     }
                                 }, '详情'),
-                                h('span', {
-                                    style: {
-                                        marginRight: '5px',
-                                        color:'#4fa8f9 ',
-                                        cursor:'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            console.log(params.index)
-
-                                            this.gotoHetong()
-                                        }
-                                    }
-                                }, '编辑'),
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
@@ -278,6 +259,9 @@
         computed:{
             cus_id:function () {
                 return this.$store.getters.cus_id
+            },
+            cus_name:function(){
+               return this.$store.getters.cus_name
             }
         },
         watch:{
@@ -290,8 +274,8 @@
             }
         },
 		methods:{
-            gotoTerminalData(){
-                this.$router.push('client-terminal')
+            gotoTerminalData(clientId,index){
+                this.$router.push({path:'client-terminal',query:{clientId:clientId,clientIndex:index}})
             },
             gotoCaiji(){
                 this.$router.push('caiji-detail')
@@ -328,8 +312,9 @@
             //用户电费单
             clientElecBill(){
             	this.$http.post(this.$api.CLIENT_ELE_BILL,{cus_id:this.cus_id}).then(res=>{
-            	     console.log('用户电费单',res.data);
-            	     this.billData = res.data[0]
+            	     console.log('用户电费单',res);
+            	     let data = res.data[0].data;
+            	     this.billData = data
             	},err=>{
             		this.$api.errcallback(err);
             	}).catch(err=>{
@@ -350,8 +335,8 @@
             //用户终端列表
             clientTerminalList(){
             	this.$http.post(this.$api.CLIENT_TERMINAL_LIST,{cus_id:this.cus_id}).then(res=>{
-                    console.log('用户终端列表',res.data[0]);
-                    this.terminalListData = res.data[0];
+                    console.log('用户终端列表',res);
+                    this.terminalListData = res.data[0].data;
             	},err=>{
             		this.$api.errcallback(err);
             	}).catch(err=>{
@@ -407,7 +392,7 @@
 			<Col span="8">
 				<Card class="agreement-detail">
 					<h3 slot="title">合同基本情况</h3>
-					<span slot="extra" class="detail-btn"  @click="$router.push('add-hetong')">详情</span>
+					<span slot="extra" class="detail-btn"  @click="$router.push({path:'/add-hetong',query:{cus_name:cus_name,cus_id:cus_id}})">详情</span>
 
 					<Row>
 						<table  cellspacing="5" width="100%" style="margin-left: 20px;">

@@ -265,7 +265,7 @@
 	        qianyueList(){
                 this.$http.post(this.$api.CX_QY,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
                     console.log("长协签约表格",res);
-                    this.qyTable = res.data.data
+                    this.qyTable = res.data.data.data
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{

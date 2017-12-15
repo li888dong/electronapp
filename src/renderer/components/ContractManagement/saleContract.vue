@@ -1,11 +1,11 @@
 <template>
-    <div class="main-container">
+    <div class="main-container relative">
         <Card>
             <h3 slot="title">售电合同</h3>
             <div class="saleBox">
                 <div class="listBox" v-for="(item,index) in data1">
                     <ul class="hetongNav">
-                        <li>平顶山姚梦电厂有限公司</li>
+                        <li>{{item.cus_name}}</li>
                         <li>合同编号：{{item.con_no}}</li>
                         <li>合同方式：{{item.way}}</li>
                         <li>上年用电量：{{item.ly_used}} MWh</li>
@@ -13,7 +13,7 @@
                         <li>本年度预计电量：{{item.bndyjdl}} MWh</li>
                         <li>本年度预计最大负荷：{{item.bndyjzdfh}} MWh</li>
                         <li class="change">
-                            <router-link to="/add-hetong" tag="span" style="cursor: pointer; ">修改</router-link>
+                            <router-link  :to="{path:'/add-hetong',query:{id:item.id,cus_name:item.cus_name,con_no:item.con_no,way:item.way,way_param:item.way_param,deadline:item.deadline,ly_used:item.ly_used,ly_maxload:item.ly_maxload,bndyjdl:item.bndyjdl,bndyjzdfh:item.bndyjzdfh,usernos:item.usernos,user_nums:item.user_nums}}" tag="span" style="cursor: pointer; ">修改</router-link>
                             <span>
                                 <!-- 气泡提示模板 -->
                                 <Poptip
@@ -30,7 +30,6 @@
                     <div class="htData">
                        <div class="saleSee" @click="toSale()">
                             <i class="iconfont icon-jishiben01"></i>
-                            <!-- <span class="bhNumber">查看</span> --> 
                         </div>   
                         <i-table 
                         border
@@ -41,15 +40,19 @@
                         ></i-table>
                     </div>
                 </div>
-                <myFenye></myFenye>
-            </div>            
+             <Spin size='large' fix v-if = 'loading'></Spin> 
+            </div> 
+                      <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div>         
         </Card> 
     </div>
 </template>
 
 <script>
-import myFenye from '@/components/Tool/myFenye'
-
 export default {
     data() {
         return {
@@ -90,7 +93,11 @@ export default {
                     align: 'center'
                 }
             ],
-            data1: []
+            data1: [],
+            totalPage:0,
+            currentPage:1,
+            limit:5,
+            loading:true
         }
     },
     methods: {
@@ -119,20 +126,56 @@ export default {
         //     this.data1.splice(index, 1)
         // }
         powerSaleList(){
-           this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.$store.getters.com_id}).then(res=>{
+           this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
               console.log("售电合同列表",res);
               console.log(res.data.data);
-              this.data1=res.data.data;
-              console.log(this.data1);
+              if(res.data.status){
+                this.data1=res.data.data.data;
+                 console.log(this.data1);
+                 this.totalPage = res.data.data.total;
+                 this.loading = false;
+              }
+              
+           },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+           }).catch(err=>{
+               this.loading = false;
+               this.$api.errcallback(err);
+           })
+        },
+        pageChange(value){
+             this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+              console.log("售电合同列表",res);
+              console.log(res.data.data);
+              if(res.data.status){
+                this.data1=res.data.data.data;
+                 console.log(this.data1);
+                 this.totalPage = res.data.data.total;
+                 this.currentPage = res.data.data.current_page;
+                 this.loading = false;
+              }
+              
            },err=>{
              this.$api.errcallback(err);
            }).catch(err=>{
                this.$api.errcallback(err);
            })
+
+        }
+    },
+    watch:{
+      com_id:function(){
+         this.powerSaleList();
+         this.pageChange();
+      }
+    },
+    computed:{
+        com_id:function(){
+            return this.$store.getters.com_id;
         }
     },
     components : {
-        'myFenye': myFenye
     },
     mounted(){
         this.powerSaleList();
@@ -143,6 +186,7 @@ export default {
 <style scoped>
 .saleBox {
     height: 818px;
+    position: relative;
 }
 .hetongNav{
     height: 50px;
@@ -220,4 +264,30 @@ export default {
 .listChange span {
     cursor: pointer;
 }
+.relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+    z-index: 999;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

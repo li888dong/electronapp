@@ -43,7 +43,7 @@
 		</Row>
 		<!--实时电量负荷-->
 		<Row className="mgt_15">
-			<Col span="24">
+			<Col style="width: 1680px">
 				<real-time-power-chart  belong="com"></real-time-power-chart>
 			</Col>
 		</Row>

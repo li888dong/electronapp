@@ -1,7 +1,10 @@
 /*
 * 首页开始
 * */
-
+// token
+export const GET_TOKEN = '/oauth/token';
+// 登录
+export const LOGIN = '/api/comusers/login';
 // 预警信息区域
 //TODO:缺少负荷异常数据
 export const WARNING_INFO = '/api/index/warninginfo';
@@ -57,6 +60,8 @@ export const CLIENT_MANAGE='/api/comusers/list';
 export const CLIENT_CHECK='/api/comusers/';
 //用户管理删除
 export const CLIENT_DELECT_USER = '/api/comusers/';
+//用户合同管理
+export const CLIENT_CONTRACT_AGREEMENT = '/api/contract/unlist';
 
 // 客户总览
 //客户总览接线图 无数据
@@ -70,7 +75,7 @@ export const CLIENT_TIMEFRAME = '/api/customers/timedist';
 export const CLIENT_REALTIME_CURVE = '/api/customers/monitoring';
 // 总览下方三条曲线 缺数据
 export const CLIENT_CURVE_3 = '/api/customers/curve';
-
+export const CLIENT_CURVE_MODAL = '/api/customers/usernoCurve';
 //客户详情
 //用户基本信息
 export const CLIENT_BASIC_INFO = '/api/customers/get_cusinfo';
@@ -105,6 +110,10 @@ export const CLIENT_EQUIPMENT_REMIND = '/api/devices/errorRemind';
 export const CLIENT_COLLECT_DATA='/api/devices/datachart';
 //终端采集记录
 export const CLIENT_TERMINAL_RECORD = '/api/devices/get_epinfo';
+//终端倍率
+export const CLIENT_TERMINAL_RATIO = '/api/devices/getratio';
+//修改终端倍率
+export const CLIENT_TERMINAL_EDITRATIO = '/api/devices/editratio';
 //配置终端
 //请求出错
 export const CLIENT_ADD_TERMINAL ='/api/devices';
@@ -147,8 +156,10 @@ export const CLIENT_PIANCHA_TABLE = '/api/devanalysis/index';
 // 交易概况
 // 每月交易概况
 export const TRADE_MONTH = '/api/bidding/monthOverview';
-// 每月交易概况
+// 每月交易分析
 export const TRADE_ANALYSIS = '/api/bidding/analysis';
+// 交易占比
+export const TRADE_OF = '/api/bidding/tradingOf';
 //竞价管理
 
 //本月竞价模拟
@@ -219,6 +230,8 @@ export const POWER_ADD_COMPACT = '/api/contract/store';
 export const UPLOAD_COMPACT = '/api/file/upload';
 //用户户号添加
 export const USER_NUM_ADD = '/api/contract/add_usernums';
+//删除户号
+export const USER_NUM_DEL = '/api/contract/del_usernums';
 //售电合同结束
 //添加长协合同开始
 //电厂下拉列表
@@ -240,7 +253,28 @@ export const POWER_SALE_LIST = '/api/contract/list';
 //售电合同删除
 export const POWER_SALE_DEL = '/api/contract/del';
 //合同管理结束
+//消息中心开始
+export const MESSAGE_LIST = '/api/news/list';
+//消息中心结束
+//设备管理开始
+//设备概况
+//设备运行概况
+export const EQUIPMENT_RUN_STATUS = '/api/devices/operstate';
+//设备安装概况
+export const EQUIPMENT_INSTALL = '/api/devices/overview';
+//设备安装申请
+export const EQUIPMENT_APPLY = '/api/devices/installapply';
 
+//资产信息
+//资产信息列表
+export const EQUIPMENT_LIST = '/api/devices/asset';
+//设备详情
+export const EQUIPMENT_INFO = '/api/devices/assetinfo';
+//设备统计日志
+export const EQUIPMENT_INFO_LIST = '/api/devices/counterLog';
+//设备异常记录
+export const EQUIPMENT_ABNORMAL_RECORD ='/api/devices/deviceerror';
+//设备管理结束
 export const errcallback = function (err) {
     console.error("请求出错"+err)
 }

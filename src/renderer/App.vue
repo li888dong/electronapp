@@ -17,18 +17,15 @@
             }
 	    },
 	    mounted(){
-	      if (localStorage.getItem('isLogin')!=='success'){
-	          this.$router.push('login')
-	      }
+
 	    },
         computed:{
-            login() {
-                return localStorage.getItem('isLogin')
-//                return this.$store.getters.login
-            }
-        },
-	    methods:{
 
+        },
+	    watch:{
+            "$route": function () {
+	            console.log('路由变化')
+            }
 	    },
         components: {
             'Main':Main,

@@ -71,17 +71,17 @@
 				</Col>
 
 				<Col span="6">
-				<span>{{indexData[1].devratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[1].devratio}}%<i class="trend" v-bind:class="{trendUp:indexData[1].devratio>0,trendDown:indexData[1].devratio<0}"></i></span>
 
 				</Col>
 
 				<Col span="6">
-				<span>{{indexData[1].chainratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[1].chainratio}}%<i class="trend" v-bind:class="{trendUp:indexData[1].chainratio>0,trendDown:indexData[1].chainratio<0}"></i></span>
 
 				</Col>
 
 				<Col span="6">
-				<span>{{indexData[1].yearonyear}}<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+				<span>{{indexData[1].yearonyear}}<i class="trend" v-bind:class="{trendUp:indexData[1].yearonyear>0,trendDown:indexData[1].yearonyear<0}"></i></span>
 
 				</Col>
 
@@ -103,7 +103,7 @@
 
 				</Col>
 				<Col span="12">
-				<span>{{indexData[2].chainratio}}%<i class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+				<span>{{indexData[2].chainratio}}%<i class="trend" v-bind:class="{trendUp:indexData[2].chainratio>0,trendDown:indexData[2].chainratio<0}"></i></span>
 
 				</Col>
 			</Row>
@@ -123,7 +123,7 @@
 
 				</Col>
 				<Col span="12">
-				<span>{{indexData[3].chainratio}}%<i class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[3].chainratio}}%<i class="trend" v-bind:class="{trendUp:indexData[3].chainratio>0,trendDown:indexData[3].chainratio<0}"></i></span>
 
 				</Col>
 			</Row>
@@ -142,7 +142,7 @@
 				<span>{{indexData[4].chainratio}}</span>
 				</Col>
 				<Col span="12">
-				<span>{{indexData[4].mdev}}%<i class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+				<span>{{indexData[4].mdev}}%<i class="trend " v-bind:class="{trendUp:indexData[4].mdev>0,trendDown:indexData[4].mdev<0}"></i></span>
 
 				</Col>
 			</Row>

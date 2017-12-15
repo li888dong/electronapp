@@ -1,12 +1,12 @@
 <script>
     import Weather from '@/components/Weather.vue'
     import FastBoot from '@/components/FastBoot'
-
+    import {ipcRenderer,shell} from 'electron';
     export default {
         name: 'mainheader',
 	    data(){
           return{
-
+              logout:false
           }
 	    },
         mounted() {
@@ -15,6 +15,10 @@
             toggleFast(){
                 this.$store.dispatch('setFastboot');
             },
+            out(){
+                this.$router.push('/login');
+                ipcRenderer.send('login-failed');
+            }
         },
         components: {
             'weather': Weather,
@@ -40,10 +44,13 @@
 			</li>
 			<li class="setting">
 				<ul>
-					<router-link  class="menu-icon right_243" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>
-					<li class="menu-icon right_168"><i class="iconfont">&#xe606;</i></li>
+					<!--<router-link  class="menu-icon right_243" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>-->
+					<!--<li class="menu-icon right_168"><i class="iconfont">&#xe606;</i></li>-->
 					<li class="avatar right_72">李栋</li>
-					<i class="iconfont icon-xiala absolute" style="right: 30px;font-size: 14px!important;"></i>
+					<i class="iconfont icon-xiala absolute" :class="{rotate90:!logout}" style="right: 30px;font-size: 14px!important;" @click="logout = !logout">
+
+					</i>
+					<span class="logout" v-if="logout" @click="out">退出登录</span>
 				</ul>
 			</li>
 		</ul>
@@ -149,5 +156,18 @@
 		cursor: pointer;
 		font-size: 22px !important;
 	}
-
+	.logout{
+		position: absolute;
+		top: 20px;
+		right: 0;
+		width: 56px;
+		background-color: #fff;
+		cursor: pointer;
+	}
+	.logout:hover{
+		opacity: 0.8;
+	}
+	.rotate90{
+		transform: rotate(-90deg);
+	}
 </style>

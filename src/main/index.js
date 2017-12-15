@@ -54,7 +54,7 @@ ipcMain.on('login-succeed',()=>{
         width:size.width,
         height:size.height
     });
-    mainWindow.reload();
+    // mainWindow.reload();
 });
 ipcMain.on('login-failed',()=>{
     isLogin =false

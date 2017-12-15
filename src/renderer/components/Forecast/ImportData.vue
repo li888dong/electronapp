@@ -81,7 +81,7 @@
 						<p style="color:#ccc;line-height:20px;">导入文件格式必须选择文件格式为xls文件格式，且严格按照模版格式填写！<a href="#">下载模板</a></p>
 					</FormItem>
 					<FormItem label="导入事件记录">
-						<Input v-model="record" type="textarea" :autosize="{minRows: 20,maxRows: 30}"></Input>
+						<Input v-model="record" type="textarea" readonly="true" :autosize="{minRows: 20,maxRows: 30}"></Input>
 					</FormItem>
 					<FormItem style="text-align: center;">
 						<Button type="primary" @click="beginUpload">开始导入</Button>

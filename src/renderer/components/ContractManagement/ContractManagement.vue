@@ -18,7 +18,7 @@ export default {
 <template>
 <div class="ContractManagement">
     <Row>
-        <Col span='2'>
+       <!--  <Col span='2'>
             <div class="ConNavBar">
                 <span class="hetongMan">合同管理</span>
                 <Col span='24'>        
@@ -32,10 +32,11 @@ export default {
                     >售电合同</router-link>
                 </Col>
             </div>
-        </Col>
-        <Col span='22'>
-            <router-view></router-view>
-        </Col>
+        </Col> -->
+        <!-- <Col span='22'>
+            
+        </Col> -->
+        <router-view></router-view>
     
     </Row>    
 </div>

@@ -114,3 +114,7 @@
 	padding:2px 2px;
 	height:34px;
 }
+/*重置添加终端样式*/
+.trans .ivu-select-disabled .ivu-select-selection{
+     background-color: #fff;
+}

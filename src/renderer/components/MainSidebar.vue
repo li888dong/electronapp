@@ -25,17 +25,17 @@
                     <MenuItem name="0-1" @click.native="$router.push('home')">
                         <div><i class="iconfont icon-zonglan-hui"></i><span> &nbsp;概况</span></div>
                     </MenuItem>
-                    <MenuItem name="0-2" @click.native="$router.push('button')">
-                        <div><i class="iconfont icon-yanjing"></i><span> &nbsp;Button</span></div>
-                    </MenuItem>
+                    <!--<MenuItem name="0-2" @click.native="$router.push('button')">-->
+                        <!--<div><i class="iconfont icon-yanjing"></i><span> &nbsp;Button</span></div>-->
+                    <!--</MenuItem>-->
                     <Submenu name="1">
                         <template slot="title">
                             <Icon type="ios-people"></Icon>
                             客户中心
                         </template>
-                        <MenuItem name="1-1" @click.native="$router.push('client-situation')">
-                            <div><i class="iconfont icon-kehu"></i><span> &nbsp;客户概况</span></div>
-                        </MenuItem>
+                        <!--<MenuItem name="1-1" @click.native="$router.push('client-situation')">-->
+                            <!--<div><i class="iconfont icon-kehu"></i><span> &nbsp;客户概况</span></div>-->
+                        <!--</MenuItem>-->
                         <MenuItem name="1-2" @click.native="$router.push('client-list')">
                             <div><i class="iconfont icon-numberlist"></i><span> &nbsp;客户列表</span></div>
                         </MenuItem>
@@ -70,9 +70,9 @@
                             <li><i class="iconfont icon-xieyi"></i><span> &nbsp;长协管理</span></li>
                         </MenuItem>
 
-                        <MenuItem name="3-4" @click.native="$router.push('matching-management')">
-                            <li><i class="iconfont icon-pipei"></i><span> &nbsp;交易匹配管理</span></li>
-                        </MenuItem>
+                        <!--<MenuItem name="3-4" @click.native="$router.push('matching-management')">-->
+                            <!--<li><i class="iconfont icon-pipei"></i><span> &nbsp;交易匹配管理</span></li>-->
+                        <!--</MenuItem>-->
                     </Submenu>
                     <Submenu name="4">
                         <template slot="title">
@@ -89,30 +89,36 @@
                             <li><i class="iconfont icon-lifangti"></i><span> &nbsp;统计日志</span></li>
                         </MenuItem>
                     </Submenu>
-                    <MenuItem name="03" @click.native="$router.push('index-compare')">
-                        <li>
-                            <i class="iconfont icon-zhuzhuangtutubiao"></i>
-                            <span>  &nbsp;行业指数</span>
-                        </li>
-                    </MenuItem>
-                    <MenuItem name="04" @click.native="$router.push('sand-table')">
-                        <li>
-                            <i class="iconfont icon-qizi"></i>
-                            <span>  &nbsp;售电沙盘</span>
-                        </li>
-                    </MenuItem>
-                    <MenuItem name="05" @click.native="$router.push('database')">
-                        <li>
-                            <i class="iconfont icon-shujuku1"></i>
-                            <span>  &nbsp;电量数据库</span>
-                        </li>
-                    </MenuItem>
-                    <MenuItem name="06" @click.native="$router.push('ContractManagement')">
-                        <li>
-                            <i class="iconfont icon-wenjianjia"></i>
-                            <span>  &nbsp;合同管理</span>
-                        </li>
-                    </MenuItem>
+                    <!--<MenuItem name="03" @click.native="$router.push('index-compare')">-->
+                        <!--<li>-->
+                            <!--<i class="iconfont icon-zhuzhuangtutubiao"></i>-->
+                            <!--<span>  &nbsp;行业指数</span>-->
+                        <!--</li>-->
+                    <!--</MenuItem>-->
+                    <!--<MenuItem name="04" @click.native="$router.push('sand-table')">-->
+                        <!--<li>-->
+                            <!--<i class="iconfont icon-qizi"></i>-->
+                            <!--<span>  &nbsp;售电沙盘</span>-->
+                        <!--</li>-->
+                    <!--</MenuItem>-->
+                    <!--<MenuItem name="05" @click.native="$router.push('database')">-->
+                        <!--<li>-->
+                            <!--<i class="iconfont icon-shujuku1"></i>-->
+                            <!--<span>  &nbsp;电量数据库</span>-->
+                        <!--</li>-->
+                    <!--</MenuItem>-->
+                    <Submenu name='5'>
+                       <template slot='title'>
+                         <i class="iconfont icon-wenjianjia"></i>
+                         合同管理
+                       </template>
+                       <MenuItem name='5-1' @click.native="$router.push('ContractManagement')">
+                        <li> <i class="iconfont icon-jishiben01"></i><span> &nbsp;长协合同</span></li>
+                       </MenuItem>
+                       <MenuItem name='5-2' @click.native="$router.push('saleContract')">
+                        <li> <i class="iconfont icon-jishiben01"></i><span> &nbsp;售电合同</span></li>
+                       </MenuItem>
+                    </Submenu>
                 </Menu>
             </Row>
         </Row>

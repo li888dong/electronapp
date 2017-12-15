@@ -59,15 +59,16 @@ export default {
               }
             ],
             hetongList:[],
+            totalPage:0,
+            currentPage:1,
+            limit:6,
+            loading:true
         }
     },
     components : {
         'myFenye': myFenye
     },
     methods:{
-        change(page) {
-            console.log(page)
-        },
         ok (index) {
             console.log(index);
             console.log(this.hetongList[index].id);
@@ -88,28 +89,70 @@ export default {
             this.$Message.info('取消删除');
         },
         changxieList(){
-            this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.$store.getters.com_id}).then(res=>{
+            this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
                 console.log('长协列表',res);
-                var data = res.data.data;
+                var data = res.data.data.data;
+                 
                 if(res.data.status){
+                    this.totalPage =res.data.data.total;
+                    var arr = [];
                     for(var i=0;i<data.length;i++){
                         if(data[i].signed_status == 0){
                             data[i].signed_status ='未签约';
                         }else if(data[i].signed_status == 1){
                             data[i].signed_status ='签约';
                         }
-                        this.hetongList.push(data[i]);
+                         arr.push(data[i]);
                     }
+                    this.hetongList = arr;
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.loading = false;
+                this.$api.errcallback(err);
+            })
+        },
+        toChangxie(){
+            this.$router.push('/AddContractManagement');
+        },
+        pageChange(value){
+          console.log(value);
+            this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+                console.log('长协列表分页',res);
+                var data = res.data.data.data;   
+                if(res.data.status){
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.current_page;
+                     var arr = [];
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].signed_status == 0){
+                            data[i].signed_status ='未签约';
+                        }else if(data[i].signed_status == 1){
+                            data[i].signed_status ='签约';
+                        }
+                        arr.push(data[i]);
+                    }
+                    this.hetongList = arr;
                 }
             },err=>{
                 this.$api.errcallback(err);
             }).catch(err=>{
                 this.$api.errcallback(err);
             })
-        },
-        toChangxie(){
-            this.$router.push('/AddContractManagement');
         }
+    },
+    watch:{
+      com_id:function(){
+         this.changxieList();
+      }
+    },
+    computed:{
+      com_id:function(){
+        return this.$store.getters.com_id;
+      }
     },
     mounted(){
         this.changxieList();
@@ -118,13 +161,13 @@ export default {
 </script>
 
 <template>
-<div class="main-container">
+<div class="main-container relative">
     <Card>
         <h3 slot="title">长协合同</h3>
         <div class="hetongList">
             <div class="hetongForm" v-for='(item,index) in hetongList'>
                 <ul class="hetongIfno">
-                    <li>平顶山姚梦电厂有限公司</li>
+                    <li>{{item.com_name}}</li>
                     <li>合同编号：{{item.lpcon_no}}</li>
                     <li>合同年度：{{item.lpcon_year}}</li>
                     <li>签约电量：{{item.signed_num}} MWh</li>
@@ -132,7 +175,9 @@ export default {
                     <li>联系电话：{{item.tel}}</li>
                     <li>合同状态：{{item.signed_status}}</li>
                     <li class="change">
-                        <router-link to="AddContractManagement" tag="span" style="cursor: pointer; ">修改</router-link>
+                        <router-link :to="{path:'AddContractManagement',query:{id:item.id,lpcon_no:item.lpcon_no,lpcon_year:item.lpcon_year,signed_status:item.signed_status,signed_num:item.signed_num,business:item.business,tel:item.tel,powerplant
+:item.powerplant,list:item.lpdist,exec_date:item.exec_date,signed_day:item.signed_day,signed_price:item.signed_price
+}}" tag="span" style="cursor: pointer; ">修改</router-link>
                         <span>
                             <!-- 气泡提示模板 -->
                             <Poptip
@@ -152,9 +197,15 @@ export default {
                             </div>
                     <Table :columns = 'columns1' style='margin-left: 10%;height:100%' size='small' :data='item.lpdist'></Table>
                 </div>
-            </div>          
-            <myFenye></myFenye>            
-        </div>        
+            </div>        
+       <Spin size='large' fix v-if='loading'></Spin>      
+        </div>
+         <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div>          
     </Card>
 </div>
 </template>
@@ -163,6 +214,7 @@ export default {
 .hetongList {
     height: 818px;
     background-color: #fff;
+    position: relative;
     }
 .hetongIfno{
     height: 50px;
@@ -188,7 +240,7 @@ export default {
 .hetongShuju {
     position: relative;
     border: 1px solid #e9eaec;
-    margin-bottom:10px;
+    margin-bottom:5px;
 }
 .changxieSee{
     width: 50px;
@@ -207,4 +259,30 @@ export default {
     font-size: 30px;
     color: #ccc;
 }
+.relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+    z-index: 999;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

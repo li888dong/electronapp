@@ -105,9 +105,18 @@ export default {
         }
     },
     mounted(){
+        this.equipmentList();
     },
     methods: {      
-        
+        equipmentList(){
+            this.$http.get(this.$api.EQUIPMENT_APPLY).then(res=>{
+                console.log("设备申请列表",res);
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        }
     },
     components: {
         'EquipmentInstallView': EquipmentInstall,
@@ -119,23 +128,21 @@ export default {
 
 <template>
 <Row className="main-container">
-    <Row :gutter="15">
-        <Col span="12" >
+    <Row>
             <!-- 设备安装情况 -->
             <EquipmentInstallView></EquipmentInstallView>
-        </Col>
-        <Col span="6" >
-            <!-- 设备库存情况 -->
+         <!-- 设备库存情况 -->
+        <!-- <Col span="6" >
             <Card class="equipment-stock">
                 <h3 slot="title">设备库存情况</h3>
             </Card>                
-        </Col>
-        <Col span="6" >
-            <!-- 设备其他情况 -->
+        </Col> -->
+        <!-- 设备其他情况 -->
+       <!--  <Col span="6" >
             <Card class="equipment-other">
                 <h3 slot="title">其他的设备详情</h3>
             </Card>                
-        </Col>
+        </Col> -->
     </Row>
     <!-- 设备运行情况 -->
     <Row class="mgt_15">
@@ -144,7 +151,7 @@ export default {
         </Col>
     </Row>
         <!-- 设备安装申请表 -->
-    <Row class="mgt_15">
+    <!-- Row class="mgt_15">
         <Col span="24">
             <Card>
                 <h3 slot="title">设备安装申请</h3>
@@ -155,7 +162,7 @@ export default {
                 </Row>     
             </Card>                             
         </Col>
-    </Row>
+    </Row> -->
 </Row>
 </template>
 
@@ -165,10 +172,10 @@ export default {
     border: 1px #e5e5e5 solid;
     background-color: #fff;
 }
-.equipment-other{
-    height: 290px;
+/*.equipment-other{
+    height: 590px;
     border: 1px #e5e5e5 solid;
     background-color: #fff;
-}
+}*/
 
 </style>

@@ -282,7 +282,7 @@
 	}
 </script>
 <template>
-	<div class="client-container">
+	<div class="main-container">
 		<Row gutter=20>
 			<Col span="16">
 				<Card class="reference">

@@ -11,6 +11,7 @@
     }
 
     .login-header{
+        position: relative;
         width: 100%;
         height: 46px;
         background-color: #0089F0;
@@ -24,6 +25,7 @@
         font-size: 20px;
         cursor: pointer;
         top: 10px;
+        z-index: 9999;
     }
     #hideBtn{
         right: 40px;
@@ -74,11 +76,20 @@
     .extraGroup span{
         cursor: pointer;
     }
+    .movebar{
+        position: absolute;
+        left: 0;
+        right:67px;
+        top: 0;
+        bottom: 0;
+    }
 </style>
 
 <template>
     <div class="login" @keydown.enter="handleSubmit">
+        <!-- -webkit-app-region: drag 设置窗口可拖动-->
         <div class="login-header relative">
+            <div class="movebar"  style="-webkit-app-region: drag"></div>
             <span id="closeBtn" class="iconfont" @click="closeApp()">&#xe664;</span>
             <span id="hideBtn" class="iconfont" @click="hideApp()">&#xe601;</span>
         </div>
@@ -86,10 +97,10 @@
 
             <div class="form-con">
                 <form ref="loginForm" :model="form" :rules="rules">
-                    <input type="text" v-model="form.userName" placeholder="请输入用户名" autofocus>
-                    <input type="password" v-model="form.password" placeholder="请输入密码">
+                    <input type="text" v-model.trim="form.userName" placeholder="请输入用户名" autofocus>
+                    <input type="password" v-model.trim="form.password" placeholder="请输入密码">
                     <p style="color: #999">
-                        <input id="pwd" type="checkbox"/> <label for="pwd">自动登录</label>
+                        <input id="autologin" type="checkbox" v-on:change="isAuto"/> <label for="autologin">自动登录</label>
                         <span class="extraGroup">
                             <span class="forget" @click="closable">忘记密码 </span>|<span class="addUser" @click="addUser"> 配置新用户</span>
                         </span>
@@ -108,10 +119,11 @@ import {ipcRenderer,shell} from 'electron';
 export default {
     data () {
         return {
-            loginTip:'账号admin密码123asd',
+            loginTip:'zhongqi 123456',
             form: {
                 userName: '',
-                password: ''
+                password: '',
+                auto:false
             },
             rules: {
                 userName: [
@@ -124,6 +136,10 @@ export default {
         };
     },
     methods: {
+        isAuto(){
+            this.auto = !this.auto;
+            console.log(this.auto)
+        },
         closable () {
             this.$Message.warning({
                 content: '请联系管理员',
@@ -142,29 +158,19 @@ export default {
         hideApp() {
             ipcRenderer.send('hide-window');
         },
-
         handleSubmit () {
-            Cookies.set('user', this.form.userName);
-            Cookies.set('password', this.form.password);
-//                    this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-            if (this.form.userName === 'admin'&&this.form.password==='123asd') {
-                Cookies.set('access', 0);
-                this.$store.dispatch('setLogin',[true,1]);
-                this.$router.push('main/home');
-                localStorage.setItem('isLogin','success');
-                ipcRenderer.send('login-succeed');
-            } else {
-                Cookies.set('access', 1);
-                ipcRenderer.send('login-failed');
-                this.loginTip='请输入正确的用户名和密码';
-            }
-
+            this.$http.post(this.$api.LOGIN,{username:this.form.userName,password:this.form.password}).then(res=>{
+                if (res.data.status ==='1'){
+                    this.$store.dispatch('setLogin',[true,res.data.com_id]);
+                    this.$router.push('main/home');
+                    ipcRenderer.send('login-succeed');
+                } else {
+                    ipcRenderer.send('login-failed');
+                    this.loginTip='请输入正确的用户名和密码';
+                }
+            },err=>{});
         }
 
     }
 };
 </script>
-
-<style>
-
-</style>

@@ -4,6 +4,7 @@
 		data(){
 	        return{
 	            year:'2017',
+                spinChart:false,
 		        chartData:{},
                 columns4: [
                     {
@@ -114,7 +115,6 @@
                         splitArea: {show: false}
                     },
                     yAxis: {
-                        inverse: true,
                         splitArea: {show: false},
                         axisLine: {
                             show: false
@@ -194,10 +194,14 @@
 		},
 		methods:{
 		    reqChart(){
+                this.spinChart = true;
                 this.$http.post(this.$api.CLIENT_PIANCHA_CHART,{cus_id:this.cus_id}).then(res=> {
+                    this.spinChart = false;
                     console.log('偏差图表',res.data.citys);
                     this.chartData = res.data.citys;
                     this.drawBar()
+
+                },err=>{
 
                 })
 		    },
@@ -255,6 +259,7 @@
 
 						</div>
 					</Row>
+					<Spin size="large" fix v-if="spinChart"></Spin>
 				</Card>
 
 			</Row>

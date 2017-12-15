@@ -234,7 +234,7 @@
                     },
                     series: [
                         {
-                            name: '辅助',
+                            name: '交易日开始日期',
                             type: 'bar',
                             stack: '总量',
                             itemStyle: {
@@ -251,7 +251,7 @@
                             data: [this.planDate.fore_cycle_start.slice(-2), this.planDate.decl_cycle_start.slice(-2), this.planDate.cf_cycle_start.slice(-2), nowDay]
                         },
                         {
-                            name: '交易月份：2017-12',
+                            name: '距交易日结束天数',
                             type: 'bar',
                             stack: '总量',
                             barMaxWidth: 20,

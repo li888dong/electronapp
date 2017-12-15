@@ -2,6 +2,21 @@
 export default {
     name: 'AddClient',
     data(){
+        const telphone = (rule,val,callback)=>{
+             console.log(val);
+             if(!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)){
+                return callback(new Error("请输入正确的手机号！"));
+             }else{
+               callback();
+             }
+        };
+        const codeLength =(rule,val,callback)=>{
+            if( val.length < 15 || val.length > 18){
+              return callback(new Error('请输入正确的格式'));
+            }else{
+               callback();
+            }
+        }
         return{
             formItem: {
                     name: '',
@@ -57,39 +72,54 @@ export default {
                         label: '中国工商银行'
                     }
                 ],
-                lvList:[
-                    {
-                        value: '一级',
-                        label: '一级'
-                    },
-                    {
-                        value: '二级',
-                        label: '二级'
-                    },
-                     {
-                        value: '三级',
-                        label: '二级'
-                    }
-                ],
+                faxNum:false,
+                phoneNum:false,
+                msgHint:'',
                 categoryList:[],           
                 model11: '',
                 model22: '',
                 category1:'',
                 category2:'',
                 hint:false,
+                ruleValidate:{
+                    name: [
+                        { required: true, message: '内容不能为空', trigger: 'blur' }
+                    ],
+                    sn:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    tyshxydm:[{required:true, message: '内容不能为空', trigger: 'blur'},
+                    { validator: codeLength, trigger: 'blur' },],
+                    legal_person:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    organization:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    bank: [{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    bank_card:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    change:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    contact:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                    telphone:[{required:true, message: '内容不能为空', trigger: 'blur'},
+                     {type:'string',min:11,message:'手机号码必须为11位',trigger:'blur'},
+                     { validator: telphone, trigger: 'blur' },
+                    ],
+                    email:[{required:true, message: '内容不能为空', trigger: 'blur'},
+                      {type:'email',message:'邮箱格式不对',trigger:'blur'}],
+                      officephone1:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                      officephone2:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                      fax1:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                      fax2:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                      address:[{required:true, message: '内容不能为空', trigger: 'blur'}],
+                      zipcode:[{required:true, message: '内容不能为空', trigger: 'blur'}]
+                }
         }
     },
     methods:{
          addClient(goht){
             //手机号正则表达式
-            var tel_reg = /^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$/;
+            var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
             //邮箱的正则表达式
             var email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
             //固定电话的正则验证
             var officephone_reg = /^[0-9]{3,4}\-[0-9]{3,8}$/;
             //传真号的正则验证
             var fax_reg = /^(\d{3,4}-)?\d{7,8}$/;
-            if(!this.isEmpty(this.formItem) && this.category1 != "" && this.category2 !=""){
+            if(!this.isEmpty(this.formItem) && this.category1 != "" && this.category2 !="" && tel_reg.test(this.formItem.telphone) && email_reg.test(this.formItem.email) && officephone_reg.test(this.formItem.officephone1+"-"+this.formItem.officephone2) && officephone_reg.test(this.formItem.fax1 + "-" + this.formItem.fax2)){
             this.formItem.category = this.category1 + "," + this.category2;
             this.$http.post(this.$api.CLIENT_ADD,{
                 com_id:this.$store.getters.com_id,
@@ -116,8 +146,9 @@ export default {
                 console.log(res);
                 if(res.data.status){
                     if (goht){
-                    this.$router.push('add-hetong')
+                    this.$router.push('add-hetong');
                    }else{
+                      this.$router.push('client-list');
                       for(let k in this.formItem){
                           this.formItem[k] = "";
                       }
@@ -172,7 +203,7 @@ export default {
                 }
                 return true
             },
-            changeHint(){
+         changeHint(){
                 var _this = this;
                 var timer = setTimeout(function(){
                     _this.hint = false;
@@ -180,7 +211,7 @@ export default {
                         clearTimeout(timer);
                     }
                 },3000)
-            }
+            },
     },
     watch:{
         hint:function(){
@@ -188,6 +219,7 @@ export default {
         }
     },
     mounted(){
+     
     }
 }
 </script>
@@ -197,46 +229,46 @@ export default {
     <Card class="AddClientBox">
         <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)" style="position: absolute;top: 14px;left: 10px;"></i>
         <h3 slot="title" style="padding-left:40px;">添加新客户</h3>
-        <Form :model="formItem" :label-width="110">
+        <Form :model="formItem" :label-width="120" :rules="ruleValidate">
             <h4>基本信息</h4>
             <Row>
                 <Col span="12">
-                    <Form-item label="企业全称">
+                    <Form-item label="企业全称" prop='name' class='mgb_20'>
                         <i-input v-model="formItem.name" placeholder="请输入企业全称"></i-input>
                         
                     </Form-item>
                 </Col>
                 <Col span="5">
-                    <Form-item label="企业简称">
+                    <Form-item label="企业简称" prop='sn' class='mgb_20'>
                         <i-input v-model="formItem.sn" placeholder="请输入企业简称"></i-input>
                     </Form-item>
                 </Col>
-                <Col span="20" offset='2' class="hint">
+                <Col span="20" offset='2' class="hint" style='margin-top:10px'>
                     <p>需与当地政府颁发的商业许可证书或企业注册证上的企业名称完全一致，信息审核审核成功后，企业名称不可修改。</p>
                 </Col>    
             </Row>
             <Row>
                 <Col span="12">
-                    <Form-item label="统一社会信用代码">
+                    <Form-item label="统一社会信用代码" prop='tyshxydm' class='mgb_20'>
                         <i-input v-model="formItem.tyshxydm" placeholder="请输入15位或18位的统一社会信用代码"></i-input>
                     </Form-item>
                 </Col>
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="法人代表姓名">
+                    <Form-item label="法人代表姓名" prop='legal_person' class='mgb_20'>
                         <i-input v-model="formItem.legal_person" placeholder="与营业执照上一致"></i-input>
                     </Form-item>
                 </Col>
                 <Col span="8">
-                    <Form-item label="组织机构代码">
+                    <Form-item label="组织机构代码" prop='organization' class='mgb_20'>
                         <i-input v-model="formItem.organization" placeholder="与营业执照上一致"></i-input>
                     </Form-item>
                 </Col>
             </Row>        
             <Row>
                 <Col span="8">
-                    <Form-item label="开户银行">
+                    <Form-item label="开户银行" prop='bank' class='mgb_20'>
                         <Select v-model="formItem.bank" placeholder="请选择">
                             <Option :value="item.value" v-for='item in bankList'>{{item.label}}</Option>
                         </Select>
@@ -245,14 +277,14 @@ export default {
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="开户账号">
+                    <Form-item label="开户账号" prop='bank_card' class='mgb_20'>
                         <i-input v-model="formItem.bank_card" placeholder="请如实填写"></i-input>
                     </Form-item>
                 </Col>
             </Row>
             <h4>业务信息</h4>
             <Row :gutter="10">                
-                <Form-item label="所属行业">
+                <Form-item label="所属行业" class='mgb_20'>
                     <Col span="5">
                         <Select v-model="category1" placeholder="请选择" v-on:on-change='changeCategory'>
                             <Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
@@ -275,7 +307,7 @@ export default {
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="用电等级">
+                    <Form-item label="用电等级" prop='grade' class='mgb_20'>
                         <Select v-model="formItem.grade" placeholder="请选择">
                             <Option value="0.4kV">0.4kV</Option>
                             <Option value="6.3kV">6.3kV</Option>
@@ -294,31 +326,38 @@ export default {
                 </Col>
             </Row>
             <h4>联系信息</h4>
-            <Row :gutter="10">
-                <Form-item label="通讯地址">
+            <Row :gutter="10" >
+                <Form-item label="通讯地址" class='address'>
                     <Col span="8">
-                        <al-selector v-model="formItem.res_s" level=2 />
+                    <FormItem>
+                       <al-selector v-model="formItem.res_s" level=2 />
+                    </FormItem>  
                     </Col>
                     <Col span="8">
-                        <i-input v-model="formItem.address" placeholder="请输入详细通讯地址"></i-input>
+                     <FormItem prop='address'>
+                         <i-input v-model="formItem.address" placeholder="请输入详细通讯地址"></i-input>
+                     </FormItem> 
                     </Col>
                     <Col span="2">
-                        <i-input v-model="formItem.zipcode" placeholder="邮政编码" maxlength="6"></i-input>
+                    <FormItem prop='zipcode'>
+                       <i-input v-model="formItem.zipcode" placeholder="邮政编码" maxlength="6"></i-input>
+                    </FormItem>    
                     </Col>
                 </Form-item>
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="联系人">
+                    <Form-item label="联系人" prop='contact' class='mgb_20'>
                         <i-input v-model="formItem.contact" placeholder="请输入联系人姓名"></i-input>
                     </Form-item>
                 </Col>
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="联系人电话">
-                        <i-input v-model="formItem.telphone" placeholder="请输入联系人手机号码"></i-input>
+                    <Form-item label="联系人电话" prop='telphone' class='mgb_20'>
+                        <i-input v-model="formItem.telphone" placeholder="请输入联系人手机号码" v-on:on-blur='tel'></i-input>
                     </Form-item>
+
                 </Col>
                 <Col span="12" class="hint2">
                     <p>该手机号用于开通系统登录账号，请确保手机号正确</p>
@@ -326,7 +365,7 @@ export default {
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="电子邮箱">
+                    <Form-item label="电子邮箱" prop='email' class='mgb_20'>
                         <i-input v-model="formItem.email" placeholder="请输入联系人邮箱号码"></i-input>
                     </Form-item>
                 </Col>
@@ -336,39 +375,47 @@ export default {
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="办公电话">
+                    <Form-item label="办公电话" class='mgb_20'>
                         <Col span="8">
-                            <i-input v-model="formItem.officephone1" placeholder="-"></i-input>
+                        <FormItem prop='officephone1'>
+                            <i-input v-model="formItem.officephone1" placeholder="-"  id='tel1'></i-input>
+                        </FormItem> 
                         </Col>
                         <Col span="1" style="text-align: center;line-height: 34px;">-</Col>    
                         <Col span="15">
-                            <i-input v-model="formItem.officephone2" placeholder="请输入办公电话"></i-input>
+                           <FormItem prop='officephone2'>
+                             <i-input v-model="formItem.officephone2" placeholder="请输入办公电话"></i-input>
+                           </FormItem>
                         </Col>
                     </Form-item>
                 </Col>
                 <Col span="8">
-                    <Form-item label="传真号码">
-                        <Col span="8">
-                            <i-input v-model="formItem.fax1" placeholder="-"></i-input>
+                    <Form-item label="传真号码" style='margin-bottom: 0px'>
+                        <Col span="6">
+                         <FormItem prop='fax1'>
+                          <i-input v-model="formItem.fax1" placeholder="-"></i-input>
+                         </FormItem>
                         </Col>
                         <Col span="1" style="text-align: center;line-height: 34px;">-</Col>    
                         <Col span="15">
-                            <i-input v-model="formItem.fax2" placeholder="请输入传真号码"></i-input>
+                        <FormItem prop='fax2'>
+                           <i-input v-model="formItem.fax2" placeholder="请输入传真号码" v-on:on-blur='faxReg'></i-input>
+                        </FormItem>
                         </Col>
                     </Form-item>
                 </Col>
             </Row>            
             <Row>
                 <Col span="12" style="text-align: center;line-height: 34px;">
-                    <Form-item>
+                    <Form-item style='margin-bottom: 0'>
                         <i-button type="primary" @click="addClient('goht')">保存并添加合同</i-button>
                         <i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
                         <i-button type="ghost" style="margin-left: 30px">取消</i-button>
-                    </Form-item>
                         <div v-if='hint' style="margin-left: 150px;">
-                            <Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red;'>内容不能为空
+                            <Alert type="warning" show-icon style='width: 200px;margin:0px auto;color: red;'>内容不能为空
                             </Alert>
                         </div>
+                    </Form-item>     
                 </Col>
             </Row>
         </Form>
@@ -378,9 +425,11 @@ export default {
 
 <style scoped>
 /* 表单每一项的下外边距 */
-
-.ivu-form-item {
-    margin-bottom: 15px;
+.address{
+  margin-bottom: 10px !import;
+}
+.mgb_20 {
+    margin-bottom: 20px;
 }
 
 .AddClient{
@@ -402,7 +451,6 @@ export default {
     margin-bottom: 20px;
 }
 .AddClientBox form{
-    margin: 20px 60px;
     margin-left: 20%;
 }
 
@@ -467,4 +515,5 @@ select {
     border: 1px solid #108CEE;
     background-color: #fff;
 }
+
 </style>

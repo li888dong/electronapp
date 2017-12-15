@@ -5,18 +5,21 @@
         name: 'clientindex',
         data() {
             return {
+
                 indexData: '',
-                trendUp: true,
-                trendDown: true,
+	            huhaoSpin:false,
 	            dayTongbi:{
+                    spin:false,
                     year:[],
 		            lastyear:[]
 	            },
 	            dayCompare:{
+                    spin:false,
                     today:0,
                     yesterday:0
 	            },
 	            monthCompare:{
+                    spin:false,
                     curmonth:0,
 		            lastmonth:0
 	            }
@@ -258,41 +261,52 @@
         methods: {
 //            户号指数
 	        huhao(){
+	            this.huhaoSpin = true;
                 this.$http.post(this.$api.CLIENT_DATA_INDEX,{cus_id:this.cus_id}).then(res=>{
-
+                    this.huhaoSpin = false;
                     this.indexData = res.data.data;
                     console.log('户号指数',this.indexData);
                 },err=>{
+                    this.huhaoSpin = false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.huhaoSpin = false;
                     this.$api.errcallback(err);
                 })
 	        },
 //            日电量同比
 	        daytb(){
+                this.dayTongbi.spin = true;
+
                 this.$http.post(this.$api.CLIENT_DAYTB,{cus_id:this.cus_id}).then(res=>{
+                    this.dayTongbi.spin = false;
                     console.log('日电量同比',res);
                     let data = res.data.data;
                     for(let k in data){
                         this.dayTongbi.year.push(data[k].year);
                         this.dayTongbi.lastyear.push(data[k].lastyear);
                     }
-                    console.log(this.dayTongbi)
+                    console.log(this.dayTongbi);
                     this.drawBar1(this.chartOption1);
                 },err=>{
+                    this.dayTongbi.spin = false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.dayTongbi.spin = false;
                     this.$api.errcallback(err);
                 })
 	        },
 //            日对比
 	        daycompare(){
+	            this.dayCompare.spin = true;
                 this.$http.post(this.$api.CLIENT_DAY_COMPARE,{cus_id:this.cus_id}).then(res=>{
+                    this.dayCompare.spin = false;
                     console.log('日对比',res);
 					this.dayCompare = res.data.data;
                     this.drawBar2(this.chartOption2);
 
                 },err=>{
+                    this.dayCompare.spin = false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
                     this.$api.errcallback(err);
@@ -300,13 +314,17 @@
 	        },
 //            月对比
 	        monthcompare(){
+                this.monthCompare.spin = true;
+
                 this.$http.post(this.$api.CLIENT_MONTH_COMPARE,{cus_id:this.cus_id}).then(res=>{
+                    this.monthCompare.spin = false;
                     console.log('月对比',res);
                     this.monthCompare = res.data.data;
 
                     this.drawBar3(this.chartOption3);
 
                 },err=>{
+                    this.monthCompare.spin = false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
                     this.$api.errcallback(err);
@@ -371,12 +389,12 @@
 								<span class="count">{{item[1].num}}</span>
 							</Col>
 							<Col span="7">
-								<span class="tongbi-rate">{{item[1].chainratio}}<i class="trend"
-							                                                      v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+								<span class="tongbi-rate">{{item[1].chainratio}}%<i class="trend"
+							                                                      v-bind:class="{trendUp:item[1].chainratio>0,trendDown:item[1].chainratio<0}"></i></span>
 							</Col>
 							<Col span="7">
-								<span class="huanbi-rate">{{item[1].yearonyear}}<i class="trend"
-							                                                      v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+								<span class="huanbi-rate">{{item[1].yearonyear}}%<i class="trend"
+							                                                      v-bind:class="{trendUp:item[1].yearonyear>0,trendDown:item[1].yearonyear<0}"></i></span>
 							</Col>
 						</Row>
 					</Col>
@@ -398,13 +416,13 @@
 							</Col>
 							<Col span="8">
 							<span
-								class="tongbi-rate">{{item[2].chainratio}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+								class="tongbi-rate">{{item[2].chainratio}}%<i
+								class="trend " v-bind:class="{trendUp:item[2].chainratio>0,trendDown:item[2].chainratio<0}"></i></span>
 							</Col>
 							<Col span="8">
 							<span
-								class="huanbi-rate">{{item[2].yearonyear}}<i
-								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+								class="huanbi-rate">{{item[2].yearonyear}}%<i
+								class="trend" v-bind:class="{trendUp:item[2].yearonyear>0,trendDown:item[2].yearonyear<0}"></i></span>
 							</Col>
 						</Row>
 					</Col>
@@ -431,14 +449,14 @@
 
 							<Col span="8">
 							<span
-								class="tongbi-rate">{{item[3].chainratio}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+								class="tongbi-rate">{{item[3].chainratio}}%<i
+								class="trend " v-bind:class="{trendUp:item[3].chainratio>0,trendDown:item[3].chainratio<0}"></i></span>
 							</Col>
 
 							<Col span="8">
 							<span
-								class="huanbi-rate">{{item[3].yearonyear}}<i
-								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+								class="huanbi-rate">{{item[3].yearonyear}}%<i
+								class="trend " v-bind:class="{trendUp:item[3].yearonyear>0,trendDown:item[3].yearonyear<0}"></i></span>
 							</Col>
 
 
@@ -446,6 +464,7 @@
 
 					</Col>
 				</Row>
+				<Spin size="large" fix v-if="huhaoSpin"></Spin>
 			</Card>
 		</Row>
 		<Row className="mgt_15" gutter="20">
@@ -456,6 +475,7 @@
 					<div id="compare-bar-1" style="width: 924px;height: 465px;">
 
 					</div>
+					<Spin size="large" fix v-if="dayTongbi.spin"></Spin>
 				</Card>
 			</Col>
 			<Col span="4">
@@ -465,6 +485,7 @@
 					<div id="compare-bar-2">
 
 					</div>
+					<Spin size="large" fix v-if="dayCompare.spin"></Spin>
 				</Card>
 			</Col>
 			<Col span="4">
@@ -474,6 +495,7 @@
 					<div id="compare-bar-3">
 
 					</div>
+					<Spin size="large" fix v-if="monthCompare.spin"></Spin>
 				</Card>
 			</Col>
 		</Row>
