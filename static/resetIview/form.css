@@ -118,3 +118,9 @@
 .trans .ivu-select-disabled .ivu-select-selection{
      background-color: #fff;
 }
+.dcdz .ivu-input[disabled], fieldset[disabled] .ivu-input{
+	 background-color: #fff;
+}
+.monthData .ivu-input[disabled], fieldset[disabled] .ivu-input{
+	  background-color: #fff;
+}

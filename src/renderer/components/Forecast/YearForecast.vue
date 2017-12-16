@@ -346,92 +346,94 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal"
 				@on-ok="modifyData">
-			<table v-if="modifyModal">
-				<thead>
-				<tr>
-					<th>2017年月份</th>
-					<th>01月</th>
-					<th>02月</th>
-					<th>03月</th>
-					<th>04月</th>
-					<th>05月</th>
-					<th>06月</th>
-					<th>07月</th>
-					<th>08月</th>
-					<th>09月</th>
-					<th>10月</th>
-					<th>11月</th>
-					<th>12月</th>
-					<th>合计</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr v-for="item in tableData2">
-					<td>户号{{item.id}}</td>
-					<td><input placeholder='-' type="text" v-model="item.month01"></td>
-					<td><input placeholder='-' type="text" v-model="item.month02"></td>
-					<td><input placeholder='-' type="text" v-model="item.month03"></td>
-					<td><input placeholder='-' type="text" v-model="item.month04"></td>
-					<td><input placeholder='-' type="text" v-model="item.month05"></td>
-					<td><input placeholder='-' type="text" v-model="item.month06"></td>
-					<td><input placeholder='-' type="text" v-model="item.month07"></td>
-					<td><input placeholder='-' type="text" v-model="item.month08"></td>
-					<td><input placeholder='-' type="text" v-model="item.month09"></td>
-					<td><input placeholder='-' type="text" v-model="item.month10"></td>
-					<td><input placeholder='-' type="text" v-model="item.month11"></td>
-					<td><input placeholder='-' type="text" v-model="item.month12"></td>
-					<td>{{item.total}}</td>
-				</tr>
-				<tr>
-					<td>合计</td>
-					<td>{{tableData1[modifyIndex].month01}}</td>
-					<td>{{tableData1[modifyIndex].month02}}</td>
-					<td>{{tableData1[modifyIndex].month03}}</td>
-					<td>{{tableData1[modifyIndex].month04}}</td>
-					<td>{{tableData1[modifyIndex].month05}}</td>
-					<td>{{tableData1[modifyIndex].month06}}</td>
-					<td>{{tableData1[modifyIndex].month07}}</td>
-					<td>{{tableData1[modifyIndex].month08}}</td>
-					<td>{{tableData1[modifyIndex].month09}}</td>
-					<td>{{tableData1[modifyIndex].month10}}</td>
-					<td>{{tableData1[modifyIndex].month11}}</td>
-					<td>{{tableData1[modifyIndex].month12}}</td>
-					<td>{{tableData1[modifyIndex].total}}</td>
-				</tr>
-				<tr>
-					<td>系统预测</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
-				<tr>
-					<td>偏差值</td>
-					<td>{{tableData1[modifyIndex].month01}}</td>
-					<td>{{tableData1[modifyIndex].month02}}</td>
-					<td>{{tableData1[modifyIndex].month03}}</td>
-					<td>{{tableData1[modifyIndex].month04}}</td>
-					<td>{{tableData1[modifyIndex].month05}}</td>
-					<td>{{tableData1[modifyIndex].month06}}</td>
-					<td>{{tableData1[modifyIndex].month07}}</td>
-					<td>{{tableData1[modifyIndex].month08}}</td>
-					<td>{{tableData1[modifyIndex].month09}}</td>
-					<td>{{tableData1[modifyIndex].month10}}</td>
-					<td>{{tableData1[modifyIndex].month11}}</td>
-					<td>{{tableData1[modifyIndex].month12}}</td>
-					<td>{{tableData1[modifyIndex].total}}</td>
-				</tr>
-				</tbody>
-			</table>
+			<div style="max-height: 600px;overflow-y: scroll">
+				<table v-if="modifyModal">
+					<thead>
+					<tr>
+						<th>2017年月份</th>
+						<th>01月</th>
+						<th>02月</th>
+						<th>03月</th>
+						<th>04月</th>
+						<th>05月</th>
+						<th>06月</th>
+						<th>07月</th>
+						<th>08月</th>
+						<th>09月</th>
+						<th>10月</th>
+						<th>11月</th>
+						<th>12月</th>
+						<th>合计</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr v-for="item in tableData2">
+						<td>户号{{item.id}}</td>
+						<td><input placeholder='-' type="text" v-model="item.month01"></td>
+						<td><input placeholder='-' type="text" v-model="item.month02"></td>
+						<td><input placeholder='-' type="text" v-model="item.month03"></td>
+						<td><input placeholder='-' type="text" v-model="item.month04"></td>
+						<td><input placeholder='-' type="text" v-model="item.month05"></td>
+						<td><input placeholder='-' type="text" v-model="item.month06"></td>
+						<td><input placeholder='-' type="text" v-model="item.month07"></td>
+						<td><input placeholder='-' type="text" v-model="item.month08"></td>
+						<td><input placeholder='-' type="text" v-model="item.month09"></td>
+						<td><input placeholder='-' type="text" v-model="item.month10"></td>
+						<td><input placeholder='-' type="text" v-model="item.month11"></td>
+						<td><input placeholder='-' type="text" v-model="item.month12"></td>
+						<td>{{item.total}}</td>
+					</tr>
+					<tr>
+						<td>合计</td>
+						<td>{{tableData1[modifyIndex].month01}}</td>
+						<td>{{tableData1[modifyIndex].month02}}</td>
+						<td>{{tableData1[modifyIndex].month03}}</td>
+						<td>{{tableData1[modifyIndex].month04}}</td>
+						<td>{{tableData1[modifyIndex].month05}}</td>
+						<td>{{tableData1[modifyIndex].month06}}</td>
+						<td>{{tableData1[modifyIndex].month07}}</td>
+						<td>{{tableData1[modifyIndex].month08}}</td>
+						<td>{{tableData1[modifyIndex].month09}}</td>
+						<td>{{tableData1[modifyIndex].month10}}</td>
+						<td>{{tableData1[modifyIndex].month11}}</td>
+						<td>{{tableData1[modifyIndex].month12}}</td>
+						<td>{{tableData1[modifyIndex].total}}</td>
+					</tr>
+					<tr>
+						<td>系统预测</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td>偏差值</td>
+						<td>{{tableData1[modifyIndex].month01}}</td>
+						<td>{{tableData1[modifyIndex].month02}}</td>
+						<td>{{tableData1[modifyIndex].month03}}</td>
+						<td>{{tableData1[modifyIndex].month04}}</td>
+						<td>{{tableData1[modifyIndex].month05}}</td>
+						<td>{{tableData1[modifyIndex].month06}}</td>
+						<td>{{tableData1[modifyIndex].month07}}</td>
+						<td>{{tableData1[modifyIndex].month08}}</td>
+						<td>{{tableData1[modifyIndex].month09}}</td>
+						<td>{{tableData1[modifyIndex].month10}}</td>
+						<td>{{tableData1[modifyIndex].month11}}</td>
+						<td>{{tableData1[modifyIndex].month12}}</td>
+						<td>{{tableData1[modifyIndex].total}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
 		</Modal>
 	</div>
 </template>

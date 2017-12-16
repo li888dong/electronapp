@@ -7,11 +7,6 @@ export default {
         return{
             columns1: [
                 {
-                    type: 'selection',
-                    width: 60,
-                    align: 'center'
-                },
-                {
                     "sortable": true,
                     title: '资产号',
                     key: 'clientid'
@@ -36,12 +31,12 @@ export default {
                     key: 'wiring'
                 },
                 {
-                    title: 'IP地址',
-                    key: 'n6'
+                    title: '通信地址',
+                    key: 'mailing_address'
                 },
                 {
                     title: '端口号',
-                    key: 'n7'
+                    key: 'port'
                 },
                 {
                     title: '是否已安装',
@@ -86,11 +81,13 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        // this.moreTo(params.row.clientid);
+                                        this.deleteId = params.row.id;
+                                        this.deleteName = params.row.clientid;
+                                        this.modal2 = true;
                                     }
                                 }                            
 
-                            },'更多')
+                            },'删除')
                         ]);
                     }
 
@@ -100,23 +97,37 @@ export default {
             totalPage:0,
             currentPage:1,
             limit:14,
-            loading:true
+            loading:false,
+            modal2:false,
+            deleteId:'',
+            deleteName:''
         }
     },
     methods: {
         infoTo(id) {
             this.$router.push({path:'/EquipmentStatus',query:{id:id}});    
         },
-        moreTo(index) {
-            // this.$router.push({path:'/EquipmentException',query:{id:id}});
+        deleteInfo(){
+            this.$http.delete(this.$api.CLIENT_TERMINAL_DELETE+this.deleteId).then(res=>{
+               console.log('删除终端',res);
+                this.equipmentList();
+                this.modal2 = false;
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+             })
         },
         equipmentList(){
+           this.loading = true;
            this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
              console.log("资产信息列表",res);
              var data = res.data.data;
              if(res.data.status){
                  this.data1 = data.data;
                  this.totalPage = data.total;
+                 this.loading = false;
+             }else{
                  this.loading = false;
              }
            },err=>{
@@ -175,11 +186,14 @@ export default {
         <h3>资产信息</h3>
                
         </div>
-        <div slot="extra">
-             <mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>
-        </div>
+        <!--<div slot="extra">-->
+             <!--<mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>-->
+        <!--</div>-->
         <div class="AssetInfo">
-            <Row class="AssetInfoForm">
+            <div slot="extra">
+                <mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>
+            </div>
+            <Row class="AssetInfoForm" className="mgt_15">
                 <Col span='24'>
                     <Table border :columns='columns1' :data='data1' :loading='loading'></Table>
                 </Col>        
@@ -192,6 +206,21 @@ export default {
         </div>
       </div>           
     </Card>
+    <!-- 是否删除蒙版 -->
+       <Modal v-model="modal2" width="360" class-name="vertical-center-modal">
+        <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="information-circled"></Icon>
+            <span>确认删除？</span>
+        </p>
+        <div style="text-align:center">
+            <p>确认删除资产号为：</p>
+            <p>{{deleteName}}</p>
+        </div>
+        <div slot="footer">
+            <Button type="default" @click='modal2=false'>取消</Button>
+            <Button type="primary" @click='deleteInfo()'>确认</Button>
+        </div>
+    </Modal>
 </div>
 
 </template>

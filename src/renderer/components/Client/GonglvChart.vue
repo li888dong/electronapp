@@ -103,18 +103,18 @@
                         itemWidth: 16,
                         itemHeight: 16,
                     },
-                    toolbox: {
-                        feature: {
-                            myTool2: {
-                                show: true,
-                                title: '自定义扩展方法',
-                                icon: 'image://http://echarts.baidu.com/images/favicon.png',
-                                onclick: function () {
-                                    alert('myToolHandler2')
-                                }
-                            }
-                        }
-                    },
+//                    toolbox: {
+//                        feature: {
+//                            myTool2: {
+//                                show: true,
+//                                title: '自定义扩展方法',
+//                                icon: 'image://http://echarts.baidu.com/images/favicon.png',
+//                                onclick: function () {
+//                                    alert('myToolHandler2')
+//                                }
+//                            }
+//                        }
+//                    },
                     grid: {
                         top: '80',
                         left: 5,

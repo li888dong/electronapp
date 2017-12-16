@@ -15,14 +15,65 @@
                 show: '本月竞价模拟',
                 comsupply:[],
                 powerplant:[],
-                supply:'',
-	            count1:'',
-	            count2:'',
-	            chartData:[
-	                {supply:200,count1:1,count2:0.8},
-	                {supply:300,count1:2,count2:1.8},
-	                {supply:400,count1:3,count2:2.3},
-	                {supply:500,count1:4,count2:3.2},
+                dcMockDatas: [
+                    {
+                        rank: '1',
+                        name: '电厂1',
+                        gongying: 300,
+                        baojia: 3.2,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '电厂1',
+                        gongying: 400,
+                        baojia: 3.1,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '电厂1',
+                        gongying: 500,
+                        baojia: 3.4,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '电厂1',
+                        gongying: 600,
+                        baojia: 3.6,
+                        caozuo: '修改',
+                    },
+                ],
+                gsMockDatas: [
+                    {
+                        rank: '1',
+                        name: '最高报价',
+                        gongying: 300,
+                        baojia: 5.2,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '最低报价',
+                        gongying: 400,
+                        baojia: 4.9,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '最低报价',
+                        gongying: 400,
+                        baojia: 5.4,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '最低报价',
+                        gongying: 400,
+                        baojia: 4.1,
+                        caozuo: '修改',
+                    },
                 ],
                 columns1: [
                     {
@@ -55,7 +106,7 @@
                         key: 'seller_price'
                     }, {
                         title: '售电公司报价',
-                        key: 'com_price'
+                        key: 'sdgsbj'
                     }, {
                         title: '报价差价',
                         key: 'price_dif'
@@ -90,16 +141,6 @@
                     this.$api.errcallback(err);
                 })
 	        },
-	        lastResolute(){
-	            this.$http.post(this.$api.BIDDING_LIST,{com_id:this.$store.getters.com_id}) .then(res=>{
-	                console.log('上期交易结果公示',res);
-	                this.data1 = res.data.data;
-	            },err => {
-                    this.$api.errcallback(err);
-                }) .catch(err => {
-                    this.$api.errcallback(err);
-                })
-	        },
             switchSelected(type) {
                 this.mockSelected = type
             },
@@ -112,11 +153,8 @@
             showCurrent: function (value) {
                 this.show = value;
             },
-            addChartData(){
-                this.chartData.push({supply:this.supply,count1:this.count1,count2:this.count2});
-                this.supply = 0;
-                this.count1 = 0;
-                this.count2 = 0;
+            add() {
+
             }
         },
         components: {
@@ -162,48 +200,48 @@
 						<span>推荐报价方案B：123.321</span>
 						<span>推荐报价方案C：123.321</span>
 					</div>
-					<bid-chart :comsupply="comsupply" :powerplant="powerplant" :chartData="chartData"></bid-chart>
+					<bid-chart :comsupply="gsMockDatas" :powerplant="dcMockDatas"></bid-chart>
 				</Card>
 				</Col>
 				<Col span="6" style="height: 100%;">
-				<Card class="height_392" style="overflow-y: scroll">
+				<Card class="height_392">
 					<h3 slot="title" class="title-lv2">模拟交易</h3>
-					<ul >
-						<li class="flex-row">
-							<div class="flex-col" style="justify-content: center">
-								<Input type="text" placeholder="供应量" v-model="supply"/>
-							</div>
-							<div class="flex-col">
-								<Input type="text" placeholder="供应侧报价" v-model="count1"/>
-								<Input type="text" placeholder="需求侧报价" v-model="count2"/>
-							</div>
-							<div class="flex-col" style="justify-content: center">
-								<Button type="primary" @click="addChartData">添加</Button>
-							</div>
-						</li>
-						<li class="flex-row">
-							<div class="flex-col" style="justify-content: center">
-								<span>供应量(kw.h)</span>
-							</div>
-							<div class="flex-col">
-								<span>售电公司报价(元)</span>
-								<span>电厂报价(元)</span>
-							</div>
-
-						</li>
-						<template v-for="item in chartData">
-							<li class="flex-row">
-								<div class="flex-col" style="justify-content: center">
-									<span>{{item.supply}}</span>
-								</div>
-								<div class="flex-col">
-									<span>{{item.count1}}</span>
-									<span>{{item.count2}}</span>
-								</div>
-
-							</li>
-						</template>
-
+					<div slot="extra" class="btn-group2">
+						<Radio-group v-model="tabValue" type="button" v-on:on-change="switchSelected">
+							<Radio label="添加供给侧价格"></Radio>
+							<Radio label="添加需求侧价格"></Radio>
+						</Radio-group>
+					</div>
+					<div class="input-container">
+						<Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="电厂名称" v-model="dcmc"
+						       style="width:120px;"/>
+						<Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="供应量" v-model="gyl"
+						       style="width:75px;margin-right:4px;margin-left:4px;"/>
+						<Input v-if="mockSelected === '添加需求侧价格'" type="text" placeholder="售电公司名称" v-model="dcmc"
+						       style="width:120px;"/>
+						<Input v-if="mockSelected === '添加需求侧价格'" type="text" placeholder="需求量" v-model="gyl"
+						       style="width:75px;margin-right:4px;margin-left:4px;"/>
+						<Input placeholder="报价(元/Kw时)" v-model="bj" style="width:90px;"/>
+						<div v-if="mockSelected === '添加供给侧价格'" class="btn-save fr">
+							<Button type="primary">保存</Button>
+						</div>
+						<div v-if="mockSelected === '添加需求侧价格'" class="btn-save fr">
+							<Button type="primary">保存</Button>
+						</div>
+					</div>
+					<ul v-for="mockData in dcMockDatas" v-if="mockSelected === '添加供给侧价格'">
+						<li>{{mockData.rank}}</li>
+						<li class="name" :title="mockData.name">{{mockData.name}}</li>
+						<li class="gongying">{{mockData.gongying}}</li>
+						<li class="baojia">{{mockData.baojia}}</li>
+						<li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
+					</ul>
+					<ul v-for="mockData in gsMockDatas" v-if="mockSelected === '添加需求侧价格'">
+						<li>{{mockData.rank}}</li>
+						<li class="name" :title="mockData.name">{{mockData.name}}</li>
+						<li class="gongying">{{mockData.gongying}}</li>
+						<li class="baojia">{{mockData.baojia}}</li>
+						<li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
 					</ul>
 				</Card>
 				</Col>
@@ -254,11 +292,16 @@
 		margin-left: 20px;
 		text-align: center;
 	}
-	li.flex-row{
-		border-bottom: 1px solid #EEEEEE;
+
+	ul {
+		overflow: hidden;
+		font-size: 12px;
 	}
-	li.flex-row div{
-		margin: 10px;
+
+	ul li {
+		float: left;
+		margin-top: 20px;
+
 	}
 
 	li.name {
@@ -346,9 +389,6 @@
 
 	.ivu-radio-wrapper {
 		width: 120px;
-		text-align: center;
-	}
-	.center{
 		text-align: center;
 	}
 </style>

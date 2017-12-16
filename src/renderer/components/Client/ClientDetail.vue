@@ -369,7 +369,7 @@
 			<Col span="16">
 				<Card class="user-detail">
 					<h3 slot="title">用户基本信息</h3>
-					<span slot="extra" class="detail-btn" @click="$router.push('AddClient')">详情</span>
+					<!--<span slot="extra" class="detail-btn" @click="$router.push('AddClient')">详情</span>-->
 					<Row>
 						<table cellspacing="5" width="100%" style="margin-left: 20px;">
 							<tbody>
@@ -392,7 +392,7 @@
 			<Col span="8">
 				<Card class="agreement-detail">
 					<h3 slot="title">合同基本情况</h3>
-					<span slot="extra" class="detail-btn"  @click="$router.push({path:'/add-hetong',query:{cus_name:cus_name,cus_id:cus_id}})">详情</span>
+					<span slot="extra" class="detail-btn"  @click="$router.push({path:'/hetong',query:{cus_name:cus_name,cus_id:cus_id}})">详情</span>
 
 					<Row>
 						<table  cellspacing="5" width="100%" style="margin-left: 20px;">

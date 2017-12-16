@@ -62,7 +62,7 @@ export default {
             totalPage:0,
             currentPage:1,
             limit:6,
-            loading:true
+            loading:false
         }
     },
     components : {
@@ -89,6 +89,7 @@ export default {
             this.$Message.info('取消删除');
         },
         changxieList(){
+            this.loading=true;
             this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
                 console.log('长协列表',res);
                 var data = res.data.data.data;
@@ -106,6 +107,8 @@ export default {
                     }
                     this.hetongList = arr;
                     this.loading = false;
+                }else{
+                   this.loading = false;
                 }
             },err=>{
                  this.loading = false;
@@ -120,6 +123,7 @@ export default {
         },
         pageChange(value){
           console.log(value);
+          this.loading=true;
             this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
                 console.log('长协列表分页',res);
                 var data = res.data.data.data;   
@@ -198,7 +202,7 @@ export default {
                     <Table :columns = 'columns1' style='margin-left: 10%;height:100%' size='small' :data='item.lpdist'></Table>
                 </div>
             </div>        
-       <Spin size='large' fix v-if='loading'></Spin>      
+          <Spin size='large' fix v-if='loading'></Spin>      
         </div>
          <div class="page-center">
         <!--分页-->

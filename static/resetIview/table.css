@@ -115,3 +115,6 @@
 .ht-list .ivu-table-row:last-child td{
 	border-bottom: none;
 }
+.ht-list .ivu-table:after{
+	 width:0;
+}

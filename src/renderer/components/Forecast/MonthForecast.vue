@@ -10,7 +10,7 @@ export default {
             modalShow: false,
             spinShow:false,
             currentPage:1,
-            limit:11,
+            limit:14,
             totalPage:1,
             selectList: [],
             modifyList:[],
@@ -72,9 +72,13 @@ export default {
                     align: 'center'
                 },{
                     title: '月度预测记录(万kW-h)',
-                    key: 'log',
                     align: 'center',
-git
+                    render:(h,params)=>{
+                        let text='';
+                        params.row.log.map(i=>text+='//'+i.created_at+'_'+i.total+'kW-h')
+                       console.log(params)
+                       return h('span',{},text)
+                    }
                 },{
                     title: '月度预测(万kW-h)',
                     key: 'p_predict',
@@ -145,7 +149,8 @@ git
                                 },
                                 on: {
                                     click: () => {
-                                        this.renderM(params)
+                                        this.modifyIndex = params.index;
+                                        this.renderM(params.row)
                                     }
                                 }
                             }, '修改')
@@ -254,7 +259,21 @@ git
             this.tableData1[index].status = value;
         },
         renderM() {
-            this.modal1= true
+            // this.tableData1 = value;
+            // console.log(valu);
+            this.modal1= true;
+            this.$http.post(this.$api.MONTH_MODIFY, {
+                cus_id:this.tableData1[this.modifyIndex].cus_id,
+                data:[this.tableData1[this.modifyIndex].id,this.tableData1[this.modifyIndex].p_predict],
+                total:this.tableData1[this.modifyIndex].p_predict,
+                month:this.tableData1[this.modifyIndex].month
+            }).then(res => {
+                console.log("月度预测修改", res);
+            }, err => {
+                this.$api.errcallback(err);
+            }).catch(err => {
+                this.$api.errcallback(err);
+            })
         },
         toDaoru() {
             this.$router.push({path:"/import-data",query:{type:'month'}})
@@ -320,40 +339,30 @@ git
         :mask-closable="false"
         class-name="vertical-center-modal">
         <Row class="gongSiBox" v-if="modal1">
-            <Col span="8" class="gongSi">
+            <Col span="9" class="gongSi">
                 <Row class="comName">
-                    <Col span='10'>企业名称</Col>
-                    <Col span='7'>所属区域</Col>
-                    <Col span='7'>是否购电</Col>
+                    <Col span='12'>企业名称</Col>
+                    <Col span='6'>所属区域</Col>
+                    <Col span='6'>是否购电</Col>
                 </Row>
-                <Row style="margin-top:35px;text-align: center;">
+                <Row style="text-align: center;line-height: 34px;">
                     <Col span='10'>{{tableData1[modifyIndex].name}}</Col>
                     <Col span='7'>{{tableData1[modifyIndex].area}}</Col>
                     <Col span='7'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
                 </Row>
             </Col>
-            <Col span="16">
+            <Col span="15">
                 <table cellspacing="10" cellpadding="10">
                     <tr>
-                        <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
-                        <td>企业申报合计: 0</td>
-                        <td>人工预测合计: {{tableData1[modifyIndex].p_predict}} <br>
+                        <td>系统预测合计: {{tableData1[modifyIndex].p_predict}}</td>
+                        <td>企业申报合计: {{tableData1[modifyIndex].declare}}</td>
+                        <td>人工预测合计: {{tableData1[modifyIndex].forecast}} <br>
                         <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox></td>
                     </tr>
                     <tr>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <input type="text" placeholder="-"> </td>
-                    </tr>
-                    <tr>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <input type="text" placeholder="-"></td>
-                    </tr>
-                    <tr>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <span class="num">0</span></td>
-                        <td>1234657498: <input type="text" placeholder="-"></td>
+                        <td>tableData1[modifyIndex].user_no<span class="num">0</span></td>
+                        <td>tableData1[modifyIndex].user_no<span class="num">0</span></td>
+                        <td>tableData1[modifyIndex].user_no<input type="text" placeholder="-"> </td>
                     </tr>
                 </table>
             </Col>

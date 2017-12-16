@@ -9,7 +9,7 @@ if (!token){
     axios.post('http://192.168.2.111/oauth/token',{
         grant_type:'client_credentials',
         client_id:1,
-        client_secret:'5o5ZVZZg3mHSSI3zD1ORjFKnlfHWgKBIXz6Yv0uM',
+        client_secret:'IRwipTloBj54dYeznekQt2shYHaTrmeIIRXq0bQb',
         scope:''
 
     }).then(res=>{

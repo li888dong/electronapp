@@ -121,11 +121,12 @@ export default {
             totalPage:0,
             currentPage:1,
             limit:14,
-            loading:true
+            loading:false
         }
     },
     methods:{
        equipmentAbnormal(){
+          this.loading = true;
           this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
              console.log("设备异常记录列表",res);
              if(res.data.status){
@@ -144,6 +145,7 @@ export default {
           })
        },
        pageChange(value){
+          this.loading = true;
           this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
              console.log("设备异常记录列表",res);
              if(res.data.status){
@@ -190,7 +192,7 @@ export default {
         <div class="EquipmentExceptionBox">
             <div class="ExceptionTop">
                 <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
-                <Button type="primary" class="refresh" style="margin-left: 10px;"><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
+                <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentAbnormal()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
                 <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
                     <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>

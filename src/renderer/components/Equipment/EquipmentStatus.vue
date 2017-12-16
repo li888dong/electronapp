@@ -63,29 +63,7 @@ export default {
                     "sortable": true,
                     title: '上报比例',
                     key: 'report_ratio'
-                },
-                {
-                    title: '操作',
-                    key: 'n11',
-                    align: 'center',
-                    render: (h, params) => {
-                        return h('div', [                            
-                            h('span', {
-                                style: {
-                                    marginRight: '5px',
-                                    color:'#36c ',
-                                    cursor:'pointer'
-                                },
-                                on: {
-                                    click: () => {
-                                        
-                                    }
-                                }
-                            }, '更多')                            
-                        ]);
-                    }
-
-                }               
+                },              
             ],
             data1: [],
             cityList: [
@@ -123,7 +101,7 @@ export default {
             totalPage:0,
             currentPage:1,
             limit:14,
-            loading:true
+            loading:false
         }
     },
     methods:{
@@ -132,6 +110,7 @@ export default {
         },
         equipmentInfo(){
             if(this.$route.query.id){
+                this.loading = true;
                 this.$http.post(this.$api.EQUIPMENT_INFO,{clientid:this.$route.query.id}).then(res=>{
                      console.log("设备详情",res);
                      if(res.data.status){
@@ -149,6 +128,7 @@ export default {
                 })
 
             }else{
+                  this.loading = true;
                  this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
                 console.log("设备统计日志",res);
                 if(res.data.status){
@@ -213,16 +193,17 @@ export default {
         <div class="EquipmentStatusBox">
             <div class="statusTop">
                 <div class="fl">
+                    <DatePicker type="datetime" placeholder="请选择日期"  style="width: 200px"></DatePicker>
+                    <!--<Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">-->
+                        <!--<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
+                    <!--</Select>-->
                     <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
-                    <Button type="primary" class="refresh" style="margin-left: 10px;"><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
-                    <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
-                        <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                    </Select>
-                    <DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker>
                 </div>
                 <div class="viewOffline">
                     <Checkbox label="Eat"></Checkbox>
                     仅显示已掉线设备
+                    <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentInfo()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
+
                 </div>    
             </div>
             <Row class="statusForm">

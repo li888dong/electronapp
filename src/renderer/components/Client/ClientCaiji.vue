@@ -3,7 +3,8 @@
         name: 'caiji',
         data() {
             return {
-                currentPDS: '1',
+                terminalList:[],
+                currentPDS:1,
                 powerType: '综合',
                 origratio:'',
                 columnzh: [
@@ -222,6 +223,18 @@
             changeSelect(pds) {
                 this.currentPDS = pds;
             },
+            //用户终端列表
+            clientTerminalList() {
+                this.$http.post(this.$api.CLIENT_TERMINAL_LIST, {cus_id: this.$store.getters.cus_id}).then(res => {
+                    console.log('用户终端列表', res.data[0]);
+                    this.terminalList = res.data[0].data;
+                    this.terminalCollectRecord('综合');
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
+            },
             terminalCollectRecord(type) {
                 let typeNum = 0;
                 switch (type) {
@@ -276,7 +289,7 @@
 
 	    },
         beforeMount() {
-            this.terminalCollectRecord('综合');
+            this.clientTerminalList();
         }
     }
 </script>
@@ -297,24 +310,11 @@
 			</div>
 			<Row className="pds-container">
 				<div class="tab-container">
-					<my-tab v-on:changeSelect="changeSelect('1')" v-bind:type="currentPDS === '1'?'disabled':'normal'">
-						10KV配电室-1
-					</my-tab>
-					<my-tab v-on:changeSelect="changeSelect('2')" v-bind:type="currentPDS === '2'?'disabled':'normal'">
-						10KV配电室-2
-					</my-tab>
-					<my-tab v-on:changeSelect="changeSelect('3')" v-bind:type="currentPDS === '3'?'disabled':'normal'">
-						10KV配电室-3
-					</my-tab>
-					<my-tab v-on:changeSelect="changeSelect('4')" v-bind:type="currentPDS === '4'?'disabled':'normal'">
-						10KV配电室-4
-					</my-tab>
-					<my-tab v-on:changeSelect="changeSelect('5')" v-bind:type="currentPDS === '5'?'disabled':'normal'">
-						10KV配电室-5
-					</my-tab>
-					<my-tab v-on:changeSelect="changeSelect('6')" v-bind:type="currentPDS === '6'?'disabled':'normal'">
-						10KV配电室-6
-					</my-tab>
+					<template v-for="(item,index) in terminalList">
+						<my-tab v-on:changeSelect="changeSelect(index,item.id,item.clientid)"
+						        v-bind:type="currentPDS === index?'disabled':'normal'">{{item.mea_name}}
+						</my-tab>
+					</template>
 				</div>
 			</Row>
 			<Row v-if="powerType ==='综合'">
@@ -388,5 +388,8 @@
 
 	.btn-group {
 		margin-top: -8px;
+	}
+	.tab-container span {
+		margin-right: 5px;
 	}
 </style>

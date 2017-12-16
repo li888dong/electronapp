@@ -97,7 +97,7 @@ export default {
             totalPage:0,
             currentPage:1,
             limit:5,
-            loading:true
+            loading:false
         }
     },
     methods: {
@@ -126,6 +126,7 @@ export default {
         //     this.data1.splice(index, 1)
         // }
         powerSaleList(){
+          this.loading =true;
            this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
               console.log("售电合同列表",res);
               console.log(res.data.data);
@@ -133,6 +134,8 @@ export default {
                 this.data1=res.data.data.data;
                  console.log(this.data1);
                  this.totalPage = res.data.data.total;
+                 this.loading = false;
+              }else{
                  this.loading = false;
               }
               
@@ -145,6 +148,7 @@ export default {
            })
         },
         pageChange(value){
+          this.loading = true;
              this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
               console.log("售电合同列表",res);
               console.log(res.data.data);
@@ -154,11 +158,15 @@ export default {
                  this.totalPage = res.data.data.total;
                  this.currentPage = res.data.data.current_page;
                  this.loading = false;
+              }else{
+                 this.loading = false;
               }
               
            },err=>{
+              this.loading = false;
              this.$api.errcallback(err);
            }).catch(err=>{
+                this.loading = false;
                this.$api.errcallback(err);
            })
 

@@ -55,7 +55,7 @@
                 dataList6: [
                     {
                         value: '河南许继仪表有限公司',
-                        label: '1',
+                        label: '河南许继仪表有限公司',
                     }, 
                 ],
                 name: '',
@@ -180,8 +180,8 @@
                         serial_no: this.terminalList.ccbh,
                         factory: this.terminalList.sccj,
                         pur_date: this.terminalList.cgrq,
-                        mailing_address: this.terminalList.txdz,
-                        port: this.terminalList.port,
+                        mailing_address: this.txdz,
+                        port: this.port,
                         sim_no: this.terminalList.sim,
                         operators: this.terminalList.ydyys,
                         is_install: 1,
@@ -275,13 +275,13 @@
                 this.$Message.success('添加成功');
             },
             changeValue(){
-                if(this.terminalList.pt1 != '' && this.terminalList.pt2 != ""){
+                if(this.terminalList.pt1&& this.terminalList.pt2){
                      this.terminalList.ptxs = this.terminalList.pt1 /this.terminalList.pt2
                      this.terminalList.ptxs = Math.ceil(this.terminalList.ptxs);
                 }
             },
             ctValueChange(){
-                if(this.terminalList.ct1 != '' && this.terminalList.ct2 != ''){
+                if(this.terminalList.ct1 && this.terminalList.ct2){
                     this.terminalList.ctxs = this.terminalList.ct1 / this.terminalList.ct2;
                     this.terminalList.ctxs =  Math.ceil(this.terminalList.ctxs);
                 }
@@ -479,7 +479,7 @@
                            <Row>
                            <Col span='10'>
                            <FormItem>
-                           <Input class="width_183" v-model='port'></Input>
+                           <Input class="width_183" v-model='port' maxlength='4'></Input>
                            </FormItem>
                            </Col>
                            </Row>
@@ -499,7 +499,7 @@
                          <Row>
                          <Col span='10'>
                          <FormItem  prop='ydyys'>
-                         <Select class='width_183'>
+                         <Select class='width_183' v-model='terminalList.ydyys'>
                           <Option value='中国移动'>中国移动
                           </Option>
                           <Option value='中国联通'>中国联通
@@ -522,10 +522,10 @@
 			<div class="btn-group" style="text-align: center;">
 				<Button type="primary" @click="addTerminal()">保存并继续添加</Button>
 				<Button type="default" class="mglr_10" @click="addTerminal('goDetil')">保存</Button>
-				<Button type="default">取消</Button>
+				<Button type="default" @click="$router.go(-1)">取消</Button>
 			</div>
 			<div v-show='hint'>
-				<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red'>内容不能为空</Alert>
+				<Alert type="warning" show-icon style='width: 200px;margin:2px auto;color: red'>内容不能为空</Alert>
 			</div>
 			<Modal
 					v-model="modal2"
@@ -615,7 +615,7 @@
 		width: 100%;
 		height: 40px;
 		line-height: 40px;
-        margin-top:20px;
+        margin-top:10px;
 	}
 
 	.modal-container {
@@ -682,7 +682,7 @@
 	}
 
 	.mgb_20 {
-		margin-bottom: 14px;
+		margin-bottom: 20px;
 	}
 
 	.mgb_10 {

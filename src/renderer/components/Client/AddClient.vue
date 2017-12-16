@@ -146,7 +146,7 @@ export default {
                 console.log(res);
                 if(res.data.status){
                     if (goht){
-                    this.$router.push('add-hetong');
+                    this.$router.push({path:'add-hetong',query:{cus_name:this.formItem.name}});
                    }else{
                       this.$router.push('client-list');
                       for(let k in this.formItem){
@@ -355,7 +355,7 @@ export default {
             <Row>
                 <Col span="8">
                     <Form-item label="联系人电话" prop='telphone' class='mgb_20'>
-                        <i-input v-model="formItem.telphone" placeholder="请输入联系人手机号码" v-on:on-blur='tel'></i-input>
+                        <i-input v-model="formItem.telphone" placeholder="请输入联系人手机号码"></i-input>
                     </Form-item>
 
                 </Col>
@@ -375,7 +375,7 @@ export default {
             </Row>
             <Row>
                 <Col span="8">
-                    <Form-item label="办公电话" class='mgb_20'>
+                    <Form-item label="办公电话" class='mgb_20 mgb_15'>
                         <Col span="8">
                         <FormItem prop='officephone1'>
                             <i-input v-model="formItem.officephone1" placeholder="-"  id='tel1'></i-input>
@@ -399,7 +399,7 @@ export default {
                         <Col span="1" style="text-align: center;line-height: 34px;">-</Col>    
                         <Col span="15">
                         <FormItem prop='fax2'>
-                           <i-input v-model="formItem.fax2" placeholder="请输入传真号码" v-on:on-blur='faxReg'></i-input>
+                           <i-input v-model="formItem.fax2" placeholder="请输入传真号码"></i-input>
                         </FormItem>
                         </Col>
                     </Form-item>
@@ -410,9 +410,9 @@ export default {
                     <Form-item style='margin-bottom: 0'>
                         <i-button type="primary" @click="addClient('goht')">保存并添加合同</i-button>
                         <i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
-                        <i-button type="ghost" style="margin-left: 30px">取消</i-button>
-                        <div v-if='hint' style="margin-left: 150px;">
-                            <Alert type="warning" show-icon style='width: 200px;margin:0px auto;color: red;'>内容不能为空
+                        <i-button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</i-button>
+                        <div v-if='hint' style="margin-left: 60px;">
+                            <Alert type="warning" show-icon style='width: 200px;margin:4px auto;color: red;'>内容不能为空
                             </Alert>
                         </div>
                     </Form-item>     
@@ -431,9 +431,11 @@ export default {
 .mgb_20 {
     margin-bottom: 20px;
 }
+.mgb_15{
+    margin-bottom: 12px;
+}
 
 .AddClient{
-    max-width: 1700px;
     padding: 20px;
     line-height: 1;
     max-height: 914px;

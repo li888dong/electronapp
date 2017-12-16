@@ -8,40 +8,42 @@
                 column1: [
                     {
                       title:'营销用户编号',
-                      key:'user_no'
+                      key:'user_no',
+                      align:'center'
                     },
 
                     {
                         title: '用户电压等级',
                         key: 'vol_level',
+                        align:'center'
                     },
                     {
                         title: '报装容量',
                         key: 'packing_capacity',
+                        align:'center'
                     },
                     {
                         title: '用户类型',
                         key: 'unit_type',
+                        align:'center'
                     },
                     {
                         title: '用户单元类型',
                         key: 'category',
+                        align:'center'
                     },
                     {
                         title: '用户地址',
                         key: 'address',
-                        width:'350'
+                        width:'350',
+                        align:'center'
                     }
                 ],
-		        agreementList:[{
-		        	con_no:'',
-		        	data1:[]
-
-		        },],
-            pageTotal:0,
-            limit:16,
-            currentPage:1,
-            loading:true
+		        agreementList:[],
+                pageTotal:0,
+                limit:16,
+                currentPage:1,
+                loading:true
 	        }
 		},
 		methods:{
@@ -49,11 +51,10 @@
 		        this.modal1 = true
 		    },
 		    userAgreement(){
-		      this.$http.post(this.$api.CLIENT_CONTRACT_AGREEMENT,{cus_id:this.cus_id,page:this.currentPage,limit:this.limit}).then(res=>{
+		      this.$http.post(this.$api.POWER_SALE_LIST,{cus_id:this.cus_id,page:this.currentPage,limit:this.limit}).then(res=>{
 		       	     console.log("合同管理",res);
 		       	     if(res.data.status){
-		    		 	 this.agreementList[0].con_no = res.data.con_no;
-		    		 	 this.agreementList[0].data1 = res.data.data.data;
+		    		 	 this.agreementList = res.data.data.data;
 		    		 	 this.pageTotal = res.data.data.total;
 		    		 	 this.loading = false;
  		    		 }else{
@@ -71,8 +72,7 @@
 		    	this.$http.post(this.$api.CLIENT_CONTRACT_AGREEMENT,{cus_id:this.cus_id,page:value,limit:this.limit}).then(res=>{
 		    		 console.log('合同管理分页',res);
 		    		if(res.data.status){
-		    		 	 this.agreementList[0].con_no = res.data.con_no;
-		    		 	 this.agreementList[0].data1 = res.data.data.data;
+		    		 	 this.agreementList = res.data.data.data;
 		    		 	 this.pageTotal = res.data.data.total;
 		    		 	 this.currentPage = res.data.data.current_page;
 		    		 	 this.loading = false;
@@ -87,16 +87,42 @@
 		    		 this.loading = false;
 		    		 this.$api.errcallback(err);
 		    	})
-		    }
+		    },
+		    ok (index) {
+            console.log(index);
+            
+            this.$http.post(this.$api.POWER_SALE_DEL,{id:this.data1[index].id}).then(res=>{
+                console.log('售电合同删除ok',res);
+                if(res.data.status){
+                    this.data1.splice(index, 1);
+                }
+            },err=>{
+                this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        cancel () {
+            this.$Message.info('点击了取消');
+        },
+        toAddHetong(){
+        	this.$router.push({path:'/add-hetong',query:{cus_name:this.cus_name}})
+        }
 		},
 		computed:{
             cus_id:function () {
                 return this.$store.getters.cus_id
             },
+            cus_name:function(){
+            	return this.$store.getters.cus_name;
+            }
         },
         watch:{
         	cus_id:function(){
         		this.userAgreement();
+        	},
+        	cus_name:function(){
+
         	}
         },
 		components : {
@@ -111,23 +137,38 @@
 		<Card class="ht-container">
 			<h3 slot="title">合同管理</h3>
 			<div class="btn-group" slot="extra">
-				<Button type="primary" style="top: -8px;"><Icon type="plus"></Icon><router-link to="/add-hetong" tag="span"> 添加合同</router-link></Button>
+				<Button type="primary" style="top: -8px;" @click='toAddHetong()'><Icon type="plus"></Icon> 添加合同</Button>
 			</div>
 			<div class="ht-list relative" v-for='item in agreementList'>
+			            <ul class="hetongNav">
+                        <li>{{item.cus_name}}</li>
+                        <li>合同编号：{{item.con_no}}</li>
+                        <li>合同方式：{{item.way}}</li>
+                        <li>上年用电量：{{item.ly_used}} MWh</li>
+                        <li>上年最大负荷：{{item.ly_maxload}} MWh</li>
+                        <li>本年度预计电量：{{item.bndyjdl}} MWh</li>
+                        <li>本年度预计最大负荷：{{item.bndyjzdfh}} MWh</li>
+                        <li class="change">
+                            <router-link  :to="{path:'/add-hetong',query:{id:item.id,cus_name:item.cus_name,con_no:item.con_no,way:item.way,way_param:item.way_param,deadline:item.deadline,ly_used:item.ly_used,ly_maxload:item.ly_maxload,bndyjdl:item.bndyjdl,bndyjzdfh:item.bndyjzdfh,usernos:item.usernos,user_nums:item.user_nums}}" tag="span" style="cursor: pointer; ">修改</router-link>
+                            <span>
+                                <!-- 气泡提示模板 -->
+                                <Poptip
+                                    placement="left-end"
+                                    confirm
+                                    title="您确认删除这条内容吗？"
+                                    @on-ok="ok(index)"
+                                    @on-cancel="cancel">
+                                    <span>删除</span>
+                                </Poptip>
+                            </span>
+                        </li>
+                    </ul>
+                        <div class="htData">
 						<div class="saleSee">
                             <i class="iconfont icon-jishiben01"></i>
-                            <p style="text-align: center;margin-top:-5px;">{{item.con_no}}</p>
                         </div> 
-						  <div class="tableBox">
-						       <Table border size='small' :columns="column1" :data="item.data1"></Table>
-						  </div>
-						 
-						<div class="caozuoBox">
-							<div class="header">操作</div>
-						</div>	
-						<div class="caozuo">
-								<p><router-link to="/add-hetong" tag="a">修改</router-link><a>删除</a></p>
-					</div>	
+						       <Table border size='small' :columns="column1" :data="item.usernos" style='margin-left: 10%'></Table>
+						  </div>		
 					<Spin fix v-if='loading'></Spin>	
 			     </div>
 			<div class="page-center">
@@ -144,11 +185,8 @@
 	.ht-container{
 		height:856px;
 	}
-	.ht-container td{
-		text-align: center;
-	}
 	.ht-list {
-       border:1px solid #ccc;
+       /*border:1px solid #ccc;*/
 
 	}
 	.ht-content{
@@ -170,44 +208,6 @@
     font-size: 30px;
     color: #ccc;
      }
-	.tableBox{
-      width:80%;
-      height: 100%;
-      margin-left:11%;
-	}
-	.caozuoBox .header{
-		background-color: #f8f8f9;
-		height: 32px;
-		text-align: center;
-		line-height: 32px;
-		border-bottom: 1px solid #dddee1;
-	}
-	.caozuoBox{
-		 width:130px;
-		 position: absolute;
-		 right:0;
-		 top:0;
-	}
-	.caozuo{
-		width: 100px;
-		position: absolute;
-		top:50%;
-		right:10px;
-	}
-	.caozuo p{
-		text-align: center;
-		position: absolute;
-		top:0;
-		left:0;
-		bottom: 0;
-		right:0;
-		display: flex;
-		justify-content: center;
-	}
-	.caozuo a{
-		display: inline-block;
-		width: 40px;
-	}
 	.relative .page-center{
 		text-align: center;
 		position: absolute;
@@ -237,5 +237,31 @@
 		 height: 100%;
 		 border-top:none;
 	}
-	
+	.htData {
+    position: relative;
+    border: 1px solid #e9eaec;
+}
+ .hetongNav{
+    height: 50px;
+    background-color: #f8f8f9;
+    padding-left: 15px;
+    position: relative;
+    /*margin-bottom: 15px;*/
+    font-size: 14px;
+    font-weight: 400;
+    border:1px solid #eeeeee;
+    border-bottom: none;
+}
+.hetongNav li{
+    float: left;
+    line-height: 50px;
+    padding-right: 30px;
+}
+.hetongNav .change{
+    position: absolute;
+    right: 30px;
+    top: 0;
+    color: #108CEE;
+    cursor: pointer;
+}	
 </style>

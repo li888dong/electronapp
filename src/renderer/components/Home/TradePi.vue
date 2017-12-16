@@ -141,29 +141,36 @@
                         }
                     ]
                 };
+            },
+		    pieChart:function () {
+			    return this.$echarts.init(document.getElementById('powerTimeFrame'))
             }
 	    },
         mounted() {
-
+			this.pieChart.showLoading();
             this.$http.post(this.$api.BID_FRAME,{com_id:this.$store.getters.com_id})
                 .then(res => {
+                    this.pieChart.hideLoading();
 	                this.tradeData= res.data.data;
                     console.log('交易分布',this.tradeData);
-                    this.drawLine(this.chartOption);
+                    this.drawLine();
                 }, err => {
+                    this.pieChart.hideLoading();
+                    this.drawLine();
                     this.$api.errcallback(err)
                 })
                 .catch(err=>{
+                    this.pieChart.hideLoading();
+                    this.drawLine();
                     this.$api.errcallback(err)
                 })
 
         },
         methods: {
-            drawLine(option = this.chartOption) {
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
-                let powerFrameChart = this.$echarts.init(document.getElementById('powerTimeFrame'));
-                // 绘制图表
-                powerFrameChart.setOption(option);
+                this.pieChart.clear();
+                this.pieChart.setOption(this.chartOption);
             }
         }
     }

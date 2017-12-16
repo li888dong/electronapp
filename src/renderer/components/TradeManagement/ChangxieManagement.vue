@@ -4,6 +4,9 @@
         data() {
             return {
                 year:new Date().getFullYear(),
+                currentPage:1,
+                totalPage:5,
+                pageLimit:3,
                 columns6:[
                     {
                         title:'类型',
@@ -202,8 +205,30 @@
 
 	            chartData:{
                     xData:['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-		            yData:[],
-		            dcList:[]
+		            yData:[{name: '电厂名称1',
+                            type: 'bar',
+                            stack: '总量',
+                            barWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data:['0','0','0','0','0','0','0','0','0','0','0','0']
+                        },{name: '电厂名称2',
+                            type: 'bar',
+                            stack: '总量',
+                            barWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data:['0','0','0','0','0','0','0','0','0','0','0','0']
+                        },],
+		            dcList:['电厂名称1','电厂名称2']
 	            }
             }
         },
@@ -225,7 +250,7 @@
                         right:'0',
                         itemWidth:16,
                     },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                     grid: {
                         top:'40',
                         left: '0',
@@ -262,10 +287,17 @@
             gotoZhishu(){
                 this.$router.push('/client-compare');
             },
-	        qianyueList(){
-                this.$http.post(this.$api.CX_QY,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
+	        qianyueList(page){
+                this.$http.post(this.$api.CX_QY,{
+                    com_id:this.$store.getters.com_id,
+	                year:this.year,
+                    page:page,
+                    limit:this.pageLimit
+                }).then(res=>{
                     console.log("长协签约表格",res);
-                    this.qyTable = res.data.data.data
+                    this.qyTable = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.currentPage;
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -276,9 +308,11 @@
                 this.$http.post(this.$api.CX_CHART,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
                     console.log("长协统计图表",res);
                     let data = res.data.data;
+                    var arr1 =[];
+                    var arr2 =[];
                     data.map(i=>{
-                        this.chartData.dcList.push(i.powerplant);
-                        this.chartData.yData.push({
+                        arr1.push(i.powerplant);
+                        arr2.push({
                             name: i.powerplant,
                             type: 'bar',
                             stack: '总量',
@@ -292,6 +326,8 @@
                             data: Object.values(i.info[0])
                         });
                     });
+                    this.chartData.dcList = arr1;
+                    this.chartData.yData = arr2;
                     console.log(this.chartData);
                     this.drawChart();
 
@@ -304,7 +340,8 @@
         },
         mounted() {
             this.doAjax();
-            this.qianyueList();
+            this.qianyueList(1);
+            this.drawChart();
         },
 	    components:{
 
@@ -335,15 +372,19 @@
 					<div slot="extra" class="btn-group">
 						<Button type="primary"  @click.native="$router.push('ContractManagement')">长协合同</Button>
 					</div>
-					<div>
-						<Table :columns="column2" :data="qyTable" height="230"></Table>
+					<div style="height: 230px;">
+						<Table :columns="column2" :data="qyTable"></Table>
 					</div>
-				<!--<div class="page-center">-->
-					<!--&lt;!&ndash;分页&ndash;&gt;-->
-					<!--<div class="fenYe">-->
-						<!--<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>-->
-					<!--</div>-->
-				<!--</div>-->
+				<div class="page-container">
+					<Page
+							:total="totalPage"
+							:current="currentPage"
+							:page-size="3"
+							show-total
+							show-elevator
+							v-on:on-change="qianyueList"
+					></Page>
+				</div>
 			</Card>
 		</Row>
 	</div>

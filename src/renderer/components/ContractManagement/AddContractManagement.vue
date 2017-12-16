@@ -37,7 +37,6 @@
                     htscdz: '',
                     d_id: '',
                     remarks: '',
-                    com_id: this.$store.getters.com_id,
                 },
                 file: '',
                 month: {
@@ -114,7 +113,7 @@
                 this.file = file;
             },
             changeStatus() {
-                if(this.file != "" && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
+                if(this.file && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
                      this.bol = true;
                      this.isGo = false
                 }else{
@@ -137,8 +136,6 @@
                             
                             arr.push(obj);
                         }
-                        
-                       
                     }
                     this.dcList = arr;
                      console.log(this.dcList);
@@ -170,6 +167,7 @@
             upLoadPowerCompact() {
                  if(this.$route.query.id){
                     this.formItem["id"] = this.$route.query.id;
+                    this.formItem['com_id'] = this.com_id;
                     console.log(this.formItem);
                       var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
                 if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
@@ -218,6 +216,7 @@
                 var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
                 if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
                     this.formItem.signed_num = parseInt(this.formItem.signed_num);
+                    this.formItem['com_id'] = this.com_id;
                     if (!this.isEmpty(this.month)) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
                             console.log("电量分配", res);
@@ -290,15 +289,15 @@
                 this.bol = true;
                 this.isGo = false;
             },
-            cancel() {
-                for (let k in this.formItem) {
-                    this.formItem[k] = '';
-                }
-                this.file = '';
-                for (let k in this.month) {
-                    this.month[k] = '';
-                }
-            },
+            // cancel() {
+            //     for (let k in this.formItem) {
+            //         this.formItem[k] = '';
+            //     }
+            //     this.file = '';
+            //     for (let k in this.month) {
+            //         this.month[k] = '';
+            //     }
+            // },
             success() {
                 this.$Message.success('添加成功');
             },
@@ -336,15 +335,12 @@
             if(this.$route.query.id){
                     this.formItem.lpcon_no = this.$route.query.lpcon_no;
                     this.formItem.lpcon_year=this.$route.query.lpcon_year;
-                    
-                    console.log(this.formItem.powerplant);
                     this.formItem.signed_num = this.$route.query.signed_num;
                     if(this.$route.query.signed_status == "签约"){
                         this.formItem.signed_status = "1";
                     }else{
                          this.formItem.signed_status = "0";
                     }
-                    
                     this.formItem.signed_day = this.$route.query.signed_day;
                     this.formItem.signed_price = this.$route.query.signed_price;
                     this.formItem.exec_date = this.$route.query.exec_date;
@@ -352,18 +348,19 @@
                     this.formItem.tel = this.$route.query.tel;
                     var arr = this.$route.query.list;
                     console.log(arr[0]);
-                    this.month01 = arr[0].month01;
-                    this.month02 = arr[0].month02;
-                    this.month03 = arr[0].month03;
-                    this.month04 = arr[0].month04;
-                    this.month05 = arr[0].month05;
-                    this.month06 = arr[0].month06;
-                    this.month07 = arr[0].month07;
-                    this.month08 = arr[0].month08;
-                    this.month09 = arr[0].month09;
-                    this.month10 = arr[0].month10;
-                    this.month11 = arr[0].month11;
-                    this.month12 = arr[0].month12;
+                    this.month.month01 = arr[0].month01;
+                    this.month.month02 = arr[0].month02;
+                    this.month.month03 = arr[0].month03;
+                    this.month.month04 = arr[0].month04;
+                    this.month.month05 = arr[0].month05;
+                    this.month.month06 = arr[0].month06;
+                    this.month.month07 = arr[0].month07;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month09 = arr[0].month09;
+                    this.month.month10 = arr[0].month10;
+                    this.month.month11 = arr[0].month11;
+                    this.month.month12 = arr[0].month12;
                     
             }else{
                  for(let k in this.formItem){
@@ -407,8 +404,8 @@
 						<Row>
 							<Col span="8">
 							<Form-item label="签约电厂" prop='powerplant'>
-								<Select v-model="formItem.powerplant" placeholder="请选择签约电厂"
-								        v-on:on-change='powerAddress' label-in-value>
+								<Select  placeholder="请选择签约电厂"
+								        v-on:on-change='powerAddress' label-in-value :value='formItem.powerplant'>
 									<Option v-for='item in dcList' :value="item.value" :key='item.value'>
 										{{item.label}}
 									</Option>
@@ -467,7 +464,7 @@
 							</Col>
 						</Row>
 						<Row :gutter="10">
-							<Form-item label="电厂地址">
+							<Form-item label="电厂地址" class='dcdz'>
 								<Col span="8">
 								<Input disabled v-model="formItem.address" placeholder="-"></Input>
 								</Col>
@@ -527,7 +524,7 @@
 						<div class="save">
 							<Button type="primary" @click='changeEmpty'>保存并继续添加</Button>
 							<Button type="primary" @click='changeStatus'>保存</Button>
-							<Button type="ghost" @click='cancel'>取消</Button>
+							<Button type="ghost" @click="$router.go(-1)">取消</Button>
 						</div>
 						<div v-if='hint'>
 							<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red'>内容不能为空
@@ -698,7 +695,7 @@
 
 	.save {
 		text-align: center;
-		margin-top: 10px;
+		margin-top: 25px;
 	}
 
 	.save button {

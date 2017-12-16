@@ -4,7 +4,7 @@
         data() {
             return {
                 currentPDS: 0,
-                currentChartType: 11,
+                currentChartType: 1,
                 timeType: '今天',
 	            todayTime:'0',
                 cldDetail: {},

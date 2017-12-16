@@ -32,7 +32,7 @@
 </template>
 <style scoped>
 	.client-header{
-		width: 73%;
+		width: 79%;
 		height: 60px;
 		display: inline-block;
 		margin-left: 25px;

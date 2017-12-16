@@ -16,7 +16,7 @@
                 currentCity:'all',
 	            currentPage:1,
 	            totalPage:5,
-	            pageLimit:14,
+	            pageLimit:13,
                 cityList: {
                     zz: {
                         name: '郑州',
@@ -402,7 +402,7 @@
 
 					</Row>
 				</div>
-				<div class="table-container">
+				<div class="table-container relative">
 					<Row className="mgt_15">
 						<Col span="24">
 							<Row>
@@ -412,7 +412,7 @@
 
 								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
 
-								<Button type="primary" class="refresh" style="margin-left: 1147px;" @click="clientList">
+								<Button type="primary" class="refresh absolute" style="right: 0px;" @click="clientList">
 
 									<i class="iconfont icon-shuaxin"></i>
 								</Button>
@@ -425,18 +425,19 @@
 						<Spin size="large" fix v-if="spinShow"></Spin>
 					</Row>
 
-					<div class="page-container">
-						<Page
-							:total="totalPage"
-							:current="currentPage"
-							show-total
-							show-elevator
-							v-on:on-change="pageChange"
-						></Page>
-					</div>
+
 				</div>
 			</div>
 		</Card>
+		<div class="page-container">
+			<Page
+					:total="totalPage"
+					:current="currentPage"
+					show-total
+					show-elevator
+					v-on:on-change="pageChange"
+			></Page>
+		</div>
 	</Row>
 </template>
 <style scoped>
