@@ -61,7 +61,7 @@
                                     symbol:['circle','circle'],
                                     data: [ [{
                                         name: '100kw',
-                                        coord:[0,0],
+                                        coord:[0,30],
 										itemStyle:{
                                             normal:{
                                                 color:'#31c9d7',
@@ -75,11 +75,11 @@
 										lineStyle:{
                                             normal:{
                                                 type:'solid',
-												width:2,
+												width:10,
 											}
 										}
                                     }, {
-                                        coord:['150',0],
+                                        coord:['150',130],
                                     }], [{
                                         name: '300kw',
                                        coord:['150',0],

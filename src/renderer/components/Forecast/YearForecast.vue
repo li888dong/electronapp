@@ -241,7 +241,7 @@
 	                postArr.push({
 		                cus_id:i.cus_id,
 		                year:_this.selectYear,
-		                type:i.status
+		                type:1
 	                })
 
                 });
@@ -258,6 +258,19 @@
                 let postArr = [];
                 let _this = this;
                 this.tableData2.map(function (i) {
+                    i.month01 = parseInt(i.month01);
+                    i.month02 = parseInt(i.month02);
+                    i.month03 = parseInt(i.month03);
+                    i.month04 = parseInt(i.month04);
+                    i.month05 = parseInt(i.month05);
+                    i.month06 = parseInt(i.month06);
+                    i.month07 = parseInt(i.month07);
+                    i.month08 = parseInt(i.month08);
+                    i.month09 = parseInt(i.month09);
+                    i.month10 = parseInt(i.month10);
+                    i.month11 = parseInt(i.month11);
+                    i.month12 = parseInt(i.month12);
+                    var total = i.month01 + i.month02 + i.month03+ i.month04 + i.month05 + i.month06 + i.month07 + i.month08 + i.month09 + i.month10 + i.month11 + i.month12;
                     postArr.push({
                         id:i.id,
 	                    data: {
@@ -272,7 +285,8 @@
 	                        month09:i.month09,
 	                        month10:i.month10,
 	                        month11:i.month11,
-	                        month12:i.month12
+	                        month12:i.month12,
+                            total:total
 	                    }
 
                     })
@@ -280,6 +294,7 @@
                 console.log(postArr);
                 this.$http.post(this.$api.YEAR_MODIFY, {data:postArr}).then(res => {
                     console.log("年度预测修改", res);
+                    this.yearData();
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {

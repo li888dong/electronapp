@@ -388,13 +388,13 @@
 						</Col>
 						<Col span="23">
 						<div class="tab-container">
-
-							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部 <span>(12332)</span></my-tab>
+<!-- TODO 各地区客户个数待添加-->
+							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部</my-tab>
 							<template v-for="(city,key) in cityList">
 								<my-tab
 										v-on:changeSelect="changeSelect(city.name)"
 										v-bind:type="currentCity === city.name?'disabled':'normal'"
-								>{{city.name}} <span>({{city.count}})</span></my-tab>
+								>{{city.name}} </my-tab>
 							</template>
 						</div>
 						</Col>

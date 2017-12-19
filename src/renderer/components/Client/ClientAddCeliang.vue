@@ -2,21 +2,21 @@
     export default {
         name: 'addceliang',
         data() {
-            const ztmcLength = (rule,val,callback)=>{
-                if(val.length > 15){
+            const ztmcLength = (rule, val, callback) => {
+                if (val.length > 15) {
                     return callback(new Error("输入内容的长度不能超过15个字符!"))
-                }else{
+                } else {
                     callback();
                 }
             };
-            const simReg = (rule,val,callback)=>{
-             console.log(val);
-             if(!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)){
-                return callback(new Error("请输入正确的SIM卡号！"));
-             }else{
-               callback();
-             }
-        };
+            const simReg = (rule, val, callback) => {
+                console.log(val);
+                if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)) {
+                    return callback(new Error("请输入正确的SIM卡号！"));
+                } else {
+                    callback();
+                }
+            };
             return {
                 addShow: false,
                 wayShow: false,
@@ -56,7 +56,7 @@
                     {
                         value: '河南许继仪表有限公司',
                         label: '河南许继仪表有限公司',
-                    }, 
+                    },
                 ],
                 name: '',
                 no: '',
@@ -87,39 +87,39 @@
                     origratio: ''
                 },
                 hint: false,
-                wiringList:[],
+                wiringList: [],
                 txdz: '',
                 port: '',
-                ruleValidate:{
-                    ztmc:[{required:true,message:'内容不能为空',trigger:'blur'},
-                     {validator:ztmcLength,trigger:'blur'}],
-                     ztwz:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ztbh:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    user_no:[{required:true,message:'内容不能为空',trigger:'change'}],
-                    byqxx:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    type:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ptxs:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    pt1:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    pt2:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ctxs:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ct1:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ct2:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    ccbh:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    sccj:[{required:true,message:'内容不能为空',trigger:'change'}],
-                    cgrq:[{required:true,type:'data',message:'内容不能为空',trigger:'change'}],
-                    azrq:[{required:true,type:'data',message:'内容不能为空',trigger:'change'}],
-                    sim:[{required:true,message:'内容不能为空',trigger:'blur'},
-                    {validator:simReg,trigger:'blur'}],
-                    ydyys:[{required:true,message:'内容不能为空',trigger:'blur'}],
-                    origratio:[{required:true,message:'内容不能为空',trigger:'blur'}]
+                ruleValidate: {
+                    ztmc: [{required: true, message: '内容不能为空', trigger: 'blur'},
+                        {validator: ztmcLength, trigger: 'blur'}],
+                    ztwz: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ztbh: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    user_no: [{required: true, message: '内容不能为空', trigger: 'change'}],
+                    byqxx: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    type: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ptxs: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    pt1: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    pt2: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ctxs: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ct1: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ct2: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    ccbh: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    sccj: [{required: true, message: '内容不能为空', trigger: 'change'}],
+                    cgrq: [{required: true, type: 'data', message: '内容不能为空', trigger: 'change'}],
+                    azrq: [{required: true, type: 'data', message: '内容不能为空', trigger: 'change'}],
+                    sim: [{required: true, message: '内容不能为空', trigger: 'blur'},
+                        {validator: simReg, trigger: 'blur'}],
+                    ydyys: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    origratio: [{required: true, message: '内容不能为空', trigger: 'blur'}]
                 }
 
             }
         },
         methods: {
-            isEmpty(obj){
-                for (let key in obj){
-                    if (obj[key] !== ""){
+            isEmpty(obj) {
+                for (let key in obj) {
+                    if (obj[key] !== "") {
                         return false
                     }
                 }
@@ -137,7 +137,7 @@
                         value: '三相四线',
                         label: '三相四线'
                     }]
-                    
+
                 } else if (value === '低压测') {
                     this.dataList5 = [
                         {
@@ -158,10 +158,10 @@
                     this.terminalList.ptxs = parseInt(this.terminalList.ptxs);
                     this.terminalList.ctxs = parseInt(this.terminalList.ctxs);
                     this.terminalList.origratio = parseFloat(this.terminalList.origratio);
-                    for(var i=0;i<this.wiringList.length;i++){
-                    	 if(this.model4 + this.model5 == this.wiringList[i].wiring){
-                    	 	  this.terminalList.wir_id = this.wiringList[i].id;
-                    	 }
+                    for (var i = 0; i < this.wiringList.length; i++) {
+                        if (this.model4 + this.model5 == this.wiringList[i].wiring) {
+                            this.terminalList.wir_id = this.wiringList[i].id;
+                        }
                     }
                     this.$http.post(this.$api.CLIENT_ADD_TERMINAL, {
                         com_id: this.$store.getters.com_id,
@@ -189,20 +189,20 @@
                         mea_name: this.terminalList.ztmc,
                         userratio: this.terminalList.origratio,
                         used_com: this.$store.getters.cus_id,
-                        mea_address:this.terminalList.ztwz
+                        mea_address: this.terminalList.ztwz
                     }).then(res => {
-                         console.log("添加终端", res);
-                         if(res.data.status){
-                              if(goDetil){
+                        console.log("添加终端", res);
+                        if (res.data.status) {
+                            if (goDetil) {
                                 this.$router.push('client-detail')
-                              }else{
-                                 this.success();
-                                 for(let k in this.terminalList){
-                                       this.terminalList[k] = '';
-                                 }
-                                 this.no = '';
-                              }
-                         }
+                            } else {
+                                this.success();
+                                for (let k in this.terminalList) {
+                                    this.terminalList[k] = '';
+                                }
+                                this.no = '';
+                            }
+                        }
                     }, err => {
                         this.$api.errcallback(err);
                     }).catch(err => {
@@ -215,6 +215,7 @@
             },
             addTransformer() {
                 this.$http.post(this.$api.CLIENT_ADD_TRANSFORMER, {
+                    cus_id: this.$store.getters.cus_id,
                     name: this.name,
                     no: this.no,
                     capacity: this.capacity
@@ -251,39 +252,39 @@
                     this.$api.errcallback(err);
                 })
             },
-            wiringWay(){
-            	this.$http.post(this.$api.TERMINAL_WIRING_WAY).then(res=>{
-            		console.log("接线方式",res);
-            		var data = res.data.data;
-            		if(res.data.status){
-            				for(var i = 0;i<data.length;i++){
-            					var obj ={
-            						id:data[i].id,
-            						wiring:data[i].location + data[i].wiring
-            					}
-            					this.wiringList.push(obj);
-            				}
-            		}
-            		
-            	},err=>{
-            		this.$api.errcallback(err);
-            	}).catch(err=>{
-            		this.$api.errcallback(err);
-            	})
+            wiringWay() {
+                this.$http.post(this.$api.TERMINAL_WIRING_WAY).then(res => {
+                    console.log("接线方式", res);
+                    var data = res.data.data;
+                    if (res.data.status) {
+                        for (var i = 0; i < data.length; i++) {
+                            var obj = {
+                                id: data[i].id,
+                                wiring: data[i].location + data[i].wiring
+                            }
+                            this.wiringList.push(obj);
+                        }
+                    }
+
+                }, err => {
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.$api.errcallback(err);
+                })
             },
             success() {
                 this.$Message.success('添加成功');
             },
-            changeValue(){
-                if(this.terminalList.pt1&& this.terminalList.pt2){
-                     this.terminalList.ptxs = this.terminalList.pt1 /this.terminalList.pt2
-                     this.terminalList.ptxs = Math.ceil(this.terminalList.ptxs);
+            changeValue() {
+                if (this.terminalList.pt1 && this.terminalList.pt2) {
+                    this.terminalList.ptxs = this.terminalList.pt1 / this.terminalList.pt2
+                    this.terminalList.ptxs =this.terminalList.ptxs.toFixed(2);
                 }
             },
-            ctValueChange(){
-                if(this.terminalList.ct1 && this.terminalList.ct2){
+            ctValueChange() {
+                if (this.terminalList.ct1 && this.terminalList.ct2) {
                     this.terminalList.ctxs = this.terminalList.ct1 / this.terminalList.ct2;
-                    this.terminalList.ctxs =  Math.ceil(this.terminalList.ctxs);
+                    this.terminalList.ctxs = this.terminalList.ctxs.toFixed(2);
                 }
             }
         },
@@ -310,7 +311,7 @@
 			<div class="from-container">
 				<h4 class="title">基本信息</h4>
 				<div class="terminal-container">
-					<Form :label-width="80"  :model='terminalList' :rules="ruleValidate"  ref='terminalList'>
+					<Form :label-width="80" :model='terminalList' :rules="ruleValidate" ref='terminalList'>
 						<FormItem label="终端名称" class='mgb_20' prop='ztmc'>
 							<Input placeholder='汉字、数字或字母表示，不超过15个字符' v-model='terminalList.ztmc'></Input>
 						</FormItem>
@@ -333,7 +334,8 @@
 								<Option :value="terminalList.byqxx" :key="terminalList.byqxx">{{terminalList.byqxx}}
 								</Option>
 							</Select><span class="add" @click="modal2 = true" style="cursor: pointer;margin-left:10px;">添加</span>
-							<span v-show='addShow'>变压器容量单位: <span class="add" style="margin-left: 10px;">10KVA</span></span>
+							<span v-show='addShow'>变压器容量单位: <span class="add"
+							                                      style="margin-left: 10px;">10KVA</span></span>
 						</FormItem>
 						<FormItem label="终端类型" class='mgb_20' prop='type'>
 							<Select v-model="terminalList.type" style="width:300px" placeholder="请选择终端类型">
@@ -350,171 +352,179 @@
 							<Option v-for="item in dataList5" :value="item.value" :key="item.value">{{item.label}}
 							</Option>
 						</Select>
-                         </FormItem>
-                           <FormItem label="用户倍率" prop='origratio' class='mgb_10 mgb_20'>
-                            <Input v-model='terminalList.origratio'></Input>
-                        </FormItem>
+						</FormItem>
+						<FormItem label="用户倍率" prop='origratio' class='mgb_10 mgb_20'>
+							<Input v-model='terminalList.origratio'></Input>
+						</FormItem>
 						<h3 class="sub_title">设备参数</h3>
-                        <FormItem  label='PT变化' class="mgb_10 mgb_20">
-                        <Row>  
-                         <Col span='6'>
-                             <FormItem>
-                               <Row>
-                                <Col span='6'>
-                                 <FormItem prop='pt1'>
-                                 <Input style="width:80px;" v-model='terminalList.pt1'></Input>
-                                 </FormItem>
-                                </Col>
-                                <Col span='2' style='text-align: center;'>:
-                                </Col>
-                                <Col span='6'>
-                                 <FormItem prop='pt2'>
-                                 <Input style="width:80px;" v-model='terminalList.pt2' v-on:on-change='changeValue'></Input>
-                                 </FormItem>
-                                </Col>
-                               </Row>
-                             </FormItem>
-                         </Col>
-                         <Col span='6' style='margin-left:-150px;'>
-                           <FormItem  label='PT系数'>
-                           <Row>
-                            <Col span='10'>
-                             <FormItem>
-                              <Input style="width:120px;" v-model=terminalList.ptxs readonly number></Input>
-                             </FormItem>
-                            </Col>
-                           </Row>
-                           </FormItem>
-                         </Col>
-                         <Col span='6' style='margin-left:-30px;'>
-                             <FormItem label='CT变化'>
-                               <Row>
-                                <Col span='6'>
-                                 <FormItem prop='ct1'>
-                                 <Input style="width:80px;" v-model='terminalList.ct1'></Input>
-                                 </FormItem>
-                                </Col>
-                                <Col span='2' style='text-align: center;'>:
-                                </Col>
-                                <Col span='6'>
-                                 <FormItem prop='ct2'>
-                                 <Input style="width:80px;" v-model='terminalList.ct2' v-on:on-change="ctValueChange"></Input>
-                                 </FormItem>
-                                </Col>
-                               </Row>
-                             </FormItem>
-                         </Col> 
-                         <Col span='4' style='margin-left:-70px;'>
-                           <FormItem label="CT系数">
-                           <Row>
-                           <Col span='10'>
-                            <FormItem>
-                             <Input style="width:120px;" v-model='terminalList.ctxs' readonly></Input>
-                            </FormItem>
-                           </Col>
-                           </Row>
-                           </FormItem>
-                         </Col>
-                           </Row>
-                           </FormItem>
-                         </Col>
-                        </Row> 
-                        </FormItem>
+						<FormItem label='PT变化' class="mgb_10 mgb_20">
+							<Row>
+								<Col span='6'>
+								<FormItem>
+									<Row>
+										<Col span='6'>
+										<FormItem prop='pt1'>
+											<Input style="width:80px;" v-model='terminalList.pt1'></Input>
+										</FormItem>
+										</Col>
+										<Col span='2' style='text-align: center;'>
+										:
+										</Col>
+										<Col span='6'>
+										<FormItem prop='pt2'>
+											<Input style="width:80px;" v-model='terminalList.pt2'
+											       v-on:on-change='changeValue'></Input>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+								<Col span='6' style='margin-left:-150px;'>
+								<FormItem label='PT系数'>
+									<Row>
+										<Col span='10'>
+										<FormItem>
+											<Input style="width:120px;" v-model=terminalList.ptxs readonly
+											       number></Input>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+								<Col span='6' style='margin-left:-30px;'>
+								<FormItem label='CT变化'>
+									<Row>
+										<Col span='6'>
+										<FormItem prop='ct1'>
+											<Input style="width:80px;" v-model='terminalList.ct1'></Input>
+										</FormItem>
+										</Col>
+										<Col span='2' style='text-align: center;'>
+										:
+										</Col>
+										<Col span='6'>
+										<FormItem prop='ct2'>
+											<Input style="width:80px;" v-model='terminalList.ct2'
+											       v-on:on-change="ctValueChange"></Input>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+								<Col span='4' style='margin-left:-70px;'>
+								<FormItem label="CT系数">
+									<Row>
+										<Col span='10'>
+										<FormItem>
+											<Input style="width:120px;" v-model='terminalList.ctxs' readonly></Input>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+							</Row>
+						</FormItem>
+						</Col>
+						</Row>
+						</FormItem>
 						<h3 class="sub_title">设备信息</h3>
 						<FormItem label="出厂编号" class='mgb_20'>
-                        <Row>
-                         <Col span='4'>
-                             <FormItem prop='ccbh'>
-                               <Input class="width_183" v-model='terminalList.ccbh'></Input>
-                             </FormItem>
-                         </Col>
-                         <Col span='6'>
-                             <FormItem label='生产厂家'>
-                             <Row>
-                             <Col span='10'>
-                             <FormItem prop='sccj'>
-                             <Select v-model="terminalList.sccj" class="width_183" placeholder="请选择生产厂家">
-                            <Option v-for="item in dataList6" :value="item.value" :key="item.value">{{item.label}}
-                            </Option>
-                            </Select>
-                             </FormItem>
-                             </Col>
-                             </Row>
-                              
-                             </FormItem>
-                         </Col>
-                         <Col span='6'>
-                             <FormItem label='采购日期' >
-                             <Row>
-                           <Col span='10'>
-                           <FormItem prop='cgrq'>
-                           <DatePicker type="date" placeholder='请选择采购日期' class='width_183'  v-model='terminalList.cgrq'></DatePicker>
-                           </FormItem>
-                           </Col>
-                           </Row>
-                             </FormItem>
-                         </Col>
-                         <Col span='6'>
-                             <FormItem label='安装日期' >
-                               <Row>
-                           <Col span='10'>
-                           <FormItem prop='azrq'>
-                           <DatePicker type="date" placeholder='请选择安装日期' class='width_183' v-model='terminalList.azrq'></DatePicker>
-                           </FormItem>
-                           </Col>
-                           </Row>
-                             </FormItem>
-                         </Col>
-                        </Row>
+							<Row>
+								<Col span='4'>
+								<FormItem prop='ccbh'>
+									<Input class="width_183" v-model='terminalList.ccbh'></Input>
+								</FormItem>
+								</Col>
+								<Col span='6'>
+								<FormItem label='生产厂家'>
+									<Row>
+										<Col span='10'>
+										<FormItem prop='sccj'>
+											<Select v-model="terminalList.sccj" class="width_183" placeholder="请选择生产厂家">
+												<Option v-for="item in dataList6" :value="item.value" :key="item.value">
+													{{item.label}}
+												</Option>
+											</Select>
+										</FormItem>
+										</Col>
+									</Row>
+
+								</FormItem>
+								</Col>
+								<Col span='6'>
+								<FormItem label='采购日期'>
+									<Row>
+										<Col span='10'>
+										<FormItem prop='cgrq'>
+											<DatePicker type="date" placeholder='请选择采购日期' class='width_183'
+											            v-model='terminalList.cgrq'></DatePicker>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+								<Col span='6'>
+								<FormItem label='安装日期'>
+									<Row>
+										<Col span='10'>
+										<FormItem prop='azrq'>
+											<DatePicker type="date" placeholder='请选择安装日期' class='width_183'
+											            v-model='terminalList.azrq'></DatePicker>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+							</Row>
 						</FormItem>
 						<FormItem label="通信地址" class='mgb_20'>
-                         <Row>
-                          <Col span='4'>
-                          <FormItem>
-                           <Input class="width_183" v-model='txdz'></Input>
-                          </FormItem> 
-                          </Col>
-                          <Col span='6'>
-                          <FormItem label='远程端口' >
-                           <Row>
-                           <Col span='10'>
-                           <FormItem>
-                           <Input class="width_183" v-model='port' maxlength='4'></Input>
-                           </FormItem>
-                           </Col>
-                           </Row>
-                          </FormItem>
-                          </Col>
-                         </Row>
+							<Row>
+								<Col span='4'>
+								<FormItem>
+									<Input class="width_183" v-model='txdz'></Input>
+								</FormItem>
+								</Col>
+								<Col span='6'>
+								<FormItem label='远程端口'>
+									<Row>
+										<Col span='10'>
+										<FormItem>
+											<Input class="width_183" v-model='port' maxlength='4'></Input>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+							</Row>
 						</FormItem>
 						<FormItem label="SIM卡号" class="last mgb_20">
-                        <Row>
-                        <Col span='4'>
-                        <FormItem prop='sim'>
-                         <Input class="width_183" v-model='terminalList.sim'></Input>
-                        </FormItem>
-                        </Col>
-                        <Col span='6'>
-                         <FormItem label='移动运营商'>
-                         <Row>
-                         <Col span='10'>
-                         <FormItem  prop='ydyys'>
-                         <Select class='width_183' v-model='terminalList.ydyys'>
-                          <Option value='中国移动'>中国移动
-                          </Option>
-                          <Option value='中国联通'>中国联通
-                          </Option>
-                          <Option value='中国电信'>中国电信
-                          </Option>
-                          <Option value='物联网'>物联网
-                          </Option>
-                         </Select>
-                         </FormItem>
-                         </Col>
-                         </Row>
-                         </FormItem>
-                        </Col>
-                        </Row>
+							<Row>
+								<Col span='4'>
+								<FormItem prop='sim'>
+									<Input class="width_183" v-model='terminalList.sim'></Input>
+								</FormItem>
+								</Col>
+								<Col span='6'>
+								<FormItem label='移动运营商'>
+									<Row>
+										<Col span='10'>
+										<FormItem prop='ydyys'>
+											<Select class='width_183' v-model='terminalList.ydyys'>
+												<Option value='中国移动'>中国移动
+												</Option>
+												<Option value='中国联通'>中国联通
+												</Option>
+												<Option value='中国电信'>中国电信
+												</Option>
+												<Option value='物联网'>物联网
+												</Option>
+											</Select>
+										</FormItem>
+										</Col>
+									</Row>
+								</FormItem>
+								</Col>
+							</Row>
 						</FormItem>
 					</Form>
 				</div>
@@ -615,7 +625,7 @@
 		width: 100%;
 		height: 40px;
 		line-height: 40px;
-        margin-top:10px;
+		margin-top: 10px;
 	}
 
 	.modal-container {

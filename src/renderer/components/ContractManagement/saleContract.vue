@@ -93,7 +93,15 @@ export default {
                     align: 'center'
                 }
             ],
-            data1: [],
+            data1: [{
+               con_no:'暂无数据',
+               way:'暂无数据',
+               ly_used:'暂无数据',
+               ly_maxload:'暂无数据',
+               bndyjdl:'暂无数据',
+               bndyjzdfh:'暂无数据',
+               usernos:[],
+            }],
             totalPage:0,
             currentPage:1,
             limit:5,
@@ -131,9 +139,11 @@ export default {
               console.log("售电合同列表",res);
               console.log(res.data.data);
               if(res.data.status){
-                this.data1=res.data.data.data;
-                 console.log(this.data1);
-                 this.totalPage = res.data.data.total;
+                if(res.data.data.data.length > 0){
+                   this.data1=res.data.data.data;
+                   console.log(this.data1);
+                   this.totalPage = res.data.data.total;
+                }
                  this.loading = false;
               }else{
                  this.loading = false;

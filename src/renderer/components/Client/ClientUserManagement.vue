@@ -17,7 +17,6 @@
                     {
                         title: '申请时间',
                         sortable: true,
-
                         key: 'created_at'
                     },
                     {
@@ -113,7 +112,11 @@
                         }
                     },
                 ],
-                tableData: []
+                tableData: [],
+                limit:14,
+                totalPage:0,
+                currentPage:0,
+                loading:false,
             }
         },
         computed: {
@@ -131,12 +134,22 @@
         },
         methods: {
             userManage() {
-                this.$http.post(this.$api.CLIENT_MANAGE, {cus_id: this.cus_id}).then(res => {
+                this.loading = true;
+                this.$http.post(this.$api.CLIENT_MANAGE, {pid: 1,page:this.currentPage,limit:this.limit}).then(res => {
                     console.log("用户管理", res);
-                    this.tableData = res.data.data;
+                    if(res.data.status){
+                         this.tableData = res.data.data.data;
+                         this.totalPage = res.data.data.total;
+                         this.currentPage = res.data.data.current_page;
+                         this.loading = false;
+                    }else{
+                        this.loading= false;
+                    }
                 }, err => {
+                    this.loading= false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading= false;
                     this.$api.errcallback(err);
                 })
             },
@@ -159,8 +172,27 @@
                 }).catch(err => {
                     this.$api.errcallback(err);
                 })
+            },
+            pageChange(value){
+                 this.loading = true;
+                this.$http.post(this.$api.CLIENT_MANAGE, {pid: 1,page:value,limit:this.limit}).then(res => {
+                    console.log("用户管理", res);
+                    if(res.data.status){
+                         this.tableData = res.data.data.data;
+                         this.totalPage = res.data.data.total;
+                         this.currentPage = res.data.data.current_page;
+                         this.loading = false;
+                    }else{
+                        this.loading= false;
+                    }
+                }, err => {
+                    this.loading= false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.loading= false;
+                    this.$api.errcallback(err);
+                })
             }
-
         },
         mounted() {
             this.userManage();
@@ -168,13 +200,19 @@
     }
 </script>
 <template>
-	<div class="client-container">
+	<div class="client-container relative">
 		<Card>
 			<h3 slot="title">用户管理</h3>
 			<div class="table-container">
-				<Table :columns="column1" :data="tableData"></Table>
-				<myFenye></myFenye>
+				<Table :columns="column1" :data="tableData" :loading ='loading'></Table>
+				
 			</div>
+            <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+        </div>
+      </div>
 		</Card>
 		<Modal
 				v-model="checkModal"
@@ -194,4 +232,29 @@
 	.table-container {
 		height: 780px;
 	}
+    .relative .page-center{
+    text-align: center;
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

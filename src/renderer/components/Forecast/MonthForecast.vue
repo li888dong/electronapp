@@ -44,13 +44,13 @@ export default {
                 {
                     width: '200',
                     title: '企业名称',
-                    key: 'name',
+                    key: 'cus_name',
                     align: 'center'
                 },
                 {
                     width: '100',
                     title: '所属区域',
-                    key: 'area',
+                    key: 'city',
                     align: 'center'
                 },
                 {
@@ -73,11 +73,23 @@ export default {
                 },{
                     title: '月度预测记录(万kW-h)',
                     align: 'center',
+                    key:'logs',
                     render:(h,params)=>{
-                        let text='';
-                        params.row.log.map(i=>text+='//'+i.created_at+'_'+i.total+'kW-h')
+                        // let text='';
+                        // params.row.logs.map(i=>text+=i.id+'：'+i.created_at+'_'+i.total+'kW-h'+'<br/>')
                        console.log(params)
-                       return h('span',{},text)
+                       return h('span',{
+                           style:{
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                               },
+                           on:{
+                             click:()=>{
+                                this.modal2 = true;
+                                this.data2 = params.row.logs;
+                             }
+                           }
+                       },'查看')
                     }
                 },{
                     title: '月度预测(万kW-h)',
@@ -150,7 +162,8 @@ export default {
                                 on: {
                                     click: () => {
                                         this.modifyIndex = params.index;
-                                        this.renderM(params.row)
+                                        this.modal1=true;
+                                        // this.renderM(params.row)
                                     }
                                 }
                             }, '修改')
@@ -159,6 +172,21 @@ export default {
                 }
             ],
             modal1: false,
+            updateValue:'',
+            modal2:false,
+            columns5:[
+            {
+                title:'修改后月度预测（万kW-h）',
+                key:'total',
+                align:'center'
+             },
+           {
+                title:'修改时间',
+                key:'created_at',
+                align:'center'
+            },
+            ],
+            data2:[]
         }
     },
     mounted(){
@@ -223,52 +251,50 @@ export default {
                 this.$api.errcallback(err);
             })
         },
-        modifyData(){
-            let postArr = [];
-            let _this = this;
-            this.tableData2.map(function (i) {
-                postArr.push({
-                    id:i.id,
-                    data: {
-                        month01:i.month01,
-                        month02:i.month02,
-                        month03:i.month03,
-                        month04:i.month04,
-                        month05:i.month05,
-                        month06:i.month06,
-                        month07:i.month07,
-                        month08:i.month08,
-                        month09:i.month09,
-                        month10:i.month10,
-                        month11:i.month11,
-                        month12:i.month12
-                    }
-
-                })
-            });
-            console.log(postArr);
-            this.$http.post(this.$api.MONTH_MODIFY, {data:postArr}).then(res => {
-                console.log("年度预测修改", res);
-            }, err => {
-                this.$api.errcallback(err);
-            }).catch(err => {
-                this.$api.errcallback(err);
-            })
-        },
         setTableData1(index,value){
             this.tableData1[index].status = value;
         },
         renderM() {
-            // this.tableData1 = value;
-            // console.log(valu);
-            this.modal1= true;
-            this.$http.post(this.$api.MONTH_MODIFY, {
-                cus_id:this.tableData1[this.modifyIndex].cus_id,
-                data:[this.tableData1[this.modifyIndex].id,this.tableData1[this.modifyIndex].p_predict],
-                total:this.tableData1[this.modifyIndex].p_predict,
-                month:this.tableData1[this.modifyIndex].month
-            }).then(res => {
+             let postArr = [];
+            let _this = this;
+            var data = [];
+            var inputs = document.getElementsByClassName('updateNum');
+            
+            for(let i=0;i<inputs.length;i++){
+                if(inputs[i].value){
+                   console.log(inputs[i]);
+                   var id = inputs[i].parentNode.parentNode.getAttribute('data-id');
+                   console.log (id);
+                   id = parseInt(id);
+                   var value = parseInt(inputs[i].value);
+                   var arr = {id:id,p_predict:value};
+                   data.push(arr);
+                   this.tableData1[_this.modifyIndex].usernos[i].p_predict = parseInt(inputs[i].value);
+                }
+            }
+                console.log(this.tableData1[_this.modifyIndex]);
+                var usernos = this.tableData1[_this.modifyIndex].usernos;
+                var total = 0;
+                for(let i =0;i<usernos.length;i++){
+                     total += usernos[i].p_predict;
+                }
+                console.log(total);
+                // data = [1,12];
+                // postArr = [this.tableData1[_this.modifyIndex].cus_id,data1,total,this.tableData1[_this.modifyIndex].usernos[0].month]
+                 // postArr.push([this.tableData1[_this.modifyIndex].cus_id,data1,total,this.tableData1[_this.modifyIndex].usernos[0].month]);
+                // postArr.push({
+                    
+                //     cus_id:this.tableData1[_this.modifyIndex].cus_id,
+                //     data:data1,
+                //     total:total,
+                //     month:this.tableData1[_this.modifyIndex].usernos[0].month
+
+                // })
+            this.$http.post(this.$api.MONTH_MODIFY,{cus_id:this.tableData1[_this.modifyIndex].cus_id,data:data,total:total,month:this.tableData1[_this.modifyIndex].usernos[0].month}).then(res => {
                 console.log("月度预测修改", res);
+                if(res.data.status){
+                    this.monthData;
+                }
             }, err => {
                 this.$api.errcallback(err);
             }).catch(err => {
@@ -337,7 +363,9 @@ export default {
         v-model="modal1"
         width = '846px'
         :mask-closable="false"
-        class-name="vertical-center-modal">
+        class-name="vertical-center-modal" 
+        @on-ok="renderM">
+        <div  class='modelBox'>
         <Row class="gongSiBox" v-if="modal1">
             <Col span="9" class="gongSi">
                 <Row class="comName">
@@ -345,28 +373,42 @@ export default {
                     <Col span='6'>所属区域</Col>
                     <Col span='6'>是否购电</Col>
                 </Row>
-                <Row style="text-align: center;line-height: 34px;">
-                    <Col span='10'>{{tableData1[modifyIndex].name}}</Col>
-                    <Col span='7'>{{tableData1[modifyIndex].area}}</Col>
+                <Row class='qiye'>
+                    <Col span='10'>{{tableData1[modifyIndex].cus_name}}</Col>
+                    <Col span='7'>{{tableData1[modifyIndex].city}}</Col>
                     <Col span='7'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
                 </Row>
             </Col>
             <Col span="15">
                 <table cellspacing="10" cellpadding="10">
                     <tr>
-                        <td>系统预测合计: {{tableData1[modifyIndex].p_predict}}</td>
+                        <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
                         <td>企业申报合计: {{tableData1[modifyIndex].declare}}</td>
                         <td>人工预测合计: {{tableData1[modifyIndex].forecast}} <br>
                         <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox></td>
                     </tr>
-                    <tr>
-                        <td>tableData1[modifyIndex].user_no<span class="num">0</span></td>
-                        <td>tableData1[modifyIndex].user_no<span class="num">0</span></td>
-                        <td>tableData1[modifyIndex].user_no<input type="text" placeholder="-"> </td>
+                    <tr v-for='item in tableData1[modifyIndex].usernos' :data-id='item.id'>
+                        <td >{{item.user_no}}:<span class="num">{{item.sy_predict}}</span></td>
+                        <td>{{item.user_no}}:<span class="num">{{item.p_predict}}</span></td>
+                        <td>{{item.user_no}}:<input type="text" placeholder="-" class="updateNum" value=''></td>
                     </tr>
                 </table>
             </Col>
         </Row>
+        </div>
+     </Modal>
+      <Modal
+        title="月度预测修改记录"
+        v-model="modal2"
+        width = '846px'
+        :mask-closable="false"
+        class-name="vertical-center-modal" 
+        @on-ok="renderM">
+        <div  class='recordBox'>
+        <Row  v-if="modal2">
+             <Table :columns='columns5' :data='data2'></Table>
+        </Row>
+        </div>
      </Modal>
 </div>
 
@@ -380,11 +422,20 @@ export default {
 .layout-content-top {
     padding-bottom: 15px;
 }
+.modelBox{
+     height:500px;
+     overflow-y: scroll;
+}
+.recordBox{
+     height: 200px;
+     overflow-y: scroll;
+}
 .gongSiBox {
     border: 1px solid #ccc;
-    overflow: hidden;
 }
-
+.gongSiBox .gongSi{
+     height: 100%;
+}
 .comName {
     height: 36px;
     text-align: center;

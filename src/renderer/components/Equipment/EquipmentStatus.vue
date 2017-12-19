@@ -1,6 +1,6 @@
 <script>
 import myFenye from '@/components/Tool/myFenye'
-import mySearch from '@/components/Tool/mySearch'
+import mySearch from '@/components/Tool/mySearchTwo'
 
 export default {
     name: 'EquipmentStatus',
@@ -9,7 +9,7 @@ export default {
             columns1: [
                 {
                     "sortable": true,
-                    title: '终端编号',
+                    title: '逻辑地址',
                     key: 'clientid'
                 },
                 {
@@ -163,6 +163,24 @@ export default {
             }).catch(err=>{
                 this.$api.errcallback(err);
             })
+        },
+        searchMethods(){
+             this.loading = true;
+                 this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status){
+                    this.data1 = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.loading = false;
+                }else{
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
         }
     },
     watch:{
@@ -193,11 +211,11 @@ export default {
         <div class="EquipmentStatusBox">
             <div class="statusTop">
                 <div class="fl">
-                    <DatePicker type="datetime" placeholder="请选择日期"  style="width: 200px"></DatePicker>
+                    <!-- <DatePicker type="datetime" placeholder="请选择日期"  style="width: 200px"></DatePicker> -->
                     <!--<Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">-->
                         <!--<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
                     <!--</Select>-->
-                    <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
+                    <div class="search"><mySearch placeholder="请输入逻辑地址" swidth="340"  v-on:doSearch="searchMethods"></mySearch></div>
                 </div>
                 <div class="viewOffline">
                     <Checkbox label="Eat"></Checkbox>
@@ -227,7 +245,7 @@ export default {
     vertical-align: bottom;
 }
 .EquipmentStatusBox {
-    height: 811px;
+    height: 817px;
 }
 
 .shebeiYichang{

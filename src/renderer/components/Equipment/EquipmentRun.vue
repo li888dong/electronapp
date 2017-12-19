@@ -196,10 +196,10 @@ export default {
         background-color: #fff;
     }
     .equipmentBox {
-        height: 590px;
+        height: 591px;
     }
     .qieHuan {
         margin-top: -8px;
-        z-index: 10px;
+        z-index: 10;
     }
 </style>

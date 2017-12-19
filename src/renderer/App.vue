@@ -24,7 +24,10 @@
         },
 	    watch:{
             "$route": function () {
-	            console.log('路由变化')
+	            console.log('路由变化');
+	            if (!this.$store.getters.access_token){
+	                this.$router.push('login')
+	            }
             }
 	    },
         components: {

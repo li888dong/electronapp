@@ -13,10 +13,11 @@
                 }
             };
             return {
+                cus_id:'',
                 htfs: '',
                 file: '',
                 bol: false,
-	            defaultArea:false,
+                defaultArea: false,
                 addList: {
                     user_name: '',
                     con_no: '',
@@ -305,9 +306,9 @@
                 }
             },
             changeStatus() {
-                if (this.file && !this.isEmpty(this.addList)) {
+                if (this.file && !this.isEmpty(this.addList) && this.way_param) {
                     this.bol = true;
-                }else{
+                } else {
                     this.hint2 = true;
                 }
             },
@@ -366,8 +367,8 @@
             saveData() {
                 if (!this.isEmpty(this.addTableList)) {
                     var arr = this.addTableList.yddz;
+                    console.log('#####',arr)
                     var address = arr.join(' ') + ' ' + this.addTableList.stree;
-                    this.addTableList.yddz = address;
                     var data1 = {
                         id: '',
                         user_id: this.addTableList.user_id,
@@ -375,7 +376,7 @@
                         bzrl: this.addTableList.bzrl,
                         ydlb: this.addTableList.ydlb,
                         yddwlb: this.addTableList.yddwlb,
-                        yddz: this.addTableList.yddz
+                        yddz: address
                     };
                     this.$http.post(this.$api.USER_NUM_ADD, {
                         cus_id: this.cus_id,
@@ -438,16 +439,16 @@
                         clearTimeout(timer2);
                     }
                 }, 3000);
-            }, // disappear() {
-            //     var _this = this;
-            //     var timer3 = setTimeout(function () {
-            //         _this.hint2 = false;
-            //         if (_this.hint2 = false) {
-            //             clearTimeout(timer3);
-            //         }
-            //     }, 3000);
-            // },
-           
+            }, 
+            disappear() {
+                var _this = this;
+                var timer3 = setTimeout(function () {
+                    _this.hint2 = false;
+                    if (_this.hint2 = false) {
+                        clearTimeout(timer3);
+                    }
+                }, 3000);
+            },  
             cancel() {
                 this.modal2 = false;
             },
@@ -610,11 +611,6 @@
                 this.saveData();
             }
         },
-        computed: {
-            cus_id: function () {
-                return this.$store.getters.cus_id
-            },
-        },
         mounted() {
             if (this.$route.query.cus_name) {
                 this.addList.user_name = this.$route.query.cus_name
@@ -622,7 +618,7 @@
                 var input = div.getElementsByClassName('ivu-input')[0];
                 input.readOnly = true;
                 // console.log(this.$route.query.cus_id)
-                this.cus_id = this.$route.query.cus_id;
+                this.cus_id = this.$route.query.cus_id||this.$store.getters.cus_id;
             } else {
                 this.addList.user_name = '';
             }
@@ -734,7 +730,9 @@
 						<Button type="default" @click="$router.go(-1)">取消</Button>
 					</div>
 					<div v-if='hint2'>
-						<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red;margin-left:450px'>内容不能为空</Alert>
+						<Alert type="warning" show-icon
+						       style='width: 200px;margin:5px auto;color: red;margin-left:450px'>内容不能为空
+						</Alert>
 					</div>
 				</FormItem>
 			</Form>
@@ -800,11 +798,12 @@
 						<Row>
 							<Col span='13'>
 							<FormItem prop='yddz'>
-								<al-selector level=2   class='address' data-type='name' v-model='addTableList.yddz' v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
+								<al-selector level=2 class='address' data-type='name' v-model='addTableList.yddz'
+								             v-if="!defaultArea"/>
+								<p v-else>{{addTableList.yddz}}-{{addTableList.stree}}</p>
 							</FormItem>
 							</Col>
-							<Col span='8' style='margin-left: 15px'  v-if="!defaultArea">
+							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">
 							<FormItem prop='stree'>
 								<Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;'
 								       v-model='addTableList.stree' v-if="!defaultArea"></Input>
@@ -887,11 +886,12 @@
 						<Row>
 							<Col span='13'>
 							<FormItem prop='yddz'>
-								<al-selector level=2   class='address' data-type='name' v-model='addTableList.yddz' v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
+								<al-selector level=2    class='address' data-type='name' v-model='addTableList.yddz'
+								             v-if="!defaultArea"/>
+								<p v-else>{{addTableList.yddz}}-{{addTableList.stree}}</p>
 							</FormItem>
 							</Col>
-							<Col span='8' style='margin-left: 15px'  v-if="!defaultArea">
+							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">
 							<FormItem prop='stree'>
 								<Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;'
 								       v-model='addTableList.stree' v-if="!defaultArea"></Input>
@@ -1012,7 +1012,7 @@
 		width: 100%;
 		float: none;
 		text-align: center;
-        margin-left:-100px;
+		margin-left: -100px;
 	}
 
 	.mgr-20 {

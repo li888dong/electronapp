@@ -1,5 +1,5 @@
 <script>
-import mySearch from '@/components/Tool/mySearch'
+import mySearch from '@/components/Tool/mySearchTwo'
 
 export default {
     name: 'AssetInfo',
@@ -8,7 +8,7 @@ export default {
             columns1: [
                 {
                     "sortable": true,
-                    title: '资产号',
+                    title: '逻辑地址',
                     key: 'clientid'
                 },
                 {
@@ -156,6 +156,26 @@ export default {
               this.$api.errcallback(err);
            })
 
+        },
+        keySeach(){
+           this.loading = true;
+           this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status){
+                 this.data1 = data.data;
+                 this.totalPage = data.total;
+                 this.loading = false;
+             }else{
+                 this.loading = false;
+             }
+           },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.loading = false;
+              this.$api.errcallback(err);
+           })
         }
     },
     watch:{
@@ -191,7 +211,7 @@ export default {
         <!--</div>-->
         <div class="AssetInfo">
             <div slot="extra">
-                <mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>
+                <mySearch placeholder="请输入逻辑地址" swidth="340" style='margin-top: -8px;' v-on:doSearch="keySeach"></mySearch>
             </div>
             <Row class="AssetInfoForm" className="mgt_15">
                 <Col span='24'>
@@ -228,7 +248,7 @@ export default {
 <style scoped>
 
 .AssetInfo{
-    height: 800px;
+    height: 825px;
     background-color: #fff;
 }
 

@@ -49,13 +49,13 @@
             return {
                 statusType:'按月',
                 pieData:{
-                    "month": {
-                        "bidding": 0,
-                        "longpact": 1
+                    month: {
+                        bidding: 0,
+                        longpact: 0
                     },
-                    "year": {
-                        "bidding": 88,
-                        "longpact": "57"
+                    year: {
+                        bidding: 0,
+                        longpact: 0
                     }
                 },
                 month:''
@@ -168,6 +168,7 @@
                 this.$http.post(this.$api.TRADE_OF,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
                     console.log("交易占比饼图",res);
                     this.pieData = res.data.data;
+                   this.drawLine();
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{

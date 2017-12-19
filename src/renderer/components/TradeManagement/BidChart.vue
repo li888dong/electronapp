@@ -3,135 +3,120 @@
         name: 'bidchart',
         props: ['comsupply', 'powerplant'],
         data() {
-            return {
-                markLineData:[]
-            }
+            return {}
         },
-        mounted() {
-
+        watch:{
+            powerplant:function () {
+	            this.drawLine(this.chartOption2)
+            }
         },
         computed: {
             chartOption2: function () {
+                //x轴总值
                 let xRange = [0],
+//	                电厂报价
                     dcbj = [],
+//		            售电公司报价
                     gsbj = [],
-                    average = [],
-                    sum = 0;
-//                降序公司报价
+//		            用来计算x轴区间的中间量
+                    sum = 0,
+//		            电厂名称
+	                dcname=[],
+//		            电厂供应量
+	                dcgongying = [],
+//		            售电公司数据坐标
+                    gsData = [],
+//		            平均值坐标
+	                pjData = [],
+//		            电厂数据
+	                dcData = [];
+//                售电公司根据报价降序
                 this.comsupply.sort(function (a, b) {
-                    return  b.baojia - a.baojia
-                });
+                    return b.baojia - a.baojia
+                })
                 this.comsupply.map(function (i) {
                     gsbj.push(i.baojia);
+                    gsData.push([i.gongying,i.baojia])
                 });
-//                升序电厂报价
+//                电厂根据报价升序
                 this.powerplant.sort(function (a, b) {
                     return a.baojia - b.baojia
-                });
+                })
                 this.powerplant.map(function (i) {
                     xRange.push(sum += i.gongying);
-                    dcbj.push(i.baojia)
+                    dcbj.push(i.baojia);
+                    dcname.push(i.name);
+                    dcgongying.push(i.gongying)
                 });
-				for (let j = 0;j<dcbj.length;j++){
-                    average.push(gsbj[j]/2+dcbj[j]/2)
-				}
-				for (let i;i<xRange.length;i++){
-                    this.markLineData.push([{
-                        name: `${xRange[i]}kw`,
-                        coord:[xRange[i],0],
-                        itemStyle:{
-                            normal:{
-                                color:'#31c9d7'
-                            }
-                        },
-                        lineStyle:{
-                            normal:{
-                                type:'solid',
-                                width:20,
+
+                for (let i = 0;i<xRange.length;i++){
+                    dcData.push([dcgongying[i],xRange[i],xRange[i+1],dcbj[i],dcname[i]])
+                }
+				dcData.map(i=>{
+				    pjData.push([i[1]+i[0]/2,this.getAverage(gsData[0][0],gsData[1][0],gsData[0][1],gsData[1][1],i[1]+i[0]/2,i[3])]);
+
+				});
+                console.log('x轴区间', xRange);
+                console.log('电厂报价', dcData);
+                var colorList = ['#4f81bd', '#c0504d', '#9bbb59', '#604a7b', '#948a54', '#e46c0b'];
+
+                dcData = this.$echarts.util.map(dcData, function (item, index) {
+                    return {
+                        value: item,
+                        itemStyle: {
+                            normal: {
+                                color: colorList[index]
                             }
                         }
-                    }, {
-                        coord:[xRange[i+1],0],
-                    }])
-				}
-                xRange.map(i=>{
-
+                    };
                 });
-                console.log('x轴区间', xRange);
-                console.log('电厂报价', dcbj);
+
+				gsData.map(i=>{
+
+				});
                 return {
-                    tooltip: this.$store.getters.chartOption.lineTooltip,
-                    legend: {
-                        data: ['电厂报价', '售电公司报价','平均报价'],
-                        icon: 'rect',
-                        left: -5,
-                        top: 0,
-                        itemWidth: 16,
-                        itemHeight: 16,             // 图例图形宽度
+                    tooltip: {
+                        axisPointer: {
+                            type: 'cross'
+                        },
                     },
+                    xAxis: {
+                        scale: true
+                    },
+                    yAxis: {},
                     grid: {
-                        top: '40',
+                        top:'40',
                         left: "0",
-                        right: "16",
+                        right: "40",
                         bottom: '',
                         containLabel: true
                     },
-                    xAxis: {
-                        show: false,
-                        type: 'category',
-                        boundaryGap: false,
-                        data: xRange,
-                        axisLabel: {
-                            formatter: '{value}kw'
-                        },
-                    },
-                    yAxis: {
-                        type: 'value',
-                        axisLabel: {
-                            formatter: '{value}'
-                        },
-                        axisPointer: {
-                            snap: true
-                        },
-                        position: 'right',
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-
-                    color: this.$store.getters.chartOption.colorList,
-                    series: [
-                        {
-                            name: '电厂报价',
-                            type: 'line',
-                            smooth: true,
-                            data: dcbj,
-                            step: 'middle',
-	                        itemStyle:{normal: {areaStyle: {type: 'default',opacity:0.8}}},
-                            markLine: {
-                                symbol: ['circle', 'circle'],
-                                data: this.markLineData,
+                    series: [{
+                        type: 'custom',
+                        renderItem: this.renderItem,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
                             }
                         },
-                        {
-                            name: '售电公司报价',
-                            type: 'line',
-                            data: gsbj,
-                            itemStyle:this.$store.getters.chartOption.lineItemStyle,
-                            markLine: {
-                                symbol: ['circle', 'circle'],
-                                data: this.markLineData,
-                            }
+                        dimensions: ['供应量','开始量', '结束量', '报价','电厂名称'],
+                        encode: {
+                            x: [1, 2],
+                            y: 3,
+                            tooltip: [ 0,3],
+                            itemName: 4
                         },
-                        {
-                            name: '平均值',
-                            type: 'line',
-                            data: average
-                        },
-                    ]
+                        data: dcData
+                    },
+                    {
+                        type: 'line',
+                        data: gsData
+                    },
+                    {
+                        type: 'line',
+                        data: pjData
+                    }]
                 }
             }
         },
@@ -143,8 +128,30 @@
                 // 基于准备好的dom，初始化echarts实例
                 let bidSimulationChart = this.$echarts.init(document.getElementById('bid-simulation-chart'));
                 // 绘制图表
-                bidSimulationChart.setOption(option);
-            }
+                bidSimulationChart.setOption(option,true);
+            },
+            renderItem(params, api) {
+                var yValue = api.value(3);
+                var start = api.coord([api.value(1), yValue]);
+                var size = api.size([api.value(2) - api.value(1), yValue]);
+                var style = api.style();
+
+                return {
+                    type: 'rect',
+                    shape: {
+                        x: start[0],
+                        y: start[1],
+                        width: size[0],
+                        height: size[1]
+                    },
+                    style: style
+                };
+            },
+	        getAverage(x1,x2,y1,y2,x,y3){
+                let a = (y2-y1)/(x2-x1),
+	                b = (x1*y2 - x2*y1)/(x1-x2);
+                return ((a*x + b)+y3)/2
+	        }
         }
     }
 </script>

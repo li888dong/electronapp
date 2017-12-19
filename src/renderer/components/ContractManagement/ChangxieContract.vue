@@ -58,7 +58,16 @@ export default {
                  }
               }
             ],
-            hetongList:[],
+            hetongList:[{
+                lpcon_no:'暂无数据',
+                lpcon_year:'暂无数据',
+                signed_num:'暂无数据',
+                business:'暂无数据',
+                tel:'暂无数据',
+                signed_status:'暂无数据',
+                lpdist:[],
+              }
+            ],
             totalPage:0,
             currentPage:1,
             limit:6,
@@ -95,7 +104,8 @@ export default {
                 var data = res.data.data.data;
                  
                 if(res.data.status){
-                    this.totalPage =res.data.data.total;
+                  if(data.length > 0){
+                   this.totalPage =res.data.data.total;
                     var arr = [];
                     for(var i=0;i<data.length;i++){
                         if(data[i].signed_status == 0){
@@ -106,7 +116,8 @@ export default {
                          arr.push(data[i]);
                     }
                     this.hetongList = arr;
-                    this.loading = false;
+                  }
+                  this.loading = false;
                 }else{
                    this.loading = false;
                 }

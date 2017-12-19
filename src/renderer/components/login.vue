@@ -159,6 +159,9 @@ export default {
             ipcRenderer.send('hide-window');
         },
         handleSubmit () {
+//            this.$store.dispatch('setLogin',[true,1]);
+//            this.$router.push('main/home');
+//            ipcRenderer.send('login-succeed');
             this.$http.post(this.$api.LOGIN,{username:this.form.userName,password:this.form.password}).then(res=>{
                 if (res.data.status ==='1'){
                     this.$store.dispatch('setLogin',[true,res.data.com_id]);
@@ -166,9 +169,11 @@ export default {
                     ipcRenderer.send('login-succeed');
                 } else {
                     ipcRenderer.send('login-failed');
-                    this.loginTip='请输入正确的用户名和密码';
+                    this.$Message.error('请输入正确的用户名和密码');
                 }
-            },err=>{});
+            },err=>{
+                this.$Message.error('网络错误');
+            });
         }
 
     }

@@ -325,7 +325,7 @@
             clientDeclareRecord(){
             	this.$http.post(this.$api.CLIENT_DECLARE_RECORD,{cus_id:this.cus_id}).then(res=>{
             		console.log('用户申报记录',res);
-            		this.applyData = res.data[0]
+            		this.applyData = res.data[0].data
             	},err=>{
             		this.$api.errcallback(err);
             	}).catch(err=>{

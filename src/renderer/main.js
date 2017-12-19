@@ -3,8 +3,10 @@ import Vue from 'vue'
 // 网络请求配置
 import axios from 'axios'
 import * as api from './Api'
+import {ipcRenderer,shell} from 'electron';
 
-let instance,token;
+let instance,
+    token = store.getters.access_token;
 if (!token){
     axios.post('http://192.168.2.111/oauth/token',{
         grant_type:'client_credentials',
@@ -14,6 +16,7 @@ if (!token){
 
     }).then(res=>{
         console.log('xxxxxxx',res);
+        store.dispatch('setToken',res.data.access_token);
         instance = axios.create({
             headers:{
                 common:{
@@ -24,11 +27,16 @@ if (!token){
             timeout:10000
         });
         Vue.http = Vue.prototype.$http = instance;
-        token = res.data.access_token
+        // ipcRenderer.send('login-failed');
+        // router.push('login')
     },err=>{
+        ipcRenderer.send('login-failed');
+        router.push('login');
         console.log(err)
     });
 
+}else {
+    ipcRenderer.send('login-success');
 }
 
 // 引入echarts

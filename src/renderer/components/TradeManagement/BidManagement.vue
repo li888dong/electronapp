@@ -7,73 +7,73 @@
         data() {
             return {
                 mockSelected: '添加供给侧价格',
-                dcmc: '',
-                gyl: '',
-                bj: '',
-	            model1:false,
+	            xqInput:{
+                    name:'',
+		            count:'',
+		            price:''
+	            },
+	            gyInput:{
+                    name:'',
+                    count:'',
+                    price:''
+	            },
+                model1: false,
                 tabValue: '添加供给侧价格',
                 show: '本月竞价模拟',
-                comsupply:[],
-                powerplant:[],
+                comsupply: [],
+                powerplant: [],
                 dcMockDatas: [
+
                     {
                         rank: '1',
                         name: '电厂1',
+                        gongying: 200,
+                        baojia: 250,
+                        caozuo: '修改',
+                    },
+                    {
+                        rank: '1',
+                        name: '电厂2',
                         gongying: 300,
-                        baojia: 3.2,
+                        baojia: 300,
                         caozuo: '修改',
                     },
                     {
                         rank: '1',
-                        name: '电厂1',
+                        name: '电厂3',
                         gongying: 400,
-                        baojia: 3.1,
+                        baojia: 200,
                         caozuo: '修改',
                     },
                     {
                         rank: '1',
-                        name: '电厂1',
-                        gongying: 500,
-                        baojia: 3.4,
+                        name: '电厂4',
+                        gongying: 300,
+                        baojia: 311,
                         caozuo: '修改',
                     },
                     {
                         rank: '1',
-                        name: '电厂1',
+                        name: '电厂5',
                         gongying: 600,
-                        baojia: 3.6,
+                        baojia: 211,
                         caozuo: '修改',
                     },
                 ],
                 gsMockDatas: [
                     {
-                        rank: '1',
                         name: '最高报价',
-                        gongying: 300,
-                        baojia: 5.2,
+                        gongying: 0,
+                        baojia: 387.5,
                         caozuo: '修改',
                     },
                     {
-                        rank: '1',
                         name: '最低报价',
-                        gongying: 400,
-                        baojia: 4.9,
+                        gongying: 1400,
+                        baojia: 320.0,
                         caozuo: '修改',
                     },
-                    {
-                        rank: '1',
-                        name: '最低报价',
-                        gongying: 400,
-                        baojia: 5.4,
-                        caozuo: '修改',
-                    },
-                    {
-                        rank: '1',
-                        name: '最低报价',
-                        gongying: 400,
-                        baojia: 4.1,
-                        caozuo: '修改',
-                    },
+
                 ],
                 columns1: [
                     {
@@ -106,57 +106,111 @@
                         key: 'seller_price'
                     }, {
                         title: '售电公司报价',
-                        key: 'sdgsbj'
+                        key: 'com_price',
                     }, {
                         title: '报价差价',
                         key: 'price_dif'
                     }
                 ],
                 data1: [],
+                limit: 5,
+                totalPage: 0,
+                currentPage: 1,
+                loading: false,
             }
         },
-	    beforeMount(){
+        mounted() {
             this.monthBidding();
             this.oldBidding();
             this.lastResolute();
         },
         methods: {
-	        monthBidding(){
-                this.$http.post(this.$api.MONTH_BIDDING,{com_id:this.$store.getters.com_id}).then(res => {
+            monthBidding() {
+                this.$http.post(this.$api.MONTH_BIDDING, {com_id: this.$store.getters.com_id}).then(res => {
                     console.log("本月竞价模拟", res);
-					this.comsupply = res.data.data.comsupply;
-					this.powerplant = res.data.data.powerplant;
+                    this.comsupply = res.data.data.comsupply;
+                    this.powerplant = res.data.data.powerplant;
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
                     this.$api.errcallback(err);
                 })
-	        },
-	        oldBidding(){
-                this.$http.post(this.$api.OLD_BIDDING,{com_id:this.$store.getters.com_id}).then(res => {
+            },
+            oldBidding() {
+                this.loading = true;
+                this.$http.post(this.$api.BIDDING_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    limit: this.limit,
+                    page: this.currentPage
+                }).then(res => {
                     console.log("往期竞价结果", res);
+                    if (res.data.status) {
+                        var data = res.data.data;
+                        console.log(data);
+                        this.totalPage = data.total,
+                            this.currentPage = data.current_page,
+                            this.data1 = data.data;
+                        this.loading = false;
+                    } else {
+                        this.loading = false;
+                    }
+
                 }, err => {
+                    this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading = false;
                     this.$api.errcallback(err);
                 })
-	        },
+            },
             switchSelected(type) {
                 this.mockSelected = type
             },
-            modifyData(data) {
+            modifyGy(data) {
                 console.log(data);
-                this.dcmc = data.name;
-                this.gyl = data.gongying;
-                this.bj = data.baojia
+                this.gyInput = {name:data.name,count:data.gongying,price:data.baojia}
             },
+            modifyXq(data) {
+                console.log(data);
+                this.xqInput = {name:data.name,count:data.gongying,price:data.baojia}
+            },
+	        updateGy(){
+
+	        },
+	        updateXq(){
+	            this.gsMockDatas.indexOf()
+	        },
             showCurrent: function (value) {
                 this.show = value;
             },
-            add() {
-
+            pageChange(value) {
+                this.loading = true;
+                this.$http.post(this.$api.BIDDING_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    limit: this.limit,
+                    page: value
+                }).then(res => {
+                    console.log("往期竞价结果", res);
+                    if (res.data.status) {
+                        var data = res.data.data;
+                        console.log(data);
+                        this.totalPage = data.total,
+                            this.currentPage = data.current_page,
+                            this.data1 = data.data;
+                        this.loading = false;
+                    } else {
+                        this.loading = false;
+                    }
+                }, err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                })
             }
         },
+
         components: {
             'bid-chart': BidChart,
             'previous-biding-chart': PreviousBidingChart,
@@ -185,7 +239,7 @@
 					<previous-biding-chart></previous-biding-chart>
 				</Card>
 			</Row>
-			<Row gutter=15  style="height: 100%" v-if="show==='本月竞价模拟'">
+			<Row gutter=15   style="height: 100%" v-if="show==='本月竞价模拟'">
 				<Col span="18">
 				<Card class="height_392">
 					<div slot="title">
@@ -212,21 +266,24 @@
 							<Radio label="添加需求侧价格"></Radio>
 						</Radio-group>
 					</div>
-					<div class="input-container">
-						<Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="电厂名称" v-model="dcmc"
+					<div class="input-container"  v-if="mockSelected === '添加供给侧价格'">
+						<Input type="text" placeholder="电厂名称" v-model="gyInput.name"
 						       style="width:120px;"/>
-						<Input v-if="mockSelected === '添加供给侧价格'" type="text" placeholder="供应量" v-model="gyl"
+						<Input type="text" placeholder="供应量" v-model="gyInput.count"
 						       style="width:75px;margin-right:4px;margin-left:4px;"/>
-						<Input v-if="mockSelected === '添加需求侧价格'" type="text" placeholder="售电公司名称" v-model="dcmc"
-						       style="width:120px;"/>
-						<Input v-if="mockSelected === '添加需求侧价格'" type="text" placeholder="需求量" v-model="gyl"
-						       style="width:75px;margin-right:4px;margin-left:4px;"/>
-						<Input placeholder="报价(元/Kw时)" v-model="bj" style="width:90px;"/>
-						<div v-if="mockSelected === '添加供给侧价格'" class="btn-save fr">
-							<Button type="primary">保存</Button>
+						<Input placeholder="报价(元/Kw时)" number v-model="gyInput.price" style="width:90px;"/>
+						<div class="btn-save fr">
+							<Button type="primary" @click="updateGy">保存</Button>
 						</div>
-						<div v-if="mockSelected === '添加需求侧价格'" class="btn-save fr">
-							<Button type="primary">保存</Button>
+					</div>
+					<div class="input-container"  v-if="mockSelected === '添加需求侧价格'">
+						<Input type="text" placeholder="售电公司名称" v-model="xqInput.name"
+						       style="width:120px;"/>
+						<Input type="text" placeholder="需求量" v-model="xqInput.count"
+						       style="width:75px;margin-right:4px;margin-left:4px;"/>
+						<Input placeholder="报价(元/Kw时)" number v-model="xqInput.price" style="width:90px;"/>
+						<div class="btn-save fr">
+							<Button type="primary" @click="updateXq">保存</Button>
 						</div>
 					</div>
 					<ul v-for="mockData in dcMockDatas" v-if="mockSelected === '添加供给侧价格'">
@@ -234,14 +291,14 @@
 						<li class="name" :title="mockData.name">{{mockData.name}}</li>
 						<li class="gongying">{{mockData.gongying}}</li>
 						<li class="baojia">{{mockData.baojia}}</li>
-						<li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
+						<li class="caozuo" @click="modifyGy(mockData)">{{mockData.caozuo}}</li>
 					</ul>
 					<ul v-for="mockData in gsMockDatas" v-if="mockSelected === '添加需求侧价格'">
 						<li>{{mockData.rank}}</li>
 						<li class="name" :title="mockData.name">{{mockData.name}}</li>
 						<li class="gongying">{{mockData.gongying}}</li>
 						<li class="baojia">{{mockData.baojia}}</li>
-						<li class="caozuo" @click="modifyData(mockData)">{{mockData.caozuo}}</li>
+						<li class="caozuo" @click="modifyXq(mockData)">{{mockData.caozuo}}</li>
 					</ul>
 				</Card>
 				</Col>
@@ -249,14 +306,15 @@
 		</Row>
 		<Row class="mgt_15">
 			<Card class="height relative">
-				<h3 slot="title">上期交易结果公式</h3>
+				<h3 slot="title">上期交易结果公布</h3>
 				<div class="result">
-					<Table :columns="columns1" :data="data1"></Table>
+					<Table :columns="columns1" :data="data1" :loading='loading'></Table>
 				</div>
 				<div class="page-center">
 					<!--分页-->
 					<div class="fenYe">
-						<Page :total="50" show-total show-elevator></Page>
+						<Page :total="totalPage" :page-size='limit' :current='currentPage' show-total show-elevator
+						      v-on:on-change='pageChange'></Page>
 						<Button type="primary">确定</Button>
 					</div>
 				</div>

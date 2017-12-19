@@ -45,7 +45,7 @@
 		},
 		methods:{
 			toPlanInfo() {
-				this.$router.push({path:'planInfo',query:{planDate:this.planDate,planStatus:this.planStatus}})
+				this.$router.push('planInfo')
 			}
 		}
 	}

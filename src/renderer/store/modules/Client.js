@@ -4,6 +4,7 @@ const state = {
     cus_termList:[],
     clientid:'999600CC',
     searchKey:'',
+    terminalKey:'',
     cusList:{
         tableData:[]
     }
@@ -40,6 +41,9 @@ const mutations = {
     },
     setClientId(state,res){
         state.clientid = res
+    },
+    setTermLinalKey(state,res){
+        state.terminalKey = res
     }
 }
 
@@ -72,6 +76,9 @@ const actions = {
     },
     'setClientId':function({commit},res){
         commit('setClientId',res)
+    },
+    'setTermLinalKey':function({commit},res){
+        commit('setTermLinalKey',res)
     }
 }
 
@@ -103,6 +110,9 @@ export default {
         },
         clientid:state=>{
             return state.clientid
+        },
+        terminalKey:state=>{
+             return state.terminalKey
         }
 
     }
