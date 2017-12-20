@@ -15,7 +15,7 @@ if (!token){
         scope:''
 
     }).then(res=>{
-        console.log('xxxxxxx',res);
+        console.log('令牌请求成功',res);
         store.dispatch('setToken',res.data.access_token);
         instance = axios.create({
             headers:{

@@ -41,6 +41,7 @@ const mutations = {
     },
     setClientId(state,res){
         state.clientid = res
+        console.log('当前终端逻辑地址',state.clientid)
     },
     setTermLinalKey(state,res){
         state.terminalKey = res

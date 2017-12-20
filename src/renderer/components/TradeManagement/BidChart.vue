@@ -7,8 +7,12 @@
         },
         watch:{
             powerplant:function () {
-	            this.drawLine(this.chartOption2)
-            }
+	            this.drawLine()
+            },
+            comsupply:function () {
+                console.log(this.comsupply)
+	            this.drawLine()
+            },
         },
         computed: {
             chartOption2: function () {
@@ -58,7 +62,7 @@
 				});
                 console.log('x轴区间', xRange);
                 console.log('电厂报价', dcData);
-                var colorList = ['#4f81bd', '#c0504d', '#9bbb59', '#604a7b', '#948a54', '#e46c0b'];
+                var colorList = this.$store.getters.chartOption.colorList;
 
                 dcData = this.$echarts.util.map(dcData, function (item, index) {
                     return {
@@ -121,14 +125,14 @@
             }
         },
         mounted() {
-            this.drawLine(this.chartOption2);
+            this.drawLine();
         },
         methods: {
-            drawLine(option = this.chartOption2) {
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 let bidSimulationChart = this.$echarts.init(document.getElementById('bid-simulation-chart'));
                 // 绘制图表
-                bidSimulationChart.setOption(option,true);
+                bidSimulationChart.setOption(this.chartOption2);
             },
             renderItem(params, api) {
                 var yValue = api.value(3);

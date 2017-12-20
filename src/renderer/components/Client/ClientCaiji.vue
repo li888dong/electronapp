@@ -4,17 +4,17 @@
         data() {
             return {
                 terminalList:[],
-                currentPDS:1,
+                currentPDS:0,
                 powerType: '综合',
                 origratio:'',
                 columnzh: [
                     {
                         title: '采集时间',
-                        key: 'collect_time'
+                        key: 'updated_at'
                     },
                     {
                         title: '电量',
-                        key: 'electricity'
+                        key: 'pat'
                     },
                     {
                         title: '有功功率',
@@ -44,7 +44,7 @@
                     },
                     {
                         title: '正向有功电量',
-                        key: 'eall'
+                        key: 'patall'
                     },
                     {
                         title: '费率',
@@ -57,7 +57,7 @@
                     },
                     {
                         title: '正向无功电量',
-                        key: 'neall'
+                        key: 'prteall'
                     },
                     {
                         title: '反向有功总（示数）',
@@ -65,7 +65,7 @@
                     },
                     {
                         title: '反向有功电量',
-                        key: 'feall'
+                        key: 'rapeall'
                     },
                     {
                         title: '反向无功总（示数）',
@@ -73,7 +73,7 @@
                     },
                     {
                         title: '反向无功电量',
-                        key: 'fneall'
+                        key: 'rrptall'
                     },
                 ],
                 columndianliu: [
@@ -214,18 +214,80 @@
 	            dianyaData:[],
 	            gonglvData:[],
 	            yinshuData:[],
+                limit:13,
+                currentPage:1,
+                totalPages:0,
+                typeNum:0,
+                type:'综合',
+                loading:false,
+                clientid:''
             }
         },
         methods: {
             pageListen: function (data) {
                 this.msg = '当前页码：' + data
             },
-            changeSelect(pds) {
-                this.currentPDS = pds;
+            changeSelect(pds,id,clientid) {
+                 this.currentPDS = pds;
+                 this.clientid = clientid;
+                 switch(this.typeNum){
+                    case 0:
+                     this.type = '综合';
+                     break;
+                     case 1:
+                      this.type = '电量';
+                      break;
+                      case 2:
+                      this.type = '电流';
+                      break;
+                      case 3:
+                      this.type = '电压';
+                      break;
+                      case 4:
+                      this.type = '功率';
+                      break;
+                      case 5:
+                      this.type = '功率因数';
+                      break;
+                }
+                 this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
+                    cus_id: this.cus_id,
+                    clientid: this.clientid,
+                    type: this.typeNum,
+                    limit:this.limit,
+                    page:this.currentPage
+                }).then(res => {
+                    console.log("终端采集记录", res);
+                    let data = res.data.data;
+                    this.origratio = res.data.origratio;
+                    this.totalPages = data.total;
+                        this.currentPage = data.current_page
+                    if (this.type === '综合'){
+                        this.zhData = data.data;    
+                    } else if (this.type === '电量'){
+                        this.dianliangData = data.data;
+                    }else if (this.type === '电流'){
+                        this.dianliuData = data.data;
+                    }else if (this.type === '电压'){
+                        this.dianyaData = data.data;
+                    }else if (this.type === '功率'){
+                        this.gonglvData = data.data;
+                    }else if (this.type === '功率因数'){
+                        this.yinshuData = data.data;
+                    }
+                    this.loading = false;
+                }, err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                })
+                console.log(this.clientid);
             },
             //用户终端列表
             clientTerminalList() {
-                this.$http.post(this.$api.CLIENT_TERMINAL_LIST, {cus_id: this.$store.getters.cus_id}).then(res => {
+                this.$http.post(this.$api.CLIENT_TERMINAL_LIST, {cus_id: this.cus_id}).then(res => {
                     console.log('用户终端列表', res.data[0]);
                     this.terminalList = res.data[0].data;
                     this.terminalCollectRecord('综合');
@@ -236,58 +298,133 @@
                 })
             },
             terminalCollectRecord(type) {
-                let typeNum = 0;
+                this.currentPage = 1;
+                this.currentPDS = 0;
+                // let typeNum = 0;
                 switch (type) {
                     case "综合":
-                        typeNum = 0;
+                        this.typeNum = 0;
                         break;
                     case "电量":
-                        typeNum = 1;
+                        this.typeNum = 1;
                         break;
                     case "电流":
-                        typeNum = 2;
+                        this.typeNum = 2;
                         break;
                     case "电压":
-                        typeNum = 3;
+                        this.typeNum = 3;
                         break;
                     case "功率":
-                        typeNum = 4;
+                        this.typeNum = 4;
                         break;
                     case "功率因数":
-                        typeNum = 5;
+                        this.typeNum = 5;
                         break;
                 }
+                this.loading = true;
                 this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
-                    cus_id: this.$store.getters.cus_id,
+                    cus_id: this.cus_id,
                     clientid: this.$store.getters.clientid,
-                    type: typeNum,
+                    type: this.typeNum,
+                    limit:this.limit,
+                    page:this.currentPage
                 }).then(res => {
                     console.log("终端采集记录", res);
                     let data = res.data.data;
 	                this.origratio = res.data.origratio;
+                    this.totalPages = data.total;
+                        this.currentPage = data.current_page
                     if (type === '综合'){
-                        this.zhData = Object.values(data);
+                        this.zhData = data.data;    
                     } else if (type === '电量'){
-                        this.dianliangData = data;
+                        this.dianliangData = data.data;
                     }else if (type === '电流'){
-                        this.dianliuData = data
+                        this.dianliuData = data.data;
                     }else if (type === '电压'){
-                        this.dianyaData = data
+                        this.dianyaData = data.data;
                     }else if (type === '功率'){
-                        this.gonglvData = data
+                        this.gonglvData = data.data;
                     }else if (type === '功率因数'){
-                        this.yinshuData = data
+                        this.yinshuData = data.data;
                     }
+                    this.loading = false;
                 }, err => {
+                    this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading = false;
                     this.$api.errcallback(err);
                 })
+            },
+            pageChange(value){
+                switch(this.typeNum){
+                    case 0:
+                     this.type = '综合';
+                     break;
+                     case 1:
+                      this.type = '电量';
+                      break;
+                      case 2:
+                      this.type = '电流';
+                      break;
+                      case 3:
+                      this.type = '电压';
+                      break;
+                      case 4:
+                      this.type = '功率';
+                      break;
+                      case 5:
+                      this.type = '功率因数';
+                      break;
+                }
+                this.loading = true;
+                this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
+                    cus_id: this.cus_id,
+                    clientid: this.$store.getters.clientid,
+                    type: this.typeNum,
+                    limit:this.limit,
+                    page:value
+                }).then(res => {
+                    console.log("终端采集记录", res);
+                    let data = res.data.data;
+                    this.origratio = res.data.origratio;
+                    this.totalPages = data.total;
+                    this.currentPage = data.current_page;
+                    if (this.type === '综合'){
+                        this.zhData = data.data;
+                    } else if (this.type === '电量'){
+                        this.dianliangData = data.data;
+                    }else if (this.type === '电流'){
+                        this.dianliuData = data.data;
+                    }else if (this.type === '电压'){
+                        this.dianyaData = data.data;
+                    }else if (this.type === '功率'){
+                        this.gonglvData = data.data;
+                    }else if (this.type === '功率因数'){
+                        this.yinshuData = data.data;
+                    }
+                    this.loading = false;
+                }, err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                })
+               
             }
         },
 	    computed:{
-
+           cus_id:function(){
+             return this.$store.getters.cus_id;
+           }
 	    },
+        watch:{
+            cus_id:function(){
+                this.clientTerminalList();
+                this.pageChange();
+            }
+        },
         beforeMount() {
             this.clientTerminalList();
         }
@@ -321,7 +458,7 @@
 				<h3 class="fr">综合倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columnzh" :data="zhData"></Table>
+				<Table :columns="columnzh" :data="zhData" :loading='loading'></Table>
 				</Col>
 
 			</Row>
@@ -329,7 +466,7 @@
 				<h3 class="fr">电量倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columndianliang" :data="dianliangData"></Table>
+				<Table :columns="columndianliang" :data="dianliangData" :loading='loading'></Table>
 
 				</Col>
 
@@ -338,7 +475,7 @@
 				<h3 class="fr">电流倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columndianliu" :data="dianliuData"></Table>
+				<Table :columns="columndianliu" :data="dianliuData" :loading='loading'></Table>
 
 				</Col>
 
@@ -347,7 +484,7 @@
 				<h3 class="fr">电压倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columndianya" :data="dianyaData"></Table>
+				<Table :columns="columndianya" :data="dianyaData" :loading='loading'></Table>
 
 				</Col>
 
@@ -356,7 +493,7 @@
 				<h3 class="fr">综合倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columngonglv" :data="gonglvData"></Table>
+				<Table :columns="columngonglv" :data="gonglvData" :loading='loading'></Table>
 
 				</Col>
 
@@ -365,7 +502,7 @@
 				<h3 class="fr">综合倍率：<span class="bl">{{origratio}}</span></h3>
 
 				<Col span="24">
-				<Table :columns="columnyinshu" :data="yinshuData"></Table>
+				<Table :columns="columnyinshu" :data="yinshuData" :loading='loading'></Table>
 
 				</Col>
 
@@ -373,7 +510,7 @@
 
 			<div class="page-container">
 
-				<Page :total="100" show-elevator show-total></Page>
+				<Page :total="totalPages" :page-size='limit' :current='currentPage' show-elevator show-total v-on:on-change='pageChange'></Page>
 			</div>
 
 		</Card>

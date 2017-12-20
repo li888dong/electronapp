@@ -11,7 +11,7 @@
                 }
             };
             const codeLength = (rule, val, callback) => {
-                if (val.length !== 15 || val.length !== 18) {
+                if (val.length !== 15 && val.length !== 18) {
                     return callback(new Error('请输入正确的格式'));
                 } else {
                     callback();
@@ -39,7 +39,6 @@
                     officephone2: '',
                     fax1: '',
                     fax2: '',
-                    switch: true,
                     date: '',
                     time: '',
                     slider: [20, 50],
@@ -144,17 +143,15 @@
                         fax: this.formItem.fax1 + this.formItem.fax2,
                     }).then(res => {
                         console.log(res);
-                        if (res.data.status) {
-                            if (goht) {
-                                this.$router.push({path: 'add-hetong', query: {cus_name: this.formItem.name}});
-                            } else {
-                                this.$router.push('client-list');
-                                for (let k in this.formItem) {
-                                    this.formItem[k] = "";
-                                }
-                                this.category1 = '';
-                                this.category2 = '';
+                        if (goht) {
+                            this.$router.push({path: 'add-hetong', query: {cus_name: this.formItem.name,cus_id:res.data.id}});
+                        } else {
+                            for (let k in this.formItem) {
+                                this.formItem[k] = "";
                             }
+                            this.category1 = '';
+                            this.category2 = '';
+                            this.$router.push('client-list');
                         }
                     }, err => {
                         this.$api.errcallback(err);
@@ -297,13 +294,13 @@
 							<Option :value='item.value' v-for='item in categoryList'>{{item.label}}</Option>
 						</Select>
 						</Col>
-						<Col span="4">
+						<!-- <Col span="4">
 						<Select v-model="formItem.select" placeholder="请选择">
 							<Option value="beijing">北京市</Option>
 							<Option value="shanghai">上海市</Option>
 							<Option value="shenzhen">深圳市</Option>
 						</Select>
-						</Col>
+						</Col> -->
 					</Form-item>
 				</Row>
 				<Row>
@@ -411,9 +408,9 @@
 				<Row>
 					<Col span="12" style="text-align: center;line-height: 34px;">
 					<Form-item style='margin-bottom: 0'>
-						<i-button type="primary" @click="addClient('goht')">保存并添加合同</i-button>
-						<i-button type="primary" style="margin-left: 30px" @click='addClient()'>保存</i-button>
-						<i-button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</i-button>
+						<Button type="primary" @click="addClient('goht')">保存并添加合同</Button>
+						<Button type="primary" style="margin-left: 30px" @click='addClient()'>保存</Button>
+						<Button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</Button>
 						<div v-if='hint' style="margin-left: 60px;">
 							<Alert type="warning" show-icon style='width: 200px;margin:4px auto;color: red;'>内容不能为空
 							</Alert>

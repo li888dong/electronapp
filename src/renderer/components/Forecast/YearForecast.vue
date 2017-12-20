@@ -10,7 +10,7 @@
                 spinShow:false,
                 currentPage:1,
 	            limit:11,
-	            totalPage:1,
+	            totalPage:0,
                 modalShow: false,
                 selectList: [],
 	            modifyList:[],

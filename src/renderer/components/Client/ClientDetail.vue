@@ -275,7 +275,8 @@
         },
 		methods:{
             gotoTerminalData(clientId,index){
-                this.$router.push({path:'client-terminal',query:{clientId:clientId,clientIndex:index}})
+                 this.$store.dispatch('setClientId',clientId),
+                this.$router.push({path:'client-terminal',query:{clientIndex:index}})
             },
             gotoCaiji(){
                 this.$router.push('caiji-detail')
@@ -376,8 +377,8 @@
 
 							<tr>
 								<td><span>客户编码 :</span> {{userDetail.category}}</td>
-								<td><span>所属行业 :</span> {{userDetail.industry}}</td>
-								<td><span>售电起止时间 :</span> {{userDetail.exec_time}}</td>
+								<td><span>所属行业 :</span> {{userDetail.category}}</td>
+								<td><span>售电起止时间 :</span> {{userDetail.deadline}}</td>
 							</tr>
 							<tr>
 								<td><span>客户地址 :</span> {{userDetail.address}}</td>

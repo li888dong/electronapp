@@ -115,7 +115,7 @@
             changeStatus() {
                 if(this.file && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
                      this.bol = true;
-                     this.isGo = false
+                     this.isGo = true;
                 }else{
                     this.hint = true;
                 }
@@ -224,10 +224,11 @@
                                 this.formItem.d_id = res.data.id;
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
                                     console.log('添加长协合同', res);
-                                    if (res.data.status && !this.isGo) {
-                                        this.$router.push('/ChangxieContract');
-                                    } else {
-                                        this.success();
+                                    if (res.data.status) {
+                                        if(this.isGo){
+                                            this.$router.push('/ChangxieContract');
+                                        }else{
+                                            this.success();
                                         for (let k in this.formItem) {
                                             this.formItem[k] = '';
                                         }
@@ -236,8 +237,9 @@
                                         this.formItem.exec_date='';
                                         for (let k in this.month) {
                                             this.month[k] = '';
-                                        }
-                                    }
+                                          }
+                                        } 
+                                    } 
                                 }, err => {
                                     this.$api.errcallback(err);
                                 }).catch(err => {
@@ -286,8 +288,13 @@
                 this.formItem.signed_status = value;
             },
             changeEmpty() {
-                this.bol = true;
-                this.isGo = false;
+                if(this.file && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
+                    this.bol = true;
+                    this.isGo = false;
+                }else{
+                    this.hint = true;
+                }
+                
             },
             // cancel() {
             //     for (let k in this.formItem) {

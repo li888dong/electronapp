@@ -34,12 +34,7 @@
         computed:{
             chartOption1:function () {
 	            return  {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     legend: {
                         left: -5,
                         top: 0,
@@ -54,7 +49,7 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                     xAxis: {
                         type: 'category',
                         data: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
@@ -105,12 +100,7 @@
             },
             chartOption2:function () {
                 return {
-                    tooltip: {
-                        trigger: 'axis',
-                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     legend: {
                         left: -5,
                             top: 0,
@@ -126,7 +116,7 @@
                             containLabel: true
                     },
 //                    color: ['#14d86b', '#ca94ec'],
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                         xAxis: {
                     type: 'category',
                         data: ["今天", "昨天"],
@@ -176,12 +166,7 @@
             },
             chartOption3:function(){
                 return  {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+                    tooltip: this.$store.getters.chartOption.barTooltip,
                     legend: {
                         left: -5,
                         top: 0,
@@ -196,7 +181,7 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    color:['#4f8af9','#6ec71e','#f56e6a','#fc8b40','#818af8','#31c9d7','#f35e7a','#ab7aee','#14d68b','#edb00d'],
+                    color:this.$store.getters.chartOption.colorList,
                     xAxis: {
                         type: 'category',
                         data: ["本月", "上月"],
@@ -268,6 +253,7 @@
                     console.log('户号指数',this.indexData);
                 },err=>{
                     this.huhaoSpin = false;
+                    this.indexData = '';
                     this.$api.errcallback(err);
                 }).catch(err=>{
                     this.huhaoSpin = false;

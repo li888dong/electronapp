@@ -265,6 +265,7 @@
             },
             changeSelect(city){
                 this.spinShow = true;
+                this.currentPage = 1;
                 this.currentCity = city;
                 this.reqType = 2;
                 if (this.currentCity ==='all'){
@@ -433,6 +434,7 @@
 			<Page
 					:total="totalPage"
 					:current="currentPage"
+					:page-size="pageLimit"
 					show-total
 					show-elevator
 					v-on:on-change="pageChange"

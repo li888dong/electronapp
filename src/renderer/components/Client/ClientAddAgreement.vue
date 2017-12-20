@@ -210,14 +210,12 @@
             addCompact() {
                 if (this.$route.query.id) {
                     if (!this.isEmpty(this.addList)) {
-                        if (this.way_param != '') {
+                        if (this.way_param) {
                             if (this.user_nums.length > 0) {
                                 this.addList.ly_used = parseFloat(this.addList.ly_used);
                                 this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
                                 this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
                                 this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
-                                var user_nums = this.user_nums.join(',');
-                                var deadline = this.addList.deadline[0] + '/' + this.addList.deadline[1];
                                 this.$http.post(this.$api.POWER_ADD_COMPACT, {
                                     id: this.$route.query.id,
                                     cus_name: this.addList.user_name,
@@ -229,12 +227,11 @@
                                     bndyjdl: this.addList.bndyjdl,
                                     bndyjzdfh: this.addList.bndyjzdfh,
                                     htscdz: this.addList.htid,
-                                    user_nums: user_nums,
-                                    deadline: deadline
+                                    user_nums: this.user_nums.join(','),
+                                    deadline: this.addList.deadline[0] + '/' + this.addList.deadline[1]
 
                                 }).then(res => {
                                     console.log('修改成功', res);
-                                    var msg = res.data.msg;
                                     if (res.data.status) {
                                         for (let key in this.addList) {
                                             this.addList[key] = '';
@@ -257,14 +254,12 @@
                     }
                 } else {
                     if (!this.isEmpty(this.addList)) {
-                        if (this.way_param != '') {
+                        if (this.way_param) {
                             if (this.user_nums.length > 0) {
                                 this.addList.ly_used = parseFloat(this.addList.ly_used);
                                 this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
                                 this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
                                 this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
-                                var user_nums = this.user_nums.join(',');
-                                var deadline = this.addList.deadline[0] + '/' + this.addList.deadline[1];
                                 this.$http.post(this.$api.POWER_ADD_COMPACT, {
                                     cus_name: this.addList.user_name,
                                     con_no: this.addList.con_no,
@@ -275,13 +270,13 @@
                                     bndyjdl: this.addList.bndyjdl,
                                     bndyjzdfh: this.addList.bndyjzdfh,
                                     htscdz: this.addList.htid,
-                                    user_nums: user_nums,
-                                    deadline: deadline
+                                    user_nums: this.user_nums.join(','),
+                                    deadline: this.addList.deadline[0] + '/' + this.addList.deadline[1]
 
                                 }).then(res => {
                                     console.log('添加合同', res);
-                                    var msg = res.data.msg;
-                                    if (msg == "添加成功!") {
+                                    let msg = res.data.msg;
+                                    if (msg === "添加成功!") {
                                         for (let key in this.addList) {
                                             this.addList[key] = '';
                                         }
@@ -290,7 +285,7 @@
                                             this.data1 = ''
                                         }
                                         this.$router.push('/hetong');
-                                    } else if (msg == '客户名称不存在!') {
+                                    } else if (msg === '客户名称不存在!') {
                                         this.modal2 = true;
                                     }
                                 }, err => {
@@ -313,33 +308,33 @@
                 }
             },
             saveBtn() {
+                let i;
                 console.log(this.addList.way);
-                if (this.addList.way == '分成模式') {
+                let div = document.getElementsByClassName('htfs-container');
+
+                if (this.addList.way === '分成模式') {
                     if (this.way_param1 && this.way_param2) {
                         this.way_param = this.way_param1 + ":" + this.way_param2;
                         console.log(this.way_param);
-                        var div = document.getElementsByClassName('htfs-container');
-                        for (var i = 0; i < div.length; i++) {
+                        for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "分成模式";
                     } else {
                         this.isKong = true;
                     }
-                } else if (this.addList.way == '保底模式') {
+                } else if (this.addList.way === '保底模式') {
                     if (this.way_param3) {
                         this.way_param = this.way_param3;
-                        var div = document.getElementsByClassName('htfs-container');
-                        for (var i = 0; i < div.length; i++) {
+                        for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "保底模式";
                     }
-                } else if (this.addList.way == '分成保底') {
+                } else if (this.addList.way === '分成保底') {
                     if (this.way_param4 && this.way_param5 && this.way_param6) {
                         this.way_param = this.way_param4 + "," + this.way_param5 + ":" + this.way_param6;
-                        var div = document.getElementsByClassName('htfs-container');
-                        for (var i = 0; i < div.length; i++) {
+                        for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "分成保底";
@@ -347,8 +342,7 @@
                 } else if (this.addList.way === '分成叠加') {
                     if (this.way_param7 && this.way_param8 && this.way_param9) {
                         this.way_param = this.way_param7 + ":" + this.way_param8 + "," + this.way_param9;
-                        var div = document.getElementsByClassName('htfs-container');
-                        for (var i = 0; i < div.length; i++) {
+                        for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "分成叠加";
@@ -356,8 +350,7 @@
                 } else if (this.addList.way === '固定服务') {
                     if (this.way_param10 !== '') {
                         this.way_param = this.way_param10;
-                        var div = document.getElementsByClassName('htfs-container');
-                        for (var i = 0; i < div.length; i++) {
+                        for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "固定服务";
@@ -366,10 +359,9 @@
             },
             saveData() {
                 if (!this.isEmpty(this.addTableList)) {
-                    var arr = this.addTableList.yddz;
-                    console.log('#####',arr)
-                    var address = arr.join(' ') + ' ' + this.addTableList.stree;
-                    var data1 = {
+                    let arr = this.addTableList.yddz;
+                    let address = arr.join(' ') + ' ' + this.addTableList.stree;
+                    let data1 = {
                         id: '',
                         user_id: this.addTableList.user_id,
                         user_grade: this.addTableList.user_grade,
@@ -416,15 +408,15 @@
             },
             isEmpty(obj) {
                 for (let key in obj) {
-                    if (obj[key] != "") {
+                    if (obj[key]) {
                         return false
                     }
                 }
                 return true
             },
             timeout() {
-                var _this = this;
-                var timer = setTimeout(function () {
+                let _this = this;
+                let timer = setTimeout(function () {
                     _this.hint = false;
                     if (_this.hint = false) {
                         clearTimeout(timer);
@@ -432,8 +424,8 @@
                 }, 3000);
             },
             valueChange() {
-                var _this = this;
-                var timer2 = setTimeout(function () {
+                let _this = this;
+                let timer2 = setTimeout(function () {
                     _this.isKong = false;
                     if (_this.isKong = false) {
                         clearTimeout(timer2);
@@ -441,8 +433,8 @@
                 }, 3000);
             }, 
             disappear() {
-                var _this = this;
-                var timer3 = setTimeout(function () {
+                let _this = this;
+                let timer3 = setTimeout(function () {
                     _this.hint2 = false;
                     if (_this.hint2 = false) {
                         clearTimeout(timer3);
@@ -473,17 +465,16 @@
                 }
             },
             saveUpdate() {
-                var arr = this.addTableList.yddz;
-                var address = arr.join(' ') + ' ' + this.addTableList.stree;
-                this.addTableList.yddz = address;
-                var data1 = {
+                let arr = this.addTableList.yddz;
+                let address = arr.join(' ') + ' ' + this.addTableList.stree;
+                let data1 = {
                     id: this.id,
                     user_id: this.addTableList.user_id,
                     user_grade: this.addTableList.user_grade,
                     bzrl: this.addTableList.bzrl,
                     ydlb: this.addTableList.ydlb,
                     yddwlb: this.addTableList.yddwlb,
-                    yddz: this.addTableList.yddz
+                    yddz: address
                 };
                 this.$http.post(this.$api.USER_NUM_ADD, {
                     id: this.id, cus_id: this.cus_id,
@@ -492,7 +483,7 @@
                     packing_capacity: this.addTableList.bzrl,
                     category: this.addTableList.ydlb,
                     unit_type: this.addTableList.yddwlb,
-                    address: this.addTableList.yddz
+                    address: address
                 }).then(res => {
                     console.log("修改", res);
                     if (res.data.status) {
@@ -505,7 +496,7 @@
                     this.addTableList.ydlb = '';
                     this.addTableList.yddwlb = '';
                     this.addTableList.stree = '';
-                    this.modal13 = false;
+                    this.modal3 = false;
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -606,14 +597,11 @@
             },
             hint2: function () {
                 this.disappear();
-            },
-            cus_id: function () {
-                this.saveData();
             }
         },
         mounted() {
             if (this.$route.query.cus_name) {
-                this.addList.user_name = this.$route.query.cus_name
+                this.addList.user_name = this.$route.query.cus_name;
                 var div = document.getElementById('name');
                 var input = div.getElementsByClassName('ivu-input')[0];
                 input.readOnly = true;

@@ -6,16 +6,18 @@
         name: 'bidmanagement',
         data() {
             return {
+                month:'2017-12',
                 mockSelected: '添加供给侧价格',
 	            xqInput:{
-                    name:'',
-		            count:'',
-		            price:''
+		            maxcount:'',
+		            highprice:'',
+		            lowprice:''
 	            },
 	            gyInput:{
                     name:'',
                     count:'',
-                    price:''
+                    price:'',
+		            index:''
 	            },
                 model1: false,
                 tabValue: '添加供给侧价格',
@@ -25,35 +27,30 @@
                 dcMockDatas: [
 
                     {
-                        rank: '1',
                         name: '电厂1',
                         gongying: 200,
                         baojia: 250,
                         caozuo: '修改',
                     },
                     {
-                        rank: '1',
                         name: '电厂2',
                         gongying: 300,
                         baojia: 300,
                         caozuo: '修改',
                     },
                     {
-                        rank: '1',
                         name: '电厂3',
                         gongying: 400,
                         baojia: 200,
                         caozuo: '修改',
                     },
                     {
-                        rank: '1',
                         name: '电厂4',
                         gongying: 300,
                         baojia: 311,
                         caozuo: '修改',
                     },
                     {
-                        rank: '1',
                         name: '电厂5',
                         gongying: 600,
                         baojia: 211,
@@ -64,14 +61,12 @@
                     {
                         name: '最高报价',
                         gongying: 0,
-                        baojia: 387.5,
-                        caozuo: '修改',
+                        baojia: 387.5
                     },
                     {
                         name: '最低报价',
                         gongying: 1400,
-                        baojia: 320.0,
-                        caozuo: '修改',
+                        baojia: 320.0
                     },
 
                 ],
@@ -145,11 +140,10 @@
                 }).then(res => {
                     console.log("往期竞价结果", res);
                     if (res.data.status) {
-                        var data = res.data.data;
-                        console.log(data);
-                        this.totalPage = data.total,
-                            this.currentPage = data.current_page,
-                            this.data1 = data.data;
+                        let data = res.data.data;
+                        this.totalPage = data.total;
+                        this.currentPage = data.current_page;
+                        this.data1 = data.data;
                         this.loading = false;
                     } else {
                         this.loading = false;
@@ -166,19 +160,30 @@
             switchSelected(type) {
                 this.mockSelected = type
             },
-            modifyGy(data) {
-                console.log(data);
-                this.gyInput = {name:data.name,count:data.gongying,price:data.baojia}
-            },
-            modifyXq(data) {
-                console.log(data);
-                this.xqInput = {name:data.name,count:data.gongying,price:data.baojia}
+            modifyGy(data,index) {
+                console.log(data,index);
+                this.gyInput = {name:data.name,count:data.gongying,price:data.baojia,index:index}
             },
 	        updateGy(){
-
+				this.dcMockDatas.splice(this.gyInput.index,1,{
+				    name:this.gyInput.name,
+					gongying:this.gyInput.count/1,
+					baojia:this.gyInput.price,
+					caozuo:'操作'
+				});
+				console.log(this.dcMockDatas)
 	        },
 	        updateXq(){
-	            this.gsMockDatas.indexOf()
+	            this.gsMockDatas.splice(1,1,{
+                    name: '最低报价',
+                    gongying: this.xqInput.maxcount||1400,
+                    baojia: this.xqInput.lowprice||320.0
+                });
+	            this.gsMockDatas.splice(0,1,{
+                    name: '最高报价',
+                    gongying: 0,
+                    baojia: this.xqInput.highprice||387.5
+                });
 	        },
             showCurrent: function (value) {
                 this.show = value;
@@ -192,11 +197,11 @@
                 }).then(res => {
                     console.log("往期竞价结果", res);
                     if (res.data.status) {
-                        var data = res.data.data;
+                        let data = res.data.data;
                         console.log(data);
-                        this.totalPage = data.total,
-                            this.currentPage = data.current_page,
-                            this.data1 = data.data;
+                        this.totalPage = data.total;
+                        this.currentPage = data.current_page;
+                        this.data1 = data.data;
                         this.loading = false;
                     } else {
                         this.loading = false;
@@ -208,6 +213,9 @@
                     this.loading = false;
                     this.$api.errcallback(err);
                 })
+            },
+            monthSelect(month){
+	            this.month = month
             }
         },
 
@@ -229,12 +237,7 @@
 						</Radio-group>
 					</div>
 					<div slot="extra" class="btn-group">
-						<Button class="Button" type="primary" @click="add()">上一月</Button>
-						<i-select v-model="model1" style="width:100px" placeholder='月度选择'>
-							<i-option v-for="item in timeList" :value="item.value" :key='item.id'>{{ item.label }}
-							</i-option>
-						</i-select>
-						<Button class="Button" type="primary">下一月</Button>
+						<DatePicker type="month" placeholder="请选择月份" @on-change="monthSelect"></DatePicker>
 					</div>
 					<previous-biding-chart></previous-biding-chart>
 				</Card>
@@ -275,31 +278,35 @@
 						<div class="btn-save fr">
 							<Button type="primary" @click="updateGy">保存</Button>
 						</div>
+						<ul v-for="(mockData,index) in dcMockDatas">
+							<li>{{mockData.rank}}</li>
+							<li class="name" :title="mockData.name">{{mockData.name}}</li>
+							<li class="gongying">{{mockData.gongying}}</li>
+							<li class="baojia">{{mockData.baojia}}</li>
+							<li class="caozuo" @click="modifyGy(mockData,index)">{{mockData.caozuo}}</li>
+						</ul>
 					</div>
 					<div class="input-container"  v-if="mockSelected === '添加需求侧价格'">
-						<Input type="text" placeholder="售电公司名称" v-model="xqInput.name"
-						       style="width:120px;"/>
-						<Input type="text" placeholder="需求量" v-model="xqInput.count"
-						       style="width:75px;margin-right:4px;margin-left:4px;"/>
-						<Input placeholder="报价(元/Kw时)" number v-model="xqInput.price" style="width:90px;"/>
+						<div class="xq-box">
+							<span>最大需求量：</span>
+							<Input type="text" placeholder="需求量" v-model="xqInput.maxcount" style="width:50%"/>KW时
+						</div>
+
+						<div class="xq-box">
+							<span>最高报价：</span>
+							<Input placeholder="最高报价(元/Kw时)" v-model="xqInput.highprice" style="width:50%;"/>元/Kw时
+						</div>
+
+						<div class="xq-box">
+							<span>最低报价：</span>
+							<Input placeholder="最低报价(元/Kw时)" v-model="xqInput.lowprice" style="width:50%;"/>元/Kw时
+						</div>
 						<div class="btn-save fr">
 							<Button type="primary" @click="updateXq">保存</Button>
 						</div>
 					</div>
-					<ul v-for="mockData in dcMockDatas" v-if="mockSelected === '添加供给侧价格'">
-						<li>{{mockData.rank}}</li>
-						<li class="name" :title="mockData.name">{{mockData.name}}</li>
-						<li class="gongying">{{mockData.gongying}}</li>
-						<li class="baojia">{{mockData.baojia}}</li>
-						<li class="caozuo" @click="modifyGy(mockData)">{{mockData.caozuo}}</li>
-					</ul>
-					<ul v-for="mockData in gsMockDatas" v-if="mockSelected === '添加需求侧价格'">
-						<li>{{mockData.rank}}</li>
-						<li class="name" :title="mockData.name">{{mockData.name}}</li>
-						<li class="gongying">{{mockData.gongying}}</li>
-						<li class="baojia">{{mockData.baojia}}</li>
-						<li class="caozuo" @click="modifyXq(mockData)">{{mockData.caozuo}}</li>
-					</ul>
+
+
 				</Card>
 				</Col>
 			</Row>
@@ -336,7 +343,13 @@
 	.input-container input:nth-child(1) {
 		width: 100px;
 	}
-
+	.xq-box{
+		margin: 10px;
+	}
+	.xq-box>span{
+		display: inline-block;
+		width: 24%;
+	}
 	.mock-trading ul {
 		height: 30px;
 		margin-top: 10px;

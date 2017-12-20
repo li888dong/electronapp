@@ -8,7 +8,6 @@
                 timeType: '今天',
 	            todayTime:'0',
                 cldDetail: {},
-                clientId: '',
                 clientIndex: '',
                 monitoringShow: 2,
                 eTotal: 0,
@@ -117,9 +116,7 @@
                 },
                 shizaiData: {
                     xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
-                    aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                    yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 },
                 yinshuData: {
                     xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
@@ -137,10 +134,17 @@
                     xData: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
                     yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
                 },
+                zuidaDate:{
+                    xData:['2017-11-13','2017-11-14','2017-11-15','2017-11-16','2017-11-17','2017-11-18','2017-11-19','2017-11-20','2017-11-21','2017-11-22','2017-11-23','2017-11-24','2017-11-25','2017-11-26','2017-11-27','2017-11-28','2017-11-29','2017-11-30'],
+                    yData:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                },
                 terminalList: []
             }
         },
         computed: {
+            clientId:function(){
+                return this.$store.getters.clientid;
+            },
             time: function () {
                 if (this.timeType === '今天') {
                     return 1
@@ -181,6 +185,9 @@
             },
             onlineChart: function () {
                 return this.$echarts.init(document.getElementById('chart-jiankong'));
+            },
+            zuidaChart:function(){
+                return this.$echarts.init(document.getElementById('chart-main3'));
             },
             dianliangOption: function () {
                 return {
@@ -494,7 +501,7 @@
                         containLabel: true
                     },
                     legend: {
-                        data: ['A相', 'B相', 'C相',],
+                        data: ['视在功率'],
                         left: 5,
                         top: 20,
                         itemWidth: 16,
@@ -676,10 +683,58 @@
 
                     ]
                 }
+            },
+            zuidaOption:function(){
+                 return {
+                    tooltip: this.$store.getters.chartOption.barTooltip,
+                     legend: {
+                        data: ['最大需量'],
+                        left: 5,
+                        top: 20,
+                        itemWidth: 16,
+                        itemHeight: 16,
+                    },
+                    grid: {
+                        top: '80',
+                        left: '10',
+                        right: '13%',
+                        bottom: '15',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        ...this.$store.getters.chartOption.barTooltip,
+                        data:this.zuidaDate.xData,
+                    }
+                    ,
+                    color:this.$store.getters.chartOption.colorList,
+                     yAxis: [
+                        {
+                            position: 'left',
+                            type: 'value',
+                            axisLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                        }
+                    ],
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    series: [
+                        {
+                            name: '最大需量',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: this.$store.getters.chartOption.lineItemStyle,
+                            data: this.zuidaDate.yData
+                        }
+
+                    ]
+                }
             }
         },
         mounted() {
-            this.clientId = this.$route.query.clientId || this.terminalList[0].clientid;
+            // this.clientId = this.$route.query.clientId || this.terminalList[0].clientid;
             this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
             this.clientTerminalList();
         },
@@ -745,6 +800,11 @@
                 this.onlineChart.clear();
                 this.onlineChart.setOption(this.onlineOption);
                 this.onlineChart.hideLoading();
+            },
+            drawZuida(){
+                this.zuidaChart.clear();
+                this.zuidaChart.setOption(this.zuidaOption);
+                this.zuidaChart.hideLoading();
             },
             changeSelect(pds, clientIndex, clientId) {
                 this.currentPDS = pds;
@@ -898,6 +958,7 @@
                 this.yougongChart.showLoading();
                 this.shizaiChart.showLoading();
                 this.yinshuChart.showLoading();
+                this.zuidaChart.showLoading();
                 this.$http.post(this.$api.CLIENT_COLLECT_DATA, {
                     type: this.currentChartType,
                     time: this.time,
@@ -944,7 +1005,7 @@
                         });
                         console.log("采集监控  电压", res);
                         this.drawDianya();
-                    } else if (this.currentChartType === 5) {
+                    } else if (this.currentChartType === 4) {
                         this.wugongData.xData = [];
                         this.wugongData.aData = [];
                         this.wugongData.bData = [];
@@ -957,16 +1018,16 @@
                         });
                         console.log("采集监控  无功功率", res);
                         this.drawWugong();
-                    } else if (this.currentChartType === 6) {
+                    } else if (this.currentChartType === 5) {
                         this.shizaiData.xData = [];
                         this.shizaiData.yData = [];
                         data.map(i => {
                             this.shizaiData.xData.push(i.updated_at);
-                            this.shizaiData.yData.push(i.rpa);
+                            this.shizaiData.yData.push(i.inspect_power);
                         });
                         console.log("采集监控  视在功率", res);
-                        this.drawWugong();
-                    } else if (this.currentChartType === 7) {
+                        this.drawShizai();
+                    } else if (this.currentChartType === 6) {
                         this.yinshuData.xData = [];
                         this.yinshuData.aData = [];
                         this.yinshuData.bData = [];
@@ -979,7 +1040,7 @@
                         });
                         console.log("采集监控  功率因数", res);
                         this.drawYinshu();
-                    } else if (this.currentChartType === 8) {
+                    } else if (this.currentChartType === 7) {
                         this.yougongData.xData = [];
                         this.yougongData.aData = [];
                         this.yougongData.bData = [];
@@ -992,9 +1053,16 @@
                         });
                         console.log("采集监控  负荷", res);
                         this.drawYougong();
+                    }else if(this.currentChartType === 8){
+                        var dataNum = res.data.data;
+                        this.zuidaDate.xData = Object.keys(dataNum);
+                        this.zuidaDate.yData = Object.values(dataNum);
+                       console.log("采集监控 最大需量",res);
+                       console.log(1,this.zuidaDate);
+                       this.drawZuida();
                     }
                 }, err => {
-                    if (this.monitoringShow === 2) {
+                    if (this.currentChartType === 1) {
                         this.dianliangData.xData = ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'];
                         this.dianliangData.yData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
                         this.drawDianliang();
@@ -1118,26 +1186,26 @@
 						<div class="power-item" :class="{selected:currentChartType===3}"
 						     @click="monitoringShow = 3;currentChartType=3;collectJiankongData()">电压
 						</div>
+						<div class="power-item" :class="{selected:currentChartType===4}"
+						     @click="monitoringShow = 3;currentChartType=4;collectJiankongData()">无功功率
+						</div>
 						<div class="power-item" :class="{selected:currentChartType===5}"
-						     @click="monitoringShow = 3;currentChartType=5;collectJiankongData()">无功功率
+						     @click="monitoringShow = 3;currentChartType=5;collectJiankongData()">视在功率
 						</div>
 						<div class="power-item" :class="{selected:currentChartType===6}"
-						     @click="monitoringShow = 3;currentChartType=6;collectJiankongData()">视在功率
+						     @click="monitoringShow = 3;currentChartType=6;collectJiankongData()">功率因数
 						</div>
 						<div class="power-item" :class="{selected:currentChartType===7}"
-						     @click="monitoringShow = 3;currentChartType=7;collectJiankongData()">功率因数
+						     @click="monitoringShow = 3;currentChartType=7;collectJiankongData()">负荷
 						</div>
 						<div class="power-item" :class="{selected:currentChartType===8}"
-						     @click="monitoringShow = 3;currentChartType=8;collectJiankongData()">负荷
-						</div>
-						<div class="power-item" :class="{selected:currentChartType===9}"
-						     @click="monitoringShow = 4;currentChartType=9;collectJiankongData()">最大需量
+						     @click="monitoringShow = 4;currentChartType=8;collectJiankongData()">最大需量
 						</div>
 					</div>
 					<div style="text-align: center;display: inline-block">
-						<div class="power-item" :class="{selected:currentChartType===10}"
+						<!-- <div class="power-item" :class="{selected:currentChartType===10}"
 						     @click="monitoringShow = 3;currentChartType=10">采集监控
-						</div>
+						</div> -->
 						<div class="power-item" :class="{selected:currentChartType===11}"
 						     @click="monitoringShow = 1;currentChartType=11">在线监控
 						</div>
@@ -1209,7 +1277,7 @@
 					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio1"/> :
 					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio2"/>
 					<Button type="primary" @click="setCTRatio">修正</Button>
-					<Button class="refresh fr" type="primary">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="dianliu-chart" style="width: 1640px;height: 430px;"></div>
@@ -1222,37 +1290,37 @@
 					<Input style="width: 80px" size="small" v-model="ratio.pt_ratio2"/>
 
 					<Button type="primary" @click="setPTRatio">修正</Button>
-					<Button class="refresh fr" type="primary">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="dianya-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
-				<div v-show="currentChartType===5" class="relative">
-					<Button class="refresh fr" type="primary">
+				<div v-show="currentChartType===4" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="wugong-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
-				<div v-show="currentChartType===6" class="relative">
-					<Button class="refresh fr" type="primary">
+				<div v-show="currentChartType===5" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="shizai-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
-				<div v-show="currentChartType===7" class="relative">
-					<Button class="refresh fr" type="primary">
+				<div v-show="currentChartType===6" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="yinshu-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
-				<div v-show="currentChartType===8" class="relative">
-					<Button class="refresh fr" type="primary">
+				<div v-show="currentChartType===7" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="yougong-chart" style="width: 1640px;height: 430px;"></div>
 				</div>
 				<div v-show="monitoringShow===4" class="relative">
-					<Button class="refresh fr" type="primary">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
 					<div class="chart-main" id="chart-main3" style="width: 1640px;height: 430px;"></div>

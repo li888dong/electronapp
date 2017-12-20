@@ -20,9 +20,10 @@
             this.clientList()
 	    },
 	    methods:{
-            changeCompany(id,name){
+            changeCompany(id,name,clientid){
                 this.$store.dispatch('setCusId',id);
                 this.$store.dispatch('setCusName',name);
+                this.$store.dispatch('setClientId',clientid);
             },
             clientList(){
                 this.spinShow = true;
@@ -55,7 +56,7 @@
 			<ul>
 				<template v-for="item in companyList">
 
-					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id,item.name)">
+					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id,item.name,item.clientid)">
 						<Row>
 							<Col span="24">
 							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>

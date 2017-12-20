@@ -11,7 +11,7 @@ export default {
             spinShow:false,
             currentPage:1,
             limit:14,
-            totalPage:1,
+            totalPage:0,
             selectList: [],
             modifyList:[],
             selectMonth: new Date().Format('yyyy-MM'),
@@ -113,15 +113,13 @@ export default {
                     key: 'n17',
                     aligin:'left',
                     render: (h, params) => {
-                        let status0 = params.row.status ==='0';
-                        let status1 = params.row.status ==='1';
-                        let status2 = params.row.status ==='2';
+                        let status0 = params.row.status ===0;
+                        let status1 = params.row.status ===1;
+                        let status2 = params.row.status ===2;
                         return h('select', {
                             on:{
                                 change:(e)=>{
                                     this.setTableData1(params.index,e.target.value);
-//                                        params.row.status = e.target.value;
-
                                 }
                             }
                         },[

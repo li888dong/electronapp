@@ -6,7 +6,6 @@ export const GET_TOKEN = '/oauth/token';
 // 登录
 export const LOGIN = '/api/comusers/login';
 // 预警信息区域
-//TODO:缺少负荷异常数据
 export const WARNING_INFO = '/api/index/warninginfo';
 
 // 工作提醒
@@ -20,21 +19,18 @@ export const ADD_SCHEDULE = 'api/index/add_schedule';
 
 
 // 数据指数
-// TODO：待定
 export const DATA_INDEX = 'api/index/dataindex';
 
 //用电实时进度
 export const USED_SCHEDULE = 'api/index/usedschedule';
 
 // 用电时段分布
-// TODO：访问出错
 export const POWER_FRAME = 'api/index/timefenbu';
 
 // 交易分布
 export const BID_FRAME = 'api/index/bidfenbu';
 
 // 实时电量负荷
-// TODO：暂无数据
 export const REALTIME_POWER_CURVE = 'api/index/loadcurve';
 /*
 * 首页结束
