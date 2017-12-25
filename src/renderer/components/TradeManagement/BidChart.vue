@@ -119,6 +119,18 @@
                     },
                     {
                         type: 'line',
+                        symbolSize:'10',
+	                    lineStyle:{
+                            normal:{
+                                color:'#fff'
+                            }
+	                    },
+                        dimensions: ['供应量（KW时）','报价（元）'],
+                        encode: {
+                            x: 0,
+                            y: 1,
+                            tooltip: [0,1],
+                        },
                         data: pjData
                     }]
                 }

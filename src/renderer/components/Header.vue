@@ -1,21 +1,27 @@
 <script>
     import Weather from '@/components/Weather.vue'
     import FastBoot from '@/components/FastBoot'
-    import {ipcRenderer,shell} from 'electron';
+    import {ipcRenderer, shell} from 'electron';
+
     export default {
         name: 'mainheader',
-	    data(){
-          return{
-              logout:false
-          }
-	    },
+        data() {
+            return {
+                logout: false
+            }
+        },
         mounted() {
         },
+        computed: {
+            fullname:function () {
+	            return this.$store.getters.fullname
+            }
+        },
         methods: {
-            toggleFast(){
+            toggleFast() {
                 this.$store.dispatch('setFastboot');
             },
-            out(){
+            out() {
                 this.$router.push('/login');
                 ipcRenderer.send('login-failed');
             }
@@ -46,8 +52,9 @@
 				<ul>
 					<!--<router-link  class="menu-icon right_243" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>-->
 					<!--<li class="menu-icon right_168"><i class="iconfont">&#xe606;</i></li>-->
-					<li class="avatar right_72">李栋</li>
-					<i class="iconfont icon-xiala absolute" :class="{rotate90:!logout}" style="right: 30px;font-size: 14px!important;" @click="logout = !logout">
+					<li class="avatar right_72">{{fullname}}</li>
+					<i class="iconfont icon-xiala absolute" :class="{rotate90:!logout}"
+					   style="right: 30px;font-size: 14px!important;" @click="logout = !logout">
 
 					</i>
 					<span class="logout" v-if="logout" @click="out">退出登录</span>
@@ -83,17 +90,21 @@
 		text-align: center;
 		border-right: 1px solid #efefef;
 	}
-	.header .avatar{
+
+	.header .avatar {
 		top: -10px;
-		width: 45px;
-		height: 45px;
+		width: 48px;
+		height: 48px;
 		text-align: center;
-		line-height: 45px;
+		line-height: 48px;
 		background-color: #EA2E2E;
 		border-radius: 50%;
 		color: white;
-		font-size: 18px;
+		white-space: nowrap;
+		word-wrap: normal;
+		font-size: 12px;
 	}
+
 	.icon-li {
 		width: 30px;
 		height: 40px;
@@ -156,7 +167,8 @@
 		cursor: pointer;
 		font-size: 22px !important;
 	}
-	.logout{
+
+	.logout {
 		position: absolute;
 		top: 20px;
 		right: 0;
@@ -164,10 +176,12 @@
 		background-color: #fff;
 		cursor: pointer;
 	}
-	.logout:hover{
+
+	.logout:hover {
 		opacity: 0.8;
 	}
-	.rotate90{
+
+	.rotate90 {
 		transform: rotate(-90deg);
 	}
 </style>

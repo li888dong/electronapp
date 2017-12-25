@@ -23,15 +23,15 @@
                 timeList: [
                     {
                         label: '15分钟',
-                        value: '15'
+                        value: '今天'
                     },
                     {
-                        label: '天',
-                        value: '24'
+                        label: '1天',
+                        value: '1天'
                     },
                     {
-                        label: '月',
-                        value: '30'
+                        label: '1月',
+                        value: '1月'
                     },
                 ],
                 logColumns: [
@@ -142,7 +142,7 @@
             }
         },
         computed: {
-            clientId:function(){
+            clientid:function(){
                 return this.$store.getters.clientid;
             },
             time: function () {
@@ -152,6 +152,10 @@
                     return 2
                 } else if (this.timeType === '近7天') {
                     return 3
+                } else if (this.timeType === '1天') {
+                    return 4
+                } else if (this.timeType === '1月') {
+                    return 5
                 } else if (this.timeType === '时间区间') {
                     return 6
                 }
@@ -734,7 +738,7 @@
             }
         },
         mounted() {
-            // this.clientId = this.$route.query.clientId || this.terminalList[0].clientid;
+            // this.clientid = this.$route.query.clientid || this.terminalList[0].clientid;
             this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
             this.clientTerminalList();
         },
@@ -742,8 +746,8 @@
             cus_id: function () {
                 this.clientTerminalList()
             },
-            clientId: function () {
-                console.log('clientId 改变',this.clientId)
+            clientid: function () {
+                console.log('clientid 改变',this.clientid)
 
             }
         },
@@ -806,10 +810,10 @@
                 this.zuidaChart.setOption(this.zuidaOption);
                 this.zuidaChart.hideLoading();
             },
-            changeSelect(pds, clientIndex, clientId) {
+            changeSelect(pds, clientIndex, clientid) {
                 this.currentPDS = pds;
                 this.clientIndex = clientIndex;
-                this.clientId = clientId;
+                this.clientid = clientid;
                 this.getTerminalDetail();
                 this.onLineJiankng();
                 this.equipmentAbnomal();
@@ -836,7 +840,7 @@
             },
 //	        获取倍率
             getRatio() {
-                this.$http.post(this.$api.CLIENT_TERMINAL_RATIO, {clientid: this.clientId}).then(res => {
+                this.$http.post(this.$api.CLIENT_TERMINAL_RATIO, {clientid: this.clientid}).then(res => {
                     let data = res.data.data;
                     let pt_ratio = data.pt_ratio.split('/');
                     let ct_ratio = data.ct_ratio.split('/');
@@ -857,7 +861,7 @@
             //	        修正ct倍率
             setCTRatio() {
                 this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
-                    clientid: this.clientId,
+                    clientid: this.clientid,
                     type: 'ct',
                     ct: this.ratio.ct_ratio1 / this.ratio.ct_ratio2,
                     ct_ratio1: this.ratio.ct_ratio1,
@@ -874,7 +878,7 @@
             //	        修正pt倍率
             setPTRatio() {
                 this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
-                    clientid: this.clientId,
+                    clientid: this.clientid,
                     type: 'pt',
                     pt: this.ratio.pt_ratio1 / this.ratio.pt_ratio2,
                     pt_ratio1: this.ratio.pt_ratio1,
@@ -908,7 +912,7 @@
             },
             onLineJiankng() {
                 this.onlineChart.showLoading();
-                this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE, {clientid: this.clientId}).then(res => {
+                this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE, {clientid: this.clientid}).then(res => {
                     console.log("在线监控", res);
                     let data = res.data.data;
                     this.onlineData.xData = Object.keys(data);
@@ -934,7 +938,7 @@
                 })
             },
             equipmentLog() {
-                this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: this.clientId}).then(res => {
+                this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: this.clientid}).then(res => {
                     console.log("设备日志", res);
                     this.logData = res.data.data;
                 }, err => {
@@ -962,7 +966,7 @@
                 this.$http.post(this.$api.CLIENT_COLLECT_DATA, {
                     type: this.currentChartType,
                     time: this.time,
-                    clientid: this.clientId,
+                    clientid: this.clientid,
                     start: start,
                     end: end
                 }).then(res => {
@@ -1078,6 +1082,10 @@
                     this.$api.errcallback(err);
                 })
             },
+	        setTimeType(type){
+                this.timeType = type;
+                this.collectJiankongData()
+	        },
             formatDuring(mss) {
                 let days = parseInt(mss / (1000 * 60 * 60 * 24));
                 let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1244,7 +1252,7 @@
 						</Button>
 					</div>
 					<div class="select-time">
-						<ul style="position: relative;left: 240px">
+						<ul style="position: relative;left: 220px">
 							<li>
 								<RadioGroup v-model="timeType" type="button" v-on:on-change="collectJiankongData">
 									<Radio label="今天"></Radio>
@@ -1260,7 +1268,7 @@
 										v-on:on-change="collectJiankongData"></DatePicker>
 							</li>
 							<li>
-								<Select style="width: 100px">
+								<Select style="width: 120px" placeholder="请选择时间粒度" v-on:on-change="setTimeType">
 									<Option v-for="item in timeList" :value="item.value" :key="item.value"
 									        style="width: 80px">{{ item.label }}
 									</Option>

@@ -8,7 +8,7 @@
             return {
                 spinShow:false,
                 currentPage:1,
-                limit:11,
+                limit:14,
                 totalPage:0,
                 detailModal: false,
                 delModal: false,
@@ -26,9 +26,9 @@
                     },
                     {
                         title: '企业名称',
-                        key: 'com_name',
-                        width: 200,
-                        align: 'center'
+                        key: 'name',
+                        width: 250,
+                        align: 'left'
                     },
                     {
                         title: '上月申报电量(万KW-h)',
@@ -57,11 +57,13 @@
                     {
                         title: '购电量(万kW-h)',
                         key: 'gdl',
-                        align: 'center'
+                        align: 'center',
+                        width:150
                     }, {
                         title: '申报时间',
                         key: 'created_at',
-                        align: 'center'
+                        align: 'center',
+                        width:160
                     },
                     {
                         title: '申报状态',
@@ -135,8 +137,8 @@
                                     on: {
                                         click: () => {
                                             this.detailModal = true;
-                                            this.detailModalName = params.row.com_name;
-                                            this.renderM(params.row.cus_id)
+                                            this.detailModalName = params.row.name;
+                                            this.renderM(params.row.id)
                                         }
                                     }
                                 }, '查看'),
@@ -148,7 +150,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.delId = params.row.cus_id;
+                                            this.delId = params.row.id;
                                             this.delModal = true;
                                         }
                                     }
@@ -158,9 +160,9 @@
                     }
                 ],
                 columns5: [
-                    {
+                    { 
                         title: '申报时间',
-                        width: 110,
+                        width: 160,
                         key: 'updated_at'
                     },
                     {
@@ -184,20 +186,36 @@
                 ],
                 tableData1: [],
                 tableData2: [],
+                loading:false
 
 
             }
         },
         methods: {
             renderM(index) {
+                this.loading = true;
                 this.$http.post(this.$api.DECLARE_DETAIL, {
                     id: index
                 }).then(res => {
                     console.log("用户申报详情", res);
-                    this.tableData2 = res.data.citys
+                    if(res.data.status === '1'){
+                        var str = '';
+                        var obj ='';
+                        this.tableData2 = res.data.citys;
+                        obj=this.tableData2[0].sbdlinfo;
+                        for(let k in obj){
+                            str += k +':'+ obj[k] +',';
+                        }
+                        this.tableData2[0].sbdlinfo = str;
+                    }else{
+
+                    } 
+                    this.loading = false;
                 }, err => {
+                     this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading = false;
                     this.$api.errcallback(err);
                 })
             },
@@ -234,9 +252,33 @@
                     area: this.selectArea,
                     keyword: this.$store.getters.searchKey
                 }).then(res => {
-                    this.spinShow = false;
                     console.log("用户申报", res);
-                    this.tableData1 = res.data.citys
+                    if(res.data.status === '1'){
+                        var data = res.data.data.data;
+                        var obj = {};
+                        var arr =[];
+                        for(let i =0;i<data.length;i++){
+                            obj = {
+                                cus_id:data[i].id,
+                                name:data[i].name,
+                                sysb:data[i].sysb,
+                                ycdl:data[i].ycdl,
+                                syydl:data[i].syydl,
+                                gdl:data[i].gdl,
+                                created_at:data[i].declarepower.created_at,
+                                sbdl:data[i].declarepower.sbdl,
+                                dstatus:data[i].declarepower.dstatus,
+                                status:data[i].declarepower.status,
+                                confirmor:data[i].declarepower.confirmor,
+                                 id:data[i].declarepower.id
+                            }
+                            arr.push(obj);
+                        }
+                        this.tableData1 = arr;
+                        this.totalPage = res.data.data.total;
+                        this.currentPage = res.data.data.current_page;
+                    }
+                     this.spinShow = false;
                 }, err => {
                     this.spinShow = false;
                     this.$api.errcallback(err);
@@ -300,6 +342,7 @@
 							:current="currentPage"
 							show-total
 							show-elevator
+                            :page-size='limit'
 							v-on:on-change="pageChange"
 					></Page>
 				</div>
@@ -312,7 +355,7 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal">
 			申报记录 :
-			<Table border ref="selection" :columns="columns5" :data="tableData2"></Table>
+			<Table border ref="selection" :columns="columns5" :data="tableData2" :loading='loading'></Table>
 		</Modal>
 		<Modal
 				v-model="delModal"

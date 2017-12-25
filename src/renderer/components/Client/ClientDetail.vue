@@ -296,14 +296,15 @@
             clinentContractInfor(){
             	this.$http.post(this.$api.CLIENT_CONTRACT_INFO,{cus_id:this.cus_id}).then(res=>{
             		console.log("合同基本情况",res);
-                    var data = res.data.data;
-                     this.agreementDetail = {
+                    if(res.data.status === '1'){
+                        var data = res.data.data;
+                        this.agreementDetail = {
                           htbm:data.con_no,
                           hhgs:data.user_nums,
                           mydl:data.ly_used,
                           htms:data.way
-                     }
-
+                       }
+                    }
             	},err=>{
             		this.$api.errcallback(err);
             	}).catch(err=>{
@@ -314,8 +315,10 @@
             clientElecBill(){
             	this.$http.post(this.$api.CLIENT_ELE_BILL,{cus_id:this.cus_id}).then(res=>{
             	     console.log('用户电费单',res);
-            	     let data = res.data[0].data;
-            	     this.billData = data
+                     if(res.data.status === '1'){
+                        let data = res.data[0].data;
+                         this.billData = data
+                     } 
             	},err=>{
             		this.$api.errcallback(err);
             	}).catch(err=>{

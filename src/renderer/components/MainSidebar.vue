@@ -11,6 +11,14 @@
         background-size: 45%;
         background-color: #495060;
     }
+    .version{
+        color: #fff;
+        opacity: 0.7;
+        position: absolute;
+        bottom: 0;
+        display: block;
+        text-align: center;
+    }
 </style>
 <template>
     <div >
@@ -119,17 +127,20 @@
                         <li> <i class="iconfont icon-jishiben01"></i><span> &nbsp;售电合同</span></li>
                        </MenuItem>
                     </Submenu>
+                    <li class="version">当前版本v{{currentVersion}}</li>
                 </Menu>
+
             </Row>
         </Row>
     </div>
 </template>
 <script>
+    import {version} from '../../../package.json'
     export default {
         name: 'mainsidebar',
         data(){
             return{
-
+                currentVersion:''
             }
         },
         methods:{
@@ -139,6 +150,9 @@
             goto2(){
                 console.log(2)
             },
+        },
+        mounted(){
+            this.currentVersion = version
         }
     }
 </script>

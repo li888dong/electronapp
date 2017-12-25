@@ -6,24 +6,27 @@ export default {
             value1: 0,
             value2: 0,
             dataPie:{
-                 has_install:0,
-                 declared:0,
-                 tobe_install:0,
-                 four_wire:0,
-                 scott_wiring:0,
+                 has_install:'',
+                 declared:'',
+                 tobe_install:'',
+                 four_wire:'',
+                 scott_wiring:'',
             }
         }
     },
     mounted(){
-        this.drawLine();
+        // this.drawLine();
         this.equipmentInstall();
     },
     methods:{
         drawLine(){
+             this.powerFrameChart.clear();
             // 基于准备好的dom，初始化echarts实例
              this.powerFrameChart.setOption(this.pieOption);
+             this.powerFrameChart.hideLoading();
         },
         equipmentInstall(){
+            this.powerFrameChart.showLoading();
             this.$http.post(this.$api.EQUIPMENT_INSTALL,{com_id:this.com_id}).then(res=>{
                 console.log("设备安装",res);
                 console.log(res.data.data);
@@ -32,8 +35,10 @@ export default {
                 this.value1 = this.dataPie.scott_wiring;
                 this.drawLine();
             },err=>{
+                this.powerFrameChart.hideLoading();
                 this.$api.errcallback(err);
             }).catch(err=>{
+                 this.powerFrameChart.hideLoading();
                  this.$api.errcallback(err);
             })
         }

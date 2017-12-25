@@ -3,22 +3,24 @@
         name: 'previousbidingchart',
         data() {
             return {
-				gsData : [120, 110, 125, 145],
-	            dcData:[260, 182, 191, 134],
-	            gsName:['售电公司1', '售电公司2', '售电公司3', '售电公司4',]
+				gsData : [],
+	            dcData:[],
+	            gsName:[]
             }
         },
+	    props:['comsupply','powerplant'],
 	    computed:{
             bidSimulationChart:function () {
 	            return this.$echarts.init(document.getElementById('bid-previous-chart'))
             },
             chartOption2:function () {
                 let data1 = this.gsData.sort(function (a, b) {
-                    return a - b
-                });
-                let data2 = this.dcData.sort(function (a, b) {
                     return b - a
                 });
+                let data2 = this.dcData.sort(function (a, b) {
+                    return a - b
+                });
+                console.log('33333',data1)
                 let axisData = this.gsName;
                 let barData1 = [];
                 let barData2 = [];
@@ -120,6 +122,9 @@
             }
 	    },
         mounted() {
+            this.gsName = this.comsupply.map(i=>i.name);
+            this.gsData = this.comsupply.map(i=>i.price);
+            this.dcData = this.powerplant.map(i=>i.price);
             this.drawLine();
         },
         methods: {

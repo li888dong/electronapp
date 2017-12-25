@@ -24,7 +24,7 @@ if (!token){
                 }
             },
             baseURL:"http://192.168.2.111/",
-            timeout:10000
+            timeout:15000
         });
         Vue.http = Vue.prototype.$http = instance;
         // ipcRenderer.send('login-failed');

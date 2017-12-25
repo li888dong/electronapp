@@ -1,10 +1,15 @@
 <style>
-
+*{
+	margin:0;
+	padding:0;
+}
 
 </style>
 <template>
 
 	<Row className="main-container">
+	  <Row>
+	  <Row>
 		<Row gutter=15>
 			<Col span="17">
 				<Row gutter=15>
@@ -27,6 +32,8 @@
 				<process-plan></process-plan>
 			</Col>
 		</Row>
+        </Row>
+        <Row>
 		<Row gutter=15 className="mgt_15">
 			<!--用电实时进度-->
 			<Col span="9">
@@ -41,11 +48,13 @@
 				<trade-pi></trade-pi>
 			</Col>
 		</Row>
+		</Row>
 		<!--实时电量负荷-->
 		<Row className="mgt_15">
-			<Col style="width: 1680px">
+			<Col style="width: 1675.52px">
 				<real-time-power-chart  belong="com"></real-time-power-chart>
 			</Col>
+		</Row>
 		</Row>
 	</Row>
 </template>

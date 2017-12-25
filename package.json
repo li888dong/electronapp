@@ -1,9 +1,9 @@
 {
   "name": "smartpower",
-  "version": "0.0.0",
+  "version": "1.0.4",
   "author": "li888dong <498437323@qq.com>",
-  "description": "An electron-vue project",
-  "license": null,
+  "description": "易采电力数据管理系统",
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -14,17 +14,19 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "",
+    "publish": "build -p always"
   },
   "build": {
     "productName": "smartpower",
-    "appId": "org.simulatedgreg.electron-vue",
+    "appId": "com.smartpower.app",
     "directories": {
       "output": "build"
     },
     "files": [
       "dist/electron/**/*"
     ],
+    "artifactName":"${productName}-${os}-${version}.${ext}",
     "dmg": {
       "contents": [
         {
@@ -41,25 +43,41 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "publish":{
+        "provider":"generic",
+        "url":"http://192.168.2.2/release/${os}/latest",
+        "channel":"latest"       
+      }
     },
     "win": {
-      "icon": "build/icons/logo.ico"
+      "icon": "build/icons/logo.ico",
+      "publish":{
+        "provider":"generic",
+        "url":"http://192.168.2.2/release/${os}/latest",
+        "channel":"latest"       
+      },
+      "target":"nsis"
     },
     "linux": {
       "icon": "build/icons"
+    },
+    "nsis": {
+      "oneClick": false,
+      "installerLanguages":"zh-CN",
+      "language":"2052",
+      "allowToChangeInstallationDirectory": true
     }
   },
   "dependencies": {
     "axios": "^0.16.1",
     "calendar-plugin": "^1.0.1",
     "echarts": "^3.8.4",
-    "electron-log": "^2.2.13",
     "electron-updater": "^2.17.6",
-    "iview": "^2.7.4",
+    "iview": "^2.6.0",
     "mockjs": "^1.0.1-beta3",
     "raphael": "^2.2.7",
-    "vue": "^2.5.11",
+    "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
     "vue-kindeditor": "^0.2.1",
     "vue-router": "^2.5.3",
@@ -99,7 +117,7 @@
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^13.0.5",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.11",
+    "vue-template-compiler": "^2.4.2",
     "webpack": "^3.5.2",
     "webpack-dev-server": "^2.7.1",
     "webpack-hot-middleware": "^2.18.2"

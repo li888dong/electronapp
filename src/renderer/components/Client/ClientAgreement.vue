@@ -39,7 +39,17 @@
                         align:'center'
                     }
                 ],
-		        agreementList:[],
+		        agreementList:[{
+                      cus_name:this.$store.getters.cus_name,
+                      con_no:'暂无数据',
+                      way:'暂无数据',
+                      ly_used:'0',
+                      ly_maxload:'0',
+                      bndyjdl:'0',
+                      bndyjzdfh:'0',
+                      usernos:[] 
+                 }
+                ],
                 pageTotal:0,
                 limit:16,
                 currentPage:1,
@@ -53,10 +63,15 @@
 		    userAgreement(){
 		      this.$http.post(this.$api.POWER_SALE_LIST,{cus_id:this.cus_id,page:this.currentPage,limit:this.limit}).then(res=>{
 		       	     console.log("合同管理",res);
-		       	     if(res.data.status){
-		    		 	 this.agreementList = res.data.data.data;
-		    		 	 this.pageTotal = res.data.data.total;
-		    		 	 this.loading = false;
+		       	     if(res.data.status === '1'){
+                        if(res.data.data.data.length > 0){
+                            this.agreementList = res.data.data.data;
+                            this.pageTotal = res.data.data.total;
+                            this.loading = false;
+                        }else{
+                             this.loading = false;
+                        }
+		    		 	 
  		    		 }else{
  		    		 	 this.loading = false;
  		    		 }

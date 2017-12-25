@@ -222,7 +222,7 @@ export default {
         <div class="page-center">
         <!--分页-->
         <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
         </div>
       </div>           
     </Card>

@@ -45,7 +45,7 @@
                       <div class="page-center">
         <!--分页-->
         <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <!-- <Button type="primary">确定</Button> -->
         </div>
       </div>         
         </Card> 
@@ -94,12 +94,13 @@ export default {
                 }
             ],
             data1: [{
+               cus_name:'暂无客户签订合同',
                con_no:'暂无数据',
                way:'暂无数据',
-               ly_used:'暂无数据',
-               ly_maxload:'暂无数据',
-               bndyjdl:'暂无数据',
-               bndyjzdfh:'暂无数据',
+               ly_used:'0',
+               ly_maxload:'0',
+               bndyjdl:'0',
+               bndyjzdfh:'0',
                usernos:[],
             }],
             totalPage:0,
@@ -304,8 +305,8 @@ export default {
   .fenYe ul {
     display: inline-block;
   }
-  .fenYe button{
+  /*.fenYe button{
     top: -12px;
     left: 12px;
-  }
+  }*/
 </style>

@@ -20,13 +20,18 @@
 		        user_no:''
 	        }
 		},
+        mounted(){
+            this.doAjax();
+        },
 	    computed:{
 		    cus_id:function () {
 			    return this.$store.getters.cus_id
             }
 	    },
-	    mounted(){
-            this.doAjax();
+	    watch:{
+            cus_id:function () {
+	            this.doAjax()
+            }
 	    },
 	    methods:{
 	        setUserNo(num){
@@ -36,9 +41,18 @@
                         this.active_power = [];
                         this.power_factor=[];
                         this.updated_at=[];
-                        console.log('负荷曲线',res);
+                        let data = res.data.data;
+                        data.map(i=>{
+                            this.active_power.push(i.active_power);
+                            this.power_factor.push(i.power_factor);
+                            this.updated_at.push(i.updated_at);
+                        })
+                        console.log('户号负荷曲线',res);
 
                     }, err => {
+                        this.active_power = [];
+                        this.power_factor=[];
+                        this.updated_at=[];
                         this.$api.errcallback(err)
                     })
                     .catch(err=>{

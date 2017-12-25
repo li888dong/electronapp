@@ -5,22 +5,22 @@
 	        return{
 				indexData:{
                     "1": {
-                        "num": 13,
+                        "num": 0,
                         "chainratio": 0,
                         "yearonyear": 0,
                         "devratio": 0
                     },
                     "2": {
-                        "fordev": -1,
-                        "chainratio": "1.00"
+                        "fordev": 0,
+                        "chainratio": 0
                     },
                     "3": {
-                        "num": -1,
-                        "chainratio": "1.00"
+                        "num": 0,
+                        "chainratio": 0
                     },
                     "4": {
                         "mdev": 0,
-                        "chainratio": "0.00"
+                        "chainratio": 0
                     }
 				},
 		        trendUp:true,
@@ -31,7 +31,7 @@
             this.$http.post(this.$api.DATA_INDEX,{com_id:this.$store.getters.com_id})
                 .then(res => {
                     console.log('数据指数',res);
-                    this.indexData = res.data.data
+                    if (res.data.status === '1') this.indexData = res.data.data
                 }, err => {
                     this.$api.errcallback(err)
                 })

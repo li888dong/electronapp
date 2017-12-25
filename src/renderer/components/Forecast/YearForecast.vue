@@ -241,13 +241,16 @@
 	                postArr.push({
 		                cus_id:i.cus_id,
 		                year:_this.selectYear,
-		                type:1
+		                type:i.status
 	                })
 
                 });
                 console.log(postArr);
                 this.$http.post(this.$api.YEAR_CONFIRM, {data:postArr}).then(res => {
                     console.log("年度预测确认", res);
+                    if(res.data.status){
+                        this.yearData();
+                    }
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {

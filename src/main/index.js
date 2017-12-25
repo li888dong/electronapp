@@ -1,5 +1,5 @@
-import {app, BrowserWindow, ipcMain,screen} from 'electron'
-
+import {app, BrowserWindow, ipcMain,screen,dialog} from 'electron';
+ import { autoUpdater } from "electron-updater";
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -38,7 +38,7 @@ function createWindow() {
         // movable:false,
         resizable:false,//不可改变窗口大小
     })
-
+    //console.log(app.getVersion());
     mainWindow.loadURL(winURL)
 
     mainWindow.on('closed', () => {
@@ -72,7 +72,6 @@ ipcMain.on('window-all-closed', () => {
 });
 //小化
 ipcMain.on('hide-window', () => {
-    updateHandle()
     mainWindow.minimize();
 });
 //最大化
@@ -84,7 +83,11 @@ ipcMain.on('orignal-window', () => {
     mainWindow.unmaximize();
 });
 
-app.on('ready', createWindow)
+app.on('ready', function()  {
+  //autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdatesAndNotify();
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -106,14 +109,41 @@ app.on('activate', () => {
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
 
-
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
+// app.on('ready', function()  {
+//     autoUpdater.checkForUpdates();
+// });
+//正在检查更新
+autoUpdater.on('update-available', (info) => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: '更新版本',
+    message: '发现有新的版本, 您需要现在更新吗?',
+    buttons: ['是', '否']
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate()
+    }else {
+      updater.enabled = true
+      updater = null
+    }
+  })
+});
+autoUpdater.on('update-not-available', (info) => {
+    updater.enabled = true
+    updater = null
+});
+autoUpdater.on('error', (err) => {
+    dialog.showErrorBox('Error: ', error == null ? "未知错误" : (error.stack || error).toString())
+});
+autoUpdater.on('download-progress', (progressObj) => {
+    mainWindow.setProgressBar(progressObj.percent/100,"mode");
+});
+autoUpdater.on('update-downloaded', (info) => {
+    autoUpdater.quitAndInstall(); 
+    dialog.showMessageBox({
+        title: '安装更新',
+        message: '更新下载完成, 将要退出应用执行安装...'
+    }, () => {
+        setImmediate(() => autoUpdater.quitAndInstall())
+    }) 
 })
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
-

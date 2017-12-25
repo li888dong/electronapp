@@ -38,6 +38,7 @@
     }
     .form-con{
         padding: 10px 0 0;
+        height:256px;
     }
     .login-tip{
         font-size: 10px;
@@ -56,7 +57,7 @@
         margin-top: 20px;
         font-size: 16px;
     }
-    .form-con input[type=checkbox]{
+    .form-con .setAuto{
         height: 16px;
         margin: 12px 0 0 10%;
         vertical-align: bottom;
@@ -96,11 +97,11 @@
         <div class="login-con">
 
             <div class="form-con">
-                <form ref="loginForm" :model="form" :rules="rules">
-                    <input type="text" v-model.trim="form.userName" placeholder="请输入用户名" autofocus>
+                <form ref="loginForm" :model="form">
+                    <input type="text" v-model.trim="form.mobile" placeholder="请输入手机号" autofocus maxlength="11">
                     <input type="password" v-model.trim="form.password" placeholder="请输入密码">
                     <p style="color: #999">
-                        <input id="autologin" type="checkbox" v-on:change="isAuto"/> <label for="autologin">自动登录</label>
+                        <Checkbox class="setAuto" v-on:on-change="setAuto" v-model="auto">自动登录</Checkbox>
                         <span class="extraGroup">
                             <span class="forget" @click="closable">忘记密码 </span>|<span class="addUser" @click="addUser"> 配置新用户</span>
                         </span>
@@ -109,37 +110,41 @@
                 </form>
                 <p class="login-tip">{{loginTip}}</p>
             </div>
+            <p class="login-tip absolute" style="bottom: 0">&copy;河南易采</p>
+
         </div>
+
     </div>
 </template>
 
 <script>
-import Cookies from 'js-cookie';
 import {ipcRenderer,shell} from 'electron';
 export default {
     data () {
-        return {
-            loginTip:'zhongqi 123456',
-            form: {
-                userName: '',
-                password: '',
-                auto:false
-            },
-            rules: {
-                userName: [
-                    { required: true, message: '账号不能为空', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '密码不能为空', trigger: 'blur' }
-                ]
+        const telphone = (rule, val, callback) => {
+            if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)) {
+                return callback(new Error("请输入正确的手机号！"));
+            } else {
+                callback();
             }
         };
+        return {
+            loginTip:'15988888888 123456',
+            form: {
+                mobile: '',
+                password: ''
+            },
+            auto:false
+        };
+    },
+    mounted(){
+        this.auto = localStorage.getItem('auto') === 'true';
+        if (localStorage.getItem('auto') === 'true'){
+            this.form.mobile = localStorage.getItem('mobile');
+            this.form.password = localStorage.getItem('password');
+        }
     },
     methods: {
-        isAuto(){
-            this.auto = !this.auto;
-            console.log(this.auto)
-        },
         closable () {
             this.$Message.warning({
                 content: '请联系管理员',
@@ -147,6 +152,10 @@ export default {
                 closable: true
             });
         },
+        setAuto(val){
+            localStorage.setItem('auto',val)
+        },
+//        注册新用户时的跳转页
         addUser(){
             shell.openExternal('https://www.baidu.com');
         },
@@ -162,11 +171,17 @@ export default {
 //            this.$store.dispatch('setLogin',[true,1]);
 //            this.$router.push('main/home');
 //            ipcRenderer.send('login-succeed');
-            this.$http.post(this.$api.LOGIN,{username:this.form.userName,password:this.form.password}).then(res=>{
+            this.$http.post(this.$api.LOGIN,{mobile:this.form.mobile,password:this.form.password}).then(res=>{
+                console.log('login',res);
                 if (res.data.status ==='1'){
-                    this.$store.dispatch('setLogin',[true,res.data.com_id]);
+                    this.$store.dispatch('setLogin',[true,res.data.com_id,res.data.userinfo.fullname]);
                     this.$router.push('main/home');
                     ipcRenderer.send('login-succeed');
+                    localStorage.setItem('auto',this.auto);
+                    if (this.auto === true){
+                        localStorage.setItem('mobile',this.form.mobile);
+                        localStorage.setItem('password',this.form.password)
+                    }
                 } else {
                     ipcRenderer.send('login-failed');
                     this.$Message.error('请输入正确的用户名和密码');
@@ -174,6 +189,8 @@ export default {
             },err=>{
                 this.$Message.error('网络错误');
             });
+
+
         }
 
     }

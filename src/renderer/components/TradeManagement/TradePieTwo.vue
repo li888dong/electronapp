@@ -160,15 +160,21 @@
             }
         },
         mounted() {
-            this.drawLine();
+            // this.drawLine();
             this.reqTradeOf();
         },
         methods: {
             reqTradeOf(){
+                this.powerFrameChart.showLoading();
                 this.$http.post(this.$api.TRADE_OF,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
                     console.log("交易占比饼图",res);
-                    this.pieData = res.data.data;
-                   this.drawLine();
+                    if(res.data.status==='1'){
+                        this.pieData = res.data.data;
+                        this.drawLine();
+                    }else{
+                        this.drawLine();
+                    }
+                    
                 },err=>{
                     this.$api.errcallback(err);
                 }).catch(err=>{
@@ -181,7 +187,9 @@
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
                 // 绘制图表
+                this.powerFrameChart.clear();
                 this.powerFrameChart.setOption(this.pieOption);
+                this.powerFrameChart.hideLoading();
             },
             changeType(value){
                 this.statusType = value;

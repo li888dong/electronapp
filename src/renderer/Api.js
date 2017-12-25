@@ -4,7 +4,7 @@
 // token
 export const GET_TOKEN = '/oauth/token';
 // 登录
-export const LOGIN = '/api/comusers/login';
+export const LOGIN = '/api/users/login';
 // 预警信息区域
 export const WARNING_INFO = '/api/index/warninginfo';
 
@@ -51,11 +51,13 @@ export const CLIENT_DIS = '/api/customers/regions_dist';
 //客户列表
 export const CLIENT_LIST = '/api/customers/index';
 //用户管理
-export const CLIENT_MANAGE='/api/comusers/list';
+export const CLIENT_MANAGE='/api/userscus/index';
 //用户管理审核
-export const CLIENT_CHECK='/api/comusers/';
+export const CLIENT_CHECK='/api/userscus/setstatus';
 //用户管理删除
-export const CLIENT_DELECT_USER = '/api/comusers/';
+export const CLIENT_DELECT_USER = '/api/userscus/';
+//添加用户
+export const CLIENT_ADD_USER ='/api/userscus';
 //用户合同管理
 export const CLIENT_CONTRACT_AGREEMENT = '/api/contract/unlist';
 
@@ -79,15 +81,15 @@ export const CLIENT_BASIC_INFO = '/api/customers/get_cusinfo';
 //访问出错
 export const CLIENT_CONTRACT_INFO = '/api/customers/get_coninfo';
 //用户电费单列表
-export const CLIENT_ELE_BILL = '/api/comusers/ebilllist';
+export const CLIENT_ELE_BILL = '/api/users/ebilllist';
 //添加用户电费单（暂未使用）
-export const CLIENT_ADD_ELEBILL='/api/comusers/add_electric_bill';
+export const CLIENT_ADD_ELEBILL='/api/users/add_electric_bill';
 //审核用户电费单（暂未使用）
-export const CLIENT_CHECK_ELEBILL='/api/comusers/setstatus';
+export const CLIENT_CHECK_ELEBILL='/api/users/setstatus';
 //上传用户电费单（暂未使用）
 export const CLIENT_UPLODDING_ELEBILL = '/api/file/uploadimg';
 //用户申报记录
-export const CLIENT_DECLARE_RECORD = '/api/comusers/declarelog';
+export const CLIENT_DECLARE_RECORD = '/api/users/declarelog';
 //用户终端列表
 export const CLIENT_TERMINAL_LIST='/api/devices/list';
 //删除终端

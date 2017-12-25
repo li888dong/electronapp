@@ -9,7 +9,7 @@ export default {
             columns1: [
                 {
                     "sortable": true,
-                    title: '终端编号',
+                    title: '逻辑地址',
                     key: 'clientid'
                 },
                 {
@@ -191,12 +191,13 @@ export default {
         <h3 slot="title" style="padding-left:40px">设备异常记录</h3>
         <div class="EquipmentExceptionBox">
             <div class="ExceptionTop">
-                <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
-                <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentAbnormal()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
-                <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
-                    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                </Select>
                 <DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker>
+                <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
+                <Button type="primary" class="refresh fr" style="margin-left: 10px;" @click='equipmentAbnormal()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
+               <!--  <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
+                    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select> -->
+                
             </div>
             <Row class="ExceptionForm">
                 <Table border :columns='columns1' :data='data1' :loading='loading'></Table>            
@@ -205,7 +206,7 @@ export default {
        <div class="page-center">
         <!--分页-->
         <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <!-- <Button type="primary">确定</Button> -->
         </div>
       </div> 
     </Card>
@@ -256,8 +257,8 @@ export default {
   .fenYe ul {
     display: inline-block;
   }
-  .fenYe button{
+ /* .fenYe button{
     top: -12px;
     left: 12px;
-  }
+  }*/
 </style>

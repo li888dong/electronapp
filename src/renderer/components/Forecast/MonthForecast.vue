@@ -45,7 +45,7 @@ export default {
                     width: '200',
                     title: '企业名称',
                     key: 'cus_name',
-                    align: 'center'
+                    align: 'left'
                 },
                 {
                     width: '100',
@@ -119,6 +119,7 @@ export default {
                         return h('select', {
                             on:{
                                 change:(e)=>{
+                                    e.target.value = parseInt(e.target.value);
                                     this.setTableData1(params.index,e.target.value);
                                 }
                             }
@@ -233,9 +234,10 @@ export default {
             let postArr = [];
             let _this = this;
             this.selectList.map(function (i) {
+                i.status = parseInt(i.status);
                 postArr.push({
                     cus_id:i.cus_id,
-                    year:_this.selectYear,
+                    month:_this.selectYear,
                     type:i.status
                 })
 
@@ -243,6 +245,9 @@ export default {
             console.log(postArr);
             this.$http.post(this.$api.MONTH_CONFIRM, {data:postArr}).then(res => {
                 console.log("月度预测确认", res);
+                if(res.data.status){
+                    this.monthData();
+                }
             }, err => {
                 this.$api.errcallback(err);
             }).catch(err => {
@@ -372,12 +377,14 @@ export default {
                     <Col span='6'>是否购电</Col>
                 </Row>
                 <Row class='qiye'>
-                    <Col span='10'>{{tableData1[modifyIndex].cus_name}}</Col>
-                    <Col span='7'>{{tableData1[modifyIndex].city}}</Col>
-                    <Col span='7'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
+                    <Row  class='qiyeBox'>
+                    <Col span='12'>{{tableData1[modifyIndex].cus_name}}</Col>
+                    <Col span='6'>{{tableData1[modifyIndex].city}}</Col>
+                    <Col span='6'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
+                    </Row>
                 </Row>
             </Col>
-            <Col span="15">
+            <Col span="15" style='margin-left: 37.5%'>
                 <table cellspacing="10" cellpadding="10">
                     <tr>
                         <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
@@ -432,7 +439,21 @@ export default {
     border: 1px solid #ccc;
 }
 .gongSiBox .gongSi{
-     height: 100%;
+     position: absolute;
+     top:0;
+     bottom: 0;
+     left:0;
+}
+.qiye{
+    height:90%;
+    /*padding-top: 50%;*/
+}
+.qiyeBox{
+    position: absolute;
+    top:50%;
+    left:0;
+    right:0;
+    margin-top: -9px;
 }
 .comName {
     height: 36px;

@@ -1,13 +1,15 @@
 const state = {
     login:false,
     com_id:1,
+    fullname:''
 }
 
 const mutations = {
 
     setLogin(state ,res){
         state.login = res[0];
-        state.com_id=res[1]||1
+        state.com_id=res[1];
+        state.fullname=res[2]||'未设置';
     }
 }
 
@@ -31,6 +33,9 @@ export default {
         },
         com_id: state=> {
             return state.com_id
+        },
+        fullname:state=>{
+            return state.fullname
         }
     }
 }

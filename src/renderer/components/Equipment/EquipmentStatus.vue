@@ -207,7 +207,7 @@ export default {
 <div class="main-container relative">
     <Card>
         <h3 slot="title">设备统计日志</h3>
-        <Button slot="extra" type="primary" style="top:-8px;" @click="toYichang()">设备异常记录</Button>
+        <!-- <Button slot="extra" type="primary" style="top:-8px;" @click="toYichang()">设备异常记录</Button> -->
         <div class="EquipmentStatusBox">
             <div class="statusTop">
                 <div class="fl">
@@ -231,7 +231,7 @@ export default {
         <div class="page-center">
         <!--分页-->
         <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
         </div>
       </div> 
     </Card>
@@ -306,9 +306,9 @@ export default {
   .fenYe ul {
     display: inline-block;
   }
-  .fenYe button{
+  /*.fenYe button{
     top: -12px;
     left: 12px;
-  }
+  }*/
 
 </style>

@@ -347,7 +347,7 @@
 					<div class="page-center">
 						<!--分页-->
 						<div class="fenYe">
-							<Page :total="50" show-total show-elevator></Page> <Button type="primary">确定</Button>
+							<Page :total="50" show-total show-elevator></Page> <!-- <Button type="primary">确定</Button> -->
 						</div>
 					</div>
 			</Card>
@@ -398,8 +398,8 @@
 	.fenYe ul {
 		display: inline-block;
 	}
-	.fenYe button{
+	/*.fenYe button{
 		top: -12px;
 		left: 12px;
-	}
+	}*/
 </style>

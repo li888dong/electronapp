@@ -65,11 +65,11 @@ input,select,textarea,option{
 }
 
 .relative {
-	position: relative;
+	position: relative!important;
 }
 
 .absolute {
-	position: absolute;
+	position: absolute!important;
 }
 .fl{
 	float: left;

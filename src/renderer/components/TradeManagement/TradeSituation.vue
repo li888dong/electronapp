@@ -163,9 +163,9 @@
 </script>
 <template>
 	<div class="main-container">
-
-           <Row gutter=15 style='margin-right: 0;margin-left:0'>
-			   <Col span="18" style="padding-left: 0px;padding-right: 0px;">
+          <Row>	
+           <Row gutter=15>
+			   <Col span="18">
 			      <Card class="height">
 						  <h3 slot="title">交易基础数据分析</h3>
 						  <div class="btn-group relative" slot="extra">
@@ -211,7 +211,7 @@
 					  </div>
 				  </Card>
 		        </Col>
-	           <Col span="6" style="padding-left: 0px;padding-right: 0px;">
+	           <Col span="6">
 	           <Card>
 		           <h3 slot="title">月度交易占比</h3>
 		           <div class="trade-pie relative">
@@ -350,6 +350,7 @@
 			<!--</Card>-->
 			<!--</Row>-->
 		<!--</Row>-->
+		</Row>
 	</div>
 </template>
 <style scoped>

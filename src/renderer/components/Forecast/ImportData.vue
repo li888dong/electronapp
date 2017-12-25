@@ -67,6 +67,7 @@
 						<Select style="width: 120px" v-model="uploadType">
 							<Option value="year">年度预测数据</Option>
 							<Option value="month">月度预测数据</Option>
+							<!-- <Option value="month">往期竞价结果</Option> -->
 						</Select>
 					</FormItem>
 					<FormItem label='文件上传' class='myTab'>

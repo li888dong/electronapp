@@ -15,7 +15,7 @@
 	            reqType:'',
                 currentCity:'all',
 	            currentPage:1,
-	            totalPage:5,
+	            totalPage:0,
 	            pageLimit:13,
                 cityList: {
                     zz: {
@@ -103,6 +103,7 @@
                         sortable: true,
                         title: '客户名称',
                         key: 'name',
+                        width:'300',
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
@@ -372,7 +373,7 @@
                     this.$api.errcallback(err);
                 });
 	            console.log(page)
-	        }
+	        },
         },
 
     }
@@ -411,9 +412,9 @@
 								<my-search style="text-align: left" placeholder="客户编号或客户名称" v-on:doSearch="comSearch"></my-search>
 								</Col>
 
-								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增用户</Button>
+								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增客户</Button>
 
-								<Button type="primary" class="refresh absolute" style="right: 0px;" @click="clientList">
+								<Button type="primary" class="refresh absolute" style="right: 0;" @click="clientList">
 
 									<i class="iconfont icon-shuaxin"></i>
 								</Button>

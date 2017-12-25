@@ -5,7 +5,7 @@
             return {
                 year:new Date().getFullYear(),
                 currentPage:1,
-                totalPage:5,
+                totalPage:0,
                 pageLimit:3,
                 columns6:[
                     {
@@ -15,45 +15,45 @@
                     },
                     {
                         title:'01月',
-                        key:'Jan',
+                        key:'month01',
                     },{
                         title:'02月',
-                        key:'Feb',
+                        key:'month02',
                     },
                     {
                         title:'03月',
-                        key:'Mar',
+                        key:'month03',
                     },{
                         title:'04月',
-                        key:'Apr',
+                        key:'month04',
                     },
                     {
                         title:'05月',
-                        key:'May',
+                        key:'month05',
                     },{
                         title:'06月',
-                        key:'Jun',
+                        key:'month06',
                     },{
                         title:'07月',
-                        key:'July',
+                        key:'month07',
                     },{
                         title:'08月',
-                        key:'Aug',
+                        key:'month08',
                     },{
                         title:'09月',
-                        key:'Sept',
+                        key:'month09',
                     },{
                         title:'10月',
-                        key:'Oct',
+                        key:'month10',
                     },{
                         title:'11月',
-                        key:'Nov',
+                        key:'month11',
                     },{
                         title:'12月',
-                        key:'Dec',
+                        key:'month12',
                     },{
                         title:'总计',
-                        key:'all',
+                        key:'total',
                     }
                 ],
 	            column2:[
@@ -128,51 +128,51 @@
                 data5:[
                     {
                         name:'年度预测合计（wkw）',
-                        Jan:'111',
-                        Feb:'111',
-                        Mar:'111',
-                        Apr:'111',
-                        May:'111',
-                        Jun:'111',
-                        July:'1',
-                        Aug:'1',
-                        Sept:'1',
-                        Oct:'1',
-                        Nov:'1',
-                        Dec:'1',
-                        all:'1',
+                        month01:'0',
+                        month02:'0',
+                        month03:'0',
+                        month04:'0',
+                        month05:'0',
+                        month06:'0',
+                        month07:'0',
+                        month08:'0',
+                        month09:'0',
+                        month10:'0',
+                        month11:'0',
+                        month12:'0',
+                        total:'0',
                     },
                     {
                         name:'长协合同总计（wkw）',
-                        Jan:'111',
-                        Feb:'111',
-                        Mar:'111',
-                        Apr:'111',
-                        May:'111',
-                        Jun:'111',
-                        July:'1',
-                        Aug:'1',
-                        Sept:'1',
-                        Oct:'1',
-                        Nov:'1',
-                        Dec:'1',
-                        all:'1',
+                        month01:'0',
+                        month02:'0',
+                        month03:'0',
+                        month04:'0',
+                        month05:'0',
+                        month06:'0',
+                        month07:'0',
+                        month08:'0',
+                        month09:'0',
+                        month10:'0',
+                        month11:'0',
+                        month12:'0',
+                        total:'0',
                     },
                     {
                         name:'长协比例（%）',
-                        Jan:'111',
-                        Feb:'111',
-                        Mar:'111',
-                        Apr:'111',
-                        May:'111',
-                        Jun:'111',
-                        July:'1',
-                        Aug:'1',
-                        Sept:'1',
-                        Oct:'1',
-                        Nov:'1',
-                        Dec:'1',
-                        all:'1',
+                        month01:'0',
+                        month02:'0',
+                        month03:'0',
+                        month04:'0',
+                        month05:'0',
+                        month06:'0',
+                        month07:'0',
+                        month08:'0',
+                        month09:'0',
+                        month10:'0',
+                        month11:'0',
+                        month12:'0',
+                        total:'0',
                     },
                 ],
                 qyTable:[],
@@ -229,7 +229,9 @@
                             data:['0','0','0','0','0','0','0','0','0','0','0','0']
                         },],
 		            dcList:['电厂名称1','电厂名称2']
-	            }
+	            },
+                loading:false,
+                loading2:false
             }
         },
 	    computed:{
@@ -288,6 +290,7 @@
                 this.$router.push('/client-compare');
             },
 	        qianyueList(page){
+                this.loading2 = true;
                 this.$http.post(this.$api.CX_QY,{
                     com_id:this.$store.getters.com_id,
 	                year:this.year,
@@ -298,18 +301,31 @@
                     this.qyTable = res.data.data.data;
                     this.totalPage = res.data.data.total;
                     this.currentPage = res.data.data.currentPage;
+                    this.loading2=false;
                 },err=>{
+                    this.loading2=false;
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.loading2=false;
                     this.$api.errcallback(err);
                 })
 	        },
 	        doAjax(){
+                this.loading=true;
+                this.cxChart.showLoading();
                 this.$http.post(this.$api.CX_CHART,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
                     console.log("长协统计图表",res);
+                     this.cxChart.hideLoading();
                     let data = res.data.data;
+                    let listData = res.data.monthstotal;
+                    // console.log(listData.annual_forecast.list);
                     var arr1 =[];
                     var arr2 =[];
+                    var arr3=[];
+                    var arr4=[];
+                    var arr5=[];
+                    var obj ={};
+                    var total =0;
                     data.map(i=>{
                         arr1.push(i.powerplant);
                         arr2.push({
@@ -330,10 +346,38 @@
                     this.chartData.yData = arr2;
                     console.log(this.chartData);
                     this.drawChart();
+                    arr3 =[listData.annual_forecast.list,listData.longpact.list,listData.lp_ratio];
+                    for(let k in arr3[0]){
+                        arr5.push(k);
+                    }
+                    console.log(2,arr5);
+                    arr3[0].name='年度预测合计（wkw）';
+                    arr3[1].name='长协合同总计（wkw）';
+                    arr4 = arr3[2];
+                    for(let i =0;i<arr4.length;i++){
+                        arr4[i] = Number(arr4[i]);
+                        total += arr4[i];
+                    }
+                    for(var i=0;i<arr5.length-1;i++){
+                        for(var j=0;j<arr4.length;j++){
+                            obj[arr5[i]] = arr4[j];
+                        }
+                    }
+                    obj.name='长协比例（%）';
+                    obj.total=total;
+                    arr3[2] = obj;
+                    // console.log(obj);
+                    console.log(arr3,1);
+                    this.data5=arr3;
+                    this.loading=false;
 
                 },err=>{
+                    this.loading=false;
+                    this.cxChart.hideLoading();
                     this.$api.errcallback(err);
                 }).catch(err=>{
+                    this.loading=false;
+                    this.cxChart.hideLoading();
                     this.$api.errcallback(err);
                 })
 	        }
@@ -359,12 +403,13 @@
 				<div class="chart-container">
 					<div id="cxchart" style="width:100%;height: 100%;">
 					</div>
+
 				</div>
 			</Card>
 		</Row>
 		<Row className="mgt_15">
 
-			<Table :columns="columns6" :data="data5"  height="180"></Table>
+			<Table :columns="columns6" :data="data5"  height="180" :loading='loading'></Table>
 		</Row>
 		<Row class="mgt_15">
 			<Card class="relative">
@@ -373,7 +418,7 @@
 						<Button type="primary"  @click.native="$router.push('ContractManagement')">长协合同</Button>
 					</div>
 					<div style="height: 230px;">
-						<Table :columns="column2" :data="qyTable"></Table>
+						<Table :columns="column2" :data="qyTable" :loading='loading2'></Table>
 					</div>
 				<div class="page-container">
 					<Page

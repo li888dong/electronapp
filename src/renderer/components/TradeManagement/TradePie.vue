@@ -130,11 +130,13 @@
             }
         },
         mounted() {
-            this.drawPie();
+            // this.drawPie();
+             this.powerFrameChart.showLoading();
         },
         watch:{
             pieData:function () {
-                this.drawPie()
+                this.drawPie();
+                // this.powerFrameChart.showLoading();
             }
         },
         methods: {
@@ -143,6 +145,7 @@
                 // 基于准备好的dom，初始化echarts实例
                 // 绘制图表
                 this.powerFrameChart.setOption(this.chartOption);
+                this.powerFrameChart.hideLoading();
             }
         }
     }

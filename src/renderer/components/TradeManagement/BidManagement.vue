@@ -7,7 +7,7 @@
         data() {
             return {
                 month:'2017-12',
-                mockSelected: '添加供给侧价格',
+                mockSelected: '修改供给侧价格',
 	            xqInput:{
 		            maxcount:'',
 		            highprice:'',
@@ -20,12 +20,11 @@
 		            index:''
 	            },
                 model1: false,
-                tabValue: '添加供给侧价格',
+                tabValue: '修改供给侧价格',
                 show: '本月竞价模拟',
                 comsupply: [],
                 powerplant: [],
                 dcMockDatas: [
-
                     {
                         name: '电厂1',
                         gongying: 200,
@@ -216,7 +215,10 @@
             },
             monthSelect(month){
 	            this.month = month
-            }
+            },
+            // daoru(){
+            // 	this.$router.push('/import-data');
+            // }
         },
 
         components: {
@@ -239,7 +241,7 @@
 					<div slot="extra" class="btn-group">
 						<DatePicker type="month" placeholder="请选择月份" @on-change="monthSelect"></DatePicker>
 					</div>
-					<previous-biding-chart></previous-biding-chart>
+					<previous-biding-chart :comsupply="this.comsupply" :powerplant="this.powerplant"></previous-biding-chart>
 				</Card>
 			</Row>
 			<Row gutter=15   style="height: 100%" v-if="show==='本月竞价模拟'">
@@ -265,11 +267,11 @@
 					<h3 slot="title" class="title-lv2">模拟交易</h3>
 					<div slot="extra" class="btn-group2">
 						<Radio-group v-model="tabValue" type="button" v-on:on-change="switchSelected">
-							<Radio label="添加供给侧价格"></Radio>
-							<Radio label="添加需求侧价格"></Radio>
+							<Radio label="修改供给侧价格"></Radio>
+							<Radio label="修改需求侧价格"></Radio>
 						</Radio-group>
 					</div>
-					<div class="input-container"  v-if="mockSelected === '添加供给侧价格'">
+					<div class="input-container"  v-if="mockSelected === '修改供给侧价格'">
 						<Input type="text" placeholder="电厂名称" v-model="gyInput.name"
 						       style="width:120px;"/>
 						<Input type="text" placeholder="供应量" v-model="gyInput.count"
@@ -286,7 +288,7 @@
 							<li class="caozuo" @click="modifyGy(mockData,index)">{{mockData.caozuo}}</li>
 						</ul>
 					</div>
-					<div class="input-container"  v-if="mockSelected === '添加需求侧价格'">
+					<div class="input-container"  v-if="mockSelected === '修改需求侧价格'">
 						<div class="xq-box">
 							<span>最大需求量：</span>
 							<Input type="text" placeholder="需求量" v-model="xqInput.maxcount" style="width:50%"/>KW时
@@ -314,6 +316,9 @@
 		<Row class="mgt_15">
 			<Card class="height relative">
 				<h3 slot="title">上期交易结果公布</h3>
+				<!-- <div slot='extra' class="btn-group3">
+				  <Button type="primary" @click='daoru'>导入</Button>
+				</div> -->
 				<div class="result">
 					<Table :columns="columns1" :data="data1" :loading='loading'></Table>
 				</div>
@@ -322,7 +327,7 @@
 					<div class="fenYe">
 						<Page :total="totalPage" :page-size='limit' :current='currentPage' show-total show-elevator
 						      v-on:on-change='pageChange'></Page>
-						<Button type="primary">确定</Button>
+						<!-- <Button type="primary">确定</Button> -->
 					</div>
 				</div>
 			</Card>
@@ -453,13 +458,16 @@
 		display: inline-block;
 	}
 
-	.fenYe button {
+	/*.fenYe button {
 		top: -12px;
 		left: 12px;
-	}
+	}*/
 
 	.ivu-radio-wrapper {
 		width: 120px;
 		text-align: center;
 	}
+	/*.btn-group3{
+		margin-top: -8px;
+	}*/
 </style>

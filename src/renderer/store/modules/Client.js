@@ -7,7 +7,7 @@ const state = {
     terminalKey:'',
     cusList:{
         tableData:[]
-    }
+    },
 
 }
 
@@ -45,7 +45,7 @@ const mutations = {
     },
     setTermLinalKey(state,res){
         state.terminalKey = res
-    }
+    },
 }
 
 const actions = {
@@ -80,7 +80,7 @@ const actions = {
     },
     'setTermLinalKey':function({commit},res){
         commit('setTermLinalKey',res)
-    }
+    },
 }
 
 export default {
@@ -114,7 +114,7 @@ export default {
         },
         terminalKey:state=>{
              return state.terminalKey
-        }
-
+        },
+        
     }
 }

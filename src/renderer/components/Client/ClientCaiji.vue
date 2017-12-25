@@ -422,7 +422,7 @@
         watch:{
             cus_id:function(){
                 this.clientTerminalList();
-                this.pageChange();
+                // this.pageChange();
             }
         },
         beforeMount() {

@@ -59,9 +59,10 @@ export default {
               }
             ],
             hetongList:[{
+                com_name:'河南众企售电有限公司',
                 lpcon_no:'暂无数据',
                 lpcon_year:'暂无数据',
-                signed_num:'暂无数据',
+                signed_num:'0',
                 business:'暂无数据',
                 tel:'暂无数据',
                 signed_status:'暂无数据',
@@ -218,7 +219,7 @@ export default {
          <div class="page-center">
         <!--分页-->
         <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <Button type="primary">确定</Button>
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
         </div>
       </div>          
     </Card>
@@ -296,8 +297,8 @@ export default {
   .fenYe ul {
     display: inline-block;
   }
-  .fenYe button{
+ /* .fenYe button{
     top: -12px;
     left: 12px;
-  }
+  }*/
 </style>

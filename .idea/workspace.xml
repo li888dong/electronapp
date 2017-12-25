@@ -2,11 +2,528 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f173bf77-0a43-4a97-8bc3-49caf53b122a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/Update.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-console-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-datetime-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-debug-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-errorhandling-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l1-2-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l2-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-handle-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-heap-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-interlocked-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-libraryloader-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-localization-l1-2-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-memory-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-namedpipe-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processenvironment-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processthreads-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processthreads-l1-1-1.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-profile-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-rtlsupport-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-string-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-synch-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-synch-l1-2-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-sysinfo-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-timezone-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-util-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-conio-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-convert-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-environment-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-filesystem-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-heap-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-locale-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-math-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-multibyte-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-private-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-process-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-runtime-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-stdio-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-string-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-time-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-utility-l1-1-0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/blink_image_resources_200_percent.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/client.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/content_resources_200_percent.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/content_shell.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/d3dcompiler_47.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ffmpeg.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/icudtl.dat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/libEGL.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/libGLESv2.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/am.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ar.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/bg.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/bn.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ca.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/cs.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/da.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/de.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/el.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/en-GB.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/en-US.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/es-419.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/es.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/et.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fa.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fake-bidi.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fi.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fil.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fr.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/gu.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/he.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hi.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hr.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hu.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/id.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/it.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ja.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/kn.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ko.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/lt.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/lv.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ml.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/mr.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ms.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/nb.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/nl.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pl.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pt-BR.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pt-PT.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ro.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ru.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sk.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sl.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sr.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sv.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sw.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ta.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/te.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/th.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/tr.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/uk.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/vi.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/zh-CN.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/zh-TW.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/msvcp140.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/natives_blob.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/node.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/pdf_viewer_resources.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/256x256.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/icon.icns" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/icon.ico" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/b1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo蓝底.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo（没有文字）.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/公司 (1).png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/天气.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/消息.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/登录.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/蓝底logo（小）.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/PingFang SC Semibold.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/PingHei-light.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/0.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/10.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/100.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/101.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/102.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/103.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/104.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/105.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/106.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/107.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/108.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/109.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/11.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/110.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/111.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/112.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/113.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/114.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/115.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/116.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/117.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/118.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/119.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/12.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/120.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/121.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/122.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/123.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/124.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/125.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/126.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/127.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/128.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/129.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/13.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/130.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/131.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/132.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/133.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/134.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/14.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/15.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/16.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/17.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/18.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/19.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/20.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/21.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/22.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/23.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/24.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/25.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/26.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/27.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/28.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/29.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/3.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/30.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/31.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/32.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/33.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/34.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/35.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/36.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/37.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/38.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/39.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/4.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/40.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/41.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/42.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/43.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/44.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/45.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/46.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/47.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/48.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/49.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/5.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/50.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/51.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/52.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/53.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/54.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/55.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/56.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/57.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/58.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/59.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/6.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/60.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/61.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/62.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/63.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/64.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/65.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/66.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/67.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/68.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/69.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/7.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/70.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/71.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/72.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/73.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/74.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/75.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/76.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/77.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/78.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/79.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/8.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/80.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/81.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/82.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/83.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/84.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/85.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/86.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/87.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/88.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/89.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/9.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/90.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/91.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/92.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/93.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/94.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/95.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/96.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/97.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/98.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/99.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/static.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/file-16.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/file-64.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/folder-16.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/folder-64.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/go-up.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_left.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_right.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_top.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/refresh.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/image.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/select-files-en.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/select-files-zh-CN.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/swfupload.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/electron.asar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/snapshot_blob.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ucrtbase.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ui_resources_200_percent.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/vcruntime140.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/views_resources_200_percent.pak" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/Setup.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/Setup.msi" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/smartpower-0.0.0-full.nupkg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/LICENSES.chromium.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.babelrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/build.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/dev-client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/dev-runner.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.main.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.renderer.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.web.config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.eslintignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.eslintrc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/electronapp.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.travis.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/appveyor.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/dist/electron/.gitkeep" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/dist/web/.gitkeep" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package-lock.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/index.ejs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/main/index.dev.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/main/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/Api.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/App.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/.gitkeep" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/AnnualForecast.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/BidChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/BidManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/Button.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/MyTab.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/Panel.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/AddClient.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/Client.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAddAgreement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAddCeliang.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAgreement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientCaiji.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientDetail.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientHeader.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientIndexCompare.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientList.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientPiancha.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientSidebar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientSituation.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientTerminalData.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientUserManage.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientUserManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientZonglan.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/FuheChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/GonglvChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/JieXianTu.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/PowerDatabase.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/YougongChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ClientList.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ClientSidebar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/CompanyPowerProgress.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/CompletionRate.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/AddContractManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/ChangxieContract.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/ContractManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/inputs.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/saleContract.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Echarts-demo/Echarts-demo.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Echarts-demo/Echarts-demo2.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/AssetInfo.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/Equipment.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentException.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentInform.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentInstall.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentRun.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentStatus.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/PagingTool.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/test.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Exmaple.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/FastBoot.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/AnnualForecast - 副本.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/AnnualForecast.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/ImportData.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/MonthForecast.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/UserForecast.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/YearForecast.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Header.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/HenanMap.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/DataIndex.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/FiveData.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/HomeCalendar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerTimeframeProgress.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerTimeframeYM.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerUse.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/ProcessPlan.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/RealTimePowerChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/TradePi.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/WorkRemind.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/calendar-plugin/calendar-input.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/calendar-plugin/calendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/HomeCalendar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/IndexCompare.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/JieXianTu.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LandingPage.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LandingPage/SystemInformation.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart1.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart2.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart3.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Main.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/MainPage.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/MainSidebar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Map.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/Message.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageCenter.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageDetail.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageMain.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageSend.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageSidebar.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Pagenation.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PowerTimeFrame.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PowerTimeframeProgress.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PreviousBidingChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/RealTimePowerChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/SandTable.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Table/Table.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Testcart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Button.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/MyTab.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Panel.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Table.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/myFenye.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/mySearch.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/mySearchTwo.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/upLoad.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/BidChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/BidManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/MatchingManagement.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/PreviousBidingChart.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradePie.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradePieTwo.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradeSituation.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradePi.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Weather.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/login.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/planInfo.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/router/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Chart.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Client.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/ClientList.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Counter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Global.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Login.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/.gitkeep" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/china.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/china.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/common.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/dateformat.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/flare.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_fontclass.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_symbol.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_unicode.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/henan.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/anchor/anchor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/autoheight/autoheight.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/baidumap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/clearhtml/clearhtml.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/code.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/prettify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/emoticons.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/filemanager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/flash/flash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/image.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/insertfile/insertfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/lineheight/lineheight.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/link/link.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/map/map.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/map/map.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/media/media.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/multiimage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/pagebreak/pagebreak.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/plainpaste/plainpaste.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/preview/preview.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/quickformat/quickformat.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/table/table.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/template.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/wordpaste/wordpaste.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/laydate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/laydate.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/myiVew.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/normalize.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/Radio.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/button.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/form.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/homeCalendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/menu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/myIview.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/table.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/.eslintrc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/specs/Launch.spec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/utils.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/karma.conf.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/specs/LandingPage.spec.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/version" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/RELEASES" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,44 +535,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ChangxieManagement.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-              <folding>
-                <element signature="e#173#1652#0" expanded="false" />
-                <element signature="e#2532#4143#0" expanded="false" />
-                <element signature="e#4174#7933#0" expanded="false" />
-                <element signature="e#5314#7915#0" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#Row#1;n#panel#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PowerDatabase.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="165" column="27" lean-forward="true" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
-              <folding>
-                <element signature="e#105#2858#0" expanded="false" />
-                <element signature="e#2873#3726#0" expanded="false" />
-                <element signature="e#3738#3989#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RealTimePowerChart.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+            <state relative-caret-position="-513">
+              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -72,6 +558,7 @@
         <option value="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -84,6 +571,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/client/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
@@ -106,128 +594,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TradeManagement" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electronapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Home" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -249,16 +646,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="false" name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
@@ -269,9 +656,15 @@
       <envs />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="npm.dev" />
-    </list>
+    <configuration name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
     <recent_temporary>
       <list size="1">
         <item index="0" class="java.lang.String" itemvalue="npm.dev" />
@@ -289,37 +682,37 @@
       <option name="presentableId" value="Default" />
       <updated>1511711122340</updated>
       <workItem from="1511711123715" duration="1227000" />
+      <workItem from="1513839428304" duration="1092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1227000" />
+    <option name="totallyTimeSpent" value="2319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1924" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.4961665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14899258" sideWeight="0.49019608" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497349" sideWeight="0.50383353" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14899258" sideWeight="0.50980395" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -331,27 +724,25 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
+        <state relative-caret-position="2376">
           <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding>
-            <element signature="e#173#1652#0" expanded="false" />
-            <element signature="e#2532#4143#0" expanded="false" />
-            <element signature="e#4174#7933#0" expanded="false" />
-            <element signature="e#5314#7915#0" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#Row#1;n#panel#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
+        <state relative-caret-position="4455">
           <caret line="165" column="27" lean-forward="true" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
-          <folding>
-            <element signature="e#105#2858#0" expanded="false" />
-            <element signature="e#2873#3726#0" expanded="false" />
-            <element signature="e#3738#3989#0" expanded="false" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1485">
+          <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -359,6 +750,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="165" column="27" lean-forward="false" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-513">
+          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
           <folding />
         </state>
       </provider>
