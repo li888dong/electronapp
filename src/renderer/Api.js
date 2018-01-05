@@ -1,3 +1,5 @@
+import Vue from 'vue'
+const vue = new Vue();
 /*
 * 首页开始
 * */
@@ -115,12 +117,21 @@ export const CLIENT_TERMINAL_EDITRATIO = '/api/devices/editratio';
 //配置终端
 //请求出错
 export const CLIENT_ADD_TERMINAL ='/api/devices';
+// 获取变压器
+export const CLIENT_GET_TRANSFORMER = '/api/devices/tflist';
 //添加变压器
 export const CLIENT_ADD_TRANSFORMER = '/api/devices/add_transformer';
+//添加生产厂家
+export const CLIENT_ADD_FAcTORY = '/api/devices/add_epfactory';
+//获取生产厂家
+export const CLIENT_FACTORY = '/api/devices/epflist';
+
 //接线方式
 export const TERMINAL_WIRING_WAY = '/api/devices/getwiring';
 //新增客户
 export const CLIENT_ADD ='/api/customers/add';
+// 获取行业信息
+export const GET_INDLIST = 'api/contract/indlist';
 //添加行业（暂未使用）
 export const CLIENT_BUSINESS = '/api/customers/add_industry';
 //添加银行（暂未使用）
@@ -158,13 +169,23 @@ export const TRADE_MONTH = '/api/bidding/monthOverview';
 export const TRADE_ANALYSIS = '/api/bidding/analysis';
 // 交易占比
 export const TRADE_OF = '/api/bidding/tradingOf';
+//发电集团剩余电量
+export const POWER_PLANT_ELECTRIC = '/api/bidding/batterypercent'
 //竞价管理
 
-//本月竞价模拟
+//往期竞价模拟
 export const MONTH_BIDDING = '/api/bidding/simulation';
 
 //添加模拟竞价交易
-export const ADD_MOCK_BIDDING = '/api/bidding/addbidprice';
+export const ADD_MOCK_BIDDING = '/api/ppsupply';
+//本月竞价模拟
+export const MONTH_BIDDING_NOW = '/api/ppsupply/index';
+//修改竞价模拟
+export const MONTH_BIDDING_UPDATE ='/api/ppsupply/update';
+//参与竞价的电厂详情
+export const MONTH_BIDDING_DETAIL = '/api/ppsupply/';
+//删除竞价电厂
+export const MONTH_BIDDING_DELETE = '/api/ppsupply/';
 
 //往期竞价结果
 export const OLD_BIDDING = '/api/bidding/oldsimulation';
@@ -274,5 +295,8 @@ export const EQUIPMENT_INFO_LIST = '/api/devices/counterLog';
 export const EQUIPMENT_ABNORMAL_RECORD ='/api/devices/deviceerror';
 //设备管理结束
 export const errcallback = function (err) {
+    vue.$Modal.error({
+        content: '请求出错'
+    });
     console.error("请求出错"+err)
 }

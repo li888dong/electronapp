@@ -1,4 +1,5 @@
 <script>
+    import {ipcRenderer} from 'electron';
 	export default {
 	    name:'poweruse',
 		props:['belong'],
@@ -10,10 +11,21 @@
 		        piancha:0,
 		        yiyongRate:0,
 		        chaochuRate:0,
+		        startWidth:500
 	        }
 		},
 		mounted(){
             this.doAjax(this.belong);
+            window.onresize=function(){
+        		var width = ipcRenderer.sendSync('width-change','change');
+        		console.log(width);
+        		if(width > 1366){
+        			  this.startWidth = 400;
+        		}else{
+        			 this.startWidth = 500;
+        		}
+        	 
+        	}
 		},
         computed:{
             cus_id:function () {
@@ -92,9 +104,9 @@
 				<li> <i class="square legend-chaochu"></i>超出电量</li>
 			</ul>
 			<div class="progress-bar absolute">
-				<div class="progress-bar-frame frame-high" :style="{width:(500*yiyongRate)+34+'px',maxWidth:500+'px'}">{{(yiyong>yigou?100:(yiyongRate*100).toFixed(2))+'%'}}</div>
+				<div class="progress-bar-frame frame-high" :style="{width:(startWidth*yiyongRate)+34+'px',maxWidth:startWidth+'px'}">{{(yiyong>yigou?100:(yiyongRate*100).toFixed(2))+'%'}}</div>
 				<div class="progress-bar-frame frame-normal"></div>
-				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(500*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
+				<div class="progress-bar-frame frame-low" v-if="chaochu !== 0"  :style="{width:(startWidth*chaochuRate)+'px',paddingLeft:25+'px'}"></div>
 			</div>
 			<div class="deviation-data">
 				<ul>
@@ -242,6 +254,14 @@
 		top: -11px;
 		left: 34px;
 		font-weight: bold;
+	}
+	@media (max-width: 1366px) {
+	   .power-realTime-progress .progress-bar{
+	   	 width:400px;
+	   }
+	   .deviation-data ul{
+          width:450px;
+	   }
 	}
 
 </style>

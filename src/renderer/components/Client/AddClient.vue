@@ -1,23 +1,12 @@
 <script>
+    import bank from '../../../../static/bank.json'
+    import {telphone,codeLength,officeReg} from '../../../../static/verification.js'
+
     export default {
         name: 'AddClient',
         data() {
-            const telphone = (rule, val, callback) => {
-                console.log(val);
-                if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)) {
-                    return callback(new Error("请输入正确的手机号！"));
-                } else {
-                    callback();
-                }
-            };
-            const codeLength = (rule, val, callback) => {
-                if (val.length !== 15 && val.length !== 18) {
-                    return callback(new Error('请输入正确的格式'));
-                } else {
-                    callback();
-                }
-            }
             return {
+                loading1: false,
                 formItem: {
                     name: '',
                     sn: '',
@@ -74,38 +63,18 @@
                 faxNum: false,
                 phoneNum: false,
                 msgHint: '',
-                categoryList: [],
+                categoryList1: [],
+                categoryList2: [],
+                categoryList3: [],
                 model11: '',
                 model22: '',
                 category1: '',
                 category2: '',
+                category3: '',
                 hint: false,
-                ruleValidate: {
-                    name: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    sn: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    tyshxydm: [{required: true, message: '内容不能为空', trigger: 'blur'},
-                        {validator: codeLength, trigger: 'blur'},],
-                    legal_person: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    organization: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    bank: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    bank_card: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    change: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    contact: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    telphone: [{required: true, message: '内容不能为空', trigger: 'blur'},
-                        {type: 'string', min: 11, message: '手机号码必须为11位', trigger: 'blur'},
-                        {validator: telphone, trigger: 'blur'},
-                    ],
-                    email: [{required: true, message: '内容不能为空', trigger: 'blur'},
-                        {type: 'email', message: '邮箱格式不对', trigger: 'blur'}],
-                    officephone1: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    officephone2: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    fax1: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    fax2: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    address: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    zipcode: [{required: true, message: '内容不能为空', trigger: 'blur'}]
-                }
+                emptyRule:{required: true, message: '内容不能为空', trigger: 'blur'},
+                msg:'',
+                modal1:false
             }
         },
         methods: {
@@ -116,10 +85,14 @@
                 var email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
                 //固定电话的正则验证
                 var officephone_reg = /^[0-9]{3,4}\-[0-9]{3,8}$/;
-                //传真号的正则验证
-                var fax_reg = /^(\d{3,4}-)?\d{7,8}$/;
-                if (!this.isEmpty(this.formItem) && this.category1 != "" && this.category2 != "" && tel_reg.test(this.formItem.telphone) && email_reg.test(this.formItem.email) && officephone_reg.test(this.formItem.officephone1 + "-" + this.formItem.officephone2) && officephone_reg.test(this.formItem.fax1 + "-" + this.formItem.fax2)) {
-                    this.formItem.category = this.category1 + "," + this.category2;
+                if (!this.isEmpty(this.formItem) && this.category1&& tel_reg.test(this.formItem.telphone) && email_reg.test(this.formItem.email) && officephone_reg.test(this.formItem.officephone1 + "-" + this.formItem.officephone2) && officephone_reg.test(this.formItem.fax1 + "-" + this.formItem.fax2)) {
+                    if(this.category1){
+                         this.formItem.category = this.category1
+                     }else if(this.category1 && this.category2){
+                        this.formItem.category = this.category1 + "," + this.category2
+                    }else if(this.category1 && this.category2 &&this.category3){
+                        this.formItem.category = this.category1 + "," + this.category2 + "," + this.category3;
+                    }  
                     this.$http.post(this.$api.CLIENT_ADD, {
                         com_id: this.$store.getters.com_id,
                         name: this.formItem.name,
@@ -143,16 +116,28 @@
                         fax: this.formItem.fax1 + this.formItem.fax2,
                     }).then(res => {
                         console.log(res);
-                        if (goht) {
-                            this.$router.push({path: 'add-hetong', query: {cus_name: this.formItem.name,cus_id:res.data.id}});
+                        if(res.data.status === '1'){
+                             if (goht) {
+                            this.$store.dispatch('setCusId', res.data.id);
+                            this.$store.dispatch('setCusName', this.formItem.name);
+                            this.$router.push({
+                                path: 'add-hetong',
+                                query: {cus_name: this.formItem.name, cus_id: res.data.id}
+                            });
                         } else {
                             for (let k in this.formItem) {
                                 this.formItem[k] = "";
                             }
                             this.category1 = '';
                             this.category2 = '';
+                            this.category3 = '';
                             this.$router.push('client-list');
                         }
+                      }else{
+                         this.modal1 = true;
+                          this.msg = res.data.msg;
+                      }
+                       
                     }, err => {
                         this.$api.errcallback(err);
                     }).catch(err => {
@@ -163,33 +148,70 @@
                 }
 
             },
-            changeCategory(value) {
-                if (value == "农、林、牧、渔业") {
-                    this.categoryList = [{
-                        value: '农业',
-                        label: '农业'
-                    }, {
-                        value: '林业',
-                        label: '林业'
-                    }, {
-                        value: '畜牧业',
-                        label: '畜牧业'
-                    }, {
-                        value: '渔业',
-                        label: '渔业'
-                    }, {
-                        value: '农、林、牧、渔服务业',
-                        label: '农、林、牧、渔服务业'
-                    }]
-                }
-                if (value == "工业") {
-                    this.categoryList = [{
-                        value: '轻工业',
-                        label: '轻工业'
-                    }, {
-                        value: '重工业',
-                        label: '重工业'
-                    }]
+            changeCategory1(value) {
+                let grade = 1;
+                this.categoryList2 = [];
+                this.categoryList3 = [];
+                this.changeCategory(value, grade)
+            },
+            changeCategory2(value) {
+                let grade = 2;
+                this.categoryList3 = [];
+                this.changeCategory(value, grade)
+            },
+            changeCategory3(value) {
+                let grade = 3;
+                this.changeCategory(value, grade)
+            },
+            changeCategory(value, grade) {
+                console.log(value, grade)
+                if (value) {
+                    this.$http.post(this.$api.GET_INDLIST, {
+                        pid: value
+                    }).then(res => {
+                        console.log(res);
+                        let data = res.data.data;
+                        if (grade === 1) {
+                            this.categoryList2 = [];
+                            data.map(i => {
+                                this.categoryList2.push({
+                                    label: i.name,
+                                    value: i.id
+                                })
+                            })
+                        } else if (grade === 2) {
+                            this.categoryList3 = [];
+                            data.map(i => {
+                                this.categoryList3.push({
+                                    label: i.name,
+                                    value: i.id
+                                })
+                            })
+                        }
+
+                    }, err => {
+                        this.$api.errcallback(err);
+                    }).catch(err => {
+                        this.$api.errcallback(err);
+                    })
+                } else {
+                    this.$http.post(this.$api.GET_INDLIST, {
+                        pid: 0
+                    }).then(res => {
+                        console.log(res);
+                        this.categoryList1 = [];
+                        let data = res.data.data;
+                        data.map(i => {
+                            this.categoryList1.push({
+                                label: i.name,
+                                value: i.id
+                            })
+                        })
+                    }, err => {
+                        this.$api.errcallback(err);
+                    }).catch(err => {
+                        this.$api.errcallback(err);
+                    })
                 }
             },
             isEmpty(obj) {
@@ -209,6 +231,78 @@
                     }
                 }, 3000)
             },
+            getBank(query) {
+                let bankSet = new Set();
+                this.bankList = [];
+                if (query) {
+                    setTimeout(() => {
+                        for (let key in bank) {
+                            if (new RegExp(query).test(bank[key].bank)) {
+                                bankSet.add(bank[key].bank)
+                            }
+                        }
+                        Array.from(bankSet).map(i => {
+                            this.bankList.push({
+                                label: i,
+                                value: i
+                            })
+                        });
+                    })
+                } else {
+                    setTimeout(() => {
+                        for (let key in bank) {
+                            bankSet.add(bank[key].bank)
+                        }
+                        Array.from(bankSet).map(i => {
+                            this.bankList.push({
+                                label: i,
+                                value: i
+                            })
+                        });
+                    })
+                }
+            },
+          sure(){
+                 for (let k in this.formItem) {
+                     this.formItem[k] = "";
+                 }
+                 this.category1 = '';
+                 this.category2 = '';
+                this.category3 = '';
+                this.modal1 = false;
+          }
+        },
+        computed:{
+               ruleValidate: function(){
+                return {
+                    name: [this.emptyRule],
+                    sn: [this.emptyRule],
+                    tyshxydm: [this.emptyRule,
+                        {validator: codeLength, trigger: 'blur'},],
+                    legal_person: [this.emptyRule],
+                    organization: [this.emptyRule],
+                    bank: [this.emptyRule],
+                    bank_card: [this.emptyRule],
+                    change: [this.emptyRule],
+                    contact: [this.emptyRule],
+                    telphone: [this.emptyRule,
+                        {type: 'string', min: 11, message: '手机号码必须为11位', trigger: 'blur'},
+                        {validator:telphone, trigger: 'blur'},
+                    ],
+                    email: [this.emptyRule,
+                        {type: 'email', message: '邮箱格式不对', trigger: 'blur'}],
+                    officephone1: [this.emptyRule],
+                    officephone2: [this.emptyRule,{
+                        validator:officeReg,trigger:'blur'
+                    }],
+                    fax1: [this.emptyRule],
+                    fax2: [this.emptyRule,{
+                        validator:officeReg,trigger:'blur'
+                    }],
+                    address: [this.emptyRule],
+                    zipcode: [this.emptyRule]
+                }
+            }
         },
         watch: {
             hint: function () {
@@ -216,7 +310,8 @@
             }
         },
         mounted() {
-
+            this.getBank();
+            this.changeCategory()
         }
     }
 </script>
@@ -267,8 +362,14 @@
 				<Row>
 					<Col span="8">
 					<Form-item label="开户银行" prop='bank' class='mgb_20'>
-						<Select v-model="formItem.bank" placeholder="请选择">
-							<Option :value="item.value" v-for='item in bankList'>{{item.label}}</Option>
+						<Select
+								v-model="formItem.bank"
+								filterable
+								remote
+								:remote-method="getBank"
+								:loading="loading1">
+							<Option :value="item.value" v-for='(item, index) in bankList' :key="index">{{item.label}}
+							</Option>
 						</Select>
 					</Form-item>
 					</Col>
@@ -284,23 +385,22 @@
 				<Row :gutter="10">
 					<Form-item label="所属行业" class='mgb_20'>
 						<Col span="5">
-						<Select v-model="category1" placeholder="请选择" v-on:on-change='changeCategory'>
-							<Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
-							<Option value="工业">工业</Option>
+						<Select v-model="category1" placeholder="请选择" v-on:on-change='changeCategory1'>
+							<Option :value='item.value' v-for='item in categoryList1'>{{item.label}}</Option>
 						</Select>
 						</Col>
 						<Col span="4">
-						<Select v-model="category2" placeholder="请选择">
-							<Option :value='item.value' v-for='item in categoryList'>{{item.label}}</Option>
+						<Select v-model="category2" placeholder="请选择" v-on:on-change='changeCategory2'
+						        v-if="categoryList2.length>0">
+							<Option :value='item.value' v-for='item in categoryList2'>{{item.label}}</Option>
 						</Select>
 						</Col>
-						<!-- <Col span="4">
-						<Select v-model="formItem.select" placeholder="请选择">
-							<Option value="beijing">北京市</Option>
-							<Option value="shanghai">上海市</Option>
-							<Option value="shenzhen">深圳市</Option>
+						<Col span="4">
+						<Select v-model="category3" placeholder="请选择" v-on:on-change='changeCategory3'
+						        v-if="categoryList3.length>0">
+							<Option :value='item.value' v-for='item in categoryList3'>{{item.label}}</Option>
 						</Select>
-						</Col> -->
+						</Col>
 					</Form-item>
 				</Row>
 				<Row>
@@ -338,7 +438,7 @@
 						</Col>
 						<Col span="2">
 						<FormItem prop='zipcode'>
-							<Input v-model="formItem.zipcode" placeholder="邮政编码" maxlength="6"></Input>
+							<Input v-model="formItem.zipcode" placeholder="邮政编码" :maxlength="6"></Input>
 						</FormItem>
 						</Col>
 					</Form-item>
@@ -376,14 +476,14 @@
 					<Form-item label="办公电话" class='mgb_20 mgb_15'>
 						<Col span="8">
 						<FormItem prop='officephone1'>
-							<Input v-model="formItem.officephone1" placeholder="-" id='tel1'></Input>
+							<Input v-model="formItem.officephone1" placeholder="-" id='tel1'  :maxlength="4"></Input>
 						</FormItem>
 						</Col>
 						<Col span="1" style="text-align: center;line-height: 34px;">
 						-</Col>
 						<Col span="15">
 						<FormItem prop='officephone2'>
-							<Input v-model="formItem.officephone2" placeholder="请输入办公电话"></Input>
+							<Input v-model="formItem.officephone2" placeholder="请输入办公电话" :maxlength="8"></Input>
 						</FormItem>
 						</Col>
 					</Form-item>
@@ -392,27 +492,27 @@
 					<Form-item label="传真号码" style='margin-bottom: 0px'>
 						<Col span="6">
 						<FormItem prop='fax1'>
-							<Input v-model="formItem.fax1" placeholder="-"></Input>
+							<Input v-model="formItem.fax1" placeholder="-" :maxlength="4"></Input>
 						</FormItem>
 						</Col>
 						<Col span="1" style="text-align: center;line-height: 34px;">
 						-</Col>
 						<Col span="15">
 						<FormItem prop='fax2'>
-							<Input v-model="formItem.fax2" placeholder="请输入传真号码"></Input>
+							<Input v-model="formItem.fax2" placeholder="请输入传真号码" :maxlength="8"></Input>
 						</FormItem>
 						</Col>
 					</Form-item>
 					</Col>
 				</Row>
 				<Row>
-					<Col span="12" style="text-align: center;line-height: 34px;">
+					<Col span="12" style="text-align: center;line-height: 34px;margin-top:5px">
 					<Form-item style='margin-bottom: 0'>
 						<Button type="primary" @click="addClient('goht')">保存并添加合同</Button>
 						<Button type="primary" style="margin-left: 30px" @click='addClient()'>保存</Button>
 						<Button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</Button>
 						<div v-if='hint' style="margin-left: 60px;">
-							<Alert type="warning" show-icon style='width: 200px;margin:4px auto;color: red;'>内容不能为空
+							<Alert type="warning" show-icon style='width: 200px;margin:2px auto;color: red;'>内容不能为空
 							</Alert>
 						</div>
 					</Form-item>
@@ -420,6 +520,16 @@
 				</Row>
 			</Form>
 		</Card>
+         <Modal
+        title="提示"
+        v-model="modal1"
+        class-name="vertical-center-modal"
+        >
+        <p>{{msg}}</p>
+         <div slot="footer">
+            <Button type="primary"  @click="sure">确定</Button>
+        </div>
+    </Modal>
 	</div>
 </template>
 
@@ -528,5 +638,14 @@
 		border: 1px solid #108CEE;
 		background-color: #fff;
 	}
+     .vertical-center-modal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
+        
+    }
+    .vertical-center-modal .ivu-modal{
+            top: 0;
+    }
 </style>

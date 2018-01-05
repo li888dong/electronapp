@@ -1,26 +1,30 @@
 <template>
-	<Row className="flex-row">
-		<div style="flex:5">
+	<Row id='main_page'>
+		<div  class="sidebar_menu">
 			<main-sidebar></main-sidebar>
 		</div>
-		<div style="flex: 43">
+		<div  class='main_content'>
 			<Row>
 				<div class="frame-top">
 					<span class="hideBtn iconfont" @click="hideApp()">&#xe601;</span>
 					<span class="closeBtn iconfont" @click="closeApp()">&#xe664;</span>
 				</div>
 			</Row>
-			<Row>
+			<Row class='top_25'>
 				<main-header></main-header>
 
 			</Row>
-			<Row>
+			<Row class='top_80'>
 				<router-view></router-view>
 			</Row>
 
 			<transition name="fade">
 				<fast-boot v-if="fastboot"></fast-boot>
+				<Col span='4' class='main_siderbar_box' v-if='mainsidebar'>
+				 <main-sidebar ></main-sidebar>
+				</Col>
 			</transition>
+
 		</div>
 	</Row>
 </template>
@@ -35,13 +39,15 @@
         name: 'mainPage',
         data(){
             return{
-
             }
         },
 	    computed:{
             fastboot:function () {
 	            return this.$store.getters.fastboot
-            }
+            },
+           mainsidebar:function(){
+           	  return this.$store.getters.mainsidebar
+           }
 	    },
         methods:{
 
@@ -58,10 +64,52 @@
             'main-sidebar': MainSidebar,
             'main-header': Header,
             'fast-boot':FastBoot
+        },
+        mounted(){
+        	window.onresize=function(){
+        		var width = ipcRenderer.sendSync('width-change','change');
+                var mainPage = document.getElementById('main_page');
+        		if(width > 1366){
+                      mainPage.className = 'flex-row';
+        		}else{
+        			mainPage.className='';
+        		}
+        	}
         }
     }
 </script>
 
-<style>
+<style scoped>
 	@import "../../../static/common.css";
+	@media (min-width: 1367px) {
+      .main_content{
+         flex: 43;
+      }
+      .sidebar_menu{
+        flex:5;
+      }
+	}
+	@media (max-width: 1366px){
+		.sidebar_menu{
+            display: none;
+        }
+        .top_80{
+           margin-top: 80px;
+        }
+        .main_siderbar_box{
+        position: fixed;
+        top: 100px;
+        height: 900px;
+        overflow: hidden;
+        z-index: 1000;
+    }
+    .frame-top{
+        position: fixed;
+        z-index: 999999;
+	}
+    .top_25{
+        margin-top: 25px;
+    }
+}
+	
 </style>

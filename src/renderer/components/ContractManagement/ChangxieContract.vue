@@ -84,7 +84,7 @@ export default {
             console.log(this.hetongList[index].id);
             this.$http.post(this.$api.CHANGXIE_LIST_DEL,{id:this.hetongList[index].id}).then(res=>{
                 console.log("长协合同删除成功",res);
-                if(res.data.status){
+                if(res.data.status==='1'){
                    this.hetongList.splice(index,1);
                 }
                 // this.changxieList();
@@ -104,7 +104,7 @@ export default {
                 console.log('长协列表',res);
                 var data = res.data.data.data;
                  
-                if(res.data.status){
+                if(res.data.status ==='1'){
                   if(data.length > 0){
                    this.totalPage =res.data.data.total;
                     var arr = [];
@@ -130,16 +130,13 @@ export default {
                 this.$api.errcallback(err);
             })
         },
-        toChangxie(){
-            this.$router.push('/AddContractManagement');
-        },
         pageChange(value){
           console.log(value);
           this.loading=true;
             this.$http.post(this.$api.CHANGXIE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
                 console.log('长协列表分页',res);
                 var data = res.data.data.data;   
-                if(res.data.status){
+                if(res.data.status==='1'){
                     this.totalPage = res.data.data.total;
                     this.currentPage = res.data.data.current_page;
                      var arr = [];
@@ -208,7 +205,7 @@ export default {
                     </li>
                 </ul>
                 <div class="hetongShuju">
-                    <div class="changxieSee" @click="toChangxie()">
+                    <div class="changxieSee">
                             <i class="iconfont icon-jishiben01"></i>
                             </div>
                     <Table :columns = 'columns1' style='margin-left: 10%;height:100%' size='small' :data='item.lpdist'></Table>
@@ -266,7 +263,6 @@ export default {
     top: 50%;
     left: 3%;
     margin-top: -25px;
-    cursor: pointer;
 }
 .changxieSee i{
     position: absolute;

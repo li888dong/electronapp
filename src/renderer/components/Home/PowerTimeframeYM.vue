@@ -13,8 +13,8 @@
             }
         },
 	    mounted(){
-            this.totalWidth = this.baseWidth;
-            this.changeType()
+	    	this.totalWidth = this.baseWidth;
+            this.changeType();
 	    },
         computed:{
             cus_id:function () {
@@ -24,6 +24,9 @@
         watch:{
             cus_id:function () {
                 this.doAjax(this.belong)
+            },
+            baseWidth:function(){
+            	this.totalWidth = this.baseWidth;
             }
         },
         methods: {
@@ -39,12 +42,12 @@
                             this.$api.errcallback(err)
                         })
                 }else if (belong === 'cus'){
-                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{com_id:this.cus_id,type:this.powerFrameType})
+                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{cus_id:this.cus_id,type:this.powerFrameType})
                         .then(res => {
                             console.log('用户用电时段分布',res);
-                            this.guduanData = res.data.data.e1;
-                            this.pingduanData = res.data.data.e2;
-                            this.fengduanData = res.data.data.e3;
+                            this.guduanData = Number(res.data.data.e1);
+                            this.pingduanData = Number(res.data.data.e2);
+                            this.fengduanData = Number(res.data.data.e3);
                         }, err => {
                             this.$api.errcallback(err)
                         })
@@ -58,6 +61,9 @@
                 this.powerFrameType = type;
                 this.doAjax(this.belong)
             }
+        },
+        updated(){
+        	this.totalWidth = this.baseWidth;
         }
     }
 </script>
@@ -72,13 +78,13 @@
 		</div>
 		<div class="power-timeframe-bar" :style="{width:totalWidth+'px'}">
 			<div class="power-timeframe-bar-low">谷段 <span><span class="bar" v-if="guduanData !==0"
-			                                                    v-bind:style="{width: totalWidth*guduanData/(guduanData+pingduanData+fengduanData) + 'px'}">20%</span>{{guduanData}}Mw.时</span>
+			                                                    v-bind:style="{width: totalWidth*guduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((guduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{guduanData}}Mw.时</span>
 			</div>
 			<div class="power-timeframe-bar-normal">平段 <span><span class="bar" v-if="pingduanData !==0"
-			                                                       v-bind:style="{width: totalWidth*pingduanData/(guduanData+pingduanData+fengduanData) + 'px'}">30%</span>{{pingduanData}}Mw.时</span>
+			                                                       v-bind:style="{width: totalWidth*pingduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((pingduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{pingduanData}}Mw.时</span>
 			</div>
 			<div class="power-timeframe-bar-high">峰段 <span><span class="bar" v-if="fengduanData !==0"
-			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">50%</span>{{fengduanData}}Mw.时</span>
+			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((fengduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{fengduanData}}Mw.时</span>
 			</div>
 		</div>
 	</Card>

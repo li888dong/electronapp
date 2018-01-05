@@ -28,7 +28,7 @@
                         </li>
                     </ul>
                     <div class="htData">
-                       <div class="saleSee" @click="toSale()">
+                       <div class="saleSee">
                             <i class="iconfont icon-jishiben01"></i>
                         </div>   
                         <i-table 
@@ -115,7 +115,7 @@ export default {
             
             this.$http.post(this.$api.POWER_SALE_DEL,{id:this.data1[index].id}).then(res=>{
                 console.log('售电合同删除ok',res);
-                if(res.data.status){
+                if(res.data.status==='1'){
                     this.data1.splice(index, 1);
                 }
             },err=>{
@@ -127,9 +127,6 @@ export default {
         cancel () {
             this.$Message.info('点击了取消');
         },
-        toSale() {
-            this.$router.push("/add-hetong")
-        },
         // removeItem (index) {
         //     console.log(index);
         //     this.data1.splice(index, 1)
@@ -139,7 +136,7 @@ export default {
            this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
               console.log("售电合同列表",res);
               console.log(res.data.data);
-              if(res.data.status){
+              if(res.data.status==='1'){
                 if(res.data.data.data.length > 0){
                    this.data1=res.data.data.data;
                    console.log(this.data1);
@@ -163,7 +160,7 @@ export default {
              this.$http.post(this.$api.POWER_SALE_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
               console.log("售电合同列表",res);
               console.log(res.data.data);
-              if(res.data.status){
+              if(res.data.status==='1'){
                 this.data1=res.data.data.data;
                  console.log(this.data1);
                  this.totalPage = res.data.data.total;
@@ -251,14 +248,11 @@ export default {
 .saleSee{
     width: 50px;
     height: 50px;
-    /*background-color: #5ecfb8;*/
-    /*border-radius: 50%;*/
     padding-top: 50px;
     position: absolute;
     top: 50%;
     left: 3%;
     margin-top: -25px;
-    cursor: pointer;
 }
 .saleSee i{
     position: absolute;
@@ -309,4 +303,15 @@ export default {
     top: -12px;
     left: 12px;
   }*/
+  @media (max-width: 1366px) {
+      .hetongNav .change{
+          right:0px;
+          padding-right:10px;
+      }
+    .hetongNav li{
+    float: left;
+    line-height: 50px;
+    padding-right: 12px;
+     }
+  }
 </style>

@@ -1,15 +1,16 @@
 <script>
-	export default {
-	    name:'piancha',
-		data(){
-	        return{
-	            year:'2017',
-                spinChart:false,
-		        chartData:{},
+    export default {
+        name: 'piancha',
+        data() {
+            return {
+                year: '2017',
+                spinChart: false,
+                chartData: {},
                 columns4: [
                     {
                         title: '类别',
-                        key: 'category'
+                        key: 'category',
+                        width:100
                     },
                     {
                         title: '1月',
@@ -64,52 +65,52 @@
                         key: 'all'
                     }
                 ],
-		        data1:[],
-		        tableData:[
-		            {category:'采集电量'},
-			        {category:'申报电量'},
-			        {category:'申报偏差'},
-			        {category:'预测电量'},
-			        {category:'预测偏差'},
-			        {category:'监测电量'},
-			        {category:'监测偏差'}
-			        ],
-		        tableData1:[]
-	        }
-		},
+                data1: [],
+                tableData: [
+                    {category: '采集电量'},
+                    {category: '申报电量'},
+                    {category: '申报偏差'},
+                    {category: '预测电量'},
+                    {category: '预测偏差'},
+                    {category: '监测电量'},
+                    {category: '监测偏差'}
+                ],
+                tableData1: []
+            }
+        },
 
-		computed:{
-		    cus_id:function () {
-			    return this.$store.getters.cus_id
+        computed: {
+            cus_id: function () {
+                return this.$store.getters.cus_id
             },
-		    option:function () {
-		        let monthList = [],
-			        caijiList = [],
-			        cyuceList = [],
-			        gyuceList = [];
-		        for (let k in this.chartData){
-		            monthList.push(k);
-		            for (let i = 0;i<this.chartData[k].dev.length;i++){
+            option: function () {
+                let monthList = [],
+                    caijiList = [],
+                    cyuceList = [],
+                    gyuceList = [];
+                for (let k in this.chartData) {
+                    monthList.push(k);
+                    for (let i = 0; i < this.chartData[k].dev.length; i++) {
                         caijiList.push(this.chartData[k].dev[i].declare_dev);
-						cyuceList.push(this.chartData[k].dev[i].fore_dev);
+                        cyuceList.push(this.chartData[k].dev[i].fore_dev);
                         gyuceList.push(this.chartData[k].dev[i].monitor_dev);
                     }
 
-		        }
-			    return{
+                }
+                return {
                     legend: {
                         data: ['采集偏差', '客户预测偏差', '公司预测偏差'],
                         align: 'left',
-                        top:20,
+                        top: 20,
                         left: 0,
-                        itemWidth:16,
-                        itemHeight:16,
+                        itemWidth: 16,
+                        itemHeight: 16,
                     },
-                    color:this.$store.getters.chartOption.colorList,
+                    color: this.$store.getters.chartOption.colorList,
                     tooltip: this.$store.getters.chartOption.barTooltip,
                     xAxis: {
-                        type:'category',
-                        data: ['01月', '02月', '03月','04月','05月', '06月','07月','08月', '09月', '10月','11月','12月'],
+                        type: 'category',
+                        data: ['01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'],
                         axisLine: {onZero: true},
                         splitLine: {show: false},
                         splitArea: {show: false}
@@ -124,18 +125,17 @@
                         },
                     },
                     grid: {
-                        right:10,
+                        right: 10,
                         left: 30,
-                        top:80,
-                        bottom:20
+                        top: 80,
+                        bottom: 20
                     },
                     series: [
                         {
                             name: '采集偏差',
                             type: 'bar',
                             itemStyle: {
-                                normal: {
-                                },
+                                normal: {},
                                 emphasis: {
                                     barBorderWidth: 1,
                                     shadowBlur: 10,
@@ -150,8 +150,7 @@
                             name: '客户预测偏差',
                             type: 'bar',
                             itemStyle: {
-                                normal: {
-                                },
+                                normal: {},
                                 emphasis: {
                                     barBorderWidth: 1,
                                     shadowBlur: 10,
@@ -166,8 +165,7 @@
                             name: '公司预测偏差',
                             type: 'bar',
                             itemStyle: {
-                                normal: {
-                                },
+                                normal: {},
                                 emphasis: {
                                     barBorderWidth: 1,
                                     shadowBlur: 10,
@@ -181,65 +179,65 @@
                     ]
                 }
             }
-		},
-		mounted(){
-		    this.reqChart();
-		    this.reqTable();
         },
-		watch:{
-		    cus_id:function () {
+        mounted() {
+            this.reqChart();
+            this.reqTable();
+        },
+        watch: {
+            cus_id: function () {
                 this.reqChart();
                 this.reqTable();
             }
-		},
-		methods:{
-		    reqChart(){
+        },
+        methods: {
+            reqChart() {
                 this.spinChart = true;
-                this.$http.post(this.$api.CLIENT_PIANCHA_CHART,{cus_id:this.cus_id}).then(res=> {
+                this.$http.post(this.$api.CLIENT_PIANCHA_CHART, {cus_id: this.cus_id}).then(res => {
                     this.spinChart = false;
-                    console.log('偏差图表',res.data.citys);
+                    console.log('偏差图表', res.data.citys);
                     this.chartData = res.data.citys;
                     this.drawBar()
 
-                },err=>{
+                }, err => {
 
                 })
-		    },
-			reqTable(){
-                this.$http.post(this.$api.CLIENT_PIANCHA_TABLE,{cus_id:this.cus_id}).then(res=> {
-                    console.log('偏差表格',res);
+            },
+            reqTable() {
+                this.$http.post(this.$api.CLIENT_PIANCHA_TABLE, {cus_id: this.cus_id}).then(res => {
+                    console.log('偏差表格', res);
 
                     let data = res.data.citys;
 
-                    for (let k in data){
+                    for (let k in data) {
 
-                        for (let i = 0;i<data[k].length;i++){
+                        for (let i = 0; i < data[k].length; i++) {
 //	                        申报电量
-							this.tableData[0][k.replace('2017-','month')]=data[k][i].declare;
+                            this.tableData[0][k.replace('2017-', 'month')] = data[k][i].declare;
 //                          申报偏差
-							this.tableData[1][k.replace('2017-','month')]=data[k][i].declare_dev;
+                            this.tableData[1][k.replace('2017-', 'month')] = data[k][i].declare_dev;
 //							监测电量
-							this.tableData[2][k.replace('2017-','month')]=data[k][i].monitor;
+                            this.tableData[2][k.replace('2017-', 'month')] = data[k][i].monitor;
 //							监测偏差
-							this.tableData[3][k.replace('2017-','month')]=data[k][i].monitor_dev;
+                            this.tableData[3][k.replace('2017-', 'month')] = data[k][i].monitor_dev;
 //							预测电量
-							this.tableData[4][k.replace('2017-','month')]=data[k][i].forecast;
+                            this.tableData[4][k.replace('2017-', 'month')] = data[k][i].forecast;
 //							预测偏差
-							this.tableData[5][k.replace('2017-','month')]=data[k][i].fore_dev;
+                            this.tableData[5][k.replace('2017-', 'month')] = data[k][i].fore_dev;
 //							采集电量
-							this.tableData[6][k.replace('2017-','month')]=data[k][i].actual_used;
+                            this.tableData[6][k.replace('2017-', 'month')] = data[k][i].actual_used;
                         }
 
                     }
-	                this.tableData1 = this.tableData;
+                    this.tableData1 = this.tableData;
                 })
-			},
-		    drawBar(){
+            },
+            drawBar() {
                 let compare1Chart = this.$echarts.init(document.getElementById('caiji'));
                 compare1Chart.setOption(this.option);
             }
-		}
-	}
+        }
+    }
 </script>
 <template>
 	<div>
@@ -249,8 +247,8 @@
 				<Card class="client-piancha relative">
 					<h3 slot="title">偏差分析</h3>
 					<div slot="extra" class="btn-group">
-						<DatePicker type="year" placeholder="请选择年份" style="width: 180px"></DatePicker>
-						<Button type="primary" class="refresh">
+						<!-- <DatePicker type="year" placeholder="请选择年份" style="width: 180px"></DatePicker> -->
+						<Button type="primary" class="refresh" @click='reqChart()'>
 							<i class="iconfont icon-shuaxin"></i>
 						</Button>
 					</div>
@@ -273,14 +271,15 @@
 	</div>
 </template>
 <style scoped>
-	.btn-group{
+	.btn-group {
 		margin-top: -9px;
 	}
-	.char-group>div{
+
+	.char-group > div {
 		height: 358px;
 	}
 
-	.refresh{
+	.refresh {
 		display: inline-block;
 		vertical-align: middle;
 		margin-left: 5px;

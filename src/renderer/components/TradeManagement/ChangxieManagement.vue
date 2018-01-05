@@ -86,42 +86,22 @@
 		                key:'tel'
 	                },
 	                {
-	                    title:'查看',
+	                    title:'操作',
                         align:'center',
 		                key:'ck',
                          render: (h, params) => {
-                            return h('div', [
-                                h('span', {
-                                     attrs:{
-                                    class:'iconfont icon-zhuzhuangtutubiao'
-                                    },
+                            return  h('span', {
                                     style: {
-                                        marginRight: '10px',
-                                        cursor:'pointer'
+                                        cursor:'pointer',
+                                        color: '#4fa8f9 ',
                                     },
                                     on: {
                                         click: () => {
                                             console.log(params.index)
-                                            this.gotoZonglan()
+                                            this.gotoChangXie()
                                         }
                                     }
-                                }, ''),
-                                h('span', {
-                                    attrs:{
-                                    class:'iconfont icon-zhishufenxiyanpan'
-                                     },
-                                    style: {
-                                        marginRight: '0px',
-                                        cursor:'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            console.log(params.index);
-                                            this.gotoZhishu()
-                                        }
-                                    }
-                                }, '')
-                            ])
+                                }, '查看')
                         }
 	                }
 	            ],
@@ -278,16 +258,14 @@
                 this.msg = '当前页码：' + data
             },
             yearSelect(year){
-                this.year = year
+                this.year = year;
+                this.doAjax();
             },
             drawChart() {
                 this.cxChart.setOption(this.chartOption)
             },
-            gotoZonglan(){
-                this.$router.push('/client-zonglan');
-            },
-            gotoZhishu(){
-                this.$router.push('/client-compare');
+            gotoChangXie(){
+                this.$router.push('/ChangxieContract');
             },
 	        qianyueList(page){
                 this.loading2 = true;
@@ -315,9 +293,18 @@
                 this.cxChart.showLoading();
                 this.$http.post(this.$api.CX_CHART,{com_id:this.$store.getters.com_id,year:this.year}).then(res=>{
                     console.log("长协统计图表",res);
+                    if(res.data.status === '1'){
                      this.cxChart.hideLoading();
-                    let data = res.data.data;
+                     let data = res.data.data;
                     let listData = res.data.monthstotal;
+                    for(let i =0;i<data.length;i++){
+                         for(let k in data[i].info[0]){
+                              if(data[i].info[0][k] == null){
+                                 data[i].info[0][k] = 0;
+                              }
+                         }
+                     }
+                     
                     // console.log(listData.annual_forecast.list);
                     var arr1 =[];
                     var arr2 =[];
@@ -346,30 +333,44 @@
                     this.chartData.yData = arr2;
                     console.log(this.chartData);
                     this.drawChart();
-                    arr3 =[listData.annual_forecast.list,listData.longpact.list,listData.lp_ratio];
-                    for(let k in arr3[0]){
-                        arr5.push(k);
-                    }
-                    console.log(2,arr5);
-                    arr3[0].name='年度预测合计（wkw）';
-                    arr3[1].name='长协合同总计（wkw）';
-                    arr4 = arr3[2];
-                    for(let i =0;i<arr4.length;i++){
-                        arr4[i] = Number(arr4[i]);
-                        total += arr4[i];
-                    }
-                    for(var i=0;i<arr5.length-1;i++){
-                        for(var j=0;j<arr4.length;j++){
-                            obj[arr5[i]] = arr4[j];
+                    if(listData.longpact == '' &&listData.lp_ratio == ''){
+                          listData.longpact = {name:'长协合同总计（wkw）',month01:0,month02:0, month03:0,month04:0,month05:0,month06:0, month07:0,month08:0,month09:0,month10:0, month11:0, month12:0,total:0};
+                          listData.lp_ratio = {name:'长协比例（%）',month01:0,month02:0, month03:0,month04:0,month05:0,month06:0, month07:0,month08:0,month09:0,month10:0, month11:0, month12:0,total:0}
+                          for(let k in listData.annual_forecast.list){
+                             if(listData.annual_forecast.list[k] == null || ''){
+                                 listData.annual_forecast.list[k] = 0;
+                             }
+                          }
+                           listData.annual_forecast.list.name = '年度预测合计（wkw）';
+                           arr3 = [listData.annual_forecast.list,listData.longpact,listData.lp_ratio];
+                           this.data5 = arr3;
+                     }else{
+                          arr3 =[listData.annual_forecast.list,listData.longpact.list,listData.lp_ratio];
+                              for(let k in arr3[0]){
+                                   arr5.push(k);
+                              }
+                          console.log(2,arr5);
+                          arr3[0].name='年度预测合计（wkw）';
+                          arr3[1].name='长协合同总计（wkw）';
+                          arr4 = arr3[2];
+                          for(let i =0;i<arr4.length;i++){
+                                arr4[i] = Number(arr4[i]);
+                                total += arr4[i];
+                           }
+                         for(let i=0;i<arr5.length-1;i++){
+                                  obj[arr5[i]] = arr4[i];
                         }
-                    }
-                    obj.name='长协比例（%）';
-                    obj.total=total;
-                    arr3[2] = obj;
-                    // console.log(obj);
-                    console.log(arr3,1);
-                    this.data5=arr3;
+                         obj.name='长协比例（%）';
+                         obj.total=total.toFixed(4);
+                         arr3[2] = obj;
+                         // console.log(obj);
+                         console.log(arr3,1);
+                         this.data5=arr3;
+                     }
                     this.loading=false;
+                    }else{
+
+                    }  
 
                 },err=>{
                     this.loading=false;
@@ -415,7 +416,7 @@
 			<Card class="relative">
 					<h3 slot="title">签约统计</h3>
 					<div slot="extra" class="btn-group">
-						<Button type="primary"  @click.native="$router.push('ContractManagement')">长协合同</Button>
+						<Button type="primary"  @click.native="$router.push('AddContractManagement')">+长协合同</Button>
 					</div>
 					<div style="height: 230px;">
 						<Table :columns="column2" :data="qyTable" :loading='loading2'></Table>
@@ -471,9 +472,5 @@
 	}
 	.fenYe ul {
 		display: inline-block;
-	}
-	.fenYe button{
-		top: -12px;
-		left: 12px;
 	}
 </style>

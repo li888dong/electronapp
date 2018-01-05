@@ -82,7 +82,11 @@ ipcMain.on('show-window', () => {
 ipcMain.on('orignal-window', () => {
     mainWindow.unmaximize();
 });
+ipcMain.on('width-change',(event,arg)=>{
+    var size = screen.getPrimaryDisplay().workAreaSize;
+     event.returnValue = size.width;
 
+})
 app.on('ready', function()  {
   //autoUpdater.checkForUpdatesAndNotify();
   autoUpdater.checkForUpdatesAndNotify();

@@ -4,7 +4,7 @@
     export default {
         name: 'usermanager',
         data() {
-             const telphone = (rule, val, callback) => {
+            const telphone = (rule, val, callback) => {
                 console.log(val);
                 if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)) {
                     return callback(new Error("请输入正确的手机号！"));
@@ -13,10 +13,10 @@
                 }
             };
             return {
-                nowId:'',
-                checkModal:false,
-	            deleteModal:false,
-                status:0,
+                nowId: '',
+                checkModal: false,
+                deleteModal: false,
+                status: 0,
                 column1: [
                     {
                         title: '手机号码',
@@ -71,7 +71,7 @@
                                         on: {
                                             click: () => {
                                                 this.deleteModal = true;
-                                                this.nowId = params.row.id; 
+                                                this.nowId = params.row.id;
                                             }
                                         }
                                     }, '删除'),
@@ -103,7 +103,7 @@
                                             click: () => {
                                                 this.deleteModal = true;
                                                 this.nowId = params.row.id
-                                                
+
                                             }
                                         }
                                     }, '删除'),
@@ -114,20 +114,25 @@
                     },
                 ],
                 tableData: [],
-                limit:14,
-                totalPage:0,
-                currentPage:1,
-                loading:false,
-                addModal:false,
-                unModal:false,
-                formItem:{
-                     fullname:'',
-                     mobile:''
+                limit: 14,
+                totalPage: 0,
+                currentPage: 1,
+                loading: false,
+                addModal: false,
+                unModal: false,
+                formItem: {
+                    fullname: '',
+                    mobile: ''
                 },
-                ruleValidate:{
-                     fullname:[{required: true, message: '内容不能为空', trigger: 'blur'}],
-                     mobile:[{required: true, message: '内容不能为空', trigger: 'blur'},{type: 'string', min: 11, message: '手机号必须为11位！', trigger: 'blur' },
-                     {validator: telphone, trigger: 'blur'}]
+                ruleValidate: {
+                    fullname: [{required: true, message: '内容不能为空', trigger: 'blur'}],
+                    mobile: [{required: true, message: '内容不能为空', trigger: 'blur'}, {
+                        type: 'string',
+                        min: 11,
+                        message: '手机号必须为11位！',
+                        trigger: 'blur'
+                    },
+                        {validator: telphone, trigger: 'blur'}]
                 }
             }
         },
@@ -147,31 +152,35 @@
         methods: {
             userManage() {
                 this.loading = true;
-                this.$http.post(this.$api.CLIENT_MANAGE, {cus_id:this.$store.getters.cus_id,page:this.currentPage,limit:this.limit}).then(res => {
+                this.$http.post(this.$api.CLIENT_MANAGE, {
+                    cus_id: this.$store.getters.cus_id,
+                    page: this.currentPage,
+                    limit: this.limit
+                }).then(res => {
                     console.log("用户管理", res);
-                    if(res.data.status==='1'){
-                         this.tableData = res.data.data.data;
-                         this.totalPage = res.data.data.total;
-                         this.currentPage = res.data.data.current_page;
-                         this.loading = false;
-                    }else{
-                        this.tableData=[];
-                        this.totalPage=0,
-                        this.currentPage=1,
-                        this.loading= false;
+                    if (res.data.status === '1') {
+                        this.tableData = res.data.data.data;
+                        this.totalPage = res.data.data.total;
+                        this.currentPage = res.data.data.current_page;
+                        this.loading = false;
+                    } else {
+                        this.tableData = [];
+                        this.totalPage = 0,
+                            this.currentPage = 1,
+                            this.loading = false;
                     }
                 }, err => {
-                    this.loading= false;
+                    this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
-                    this.loading= false;
+                    this.loading = false;
                     this.$api.errcallback(err);
                 })
             },
             userCheck() {
-                this.$http.post(this.$api.CLIENT_CHECK,{id:this.nowId,status:this.status}).then(res => {
+                this.$http.post(this.$api.CLIENT_CHECK, {id: this.nowId, status: this.status}).then(res => {
                     console.log("审核用户信息", res);
-	                this.userManage();
+                    this.userManage();
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -179,7 +188,7 @@
                 })
             },
             userDelete() {
-                this.$http.delete(this.$api.CLIENT_DELECT_USER +this.nowId).then(res => {
+                this.$http.delete(this.$api.CLIENT_DELECT_USER + this.nowId).then(res => {
                     console.log("删除成功", res);
                     this.userManage();
                 }, err => {
@@ -188,33 +197,37 @@
                     this.$api.errcallback(err);
                 })
             },
-            pageChange(value){
-                 this.loading = true;
-                this.$http.post(this.$api.CLIENT_MANAGE, {pid: 1,page:value,limit:this.limit}).then(res => {
+            pageChange(value) {
+                this.loading = true;
+                this.$http.post(this.$api.CLIENT_MANAGE, {pid: 1, page: value, limit: this.limit}).then(res => {
                     console.log("用户管理", res);
-                    if(res.data.status === '1'){
-                         this.tableData = res.data.data.data;
-                         this.totalPage = res.data.data.total;
-                         this.currentPage = res.data.data.current_page;
-                         this.loading = false;
-                    }else{
-                        this.loading= false;
+                    if (res.data.status === '1') {
+                        this.tableData = res.data.data.data;
+                        this.totalPage = res.data.data.total;
+                        this.currentPage = res.data.data.current_page;
+                        this.loading = false;
+                    } else {
+                        this.loading = false;
                     }
                 }, err => {
-                    this.loading= false;
+                    this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
-                    this.loading= false;
+                    this.loading = false;
                     this.$api.errcallback(err);
                 })
             },
-            userAdd(){
-                this.$http.post(this.$api.CLIENT_ADD_USER,{cus_id:this.$store.getters.cus_id,fullname:this.formItem.fullname,mobile:this.formItem.mobile}).then(res=>{
-                    console.log('添加新用户',res);
+            userAdd() {
+                this.$http.post(this.$api.CLIENT_ADD_USER, {
+                    cus_id: this.$store.getters.cus_id,
+                    fullname: this.formItem.fullname,
+                    mobile: this.formItem.mobile
+                }).then(res => {
+                    console.log('添加新用户', res);
                     this.userManage();
-                },err=>{
+                }, err => {
                     this.$api.errcallback(err);
-                }).catch(err=>{
+                }).catch(err => {
                     this.$api.errcallback(err);
                 })
             }
@@ -228,18 +241,19 @@
 	<div class="client-container relative">
 		<Card>
 			<h3 slot="title">用户管理</h3>
-            <div slot='extra' class="btn_group">
-                <Button type="primary" @click='addModal=true'>新增用户</Button>
-            </div>
-			<div class="table-container">
-				<Table :columns="column1" :data="tableData" :loading ='loading'></Table>
+			<div slot='extra' class="btn_group">
+				<Button type="primary" @click='addModal=true'>新增用户</Button>
 			</div>
-            <div class="page-center">
-        <!--分页-->
-        <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
-        </div>
-      </div>
+			<div class="table-container">
+				<Table :columns="column1" :data="tableData" :loading='loading'></Table>
+			</div>
+			<div class="page-center">
+				<!--分页-->
+				<div class="fenYe">
+					<Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator
+					      v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
+				</div>
+			</div>
 		</Card>
 		<Modal
 				v-model="unModal"
@@ -247,71 +261,77 @@
 				@on-cancel="unModal=false">
 			<p>确定要将该用户激活？</p>
 		</Modal>
-        <Modal
-                v-model="checkModal"
-                @on-ok="userCheck"
-                @on-cancel="checkModal=false">
-            <p>确定要将该用户禁用？</p>
-        </Modal>
+		<Modal
+				v-model="checkModal"
+				@on-ok="userCheck"
+				@on-cancel="checkModal=false">
+			<p>确定要将该用户禁用？</p>
+		</Modal>
 		<Modal
 				v-model="deleteModal"
 				@on-ok="userDelete"
 				@on-cancel="deleteModal=false">
 			<p>确定要将该用户删除？</p>
 		</Modal>
-        <Modal
-                v-model="addModal"
-                @on-ok="userAdd"
-                @on-cancel="addModal=false"
-                class-name="vertical-center-modal"
-                width='400'>
-            <h3 slot='header'>新增用户</h3>
-             <Form :model="formItem" :label-width="80" :rules="ruleValidate" ref="formItem">
-                <FormItem label='姓名：' prop='fullname'>
-                <Input class='width_200' v-model='formItem.fullname' placeholder='请输入姓名'></Input>
-                </FormItem>
-                 <FormItem label='手机号：' prop='mobile'>
-                <Input class='width_200' v-model='formItem.mobile' placeholder='请输入手机号'></Input>
-                </FormItem>
-             </Form>
-        </Modal>
-        
+		<Modal
+				v-model="addModal"
+				@on-ok="userAdd"
+				@on-cancel="addModal=false"
+				class-name="vertical-center-modal"
+				width='400'>
+			<h3 slot='header'>新增用户</h3>
+			<Form :model="formItem" :label-width="80" :rules="ruleValidate" ref="formItem">
+				<FormItem label='姓名：' prop='fullname'>
+					<Input class='width_200' v-model='formItem.fullname' placeholder='请输入姓名'></Input>
+				</FormItem>
+				<FormItem label='手机号：' prop='mobile'>
+					<Input class='width_200' v-model='formItem.mobile' placeholder='请输入手机号'></Input>
+				</FormItem>
+			</Form>
+		</Modal>
+
 	</div>
 </template>
 <style scoped>
 	.table-container {
 		height: 780px;
 	}
-    .relative .page-center{
-    text-align: center;
-    position: absolute;
-    bottom:0px;
-    left:0;
-    right:0;
-  }
-  /* 分页的样式 */
-  .page-center  .fenYe {
-    width: 100%;
-    height: 60px;
-    background-color: #fff;
-    padding-top: 10px;
-    text-align: center;
-  }
-  .fenYe table{
-    border: 0;
-  }
-  .fenYe ul {
-    display: inline-block;
-  }
-  /*.fenYe button{
-    top: -12px;
-    left: 12px;
-  }*/
-   .width_200{
-    width:200px;
-   }
-   .btn_group{
-    margin-top: -8px;
-    z-index: 999;
-   }
+
+	.relative .page-center {
+		text-align: center;
+		position: absolute;
+		bottom: 0px;
+		left: 0;
+		right: 0;
+	}
+
+	/* 分页的样式 */
+	.page-center .fenYe {
+		width: 100%;
+		height: 60px;
+		background-color: #fff;
+		padding-top: 10px;
+		text-align: center;
+	}
+
+	.fenYe table {
+		border: 0;
+	}
+
+	.fenYe ul {
+		display: inline-block;
+	}
+
+	/*.fenYe button{
+	  top: -12px;
+	  left: 12px;
+	}*/
+	.width_200 {
+		width: 200px;
+	}
+
+	.btn_group {
+		margin-top: -8px;
+		z-index: 999;
+	}
 </style>

@@ -108,9 +108,9 @@
                     </p>
                     <Button @click="handleSubmit" type="primary" long class="loginBtn">登录</Button>
                 </form>
-                <p class="login-tip">{{loginTip}}</p>
+                <!-- <p class="login-tip">{{loginTip}}</p> -->
             </div>
-            <p class="login-tip absolute" style="bottom: 0">&copy;河南易采</p>
+            <p class="login-tip absolute" style="bottom: 0;left:0;right:0">&copy;河南易采</p>
 
         </div>
 
@@ -157,7 +157,7 @@ export default {
         },
 //        注册新用户时的跳转页
         addUser(){
-            shell.openExternal('https://www.baidu.com');
+            shell.openExternal('http://web.cx8o92.cn/#/login');
         },
         //            用以关闭应用
         closeApp() {

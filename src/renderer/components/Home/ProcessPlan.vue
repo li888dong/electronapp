@@ -23,15 +23,17 @@
             this.$http.post(this.$api.PLAN_REMIND,{com_id:this.$store.getters.com_id})
                 .then(res => {
                     console.log('计划进度',res);
-                    this.planDate.bid_day = res.data[0].bid_day;
-                    this.planDate.fore_cycle_start = res.data[0].fore_cycle.split('\/')[0];
-                    this.planDate.fore_cycle_end = res.data[0].fore_cycle.split('\/')[1];
-                    this.planDate.decl_cycle_start = res.data[0].decl_cycle.split('\/')[0];
-                    this.planDate.decl_cycle_end = res.data[0].decl_cycle.split('\/')[1];
-                    this.planDate.cf_cycle_start = res.data[0].cf_cycle.split('\/')[0];
-                    this.planDate.cf_cycle_end = res.data[0].cf_cycle.split('\/')[1];
-                    this.planDate.biddays = res.data[0].biddays;
-                    this.planStatus = res.data.status
+                    if(res.data.status === '1'){
+                    	this.planDate.bid_day = res.data[0].bid_day;
+                        this.planDate.fore_cycle_start = res.data[0].fore_cycle.split('\/')[0];
+                        this.planDate.fore_cycle_end = res.data[0].fore_cycle.split('\/')[1];
+                        this.planDate.decl_cycle_start = res.data[0].decl_cycle.split('\/')[0];
+                        this.planDate.decl_cycle_end = res.data[0].decl_cycle.split('\/')[1];
+                        this.planDate.cf_cycle_start = res.data[0].cf_cycle.split('\/')[0];
+                        this.planDate.cf_cycle_end = res.data[0].cf_cycle.split('\/')[1];
+                        this.planDate.biddays = res.data[0].biddays;
+                        this.planStatus = res.data.status
+                    }
 
                 }, err => {
                     this.$api.errcallback(err)
@@ -141,5 +143,22 @@
 	.btn-group i{
 		font-weight:bold;
 		font-size: 20px;
+	}
+	@media (max-width: 1366px) {
+		#rili{
+			left: 140px;
+		}
+		.process-plan .count-down{
+			margin: 20px 0px 0 10px;
+		}
+		.process-plan .deadline{
+			width: 140px;
+			margin-left: -12px;
+		}
+		.process-plan .deadline .nowDate {
+		font-size: 14px;
+		font-weight: 200;
+		text-align: center;
+	}
 	}
 </style>

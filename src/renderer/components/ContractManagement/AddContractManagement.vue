@@ -1,19 +1,10 @@
 <script>
     import inputs from '@/components/ContractManagement/inputs'
     import MyUpload from '../Tool/upLoad.vue'
-
-
+    import {telphone} from '../../../../static/verification.js'
     export default {
         name: 'ContractManagement',
         data() {
-            const telphone = (rule,val,callback)=>{
-             console.log(val);
-             if(!/^1[3|4|5|8][0-9]\d{4,8}$/.test(val)){
-                return callback(new Error("输入的手机号格式不对"));
-             }else{
-               callback();
-             }
-        };
             return {
                 value: "",
                 dcList: [{
@@ -125,7 +116,7 @@
                     console.log("电厂列表", res);
                     var data = res.data;
                     console.log(data);
-                    if (data.status) {
+                    if (data.status==='1') {
                         var list = data[0];
                         var arr =[];
                         for (var i = 0; i < list.length; i++) {
@@ -154,7 +145,7 @@
                     console.log(this.powerId, this.formItem.powerplant);
                     this.$http.get(this.$api.POWER_PLANT_ADDRESS + this.powerId).then(res => {
                         console.log('电厂地址', res);
-                        if (res.data.status) {
+                        if (res.data.status==='1') {
                             this.formItem.address = res.data[0].address;
                         }
                     }, err => {
@@ -175,11 +166,11 @@
                     if (!this.isEmpty(this.month)) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
                             console.log("电量分配", res);
-                            if (res.data.status) {
+                            if (res.data.status==='1') {
                                 this.formItem.d_id = res.data.id;
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
                                     console.log('修改长协合同', res);
-                                    if (res.data.status && !this.isGo) {
+                                    if (res.data.status==='1' && this.isGo) {
                                         this.$router.push('/ChangxieContract');
                                     } else {
                                         this.success();
@@ -224,7 +215,7 @@
                                 this.formItem.d_id = res.data.id;
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
                                     console.log('添加长协合同', res);
-                                    if (res.data.status) {
+                                    if (res.data.status==='1') {
                                         if(this.isGo){
                                             this.$router.push('/ChangxieContract');
                                         }else{
@@ -725,6 +716,12 @@
 		margin-top: 10px;
 		margin-left: 10px;
 	}
+    @media (max-width: 1366px) {
+        .ContractBox-main form{
+            padding-left: 14%;
+            padding-right: 12%;
+        }
+    }
 </style>
 
 

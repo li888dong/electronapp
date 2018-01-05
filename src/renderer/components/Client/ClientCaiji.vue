@@ -3,10 +3,10 @@
         name: 'caiji',
         data() {
             return {
-                terminalList:[],
-                currentPDS:0,
+                terminalList: [],
+                currentPDS: 0,
                 powerType: '综合',
-                origratio:'',
+                origratio: '',
                 columnzh: [
                     {
                         title: '采集时间',
@@ -49,7 +49,7 @@
                     {
                         title: '费率',
                         key: 'rate',
-	                    width:60
+                        width: 60
                     },
                     {
                         title: '正向无功总（示数）',
@@ -208,71 +208,74 @@
                         key: 'power_factorall'
                     },
                 ],
-	            zhData:[],
-	            dianliangData:[],
-	            dianliuData:[],
-	            dianyaData:[],
-	            gonglvData:[],
-	            yinshuData:[],
-                limit:13,
-                currentPage:1,
-                totalPages:0,
-                typeNum:0,
-                type:'综合',
-                loading:false,
-                clientid:''
+                zhData: [],
+                dianliangData: [],
+                dianliuData: [],
+                dianyaData: [],
+                gonglvData: [],
+                yinshuData: [],
+                limit: 13,
+                currentPage: 1,
+                totalPages: 0,
+                typeNum: 0,
+                type: '综合',
+                loading: false,
+                clientid: ''
             }
         },
         methods: {
             pageListen: function (data) {
                 this.msg = '当前页码：' + data
             },
-            changeSelect(pds,id,clientid) {
-                 this.currentPDS = pds;
-                 this.clientid = clientid;
-                 switch(this.typeNum){
+            changeSelect(pds, id, clientid) {
+                this.currentPDS = pds;
+                this.clientid = clientid;
+                this.currentPage =1;
+                this.$store.dispatch('setClientId',clientid)
+                switch (this.typeNum) {
                     case 0:
-                     this.type = '综合';
-                     break;
-                     case 1:
-                      this.type = '电量';
-                      break;
-                      case 2:
-                      this.type = '电流';
-                      break;
-                      case 3:
-                      this.type = '电压';
-                      break;
-                      case 4:
-                      this.type = '功率';
-                      break;
-                      case 5:
-                      this.type = '功率因数';
-                      break;
+                        this.type = '综合';
+                        break;
+                    case 1:
+                        this.type = '电量';
+                        break;
+                    case 2:
+                        this.type = '电流';
+                        break;
+                    case 3:
+                        this.type = '电压';
+                        break;
+                    case 4:
+                        this.type = '功率';
+                        break;
+                    case 5:
+                        this.type = '功率因数';
+                        break;
                 }
-                 this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
+                this.loading = true;
+                this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
                     cus_id: this.cus_id,
                     clientid: this.clientid,
                     type: this.typeNum,
-                    limit:this.limit,
-                    page:this.currentPage
+                    limit: this.limit,
+                    page: this.currentPage
                 }).then(res => {
                     console.log("终端采集记录", res);
                     let data = res.data.data;
                     this.origratio = res.data.origratio;
                     this.totalPages = data.total;
-                        this.currentPage = data.current_page
-                    if (this.type === '综合'){
-                        this.zhData = data.data;    
-                    } else if (this.type === '电量'){
+                    this.currentPage = data.current_page
+                    if (this.type === '综合') {
+                        this.zhData = data.data;
+                    } else if (this.type === '电量') {
                         this.dianliangData = data.data;
-                    }else if (this.type === '电流'){
+                    } else if (this.type === '电流') {
                         this.dianliuData = data.data;
-                    }else if (this.type === '电压'){
+                    } else if (this.type === '电压') {
                         this.dianyaData = data.data;
-                    }else if (this.type === '功率'){
+                    } else if (this.type === '功率') {
                         this.gonglvData = data.data;
-                    }else if (this.type === '功率因数'){
+                    } else if (this.type === '功率因数') {
                         this.yinshuData = data.data;
                     }
                     this.loading = false;
@@ -299,7 +302,6 @@
             },
             terminalCollectRecord(type) {
                 this.currentPage = 1;
-                this.currentPDS = 0;
                 // let typeNum = 0;
                 switch (type) {
                     case "综合":
@@ -326,25 +328,25 @@
                     cus_id: this.cus_id,
                     clientid: this.$store.getters.clientid,
                     type: this.typeNum,
-                    limit:this.limit,
-                    page:this.currentPage
+                    limit: this.limit,
+                    page: this.currentPage
                 }).then(res => {
                     console.log("终端采集记录", res);
                     let data = res.data.data;
-	                this.origratio = res.data.origratio;
+                    this.origratio = res.data.origratio;
                     this.totalPages = data.total;
-                        this.currentPage = data.current_page
-                    if (type === '综合'){
-                        this.zhData = data.data;    
-                    } else if (type === '电量'){
+                    this.currentPage = data.current_page
+                    if (type === '综合') {
+                        this.zhData = data.data;
+                    } else if (type === '电量') {
                         this.dianliangData = data.data;
-                    }else if (type === '电流'){
+                    } else if (type === '电流') {
                         this.dianliuData = data.data;
-                    }else if (type === '电压'){
+                    } else if (type === '电压') {
                         this.dianyaData = data.data;
-                    }else if (type === '功率'){
+                    } else if (type === '功率') {
                         this.gonglvData = data.data;
-                    }else if (type === '功率因数'){
+                    } else if (type === '功率因数') {
                         this.yinshuData = data.data;
                     }
                     this.loading = false;
@@ -356,51 +358,51 @@
                     this.$api.errcallback(err);
                 })
             },
-            pageChange(value){
-                switch(this.typeNum){
+            pageChange(value) {
+                switch (this.typeNum) {
                     case 0:
-                     this.type = '综合';
-                     break;
-                     case 1:
-                      this.type = '电量';
-                      break;
-                      case 2:
-                      this.type = '电流';
-                      break;
-                      case 3:
-                      this.type = '电压';
-                      break;
-                      case 4:
-                      this.type = '功率';
-                      break;
-                      case 5:
-                      this.type = '功率因数';
-                      break;
+                        this.type = '综合';
+                        break;
+                    case 1:
+                        this.type = '电量';
+                        break;
+                    case 2:
+                        this.type = '电流';
+                        break;
+                    case 3:
+                        this.type = '电压';
+                        break;
+                    case 4:
+                        this.type = '功率';
+                        break;
+                    case 5:
+                        this.type = '功率因数';
+                        break;
                 }
                 this.loading = true;
                 this.$http.post(this.$api.CLIENT_TERMINAL_RECORD, {
                     cus_id: this.cus_id,
                     clientid: this.$store.getters.clientid,
                     type: this.typeNum,
-                    limit:this.limit,
-                    page:value
+                    limit: this.limit,
+                    page: value
                 }).then(res => {
                     console.log("终端采集记录", res);
                     let data = res.data.data;
                     this.origratio = res.data.origratio;
                     this.totalPages = data.total;
                     this.currentPage = data.current_page;
-                    if (this.type === '综合'){
+                    if (this.type === '综合') {
                         this.zhData = data.data;
-                    } else if (this.type === '电量'){
+                    } else if (this.type === '电量') {
                         this.dianliangData = data.data;
-                    }else if (this.type === '电流'){
+                    } else if (this.type === '电流') {
                         this.dianliuData = data.data;
-                    }else if (this.type === '电压'){
+                    } else if (this.type === '电压') {
                         this.dianyaData = data.data;
-                    }else if (this.type === '功率'){
+                    } else if (this.type === '功率') {
                         this.gonglvData = data.data;
-                    }else if (this.type === '功率因数'){
+                    } else if (this.type === '功率因数') {
                         this.yinshuData = data.data;
                     }
                     this.loading = false;
@@ -411,22 +413,27 @@
                     this.loading = false;
                     this.$api.errcallback(err);
                 })
-               
+
             }
         },
-	    computed:{
-           cus_id:function(){
-             return this.$store.getters.cus_id;
-           }
-	    },
-        watch:{
-            cus_id:function(){
+        computed: {
+            cus_id: function () {
+                return this.$store.getters.cus_id;
+            }
+        },
+        watch: {
+            cus_id: function () {
                 this.clientTerminalList();
                 // this.pageChange();
             }
         },
         beforeMount() {
             this.clientTerminalList();
+        },
+        mounted(){
+            if(this.$route.query.index){
+                 this.currentPDS = this.$route.query.index;
+            }
         }
     }
 </script>
@@ -510,7 +517,8 @@
 
 			<div class="page-container">
 
-				<Page :total="totalPages" :page-size='limit' :current='currentPage' show-elevator show-total v-on:on-change='pageChange'></Page>
+				<Page :total="totalPages" :page-size='limit' :current='currentPage' show-elevator show-total
+				      v-on:on-change='pageChange'></Page>
 			</div>
 
 		</Card>
@@ -526,6 +534,7 @@
 	.btn-group {
 		margin-top: -8px;
 	}
+
 	.tab-container span {
 		margin-right: 5px;
 	}

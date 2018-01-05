@@ -10,37 +10,42 @@ export default {
                 {
                     "sortable": true,
                     title: '逻辑地址',
-                    key: 'clientid'
+                    key: 'clientid',
                 },
                 {
                     "sortable": true,
                     title: '生产厂家',
+                    width: '160',
                     key: 'factory'
                 },
                 {
                     "sortable": true,
                     title: '登陆IP：端口',
-                    key: 'port'
+                    key: 'port',
+                    width:'125'
                 },
                 { 
                     title: '最新上线时间',
                     key: 'on_time',
-                    width:'200'
+                    width:'160'
                 },
                 {
                     "sortable": true,
                     title: '当前在线时长',
-                    key: 'cur_on_time'
+                    key: 'cur_on_time',
+                     width:'135'
                 },
                 {
                     "sortable": true,
                     title: '合计在线时长',
-                    key: 'all_on_time'
+                    key: 'all_on_time',
+                     width:'135'
                 },
                 {
                     "sortable": true,
                     title: '当前状态',
                     key: 'status',
+                    width:'110',
                     render:(h,params)=>{
                         if(params.row.status == 1){
                             return h('span',{},'在线')
@@ -52,17 +57,17 @@ export default {
                 {
                     title: '掉线时间',
                     key: 'off_time',
-                    width:'200'
+                    width:'155'
                 },
                 {
                     "sortable": true,
                     title: '采集成功率',
-                    key: 'succeed_ratio'
+                    key: 'succeed_ratio',
                 },
                 {
                     "sortable": true,
                     title: '上报比例',
-                    key: 'report_ratio'
+                    key: 'report_ratio',
                 },              
             ],
             data1: [],
@@ -113,10 +118,11 @@ export default {
                 this.loading = true;
                 this.$http.post(this.$api.EQUIPMENT_INFO,{clientid:this.$route.query.id}).then(res=>{
                      console.log("设备详情",res);
-                     if(res.data.status){
+                     if(res.data.status === '1'){
                          this.data1 = res.data.data;
                          this.loading = false;
                      }else{
+                          this.data1 = [] ;
                           this.loading = false;
                      }
                 },err=>{
@@ -126,16 +132,16 @@ export default {
                      this.loading = false;
                      this.$api.errcallback(err);
                 })
-
             }else{
-                  this.loading = true;
-                 this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
+                this.loading = true;
+                this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:''}).then(res=>{
                 console.log("设备统计日志",res);
-                if(res.data.status){
+                if(res.data.status ==='1'){
                     this.data1 = res.data.data.data;
                     this.totalPage = res.data.data.total;
                     this.loading = false;
                 }else{
+                    this.data1 = [] ;
                     this.loading = false;
                 }
             },err=>{
@@ -147,14 +153,15 @@ export default {
           }
         },
         pageChange(value){
-            this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+            this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:value,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
                 console.log("设备统计日志",res);
-                if(res.data.status){
+                if(res.data.status ==='1'){
                     this.data1 = res.data.data.data;
                     this.totalPage = res.data.data.total;
                     this.currentPage = res.data.data.current_page;
                     this.loading = false;
                 }else{
+                    this.data1 = [] ;
                     this.loading = false;
                 }
             },err=>{
@@ -168,7 +175,7 @@ export default {
              this.loading = true;
                  this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
                 console.log("设备统计日志",res);
-                if(res.data.status){
+                if(res.data.status==='1'){
                     this.data1 = res.data.data.data;
                     this.totalPage = res.data.data.total;
                     this.loading = false;
@@ -181,7 +188,25 @@ export default {
             }).catch(err=>{
                 this.$api.errcallback(err);
             })
+        },
+        isOnline(value){
+            if(value){
+                this.loading = true;
+                var arr = this.data1;
+                var arr2 = [];
+                for(let i =0;i<arr.length;i++){
+                    if(arr[i].status === 0){
+                       arr2.push(arr[i]);
+                    }else{
+                    this.data1=[];
+                    }
+                }
+                this.data1 = arr2;
+                this.loading = false;
+            }else{
+             this.equipmentInfo();
         }
+       }
     },
     watch:{
         com_id:function(){
@@ -199,6 +224,7 @@ export default {
     },
     mounted(){
         this.equipmentInfo();
+
     }
 }
 </script>
@@ -218,7 +244,7 @@ export default {
                     <div class="search"><mySearch placeholder="请输入逻辑地址" swidth="340"  v-on:doSearch="searchMethods"></mySearch></div>
                 </div>
                 <div class="viewOffline">
-                    <Checkbox label="Eat"></Checkbox>
+                    <Checkbox label="Eat" v-on:on-change='isOnline'></Checkbox>
                     仅显示已掉线设备
                     <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentInfo()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
 

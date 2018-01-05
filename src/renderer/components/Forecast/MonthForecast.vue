@@ -45,7 +45,8 @@ export default {
                     width: '200',
                     title: '企业名称',
                     key: 'cus_name',
-                    align: 'left'
+                    align: 'left',
+                    width:230
                 },
                 {
                     width: '100',
@@ -92,7 +93,7 @@ export default {
                        },'查看')
                     }
                 },{
-                    title: '月度预测(万kW-h)',
+                    title: '月度预测(万kW-h)', 
                     key: 'p_predict',
                     align: 'center'
                 },
@@ -111,7 +112,7 @@ export default {
                 {
                     title: '状态',
                     key: 'n17',
-                    aligin:'left',
+                    align: 'center',
                     render: (h, params) => {
                         let status0 = params.row.status ===0;
                         let status1 = params.row.status ===1;
@@ -216,7 +217,7 @@ export default {
             })
         },
         monthSelect(month) {
-            this.selectYear = month;
+            this.selectMonth = month;
             console.log(this.selectMonth);
             this.monthData()
         },
@@ -237,7 +238,7 @@ export default {
                 i.status = parseInt(i.status);
                 postArr.push({
                     cus_id:i.cus_id,
-                    month:_this.selectYear,
+                    month:_this.selectMonth,
                     type:i.status
                 })
 
@@ -245,7 +246,7 @@ export default {
             console.log(postArr);
             this.$http.post(this.$api.MONTH_CONFIRM, {data:postArr}).then(res => {
                 console.log("月度预测确认", res);
-                if(res.data.status){
+                if(res.data.status==='1'){
                     this.monthData();
                 }
             }, err => {
@@ -282,21 +283,10 @@ export default {
                      total += usernos[i].p_predict;
                 }
                 console.log(total);
-                // data = [1,12];
-                // postArr = [this.tableData1[_this.modifyIndex].cus_id,data1,total,this.tableData1[_this.modifyIndex].usernos[0].month]
-                 // postArr.push([this.tableData1[_this.modifyIndex].cus_id,data1,total,this.tableData1[_this.modifyIndex].usernos[0].month]);
-                // postArr.push({
-                    
-                //     cus_id:this.tableData1[_this.modifyIndex].cus_id,
-                //     data:data1,
-                //     total:total,
-                //     month:this.tableData1[_this.modifyIndex].usernos[0].month
-
-                // })
             this.$http.post(this.$api.MONTH_MODIFY,{cus_id:this.tableData1[_this.modifyIndex].cus_id,data:data,total:total,month:this.tableData1[_this.modifyIndex].usernos[0].month}).then(res => {
                 console.log("月度预测修改", res);
-                if(res.data.status){
-                    this.monthData;
+                if(res.data.status==='1'){
+                    this.monthData();
                 }
             }, err => {
                 this.$api.errcallback(err);
@@ -354,6 +344,7 @@ export default {
                 <Page
                         :total="totalPage"
                         :current="currentPage"
+                        :page-size ='limit'
                         show-total
                         show-elevator
                         v-on:on-change="pageChange"
@@ -378,7 +369,7 @@ export default {
                 </Row>
                 <Row class='qiye'>
                     <Row  class='qiyeBox'>
-                    <Col span='12'>{{tableData1[modifyIndex].cus_name}}</Col>
+                    <Col span='12' style='overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>{{tableData1[modifyIndex].cus_name}}</Col>
                     <Col span='6'>{{tableData1[modifyIndex].city}}</Col>
                     <Col span='6'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
                     </Row>
@@ -389,12 +380,12 @@ export default {
                     <tr>
                         <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
                         <td>企业申报合计: {{tableData1[modifyIndex].declare}}</td>
-                        <td>人工预测合计: {{tableData1[modifyIndex].forecast}} <br>
-                        <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox></td>
+                        <td>人工预测合计: {{tableData1[modifyIndex].p_predict}} <!-- <br>
+                        <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox> --></td>
                     </tr>
                     <tr v-for='item in tableData1[modifyIndex].usernos' :data-id='item.id'>
                         <td >{{item.user_no}}:<span class="num">{{item.sy_predict}}</span></td>
-                        <td>{{item.user_no}}:<span class="num">{{item.p_predict}}</span></td>
+                        <td>{{item.user_no}}:<span class="num">{{item.declare_power}}</span></td>
                         <td>{{item.user_no}}:<input type="text" placeholder="-" class="updateNum" value=''></td>
                     </tr>
                 </table>
@@ -445,8 +436,7 @@ export default {
      left:0;
 }
 .qiye{
-    height:90%;
-    /*padding-top: 50%;*/
+    height:80%;
 }
 .qiyeBox{
     position: absolute;

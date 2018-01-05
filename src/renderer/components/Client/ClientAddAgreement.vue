@@ -13,7 +13,7 @@
                 }
             };
             return {
-                cus_id:'',
+                cus_id: '',
                 htfs: '',
                 file: '',
                 bol: false,
@@ -232,7 +232,7 @@
 
                                 }).then(res => {
                                     console.log('修改成功', res);
-                                    if (res.data.status) {
+                                    if (res.data.status==='1') {
                                         for (let key in this.addList) {
                                             this.addList[key] = '';
                                         }
@@ -380,7 +380,7 @@
                         address: data1.yddz
                     }).then(res => {
                         console.log('用户户号添加', res);
-                        if (res.data.status) {
+                        if (res.data.status==='1') {
                             console.log(res.data.id);
                             data1["id"] = res.data.id;
                             this.data1.push(data1);
@@ -431,7 +431,7 @@
                         clearTimeout(timer2);
                     }
                 }, 3000);
-            }, 
+            },
             disappear() {
                 let _this = this;
                 let timer3 = setTimeout(function () {
@@ -440,7 +440,7 @@
                         clearTimeout(timer3);
                     }
                 }, 3000);
-            },  
+            },
             cancel() {
                 this.modal2 = false;
             },
@@ -448,13 +448,16 @@
                 if (value === true) {
                     this.$http.post(this.$api.CLIENT_BASIC_INFO, {cus_id: this.cus_id}).then(res => {
                         console.log('用户基本信息', res);
-                        this.address1 = res.data.data.province;
+                        if(res.data.status==='1'){
+                              this.address1 = res.data.data.province;
                         this.address2 = res.data.data.city;
                         this.address3 = res.data.data.county;
                         this.defaultAddress = 'true';
                         this.addTableList.yddz = [this.address1, this.address2, this.address3];
                         console.log(this.addTableList.yddz);
                         this.addTableList.stree = res.data.data.address;
+                        }
+                      
                     }, err => {
                         this.$api.errcallback(err);
                     }).catch(err => {
@@ -486,7 +489,7 @@
                     address: address
                 }).then(res => {
                     console.log("修改", res);
-                    if (res.data.status) {
+                    if (res.data.status==='1') {
                         this.data1.splice(this.index, 1, data1);
                     }
                     this.addTableList.yddz = [];
@@ -506,7 +509,7 @@
             deleteUserNum(id, index) {
                 this.$http.post(this.$api.USER_NUM_DEL, {id: id}).then(res => {
                     console.log("删除", res);
-                    if (res.data.status) {
+                    if (res.data.status==='1') {
                         this.data1.splice(index, 1);
                     }
                 }, err => {
@@ -606,10 +609,10 @@
                 var input = div.getElementsByClassName('ivu-input')[0];
                 input.readOnly = true;
                 // console.log(this.$route.query.cus_id)
-                this.cus_id = this.$route.query.cus_id||this.$store.getters.cus_id;
             } else {
                 this.addList.user_name = '';
             }
+            this.cus_id = this.$route.query.cus_id || this.$store.getters.cus_id;
             this.updateCompact();
         }
     }
@@ -661,7 +664,7 @@
 						<Input class="width-90" placeholder="输入服务费率" v-model='way_param10'></Input><span>/kw.h</span>
 					</div>
 					<div class="btn-save">
-						<Button type="primary" @click='saveBtn()'>保存</Button>
+						<Button :type="way===''?'primary':'default'" @click='saveBtn()'>保存</Button>
 						<span v-if='isKong' style="font-size: 12px;color:red;margin-left:5px;">内容不能为空</span>
 					</div>
 					<div style="height: 24px;line-height: 24px;color: #ccc;">
@@ -786,9 +789,9 @@
 						<Row>
 							<Col span='13'>
 							<FormItem prop='yddz'>
-								<al-selector level=2 class='address' data-type='name' v-model='addTableList.yddz'
+								<al-selector level=2  class='address' data-type='name' v-model='addTableList.yddz'
 								             v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz}}-{{addTableList.stree}}</p>
+								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
 							</FormItem>
 							</Col>
 							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">
@@ -874,9 +877,9 @@
 						<Row>
 							<Col span='13'>
 							<FormItem prop='yddz'>
-								<al-selector level=2    class='address' data-type='name' v-model='addTableList.yddz'
+								<al-selector level=2     class='address' data-type='name' v-model='addTableList.yddz'
 								             v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz}}-{{addTableList.stree}}</p>
+								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
 							</FormItem>
 							</Col>
 							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">

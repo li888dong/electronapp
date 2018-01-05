@@ -24,6 +24,8 @@
         },
 	    watch:{
             "$route": function () {
+            	this.$store.dispatch('setSearchKey','');
+            	this.$store.dispatch('setTermLinalKey','');
 	            console.log('路由变化');
 	            if (!this.$store.getters.access_token){
 	                this.$router.push('login')

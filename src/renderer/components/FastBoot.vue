@@ -290,6 +290,7 @@
 		bottom: 5px;
 		left: 5px;
 		font-size: 12px;
+		font-weight:400;
 		color: #fff;
 	}
 

@@ -248,7 +248,7 @@
                 console.log(postArr);
                 this.$http.post(this.$api.YEAR_CONFIRM, {data:postArr}).then(res => {
                     console.log("年度预测确认", res);
-                    if(res.data.status){
+                    if(res.data.status==='1'){
                         this.yearData();
                     }
                 }, err => {
@@ -364,7 +364,7 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal"
 				@on-ok="modifyData">
-			<div style="max-height: 600px;overflow-y: scroll">
+			<div style="max-height: 600px;overflow-y: scroll" class="yearUpdate">
 				<table v-if="modifyModal">
 					<thead>
 					<tr>

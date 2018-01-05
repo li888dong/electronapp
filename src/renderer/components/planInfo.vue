@@ -59,7 +59,7 @@
                 edit_fore_cycle:[],
                 edit_decl_cycle:[],
                 edit_cf_cycle:[],
-	            tableData:[],
+	            tableData:[{month:'暂未确定', bid_day:'暂未确定',fore_cycle:'暂未确定',decl_cycle:'暂未确定',cf_cycle:'暂未确定',status:'暂未确定'}],
                 planDate:{
                     bid_day: "",
                     fore_cycle_start: "",
@@ -124,8 +124,8 @@
                                     on: {
                                         click: () => {
                                             this.modal1 = true;
-                                            this.editMonth = params.row.n1;
-											console.log(params.row.n1)
+                                            this.editMonth = params.row.month;
+											console.log(params.row.month)
                                         }
                                     }
 
@@ -172,8 +172,10 @@
                     com_id:this.$store.getters.com_id
                 })
                     .then(res => {
+
                         console.log('获取计划进度',res.data);
-						this.tableData = [res.data[0]];
+                        if(res.data.status ==='1'){
+                             this.tableData = [res.data[0]];
                         this.planDate.bid_day = res.data[0].bid_day;
                         this.planDate.fore_cycle_start = res.data[0].fore_cycle.split('\/')[0];
                         this.planDate.fore_cycle_end = res.data[0].fore_cycle.split('\/')[1];
@@ -184,6 +186,17 @@
                         this.planDate.biddays = res.data[0].biddays;
                         this.planStatus = res.data.status;
                         this.planChart();
+                        }else{
+                             this.tableData = [{
+                                 month:'暂未确定',
+                                 bid_day:'暂未确定',
+                                 fore_cycle:'暂未确定',
+                                 decl_cycle:'暂未确定',
+                                 cf_cycle:'暂未确定',
+                                 status:'暂未确定'
+                             }]
+                        }
+						
                     }, err => {
                         this.planChart();
                         this.$api.errcallback(err)

@@ -11,11 +11,13 @@
                 fileName: '',
                 record: '',
                 visible: false,
-                uploadType:''
+                uploadType:'',
+                urlname:''
             }
         },
 	    mounted(){
-            this.uploadType = this.$route.query.type
+            this.uploadType = this.$route.query.type;
+            this.downloadname();
 	    },
 	    computed:{
 	        uploadUrl:function () {
@@ -51,6 +53,15 @@
                 this.$Message.info({
                     content: '上传中'
                 });
+            },
+            downloadname(){
+                if (this.uploadType === 'year'){
+		           this.urlname = '年度预测表.xlsx';
+		           console.log(this.urlname);
+		        }else if(this.uploadType === 'month'){
+                    this.urlname = '月度预测表.xlsx';
+                    console.log(this.urlname);
+                }
             }
         }
     }
@@ -79,14 +90,14 @@
 							<Input placeholder='请选择文件' class='file' v-model='fileName'></Input>
 							<a>选择文件</a>
 						</my-upload>
-						<p style="color:#ccc;line-height:20px;">导入文件格式必须选择文件格式为xls文件格式，且严格按照模版格式填写！<a href="#">下载模板</a></p>
+						<p style="color:#ccc;line-height:20px;">导入文件格式必须选择文件格式为xls文件格式，且严格按照模版格式填写！<a :href="'http://www.cx8o92.cn/download/'+ urlname">下载模板</a></p>
 					</FormItem>
 					<FormItem label="导入事件记录">
 						<Input v-model="record" type="textarea" readonly="true" :autosize="{minRows: 20,maxRows: 30}"></Input>
 					</FormItem>
 					<FormItem style="text-align: center;">
 						<Button type="primary" @click="beginUpload">开始导入</Button>
-						<Button type="ghost" style="margin-left: 30px">取消</Button>
+						<Button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</Button>
 					</FormItem>
 				</Form>
 			</div>

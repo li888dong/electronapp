@@ -1,22 +1,23 @@
 <script>
-	import MyTab from '@/components/Tool/MyTab'
+    import MyTab from '@/components/Tool/MyTab'
     import mySearch from '@/components/Tool/mySearch'
     import Panel from "../Tool/Panel.vue";
+
     export default {
-        name:'clientlist',
-        components:{
+        name: 'clientlist',
+        components: {
             Panel,
-            'my-tab':MyTab,
-	        'my-search':mySearch
+            'my-tab': MyTab,
+            'my-search': mySearch
         },
-        data(){
-            return{
-                spinShow:false,
-	            reqType:'',
-                currentCity:'all',
-	            currentPage:1,
-	            totalPage:0,
-	            pageLimit:13,
+        data() {
+            return {
+                spinShow: false,
+                reqType: '',
+                currentCity: 'all',
+                currentPage: 1,
+                totalPage: 0,
+                pageLimit: 13,
                 cityList: {
                     zz: {
                         name: '郑州',
@@ -91,11 +92,11 @@
                         count: '11'
                     }
                 },
-                cusList:{
+                cusList: {
                     tableData: [],
-                    pageData:{
-                        total:100,
-                        current:2
+                    pageData: {
+                        total: 100,
+                        current: 2
                     }
                 },
                 columns4: [
@@ -103,18 +104,18 @@
                         sortable: true,
                         title: '客户名称',
                         key: 'name',
-                        width:'300',
+                        width: '260',
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
 
                                     style: {
-                                        color:'#4fa8f9 ',
-                                        cursor:'pointer'
+                                        color: '#4fa8f9 ',
+                                        cursor: 'pointer'
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('client-zonglan',params);
+                                            this.gotoClientPage('client-zonglan', params);
                                         }
                                     }
                                 }, params.row.name)
@@ -164,19 +165,19 @@
                     {
                         title: '总览',
                         key: 'zonglan',
-                        width:60,
-                        render:(h,params)=>{
+                        width: 60,
+                        render: (h, params) => {
                             return h('span', {
-                                attrs:{
-                                    class:'iconfont icon-zhuzhuangtutubiao'
+                                attrs: {
+                                    class: 'iconfont icon-zhuzhuangtutubiao'
                                 },
                                 style: {
                                     marginRight: '5px',
-                                    cursor:'pointer'
+                                    cursor: 'pointer'
                                 },
                                 on: {
                                     click: () => {
-                                        this.gotoClientPage('client-zonglan',params)
+                                        this.gotoClientPage('client-zonglan', params)
                                     }
                                 }
                             }, '')
@@ -185,20 +186,20 @@
                     },
                     {
                         title: '指数',
-                        width:60,
+                        width: 60,
                         key: 'zhishu',
-                        render:(h,params)=>{
+                        render: (h, params) => {
                             return h('span', {
-                                attrs:{
-                                    class:'iconfont icon-zhishufenxiyanpan'
+                                attrs: {
+                                    class: 'iconfont icon-zhishufenxiyanpan'
                                 },
                                 style: {
                                     marginRight: '5px',
-                                    cursor:'pointer',
+                                    cursor: 'pointer',
                                 },
                                 on: {
                                     click: () => {
-                                        this.gotoClientPage('client-compare',params);
+                                        this.gotoClientPage('client-compare', params);
                                     }
                                 }
                             }, '')
@@ -214,24 +215,24 @@
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
-                                        color:'#4fa8f9 ',
-                                        cursor:'pointer'
+                                        color: '#4fa8f9 ',
+                                        cursor: 'pointer'
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('hetong',params)
+                                            this.gotoClientPage('hetong', params)
                                         }
                                     }
                                 }, '合同'),
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
-                                        color:'#4fa8f9 ',
-                                        cursor:'pointer'
+                                        color: '#4fa8f9 ',
+                                        cursor: 'pointer'
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('user-manager',params)
+                                            this.gotoClientPage('user-manager', params)
                                         }
                                     }
                                 }, '用户')
@@ -241,139 +242,143 @@
                 ],
             }
         },
-	    mounted(){
+        mounted() {
             this.clientList();
-	    },
-	    computed:{
-		    searchKey(){
-		        return this.$store.getters.searchKey
-		    }
-	    },
-	    watch:{
-
-	    },
-        methods:{
-            setcusList(res){
-                this.$store.dispatch('setcusList',res)
+        },
+        computed: {
+            searchKey() {
+                return this.$store.getters.searchKey
+            }
+        },
+        watch: {},
+        methods: {
+            setcusList(res) {
+                this.$store.dispatch('setcusList', res)
             },
-	        gotoClientPage(page,params){
-                this.$store.dispatch('setCusId',params.row.id);
-                this.$store.dispatch('setCusName',params.row.name);
+            gotoClientPage(page, params) {
+                this.$store.dispatch('setCusId', params.row.id);
+                this.$store.dispatch('setCusName', params.row.name);
                 this.$router.push(page);
-	        },
-            gotoAddUser(){
+            },
+            gotoAddUser() {
                 this.$router.push('/AddClient');
             },
-            changeSelect(city){
+            changeSelect(city) {
                 this.spinShow = true;
                 this.currentPage = 1;
                 this.currentCity = city;
                 this.reqType = 2;
-                if (this.currentCity ==='all'){
-	                this.clientList();
-	            }else {
-                    this.$http.post(this.$api.CLIENT_LIST,{
-                        com_id:this.$store.getters.com_id,
-                        type:this.reqType,
-                        area:this.currentCity,
-                        page:this.currentPage,
-                        limit:this.pageLimit
-                    }).then(res=>{
+                if (this.currentCity === 'all') {
+                    this.clientList();
+                } else {
+                    this.$http.post(this.$api.CLIENT_LIST, {
+                        com_id: this.$store.getters.com_id,
+                        type: this.reqType,
+                        area: this.currentCity,
+                        page: this.currentPage,
+                        limit: this.pageLimit
+                    }).then(res => {
                         this.spinShow = false;
-                        console.log('客户列表区域选择',res);
+                        console.log('客户列表区域选择', res);
                         let data = res.data[0].data;
                         this.totalPage = res.data[0].total;
                         this.currentPage = res.data[0].currentPage;
                         this.cusList.tableData = data;
                         this.setcusList(data);
-                    },err=>{
+                    }, err => {
                         this.spinShow = false;
-
+                        this.cusList.tableData = [];
                         this.$api.errcallback(err);
-                    }).catch(err=>{
+                    }).catch(err => {
                         this.spinShow = false;
+                        this.cusList.tableData = [];
                         this.$api.errcallback(err);
                     })
-	            }
+                }
 
 
             },
-            clientList(){
-	            this.spinShow = true;
-	            this.reqType = 0;
-                this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id,
-                    type:this.reqType,
-	                page:this.currentPage,
-	                limit:this.pageLimit
-                }).then(res=>{
-                    this.spinShow =false;
-                    console.log('客户列表默认',res);
+            clientList() {
+                this.spinShow = true;
+                this.reqType = 0;
+                this.currentCity ='all';
+                this.$http.post(this.$api.CLIENT_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    type: this.reqType,
+                    page: this.currentPage,
+                    limit: this.pageLimit
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('客户列表默认', res);
                     let data = res.data[0].data;
                     this.totalPage = res.data[0].total;
                     this.currentPage = res.data[0].currentPage;
                     this.cusList.tableData = data;
                     this.setcusList(data);
-                },err=>{
-                    this.spinShow =false;
+                }, err => {
+                    this.spinShow = false;
                     this.$api.errcallback(err);
-                }).catch(err=>{
-                    this.spinShow =false;
+                }).catch(err => {
+                    this.spinShow = false;
 
                     this.$api.errcallback(err);
                 })
             },
-	        comSearch(){
+            comSearch() {
                 this.spinShow = true;
                 this.reqType = 1;
-                this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id,
-                    type:this.reqType,
-                    keyword:this.$store.getters.searchKey,
-                    page:this.currentPage,
-                    limit:this.pageLimit
-                }).then(res=>{
-                    this.spinShow =false;
-                    console.log('客户列表搜索',res);
+                this.$http.post(this.$api.CLIENT_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    type: this.reqType,
+                    keyword: this.$store.getters.searchKey,
+                    page: this.currentPage,
+                    limit: this.pageLimit
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('客户列表搜索', res);
                     let data = res.data[0].data;
                     this.totalPage = res.data[0].total;
                     this.currentPage = res.data[0].currentPage;
                     this.cusList.tableData = data;
                     this.setcusList(data);
-                },err=>{
-                    this.spinShow =false;
+                }, err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
                     this.$api.errcallback(err);
-                }).catch(err=>{
-                    this.spinShow =false;
+                }).catch(err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
                     this.$api.errcallback(err);
                 })
-	        },
-	        pageChange(page){
+            },
+            pageChange(page) {
                 this.spinShow = true;
-                this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id,
-                    type:this.reqType,
-                    area:this.currentCity,
-                    keyword:this.$store.getters.searchKey,
-                    page:page,
-                    limit:this.pageLimit
-                }).then(res=>{
-                    this.spinShow =false;
-                    console.log('客户列表分页',res);
+                this.$http.post(this.$api.CLIENT_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    type: this.reqType,
+                    area: this.currentCity,
+                    keyword: this.$store.getters.searchKey,
+                    page: page,
+                    limit: this.pageLimit
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('客户列表分页', res);
                     let data = res.data[0].data;
                     this.totalPage = res.data[0].total;
                     this.currentPage = res.data[0].currentPage;
                     this.cusList.tableData = data;
                     this.setcusList(data);
-                },err=>{
-                    this.spinShow =false;
+                }, err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
                     this.$api.errcallback(err);
-                }).catch(err=>{
-                    this.spinShow =false;
+                }).catch(err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
                     this.$api.errcallback(err);
                 });
-	            console.log(page)
-	        },
+                console.log(page)
+            },
         },
 
     }
@@ -386,39 +391,39 @@
 					<Row>
 						<Col span="1">
 						<h3 class="title-lv2">客户列表</h3>
-
 						</Col>
 						<Col span="23">
 						<div class="tab-container">
-<!-- TODO 各地区客户个数待添加-->
-							<my-tab v-on:changeSelect="changeSelect('all')" v-bind:type="currentCity === 'all'?'disabled':'normal'">全部</my-tab>
+							<!-- TODO 各地区客户个数待添加-->
+							<my-tab v-on:changeSelect="changeSelect('all')"
+							        v-bind:type="currentCity === 'all'?'disabled':'normal'">全部
+							</my-tab>
 							<template v-for="(city,key) in cityList">
 								<my-tab
 										v-on:changeSelect="changeSelect(city.name)"
 										v-bind:type="currentCity === city.name?'disabled':'normal'"
-								>{{city.name}} </my-tab>
+								>{{city.name}}
+								</my-tab>
 							</template>
 						</div>
 						</Col>
-
-
 					</Row>
 				</div>
 				<div class="table-container relative">
 					<Row className="mgt_15">
 						<Col span="24">
-							<Row>
-								<Col span="5" >
-								<my-search style="text-align: left" placeholder="客户编号或客户名称" v-on:doSearch="comSearch"></my-search>
-								</Col>
+						<Row>
+							<Col span="5">
+							<my-search style="text-align: left" placeholder="客户编号或客户名称"
+							           v-on:doSearch="comSearch"></my-search>
+							</Col>
+							<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;" class='add_User'>+新增客户</Button>
 
-								<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;">+新增客户</Button>
+							<Button type="primary" class="refresh absolute" style="right: 0;" @click="clientList">
 
-								<Button type="primary" class="refresh absolute" style="right: 0;" @click="clientList">
-
-									<i class="iconfont icon-shuaxin"></i>
-								</Button>
-							</Row>
+								<i class="iconfont icon-shuaxin"></i>
+							</Button>
+						</Row>
 						</Col>
 					</Row>
 					<Row className="mgt_15">
@@ -445,11 +450,12 @@
 </template>
 <style scoped>
 
-	.header{
+	.header {
 		border-bottom: 1px solid #eeeeee;
 		padding-bottom: 10px;
 	}
-	.tab-container{
+
+	.tab-container {
 		display: inline-block;
 		vertical-align: middle;
 		margin-top: -15px;
@@ -457,14 +463,15 @@
 		overflow: hidden;
 	}
 
-	.tab-container>span{
-		margin:10px 0 10px 9px;
+	.tab-container > span {
+		margin: 10px 0 10px 9px;
 	}
-	.table-container{
+
+	.table-container {
 
 	}
 
-	.title-lv2{
+	.title-lv2 {
 		display: inline-block;
 		height: 20px;
 		line-height: 20px;
@@ -475,4 +482,12 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+    @media (max-width: 1366px) {
+        .tab-container{
+             margin-left:15px;
+        }
+        .add_User{
+             margin-left:80px !important;
+        }
+    }
 </style>

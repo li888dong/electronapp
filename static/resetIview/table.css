@@ -45,7 +45,7 @@
 .ivu-table-body:hover::-webkit-scrollbar{
 	width: 5px;
 	/*滚动条宽度（右侧滚动条）*/
-	height: 5px;
+	height: 10px;
 	/*滚动条高度（底部滚动条）*/
 	background-color: #eeeeee;
 }

@@ -8,7 +8,7 @@ import {ipcRenderer,shell} from 'electron';
 let instance,
     token = store.getters.access_token;
 if (!token){
-    axios.post('http://192.168.2.111/oauth/token',{
+    axios.post('http://www.cx8o92.cn/oauth/token',{
         grant_type:'client_credentials',
         client_id:1,
         client_secret:'IRwipTloBj54dYeznekQt2shYHaTrmeIIRXq0bQb',
@@ -23,7 +23,7 @@ if (!token){
                     Authorization:res.data.access_token
                 }
             },
-            baseURL:"http://192.168.2.111/",
+            baseURL:"http://www.cx8o92.cn/",
             timeout:15000
         });
         Vue.http = Vue.prototype.$http = instance;

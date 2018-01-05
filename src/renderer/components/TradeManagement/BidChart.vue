@@ -15,6 +15,9 @@
             },
         },
         computed: {
+            bidSimulationChart:function(){
+                return this.$echarts.init(document.getElementById('bid-simulation-chart'));
+            },
             chartOption2: function () {
                 //x轴总值
                 let xRange = [0],
@@ -33,24 +36,28 @@
 //		            平均值坐标
 	                pjData = [],
 //		            电厂数据
-	                dcData = [];
+	                dcData = [],
+                    lowPrice = {};
 //                售电公司根据报价降序
                 this.comsupply.sort(function (a, b) {
-                    return b.baojia - a.baojia
+                    return b.price - a.price
                 })
                 this.comsupply.map(function (i) {
-                    gsbj.push(i.baojia);
-                    gsData.push([i.gongying,i.baojia])
+                    gsbj.push(i.price);
+                    gsData.push([i.electricity,i.price])
                 });
 //                电厂根据报价升序
                 this.powerplant.sort(function (a, b) {
-                    return a.baojia - b.baojia
-                })
+                    return a.price - b.price
+                });
+                lowPrice = this.powerplant.slice(-1);
+                // this.comsupply.splice(1,1,{name:'最低报价',electricity:lowPrice[0].electricity,price:lowPrice[0].price});
+                // console.log(gsData,99999);
                 this.powerplant.map(function (i) {
-                    xRange.push(sum += i.gongying);
-                    dcbj.push(i.baojia);
+                    xRange.push(sum += i.electricity);
+                    dcbj.push(i.price);
                     dcname.push(i.name);
-                    dcgongying.push(i.gongying)
+                    dcgongying.push(i.electricity)
                 });
 
                 for (let i = 0;i<xRange.length;i++){
@@ -60,6 +67,7 @@
 				    pjData.push([i[1]+i[0]/2,this.getAverage(gsData[0][0],gsData[1][0],gsData[0][1],gsData[1][1],i[1]+i[0]/2,i[3])]);
 
 				});
+                gsData.splice(1,1,[pjData.slice(-2)[0][0],lowPrice[0].price]);
                 console.log('x轴区间', xRange);
                 console.log('电厂报价', dcData);
                 var colorList = this.$store.getters.chartOption.colorList;
@@ -142,9 +150,10 @@
         methods: {
             drawLine() {
                 // 基于准备好的dom，初始化echarts实例
-                let bidSimulationChart = this.$echarts.init(document.getElementById('bid-simulation-chart'));
+                // let bidSimulationChart = this.$echarts.init(document.getElementById('bid-simulation-chart'));
                 // 绘制图表
-                bidSimulationChart.setOption(this.chartOption2);
+                this.bidSimulationChart.clear();
+                this.bidSimulationChart.setOption(this.chartOption2);
             },
             renderItem(params, api) {
                 var yValue = api.value(3);

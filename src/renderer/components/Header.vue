@@ -7,7 +7,8 @@
         name: 'mainheader',
         data() {
             return {
-                logout: false
+                logout: false,
+                bol:false
             }
         },
         mounted() {
@@ -24,6 +25,13 @@
             out() {
                 this.$router.push('/login');
                 ipcRenderer.send('login-failed');
+            },
+            toggleMainSidebar(){
+            	 if(this.$store.getters.mainsidebar === true){
+            	 	this.$store.dispatch('setMainSidebar',false);
+            	 }else{
+            	 	this.$store.dispatch('setMainSidebar',true);
+            	 }
             }
         },
         components: {
@@ -36,7 +44,10 @@
 
 	<div class="header">
 		<ul class="absolute">
-			<li class="top_15 icon-menu" @click="toggleFast" style="cursor: pointer">
+			<li class="top_15 icon-menu fast_menu" @click="toggleFast" style="cursor: pointer">
+				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
+			</li>
+			<li class="top_15 main_menu icon-menu" @click="toggleMainSidebar()" style="cursor: pointer">
 				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
 			</li>
 			<li class="search top_15 left_136">
@@ -183,5 +194,21 @@
 
 	.rotate90 {
 		transform: rotate(-90deg);
+	}
+	.main_menu{
+		 display: none;
+	}
+		@media (max-width: 1366px){
+		.main_menu{
+            display: block;
+        }
+        .fast_menu{
+        	display: none;
+        }
+        .header{
+        	position: fixed;
+        	width: 100%;
+        	z-index: 999999;
+        }
 	}
 </style>

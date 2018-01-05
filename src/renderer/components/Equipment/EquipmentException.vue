@@ -129,7 +129,7 @@ export default {
           this.loading = true;
           this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
              console.log("设备异常记录列表",res);
-             if(res.data.status){
+             if(res.data.status==='1'){
                  this.data1 = res.data.data.data;
                  this.totalPage = res.data.data.total;
                  this.loading = false;
@@ -148,7 +148,7 @@ export default {
           this.loading = true;
           this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
              console.log("设备异常记录列表",res);
-             if(res.data.status){
+             if(res.data.status==='1'){
                  this.data1 = res.data.data.data;
                  this.totalPage = res.data.data.total;
                  this.currentPage = res.data.data.current_page;

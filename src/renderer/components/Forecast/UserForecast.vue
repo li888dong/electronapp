@@ -6,10 +6,10 @@
         name: 'UserForecast',
         data() {
             return {
-                spinShow:false,
-                currentPage:1,
-                limit:14,
-                totalPage:0,
+                spinShow: false,
+                currentPage: 1,
+                limit: 14,
+                totalPage: 0,
                 detailModal: false,
                 delModal: false,
                 confirmModal: false,
@@ -27,7 +27,7 @@
                     {
                         title: '企业名称',
                         key: 'name',
-                        width: 250,
+                        width: 260,
                         align: 'left'
                     },
                     {
@@ -58,17 +58,18 @@
                         title: '购电量(万kW-h)',
                         key: 'gdl',
                         align: 'center',
-                        width:150
+                        width: 150
                     }, {
                         title: '申报时间',
                         key: 'created_at',
                         align: 'center',
-                        width:160
+                        width: 170
                     },
                     {
                         title: '申报状态',
                         key: 'dstatus',
                         align: 'center',
+                        width: 150,
                         render: (h, params) => {
                             let text = '未申报';
                             if (params.row.dstatus === 0) {
@@ -95,6 +96,7 @@
                         title: '审核状态',
                         key: 'status',
                         align: 'center',
+                        width: 150,
                         render: (h, params) => {
                             let text = '未审核';
                             if (params.row.status === 0) {
@@ -120,12 +122,14 @@
                     {
                         title: '确认人',
                         key: 'confirmor',
-                        align: 'center'
+                        align: 'center',
+                        width: 120
                     },
                     {
                         title: '操作',
                         key: 'n11',
                         align: 'center',
+                        width: 150,
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
@@ -160,7 +164,7 @@
                     }
                 ],
                 columns5: [
-                    { 
+                    {
                         title: '申报时间',
                         width: 160,
                         key: 'updated_at'
@@ -186,7 +190,7 @@
                 ],
                 tableData1: [],
                 tableData2: [],
-                loading:false
+                loading: false
 
 
             }
@@ -198,23 +202,25 @@
                     id: index
                 }).then(res => {
                     console.log("用户申报详情", res);
-                    if(res.data.status === '1'){
-                        var str = '';
-                        var obj ='';
-                        this.tableData2 = res.data.citys;
-                        obj=this.tableData2[0].sbdlinfo;
-                        for(let k in obj){
-                            str += k +':'+ obj[k] +',';
-                        }
-                        this.tableData2[0].sbdlinfo = str;
-                    }else{
+                    if (res.data.status === '1') {
+                        let data;
+                        data = res.data.citys;
 
-                    } 
+                        for(let i of data){
+                            i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'')
+                        }
+                        console.log(data)
+                        this.tableData2 = data
+                    } else {
+                        this.tableData2 = [];
+                    }
                     this.loading = false;
                 }, err => {
-                     this.loading = false;
+                    this.tableData2 = [];
+                    this.loading = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.tableData2 = [];
                     this.loading = false;
                     this.$api.errcallback(err);
                 })
@@ -247,38 +253,42 @@
                 this.$http.post(this.$api.USER_DECLARE, {
                     com_id: this.$store.getters.com_id,
                     time: this.selectMonth,
-                    page:this.currentPage,
-                    limit:this.limit,
+                    page: this.currentPage,
+                    limit: this.limit,
                     area: this.selectArea,
                     keyword: this.$store.getters.searchKey
                 }).then(res => {
                     console.log("用户申报", res);
-                    if(res.data.status === '1'){
+                    if (res.data.status === '1') {
                         var data = res.data.data.data;
                         var obj = {};
-                        var arr =[];
-                        for(let i =0;i<data.length;i++){
-                            obj = {
-                                cus_id:data[i].id,
-                                name:data[i].name,
-                                sysb:data[i].sysb,
-                                ycdl:data[i].ycdl,
-                                syydl:data[i].syydl,
-                                gdl:data[i].gdl,
-                                created_at:data[i].declarepower.created_at,
-                                sbdl:data[i].declarepower.sbdl,
-                                dstatus:data[i].declarepower.dstatus,
-                                status:data[i].declarepower.status,
-                                confirmor:data[i].declarepower.confirmor,
-                                 id:data[i].declarepower.id
+                        var arr = [];
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].declarepower instanceof Object) {
+                                obj = {
+                                    cus_id: data[i].id,
+                                    name: data[i].name,
+                                    sysb: data[i].sysb,
+                                    ycdl: data[i].ycdl,
+                                    syydl: data[i].syydl,
+                                    gdl: data[i].gdl,
+                                    created_at: data[i].declarepower.created_at,
+                                    sbdl: data[i].declarepower.sbdl,
+                                    dstatus: data[i].declarepower.dstatus,
+                                    status: data[i].declarepower.status,
+                                    confirmor: data[i].declarepower.confirmor,
+                                    id: data[i].declarepower.id
+                                }
+                                arr.push(obj);
                             }
-                            arr.push(obj);
+
                         }
                         this.tableData1 = arr;
-                        this.totalPage = res.data.data.total;
+                        this.totalPage = arr.length;
                         this.currentPage = res.data.data.current_page;
+                        console.log(this.tableData1);
                     }
-                     this.spinShow = false;
+                    this.spinShow = false;
                 }, err => {
                     this.spinShow = false;
                     this.$api.errcallback(err);
@@ -297,9 +307,9 @@
 
                 this.userShenBao()
             },
-            pageChange(page){
-	            this.currentPage = page;
-	            this.userShenBao();
+            pageChange(page) {
+                this.currentPage = page;
+                this.userShenBao();
             }
         },
         mounted() {
@@ -323,7 +333,7 @@
 						<DatePicker type="month" placeholder="请选择月份" @on-change="monthSelect"></DatePicker>
 						</Col>
 						<Col span="4">
-						<al-selector level=1  @on-change="areaSelect"/>
+						<al-selector level=1   @on-change="areaSelect"/>
 						</Col>
 						<Col span="6">
 
@@ -342,7 +352,7 @@
 							:current="currentPage"
 							show-total
 							show-elevator
-                            :page-size='limit'
+							:page-size='limit'
 							v-on:on-change="pageChange"
 					></Page>
 				</div>
@@ -377,4 +387,7 @@
 	.layout-content-top {
 		margin-bottom: 15px;
 	}
+    .layout-content-main table{
+        width: 100%;
+    }
 </style>

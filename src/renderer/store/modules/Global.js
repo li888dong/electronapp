@@ -1,6 +1,7 @@
 const state = {
     fastboot:false,
-    access_token:''
+    access_token:'',
+    mainsidebar:false
 }
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
     },
     setToken(state, res) {
        state.access_token = res
+    },
+    setMainSidebar(state,res){
+        state.mainsidebar = res;
     }
 }
 
@@ -28,6 +32,9 @@ const actions = {
     },
     'setToken': function ({commit}, res) {
         commit('setToken', res)
+    },
+    'setMainSidebar':function({commit},res){
+        commit('setMainSidebar',res)
     }
 }
 
@@ -42,5 +49,8 @@ export default {
         access_token: state => {
             return state.access_token
         },
+        mainsidebar:state=>{
+            return state.mainsidebar
+        }
     }
 }

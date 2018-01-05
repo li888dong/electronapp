@@ -22,7 +22,11 @@
 	/*border-radius: 0;*/
 }
 .ivu-select-dropdown::-webkit-scrollbar,
-.ivu-scroll-container::-webkit-scrollbar{
+.ivu-scroll-container::-webkit-scrollbar,
+.bidBox::-webkit-scrollbar,
+.yearUpdate::-webkit-scrollbar,
+.modelBox::-webkit-scrollbar,
+.recordBox::-webkit-scrollbar{
 	width: 0px;
 	/*滚动条宽度（右侧滚动条）*/
 	height: 0px;
@@ -31,7 +35,11 @@
 	z-index: 999;
 }
 .ivu-select-dropdown:hover::-webkit-scrollbar,
-.ivu-scroll-container:hover::-webkit-scrollbar{
+.ivu-scroll-container:hover::-webkit-scrollbar,
+.bidBox:hover::-webkit-scrollbar,
+.yearUpdate:hover::-webkit-scrollbar,
+.modelBox:hover::-webkit-scrollbar,
+.recordBox:hover::-webkit-scrollbar{
 	width: 5px;
 	/*滚动条宽度（右侧滚动条）*/
 	height: 5px;
@@ -41,8 +49,11 @@
 }
 /*定义滚动条轨道 内阴影+圆角*/
 .ivu-select-dropdown::-webkit-scrollbar-track,
-.ivu-scroll-container::-webkit-scrollbar-track
-{
+.ivu-scroll-container::-webkit-scrollbar-track,
+.bidBox::-webkit-scrollbar-track,
+.yearUpdate::-webkit-scrollbar-track,
+.modelBox::-webkit-scrollbar-track,
+.recordBox::-webkit-scrollbar-track{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
 	border-radius: 10px;
 	background-color: #F5F5F5;
@@ -50,10 +61,16 @@
 }
 /*定义滑块 内阴影+圆角*/
 .ivu-select-dropdown::-webkit-scrollbar-thumb,
-.ivu-scroll-container::-webkit-scrollbar-thumb
-{
+.ivu-scroll-container::-webkit-scrollbar-thumb,
+.bidBox::-webkit-scrollbar-thumb,
+.yearUpdate::-webkit-scrollbar-thumb,
+.modelBox::-webkit-scrollbar-thumb,
+.recordBox::-webkit-scrollbar-thumb{
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
 	background-color: #ccc;
 	z-index: 999;
+}
+.small .ivu-input-wrapper{
+	 width: 94px;
 }

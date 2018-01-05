@@ -1,6 +1,6 @@
 const state = {
     login:false,
-    com_id:1,
+    com_id:'',
     fullname:''
 }
 

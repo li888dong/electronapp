@@ -24,7 +24,8 @@ export default {
                 {
                     "sortable": true,
                     title: '采购日期',
-                    key: 'pur_date'
+                    key: 'pur_date',
+                     width: 200,
                 },
                 {
                     title: '接线方式',
@@ -36,7 +37,8 @@ export default {
                 },
                 {
                     title: '端口号',
-                    key: 'port'
+                    key: 'port',
+                    width:90,
                 },
                 {
                     title: '是否已安装',
@@ -105,7 +107,7 @@ export default {
     },
     methods: {
         infoTo(id) {
-            this.$router.push({path:'/EquipmentStatus',query:{id:id}});    
+            this.$router.push({path:'EquipmentStatus',query:{id:id}});    
         },
         deleteInfo(){
             this.$http.delete(this.$api.CLIENT_TERMINAL_DELETE+this.deleteId).then(res=>{
@@ -123,7 +125,7 @@ export default {
            this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
              console.log("资产信息列表",res);
              var data = res.data.data;
-             if(res.data.status){
+             if(res.data.status==='1'){
                  this.data1 = data.data;
                  this.totalPage = data.total;
                  this.loading = false;
@@ -142,7 +144,7 @@ export default {
             this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
              console.log("资产信息列表",res);
              var data = res.data.data;
-             if(res.data.status){
+             if(res.data.status==='1'){
                  this.data1 = data.data;
                  this.loading = false;
                  this.totalPage = data.total;
@@ -162,7 +164,7 @@ export default {
            this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
              console.log("资产信息列表",res);
              var data = res.data.data;
-             if(res.data.status){
+             if(res.data.status==='1'){
                  this.data1 = data.data;
                  this.totalPage = data.total;
                  this.loading = false;

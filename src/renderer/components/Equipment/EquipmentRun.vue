@@ -132,7 +132,7 @@ export default {
                     itemHeight:16,
                 },
                 grid: {
-                    left: '60',
+                    left: '20',
                     right: '20',
                     bottom: '40',
                     top: '40',

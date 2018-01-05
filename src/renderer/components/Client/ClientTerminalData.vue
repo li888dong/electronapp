@@ -6,7 +6,7 @@
                 currentPDS: 0,
                 currentChartType: 1,
                 timeType: '今天',
-	            todayTime:'0',
+                todayTime: '0',
                 cldDetail: {},
                 clientIndex: '',
                 monitoringShow: 2,
@@ -134,17 +134,15 @@
                     xData: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
                     yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
                 },
-                zuidaDate:{
-                    xData:['2017-11-13','2017-11-14','2017-11-15','2017-11-16','2017-11-17','2017-11-18','2017-11-19','2017-11-20','2017-11-21','2017-11-22','2017-11-23','2017-11-24','2017-11-25','2017-11-26','2017-11-27','2017-11-28','2017-11-29','2017-11-30'],
-                    yData:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                zuidaDate: {
+                    xData: ['2017-11-13', '2017-11-14', '2017-11-15', '2017-11-16', '2017-11-17', '2017-11-18', '2017-11-19', '2017-11-20', '2017-11-21', '2017-11-22', '2017-11-23', '2017-11-24', '2017-11-25', '2017-11-26', '2017-11-27', '2017-11-28', '2017-11-29', '2017-11-30'],
+                    yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 },
-                terminalList: []
+                terminalList: [],
+	            clientid:''
             }
         },
         computed: {
-            clientid:function(){
-                return this.$store.getters.clientid;
-            },
             time: function () {
                 if (this.timeType === '今天') {
                     return 1
@@ -190,7 +188,7 @@
             onlineChart: function () {
                 return this.$echarts.init(document.getElementById('chart-jiankong'));
             },
-            zuidaChart:function(){
+            zuidaChart: function () {
                 return this.$echarts.init(document.getElementById('chart-main3'));
             },
             dianliangOption: function () {
@@ -655,11 +653,11 @@
                         containLabel: true
                     },
                     xAxis: {
-	                    ...this.$store.getters.chartOption.barTooltip,
-						data:this.onlineData.xData,
+                        ...this.$store.getters.chartOption.barTooltip,
+                        data: this.onlineData.xData,
                     }
                     ,
-	                color:this.$store.getters.chartOption.colorList,
+                    color: this.$store.getters.chartOption.colorList,
                     yAxis: [
                         {
                             position: 'left',
@@ -681,17 +679,17 @@
                         {
                             name: '在线时长',
                             type: 'bar',
-	                        barMaxWidth:40,
+                            barMaxWidth: 40,
                             data: this.onlineData.yData
                         }
 
                     ]
                 }
             },
-            zuidaOption:function(){
-                 return {
+            zuidaOption: function () {
+                return {
                     tooltip: this.$store.getters.chartOption.barTooltip,
-                     legend: {
+                    legend: {
                         data: ['最大需量'],
                         left: 5,
                         top: 20,
@@ -707,11 +705,11 @@
                     },
                     xAxis: {
                         ...this.$store.getters.chartOption.barTooltip,
-                        data:this.zuidaDate.xData,
+                        data: this.zuidaDate.xData,
                     }
                     ,
-                    color:this.$store.getters.chartOption.colorList,
-                     yAxis: [
+                    color: this.$store.getters.chartOption.colorList,
+                    yAxis: [
                         {
                             position: 'left',
                             type: 'value',
@@ -738,8 +736,9 @@
             }
         },
         mounted() {
-            // this.clientid = this.$route.query.clientid || this.terminalList[0].clientid;
+	        this.clientid = this.$store.getters.clientid;
             this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
+            this.currentPDS =  this.$route.query.index || 0;
             this.clientTerminalList();
         },
         watch: {
@@ -747,7 +746,7 @@
                 this.clientTerminalList()
             },
             clientid: function () {
-                console.log('clientid 改变',this.clientid)
+                console.log('clientid 改变', this.clientid)
 
             }
         },
@@ -805,7 +804,7 @@
                 this.onlineChart.setOption(this.onlineOption);
                 this.onlineChart.hideLoading();
             },
-            drawZuida(){
+            drawZuida() {
                 this.zuidaChart.clear();
                 this.zuidaChart.setOption(this.zuidaOption);
                 this.zuidaChart.hideLoading();
@@ -902,6 +901,17 @@
                     } else if (data.status === 1) {
                         data.status = "已启用";
                     }
+                     if(data.maxdemand == null){
+                         data.maxdemand = 0;
+                     }
+                     if(data.electricity == null){
+                         data.electricity = 0;
+                     }
+                     if(data.power_factor == null){
+                          data.power_factor = 0;
+                     }
+                    data.pur_date = data.pur_date.split(' ')[0];
+                    data.install_date = data.install_date.split(' ')[0];
                     this.cldDetail = data;
                     console.log(this.cldDetail)
                 }, err => {
@@ -916,8 +926,8 @@
                     console.log("在线监控", res);
                     let data = res.data.data;
                     this.onlineData.xData = Object.keys(data);
-                    this.onlineData.yData = Object.values(data).map(i=>parseInt((i / 3600)));
-                    this.todayTime = this.formatDuring(Object.values(data).pop()*1000);
+                    this.onlineData.yData = Object.values(data).map(i => parseInt((i / 3600)));
+                    this.todayTime = this.formatDuring(Object.values(data).pop() * 1000);
                     this.drawOnline()
                 }, err => {
                     this.drawOnline();
@@ -970,100 +980,100 @@
                     start: start,
                     end: end
                 }).then(res => {
-                    let data = Object.values(res.data.data);
-                    this.eTotal = res.data.total;
-                    this.origratio = res.data.origratio;
-                    if (this.currentChartType === 1) {
-                        this.dianliangData.xData = [];
-                        this.dianliangData.yData = [];
-                        data.map(i => {
-                            this.dianliangData.xData.push(i.collect_time);
-                            this.dianliangData.yData.push(i.electricity);
-                        });
-                        console.log("采集监控  电量", res);
-                        this.drawDianliang();
-                    } else if (this.currentChartType === 2) {
-                        this.dianliuData.xData = [];
-                        this.dianliuData.curaData = [];
-                        this.dianliuData.curbData = [];
-                        this.dianliuData.curcData = [];
-                        data.map(i => {
-                            this.dianliuData.xData.push(i.updated_at);
-                            this.dianliuData.curaData.push(i.cur_a);
-                            this.dianliuData.curbData.push(i.cur_b);
-                            this.dianliuData.curcData.push(i.cur_c);
-                        });
-                        console.log("采集监控  电流", res);
-                        console.log(this.dianliuData);
-                        this.drawDianliu();
-                    } else if (this.currentChartType === 3) {
-                        this.dianyaData.xData = [];
-                        this.dianyaData.aData = [];
-                        this.dianyaData.bData = [];
-                        this.dianyaData.cData = [];
-                        data.map(i => {
-                            this.dianyaData.xData.push(i.updated_at);
-                            this.dianyaData.aData.push(i.vol_a);
-                            this.dianyaData.bData.push(i.vol_b);
-                            this.dianyaData.cData.push(i.vol_c);
-                        });
-                        console.log("采集监控  电压", res);
-                        this.drawDianya();
-                    } else if (this.currentChartType === 4) {
-                        this.wugongData.xData = [];
-                        this.wugongData.aData = [];
-                        this.wugongData.bData = [];
-                        this.wugongData.cData = [];
-                        data.map(i => {
-                            this.wugongData.xData.push(i.updated_at);
-                            this.wugongData.aData.push(i.rpa);
-                            this.wugongData.bData.push(i.rpb);
-                            this.wugongData.cData.push(i.rpc);
-                        });
-                        console.log("采集监控  无功功率", res);
-                        this.drawWugong();
-                    } else if (this.currentChartType === 5) {
-                        this.shizaiData.xData = [];
-                        this.shizaiData.yData = [];
-                        data.map(i => {
-                            this.shizaiData.xData.push(i.updated_at);
-                            this.shizaiData.yData.push(i.inspect_power);
-                        });
-                        console.log("采集监控  视在功率", res);
-                        this.drawShizai();
-                    } else if (this.currentChartType === 6) {
-                        this.yinshuData.xData = [];
-                        this.yinshuData.aData = [];
-                        this.yinshuData.bData = [];
-                        this.yinshuData.cData = [];
-                        data.map(i => {
-                            this.yinshuData.xData.push(i.updated_at);
-                            this.yinshuData.aData.push(i.pfa);
-                            this.yinshuData.bData.push(i.pfb);
-                            this.yinshuData.cData.push(i.pfc);
-                        });
-                        console.log("采集监控  功率因数", res);
-                        this.drawYinshu();
-                    } else if (this.currentChartType === 7) {
-                        this.yougongData.xData = [];
-                        this.yougongData.aData = [];
-                        this.yougongData.bData = [];
-                        this.yougongData.cData = [];
-                        data.map(i => {
-                            this.yougongData.xData.push(i.updated_at);
-                            this.yougongData.aData.push(i.apa);
-                            this.yougongData.bData.push(i.apb);
-                            this.yougongData.cData.push(i.apc);
-                        });
-                        console.log("采集监控  负荷", res);
-                        this.drawYougong();
-                    }else if(this.currentChartType === 8){
-                        var dataNum = res.data.data;
-                        this.zuidaDate.xData = Object.keys(dataNum);
-                        this.zuidaDate.yData = Object.values(dataNum);
-                       console.log("采集监控 最大需量",res);
-                       console.log(1,this.zuidaDate);
-                       this.drawZuida();
+                            let data = Object.values(res.data.data);
+                             this.eTotal = res.data.total;
+                             this.origratio = res.data.origratio;
+                             if (this.currentChartType === 1) {
+                                  this.dianliangData.xData = [];
+                                  this.dianliangData.yData = [];
+                                  data.map(i => {
+                                  this.dianliangData.xData.push(i.collect_time);
+                                  this.dianliangData.yData.push(i.electricity);
+                                 });
+                                 console.log("采集监控  电量", res);
+                                  this.drawDianliang();
+                            } else if (this.currentChartType === 2) {
+                                 this.dianliuData.xData = [];
+                                 this.dianliuData.curaData = [];
+                                 this.dianliuData.curbData = [];
+                                 this.dianliuData.curcData = [];
+                                 data.map(i => {
+                                  this.dianliuData.xData.push(i.updated_at);
+                                  this.dianliuData.curaData.push(i.cur_a);
+                                  this.dianliuData.curbData.push(i.cur_b);
+                                  this.dianliuData.curcData.push(i.cur_c);
+                             });
+                              console.log("采集监控  电流", res);
+                              console.log(this.dianliuData);
+                              this.drawDianliu();
+                            } else if (this.currentChartType === 3) {
+                                 this.dianyaData.xData = [];
+                                 this.dianyaData.aData = [];
+                                 this.dianyaData.bData = [];
+                                 this.dianyaData.cData = [];
+                                 data.map(i => {
+                                  this.dianyaData.xData.push(i.updated_at);
+                                  this.dianyaData.aData.push(i.vol_a);
+                                  this.dianyaData.bData.push(i.vol_b);
+                                  this.dianyaData.cData.push(i.vol_c);
+                            });
+                                 console.log("采集监控  电压", res);
+                                 this.drawDianya();
+                            } else if (this.currentChartType === 4) {
+                                 this.wugongData.xData = [];
+                                 this.wugongData.aData = [];
+                                 this.wugongData.bData = [];
+                                 this.wugongData.cData = [];
+                                 data.map(i => {
+                                 this.wugongData.xData.push(i.updated_at);
+                                 this.wugongData.aData.push(i.rpa);
+                                 this.wugongData.bData.push(i.rpb);
+                                 this.wugongData.cData.push(i.rpc);
+                            });
+                                 console.log("采集监控  无功功率", res);
+                                 this.drawWugong();
+                            } else if (this.currentChartType === 5) {
+                                 this.shizaiData.xData = [];
+                                 this.shizaiData.yData = [];
+                                 data.map(i => {
+                                   this.shizaiData.xData.push(i.updated_at);
+                                   this.shizaiData.yData.push(i.inspect_power);
+                            });
+                                 console.log("采集监控  视在功率", res);
+                                 this.drawShizai();
+                            } else if (this.currentChartType === 6) {
+                                 this.yinshuData.xData = [];
+                                 this.yinshuData.aData = [];
+                                 this.yinshuData.bData = [];
+                                 this.yinshuData.cData = [];
+                                 data.map(i => {
+                                  this.yinshuData.xData.push(i.updated_at);
+                                  this.yinshuData.aData.push(i.pfa);
+                                  this.yinshuData.bData.push(i.pfb);
+                                   this.yinshuData.cData.push(i.pfc);
+                            });
+                                 console.log("采集监控  功率因数", res);
+                                 this.drawYinshu();
+                            } else if (this.currentChartType === 7) {
+                                 this.yougongData.xData = [];
+                                 this.yougongData.aData = [];
+                                 this.yougongData.bData = [];
+                                 this.yougongData.cData = [];
+                                 data.map(i => {
+                                  this.yougongData.xData.push(i.updated_at);
+                                  this.yougongData.aData.push(i.apa);
+                                  this.yougongData.bData.push(i.apb);
+                                  this.yougongData.cData.push(i.apc);
+                            });
+                                 console.log("采集监控  负荷", res);
+                                 this.drawYougong();
+                            } else if (this.currentChartType === 8) {
+                                 var dataNum = res.data.data;
+                                 this.zuidaDate.xData = Object.keys(dataNum);
+                                 this.zuidaDate.yData = Object.values(dataNum);
+                                 console.log("采集监控 最大需量", res);
+                                 console.log(1, this.zuidaDate);
+                                 this.drawZuida();
                     }
                 }, err => {
                     if (this.currentChartType === 1) {
@@ -1082,10 +1092,10 @@
                     this.$api.errcallback(err);
                 })
             },
-	        setTimeType(type){
+            setTimeType(type) {
                 this.timeType = type;
                 this.collectJiankongData()
-	        },
+            },
             formatDuring(mss) {
                 let days = parseInt(mss / (1000 * 60 * 60 * 24));
                 let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1151,19 +1161,21 @@
 											<td><span>终端号 : </span> {{cldDetail.clientid}}</td>
 											<td><span>生产厂家 : </span> {{cldDetail.factory}}</td>
 											<td><span>出厂编号 : </span> {{cldDetail.serial_no}}</td>
-											<td><span>设备类型 : </span> {{cldDetail.sblx}}</td>
-											<td><span>采购日期 : </span> {{cldDetail.cgrq}}</td>
+											<td><span>设备类型 : </span> {{cldDetail.type}}</td>
+											
 										</tr>
 										<tr>
+                                            <td><span>采购日期 : </span> {{cldDetail.pur_date}}</td>
 											<td><span>通信地址 : </span> {{cldDetail.mailing_address}}</td>
 											<td><span>远程端口 : </span> {{cldDetail.port}}</td>
-											<td><span> 上线日期 :</span> {{cldDetail.sxrq}}</td>
-											<td><span>所属户号 : </span> {{cldDetail.user_no}}</td>
-											<td><span>供电单位 : </span> {{cldDetail.powerplant}}</td>
+											<td><span> 上线日期 :</span> {{cldDetail.install_date}}</td>
+											
+											
 
 										</tr>
 										<tr>
-
+                                            <td><span>所属户号 : </span> {{cldDetail.user_no}}</td>
+                                            <td><span>供电单位 : </span> {{cldDetail.powerplant}}</td>
 											<td><span>所属变压器容量 : </span> {{cldDetail.capacity}}KW</td>
 											<td><span>状态 : </span> {{cldDetail.status}}</td>
 
@@ -1224,13 +1236,12 @@
 				<div v-show="currentChartType===11" class="relative" style="height: 500px">
 					<p style="margin: -10px 0 10px 10px;clear: both">今日在线时长 :<span
 							style="color: #0089f0;font-size: 16px;"> {{todayTime}}</span></p>
-					<div class="chart-main" id="chart-jiankong" style="width: 1000px;height: 189px;float: left;">
+					<div class="chart-main" id="chart-jiankong">
 
 					</div>
-					<div class="unusual-commind fr"
-					     style="width: 400px;height: 477px;padding-right: 20px;margin-top: -15px;">
+					<div class="unusual-commind fr">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
-						<Table :columns="columns2" :data="tableData2" height="468"></Table>
+						<Table :columns="columns2" :data="tableData2"></Table>
 					</div>
 					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
@@ -1455,4 +1466,59 @@
 		top: 0;
 		left: 9px;
 	}
+    #chart-jiankong{
+        width: 1000px;
+        height: 189px;
+        float: left;
+    }
+    .unusual-commind{
+      width: 400px;
+      height: 477px;
+      padding-right: 20px;
+      margin-top: -15px;
+    }
+    .unusual-commind .ivu-table-wrapper{
+        height: 468px;
+      }
+    @media (max-width: 1366px) {
+        .cld-detail .right{
+            margin-left: -80px;
+        }
+        .tab-container{
+            margin-left: 0;
+        }
+        .cld-detail .left{
+            margin-left: 0;
+        }
+        .right td{
+             white-space: nowrap;
+        }
+        .select-time{
+            padding:0 0 15px 350px;
+        }
+    #chart-jiankong{
+        width: 800px;
+        height: 189px;
+        float: left;
+    }
+    .unusual-commind{
+      width: 300px;
+      height: 250px;
+      padding-right: 20px;
+      margin-top: -15px;
+    }
+      .unusual-commind .ivu-table-wrapper{
+        height: 230px;
+      }
+      #dianliang-chart,
+      #dianliu-chart,
+      #dianya-chart,
+      #wugong-chart,
+      #shizai-chart,
+      #yinshu-chart,
+      #ougong-chart,
+      #chart-main3{
+        width:1250px !important;
+      }
+    }
 </style>

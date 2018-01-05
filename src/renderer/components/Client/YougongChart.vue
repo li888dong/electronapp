@@ -1,18 +1,24 @@
 <style scoped>
-	.relative{
+	.relative {
 		background-color: #fff;
 	}
+    @media (max-width: 1366px) {
+        #lineChart3{
+            width:540px !important;
+        }
+    }
 </style>
 <template>
 	<Card class="relative">
 		<h3 slot="title" style="position: absolute;top: 5px;left: 15px;">负荷曲线</h3>
-		<div @click="showModal" style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
+		<div @click="showModal"
+		     style="position: absolute;z-index: 999;font-size: 14px;cursor: pointer;right: 10px;top: 5px;color: #31c9d7">
 			<Icon type="qr-scanner"></Icon> &nbsp;全屏
 		</div>
 		<Modal v-model="modal3"
 		       title="负荷曲线"
-		       width="1500">
-			<div id="lineModalChart3" :style="{width: '1449px', height: '543px',margin:'15px 0 0 20px'}">
+		       width="1200">
+			<div id="lineModalChart3" :style="{width: '1100px', height: '543px',margin:'15px 0 0 20px'}">
 
 			</div>
 			<div slot="footer">
@@ -32,8 +38,8 @@
         name: 'lineChart',
         data() {
             return {
-                modal3:false,
-                modalName: [ '河南众企联合售电'],
+                modal3: false,
+                modalName: ['河南众企联合售电'],
                 modalxData: ['2017年01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'],
                 modalyData: [
                     {
@@ -45,19 +51,19 @@
                 ],
             }
         },
-        props:['active_power','updated_at'],
-        computed:{
-            powerChart:function () {
+        props: ['active_power', 'updated_at'],
+        computed: {
+            powerChart: function () {
                 return this.$echarts.init(document.getElementById('lineChart3'));
             },
-            powerModalChart:function () {
+            powerModalChart: function () {
                 return this.$echarts.init(document.getElementById('lineModalChart3'));
             },
-            chartOption1:function () {
+            chartOption1: function () {
                 return {
                     tooltip: this.$store.getters.chartOption.lineTooltip,
                     grid: {
-                        top:5,
+                        top: 5,
                         left: 0,
                         right: 0,
                         bottom: '8%',
@@ -65,7 +71,7 @@
                     },
                     xAxis: [
                         {
-                            boundaryGap : true,
+                            boundaryGap: true,
                             axisLine: {onZero: false},
                             type: 'category',
                             data: this.updated_at
@@ -74,20 +80,20 @@
                     yAxis: [
                         {
                             ...this.$store.getters.chartOption.yAxis,
-                            position:'right',
+                            position: 'right',
 
                         }
                     ],
 //          设置可拖动区间
-                    color:this.$store.getters.chartOption.colorList,
-                    dataZoom:this.$store.getters.chartOption.dataZoom,
+                    color: this.$store.getters.chartOption.colorList,
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
                     series: [
                         {
                             name: '负荷曲线',
                             type: 'line',
-                            smooth:true,
+                            smooth: true,
                             itemStyle: this.$store.getters.chartOption.lineItemStyle,
-                            data:this.active_power
+                            data: this.active_power
                         }
                     ]
                 }
@@ -137,11 +143,11 @@
         mounted() {
             this.drawLine();
         },
-	    watch:{
-            active_power:function () {
-	            this.drawLine()
+        watch: {
+            active_power: function () {
+                this.drawLine()
             }
-	    },
+        },
         methods: {
             showModal() {
                 this.modal3 = true;
@@ -158,7 +164,7 @@
                             active_power.push(Object.values(i).map(j => j.active_power));
                             power_factor.push(Object.values(i).map(j => j.power_factor));
                         });
-                        usernolist.map((v,i) => {
+                        usernolist.map((v, i) => {
                             this.modalName.push({name: v, icon: 'rect'});
                             this.modalyData.push({
                                 name: v,
@@ -193,7 +199,7 @@
                 this.powerChart.clear();
                 this.powerChart.setOption(this.chartOption1);
             },
-            drawModal1(){
+            drawModal1() {
                 // 基于准备好的dom，初始化echarts实例
                 // 绘制图表
                 this.powerModalChart.clear();

@@ -157,7 +157,9 @@
 	.data-index {
 		height: 129px;
 	}
-
+     .data-title span{
+         white-space: nowrap;
+     }
 	.data-title{
 		background-color:#f2f7fb;
 	}

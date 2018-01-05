@@ -3,7 +3,7 @@
         name: 'database',
         data() {
             return {
-                year: '2017年',
+                year: new Date().getFullYear()+'年',
                 columns6: [
                     {
                         title: '户号',
@@ -52,22 +52,28 @@
                         key: 'total',
                     }
                 ],
-	            tableData:[],
-                chartData: []
+                tableData: [],
+                chartData: [],
+                yearList:[],
+                loading:false,
+                legendList:[]
             }
         },
         computed: {
-			yearData:function () {
-                switch (this.year){
-                    case '2017年':
+            yearData: function () {
+                switch (this.year) {
+                    case this.yearList[0]:
                         return this.tableData[0];
-                    case '2016年':
+                    case this.yearList[1]:
                         return this.tableData[1];
-                    case '2015年':
+                    case this.yearList[2]:
                         return this.tableData[2];
-                    case '2014年':
+                    case this.yearList[3]:
                         return this.tableData[3]
                 }
+            },
+            historyChart:function(){
+                return this.$echarts.init(document.getElementById('historyChart'));
             },
             chartOption2: function () {
                 return {
@@ -77,7 +83,7 @@
                         top: 10,
                         itemWidth: 16,
                         itemHeight: 16,
-                        data: ['2017', '2016', '2015', '2014'],
+                        data: this.legendList,
                     },
                     backgroundColor: '#fff',
                     grid: {
@@ -130,71 +136,87 @@
         methods: {
             drawChart(option = this.chartOption2) {
                 // 基于准备好的dom，初始化echarts实例
-                let historyChart = this.$echarts.init(document.getElementById('historyChart'));
+                this.historyChart.clear();
                 // 绘制图表
-                historyChart.setOption(option);
+                this.historyChart.setOption(option);
+                
             },
-            yearChange(year){
-
+            yearChange(year) {
+                 this.year = year;
             },
             historyUserPower() {
+                this.loading = true;
+                this.historyChart.showLoading();
                 this.$http.post(this.$api.HISTORY_ELECTRIC, {com_id: this.$store.getters.com_id}).then(res => {
                     console.log("历史用电量趋势", res.data.data);
-                    let data = res.data.data;
-                    for (let year in data){
-
-                        if (data[year].length>0){
-                            this.tableData.push(data[year]);
-                            this.chartData.push({
+                    if(res.data.status === '1'){
+                        this.historyChart.hideLoading();
+                        let data = res.data.data;
+                      for (let year in data) {
+                             this.legendList.unshift(year);
+                             this.yearList.unshift(year+'年');
+                        // if (data[year].length > 0) {
+                            this.tableData.unshift(data[year]);
+                            this.chartData.unshift({
                                 name: year,
                                 type: 'bar',
-                                barMaxWidth:30,
+                                barMaxWidth: 30,
                                 data: [
-                                    data[year].reduce(function (preValue,curValue,index,array) {
-	                                    return preValue + curValue.month01
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    data[year].reduce(function (preValue, curValue, index, array) {
+                                        return preValue + curValue.month01
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month02
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month03
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month04
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month05
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month06
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month07
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month08
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month09
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month10
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month11
-                                    },0),
-                                    data[year].reduce(function (preValue,curValue,index,array) {
+                                    }, 0),
+                                    data[year].reduce(function (preValue, curValue, index, array) {
                                         return preValue + curValue.month12
-                                    },0),
+                                    }, 0),
                                 ]
                             })
-                        }
+                        // }
                     }
-					console.log(this.tableData)
+                    console.log(this.tableData);
+                    console.log(this.yearList);
                     this.drawChart(this.chartOption2);
+                    this.loading = false;
+                    }else{
+
+                    }
+                    
                 }, err => {
+                    this.loading = false;
+                    this.historyChart.hideLoading();
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading = false;
+                    this.historyChart.hideLoading();
                     this.$api.errcallback(err);
                 })
             },
@@ -222,14 +244,11 @@
 				<h3 slot="title">历史用电量数据</h3>
 				<div slot="extra" class="btn-group">
 					<RadioGroup v-model="year" type="button" v-on:on-change="yearChange">
-						<Radio label="2017年"></Radio>
-						<Radio label="2016年"></Radio>
-						<Radio label="2015年"></Radio>
-						<Radio label="2014年"></Radio>
+						<Radio  v-for='item in yearList' :label="item"></Radio>
 					</RadioGroup>
 				</div>
 
-				<Table :columns="columns6" :data="yearData" height="320px"></Table>
+				<Table :columns="columns6" :data="yearData" height="320px" :loading='loading'></Table>
 
 			</Card>
 

@@ -1,102 +1,121 @@
 <style>
-*{
-	margin:0;
-	padding:0;
-}
+	* {
+		margin: 0;
+		padding: 0;
+	}
 
 </style>
 <template>
 
 	<Row className="main-container">
-	  <Row>
-	  <Row>
-		<Row gutter=15>
-			<Col span="17">
+		<Row>
+			<Row>
 				<Row gutter=15>
-					<!--/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/-->
-					<Col span="16">
+					<Col span="17">
+					<Row gutter=15>
+						<!--/*离线预警、数据异常、电量偏差、功率因数、负荷异常*/-->
+						<Col span="16">
 						<five-data></five-data>
-					</Col>
-					<!--工作提醒 -->
-					<Col span="8">
+						</Col>
+						<!--工作提醒 -->
+						<Col span="8">
 						<work-remind></work-remind>
+						</Col>
+					</Row>
+					<Row class="mgt_15">
+						<!--数据指数-->
+						<data-index></data-index>
+					</Row>
+					</Col>
+					<Col span="7">
+					<!--计划进度提醒-->
+					<process-plan></process-plan>
 					</Col>
 				</Row>
-				<Row class="mgt_15">
-					<!--数据指数-->
-					<data-index></data-index>
+			</Row>
+			<Row>
+				<Row gutter=15  className="mgt_15">
+					<!--用电实时进度-->
+					<Col span="9">
+					<power-use belong="com"></power-use>
+					</Col>
+					<!--用电时段分布-->
+					<Col span="8">
+					<power-timeframe belong="com" :baseWidth='Width'></power-timeframe>
+					</Col>
+					<!--交易分步-->
+					<Col span="7">
+					<trade-pi></trade-pi>
+					</Col>
 				</Row>
-			</Col>
-			<Col span="7">
-				<!--计划进度提醒-->
-				<process-plan></process-plan>
-			</Col>
-		</Row>
-        </Row>
-        <Row>
-		<Row gutter=15 className="mgt_15">
-			<!--用电实时进度-->
-			<Col span="9">
-				<power-use  belong="com"></power-use>
-			</Col>
-			<!--用电时段分布-->
-			<Col span="8">
-				<power-timeframe belong="com" baseWidth="460"></power-timeframe>
-			</Col>
-			<!--交易分步--> 
-			<Col span="7">
-				<trade-pi></trade-pi>
-			</Col>
-		</Row>
-		</Row>
-		<!--实时电量负荷-->
-		<Row className="mgt_15">
-			<Col style="width: 1675.52px">
-				<real-time-power-chart  belong="com"></real-time-power-chart>
-			</Col>
-		</Row>
+			</Row>
+			<!--实时电量负荷-->
+			<Row className="mgt_15">
+				<Col style="width: 1675.52px">
+				<real-time-power-chart belong="com"></real-time-power-chart>
+				</Col>
+			</Row>
 		</Row>
 	</Row>
 </template>
 
 <script>
-
-    import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
-    import TradePi from '@/components/Home/TradePi.vue'
-    import FiveData from '@/components/Home/FiveData'
-    import WorkRemind from '@/components/Home/WorkRemind'
-    import DataIndex from '@/components/Home/DataIndex'
-    import ProcessPlan from '@/components/Home/ProcessPlan'
-    import PowerUse from '@/components/Home/PowerUse'
+	import {ipcRenderer} from 'electron';
+	import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
+	import TradePi from '@/components/Home/TradePi.vue'
+	import FiveData from '@/components/Home/FiveData'
+	import WorkRemind from '@/components/Home/WorkRemind'
+	import DataIndex from '@/components/Home/DataIndex'
+	import ProcessPlan from '@/components/Home/ProcessPlan'
+	import PowerUse from '@/components/Home/PowerUse'
 	import PowerTimeframeYM from '@/components/Home/PowerTimeframeYM'
 
-    export default {
-        name: 'home',
-        data() {
-            return {
-                periodicTime: 'half',
-            }
-        },
-        computed: {
-            timeData() {
-                return this.$store.getters.timeData
-            }
-        },
-        mounted() {
-
-        },
-        methods: {
-
-        },
-        components: {
-            'real-time-power-chart': RealTimePowerChart,
-            'trade-pi': TradePi,
-            'five-data':FiveData,
-            'work-remind':WorkRemind,
-            'data-index':DataIndex,
-            'process-plan':ProcessPlan,
-            'power-use':PowerUse,
-	        'power-timeframe':PowerTimeframeYM
-        }
-    }
+	export default {
+		name: 'home',
+		data() {
+			return {
+				periodicTime: 'half',
+//                Width:0
+			}
+		},
+		computed: {
+			/**
+			 * @return {number}
+			 */
+			Width: function () {
+				let screenWidth = ipcRenderer.sendSync('width-change', 'change');
+				let width = 0;
+				console.log(screenWidth);
+				if (screenWidth > 1366) {
+					width = 460;
+				} else {
+					width = 350;
+				}
+				return width
+			}
+		},
+//        mounted() {
+//            window.onresize=function(){
+//        		var width = ipcRenderer.sendSync('width-change','change');
+//        		console.log(width);
+//        		if(width > 1366){
+//        			 this.Width = 460;
+//        		}else{
+//        			this.Width = 350;
+//        		}
+//
+//        	}
+//        },
+		methods: {},
+		components: {
+			'real-time-power-chart': RealTimePowerChart,
+			'trade-pi': TradePi,
+			'five-data': FiveData,
+			'work-remind': WorkRemind,
+			'data-index': DataIndex,
+			'process-plan': ProcessPlan,
+			'power-use': PowerUse,
+			'power-timeframe': PowerTimeframeYM
+		}
+	}
 </script>

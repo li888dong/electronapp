@@ -1,140 +1,164 @@
 <script>
     export default {
-        name:'clientsidebar',
-        data(){
-            return{
-                spinShow:false,
-				companyList:[],
-				totalPages:0,
-				lastPage:0,
-				currentPage:1,
-				limit:26,
+        name: 'clientsidebar',
+        data() {
+            return {
+                spinShow: false,
+                companyList: [],
+                totalPages: 0,
+                lastPage: 0,
+                currentPage: 1,
+                limit: 26,
+                keyword: ''
             }
         },
-	    computed:{
-            selectedId:function () {
-	            return this.$store.getters.cus_id
-            },
-
-		    searchKey:function () {
-                return this.$store.getters.searchKey
+        computed: {
+            selectedId: function () {
+                return this.$store.getters.cus_id
             }
-	    },
-	    mounted(){
+        },
+        mounted() {
             this.clientList();
-	    },
-	    methods:{
-            changeCompany(id,name,clientid,user_id){
-                this.$store.dispatch('setCusId',id);
-                this.$store.dispatch('setCusName',name);
-                this.$store.dispatch('setClientId',clientid);
+        },
+        methods: {
+            changeCompany(id, name, clientid, user_id) {
+                this.$store.dispatch('setCusId', id);
+                this.$store.dispatch('setCusName', name);
+                this.$store.dispatch('setClientId', clientid);
             },
-            clientList(){
+            clientList() {
                 this.spinShow = true;
-                this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id,
-                    type:3,
-                    limit:this.limit,
-                    page:this.currentPage,
-                    area:'',
-                }).then(res=>{
+                this.$http.post(this.$api.CLIENT_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    type: 3,
+                    limit: this.limit,
+                    page: this.currentPage,
+                    area: '',
+                }).then(res => {
                     this.spinShow = false;
-                    console.log('客户 名称列表',res);
+                    console.log('客户 名称列表', res);
                     this.companyList = res.data[0].data;
                     this.totalPages = res.data[0].total;
                     this.currentPage = res.data[0].current_page;
                     this.lastPage = res.data[0].last_page;
-                },err=>{
-                    this.spinShow =false;
+                }, err => {
+                    this.spinShow = false;
                     this.$api.errcallback(err);
-                }).catch(err=>{
-                    this.spinShow =false;
+                }).catch(err => {
+                    this.spinShow = false;
 
                     this.$api.errcallback(err);
                 })
             },
-            handleReachBottom(){
-            	 return new Promise(resolve =>{
-                      if(this.currentPage < this.lastPage){
-                      	this.currentPage+=1;
+            handleReachBottom() {
+                return new Promise(resolve => {
+                    if (this.currentPage < this.lastPage) {
+                        this.currentPage += 1;
                         console.log(1)
-                    // this.spinShow = true;
-                    this.$http.post(this.$api.CLIENT_LIST,{
-                    com_id:this.$store.getters.com_id,
-                    type:3,
-                    limit:this.limit,
-                    page:this.currentPage
-                }).then(res=>{
-                      console.log('下一页客户名称列表',res);
-                      let list = res.data[0].data;
-                      this.currentPage = res.data[0].current_page
-                      for(let i=0;i<list.length;i++){
-                      	this.companyList.push(list[i]);
-                      }
-                      // this.spinShow =false;
-                      // resolve();
-                },err=>{
-                	   // reject();
-                	   // this.spinShow =false;
-                       this.$api.errcallback(err);
-                }).catch(err=>{
-                	 // this.spinShow =false;
-                	 this.$api.errcallback(err);
+                        // this.spinShow = true;
+                        this.$http.post(this.$api.CLIENT_LIST, {
+                            com_id: this.$store.getters.com_id,
+                            type: 3,
+                            limit: this.limit,
+                            page: this.currentPage
+                        }).then(res => {
+                            console.log('下一页客户名称列表', res);
+                            let list = res.data[0].data;
+                            this.currentPage = res.data[0].current_page
+                            for (let i = 0; i < list.length; i++) {
+                                this.companyList.push(list[i]);
+                            }
+                            // this.spinShow =false;
+                            // resolve();
+                        }, err => {
+                            // reject();
+                            // this.spinShow =false;
+                            this.$api.errcallback(err);
+                        }).catch(err => {
+                            // this.spinShow =false;
+                            this.$api.errcallback(err);
+                        })
+                    } else {
+                        this.currentPage = this.lastPage;
+                    }
+
                 })
-                 }else{
-                          this.currentPage =  this.lastPage;
-                      }
-                     
-            	 })
+            },
+            doSearch() {
+                this.spinShow = true;
+                this.$http.post(this.$api.CLIENT_LIST, {
+                    com_id: this.$store.getters.com_id,
+                    type: 1,
+                    keyword: this.keyword,
+                    page: this.currentPage,
+                    limit: this.pageLimit
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('客户 名称列表', res);
+                    this.companyList = res.data[0].data;
+                    this.totalPages = res.data[0].total;
+                    this.currentPage = res.data[0].current_page;
+                    this.lastPage = res.data[0].last_page;
+                }, err => {
+                    this.spinShow = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.spinShow = false;
+                    this.$api.errcallback(err);
+                })
             }
-	    },
+        },
     }
 </script>
 <template>
 	<div class="client-sidebar">
-		<div class="search relative">
+		<div class="search relative" v-on:keyup.enter="doSearch">
 			<i class="iconfont icon-search absolute"></i>
-			<input type="search" placeholder="客户编号或客户名称" :value="searchKey">
+			<input type="search" placeholder="客户编号或客户名称" v-model="keyword">
 		</div>
 		<div class="company-list" id='companyList'>
-		  
-			<ul id='clientMenu'>
-			<Scroll height='870' :on-reach-bottom="handleReachBottom" :distance-to-edge=-35>
-				<template v-for="item in companyList">
 
-					<li class="relative" v-bind:class="{selected:selectedId == item.id}" @click="changeCompany(item.id,item.name,item.clientid,item.user_id)">
-						<Row>
-							<Col span="24">
-							<p v-bind:title="item.name" class="company-name">{{item.name}}</p>
-							</Col>
-						</Row>
-					</li>
-				</template>
+			<ul id='clientMenu'>
+				<Scroll height='870' :on-reach-bottom="handleReachBottom" :distance-to-edge=-35>
+					<template v-for="item in companyList">
+
+						<li class="relative" v-bind:class="{selected:selectedId == item.id}"
+						    @click="changeCompany(item.id,item.name,item.clientid,item.user_id)">
+							<Row>
+								<Col span="24">
+								<p v-bind:title="item.name" class="company-name">{{item.name}}</p>
+								</Col>
+							</Row>
+						</li>
+					</template>
 				</Scroll>
 			</ul>
-			
+
 			<Spin size="large" fix v-if="spinShow"></Spin>
 		</div>
 	</div>
 </template>
 <style scoped>
-	.client-sidebar{
+	.client-sidebar {
 		background-color: #fff;
 		margin: 3px;
 	}
-	.search{
+
+	.search {
 		width: 100%;
 		height: 60px;
 		border-bottom: solid 1px #ccc;
 		line-height: 60px;
 		text-align: center;
 	}
-	.search i{
+
+	.search i {
 		top: 1px;
 		left: 25px;
 		color: #ccc;
 	}
-	.search input{
+
+	.search input {
 		width: 90%;
 		height: 30px;
 		border: solid 1px #ccc;
@@ -142,49 +166,54 @@
 		outline: none;
 		padding-left: 30px;
 	}
-	.company-list ul{
+
+	.company-list ul {
 		width: 100%;
 		height: 870px;
-		overflow:hidden;
+		overflow: hidden;
 		/*overflow-y: scroll;
 		overflow-x: hidden;*/
 	}
-	.company-list ul:hover::-webkit-scrollbar{
+
+	.company-list ul:hover::-webkit-scrollbar {
 		width: 5px;
 		/*滚动条宽度（右侧滚动条）*/
 		height: 5px;
 		/*滚动条高度（底部滚动条）*/
 		background-color: #eeeeee;
 	}
+
 	/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-	.company-list ul::-webkit-scrollbar{
+	.company-list ul::-webkit-scrollbar {
 		width: 0px;
 		/*滚动条宽度（右侧滚动条）*/
 		height: 5px;
 		/*滚动条高度（底部滚动条）*/
 		background-color: #eeeeee;
 	}
+
 	/*定义滚动条轨道 内阴影+圆角*/
-	.company-list ul::-webkit-scrollbar-track
-	{
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+	.company-list ul::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
 		border-radius: 10px;
 		background-color: #F5F5F5;
 	}
+
 	/*定义滑块 内阴影+圆角*/
-	.company-list ul::-webkit-scrollbar-thumb
-	{
+	.company-list ul::-webkit-scrollbar-thumb {
 		border-radius: 10px;
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
 		background-color: #ccc;
 	}
-	.company-list li.selected{
+
+	.company-list li.selected {
 		background-color: #E0EBF7;
 		border-left: 4px solid #108CEE !important;
 		border-top: solid 1px #eee;
-		color: #108CEE ;
+		color: #108CEE;
 	}
-	.company-list li{
+
+	.company-list li {
 		width: 100%;
 		min-height: 40px;
 		overflow: hidden;
@@ -195,25 +224,37 @@
 		cursor: pointer;
 
 	}
-	.company-list li:hover{
+
+	.company-list li:hover {
 		background-color: #E0EBF7;
-		color: #108CEE ;
+		color: #108CEE;
 	}
-	.company-list li p{
+
+	.company-list li p {
 		padding: 10px 0 10px 10px;
 		margin-left: 5px;
 	}
-	.company-name{
+
+	.company-name {
 		font-size: 12px;
 	}
-	.company-id{
+
+	.company-id {
 		color: #999;
 	}
+
 	/*.avator{*/
-		/*width: 100%;*/
-		/*height: 76px;*/
-		/*line-height: 70px;*/
-		/*text-align: center;*/
-		/*margin: 5px;*/
+	/*width: 100%;*/
+	/*height: 76px;*/
+	/*line-height: 70px;*/
+	/*text-align: center;*/
+	/*margin: 5px;*/
 	/*}*/
+	@media (max-width: 1366px) {
+		.client-sidebar{
+			 width:12.5%;
+			 position: fixed;
+			 z-index: 999;
+		}
+	}
 </style>

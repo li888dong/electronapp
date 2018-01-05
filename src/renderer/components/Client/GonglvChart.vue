@@ -2,6 +2,11 @@
 	.relative {
 		background-color: #fff;
 	}
+    @media (max-width: 1366px) {
+        #lineChart2{
+            width:540px !important;
+        }
+    }
 </style>
 <template>
 	<Card class="relative">
@@ -12,8 +17,8 @@
 		</div>
 		<Modal v-model="modal2"
 		       title="功率因数"
-		       width="1500">
-			<div id="lineModalChart2" :style="{width: '1449px', height: '543px',margin:'15px 0 0 20px'}">
+		       width="1200">
+			<div id="lineModalChart2" :style="{width: '1100px', height: '543px',margin:'15px 0 0 20px'}">
 
 			</div>
 			<div slot="footer">
@@ -34,7 +39,7 @@
         data() {
             return {
                 modal2: false,
-                modalName: [ '河南众企联合售电'],
+                modalName: ['河南众企联合售电'],
                 modalxData: ['2017年01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'],
                 modalyData: [
                     {
@@ -165,7 +170,7 @@
                             active_power.push(Object.values(i).map(j => j.active_power));
                             power_factor.push(Object.values(i).map(j => j.power_factor));
                         });
-                        usernolist.map((v,i) => {
+                        usernolist.map((v, i) => {
                             this.modalName.push({name: v, icon: 'rect'});
                             this.modalyData.push({
                                 name: v,
@@ -174,15 +179,15 @@
                                 data: power_factor[i]
                             })
                         });
-						this.modalName.unshift(this.$store.getters.cus_name);
-						this.modalxData.unshift(this.updated_at);
-						this.modalyData.unshift({
+                        this.modalName.unshift(this.$store.getters.cus_name);
+                        this.modalxData.unshift(this.updated_at);
+                        this.modalyData.unshift({
                             name: this.$store.getters.cus_name,
                             type: 'line',
                             smooth: true,
                             data: this.power_factor
                         });
-						console.log(this.modalyData)
+                        console.log(this.modalyData)
                         console.log('功率曲线 户号', res);
                         this.drawModal1()
                     }, err => {

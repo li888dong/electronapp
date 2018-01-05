@@ -1,6 +1,8 @@
 <style>
 	.powerTimeFrame {
 		height: 202px;
+        width: 100%;
+
 	}
 	.title{
 		display: inline-block;
@@ -13,6 +15,11 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+    @media (max-width: 1366px) {
+        .powerTimeFrame{
+            width: 382px;
+        }
+    }
 </style>
 <template>
 	<Card class="powerTimeFrame">

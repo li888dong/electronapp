@@ -20,8 +20,10 @@
 			doAjax(){
                 this.$http.post(this.$api.WARNING_INFO,{com_id:this.$store.getters.com_id})
 	                .then(res => {
-	                    console.log('数据异常提醒',res);
-	                    this.fiveData = res.data[0];
+	                	console.log('数据异常提醒',res);
+	                	if(res.data.status === '1'){
+	                		this.fiveData = res.data[0];
+	                	}
 						console.log('*****',this.fiveData)
 	                }, err => {
 	                    this.$api.errcallback(err)
@@ -41,7 +43,7 @@
 		<Card>
 			<Row type="flex" justify="space-between" align="middle">
 
-				<Col span="4" class="data-item lxyj"><strong class="offline-warning"><CountTo :startVal='0' :endVal='fiveData.offline' :duration='2000'></CountTo></strong><span class="data-title">离线预警</span></Col>
+				<Col span="4" class="data-item lxyj"><strong class="offline-warning"><CountTo :startVal='0' :endVal='fiveData.offline||0' :duration='2000'></CountTo></strong><span class="data-title">离线预警</span></Col>
 
 				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='fiveData.abnormal' :duration='2000'></CountTo></strong><span class="data-title">数据异常</span></Col>
 

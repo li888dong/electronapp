@@ -1,5 +1,5 @@
 const state = {
-    cus_id:1,
+    cus_id:null,
     cus_name:'',
     cus_termList:[],
     clientid:'999600CC',

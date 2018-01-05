@@ -182,7 +182,8 @@
 		</div>
 		<Modal v-model="modal"
 		       title="接线图"
-		       width="1500">
+		       class='quanping'
+               width='1300'>
 			<div id="modalTree" :style="{width: '1449px', height: '543px',margin:'15px 0 0 20px'}">
 
 			</div>
@@ -202,5 +203,8 @@
 		position: relative;
 		overflow: hidden;
 	}
-
+@media (max-width: 1366px) {
+     
+     
+}
 </style>
