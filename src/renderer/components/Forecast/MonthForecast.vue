@@ -399,7 +399,7 @@ export default {
         width = '846px'
         :mask-closable="false"
         class-name="vertical-center-modal" 
-        @on-ok="renderM">
+        >
         <div  class='recordBox'>
         <Row  v-if="modal2">
              <Table :columns='columns5' :data='data2'></Table>
@@ -481,5 +481,11 @@ export default {
 	width: 70px;
 	height: 26px;
 	text-align: center;
+}
+@media (max-width: 1366px) {
+   .modelBox{
+     height:450px;
+     overflow-y: scroll;
+}
 }
 </style>

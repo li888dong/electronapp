@@ -15,10 +15,10 @@
             },
             chartOption2:function () {
                 let data1 = this.gsData.sort(function (a, b) {
-                    return b - a
+                    return a - b
                 });
                 let data2 = this.dcData.sort(function (a, b) {
-                    return a - b
+                    return b - a
                 });
                 console.log('33333',data1)
                 let axisData = this.gsName;

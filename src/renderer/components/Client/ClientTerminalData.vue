@@ -139,7 +139,9 @@
                     yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 },
                 terminalList: [],
-	            clientid:''
+	            clientid:'',
+                loading1:false,
+                loading2:false,
             }
         },
         computed: {
@@ -938,22 +940,40 @@
                 })
             },
             equipmentAbnomal() {
+                this.loading1 = true;
                 this.$http.post(this.$api.CLIENT_EQUIPMENT_REMIND).then(res => {
                     console.log("设备异常提醒", res);
-                    this.tableData2 = res.data.data;
+                    if(res.data.status === '1'){
+                        this.tableData2 = res.data.data;
+                        this.loading1 = false;
+                    }else{
+                        this.loading1 = false;
+                    }
+                    
                 }, err => {
+                    this.loading1 = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading1 = false;
                     this.$api.errcallback(err);
                 })
             },
             equipmentLog() {
+                this.loading2 = true;
                 this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: this.clientid}).then(res => {
                     console.log("设备日志", res);
-                    this.logData = res.data.data;
+                    if(res.data.status === '1'){
+                        this.logData = res.data.data;
+                        this.loading2 = false;
+                    }else{
+                       this.loading2 = false;
+                    }
+                    
                 }, err => {
+                    this.loading2 = false;
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.loading2 = false;
                     this.$api.errcallback(err);
                 })
             },
@@ -1241,11 +1261,11 @@
 					</div>
 					<div class="unusual-commind fr">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
-						<Table :columns="columns2" :data="tableData2"></Table>
+						<Table :columns="columns2" :data="tableData2" :loading='loading1'></Table>
 					</div>
 					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
 						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
-						<Table :columns="logColumns" width="990" :data="logData" height="232">
+						<Table :columns="logColumns" :data="logData" height="220" :loading='loading2'>
 						</Table>
 					</div>
 				</div>
@@ -1478,7 +1498,10 @@
       margin-top: -15px;
     }
     .unusual-commind .ivu-table-wrapper{
-        height: 468px;
+        height: 460px;
+      }
+      .shebei-log{
+         width:990px;
       }
     @media (max-width: 1366px) {
         .cld-detail .right{
@@ -1503,12 +1526,15 @@
     }
     .unusual-commind{
       width: 300px;
-      height: 250px;
-      padding-right: 20px;
+      height: 485px;
+      padding-right: 0px;
       margin-top: -15px;
     }
       .unusual-commind .ivu-table-wrapper{
-        height: 230px;
+        height: 455px;
+      }
+      .shebei-log{
+        width:780px;
       }
       #dianliang-chart,
       #dianliu-chart,

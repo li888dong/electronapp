@@ -497,4 +497,11 @@
 		border: 1px solid #edb00d;
 		text-align: center;
 	}
+    @media (max-width: 1366px) {
+        .yearUpdate{
+            max-height:450px !important;
+            overflow-y:scroll !important;
+
+        }
+    }
 </style>

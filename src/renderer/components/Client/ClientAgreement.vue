@@ -309,6 +309,9 @@
 		color: #108CEE;
 		cursor: pointer;
 	}
+    .ht-list{
+        margin-bottom:10px;
+    }
     @media (max-width: 1366px) {
     .hetongNav .change {
         position: absolute;
@@ -320,7 +323,7 @@
     .hetongNav li {
         float: left;
         line-height: 50px;
-        padding-right: 12px;
+        padding-right: 5px;
     }
     .hetongNav{
         font-size: 12px;

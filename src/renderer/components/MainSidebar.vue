@@ -120,7 +120,7 @@
                          <i class="iconfont icon-wenjianjia"></i>
                          合同管理
                        </template>
-                       <MenuItem name='5-1' @click.native="$toggleMainSidebar('ContractManagement')">
+                       <MenuItem name='5-1' @click.native="toggleMainSidebar('ContractManagement')">
                         <li> <i class="iconfont icon-jishiben01"></i><span> &nbsp;长协合同</span></li>
                        </MenuItem>
                        <MenuItem name='5-2' @click.native="toggleMainSidebar('saleContract')">

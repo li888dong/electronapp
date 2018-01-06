@@ -183,8 +183,8 @@
 		<Modal v-model="modal"
 		       title="接线图"
 		       class='quanping'
-               width='1300'>
-			<div id="modalTree" :style="{width: '1449px', height: '543px',margin:'15px 0 0 20px'}">
+               width='1200'>
+			<div id="modalTree" :style="{width: '1100px', height: '543px',margin:'15px 0 0 20px'}">
 
 			</div>
 			<div slot="footer">

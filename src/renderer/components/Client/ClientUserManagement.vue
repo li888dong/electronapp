@@ -218,19 +218,44 @@
                 })
             },
             userAdd() {
-                this.$http.post(this.$api.CLIENT_ADD_USER, {
+                //手机号正则表达式
+                var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+                if(!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.mobile)){
+                    this.$http.post(this.$api.CLIENT_ADD_USER, {
                     cus_id: this.$store.getters.cus_id,
                     fullname: this.formItem.fullname,
                     mobile: this.formItem.mobile
                 }).then(res => {
                     console.log('添加新用户', res);
-                    this.userManage();
+                    if(res.data.status === '1'){
+                         this.userManage();
+                         for(let k in this.formItem){
+                             this.formItem[k] = '';
+                         }
+                         this.addModal = false;
+                    }
+                   
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
                     this.$api.errcallback(err);
                 })
-            }
+                }  
+            },
+            cancel(){
+               for(let k in this.formItem){
+                             this.formItem[k] = '';
+                         }
+                         this.addModal = false;
+            },
+             isEmpty(obj) {
+                for (let key in obj) {
+                    if (obj[key] !== "") {
+                        return false
+                    }
+                }
+                return true
+            },
         },
         mounted() {
             this.userManage();
@@ -275,8 +300,6 @@
 		</Modal>
 		<Modal
 				v-model="addModal"
-				@on-ok="userAdd"
-				@on-cancel="addModal=false"
 				class-name="vertical-center-modal"
 				width='400'>
 			<h3 slot='header'>新增用户</h3>
@@ -288,6 +311,10 @@
 					<Input class='width_200' v-model='formItem.mobile' placeholder='请输入手机号'></Input>
 				</FormItem>
 			</Form>
+             <div slot="footer">
+             <Button type="default" @click='cancel'>取消</Button>
+            <Button type="primary" @click='userAdd'>确定</Button>
+        </div>
 		</Modal>
 
 	</div>

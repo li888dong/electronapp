@@ -105,7 +105,7 @@
     }
     .frame-top{
         position: fixed;
-        z-index: 999999;
+        z-index: 999;
 	}
     .top_25{
         margin-top: 25px;

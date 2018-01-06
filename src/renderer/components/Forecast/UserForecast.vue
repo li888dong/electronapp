@@ -365,7 +365,7 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal">
 			申报记录 :
-			<Table border ref="selection" :columns="columns5" :data="tableData2" :loading='loading'></Table>
+			<Table border ref="selection" :columns="columns5" :data="tableData2" :loading='loading' height='400'></Table>
 		</Modal>
 		<Modal
 				v-model="delModal"
@@ -377,7 +377,9 @@
 </template>
 
 <style scoped>
-
+    .main-container{
+        max-width: 1680px;
+    }
 	.layout-content {
 		overflow: hidden;
 		background: #fff;

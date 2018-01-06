@@ -45,7 +45,7 @@
 		
     }
 	.client-header {
-		width: 87.5%;
+		width: 78%;
 		height: 60px;
 		display: inline-block;
 		margin-left:25px;
@@ -55,7 +55,7 @@
 	.client-header .back {
 		position: absolute;
 		top: 18px;
-		left: 0px;
+		left: 15px;
 		z-index: 9;
 		cursor: pointer;
 	}
@@ -91,6 +91,9 @@
 	@media (max-width: 1366px) {
 		.client-box{
 			background-color: #f0f0f0;
+		}
+		.client-header{
+			width:87.5%;
 		}
 	}
 </style>
