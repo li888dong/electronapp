@@ -1,264 +1,175 @@
 <script>
-import myFenye from '@/components/Tool/myFenye'
-import mySearch from '@/components/Tool/mySearch'
+import PagingTool from '@/components/Equipment/PagingTool'
 
 export default {
     name: 'EquipmentException',
     data(){
         return{
-            columns1: [
-                {
-                    "sortable": true,
-                    title: '逻辑地址',
-                    key: 'clientid'
-                },
-                {
-                    "sortable": true,
-                    title: '生产厂家',                    
-                    width: 200,
-                    key: 'factory'
-                },
-                {
-                    "sortable": true,
-                    title: '当前状态',
-                    key: 'status',
-                    render:(h,params)=>{
-                        if(params.row.status == 0){
-                            return h('span',{},'异常')
-                        }else{
-                            return h('span',{},'无异常')
-                        }
-                    }
-                },
-                { 
-                    title: '异常编码',
-                    key: 'coding'
-                },
-                {
-                    "sortable": true,
-                    title: '异常类别',
-                    key: 'type'
-                },
-                {
-                    title: '异常出现时间',
-                    key: 'error_time'
-                },
-                {
-                    "sortable": true,
-                    title: '操作人',
-                    key: 'operator'
-                },
-                
-                {
-                    title: '操作',
-                    key: 'n8',
-                    align: 'center',
-                    width: 150,
-                    render: (h, params) => {
-                        return h('div', [                            
-                            h('span', {
-                                style: {
-                                    marginRight: '5px',
-                                    color:'#36c ',
-                                    cursor:'pointer'
-                                },
-                                on: {
-                                    click: () => {
-                                        
-                                    }
-                                }
-                            }, '修正完成'),
-                            h('span', {
-                                style: {
-                                    marginLeft: '10px',
-                                    color:'#36c ',
-                                    cursor:'pointer'
-                                },
-                                on: {
-                                    click: () => {
-                                        
-                                    }
-                                }
-                            }, '拆除设备')                                        
-                        ]);
-                    }
-
-                }               
-            ],
-            data1:[],
-            cityList: [
-                {
-                    value: '所有区域',
-                    label: '所有区域'
-                },
-                {
-                    value: '河南',
-                    label: '河南'
-                },
-                {
-                    value: '河北',
-                    label: '河北'
-                },
-                {
-                    value: '江西',
-                    label: '江西'
-                },
-                {
-                    value: '山东',
-                    label: '山东'
-                },
-                {
-                    value: '山西',
-                    label: '山西'
-                },
-                {
-                    value: '陕西',
-                    label: '陕西'
-                }
-            ],
-            model1: '',
-            value: '',
-            totalPage:0,
-            currentPage:1,
-            limit:14,
-            loading:false
+            
         }
     },
-    methods:{
-       equipmentAbnormal(){
-          this.loading = true;
-          this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
-             console.log("设备异常记录列表",res);
-             if(res.data.status==='1'){
-                 this.data1 = res.data.data.data;
-                 this.totalPage = res.data.data.total;
-                 this.loading = false;
-             }else{
-                 this.loading = false;
-             }
-          },err=>{
-             this.loading = false;
-             this.$api.errcallback(err);
-          }).catch(err=>{
-             this.loading = false;
-             this.$api.errcallback(err);
-          })
-       },
-       pageChange(value){
-          this.loading = true;
-          this.$http.post(this.$api.EQUIPMENT_ABNORMAL_RECORD,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
-             console.log("设备异常记录列表",res);
-             if(res.data.status==='1'){
-                 this.data1 = res.data.data.data;
-                 this.totalPage = res.data.data.total;
-                 this.currentPage = res.data.data.current_page;
-                 this.loading = false;
-             }else{
-                 this.loading = false;
-             }
-          },err=>{
-             this.loading = false;
-             this.$api.errcallback(err);
-          }).catch(err=>{
-             this.loading = false;
-             this.$api.errcallback(err);
-          })
-
-       }
-    },
-    watch:{
-      
-    },
-    computed:{
-       com_id:function(){
-          return this.$store.getters.com_id;
-       }
-    },
-    components : {
-        'myFenye': myFenye,
-        'mySearch': mySearch
-    },
-    mounted(){
-        this.equipmentAbnormal();
+    components: {
+        'PagingToolView': PagingTool
     }
 }
 </script>
 
 <template><!-- 设备异常页面 -->
-<div class="main-container relative">
-    <Card>
-        <i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
-        <h3 slot="title" style="padding-left:40px">设备异常记录</h3>
-        <div class="EquipmentExceptionBox">
-            <div class="ExceptionTop">
-                <DatePicker :value="new Date()" format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="请选择日期"  style="width: 200px"></DatePicker>
-                <div class="search"><mySearch placeholder="请输入终端名称、编号、客户名称或IP地址等" swidth="340"></mySearch></div>
-                <Button type="primary" class="refresh fr" style="margin-left: 10px;" @click='equipmentAbnormal()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
-               <!--  <Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">
-                    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                </Select> -->
-                
-            </div>
-            <Row class="ExceptionForm">
-                <Table border :columns='columns1' :data='data1' :loading='loading'></Table>            
-            </Row>
-        </div>
-       <div class="page-center">
-        <!--分页-->
-        <div class="fenYe">
-          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page> <!-- <Button type="primary">确定</Button> -->
-        </div>
-      </div> 
-    </Card>
+<div class="EquipmentException">
+    设备管理 / 设备异常记录
+    <div class="ExceptionTittle">
+        <h3>设备异常记录</h3>
+    </div>
+    <div class="ExceptionTop">
+        <i class="iconfont icon-search searchPic"></i>
+        <input type="text" name="" id="" class="SearchText" placeholder="终端名称、编号、客户名称、IP地址等"><button>搜索</button>
+        <span>m</span>
+        <select name="" id="">
+            <option value="">所有区域</option>
+            <option value="">河南区域</option>
+            <option value="">全国区域</option>
+        </select>
+        <span>时间</span>        
+    </div>
+    <div class="ExceptionForm">
+        <table>
+            <tr>
+                <th><input type="checkbox" name="" id="">终端编号</th>
+                <th>生产厂家</th>
+                <th>当前状态</th>
+                <th>异常编码</th>
+                <th>异常类别</th>
+                <th>异常出现时间</th>
+                <th>操作人</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>23422</td>
+                <td>232342</td>
+                <td>234324324</td>
+                <td>2017.225.255</td>
+                <td>2555</td>
+                <td>2017-12-12 12:12:12</td>
+                <td>丽丽</td>
+                <td>修正完成</td>
+            </tr>
+            <tr>
+                <td>23422</td>
+                <td>232342</td>
+                <td>234324324</td>
+                <td>2017.225.255</td>
+                <td>2555</td>
+                <td>2017-12-12 12:12:12</td>
+                <td>明明</td>
+                <td>拆除设备</td>
+            </tr>
+            <PagingToolView></PagingToolView>
+        </table>
+    </div>
 </div>
 </template>
 
 <style scoped>
-.search {
-    display: inline-block;
-    width: 340px;
-    vertical-align: bottom;
+.EquipmentException{
+    width: 1700px;
+    height: 944px;
+    background-color: #E8ECF0;
+    padding: 15px;
+    font-size: 14px;
 }
-.EquipmentExceptionBox {
-    height: 811px;
+.ExceptionTittle{
     background-color: #fff;
-}
- .back{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 9;
-    cursor: pointer;
-    /* color: #108CEE; */
-}
-.ExceptionTop {
-    height: 34px;
-    position: relative;
-    margin-bottom: 15px;
-}
-.relative .page-center{
-    text-align: center;
-    position: absolute;
-    bottom:0px;
-    left:0;
-    right:0;
-  }
-  /* 分页的样式 */
-  .page-center  .fenYe {
-    width: 100%;
     height: 60px;
-    background-color: #fff;
-    padding-top: 10px;
-    text-align: center;
-  }
-  .fenYe table{
-    border: 0;
-  }
-  .fenYe ul {
+    border-bottom: 1px solid #666666;
+    padding: 20px 10px 10px 10px;
+}
+.ExceptionTittle h3{
     display: inline-block;
-  }
- /* .fenYe button{
-    top: -12px;
-    left: 12px;
-  }*/
+    font-size: 16px;
+    font-family: 'MicrosoftYahei'; 
+}
+.ExceptionTittle span {
+    width: 123px;
+    height: 30px;
+    float: right;
+    font-size: 14px;
+    background-color: #108CEE;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ExceptionTop {
+    height: 50px;
+    padding: 10px;
+    background-color: #fff;
+    position: relative;
+}
+.ExceptionTop .SearchText{
+    width: 250px;
+    height: 30px;
+    border: 1px solid #ccc;
+    padding-left: 24px;
+}
+.searchPic {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+.ExceptionTop button {
+    width: 60px;
+    height: 30px;
+    background-color: #108CEE;
+    color: #fff;
+}
+.ExceptionTop span{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #EAF6FE;
+    margin: 0 30px;
+    vertical-align: middle;
+    color: #108CEE;
+    line-height: 30px;
+    text-align: center;
+}
+.ExceptionTop select{
+    width: 94px;
+    height: 30px;
+    background-color: #EAF6FE;
+    color: #108CEE;
+    border: none;
+    outline: none;
+}
+
+.ExceptionForm{
+    background-color: #fff;
+    position: relative;
+    height: 882px;
+}
+.ExceptionForm th{
+    display: inline-block;
+    padding: 0 20px;
+    height: 40px;
+    background-color: #F6F7FB;
+    line-height: 40px;
+    margin: 0 33px;
+}
+.ExceptionForm th input {
+    vertical-align: middle;
+}
+.ExceptionForm td{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 32px;
+    text-align: center;
+    width: 100px;
+}
+.ExceptionForm a{
+    padding: 0 2px;
+} 
+
 </style>

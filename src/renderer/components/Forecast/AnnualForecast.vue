@@ -1,436 +1,281 @@
 <script>
-    import myFenye from '@/components/Tool/myFenye'
-    import mySearch from '@/components/Tool/mySearch'
-    import {POWER_FRAME} from "../../Api";
+    import Pagenation from '@/components/Pagenation'
 
     export default {
         name: 'annualforecast',
         data() {
             return {
-                modalShow: false,
-                selectList: [],
-                selectYear: new Date().getFullYear(),
-                selectArea: '郑州',
-                statusList: [
-                    {
-                        value: 0,
-                        label: '未确认'
-                    },
-                    {
-                        value: 1,
-                        label: '已确认'
-                    },
-                    {
-                        value: 2,
-                        label: '已购电'
-                    },
-                ],
+				modalShow:false,
                 cur: 1,
                 all: 5,
-                msg: '',
-                columns6: [
-                    {
-                        type: 'selection',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
-                        title: '企业名称',
-                        width: 200,
-                        key: 'com_name',
-                        align: 'left'
-                    },
-                    {
-                        title: '1月',
-                        key: 'month01',
-                        align: 'center'
-                    },
-                    {
-                        title: '2月',
-                        key: 'month02',
-                        align: 'center'
-                    },
-                    {
-                        title: '3月',
-                        key: 'month03',
-                        align: 'center'
-                    },
-                    {
-                        title: '4月',
-                        key: 'month04',
-                        align: 'center'
-                    },
-                    {
-                        title: '5月',
-                        key: 'month05',
-                        align: 'center'
-                    },
-                    {
-                        title: '6月',
-                        key: 'month06',
-                        align: 'center'
-                    },
-                    {
-                        title: '7月',
-                        key: 'month07',
-                        align: 'center'
-                    },
-                    {
-                        title: '8月',
-                        key: 'month08',
-                        align: 'center'
-                    },
-                    {
-                        title: '9月',
-                        key: 'month09',
-                        align: 'center'
-                    },
-                    {
-                        title: '10月',
-                        key: 'month10',
-                        align: 'center'
-                    },
-                    {
-                        title: '11月',
-                        key: 'month11',
-                        align: 'center'
-                    },
-                    {
-                        title: '12月',
-                        key: 'month12',
-                        align: 'center'
-                    },
-                    {
-                        title: '合计',
-                        key: 'total',
-                        align: 'center'
-                    },
-                    {
-                        title: '修改人',
-                        key: 'modifiedby',
-                        align: 'center'
-                    },
-                    {
-                        title: '确认人',
-                        key: 'confirmor',
-                        align: 'center'
-                    },
-                    {
-                        title: '状态',
-                        key: 'n17',
-                        aligin:'left',
-                        render: (h, params) => {
-                            let _this = this;
-                            return h('select', {
-	                            on:{
-                                    change:(e)=>{
-                                        params.row.status = e.target.value;
-                                        this.setTableData1(params.index,e.target.value);
-                                        console.log('当前状态',params.row.status);
-                                    }
-	                            }
-                            },[
-                                h('option', {
-                                    attrs:{
-                                        value:this.statusList[0].value
-                                    }
-                                }, this.statusList[0].label),
-                                h('option', {
-                                    attrs:{
-                                        value:this.statusList[1].value
-                                    }
-                                }, this.statusList[1].label),
-                                h('option', {
-                                    attrs:{
-                                        value:this.statusList[2].value
-                                    }
-                                }, this.statusList[2].label),
-                            ])
-                        }
-                    },
-                    {
-                        title: '操作',
-                        key: 'change',
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('span', {
-                                    style: {
-                                        marginRight: '5px',
-                                        color: '#36c ',
-                                        cursor: 'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.renderM(params)
-                                        }
-                                    }
-                                }, '修改')
-                            ])
-                        }
-                    }
-                ],
-                tableData1: [],
-                model1: '',
-                modal2: false
+                msg: ''
             }
         },
-        mounted() {
-            this.yearData()
-        },
-        methods: {
-            yearData() {
-                this.$http.post(this.$api.YEAR_FORECAST, {
-                    com_id: this.$store.getters.com_id,
-                    year: this.selectYear,
-                    area: this.selectArea,
-                    keyword: this.$store.getters.searchKey
-                }).then(res => {
-                    console.log("年度预测", res);
-                    this.tableData1 = res.data.data
-                }, err => {
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.$api.errcallback(err);
-                })
-            },
-            yearSelect(year) {
-                this.selectYear = year;
-                console.log(this.selectYear);
-                this.yearData()
-            },
-            areaSelect(area) {
-                this.selectArea = area[1].name.replace(/市/, '');
-                console.log(this.selectArea);
-
-                this.yearData()
-            },
-            selectItem(items){
-                console.log(items);
-                this.selectList = items
-            },
-	        allComfirm(){
-                let postArr = [];
-                let _this = this;
-                this.selectList.map(function (i) {
-	                postArr.push({
-		                cus_id:i.cus_id,
-		                year:_this.selectYear,
-		                type:i.status
-	                })
-
-                });
-                console.log(postArr)
-//                this.$http.post(this.$api.YEAR_CONFIRM, {confirmList:postArr}).then(res => {
-//                    console.log("年度预测确认", res);
-//                }, err => {
-//                    this.$api.errcallback(err);
-//                }).catch(err => {
-//                    this.$api.errcallback(err);
-//                })
-	        },
-            setTableData1(index,value){
-	            this.tableData1[index].status = value
-            },
+	    methods:{
             pageListen: function (data) {
                 this.msg = '当前页码：' + data
-            },
-            renderM(index) {
-                this.modal2 = true;
-                console.log(index)
-            },
-            toDaoru() {
-                this.$router.push("/import-data")
             }
         },
-        components: {
-            'myFenye': myFenye,
-            'mySearch': mySearch
-        },
+        components:{
+            'pagenation':Pagenation
+	    }
     }
 </script>
 <template>
-	<div class="main-container">
-		<Card>
-			<h3 slot="title">年度预测</h3>
-			<div class="layout-content">
-				<div class="layout-content-top">
-					<Row gutter="10">
-						<Col span="2">
-						<DatePicker type="year" placeholder="请选择年份" @on-change="yearSelect"></DatePicker>
-
-						</Col>
-						<Col span="4">
-						<al-selector level=1  @on-change="areaSelect"/>
-
-						</Col>
-						<Col span="5">
-
-						<mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="yearData"></mySearch>
-						</Col>
-						<Col span="4" offset="9" style="display: flex;justify-content: flex-end">
-						<Button class="fl" type="primary" @click="allComfirm">批量确认</Button>
-						<Button class="fl" type="primary" style="margin-left: 10px" @click="toDaoru()">导入</Button>
-						</Col>
-					</Row>
-				</div>
-				<Row>
-					<Table border @on-selection-change="selectItem" :columns="columns6" :data="tableData1"></Table>
-				</Row>
-				<myFenye></myFenye>
+	<div class="main-container relative">
+		<span class="title">预测分析/年度分析</span>
+		<div class="main-container-panel">
+			<div class="header">
+				<span>年度预测</span>
 			</div>
-		</Card>
-		<Modal
-				title="河南众企联合售电有限公司"
-				v-model="modal2"
-				width='54'
-				:mask-closable="false"
-				class-name="vertical-center-modal">
-			<table>
-				<thead>
-				<tr>
-					<th>2017年月份</th>
-					<th>01月</th>
-					<th>02月</th>
-					<th>03月</th>
-					<th>04月</th>
-					<th>05月</th>
-					<th>06月</th>
-					<th>07月</th>
-					<th>08月</th>
-					<th>09月</th>
-					<th>10月</th>
-					<th>11月</th>
-					<th>12月</th>
-					<th>合计</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>户号12345</td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td>355555.55</td>
-				</tr>
-				<tr>
-					<td>户号12345</td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td><input placeholder='-' type="text"></td>
-					<td>355555.55</td>
-				</tr>
-				<tr>
-					<td>合计</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355555.55</td>
-				</tr>
-				<tr>
-					<td>系统预测</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355555.55</td>
-				</tr>
-				<tr>
-					<td>偏差值</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355.55</td>
-					<td>355555.55</td>
-				</tr>
-				</tbody>
-			</table>
-		</Modal>
+			<div class="tab fl">
+				<div class="btn-group ">
+					<button class="button">下一年</button>
+					<button class="button btnSelected">2017年</button>
+					<button class="button">下一年</button>
+					<button class="button">年度选择 <i class="iconfont icon-xiala"></i></button>
+					<button class="button">区域选择 <i class="iconfont icon-xiala"></i></button>
+				</div>
+			</div>
+			<div class="search-box btn-group relative fr" style="margin: 10px 10px 0 0;">
+				<i class="iconfont icon-search absolute"></i><input type="search"><button class="button btnSelected">搜索</button>
+			</div>
+			<div class="table-container">
+				<table width="100%" cellspacing="2" style="margin-top: 60px;">
+					<thead>
+						<tr>
+							<th>企业名称</th>
+							<th>01月</th>
+							<th>02月</th>
+							<th>03月</th>
+							<th>04月</th>
+							<th>05月</th>
+							<th>06月</th>
+							<th>07月</th>
+							<th>08月</th>
+							<th>09月</th>
+							<th>10月</th>
+							<th>11月</th>
+							<th>12月</th>
+							<th>合计</th>
+							<th>修改人</th>
+							<th>确认人</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>河南众企联合售电</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>144.55</td>
+							<td>6665554.12</td>
+							<td>修改人</td>
+							<td>确认人</td>
+							<td>状态</td>
+							<td style="cursor: pointer;color: #36c" @click="modalShow = true">修改</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div v-if="modalShow" class="modal">
+				<div class="header">河南众企联合售电有限公司</div>
+				<div class="table-container">
+					<table width="100%" cellspacing="2" style="margin-top: 15px;">
+						<thead>
+						<tr>
+							<th>2017年月份</th>
+							<th>01月</th>
+							<th>02月</th>
+							<th>03月</th>
+							<th>04月</th>
+							<th>05月</th>
+							<th>06月</th>
+							<th>07月</th>
+							<th>08月</th>
+							<th>09月</th>
+							<th>10月</th>
+							<th>11月</th>
+							<th>12月</th>
+							<th>合计</th>
+
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>户号12345</td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td>355555.55</td>
+							</tr>
+							<tr>
+								<td>户号12345</td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td><input type="text"></td>
+								<td>355555.55</td>
+							</tr>
+							<tr>
+								<td>合计</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355555.55</td>
+							</tr>
+							<tr>
+								<td>系统预测</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355555.55</td>
+							</tr>
+							<tr>
+								<td>偏差值</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355.55</td>
+								<td>355555.55</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="btn-group" style="margin-left: 40%;">
+						<button class="button btnSelected" @click="modalShow = false">确认</button>
+						<button class="button" @click="modalShow = false">取消</button>
+					</div>
+				</div>
+			</div>
+			<div class="btn-group absolute" style="bottom: 20px;left: 40px">
+				<button class="button btnSelected">批量确认</button>
+				<router-link tag="button" to="/import-data" class="button btnSelected">导入</router-link>
+				<button class="button btnSelected">导出</button>
+			</div>
+			<div class="table-page absolute">
+				<span>共44444条记录</span><span>123页</span>
+				<span>第 <select name="" id="">
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+						</select>页</span>
+			</div>
+			<pagenation class="absolute" style="bottom: 20px;right: 40px; " :cur.sync="cur" :all.sync="all" v-on:btn-click="pageListen"></pagenation>
+		</div>
 	</div>
+
 </template>
 <style scoped>
-	.layout-content {
-		background: #fff;
-		height: 810px;
+	.main-container-panel{
+		height: 900px;
 	}
-
-	.layout-content-top {
-		padding-bottom: 15px;
+	.tab .btn-group{
+		padding: 10px 16px;
 	}
+	.tab button{
 
-	.table-container th {
+	}
+	.tab button i{
+		color: black;
+		font-size: 10px;
+	}
+	.btn-group input{
+		height: 30px;
+		width: 200px;
+		padding-left: 20px;
+	}
+	.btn-group i{
+		left: 10px;
+		top: 2px;
+	}
+	.table-container th{
 		height: 30px;
 		background-color: #f6f6f6;
-	}
 
-	.table-container td {
+	}
+	.table-container td{
 		text-align: center;
 		height: 30px;
 	}
-
-	.vertical-center-modal table {
-		text-align: center;
-		border: 1px solid #ccc;
-		border-collapse: collapse;
+	.modal{
+		width: 1600px;
+		height: 300px;
+		background-color: #fff;
+		border: 1px solid #828282;
+		position: absolute;
+		top: 130px;
+		left:50px;
 	}
-
-	.vertical-center-modal th {
-		background-color: #f8f8f9;
+	.modal .header{
+		height: 50px;
+		line-height: 50px;
+		padding-left: 20px;
+		background-color: #f6f6f6;
+		margin:0 auto;
 	}
-
-	.vertical-center-modal td, .vertical-center-modal th {
-		border: 1px solid #ccc;
-		width: 70px;
+	.modal td input{
+		width: 100px;
 		height: 30px;
 	}
-
-	.vertical-center-modal input {
-		width: 70px;
-		height: 30px;
-		border: 1px solid #edb00d;
-		text-align: center;
+	.table-page{
+		font-size: 14px;
+		color: #36c;
+		bottom: 20px;
+		right: 300px;
 	}
 </style>

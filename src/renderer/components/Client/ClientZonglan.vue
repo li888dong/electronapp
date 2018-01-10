@@ -1,151 +1,125 @@
 <script>
-    import ClientHeader from './ClientHeader'
-    import ClientSider from './ClientSidebar'
-    import CompanyPowerProgress from '@/components/Home/PowerUse'
-    import JieXianTu from '@/components/Client/JieXianTu'
-    import PowerTimeframe from '@/components/Home/PowerTimeframeYM'
+	import ClientHeader from './ClientHeader'
+	import ClientSider from './ClientSidebar'
+	import CompanyPowerProgress from '@/components/Home/PowerUse'
+	import JieXianTu from '@/components/Client/JieXianTu'
+	import PowerTimeframe from '@/components/Home/PowerTimeframeProgress'
     import RealTimePowerChart from '@/components/Home/RealTimePowerChart.vue'
-    import FuheChart from './FuheChart.vue'
-    import Gonglv from './GonglvChart.vue'
-    import Yougong from './YougongChart.vue'
-    import {ipcRenderer} from 'electron'
+    import LineChart from '@/components/LineChart.vue'
 
     export default {
-        name: 'zonglan',
-        data() {
-            return {
-                fuhe: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                active_power: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                power_factor: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                updated_at: ["2017/10/4", "2017/10/5", "2017/10/6", "2017/10/7", "2017/10/8", "2017/10/9", "2017/10/10", "2017/10/11", "2017/10/12", "2017/10/13", "2017/10/14", "2017/10/15", "2017/10/16", "2017/10/17", "2017/10/18", "2017/10/19", "2017/10/20", "2017/10/21", "2017/10/22", "2017/10/23", "2017/10/24", "2017/10/25", "2017/10/26", "2017/10/27", "2017/10/28", "2017/10/29", "2017/10/30", "2017/10/31", "2017/11/1", "2017/11/2", "2017/11/3", "2017/11/4", "2017/11/5", "2017/11/6", "2017/11/7", "2017/11/8", "2017/11/9", "2017/11/10", "2017/11/11", "2017/11/12", "2017/11/13", "2017/11/14", "2017/11/15", "2017/11/16", "2017/11/17", "2017/11/18", "2017/11/19", "2017/11/20", "2017/11/21"],
-                user_no: '',
-            }
-        },
-        mounted() {
-            this.doAjax();
-            
-        },
-        computed: {
-            cus_id: function () {
-                return this.$store.getters.cus_id
-            },
-            Width: function () {
-                let screenWidth = ipcRenderer.sendSync('width-change', 'change');
-                let width = 0;
-                console.log(screenWidth);
-                if (screenWidth > 1366) {
-                    width = 323;
-                } else {
-                    width = 240;
-                }
-                return width
-            }
-        },
-        watch: {
-            cus_id: function () {
-                this.doAjax()
-            }
-        },
-        methods: {
-            setUserNo(num) {
-                this.user_no = num;
-                this.$http.post(this.$api.CLIENT_CURVE_3, {user_no: this.user_no})
-                    .then(res => {
-                        this.active_power = [];
-                        this.power_factor = [];
-                        this.updated_at = [];
-                        let data = res.data.data;
-                        data.map(i => {
-                            this.active_power.push(i.active_power);
-                            this.power_factor.push(i.power_factor);
-                            this.updated_at.push(i.updated_at);
-                        })
-                        console.log('户号负荷曲线', res);
+	    name:'zonglan',
+		data(){
+	        return{
 
-                    }, err => {
-                        this.active_power = [];
-                        this.power_factor = [];
-                        this.updated_at = [];
-                        this.$api.errcallback(err)
-                    })
-                    .catch(err => {
-                        this.$api.errcallback(err)
-                    })
-            },
-            doAjax() {
-                this.$http.post(this.$api.CLIENT_CURVE_3, {cus_id: this.cus_id})
-                    .then(res => {
-                        this.active_power = [];
-                        this.power_factor = [];
-                        this.updated_at = [];
-                        console.log('负荷曲线', res);
-                        let data = res.data.data;
-                        data.map(i => {
-                            this.active_power.push(i.active_power);
-                            this.power_factor.push(i.power_factor);
-                            this.updated_at.push(i.updated_at);
-                        })
-                    }, err => {
-                        this.$api.errcallback(err)
-                    })
-                    .catch(err => {
-                        this.$api.errcallback(err)
-                    })
-            },
-        },
-        components: {
-            'real-time-power-chart': RealTimePowerChart,
-            'client-sider': ClientSider,
-            'company-power-progress': CompanyPowerProgress,
-            'jiexiantu': JieXianTu,
-            'power-timeframe': PowerTimeframe,
-            'fuhe-chart': FuheChart,
-            'gonglv-chart': Gonglv,
-            'yougong-chart': Yougong,
-            'client-header': ClientHeader
-        }
-    }
+	        }
+		},
+		components:{
+		    'real-time-power-chart': RealTimePowerChart,
+            'client-sider':ClientSider,
+			'company-power-progress':CompanyPowerProgress,
+			'jiexiantu':JieXianTu,
+            'power-timeframe':PowerTimeframe,
+			'line-chart':LineChart,
+			'client-header':ClientHeader
+		}
+	}
 </script>
 <template>
-	<div class="client-container">
-		<Row gutter=15>
-			<Col span="7">
-			<jiexiantu v-on:setUser="setUserNo"></jiexiantu>
-			</Col>
-			<Col span="10">
-			<company-power-progress belong="cus"></company-power-progress>
-			</Col>
-			<Col span="7">
-			<power-timeframe :baseWidth="Width" belong="cus"></power-timeframe>
-			</Col>
-		</Row>
-		<Row class="mgt_15">
-			<Col span="24">
-			<real-time-power-chart belong="cus"></real-time-power-chart>
-			</Col>
+	<div class="main-container">
+		<client-header></client-header>
+		<!-- b
+		--><div class="zonglan-container">
 
-		</Row>
-		<Row class="mgt_15" gutter=15>
-
-			<Col span="12">
-			<gonglv-chart :power_factor="power_factor" :updated_at="updated_at"></gonglv-chart>
-
-			</Col>
-
-			<Col span="12">
-			<yougong-chart :active_power="active_power" :updated_at="updated_at"></yougong-chart>
-
-			</Col>
-
-		</Row>
+			<company-power-progress></company-power-progress>
+			<jiexiantu></jiexiantu>
+			<power-timeframe></power-timeframe>
+			<div class="chart-container">
+				<real-time-power-chart></real-time-power-chart>
+			</div>
+			<line-chart></line-chart>
+		</div>
+		<client-sider></client-sider>
 
 	</div>
 </template>
 <style scoped>
+	.zonglan-header{
+		width: 1447px;
+		height: 60px;
+		background-color: #fff;
+		display: inline-block;
+		margin-left: 225px;
+		padding:0 20px;
+	}
+	.zonglan-header h1{
+		height: 26px;
+		font-size: 24px;
+		border-left: 5px solid #36c;
+		font-weight:normal;
+		line-height: 26px;
+		padding:0 15px;
+		float: left;
+	}
+	.zonglan-header .btn-group{
+		margin-top: 15px;
+	}
+	.zonglan-header .btn-group button{
+		width: 80px;
+		color: #36c;
+	}
+	.main-container{
+		margin-top: 81px;
+		padding-left: 0;
+	}
+	.zonglan-container{
+		width: 1488px;
+		height: 880px;
+		overflow: hidden;
+		box-sizing: border-box;
+		float: right;
+		margin-top: 60px;
+		margin-right: -12px;
+	}
+	.chart-container{
+		margin-left: 20px;
+		margin-top: 15px;
+		background-color: #fff;
+	}
+	ul.typeSwich{
+		border-bottom: solid 1px #eee;
+		right: 0;
+		left: 0;
+		top: 10px;
+		margin:0 20px;
+		height: 30px;
+		z-index: 999;
+	}
+	ul.typeSwich li {
+		margin-left: 20px;
+		width: 24px;
+		height: 24px;
+		float: right;
+		border-radius: 50%;
+		background-color: #eeeeee;
+		border: 1px solid #999;
+		text-align: center;
+		line-height: 24px;
+		cursor: pointer;
+		color: #828282;
+	}
+	ul.typeSwich .btnSelected{
 
-@media (max-width: 1366px) {
-    .power-timeframe-bar{
-        width:200px !important;
-    }
-}
+	}
+	.danwei{
+		border: none!important;
+		background-color: #fff!important;
+	}
+	.danwei span{
+		position: absolute;
+		top: 30px;
+		right: 20px;
+		color: #868686;
+
+	}
 </style>

@@ -1,493 +1,262 @@
 <script>
-    import MyTab from '@/components/Tool/MyTab'
-    import mySearch from '@/components/Tool/mySearch'
-    import Panel from "../Tool/Panel.vue";
-
+    import Pagenation from '@/components/Pagenation'
     export default {
-        name: 'clientlist',
-        components: {
-            Panel,
-            'my-tab': MyTab,
-            'my-search': mySearch
-        },
-        data() {
-            return {
-                spinShow: false,
-                reqType: '',
-                currentCity: 'all',
-                currentPage: 1,
-                totalPage: 0,
-                pageLimit: 13,
-                cityList: {
-                    zz: {
-                        name: '郑州',
-                        count: '11'
-                    },
-                    kf: {
-                        name: '开封',
-                        count: '22'
-                    },
-                    ly: {
-                        name: '洛阳',
-                        count: '33'
-                    },
-                    ny: {
-                        name: '南阳',
-                        count: '44'
-                    },
-                    lh: {
-                        name: '漯河',
-                        count: '55'
-                    },
-                    xc: {
-                        name: '许昌',
-                        count: '11'
-                    },
-                    smx: {
-                        name: '三门峡',
-                        count: '22'
-                    },
-                    pds: {
-                        name: '平顶山',
-                        count: '33'
-                    },
-                    zk: {
-                        name: '周口',
-                        count: '44'
-                    },
-                    zmd: {
-                        name: '驻马店',
-                        count: '55'
-                    },
-                    xx: {
-                        name: '新乡',
-                        count: '6'
-                    },
-                    hb: {
-                        name: '鹤壁',
-                        count: '11'
-                    },
-                    jz: {
-                        name: '焦作',
-                        count: '22'
-                    },
-                    py: {
-                        name: '濮阳',
-                        count: '33'
-                    },
-                    ay: {
-                        name: '安阳',
-                        count: '44'
-                    },
-                    sq: {
-                        name: '商丘',
-                        count: '55'
-                    },
-                    xy: {
-                        name: '信阳',
-                        count: '66'
-                    },
-                    jy: {
-                        name: '济源',
-                        count: '11'
-                    }
-                },
-                cusList: {
-                    tableData: [],
-                    pageData: {
-                        total: 100,
-                        current: 2
-                    }
+        name:'clientlist',
+        data(){
+            return{
+                pageData:{
+                    cur: 1,
+                    all: 5,
+                    msg: ''
                 },
                 columns4: [
                     {
-                        sortable: true,
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
                         title: '客户名称',
-                        key: 'name',
-                        width: '260',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('span', {
-
-                                    style: {
-                                        color: '#4fa8f9 ',
-                                        cursor: 'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.gotoClientPage('client-zonglan', params);
-                                        }
-                                    }
-                                }, params.row.name)
-                            ])
-                        }
+                        key: 'name'
                     },
                     {
                         sortable: true,
                         title: '实际用电量',
-                        key: 'actual_used'
+                        key: 'shiji'
                     },
                     {
-                        sortable: true,
                         title: '申报电量',
-                        key: 'declare'
-                    },
-                    {
-                        sortable: true,
+                        key: 'shenbao'
+                    },{
                         title: '申报偏差',
-                        key: 'dec_dev'
-                    },
-                    {
-                        sortable: true,
+                        key: 'shenbaopiancha'
+                    },{
                         title: '购电量',
-                        key: 'purchase'
-                    },
-                    {
-                        sortable: true,
+                        key: 'goudianliang'
+                    },{
                         title: '购电偏差',
-                        key: 'pur_dev'
-                    },
-                    {
-                        sortable: true,
+                        key: 'goudianpiancha'
+                    },{
                         title: '预测电量',
-                        key: 'forecast'
-                    },
-                    {
-                        sortable: true,
+                        key: 'yucedianliang'
+                    },{
                         title: '预测偏差',
-                        key: 'fore_dev'
-                    },
-                    {
-                        sortable: true,
+                        key: 'yucepiancha'
+                    },{
                         title: '最低功率因数',
-                        key: 'power_factor'
-                    },
-                    {
+                        key: 'gonglv'
+                    },{
                         title: '总览',
-                        key: 'zonglan',
-                        width: 60,
-                        render: (h, params) => {
-                            return h('span', {
-                                attrs: {
-                                    class: 'iconfont icon-zhuzhuangtutubiao'
-                                },
-                                style: {
-                                    marginRight: '5px',
-                                    cursor: 'pointer'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.gotoClientPage('client-zonglan', params)
-                                    }
-                                }
-                            }, '')
-
-                        }
-                    },
-                    {
+                        key: 'zonglan'
+                    },{
                         title: '指数',
-                        width: 60,
-                        key: 'zhishu',
-                        render: (h, params) => {
-                            return h('span', {
-                                attrs: {
-                                    class: 'iconfont icon-zhishufenxiyanpan'
-                                },
-                                style: {
-                                    marginRight: '5px',
-                                    cursor: 'pointer',
-                                },
-                                on: {
-                                    click: () => {
-                                        this.gotoClientPage('client-compare', params);
-                                    }
-                                }
-                            }, '')
-
-                        }
-                    },
-                    {
+                        key: 'zhishu'
+                    },{
                         title: '操作',
-                        key: 'action',
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('span', {
-                                    style: {
-                                        marginRight: '5px',
-                                        color: '#4fa8f9 ',
-                                        cursor: 'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.gotoClientPage('hetong', params)
-                                        }
-                                    }
-                                }, '合同'),
-                                h('span', {
-                                    style: {
-                                        marginRight: '5px',
-                                        color: '#4fa8f9 ',
-                                        cursor: 'pointer'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.gotoClientPage('user-manager', params)
-                                        }
-                                    }
-                                }, '用户')
-                            ])
-                        }
+                        key: 'caozuo'
                     }
                 ],
+                data1: [
+
+                ],
+                showBorder: false,
+                showStripe: false,
+                showHeader: true,
+                showIndex: true,
+                showCheckbox: false,
+                fixedHeader: false,
+                tableSize: 'default'
             }
         },
-        mounted() {
-            this.clientList();
-        },
-        computed: {
-            searchKey() {
-                return this.$store.getters.searchKey
+	    computed:{
+
+	    },
+        methods:{
+            pageListen: function (data) {
+                this.pageData.msg = '当前页码：' + data
             }
         },
-        watch: {},
-        methods: {
-            setcusList(res) {
-                this.$store.dispatch('setcusList', res)
-            },
-            gotoClientPage(page, params) {
-                this.$store.dispatch('setCusId', params.row.id);
-                this.$store.dispatch('setCusName', params.row.name);
-                this.$router.push(page);
-            },
-            gotoAddUser() {
-                this.$router.push('/AddClient');
-            },
-            changeSelect(city) {
-                this.spinShow = true;
-                this.currentPage = 1;
-                this.currentCity = city;
-                this.reqType = 2;
-                if (this.currentCity === 'all') {
-                    this.clientList();
-                } else {
-                    this.$http.post(this.$api.CLIENT_LIST, {
-                        com_id: this.$store.getters.com_id,
-                        type: this.reqType,
-                        area: this.currentCity,
-                        page: this.currentPage,
-                        limit: this.pageLimit
-                    }).then(res => {
-                        this.spinShow = false;
-                        console.log('客户列表区域选择', res);
-                        let data = res.data[0].data;
-                        this.totalPage = res.data[0].total;
-                        this.currentPage = res.data[0].currentPage;
-                        this.cusList.tableData = data;
-                        this.setcusList(data);
-                    }, err => {
-                        this.spinShow = false;
-                        this.cusList.tableData = [];
-                        this.$api.errcallback(err);
-                    }).catch(err => {
-                        this.spinShow = false;
-                        this.cusList.tableData = [];
-                        this.$api.errcallback(err);
-                    })
-                }
-
-
-            },
-            clientList() {
-                this.spinShow = true;
-                this.reqType = 0;
-                this.currentCity ='all';
-                this.$http.post(this.$api.CLIENT_LIST, {
-                    com_id: this.$store.getters.com_id,
-                    type: this.reqType,
-                    page: this.currentPage,
-                    limit: this.pageLimit
-                }).then(res => {
-                    this.spinShow = false;
-                    console.log('客户列表默认', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].currentPage;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
-                }, err => {
-                    this.spinShow = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.spinShow = false;
-
-                    this.$api.errcallback(err);
-                })
-            },
-            comSearch() {
-                this.spinShow = true;
-                this.reqType = 1;
-                this.$http.post(this.$api.CLIENT_LIST, {
-                    com_id: this.$store.getters.com_id,
-                    type: this.reqType,
-                    keyword: this.$store.getters.searchKey,
-                    page: this.currentPage,
-                    limit: this.pageLimit
-                }).then(res => {
-                    this.spinShow = false;
-                    console.log('客户列表搜索', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].currentPage;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
-                }, err => {
-                    this.cusList.tableData = [];
-                    this.spinShow = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.cusList.tableData = [];
-                    this.spinShow = false;
-                    this.$api.errcallback(err);
-                })
-            },
-            pageChange(page) {
-                this.spinShow = true;
-                this.$http.post(this.$api.CLIENT_LIST, {
-                    com_id: this.$store.getters.com_id,
-                    type: this.reqType,
-                    area: this.currentCity,
-                    keyword: this.$store.getters.searchKey,
-                    page: page,
-                    limit: this.pageLimit
-                }).then(res => {
-                    this.spinShow = false;
-                    console.log('客户列表分页', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].currentPage;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
-                }, err => {
-                    this.cusList.tableData = [];
-                    this.spinShow = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.cusList.tableData = [];
-                    this.spinShow = false;
-                    this.$api.errcallback(err);
-                });
-                console.log(page)
-            },
-        },
-
+        components:{
+			'pagenation':Pagenation
+        }
     }
 </script>
 <template>
-	<Row class="main-container">
-		<Card>
-			<div style="height: 862px;">
+	<div>
+		<div class="main-container">
+			<span class="title">客户中心/客户列表</span>
+			<div class="main-container-panel">
 				<div class="header">
-					<Row>
-						<Col span="1">
-						<h3 class="title-lv2">客户列表</h3>
-						</Col>
-						<Col span="23">
-						<div class="tab-container">
-							<!-- TODO 各地区客户个数待添加-->
-							<my-tab v-on:changeSelect="changeSelect('all')"
-							        v-bind:type="currentCity === 'all'?'disabled':'normal'">全部
-							</my-tab>
-							<template v-for="(city,key) in cityList">
-								<my-tab
-										v-on:changeSelect="changeSelect(city.name)"
-										v-bind:type="currentCity === city.name?'disabled':'normal'"
-								>{{city.name}}
-								</my-tab>
-							</template>
+					<span>客户列表</span>
+					<ul>
+						<li class="selected">全部 <span>(12332)</span></li>
+						<li>郑州 <span>(332)</span></li>
+						<li>开封 <span>(332)</span></li>
+						<li>洛阳 <span>(332)</span></li>
+						<li>平顶山 <span>(332)</span></li>
+						<li>安阳 <span>(332)</span></li>
+						<li>鹤壁 <span>(332)</span></li>
+						<li>新乡 <span>(332)</span></li>
+						<li class="more">更多 <span><i class="iconfont icon-xiala"></i></span></li>
+					</ul>
+					<div class="btn-group">
+						<button class="button btnSelected">+新增用户</button>
+						<div class="search-container">
+							<i class="iconfont icon-search"></i><input type="search" placeholder="客户编号或客户名称"><button class="button btnSelected">搜索</button>
 						</div>
-						</Col>
-					</Row>
+						<div class="dateSwitch fr">
+							<button class="button btnSelected">年度</button><button class="button">月度</button>
+							<button class="button">上一年</button>
+							<button class="button">2017年6月</button>
+							<button class="button">下一年</button>
+						</div>
+					</div>
 				</div>
-				<div class="table-container relative">
-					<Row className="mgt_15">
-						<Col span="24">
-						<Row>
-							<Col span="5">
-							<my-search style="text-align: left" placeholder="客户编号或客户名称"
-							           v-on:doSearch="comSearch"></my-search>
-							</Col>
-							<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;" class='add_User'>+新增客户</Button>
+				<div class="table-container">
+					<!--<Table ref="selection" stripe="false" :columns="columns4" :data="data1"></Table>-->
+					<table width="100%" cellspacing="15">
+						<thead>
+						<tr>
+							<th>客户名称</th>
+							<th>实际用电量</th>
+							<th>实际用电量</th>
+							<th>申报电量</th>
+							<th>申报偏差</th>
+							<th>购电量</th>
+							<th>购电偏差</th>
+							<th>预测电量</th>
+							<th>预测偏差</th>
+							<th>最低功率因数</th>
+							<th>总览</th>
+							<th>指数</th>
+							<th>操作</th>
+						</tr>
+						<tr>
+							<td>客户名称</td>
+							<td>实际用电量</td>
+							<td>实际用电量</td>
+							<td>申报电量</td>
+							<td>申报偏差</td>
+							<td>购电量</td>
+							<td>购电偏差</td>
+							<td>预测电量</td>
+							<td>预测偏差</td>
+							<td>最低功率因数</td>
+							<td>总览</td>
+							<td>指数</td>
+							<td>
+								<router-link to="/client/detail">详情</router-link>
+								<span class="xiala">更多 <i class="iconfont icon-xiala"></i>
+									<div class="router-container">
+										<router-link to="/hetong">合同</router-link>
+										<router-link to="/user-manager">用户</router-link>
+									</div>
+								</span>
+							</td>
+						</tr>
+						</thead>
+					</table>
+					<pagenation class="table-page fr" :cur.sync="pageData.cur" :all.sync="pageData.all" v-on:btn-click="pageListen"></pagenation>
 
-							<Button type="primary" class="refresh absolute" style="right: 0;" @click="clientList">
-
-								<i class="iconfont icon-shuaxin"></i>
-							</Button>
-						</Row>
-						</Col>
-					</Row>
-					<Row className="mgt_15">
-
-						<Table :columns="columns4" :data="cusList.tableData"></Table>
-						<Spin size="large" fix v-if="spinShow"></Spin>
-					</Row>
-
-
+					<div class="table-page fr">
+						<span>共44444条记录</span><span>123页</span>
+						<span>第 <select name="" id="">
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+							<option value="1">1</option>
+						</select>页</span>
+					</div>
 				</div>
 			</div>
-		</Card>
-		<div class="page-container">
-			<Page
-					:total="totalPage"
-					:current="currentPage"
-					:page-size="pageLimit"
-					show-total
-					show-elevator
-					v-on:on-change="pageChange"
-			></Page>
 		</div>
-	</Row>
+
+	</div>
 </template>
 <style scoped>
-
-	.header {
-		border-bottom: 1px solid #eeeeee;
-		padding-bottom: 10px;
+	.main-container .title{
+		margin-top:20px;
 	}
-
-	.tab-container {
+	.btn-group{
+		display: block;
+	}
+	input[type='search']{
+		height: 30px;
+		padding: 5px 20px;
+		vertical-align: -1px;
+	}
+	.table-container{
+		margin-top: 56px;
+		height: 600px;
+	}
+	.table-container th{
+		text-align: center;
+		height: 40px;
+		background-color: #F6F7FB;
+	}
+	.table-container td{
+		text-align: center;
+	}
+	.xiala{
+		color: #2d8cf0;
+		position: relative;
+	}
+	.xiala:hover .router-container{
+		display: inline-block;
+	}
+	.xiala .router-container{
+		display: none;
+		position: absolute;
+		top: 16px;
+		left: 0px;
+		width: 38px;
+		line-height:26px;
+		}
+	.main-container-panel .header ul{
+		margin-left: 100px;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.main-container-panel .header li{
+		display: inline-block;
+		width: 90px;
+		height: 30px;
+		border: 1px solid #ccc;
+		text-align: center;
+		line-height: 30px;
+		font-size: 12px;
+		font-weight:normal;
+		margin-left: 5px;
+		vertical-align: middle;
+	}
+	.main-container-panel .header li.selected{
+		background-color: #E8F8FE;
+	}
+	.search-container{
 		display: inline-block;
 		vertical-align: middle;
-		margin-top: -15px;
-
-		overflow: hidden;
 	}
-
-	.tab-container > span {
-		margin: 10px 0 10px 9px;
+	.search-container i{
+		position: relative;
+		left: 20px;
 	}
-
-	.table-container {
-
-	}
-
-	.title-lv2 {
+	.main-container-panel .header li.more i{
 		display: inline-block;
-		height: 20px;
-		line-height: 20px;
-		font-size: 16px;
-		color: #1c2438;
-		font-weight: 700;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		width: 30px;
+		height: 30px;
+		border-left:1px solid #ccc;
+		font-size: 12px;
+		text-align: center;
+		float: right;
 	}
-    @media (max-width: 1366px) {
-        .tab-container{
-             margin-left:15px;
-        }
-        .add_User{
-             margin-left:80px !important;
-        }
-    }
+	.add-client{
+		margin-right: 20px;
+	}
+	.add-client button{
+		width: 120px;
+	}
+	.table-page{
+		margin-top: 480px;
+	}
 </style>

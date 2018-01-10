@@ -1,512 +1,519 @@
 <script>
-    import DataIndex from '@/components/Home/DataIndex'
-
-    export default {
-        name: 'clientindex',
-        data() {
-            return {
-
-                indexData: '',
-                huhaoSpin: false,
-                dayTongbi: {
-                    spin: false,
-                    year: [],
-                    lastyear: []
+	import DataIndex from '@/components/Home/DataIndex'
+	export default {
+	    name:'clientindex',
+		data(){
+	        return{
+                indexData:{
+                    shijiliang:'12311.00',
+                    shijiTongbi:'12.21%',
+                    shijiHuanbi:'12.21%',
+                    yucePiancha:'12311.00',
+                    yuceTongbi:'12.21%',
+                    yuceHuanbi:'12.21%',
+                    shenbaoPiancha:'12311.00',
+                    shenbaoTongbi:'12.21%',
+                    shenbaoHuanbi:'12.21%',
+                    goudianPiancha:'12311.00',
+                    goudianTongbi:'12.21%',
+                    goudianHuanbi:'12.21%',
                 },
-                dayCompare: {
-                    spin: false,
-                    today: 0,
-                    yesterday: 0
-                },
-                monthCompare: {
-                    spin: false,
-                    curmonth: 0,
-                    lastmonth: 0
-                }
-            }
-        },
-        mounted() {
-            this.huhao();
-            this.daytb();
-            this.daycompare();
-            this.monthcompare();
-        },
-        computed: {
-            chartOption1: function () {
-                return {
-                    tooltip: this.$store.getters.chartOption.barTooltip,
-                    legend: {
-                        left: -5,
-                        top: 0,
-                        itemWidth: 16,
-                        itemHeight: 16,
-                        data: ['今年', '去年']
+                trendUp:true,
+                trendDown:true,
+		        chartOption1:{
+                    title: {
+                        text: "日电量同比",
+                        textStyle:{
+                            fontSize:'14'
+                        },
+                        left:'55',
+                        bottom:'5'
                     },
-                    grid: {
-                        top: '50',
-                        left: 0,
-                        right: 0,
-                        bottom: '3%',
-                        containLabel: true
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
                     },
-                    color: this.$store.getters.chartOption.colorList,
-                    xAxis: {
+                    xAxis:{
                         type: 'category',
-                        data: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
-                        nameTextStyle: {
-                            fontSize: 12
+                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15","1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15"],
+                        nameTextStyle:{
+                            fontSize:12
                         },
 //	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
+                        axisLabel :{
+                            interval:2
+                        }
 
-                    },
-
+                    }
+                    ,
                     yAxis: [
                         {
-                            position: 'left',
+                            position:'right',
                             type: 'value',
-                            axisLine: {
-                                show: false
-                            },
-                            axisTick: {
-                                show: false
-                            },
                             boundaryGap: 0
                         }
                     ],
-
                     series: [
+//                        { // For shadow
+//                            type: 'bar',
+//                            itemStyle: {
+//                                normal: {color: 'rgba(0,0,0,0.05)'}
+//                            },
+//                            barGap:'-100%',
+//                            barCategoryGap:'40%',
+//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
+//                            animation: false
+//                        },
                         {
                             name: '今年',
                             type: 'bar',
-                            data: this.dayTongbi.year
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30,184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
                         },
                         {
                             name: '去年',
                             type: 'bar',
-                            data: this.dayTongbi.lastyear
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [ 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14]
                         }
 
                     ]
-                }
-            },
-            chartOption2: function () {
-                return {
-                    tooltip: this.$store.getters.chartOption.barTooltip,
-                    legend: {
-                        left: -5,
-                        top: 0,
-                        itemWidth: 16,
-                        itemHeight: 16,
-                        data: ['今天', '昨天']
+                },
+		        chartOption2:{
+                    title: {
+                        text: "日电量同比",
+                        textStyle:{
+                            fontSize:'14'
+                        },
+                        left:'55',
+                        bottom:'5'
                     },
-                    grid: {
-                        top: '60',
-                        left: 0,
-                        right: '0',
-                        bottom: '3%',
-                        containLabel: true
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
                     },
-//                    color: ['#14d86b', '#ca94ec'],
-                    color: this.$store.getters.chartOption.colorList,
-                    xAxis: {
+                    xAxis:{
                         type: 'category',
-                        data: ["今天", "昨天"],
-                        nameTextStyle: {
-                            fontSize: 12
+                        data: ["1968/10"],
+                        nameTextStyle:{
+                            fontSize:12
                         },
 //	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-                    yAxis: {
-                        show: true,
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-
-                    series: [
-                        {
-                            name: '今天',
-                            type: 'bar',
-                            barWidth: 30,
-                            barGap: '-100%',
-                            data: [
-                                ['今天', this.dayCompare.today]
-                            ]
-                        }, {
-                            name: '昨天',
-                            type: 'bar',
-                            barWidth: 30,
-                            data: [
-                                ['昨天', this.dayCompare.yesterday]
-                            ]
+                        axisLabel :{
+                            interval:1
                         }
+
+                    }
+                    ,
+                    yAxis: {
+                        show:false
+                    },
+                    series: [
+
+                        {
+                            name: '今年',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [184]
+                        },
+                        {
+                            name: '去年',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [ 276]
+                        }
+
                     ]
-                }
-            },
-            chartOption3: function () {
-                return {
-                    tooltip: this.$store.getters.chartOption.barTooltip,
-                    legend: {
-                        left: -5,
-                        top: 0,
-                        itemWidth: 16,
-                        itemHeight: 16,
-                        data: ['本月', '上月']
+                },
+		        chartOption3:{
+                    title: {
+                        text: "月电量同比",
+                        textStyle:{
+                            fontSize:'14'
+                        },
+                        left:'55',
+                        bottom:'5'
                     },
-                    grid: {
-                        top: '60',
-                        left: 0,
-                        right: '0',
-                        bottom: '3%',
-                        containLabel: true
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
                     },
-                    color: this.$store.getters.chartOption.colorList,
-                    xAxis: {
+                    xAxis:{
                         type: 'category',
-                        data: ["本月", "上月"],
-                        nameTextStyle: {
-                            fontSize: 12
+                        data: ["1968/10"],
+                        nameTextStyle:{
+                            fontSize:12
                         },
 //	                    控制x轴隔几个显示
-                        axisLabel: {
-                            interval: 0
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-                    yAxis: {
-                        show: true,
-                        axisLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                    },
-
-                    series: [
-                        {
-                            name: '本月',
-                            type: 'bar',
-                            barWidth: 30,
-                            barGap: '-100%',
-                            data: [
-                                ['本月', this.monthCompare.curmonth]
-                            ]
-                        }, {
-                            name: '上月',
-                            type: 'bar',
-                            barWidth: 30,
-                            data: [
-                                ['上月', this.monthCompare.lastmonth]
-                            ]
+                        axisLabel :{
+                            interval:1
                         }
+
+                    }
+                    ,
+                    yAxis: {
+                        show:false
+                    },
+                    series: [
+
+                        {
+                            name: '今年',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [184]
+                        },
+                        {
+                            name: '去年',
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#83bff6'},
+                                            {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    )
+                                },
+                                emphasis: {
+                                    color: new this.$echarts.graphic.LinearGradient(
+                                        0, 0, 0, 1,
+                                        [
+                                            {offset: 0, color: '#2378f7'},
+                                            {offset: 0.7, color: '#2378f7'},
+                                            {offset: 1, color: '#83bff6'}
+                                        ]
+                                    )
+                                }
+                            },
+                            data: [ 276]
+                        }
+
                     ]
-                }
-
-            },
-
-            cus_id: function () {
-                return this.$store.getters.cus_id
-            }
-        },
-        watch: {
-            cus_id: function () {
-                this.huhao();
-                this.daytb();
-                this.daycompare();
-                this.monthcompare();
-            }
+                },
+	        }
+		},
+        mounted() {
+            this.drawBar1(this.chartOption1);
+            this.drawBar2(this.chartOption2);
+            this.drawBar3(this.chartOption3);
         },
         methods: {
-//            户号指数
-            huhao() {
-                this.huhaoSpin = true;
-                this.$http.post(this.$api.CLIENT_DATA_INDEX, {cus_id: this.cus_id}).then(res => {
-                    this.huhaoSpin = false;
-                    this.indexData = res.data.data;
-                    console.log('户号指数', this.indexData);
-                }, err => {
-                    this.huhaoSpin = false;
-                    this.indexData = '';
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.huhaoSpin = false;
-                    this.$api.errcallback(err);
-                })
-            },
-//            日电量同比
-            daytb() {
-                this.dayTongbi.spin = true;
-
-                this.$http.post(this.$api.CLIENT_DAYTB, {cus_id: this.cus_id}).then(res => {
-                    this.dayTongbi.spin = false;
-                    console.log('日电量同比', res);
-                    let data = res.data.data;
-                    for (let k in data) {
-                        this.dayTongbi.year.push(data[k].year);
-                        this.dayTongbi.lastyear.push(data[k].lastyear);
-                    }
-                    console.log(this.dayTongbi);
-                    this.drawBar1(this.chartOption1);
-                }, err => {
-                    this.dayTongbi.spin = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.dayTongbi.spin = false;
-                    this.$api.errcallback(err);
-                })
-            },
-//            日对比
-            daycompare() {
-                this.dayCompare.spin = true;
-                this.$http.post(this.$api.CLIENT_DAY_COMPARE, {cus_id: this.cus_id}).then(res => {
-                    this.dayCompare.spin = false;
-                    console.log('日对比', res);
-                    this.dayCompare = res.data.data;
-                    this.drawBar2(this.chartOption2);
-
-                }, err => {
-                    this.dayCompare.spin = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.$api.errcallback(err);
-                })
-            },
-//            月对比
-            monthcompare() {
-                this.monthCompare.spin = true;
-
-                this.$http.post(this.$api.CLIENT_MONTH_COMPARE, {cus_id: this.cus_id}).then(res => {
-                    this.monthCompare.spin = false;
-                    console.log('月对比', res);
-                    this.monthCompare = res.data.data;
-
-                    this.drawBar3(this.chartOption3);
-
-                }, err => {
-                    this.monthCompare.spin = false;
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.$api.errcallback(err);
-                })
-            },
             drawBar1(option = this.chartOption1) {
                 // 基于准备好的dom，初始化echarts实例
                 let compare1Chart = this.$echarts.init(document.getElementById('compare-bar-1'));
                 // 绘制图表
                 compare1Chart.setOption(option);
             },
-            drawBar2(option = this.chartOption2) {
+	        drawBar2(option = this.chartOption2) {
                 // 基于准备好的dom，初始化echarts实例
                 let compare2Chart = this.$echarts.init(document.getElementById('compare-bar-2'));
                 // 绘制图表
                 compare2Chart.setOption(option);
             }
-            , drawBar3(option = this.chartOption3) {
+            ,drawBar3(option = this.chartOption3) {
                 // 基于准备好的dom，初始化echarts实例
                 let compare3Chart = this.$echarts.init(document.getElementById('compare-bar-3'));
                 // 绘制图表
                 compare3Chart.setOption(option);
             }
         },
-        components: {
-            'data-index': DataIndex
-        }
-    }
+		components:{
+			'data-index':DataIndex
+		}
+	}
 </script>
 <template>
-	<div class="client-container">
-		<Row>
-			<Card class="data-index">
-				<h3 slot="title">户号指数</h3>
-				<Row type="flex" justify="space-around" gutter="20">
-					<Col span="3">
+	<div>
 
-					<Row className="data-title">
-						<span class="huhao" style="color: #444444">户号</span>
-					</Row>
+		<div class="index-container">
+			<div class="data-panel data-index relative">
+				<h3 class="title">户号指数</h3>
 
-					<Row className="data-content" v-for="item in indexData">
-						<span class="huhao">{{item.user_no}}</span>
-					</Row>
+				<ul class="index-title fr">
+					<li><span class="count">实际月用电量</span><span class="tongbi-rate">同比</span><span
+							class="huanbi-rate">环比</span></li>
+					<li><span class="count">预测月偏差</span><span class="tongbi-rate">同比</span><span
+							class="huanbi-rate">环比</span></li>
+					<li><span class="count">申报月偏差</span><span class="tongbi-rate">同比</span><span
+							class="huanbi-rate">环比</span></li>
+					<li><span class="count">购电月偏差</span><span class="tongbi-rate">同比</span><span
+							class="huanbi-rate">环比</span></li>
+				</ul>
+				<div class="tongbi-container">
 
-					</Col>
-					<Col span="6">
-					<Row className="data-title">
-						<Col span="10">
-						<span class="count">使用电量(Mw.h)</span>
-						</Col>
-						<Col span="7">
-						<span class="tongbi-rate">同比</span>
-						</Col>
-						<Col span="7">
-						<span class="huanbi-rate">环比</span>
-						</Col>
-					</Row>
+					<span class="fl huhao">0000000000</span>
+					<ul class="tongbi fr">
+						<li><span class="count">{{indexData.shijiliang}}</span> <span class="tongbi-rate">{{indexData.shijiTongbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.shijiHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.yucePiancha}}</span> <span class="tongbi-rate">{{indexData.yuceTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.yuceHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.shenbaoPiancha}}</span> <span class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.goudianPiancha}}</span> <span class="tongbi-rate">{{indexData.goudianTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.goudianHuanbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+						</li>
 
-					<Row className="data-content" v-for="item in indexData">
-						<Col span="10">
-						<span class="count">{{item[1].num}}</span>
-						</Col>
-						<Col span="7">
-						<span class="tongbi-rate">{{item[1].chainratio}}%<i class="trend"
-						                                                    v-bind:class="{trendUp:item[1].chainratio>0,trendDown:item[1].chainratio<0}"></i></span>
-						</Col>
-						<Col span="7">
-						<span class="huanbi-rate">{{item[1].yearonyear}}%<i class="trend"
-						                                                    v-bind:class="{trendUp:item[1].yearonyear>0,trendDown:item[1].yearonyear<0}"></i></span>
-						</Col>
-					</Row>
-					</Col>
-					<Col span="6">
-					<Row className="data-title">
-						<Col span="8">
-						<span class="count">申报月偏差</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">同比</span>
-						</Col>
-						<Col span="8">
-						<span class="huanbi-rate">环比</span>
-						</Col>
-					</Row>
-					<Row className="data-content" v-for="item in indexData">
-						<Col span="8">
-						<span class="count">{{item[2].num}}</span>
-						</Col>
-						<Col span="8">
-						<span
-								class="tongbi-rate">{{item[2].chainratio}}%<i
-								class="trend "
-								v-bind:class="{trendUp:item[2].chainratio>0,trendDown:item[2].chainratio<0}"></i></span>
-						</Col>
-						<Col span="8">
-						<span
-								class="huanbi-rate">{{item[2].yearonyear}}%<i
-								class="trend"
-								v-bind:class="{trendUp:item[2].yearonyear>0,trendDown:item[2].yearonyear<0}"></i></span>
-						</Col>
-					</Row>
-					</Col>
-					<Col span="6">
-					<Row className="data-title">
-						<Col span="8">
-						<span class="count">购电月偏差</span>
-						</Col>
-						<Col span="8">
-						<span class="tongbi-rate">同比</span>
-						</Col>
-
-						<Col span="8">
-						<span
-								class="huanbi-rate">环比</span>
-						</Col>
-
-					</Row>
-					<Row className="data-content" v-for="item in indexData">
-						<Col span="8">
-
-						<span class="count">{{item[3].num}}</span>
-						</Col>
-
-						<Col span="8">
-						<span
-								class="tongbi-rate">{{item[3].chainratio}}%<i
-								class="trend "
-								v-bind:class="{trendUp:item[3].chainratio>0,trendDown:item[3].chainratio<0}"></i></span>
-						</Col>
-
-						<Col span="8">
-						<span
-								class="huanbi-rate">{{item[3].yearonyear}}%<i
-								class="trend "
-								v-bind:class="{trendUp:item[3].yearonyear>0,trendDown:item[3].yearonyear<0}"></i></span>
-						</Col>
-
-
-					</Row>
-
-					</Col>
-				</Row>
-				<Spin size="large" fix v-if="huhaoSpin"></Spin>
-			</Card>
-		</Row>
-		<Row className="mgt_15" gutter="20">
-			<Col span="16">
-			<Card>
-				<h3 slot="title">日电量同比</h3>
-				<span class="danwei1">单位:Mw.h</span>
-				<div id="compare-bar-1" style="width: 924px;height: 465px;">
-
+					</ul>
 				</div>
-				<Spin size="large" fix v-if="dayTongbi.spin"></Spin>
-			</Card>
-			</Col>
-			<Col span="4">
-			<Card>
-				<h3 slot="title">日对比</h3>
-				<span class="danwei">单位:Mw.h</span>
-				<div id="compare-bar-2">
+				<div class="tongbi-container">
 
-				</div>
-				<Spin size="large" fix v-if="dayCompare.spin"></Spin>
-			</Card>
-			</Col>
-			<Col span="4">
-			<Card>
-				<h3 slot="title">月对比</h3>
-				<span class="danwei">单位:Mw.h</span>
-				<div id="compare-bar-3">
+					<span class="fl huhao">0000000000</span>
+					<ul class="tongbi fr">
+						<li><span class="count">{{indexData.shijiliang}}</span> <span class="tongbi-rate">{{indexData.shijiTongbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.shijiHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.yucePiancha}}</span> <span class="tongbi-rate">{{indexData.yuceTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.yuceHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:!trendUp,trendDown:trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.shenbaoPiancha}}</span> <span class="tongbi-rate">{{indexData.shenbaoTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.shenbaoHuanbi}}<i
+								class="trend" v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+						</li>
+						<li><span class="count">{{indexData.goudianPiancha}}</span> <span class="tongbi-rate">{{indexData.goudianTongbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span><span class="huanbi-rate">{{indexData.goudianHuanbi}}<i
+								class="trend " v-bind:class="{trendUp:trendUp,trendDown:!trendDown}"></i></span>
+						</li>
 
+					</ul>
 				</div>
-				<Spin size="large" fix v-if="monthCompare.spin"></Spin>
-			</Card>
-			</Col>
-		</Row>
+			</div>
+		</div>
+		<div class="chart-container">
+			<div id="compare-bar-1" class="data-panel data-index fl" style="width: 924px;height: 300px;">
+
+			</div>
+			<div id="compare-bar-2" class="data-panel data-index fr" style="width: 202px;height: 300px;">
+
+			</div>
+			<div id="compare-bar-3" class="data-panel data-index fr" style="width: 202px;height: 300px;">
+
+			</div>
+		</div>
 	</div>
-
 </template>
 <style scoped>
-
+	.index-container{
+		margin-left: 205px;
+		margin-top: 139px;
+	}
+	.chart-container{
+		margin-top: 15px;
+		margin-left: 225px;
+		width: 1447px;
+		height: 300px;
+		background-color: #fff;
+	}
 	/*数据指数*/
 	.data-index {
-		height: 295px;
+		width: 1447px;
+		background-color: #fff;
+		padding: 10px;
 	}
 
 	.data-index span {
 		display: inline;
-		text-align: center;
 		font-size: 14px;
 	}
-
+	.huhao{
+		margin-top: 10px;
+	}
+	.tongbi-container{
+		margin-top: 25px;
+		width: 1447px;
+		height: 30px;
+		overflow: hidden;
+	}
+	.data-index li, .data-index h3 {
+		display: inline-block;
+		vertical-align: top;
+	}
 	.data-index .huhao {
-		color: #0089f0;
+		margin-left: 30px;
+	}
+	.data-index .index-title {
+		margin-right: 7px;
+		margin-top: 10px;
+	}
+	.data-index .index-title li span{
+		color: #999;
+	}
+	.data-index li {
+		width: 271px;
+		height: 30px;
+		background-color: #F6F7FB;
+		font-size: 14px;
+		text-align: center;
+		margin-left: 40px;
+		padding: 5px;
+		box-sizing: border-box;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-around;
+		float: left;
+		position: relative;
+	}
+
+	.data-index li span {
+		position: absolute;
+		height: 15px;
+		line-height: 15px;
+		color: #444;
+	}
+
+	.data-index li span.count {
+		width: 111px;
+		top: 8px;
+		left: -5px;
+	}
+
+	.data-index li span.tongbi-rate {
+		width: 80px;
+		top: 8px;
+		left: 106px;
+	}
+
+	.data-index li span.huanbi-rate {
+		width: 80px;
+		top: 8px;
+		right: 0;
+	}
+
+	.data-index .index-title li span:nth-child(3) {
+		border-left: 2px solid #B3B4B5;
+
+	}
+
+	.data-index .tongbi li {
+		top:5px;
+		background-color: #fff;
+	}
+
+	.data-index .tongbi {
+		font-size: 14px;
+		margin-right: 20px;
+
 	}
 
 	.data-index .trend {
@@ -518,55 +525,12 @@
 		vertical-align: middle;
 	}
 
-	.data-title {
-		background-color: #f2f7fb;
-	}
-    .data-title span{
-        white-space: nowrap;
-    }
-	.data-content, .data-title {
-		height: 30px;
-		line-height: 30px;
-		text-align: center;
-		margin-top: 10px;
+	.trendUp {
+
+		background: url('../../assets/icons.png') no-repeat -385px -85px;
 	}
 
-	.danwei1 {
-		position: relative;
-		top: 20px;
-		right: 10px;
-		color: #999999;
-		float: right;
+	.trendDown {
+		background: url('../../assets/icons.png') no-repeat -385px -103px;
 	}
-
-	.danwei {
-		position: relative;
-		top: 20px;
-		right: 10px;
-		color: #999999;
-		float: right;
-	}
-
-	#compare-bar-2,
-	#compare-bar-3 {
-		width: 178px;
-		height: 465px;
-	}
-    @media (max-width: 1366px) {
-        #compare-bar-2,
-        #compare-bar-3 {
-        width: 150px;
-        height: 465px;
-       }
-       .danwei {
-        position: relative;
-        top: 22px;
-        right: -14px;
-        color: #999999;
-        float: right;
-      }
-      #compare-bar-1{
-        width:730px !important;
-      }
-    }
 </style>

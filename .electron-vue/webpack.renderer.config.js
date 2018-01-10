@@ -11,6 +11,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const merge = require('webpack-merge');
+const fs = require('fs');
 /**
  * List of node_modules to include in webpack bundle
  *
@@ -37,6 +39,13 @@ let rendererConfig = {
           use: 'css-loader'
         })
       },
+		{
+			test: /\.less$/,
+			use: ExtractTextPlugin.extract({
+				use: ['css-loader?minimize','autoprefixer-loader', 'less-loader'],
+				fallback: 'style-loader'
+			}),
+		},
       {
         test: /\.html$/,
         use: 'vue-html-loader'
@@ -112,7 +121,23 @@ let rendererConfig = {
         : false
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+	  new webpack.optimize.CommonsChunkPlugin({
+		  name: ['vender-exten', 'vender-base'],
+		  minChunks: Infinity
+	  }),
+	  new CopyWebpackPlugin([
+		  {
+			  from: 'src/renderer/views/main-components/theme-switch/theme'
+		  },
+		  {
+			  from: 'src/renderer/views/my-components/text-editor/tinymce'
+		  }
+	  ], {
+		  ignore: [
+			  'text-editor.vue'
+		  ]
+	  })
   ],
   output: {
     filename: '[name].js',

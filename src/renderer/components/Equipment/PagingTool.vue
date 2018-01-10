@@ -32,7 +32,8 @@ export default {
         <option value="7">7</option> 
     </select>
     页 
-    <input type="button" value="<"><span class="page3">1</span><input type="button" value=">">
+    <input type="button" value="<">
+    <span class="page3">1</span><input type="button" value=">">
 </div>
 </template>
 
@@ -53,8 +54,8 @@ export default {
 .AssetPage input{
     width: 30px;
     height: 30px;
-    background-color: #DFE2E9;
-    color: #666;
+    background-color: #F6F7FB;
+    color: #ccc;
 }
 .page3{
     display: inline-block;
