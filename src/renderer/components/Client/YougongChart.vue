@@ -2,7 +2,7 @@
 	.relative {
 		background-color: #fff;
 	}
-    @media (max-width: 1366px) {
+    @media (min-width: 1365px) and (max-width: 1919px) {
         #lineChart3{
             width:540px !important;
         }

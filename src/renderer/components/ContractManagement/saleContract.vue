@@ -31,8 +31,7 @@
                        <div class="saleSee">
                             <i class="iconfont icon-jishiben01"></i>
                         </div>   
-                        <i-table 
-                        border
+                        <i-table                         
                         size='small'
                         :columns="columns1"
                         :data="item.usernos" 
@@ -201,7 +200,7 @@ export default {
 
 <style scoped>
 .saleBox {
-    height: 818px;
+    height: 841px;
     position: relative;
 }
 .hetongNav{
@@ -303,7 +302,7 @@ export default {
     top: -12px;
     left: 12px;
   }*/
-  @media (max-width: 1366px) {
+  @media (min-width: 1365px) and (max-width: 1919px) {
       .hetongNav .change{
           right:0px;
           padding-right:10px;

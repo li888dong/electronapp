@@ -104,7 +104,7 @@
                 this.file = file;
             },
             changeStatus() {
-                if(this.file && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
+                if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
                      this.bol = true;
                      this.isGo = true;
                 }else{
@@ -159,20 +159,21 @@
                  if(this.$route.query.id){
                     this.formItem["id"] = this.$route.query.id;
                     this.formItem['com_id'] = this.com_id;
-                    console.log(this.formItem);
+                      console.log(this.formItem);
                       var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
-                if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
                     this.formItem.signed_num = parseInt(this.formItem.signed_num);
-                    if (!this.isEmpty(this.month)) {
+                    if (this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
                             console.log("电量分配", res);
                             if (res.data.status==='1') {
                                 this.formItem.d_id = res.data.id;
+                                if (this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.htscdz&&this.formItem.d_id&&this.formItem.remarks && tel_reg.test(this.formItem.tel)) {
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
                                     console.log('修改长协合同', res);
-                                    if (res.data.status==='1' && this.isGo) {
-                                        this.$router.push('/ChangxieContract');
-                                    } else {
+                                    if (res.data.status==='1') {
+                                        if(this.isGo){
+                                            this.$router.push('/ChangxieContract');
+                                        }else {
                                         this.success();
                                         for (let k in this.formItem) {
                                             this.formItem[k] = '';
@@ -183,13 +184,17 @@
                                         for (let k in this.month) {
                                             this.month[k] = '';
                                         }
-                                    }
+                                       } 
+                                    } 
                                 }, err => {
                                     this.$api.errcallback(err);
                                 }).catch(err => {
                                     this.$api.errcallback(err);
                                 })
+                            }else{
+                                this.hint = true;
                             }
+                        }
                         }, err => {
                             this.$api.errcallback(err);
                             this.fail();
@@ -197,22 +202,17 @@
                             this.$api.errcallback(err);
                         })
                     }
-                } else {
-                    this.hint = true;
-                }
-
-
                  }else{
-                    console.log(this.formItem);
                 var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/; 
-                if (!this.isEmpty(this.formItem) && tel_reg.test(this.formItem.tel)) {
+                    console.log(this.formItem);
                     this.formItem.signed_num = parseInt(this.formItem.signed_num);
                     this.formItem['com_id'] = this.com_id;
-                    if (!this.isEmpty(this.month)) {
+                    if (this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
                             console.log("电量分配", res);
-                            if (res.data.status) {
+                            if (res.data.status === '1') {
                                 this.formItem.d_id = res.data.id;
+                                if (this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.htscdz&&this.formItem.d_id&&this.formItem.remarks && tel_reg.test(this.formItem.tel)) {
                                 this.$http.post(this.$api.CHANGXIE_ADD_COMPACT, this.formItem).then(res => {
                                     console.log('添加长协合同', res);
                                     if (res.data.status==='1') {
@@ -236,7 +236,10 @@
                                 }).catch(err => {
                                     this.$api.errcallback(err);
                                 })
+                            }else{
+                                this.hint = true;
                             }
+                          }
                         }, err => {
                             this.$api.errcallback(err);
                             this.fail();
@@ -244,20 +247,10 @@
                             this.$api.errcallback(err);
                         })
                     }
-                } else {
-                    this.hint = true;
-                }
+                
 
                  }
                 
-            },
-            isEmpty(obj) {
-                for (let key in obj) {
-                    if (obj[key] !== "") {
-                        return false
-                    }
-                }
-                return true
             },
             execDate(value) {
                 this.formItem.exec_date = value;
@@ -279,7 +272,7 @@
                 this.formItem.signed_status = value;
             },
             changeEmpty() {
-                if(this.file && !this.isEmpty(this.formItem) && !this.isEmpty(this.month)){
+                if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
                     this.bol = true;
                     this.isGo = false;
                 }else{
@@ -421,7 +414,7 @@
 						<Row>
 							<Col span="8">
 							<Form-item label="合同状态" prop='signed_status'>
-								<Select v-model='formItem.signed_status' placeholder='请输入合同状态'
+								<Select :value='formItem.signed_status' placeholder='请输入合同状态'
 								        v-on:on-change='signStatus'>
 									<Option value='1'>已签</Option>
 									<Option value='0'>未签</Option>
@@ -716,9 +709,9 @@
 		margin-top: 10px;
 		margin-left: 10px;
 	}
-    @media (max-width: 1366px) {
+    @media (min-width: 1365px) and (max-width: 1919px) {
         .ContractBox-main form{
-            padding-left: 14%;
+            padding-left: 12%;
             padding-right: 12%;
         }
     }

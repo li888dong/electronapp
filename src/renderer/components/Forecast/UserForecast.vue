@@ -69,7 +69,7 @@
                         title: '申报状态',
                         key: 'dstatus',
                         align: 'center',
-                        width: 150,
+                        width: 100,
                         render: (h, params) => {
                             let text = '未申报';
                             if (params.row.dstatus === 0) {
@@ -96,7 +96,7 @@
                         title: '审核状态',
                         key: 'status',
                         align: 'center',
-                        width: 150,
+                        width: 100,
                         render: (h, params) => {
                             let text = '未审核';
                             if (params.row.status === 0) {
@@ -123,13 +123,13 @@
                         title: '确认人',
                         key: 'confirmor',
                         align: 'center',
-                        width: 120
+                        width: 100
                     },
                     {
                         title: '操作',
                         key: 'n11',
                         align: 'center',
-                        width: 150,
+                        width: 100,
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
@@ -176,7 +176,7 @@
                     {
                         title: '申报电量合计',
                         width: 110,
-                        key: 'total'
+                        key: 'sbdl'
                     },
                     {
                         title: '详情',
@@ -185,7 +185,7 @@
                     },
                     {
                         title: '备注',
-                        key: 'useNote'
+                        key: 'remarks'
                     }
                 ],
                 tableData1: [],
@@ -207,9 +207,10 @@
                         data = res.data.citys;
 
                         for(let i of data){
-                            i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'')
+                            i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'').replace(/user_no/g, " 户号 ").replace(/elec/g, " - ").replace(/"|\[|\]|\,/g, '').replace(/:/g, '')
+                            console.log(i.sbdlinfo,2222222222222222)
                         }
-                        console.log(data)
+                        console.log(data,2222222222222222)
                         this.tableData2 = data
                     } else {
                         this.tableData2 = [];
@@ -343,7 +344,7 @@
 					</Row>
 				</Row>
 				<Row class="layout-content-main">
-					<Table border ref="selection" :columns="columns4" :data="tableData1"></Table>
+					<Table ref="selection" :columns="columns4" :data="tableData1" size="small"></Table>
 					<Spin size="large" fix v-if="spinShow"></Spin>
 				</Row>
 				<div class="page-container">
@@ -365,7 +366,7 @@
 				:mask-closable="false"
 				class-name="vertical-center-modal">
 			申报记录 :
-			<Table border ref="selection" :columns="columns5" :data="tableData2" :loading='loading' height='400'></Table>
+			<Table ref="selection" :columns="columns5" :data="tableData2" :loading='loading' height='400' size="small"></Table>
 		</Modal>
 		<Modal
 				v-model="delModal"
@@ -377,13 +378,10 @@
 </template>
 
 <style scoped>
-    .main-container{
-        max-width: 1680px;
-    }
 	.layout-content {
 		overflow: hidden;
 		background: #fff;
-		height: 810px;
+		height: 841px;
 	}
 
 	.layout-content-top {

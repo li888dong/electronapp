@@ -1,165 +1,309 @@
 <script>
-import PagingTool from '@/components/Equipment/PagingTool'
+import myFenye from '@/components/Tool/myFenye'
+import mySearch from '@/components/Tool/mySearchTwo'
 
 export default {
     name: 'EquipmentStatus',
     data(){
         return{
-            
+            columns1: [
+                {
+                    "sortable": true,
+                    title: '逻辑地址',
+                    key: 'clientid',
+                },
+                {
+                    "sortable": true,
+                    title: '生产厂家',
+                    width: '160',
+                    key: 'factory'
+                },
+                {
+                    "sortable": true,
+                    title: '登陆IP：端口',
+                    key: 'port',
+                    width:'125'
+                },
+                { 
+                    title: '最新上线时间',
+                    key: 'on_time',
+                    width:'160'
+                },
+                {
+                    "sortable": true,
+                    title: '当前在线时长',
+                    key: 'cur_on_time',
+                     width:'135'
+                },
+                {
+                    "sortable": true,
+                    title: '合计在线时长',
+                    key: 'all_on_time',
+                     width:'135'
+                },
+                {
+                    "sortable": true,
+                    title: '当前状态',
+                    key: 'status',
+                    width:'110',
+                    render:(h,params)=>{
+                        if(params.row.status == 1){
+                            return h('span',{},'在线')
+                        }else{
+                            return h('span',{},'已掉线')
+                        }
+                    }
+                },
+                {
+                    title: '掉线时间',
+                    key: 'off_time',
+                    width:'155'
+                },
+                {
+                    "sortable": true,
+                    title: '采集成功率',
+                    key: 'succeed_ratio',
+                },
+                {
+                    "sortable": true,
+                    title: '上报比例',
+                    key: 'report_ratio',
+                },              
+            ],
+            data1: [],
+            cityList: [
+                {
+                    value: '所有区域',
+                    label: '所有区域'
+                },
+                {
+                    value: '河南',
+                    label: '河南'
+                },
+                {
+                    value: '河北',
+                    label: '河北'
+                },
+                {
+                    value: '江西',
+                    label: '江西'
+                },
+                {
+                    value: '山东',
+                    label: '山东'
+                },
+                {
+                    value: '山西',
+                    label: '山西'
+                },
+                {
+                    value: '陕西',
+                    label: '陕西'
+                }
+            ],
+            model1:'',
+            value: '',
+            totalPage:0,
+            currentPage:1,
+            limit:14,
+            loading:false,
         }
     },
-    components: {
-        'PagingToolView': PagingTool
+    methods:{
+        toYichang(){
+            this.$router.push("/EquipmentException");
+        },
+        equipmentInfo(){
+            if(this.$route.query.id){
+                this.loading = true;
+                this.$http.post(this.$api.EQUIPMENT_INFO,{clientid:this.$route.query.id}).then(res=>{
+                     console.log("设备详情",res);
+                     if(res.data.status === '1'){
+                         this.data1 = res.data.data;
+                         this.loading = false;
+                     }else{
+                          this.data1 = [] ;
+                          this.loading = false;
+                     }
+                },err=>{
+                    this.loading = false;
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                     this.loading = false;
+                     this.$api.errcallback(err);
+                })
+            }else{
+                this.loading = true;
+                this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:'',status:''}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status ==='1'){
+                    this.data1 = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.current_page;
+                    this.loading = false;
+                }else{
+                    this.data1 = [] ;
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+          }
+        },
+        pageChange(value){
+            this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:value,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status ==='1'){
+                    this.data1 = res.data.data.data;
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.current_page;
+                    this.loading = false;
+                }else{
+                    this.data1 = [] ;
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        searchMethods(){
+             this.loading = true;
+                 this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+                console.log("设备统计日志",res);
+                if(res.data.status==='1'){
+                    this.data1=res.data.data.data; 
+                    this.totalPage = res.data.data.total;
+                    this.currentPage = res.data.data.current_page;
+                    this.loading = false;
+                }else{
+                    this.loading = false;
+                }
+            },err=>{
+                 this.loading = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.$api.errcallback(err);
+            })
+        },
+        isOnline(value){
+            if(value){
+                this.loading = true;
+                this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey,status:1}).then(res=>{
+                     console.log("掉线设备",res);
+                    if(res.data.status === '1'){
+                        this.data1=res.data.data.data;
+                        this.totalPage = res.data.data.total;
+                        this.currentPage = res.data.data.current_page; 
+                        this.loading = false;
+                    }
+                },err=>{
+                     this.loading = false;
+                     this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.loading = false;
+                      this.$api.errcallback(err);
+                })
+            }else{
+             this.equipmentInfo();
+          }
+       }
+    },
+    watch:{
+        com_id:function(){
+            this.equipmentInfo();
+        }
+    },
+    computed:{
+        com_id:function(){
+            return this.$store.getters.com_id;
+        }
+    },
+    components : {
+        'myFenye': myFenye,
+        'mySearch': mySearch
+    },
+    mounted(){
+        this.equipmentInfo();
+
     }
 }
 </script>
 
-<template><!-- 设备状态页面 -->
-<div class="EquipmentStatus">
-    设备管理 / 设备统计日志
-    <div class="statusTittle">
-        <h3>设备统计日志</h3>
-        <router-link to="/EquipmentException" tag="a">设备异常记录</router-link>
-    </div>
-    <div class="statusTop">
-        <i class="iconfont icon-search searchPic"></i>
-        <input type="text" name="" id="" class="SearchText" placeholder="终端名称、编号、客户名称、IP地址等"><button>搜索</button>
-        <span>m</span>
-        <select name="" id="">
-            <option value="">所有区域</option>
-            <option value="">河南区域</option>
-            <option value="">全国区域</option>
-        </select>
-        <span>时间</span>
-        <div class="viewOffline">
-            <input type="checkbox" name="" id="">
-            仅显示已掉线设备
-        </div>    
-    </div>
-    <div class="statusForm">
-        <table>
-            <tr>
-                <th><input type="checkbox" name="" id="">终端编号</th>
-                <th>生产厂家</th>
-                <th>登录IP：端口</th>
-                <th>最新上线时间</th>
-                <th>当前在线时长</th>
-                <th>当前状态</th>
-                <th>掉线时间</th>
-                <th>采集成功率</th>
-                <th>上报比例</th>
-                <th>操作</th>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>运行中</td>
-                <td>状态正常</td>
-                <td>25%</td>
-                <td>3.5</td>
-                <td>
-                    详情
-                </td>
-            </tr>
-            <tr>
-                <td>23422</td>
-                <td>232342</td>
-                <td>234324324</td>
-                <td>2017.225.255</td>
-                <td>2555</td>
-                <td>已掉线</td>
-                <td>2017-12-12 12:12:12</td>
-                <td>33%</td>
-                <td>33%</td>
-                <td>
-                    详情
-                </td>
-            </tr>
-            <PagingToolView></PagingToolView>
-        </table>
-    </div>
+<template><!-- 设备统计日志页面 -->
+<div class="main-container relative">
+    <Card>
+        <h3 slot="title">设备统计日志</h3>
+        <!-- <Button slot="extra" type="primary" style="top:-8px;" @click="toYichang()">设备异常记录</Button> -->
+        <div class="EquipmentStatusBox">
+            <div class="statusTop">
+                <div class="fl">
+                    <!-- <DatePicker type="datetime" placeholder="请选择日期"  style="width: 200px"></DatePicker> -->
+                    <!--<Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">-->
+                        <!--<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
+                    <!--</Select>-->
+                    <div class="search"><mySearch placeholder="请输入逻辑地址" swidth="340"  v-on:doSearch="searchMethods"></mySearch></div>
+                </div>
+                <div class="viewOffline">
+                    <Checkbox label="Eat" v-on:on-change='isOnline'></Checkbox>
+                    仅显示已掉线设备
+                    <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentInfo()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
+
+                </div>    
+            </div>
+            <Row class="statusForm">
+                <Table :columns='columns1' :data='data1' :loading='loading' size="small"></Table>            
+            </Row>           
+        </div>
+        <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
+        </div>
+      </div> 
+    </Card>
 </div>
 </template>
 
 <style scoped>
-.EquipmentStatus{
-    width: 1700px;
-    height: 944px;
-    background-color: #E8ECF0;
-    padding: 15px;
-    font-size: 14px;
-}
-.statusTittle{
-    background-color: #fff;
-    height: 60px;
-    border-bottom: 1px solid #666666;
-    padding: 20px 10px 10px 10px;
-}
-.statusTittle h3{
+.search {
     display: inline-block;
-    font-size: 16px;
-    font-family: 'MicrosoftYahei'; 
+    width: 340px;
+    vertical-align: bottom;
 }
-.statusTittle a {
-    width: 123px;
-    height: 30px;
-    float: right;
-    font-size: 14px;
-    background-color: #108CEE;
-    color: #fff;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 5px;
-    cursor: pointer;
+.EquipmentStatusBox {
+    height:841px;
 }
 
-.statusTop {
-    height: 50px;
-    padding: 10px;
-    background-color: #fff;
-    position: relative;
-}
-.statusTop .SearchText{
-    width: 250px;
+.shebeiYichang{
+    display: inline-block;
+    width: 123px;
     height: 30px;
-    border: 1px solid #ccc;
-    padding-left: 24px;
-}
-.searchPic {
-    position: absolute;
-    left: 15px;
-    top: 13px;
-}
-.statusTop button {
-    width: 60px;
-    height: 30px;
+    font-size: 14px;
     background-color: #108CEE;
     color: #fff;
-}
-.statusTop span{
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-color: #EAF6FE;
-    margin: 0 30px;
-    vertical-align: middle;
-    color: #108CEE;
-    line-height: 30px;
     text-align: center;
+    line-height: 30px;
+    cursor: pointer;
 }
-.statusTop select{
-    width: 94px;
-    height: 30px;
-    background-color: #EAF6FE;
-    color: #108CEE;
-    border: none;
-    outline: none;
+/*.EquipmentStatusBox i {*/
+    /*top: 14px;*/
+    /*left: 10px;*/
+    /*position: absolute;*/
+/*}*/
+.statusTop {
+    height: 34px;
+    position: relative;
+    margin-bottom: 15px;
 }
 .viewOffline{
     float: right;
+    margin-top: 10px;
 }
 .viewOffline input {
     width: 16px;
@@ -172,29 +316,31 @@ export default {
 .statusForm{
     background-color: #fff;
     position: relative;
-    height: 882px;
 }
-.statusForm th{
-    display: inline-block;
-    padding: 0 20px;
-    height: 40px;
-    background-color: #F6F7FB;
-    line-height: 40px;
-    margin: 0 27px;
-}
-.statusForm th input {
-    vertical-align: middle;
-}
-.statusForm td{
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 32px;
+.relative .page-center{
     text-align: center;
-    width: 100px;
-}
-.statusForm a{
-    padding: 0 2px;
-} 
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  /*.fenYe button{
+    top: -12px;
+    left: 12px;
+  }*/
 
 </style>

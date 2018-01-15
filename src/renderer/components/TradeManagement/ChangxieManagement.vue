@@ -6,7 +6,7 @@
                 year:new Date().getFullYear(),
                 currentPage:1,
                 totalPage:0,
-                pageLimit:3,
+                pageLimit:5,
                 columns6:[
                     {
                         title:'类型',
@@ -410,7 +410,7 @@
 		</Row>
 		<Row className="mgt_15">
 
-			<Table :columns="columns6" :data="data5"  height="180" :loading='loading'></Table>
+			<Table :columns="columns6" :data="data5"  height="180" :loading='loading' size="small"></Table>
 		</Row>
 		<Row class="mgt_15">
 			<Card class="relative">
@@ -418,8 +418,8 @@
 					<div slot="extra" class="btn-group">
 						<Button type="primary"  @click.native="$router.push('AddContractManagement')">+长协合同</Button>
 					</div>
-					<div style="height: 230px;">
-						<Table :columns="column2" :data="qyTable" :loading='loading2'></Table>
+					<div style="height: 262px;">
+						<Table :columns="column2" :data="qyTable" :loading='loading2' size="small"></Table>
 					</div>
 				<div class="page-container">
 					<Page

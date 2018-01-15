@@ -1,57 +1,248 @@
 <script>
-import PagingTool from '@/components/Equipment/PagingTool'
+import mySearch from '@/components/Tool/mySearchTwo'
 
 export default {
     name: 'AssetInfo',
     data(){
         return{
-            
+            columns1: [
+                {
+                    "sortable": true,
+                    title: '逻辑地址',
+                    key: 'clientid'
+                },
+                {
+                    title: '生产厂家',                    
+                    width: 200,
+                    key: 'factory'
+                },
+                {
+                    "sortable": true,
+                    title: '出厂编号',
+                    key: 'serial_no'
+                },
+                {
+                    "sortable": true,
+                    title: '采购日期',
+                    key: 'pur_date',
+                     width: 200,
+                },
+                {
+                    title: '接线方式',
+                    key: 'wiring'
+                },
+                {
+                    title: '通信地址',
+                    key: 'mailing_address'
+                },
+                {
+                    title: '端口号',
+                    key: 'port',
+                    width:90,
+                },
+                {
+                    title: '是否已安装',
+                    width: '112',
+                    key: 'is_install',
+                    render:(h,params)=>{
+                        if(params.row.is_install == 1){
+                            return h('span',{
+
+                           },'安装')
+                        }else{
+                            return h('span',{
+
+                            },'未安装')
+                        }
+                        
+                    }
+                },
+                {
+                    title: '操作',
+                    key: 'n9',
+                    align: 'center',
+                    render: (h, params) => {
+                        return h('div', [                            
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color:'#36c ',
+                                    cursor:'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.infoTo(params.row.clientid)
+                                    }
+                                }
+                            }, '详情'),
+                            h('span', {
+                                style: {
+                                    marginRight: '5px',
+                                    color: '#36c',
+                                    cursor: 'pointer'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.deleteId = params.row.id;
+                                        this.deleteName = params.row.clientid;
+                                        this.modal2 = true;
+                                    }
+                                }                            
+
+                            },'删除')
+                        ]);
+                    }
+
+                }               
+            ],
+            data1: [],
+            totalPage:0,
+            currentPage:1,
+            limit:14,
+            loading:false,
+            modal2:false,
+            deleteId:'',
+            deleteName:''
         }
     },
-    components: {
-        "PagingToolVIew": PagingTool
+    methods: {
+        infoTo(id) {
+            this.$router.push({path:'EquipmentStatus',query:{id:id}});    
+        },
+        deleteInfo(){
+            this.$http.delete(this.$api.CLIENT_TERMINAL_DELETE+this.deleteId).then(res=>{
+               console.log('删除终端',res);
+                this.equipmentList();
+                this.modal2 = false;
+                },err=>{
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.$api.errcallback(err);
+             })
+        },
+        equipmentList(){
+           this.loading = true;
+           this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status==='1'){
+                 this.data1 = data.data;
+                 this.totalPage = data.total;
+                 this.loading = false;
+             }else{
+                 this.loading = false;
+             }
+           },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.loading = false;
+              this.$api.errcallback(err);
+           })
+        },
+        pageChange(value){
+            this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:value,limit:this.limit}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status==='1'){
+                 this.data1 = data.data;
+                 this.loading = false;
+                 this.totalPage = data.total;
+                 this.currentPage = data.current_page;
+             }else{
+                 this.loading = false;
+             }
+           },err=>{
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.$api.errcallback(err);
+           })
+
+        },
+        keySeach(){
+           this.loading = true;
+           this.$http.post(this.$api.EQUIPMENT_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+             console.log("资产信息列表",res);
+             var data = res.data.data;
+             if(res.data.status==='1'){
+                 this.data1 = data.data;
+                 this.totalPage = data.total;
+                 this.loading = false;
+             }else{
+                 this.loading = false;
+             }
+           },err=>{
+             this.loading = false;
+             this.$api.errcallback(err);
+           }).catch(err=>{
+              this.loading = false;
+              this.$api.errcallback(err);
+           })
+        }
+    },
+    watch:{
+      com_id:function(){
+         this.equipmentList();
+      }
+    },
+    computed:{
+        com_id:function(){
+            return this.$store.getters.com_id;
+        }
+
+    },
+    components : {
+        'mySearch': mySearch
+    },
+    mounted(){
+        this.equipmentList();
     }
 }
 </script>
 
 <template>
-<div class="AssetInfo"> <!-- 这是设备资产信息页面 -->   
-    <div class="AssetInfoSearch">
-        <button class="apply">申请设备入库</button> <i class="iconfont icon-search"></i> <input class="AsSearchText " type="text" name="" id="" placeholder="资产号 | IP地址 | 企业名字"><button type="submit" class="AsSearch">搜索</button>
-    </div>
-    <div class="AssetInfoForm">
-        <table>
-            <tbody>
-                <tr>
-                    <th><input type="checkbox" name="" id=""> 资产号</th> 
-                    <th>生产厂家</th>
-                    <th>出厂编号</th>
-                    <th>采购日期</th>
-                    <th>接线方式</th>
-                    <th>IP地址</th>
-                    <th>端口号</th>
-                    <th>是否已安装</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <router-link to="/EquipmentStatus" tag="a">详情</router-link>
-                        <router-link to="/EquipmentException" tag="a">更多</router-link>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <PagingToolVIew></PagingToolVIew>
-    </div>
-    
+<div class="main-container relative"> <!-- 这是设备资产信息页面 -->
+    <Card>
+        <div slot="title">
+        <!-- <Button type="primary">申请设备入库</Button> -->
+        <h3>资产信息</h3>
+               
+        </div>
+        <!--<div slot="extra">-->
+             <!--<mySearch placeholder="请输入资产号" swidth="340" style='margin-top: -8px;'></mySearch>-->
+        <!--</div>-->
+        <div class="AssetInfo">
+            <div slot="extra">
+                <mySearch placeholder="请输入逻辑地址" swidth="340" style='margin-top: -8px;' v-on:doSearch="keySeach"></mySearch>
+            </div>
+            <Row class="AssetInfoForm" className="mgt_15">
+                <Col span='24'>
+                    <Table :columns='columns1' :data='data1' :loading='loading' size="small"></Table>
+                </Col>        
+            </Row>
+        </div>
+        <div class="page-center">
+        <!--分页-->
+        <div class="fenYe">
+          <Page :total="totalPage" :current='currentPage' :page-size='limit' show-total show-elevator v-on:on-change='pageChange'></Page><!--  <Button type="primary">确定</Button> -->
+        </div>
+      </div>           
+    </Card>
+    <!-- 是否删除蒙版 -->
+       <Modal v-model="modal2" width="360" class-name="vertical-center-modal">
+        <p slot="header" style="color:#f60;text-align:center">
+            <Icon type="information-circled"></Icon>
+            <span>确认删除？</span>
+        </p>
+        <div style="text-align:center">
+            <p>确认删除资产号为：</p>
+            <p>{{deleteName}}</p>
+        </div>
+        <div slot="footer">
+            <Button type="default" @click='modal2=false'>取消</Button>
+            <Button type="primary" @click='deleteInfo()'>确认</Button>
+        </div>
+    </Modal>
 </div>
 
 </template>
@@ -59,71 +250,38 @@ export default {
 <style scoped>
 
 .AssetInfo{
-    width: 1700px;
-    height: 944px;
-    background-color: #EEEEEE;
-    padding: 10px 20px;
+    height: 849px;
+    background-color: #fff;
 }
+
 .AssetInfoSearch{
-    background-color: #fff;
-    height: 46px;
-    padding: 12px 10px;
-    position: relative;
+    overflow: hidden;
+    height: 34px;
+    margin-bottom: 15px;
 }
-.AssetInfoSearch i{
-    position: absolute;
-    top: 16px;
-    left: 150px;
-}
-.apply{
-    width: 120px;
-    height: 30px;
-    background-color: #108CEE;    
-    color: #fff;
-}
-.AsSearchText{
-    width: 184px;
-    height: 30px;
-    border: 1px solid #ccc;
-    margin-left: 10px;
-    padding-left: 26px;
-}
-.AsSearch{
-    width: 60px;
-    height: 30px;
-    background-color: #108CEE;
-    color: #fff;
-}
-
-.AssetInfoForm{
-    background-color: #fff;
-    height: 882px;
-    position: relative;
-}
-.AssetInfoForm th{
-    display: inline-block;
-    padding: 0 20px;
-    height: 40px;
-    background-color: #F6F7FB;
-    line-height: 40px;
-    margin: 0 45px;
-}
-.AssetInfoForm th input {
-    vertical-align: middle;
-}
-.AssetInfoForm td{
-    display: inline-block;
-    padding: 0 20px;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 38px;
+.relative .page-center{
     text-align: center;
-    width: 100px;
-}
-.AssetInfoForm a{
-    padding: 0 2px;
-} 
-
-
-
+    position: absolute;
+    bottom:0px;
+    left:0;
+    right:0;
+  }
+  /* 分页的样式 */
+  .page-center  .fenYe {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    padding-top: 10px;
+    text-align: center;
+  }
+  .fenYe table{
+    border: 0;
+  }
+  .fenYe ul {
+    display: inline-block;
+  }
+  .fenYe button{
+    top: -12px;
+    left: 12px;
+  }
 </style>

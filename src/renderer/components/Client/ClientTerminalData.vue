@@ -1,477 +1,1608 @@
 <script>
 	export default {
-	    name:'terminalData',
-		data(){
-	        return{
-				cldDetail:{
-					zcbj:'1705A0010052',
-					zdh:'1705A0010052',
-					sccj:'深电能',
-					ccbh:'236413132165',
-					sblx:'终端表计',
-					cgrq:'2012-12-12',
-					ycip:'122.97.176.20',
-					txdz:'1705A0010052',
-					ycdk:'37173',
-					btl:'9600',
-					sxrq:'2017-10-21 18:36:40',
-					sshh:'7020620794',
-					gddw:'巩义市供电局',
-					byqrl:'120KW',
-					zt:'已启用'
+		name: 'terminalData',
+		data() {
+			return {
+				currentPDS: 0,
+				currentChartType: 1,
+				timeType: '今天',
+				todayTime: '0',
+				cldDetail: {},
+				clientIndex: '',
+				monitoringShow: 2,
+				eTotal: 0,
+				origratio: 0,
+				ratio: {
+					pt: 0,
+					pt_ratio1: 0,
+					pt_ratio2: 0,
+					ct: 0,
+					ct_ratio1: 0,
+					ct_ratio2: 0,
 				},
-                monitoringShow:false,
-                chartOption1:{
-                    title: {
-                        text: "日电量同比",
-                        textStyle:{
-                            fontSize:'14'
-                        },
-                        left:'155',
-                        top:'5'
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    xAxis:{
-                        type: 'category',
-                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15","1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15"],
-                        nameTextStyle:{
-                            fontSize:12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel :{
-                            interval:0
-                        }
+				timeList: [
+					{
+						label: '15分钟',
+						value: '今天'
+					},
+					{
+						label: '1天',
+						value: '1天'
+					},
+					{
+						label: '1月',
+						value: '1月'
+					},
+				],
+				logColumns: [
+					{
+						title: '掉线时间',
+						sortable: true,
+						key: 'off_time'
+					},
+					{
+						title: '上线时间',
+						sortable: true,
+						key: 'on_time'
+					},
+					{
+						title: '在线时长',
+						sortable: true,
+						key: 'total',
+						render: (h, params) => {
+							let text = this.formatDuring(params.row.total * 1000);
 
-                    }
-                    ,
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
-                        }
-                    ],
-                    dataZoom: [ {
-                        type: 'slider',
-                        bottom:0,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/10'
-                    }],
-                    series: [
-//                        { // For shadow
-//                            type: 'bar',
-//                            itemStyle: {
-//                                normal: {color: 'rgba(0,0,0,0.05)'}
-//                            },
-//                            barGap:'-100%',
-//                            barCategoryGap:'40%',
-//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
-//                            animation: false
-//                        },
-                        {
-                            name: '今年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30,184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
-                        }
+							return h('span', text)
+						}
+					},
 
-                    ]
-                },
-                chartOption2:{
-                    title: {
-                        text: "日电量同比",
-                        textStyle:{
-                            fontSize:'14'
-                        },
-                        left:'155',
-                        top:'5'
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    xAxis:{
-                        type: 'category',
-                        data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15","1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15"],
-                        nameTextStyle:{
-                            fontSize:12
-                        },
-//	                    控制x轴隔几个显示
-                        axisLabel :{
-                            interval:0
-                        }
-
-                    }
-                    ,
-                    yAxis: [
-                        {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
-                        }
-                    ],
-                    dataZoom: [ {
-                        type: 'slider',
-                        bottom:0,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/10'
-                    }],
-                    series: [
-//                        { // For shadow
-//                            type: 'bar',
-//                            itemStyle: {
-//                                normal: {color: 'rgba(0,0,0,0.05)'}
-//                            },
-//                            barGap:'-100%',
-//                            barCategoryGap:'40%',
-//                            data: [300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300],
-//                            animation: false
-//                        },
-                        {
-                            name: '今年',
-                            type: 'bar',
-                            itemStyle: {
-                                normal: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#83bff6'},
-                                            {offset: 0.5, color: '#188df0'},
-                                            {offset: 1, color: '#188df0'}
-                                        ]
-                                    )
-                                },
-                                emphasis: {
-                                    color: new this.$echarts.graphic.LinearGradient(
-                                        0, 0, 0, 1,
-                                        [
-                                            {offset: 0, color: '#2378f7'},
-                                            {offset: 0.7, color: '#2378f7'},
-                                            {offset: 1, color: '#83bff6'}
-                                        ]
-                                    )
-                                }
-                            },
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30,184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30]
-                        }
-
-                    ]
-                },
-	        }
+				],
+				columns2: [
+					{
+						title: '日期时间',
+						sortable: true,
+						key: 'off_time'
+					},
+					{
+						title: '事件',
+						sortable: true,
+						width: '80',
+						key: 'name'
+					},
+					{
+						title: '处理结果',
+						sortable: true,
+						key: 'status',
+						render: (h, params) => {
+							let text;
+							if (params.row.status === 0) {
+								text = '掉线已自动登录'
+							} else if (params.row.status === 1) {
+								text = '掉线未自动登录'
+							}
+							return h('span', text)
+						}
+					},
+				],
+				logData: [],
+				tableData2: [],
+				dianliangData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+				},
+				dianliuData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					curaData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					curbData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					curcData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				dianyaData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				yougongData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				wugongData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				shizaiData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				},
+				yinshuData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				fuheData: {
+					xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+					aData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					bData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+					cData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				onlineData: {
+					xData: ["10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15", "10/4", "10/5", "10/6", "10/7", "10/8", "10/9", "10/10", "10/11", "10/12", "10/13", "10/14", "10/15"],
+					yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+				},
+				zuidaDate: {
+					xData: ['2017-11-13', '2017-11-14', '2017-11-15', '2017-11-16', '2017-11-17', '2017-11-18', '2017-11-19', '2017-11-20', '2017-11-21', '2017-11-22', '2017-11-23', '2017-11-24', '2017-11-25', '2017-11-26', '2017-11-27', '2017-11-28', '2017-11-29', '2017-11-30'],
+					yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				},
+				terminalList: [],
+				clientid: '',
+				loading1: false,
+				loading2: false,
+			}
 		},
-		mounted(){
-            this.drawBar1(this.chartOption1);
-            this.drawBar2(this.chartOption2);
+		computed: {
+			time: function () {
+				if (this.timeType === '今天') {
+					return 1
+				} else if (this.timeType === '昨天') {
+					return 2
+				} else if (this.timeType === '近7天') {
+					return 3
+				} else if (this.timeType === '1天') {
+					return 4
+				} else if (this.timeType === '1月') {
+					return 5
+				} else if (this.timeType === '时间区间') {
+					return 6
+				}
+			},
+			cus_id: function () {
+				return this.$store.getters.cus_id
+			},
+			dianliangChart: function () {
+				return this.$echarts.init(document.getElementById('dianliang-chart'));
+			},
+			dianliuChart: function () {
+				return this.$echarts.init(document.getElementById('dianliu-chart'));
+			},
+			dianyaChart: function () {
+				return this.$echarts.init(document.getElementById('dianya-chart'));
+			},
+			yougongChart: function () {
+				return this.$echarts.init(document.getElementById('yougong-chart'));
+			},
+			wugongChart: function () {
+				return this.$echarts.init(document.getElementById('wugong-chart'));
+			},
+			shizaiChart: function () {
+				return this.$echarts.init(document.getElementById('shizai-chart'));
+			},
+			yinshuChart: function () {
+				return this.$echarts.init(document.getElementById('yinshu-chart'));
+			},
+			fuheChart: function () {
+				return this.$echarts.init(document.getElementById('fuhe-chart'));
+			},
+			onlineChart: function () {
+				return this.$echarts.init(document.getElementById('chart-jiankong'));
+			},
+			zuidaChart: function () {
+				return this.$echarts.init(document.getElementById('chart-main3'));
+			},
+			dianliangOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.barTooltip,
+					legend: {
+						data: ['采集电量'],
+						icon: 'rect',
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.colorList,
+						data: this.dianliangData.xData,
+					}
+					,
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					series: [
+						{
+							name: '采集电量',
+							type: 'bar',
+							barWidth: 30,
+							data: this.dianliangData.yData
+						}
+					]
+				}
 
-        },
-		methods:{
-		    drawBar1(option = this.chartOption1) {
-		        // 基于准备好的dom，初始化echarts实例
-		        let compare1Chart = this.$echarts.init(document.getElementById('chart-main'));
-		        // 绘制图表
-		        compare1Chart.setOption(option);
-		    },
-			drawBar2(option = this.chartOption2){
+			},
+			dianliuOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					legend: {
+						data: ['A相', 'B相', 'C相',],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.dianliuData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: 'A相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianliuData.curaData
 
-                console.log(this.monitoringShow);
-                // 基于准备好的dom，初始化echarts实例
-                let compare1Chart = this.$echarts.init(document.getElementById('chart-jiankong'));
-                // 绘制图表
-                compare1Chart.setOption(option);
+						},
+						{
+							name: 'B相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianliuData.curbData
+
+						},
+						{
+							name: 'C相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianliuData.curcData
+
+						},
+
+					]
+				}
+			},
+			dianyaOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					legend: {
+						data: ['A相', 'B相', 'C相',],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.dianyaData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: 'A相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianyaData.aData
+
+						},
+						{
+							name: 'B相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianyaData.bData
+
+						},
+						{
+							name: 'C相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.dianyaData.cData
+						},
+
+					]
+				}
+			},
+			yougongOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					legend: {
+						data: ['A相', 'B相', 'C相',],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.yougongData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: 'A相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yougongData.aData
+
+						},
+						{
+							name: 'B相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yougongData.bData
+
+						},
+						{
+							name: 'C相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yougongData.cData
+
+						},
+					]
+				}
+			},
+			wugongOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					legend: {
+						data: ['A相', 'B相', 'C相',],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.wugongData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: 'A相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.wugongData.aData
+
+						},
+						{
+							name: 'B相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.wugongData.bData
+
+						},
+						{
+							name: 'C相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.wugongData.cData
+
+						},
+					]
+				}
+			},
+			shizaiOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					legend: {
+						data: ['视在功率'],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.shizaiData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: '视在功率',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.shizaiData.yData
+
+						}
+					]
+				}
+			},
+			yinshuOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					legend: {
+						data: ['A相', 'B相', 'C相',],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.yinshuData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: 'A相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yinshuData.aData
+
+						},
+						{
+							name: 'B相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yinshuData.bData
+
+						},
+						{
+							name: 'C相',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.yinshuData.cData
+
+						},
+					]
+				}
+			},
+			fuheOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.lineTooltip,
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					color: this.$store.getters.chartOption.colorList,
+					xAxis: {
+						...this.$store.getters.chartOption.xAxis,
+						data: this.fuheData.xData
+					},
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: '功率因数',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.fuheData.yData
+
+						}
+					]
+				}
+			},
+			onlineOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.barTooltip,
+					grid: {
+						top: '20',
+						left: '10',
+						right: 5,
+						bottom: 0,
+						containLabel: true
+					},
+					xAxis: {
+						...this.$store.getters.chartOption.barTooltip,
+						data: this.onlineData.xData,
+					}
+					,
+					color: this.$store.getters.chartOption.colorList,
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							boundaryGap: 0,
+							max: 24,
+							interval: 6,
+							minInterval: 1,
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: '在线时长',
+							type: 'bar',
+							barMaxWidth: 40,
+							data: this.onlineData.yData
+						}
+
+					]
+				}
+			},
+			zuidaOption: function () {
+				return {
+					tooltip: this.$store.getters.chartOption.barTooltip,
+					legend: {
+						data: ['最大需量'],
+						left: 5,
+						top: 20,
+						itemWidth: 16,
+						itemHeight: 16,
+					},
+					grid: {
+						top: '80',
+						left: '0',
+						right: '20',
+						bottom: '1%',
+						containLabel: true
+					},
+					xAxis: {
+						...this.$store.getters.chartOption.barTooltip,
+						data: this.zuidaDate.xData,
+					}
+					,
+					color: this.$store.getters.chartOption.colorList,
+					yAxis: [
+						{
+							position: 'left',
+							type: 'value',
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+						}
+					],
+					dataZoom: this.$store.getters.chartOption.dataZoom,
+					series: [
+						{
+							name: '最大需量',
+							type: 'line',
+							smooth: true,
+							itemStyle: this.$store.getters.chartOption.lineItemStyle,
+							data: this.zuidaDate.yData
+						}
+
+					]
+				}
+			}
+		},
+		mounted() {
+			this.clientid = this.$store.getters.clientid;
+			this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
+			this.currentPDS = this.$route.query.index || 0;
+			this.clientTerminalList();
+		},
+		watch: {
+			cus_id: function () {
+				this.clientTerminalList()
+			},
+			clientid: function () {
+				console.log('clientid 改变', this.clientid)
+
+			}
+		},
+		methods: {
+			drawDianliang() {
+				this.dianliangChart.clear();
+				// 绘制图表
+				this.dianliangChart.setOption(this.dianliangOption);
+				this.dianliangChart.hideLoading();
+			},
+			drawDianliu() {
+				this.dianliuChart.clear();
+				// 绘制图表
+				this.dianliuChart.setOption(this.dianliuOption);
+				this.dianliuChart.hideLoading();
+			},
+			drawDianya() {
+				this.dianyaChart.clear();
+				// 绘制图表
+				this.dianyaChart.setOption(this.dianyaOption);
+				this.dianyaChart.hideLoading();
+			},
+			drawYougong() {
+				this.yougongChart.clear();
+				// 绘制图表
+				this.yougongChart.setOption(this.yougongOption);
+				this.yougongChart.hideLoading();
+			},
+			drawWugong() {
+				this.wugongChart.clear();
+				// 绘制图表
+				this.wugongChart.setOption(this.wugongOption);
+				this.wugongChart.hideLoading();
+			},
+			drawShizai() {
+				this.shizaiChart.clear();
+				// 绘制图表
+				this.shizaiChart.setOption(this.shizaiOption);
+				this.shizaiChart.hideLoading();
+			},
+			drawYinshu() {
+				this.yinshuChart.clear();
+				// 绘制图表
+				this.yinshuChart.setOption(this.yinshuOption);
+				this.yinshuChart.hideLoading();
+			},
+			drawFuhe() {
+				this.fuheChart.clear();
+				// 绘制图表
+				this.fuheChart.setOption(this.fuheOption);
+				this.fuheChart.hideLoading();
+			},
+			drawOnline() {
+				this.onlineChart.clear();
+				this.onlineChart.setOption(this.onlineOption);
+				this.onlineChart.hideLoading();
+			},
+			drawZuida() {
+				this.zuidaChart.clear();
+				this.zuidaChart.setOption(this.zuidaOption);
+				this.zuidaChart.hideLoading();
+			},
+			changeSelect(pds, clientIndex, clientid) {
+				this.currentPDS = pds;
+				this.clientIndex = clientIndex;
+				this.clientid = clientid;
+				this.getTerminalDetail();
+				this.onLineJiankng();
+				this.equipmentAbnomal();
+				this.equipmentLog();
+				this.collectJiankongData();
+				this.getRatio();
+			},
+			//用户终端列表
+			clientTerminalList() {
+				this.$http.post(this.$api.CLIENT_TERMINAL_LIST, {cus_id: this.$store.getters.cus_id}).then(res => {
+					console.log('用户终端列表', res.data[0]);
+					this.terminalList = res.data[0].data;
+					this.getTerminalDetail();
+					this.onLineJiankng();
+					this.equipmentAbnomal();
+					this.equipmentLog();
+					this.collectJiankongData('init');
+					this.getRatio();
+				}, err => {
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+//	        获取倍率
+			getRatio() {
+				this.$http.post(this.$api.CLIENT_TERMINAL_RATIO, {clientid: this.clientid}).then(res => {
+					let data = res.data.data;
+					let pt_ratio = data.pt_ratio.split('/');
+					let ct_ratio = data.ct_ratio.split('/');
+					this.ratio.pt = data.pt;
+					this.ratio.pt_ratio1 = pt_ratio[0];
+					this.ratio.pt_ratio2 = pt_ratio[1];
+					this.ratio.ct = data.ct;
+					this.ratio.ct_ratio1 = ct_ratio[0];
+					this.ratio.ct_ratio2 = ct_ratio[1];
+					console.log('倍率', data);
+					console.log(this.ratio)
+				}, err => {
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+			//	        修正ct倍率
+			setCTRatio() {
+				this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
+					clientid: this.clientid,
+					type: 'ct',
+					ct: this.ratio.ct_ratio1 / this.ratio.ct_ratio2,
+					ct_ratio1: this.ratio.ct_ratio1,
+					ct_ratio2: this.ratio.ct_ratio2,
+				}).then(res => {
+					console.log('修正ct倍率', res);
+					this.getRatio();
+				}, err => {
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+			//	        修正pt倍率
+			setPTRatio() {
+				this.$http.post(this.$api.CLIENT_TERMINAL_EDITRATIO, {
+					clientid: this.clientid,
+					type: 'pt',
+					pt: this.ratio.pt_ratio1 / this.ratio.pt_ratio2,
+					pt_ratio1: this.ratio.pt_ratio1,
+					pt_ratio2: this.ratio.pt_ratio2,
+				}).then(res => {
+					console.log('修正ct倍率', res);
+					this.getRatio();
+				}, err => {
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+			getTerminalDetail() {
+				this.$http.get(this.$api.CLIENT_TERMINAL_DETAIL + this.clientIndex).then(res => {
+					let data = res.data.data;
+					console.log('终端详情', res);
+					if (data.status === 0) {
+						data.status = "未启用";
+
+					} else if (data.status === 1) {
+						data.status = "已启用";
+					}
+					if (data.maxdemand == null) {
+						data.maxdemand = 0;
+					}
+					if (data.electricity == null) {
+						data.electricity = 0;
+					}
+					if (data.power_factor == null) {
+						data.power_factor = 0;
+					}
+					data.pur_date = data.pur_date.split(' ')[0];
+					data.install_date = data.install_date.split(' ')[0];
+					this.cldDetail = data;
+					console.log(this.cldDetail)
+				}, err => {
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+			onLineJiankng() {
+				this.onlineChart.showLoading();
+				this.$http.post(this.$api.CLIENT_TERMINAL_ONLINE, {clientid: this.clientid}).then(res => {
+					console.log("在线监控", res);
+					let data = res.data.data;
+					this.onlineData.xData = Object.keys(data);
+					this.onlineData.yData = Object.values(data).map(i => parseInt((i / 3600)));
+					this.todayTime = this.formatDuring(Object.values(data).pop() * 1000);
+					this.drawOnline()
+				}, err => {
+					this.drawOnline();
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.drawOnline();
+					this.$api.errcallback(err);
+				})
+			},
+			equipmentAbnomal() {
+				this.loading1 = true;
+				this.$http.post(this.$api.CLIENT_EQUIPMENT_REMIND).then(res => {
+					console.log("设备异常提醒", res);
+					if (res.data.status === '1') {
+						this.tableData2 = res.data.data;
+						this.loading1 = false;
+					} else {
+						this.loading1 = false;
+					}
+
+				}, err => {
+					this.loading1 = false;
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.loading1 = false;
+					this.$api.errcallback(err);
+				})
+			},
+			equipmentLog() {
+				this.loading2 = true;
+				this.$http.post(this.$api.CLIENT_EQUIPMENT_LOG, {clientid: this.clientid}).then(res => {
+					console.log("设备日志", res);
+					if (res.data.status === '1') {
+						let data = res.data.data;
+						this.logData = data;
+						this.loading2 = false;
+					} else {
+						this.loading2 = false;
+					}
+
+				}, err => {
+					this.loading2 = false;
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.loading2 = false;
+					this.$api.errcallback(err);
+				})
+			},
+			collectJiankongData(dataType) {
+				let start = '',
+					end = '';
+				if (Array.isArray(dataType)) {
+					this.timeType = '时间区间';
+					start = dataType[0];
+					end = dataType[1];
+				}
+				this.dianliangChart.showLoading();
+				this.dianliuChart.showLoading();
+				this.dianyaChart.showLoading();
+				this.wugongChart.showLoading();
+				this.yougongChart.showLoading();
+				this.shizaiChart.showLoading();
+				this.yinshuChart.showLoading();
+				this.zuidaChart.showLoading();
+				this.$http.post(this.$api.CLIENT_COLLECT_DATA, {
+					type: this.currentChartType,
+					time: this.time,
+					clientid: this.clientid,
+					start: start,
+					end: end
+				}).then(res => {
+					let data = Object.values(res.data.data);
+					this.eTotal = res.data.total;
+					this.origratio = res.data.origratio;
+					if (this.currentChartType === 1) {
+						this.dianliangData.xData = [];
+						this.dianliangData.yData = [];
+						data.map(i => {
+							this.dianliangData.xData.push(i.collect_time);
+							this.dianliangData.yData.push(i.electricity);
+						});
+						console.log("采集监控  电量", res);
+						this.drawDianliang();
+					} else if (this.currentChartType === 2) {
+						this.dianliuData.xData = [];
+						this.dianliuData.curaData = [];
+						this.dianliuData.curbData = [];
+						this.dianliuData.curcData = [];
+						data.map(i => {
+							this.dianliuData.xData.push(i.updated_at);
+							this.dianliuData.curaData.push(i.cur_a);
+							this.dianliuData.curbData.push(i.cur_b);
+							this.dianliuData.curcData.push(i.cur_c);
+						});
+						console.log("采集监控  电流", res);
+						console.log(this.dianliuData);
+						this.drawDianliu();
+					} else if (this.currentChartType === 3) {
+						this.dianyaData.xData = [];
+						this.dianyaData.aData = [];
+						this.dianyaData.bData = [];
+						this.dianyaData.cData = [];
+						data.map(i => {
+							this.dianyaData.xData.push(i.updated_at);
+							this.dianyaData.aData.push(i.vol_a);
+							this.dianyaData.bData.push(i.vol_b);
+							this.dianyaData.cData.push(i.vol_c);
+						});
+						console.log("采集监控  电压", res);
+						this.drawDianya();
+					} else if (this.currentChartType === 4) {
+						this.wugongData.xData = [];
+						this.wugongData.aData = [];
+						this.wugongData.bData = [];
+						this.wugongData.cData = [];
+						data.map(i => {
+							this.wugongData.xData.push(i.updated_at);
+							this.wugongData.aData.push(i.rpa);
+							this.wugongData.bData.push(i.rpb);
+							this.wugongData.cData.push(i.rpc);
+						});
+						console.log("采集监控  无功功率", res);
+						this.drawWugong();
+					} else if (this.currentChartType === 5) {
+						this.shizaiData.xData = [];
+						this.shizaiData.yData = [];
+						data.map(i => {
+							this.shizaiData.xData.push(i.updated_at);
+							this.shizaiData.yData.push(i.inspect_power);
+						});
+						console.log("采集监控  视在功率", res);
+						this.drawShizai();
+					} else if (this.currentChartType === 6) {
+						this.yinshuData.xData = [];
+						this.yinshuData.aData = [];
+						this.yinshuData.bData = [];
+						this.yinshuData.cData = [];
+						data.map(i => {
+							this.yinshuData.xData.push(i.updated_at);
+							this.yinshuData.aData.push(i.pfa);
+							this.yinshuData.bData.push(i.pfb);
+							this.yinshuData.cData.push(i.pfc);
+						});
+						console.log("采集监控  功率因数", res);
+						this.drawYinshu();
+					} else if (this.currentChartType === 7) {
+						this.yougongData.xData = [];
+						this.yougongData.aData = [];
+						this.yougongData.bData = [];
+						this.yougongData.cData = [];
+						data.map(i => {
+							this.yougongData.xData.push(i.updated_at);
+							this.yougongData.aData.push(i.apa);
+							this.yougongData.bData.push(i.apb);
+							this.yougongData.cData.push(i.apc);
+						});
+						console.log("采集监控  负荷", res);
+						this.drawYougong();
+					} else if (this.currentChartType === 8) {
+						var dataNum = res.data.data;
+						this.zuidaDate.xData = Object.keys(dataNum);
+						this.zuidaDate.yData = Object.values(dataNum);
+						console.log("采集监控 最大需量", res);
+						console.log(1, this.zuidaDate);
+						this.drawZuida();
+					}
+				}, err => {
+					if (this.currentChartType === 1) {
+						this.dianliangData.xData = ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'];
+						this.dianliangData.yData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+						this.drawDianliang();
+					} else if (this.monitoringShow === 3) {
+						this.dianliuData.xData = ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'];
+						this.dianliuData.curaData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+						this.dianliuData.curbData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+						this.dianliuData.curcData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
+						this.drawDianliu();
+					}
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.$api.errcallback(err);
+				})
+			},
+			setTimeType(type) {
+				this.timeType = type;
+				this.collectJiankongData()
+			},
+			formatDuring(mss) {
+				let days = parseInt(mss / (1000 * 60 * 60 * 24));
+				let hours = parseInt((mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				let minutes = parseInt((mss % (1000 * 60 * 60)) / (1000 * 60));
+				let seconds = (mss % (1000 * 60)) / 1000;
+				return days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
 			}
 		}
 	}
 </script>
 <template>
-	<div class="terminaldata-container relative">
-		<div class="terminal-header">
-			<h3 class="title">终端详情</h3>
-			<div class="btn-group fr">
-				<button class="button"><router-link to="/caiji-detail">数据采集记录</router-link></button>
-				<button class="button btnSelected"><router-link to="/add-celiang" tag="span">+配置测量点</router-link></button>
+	<div class="client-container">
+		<Card>
+			<h3 slot="title">终端详情</h3>
+			<div slot="extra" class="btn-group" style="margin-top: -8px;">
+				<Button type="primary" style="height: 28px;line-height: 16px" @click="$router.push('caiji-detail')">
+					数据采集记录
+				</Button>
+				<Button type="primary" style="height: 28px;line-height: 16px" @click="$router.push('add-celiang')">
+					+配置测量点
+				</Button>
 			</div>
-		</div>
-		<div class="pds-container">
-			<ul>
-				<li class="pds">10KV配电室-2</li>
-				<li class="pds">10KV配电室-2</li>
-				<li class="pds">10KV配电室-2</li>
-				<li class="pds">10KV配电室-2</li>
-				<li class="pds">10KV配电室-2</li>
-				<li class="pds">10KV配电室-2</li>
-			</ul>
-			<div class="cld-detail">
-				<div class="left fl">
 
-					<h4 class="title">测量点：河南银河铝业有限公司__鲁庄镇西候村候地工业园区_02</h4>
-					<ul>
-						<li><span>实际电量</span><br><span>45454</span></li>
-						<li><span>功率因数</span><br><span>0.9</span></li>
-						<li><span>当前最大需量</span><br><span>3453</span></li>
-						<li><span>当前状态</span><br><span>运行中</span></li>
-					</ul>
+			<Row>
+				<div class="pds-container">
+					<Row>
+						<div class="tab-container">
+							<template v-for="(item,index) in terminalList">
+								<my-tab v-on:changeSelect="changeSelect(index,item.id,item.clientid)"
+								        v-bind:type="currentPDS === index?'disabled':'normal'">{{item.mea_name}}
+								</my-tab>
+							</template>
+
+						</div>
+					</Row>
+					<Row>
+						<div class="cld-detail">
+							<Row>
+								<Col span="10">
+								<div class="left">
+
+									<h4 class="title">测量点：{{cldDetail.mea_address}} <span
+											style="color: #999999;font-weight: 400;">资产编号:{{cldDetail.serial_no}}</span>
+									</h4>
+									<ul>
+										<li style="background-color: #0089f0;">
+											<strong>{{cldDetail.electricity}}</strong><br><span>实际电量</span></li>
+										<li style="background-color: #f57e6a;">
+											<strong>{{cldDetail.power_factor}}</strong><br><span>功率因数</span></li>
+										<li style="background-color: #ab7aee;">
+											<strong>{{cldDetail.maxdemand}}</strong><br><span>当前最大需量</span>
+										</li>
+										<li style="background-color: #6ec71e;">
+											<strong>{{cldDetail.status}}</strong><br><span>当前状态</span></li>
+									</ul>
+								</div>
+								</Col>
+								<Col span="14">
+								<div class="right">
+									<table  cellspacing="12">
+										<tbody>
+										<tr>
+											<td><span>终端号 : </span> {{cldDetail.clientid}}</td>
+											<td><span>生产厂家 : </span> {{cldDetail.factory}}</td>
+											<td><span>出厂编号 : </span> {{cldDetail.serial_no}}</td>
+											<td><span>设备类型 : </span> {{cldDetail.type}}</td>
+
+										</tr>
+										<tr>
+											<td><span>采购日期 : </span> {{cldDetail.pur_date}}</td>
+											<td><span>通信地址 : </span> {{cldDetail.mailing_address}}</td>
+											<td><span>远程端口 : </span> {{cldDetail.port}}</td>
+											<td><span> 上线日期 :</span> {{cldDetail.install_date}}</td>
+
+
+										</tr>
+										<tr>
+											<td><span>所属户号 : </span> {{cldDetail.user_no}}</td>
+											<td><span>供电单位 : </span> {{cldDetail.powerplant}}</td>
+											<td><span>所属变压器容量 : </span> {{cldDetail.capacity}}KW</td>
+											<td><span>状态 : </span> {{cldDetail.status}}</td>
+
+										</tr>
+										</tbody>
+									</table>
+								</div>
+								</Col>
+
+							</Row>
+						</div>
+					</Row>
 				</div>
-				<div class="right fl">
-					<table width="900" cellspacing="5">
-						<legend>资产编号:{{cldDetail.zcbj}}</legend>
-						<tbody>
-							<tr>
-								<td>终端号:{{cldDetail.zdh}}</td>
-								<td>生产厂家:{{cldDetail.sccj}}</td>
-								<td>出厂编号:{{cldDetail.ccbh}}</td>
-								<td>设备类型:{{cldDetail.sblx}}</td>
-								<td>采购日期:{{cldDetail.cgrq}}</td>
-							</tr>
-							<tr>
-								<td>远程ip:{{cldDetail.ycip}}</td>
-								<td>通信地址:{{cldDetail.txdz}}</td>
-								<td>远程端口:{{cldDetail.ycdk}}</td>
-								<td>波特率:{{cldDetail.btl}}</td>
-								<td>上线日期:{{cldDetail.sxrq}}</td>
-							</tr>
-							<tr>
-								<td>所属户号:{{cldDetail.sshh}}</td>
-								<td>供电单位:{{cldDetail.gddw}}</td>
-								<td>所属变压器容量:{{cldDetail.byqrl}}</td>
-								<td>状态:{{cldDetail.zt}}</td>
-							</tr>
-						</tbody>
-					</table>
+			</Row>
+
+		</Card>
+		<Card class="terminal-chart">
+			<h3 slot="title">数据图表</h3>
+			<div slot="extra">
+				<Row>
+					<div style="display: inline-block;margin-right: 100px;">
+						<div class="power-item" :class="{selected:currentChartType===1}"
+						     @click="monitoringShow = 2;currentChartType=1;collectJiankongData()">电量
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===2}"
+						     @click="monitoringShow = 3;currentChartType=2;collectJiankongData()">电流
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===3}"
+						     @click="monitoringShow = 3;currentChartType=3;collectJiankongData()">电压
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===4}"
+						     @click="monitoringShow = 3;currentChartType=4;collectJiankongData()">无功功率
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===5}"
+						     @click="monitoringShow = 3;currentChartType=5;collectJiankongData()">视在功率
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===6}"
+						     @click="monitoringShow = 3;currentChartType=6;collectJiankongData()">功率因数
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===7}"
+						     @click="monitoringShow = 3;currentChartType=7;collectJiankongData()">负荷
+						</div>
+						<div class="power-item" :class="{selected:currentChartType===8}"
+						     @click="monitoringShow = 4;currentChartType=8;collectJiankongData()">最大需量
+						</div>
+					</div>
+					<div style="text-align: center;display: inline-block">
+						<!-- <div class="power-item" :class="{selected:currentChartType===10}"
+						     @click="monitoringShow = 3;currentChartType=10">采集监控
+						</div> -->
+						<div class="power-item" :class="{selected:currentChartType===11}"
+						     @click="monitoringShow = 1;currentChartType=11">在线监控
+						</div>
+					</div>
+				</Row>
+			</div>
+			<Row className="terminal-chart-content">
+				<div v-show="currentChartType===11" class="relative" style="height: 500px">
+					<p style="margin: -10px 0 10px 10px;clear: both">今日在线时长 :<span
+							style="color: #0089f0;font-size: 16px;"> {{todayTime}}</span></p>
+					<div class="chart-main" id="chart-jiankong">
+
+					</div>
+					<div class="unusual-commind fr">
+						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备异常提醒</span>
+						<Table :columns="columns2" :data="tableData2" :loading='loading1'></Table>
+					</div>
+					<div class="shebei-log absolute" style="left: 5px;top: 255px;">
+						<span style="font-size: 14px;display: inline-block;margin-bottom: 5px;">设备日志</span>
+
+						<div class="ivu-table-wrapper" style="height: 220px">
+							<div class="ivu-table ivu-table-with-fixed-top">
+								<div class="ivu-table-header">
+
+								</div>
+								<div class="ivu-table-body" style="height: 220px;">
+									<table width="100%" cellspacing="0" cellpadding="0">
+										<thead>
+										<tr>
+											<th>
+												<div class="ivu-table-cell"><span>掉线时间</span></div>
+											</th>
+											<th>
+												<div class="ivu-table-cell"><span>上线时间</span></div>
+											</th>
+											<th>
+												<div class="ivu-table-cell"><span>在线时长</span></div>
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr v-for="item in logData">
+											<td>
+												<div class="ivu-table-cell"><span>{{item.off_time}}</span></div>
+											</td>
+											<td>
+												<div class="ivu-table-cell"><span>{{item.on_time}}</span></div>
+											</td>
+											<td>
+												<div class="ivu-table-cell"><span>{{item.total}}</span></div>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="terminal-chart">
-			<h3 class="title fl">数据图表</h3>
-			<div class="select-time fr">
-				<ul>
-					<li>时间选择:</li>
-					<li>今天</li>
-					<li>昨天</li>
-					<li>近7天</li>
-					<li>近15天</li>
-					<li>近30天</li>
-					<li><input type="date"></li>
-					<li>时间粒度:</li>
-					<li><select name="" id="">
-						<option value="5">5分钟</option>
-					</select></li>
-				</ul>
-			</div>
-			<div class="chart-header">
-				<ul class="fl">
-					<li class="selected">电量</li>
-					<li>电流</li>
-					<li>电压</li>
-					<li>有功功率</li>
-					<li>无功功率</li>
-					<li>视在功率</li>
-					<li>功率因数</li>
-					<li>负荷</li>
-					<li>最大需量</li>
-				</ul>
-				<ul class="fr">
-					<li>采集监控</li>
-					<li @click="monitoringShow = !monitoringShow" style="cursor: pointer;position: relative;z-index: 999">在线监控</li>
-				</ul>
-			</div>
-			<div v-show="monitoringShow" class="relative" style="height: 500px">
-				<div class="chart-main" id="chart-jiankong" style="width: 977px;height: 217px;float: left;">
+				<div v-show="currentChartType===1" class="relative">
+					<div class="totalCount">
+						<span>当前月度总电量 ：<span style="font-size: 16px;color: #0089f0">{{eTotal}}</span>Kw.h
+						</span>
+						<span style="margin-left: 20px;">当前倍率:<span
+								style="font-size: 16px;color: #0089f0">{{origratio}}</span></span>
 
+						<Button class="refresh" type="primary"
+						        style="float: right;margin-right: -15px;position: relative;z-index: 100"
+						        @click="collectJiankongData">
+							<i class="iconfont icon-shuaxin"></i>
+						</Button>
+					</div>
+					<div class="select-time">
+						<ul style="position: relative;left: 220px">
+							<li>
+								<RadioGroup v-model="timeType" type="button" v-on:on-change="collectJiankongData">
+									<Radio label="今天"></Radio>
+									<Radio label="昨天"></Radio>
+									<Radio label="近7天"></Radio>
+								</RadioGroup>
+							</li>
+							<li>
+								<DatePicker
+										type="daterange"
+										placement="bottom-end"
+										placeholder="选择时间区间"
+										v-on:on-change="collectJiankongData"></DatePicker>
+							</li>
+							<li>
+								<Select style="width: 120px" placeholder="请选择时间粒度" v-on:on-change="setTimeType">
+									<Option v-for="item in timeList" :value="item.value" :key="item.value"
+									        style="width: 80px">{{ item.label }}
+									</Option>
+								</Select>
+							</li>
+						</ul>
+					</div>
+					<div class="chart-main" id="dianliang-chart" style="width:100%;height: 430px;"></div>
 				</div>
-				<div class="unusual-commind fr" style="width: 400px;height: 217px;margin-top: 50px;">
-					<table width="400" cellspacing="15">
-						<thead>
-							<tr>
-								<th>时间日期</th>
-								<th>事件</th>
-								<th>处理结果</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td>17-12-12 24:00:00</td>
-								<td>掉线</td>
-								<td>已自动登录</td>
-							</tr>
-							<tr>
-								<td>17-12-12 24:00:00</td>
-								<td>掉线</td>
-								<td>等待登录</td>
-							</tr>
-							<tr>
-								<td>17-12-12 24:00:00</td>
-								<td>上报失败</td>
-								<td>已补抄数据</td>
-							</tr>
-							<tr>
-								<td>17-12-12 24:00:00</td>
-								<td>上报失败</td>
-								<td>等待抄数据</td>
-							</tr>
-						</tbody>
-
-					</table>
-
-				</div >
-				<div class="shebei-log absolute" style="left: 80px;top: 300px;   ">
-					<table width="840" cellspacing="15">
-						<thead>
-						<tr>
-							<th>上线时间</th>
-							<th>掉线时间</th>
-							<th>在线时长</th>
-							<th>远程ip</th>
-							<th>端口</th>
-						</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>17-12-12 24:00:00</td>
-								<td>17-12-12 24:00:00</td>
-								<td>20天20小时20分钟20秒</td>
-								<td>192.192.192.192</td>
-								<td>1234</td>
-							</tr>
-						</tbody>
-					</table>
+				<div v-show="currentChartType===2" class="relative">
+					<span style="margin-left: 10px;">当前CT系数:<span
+							style="font-size: 16px;color: #0089f0">{{ratio.ct}}</span></span>
+					<span style="margin: 0 10px;">当前CT比</span>
+					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio1"/> :
+					<Input style="width: 80px" size="small" v-model="ratio.ct_ratio2"/>
+					<Button type="primary" @click="setCTRatio">修正</Button>
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="dianliu-chart" style="width:1477px;height: 430px;"></div>
 				</div>
-			</div>
-			<div v-show="!monitoringShow" class="chart-main" id="chart-main" style="width: 1447px;height: 450px;">
+				<div v-show="currentChartType===3" class="relative">
+					<span style="margin-left: 10px;">当前PT系数:<span
+							style="font-size: 16px;color: #0089f0">{{ratio.pt}}</span></span>
+					<span style="margin: 0 10px;">当前PT比</span>
+					<Input style="width: 80px" size="small" v-model="ratio.pt_ratio1"/> :
+					<Input style="width: 80px" size="small" v-model="ratio.pt_ratio2"/>
 
-			</div>
-		</div>
+					<Button type="primary" @click="setPTRatio">修正</Button>
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="dianya-chart" style="width:1447px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===4" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="wugong-chart" style="width:1447px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===5" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="shizai-chart" style="width:1447px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===6" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="yinshu-chart" style="width:1447px;height: 430px;"></div>
+				</div>
+				<div v-show="currentChartType===7" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="yougong-chart" style="width:1447px;height: 430px;"></div>
+				</div>
+				<div v-show="monitoringShow===4" class="relative">
+					<Button class="refresh fr" type="primary" @click="collectJiankongData">
+						<i class="iconfont icon-shuaxin"></i>
+					</Button>
+					<div class="chart-main" id="chart-main3" style="width:1447px;height: 430px;"></div>
+				</div>
+			</Row>
+		</Card>
 	</div>
 </template>
 <style scoped>
-	.terminal-header .title{
-		display: inline-block;
-	}
-	.terminaldata-container{
-		top: 60px;
-		left: 205px;
 
+	.pds-container {
+		height: 200px;
 	}
-	.terminal-header{
-		width: 1447px;
-		height: 50px;
-		line-height: 50px;
-		padding: 0 20px;
-		background-color: #fff;
-		margin-left: 20px;
-		margin-top: 94px;
-	}
-	.pds-container{
-		width: 1447px;
-		height: 176px;
-		background-color: #fff;
-		margin-left: 20px;
-		margin-top: 3px;
-		padding-top: 15px;
-	}
-	.pds-container li{
+
+	.pds-container li {
 		display: inline-block;
 		vertical-align: middle;
 	}
-	.pds{
-		width: 90px;
-		height: 30px;
-		line-height: 30px;
-		margin-left: 10px;
-		text-align: center;
-		border: 1px solid #333;
+
+	.tab-container {
+		margin-left: 20px;
+		margin-bottom: 20px;
 	}
-	.cld-detail .left,.cld-detail .right{
+
+	.tab-container span {
+		margin-right: 5px;
+	}
+
+	.cld-detail {
+		height: 120px;
+	}
+
+	.cld-detail .left {
 		margin-top: 20px;
 		margin-left: 20px;
 	}
-	.cld-detail .right{
-		margin-left: 50px;
+
+	.cld-detail .right {
+		margin-top: 40px;
+		margin-left: -130px;
+
 	}
-	.cld-detail ul{
+	.cld-detail table{
+		width:100%;
+	}
+
+	.cld-detail ul {
 		margin-top: 10px;
 	}
-	.cld-detail li{
-		width: 80px;
-		height: 68px;
-		line-height: 30px;
-		background-color: #EAEDF1;
+
+	.cld-detail li {
+		width: 87px;
+		height: 87px;
 		text-align: center;
-		margin-left: 5px;
+		margin-right: 10px;
+		box-sizing: border-box;
+		color: #ffffff;
 	}
-	.terminal-chart{
-		width: 1447px;
-		height: 580px;
+
+	.cld-detail li strong, span {
+		display: inline-block;
+	}
+
+	.cld-detail li strong {
+		font-size: 18px;
+		margin-top: 16px;
+	}
+
+	.cld-detail li span {
+		margin-top: 16px;
+	}
+
+	.terminal-chart {
+		height: 564px;
 		overflow: hidden;
-		padding: 0 20px;
 		background-color: #fff;
-		margin-left: 20px;
 		margin-top: 15px;
 	}
-	.terminal-chart .title{
-		margin-top: 10px;
+
+	.select-time {
+		padding: 0 0 15px 600px;
+		border-bottom: 1px solid #eee
 	}
-	.select-time{
-		margin-top: 10px;
-	}
-	.terminal-chart li{
+
+	.terminal-chart li {
 		display: inline-block;
 		margin-right: 20px;
 	}
-	.chart-header{
-		margin-top: 50px;
-	}
-	.chart-header ul{
-		background-color: #F6F6F6;
-		height: 50px;
-	}
-	.chart-header li{
+
+	.power-item {
 		display: inline-block;
-		vertical-align: bottom;
-		margin-left: 20px;
-		margin-top: 5px;
-		height: 45px;
+		margin-left: 10px;
+		margin-right: 0;
+		height: 31px;
 		text-align: center;
-		line-height: 50px;
-		width: 65px;
+		line-height: 30px;
+		width: 60px;
+		cursor: pointer;
+		color: #0089f0;
+		position: relative;
+		top: 2px;
+		border: 1px solid transparent;
 	}
-	.chart-header li.selected{
+
+	.power-item.selected {
+		color: #666666;
+		border: 1px solid #eee;
+		border-bottom-color: transparent;
 		background-color: #fff;
 	}
-	.terminal-chart th,td{
-		text-align: center;
-		
+
+	.terminal-chart th, .terminal-chart td {
+		text-align: left;
 	}
-	.terminal-chart th{
+
+	.right td > span {
+		color: #999999 !important;
+	}
+
+	.terminal-chart th {
 		background-color: #f6f6f6;
 		height: 40px;
+	}
+
+	.totalCount {
+		position: absolute;
+		width: 1405px;
+		top: 0;
+		left: 9px;
+	}
+
+	#chart-jiankong {
+		width: 1000px;
+		height: 189px;
+		float: left;
+	}
+
+	.unusual-commind {
+		width: 400px;
+		height: 477px;
+		padding-right: 20px;
+		margin-top: -15px;
+	}
+
+	.unusual-commind .ivu-table-wrapper {
+		height: 460px;
+	}
+
+	.shebei-log {
+		width: 990px;
+	}
+
+	@media (min-width: 1365px) and (max-width: 1919px) {
+		.cld-detail .right {
+			margin-top:45px;
+			margin-left: -80px;
+		}
+        .cld-detail table{
+		    width:50%;
+	     }
+		.tab-container {
+			margin-left: 0;
+		}
+
+		.cld-detail .left {
+			margin-left: 0;
+		}
+
+		.right td {
+			white-space: nowrap;
+		}
+
+		.select-time {
+			padding: 0 0 15px 340px;
+		}
+
+		#chart-jiankong {
+			width: 770px;
+			height: 189px;
+			float: left;
+		}
+
+		.unusual-commind {
+			width: 300px;
+			height: 485px;
+			padding-right: 0px;
+			margin-top: -15px;
+		}
+
+		.unusual-commind .ivu-table-wrapper {
+			height: 455px;
+		}
+
+		.shebei-log {
+			width: 770px;
+		}
+		.cld-detail li {
+			margin-right:5px;
+		}
+		#dianliu-chart,
+		#dianya-chart,
+		#wugong-chart,
+		#shizai-chart,
+		#yinshu-chart,
+		#yougong-chart,
+		#chart-main3{
+            width:1084px !important;
+		}
 	}
 </style>

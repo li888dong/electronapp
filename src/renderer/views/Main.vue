@@ -12,8 +12,8 @@
                 :open-names="openedSubmenuArr"
                 :menu-list="menuList">
                 <div slot="top" class="logo-con">
-                    <img v-show="!shrink"  src="../images/logo.jpg" key="max-logo" />
-                    <img v-show="shrink" src="../images/logo-min.jpg" key="min-logo" />
+                    <img v-show="!shrink"  src="../assets/logo蓝底.png" key="max-logo" />
+                    <img v-show="shrink" src="../assets/logo（没有文字）.png" key="min-logo" />
                 </div>
             </shrinkable-menu>
         </div>
@@ -25,21 +25,24 @@
                     </Button>
                 </div>
                 <div class="header-middle-con">
-                    <div class="main-breadcrumb">
-                        <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
+                    <!--<div class="main-breadcrumb">-->
+                        <!--<breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>-->
+                    <!--</div>-->
+                    <div>
+                        <weather></weather>
                     </div>
                 </div>
                 <div class="header-avator-con">
-                    <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
+                    <!--<full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>-->
                     <lock-screen></lock-screen>
                     <message-tip v-model="mesCount"></message-tip>
-                    <theme-switch></theme-switch>
+                    <!--<theme-switch></theme-switch>-->
                     
                     <div class="user-dropdown-menu-con">
                         <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
                             <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
                                 <a href="javascript:void(0)">
-                                    <span class="main-user-name">{{ userName }}</span>
+                                    <span class="main-user-name">{{$store.getters.fullname}}</span>
                                     <Icon type="arrow-down-b"></Icon>
                                 </a>
                                 <DropdownMenu slot="list">
@@ -66,6 +69,7 @@
     </div>
 </template>
 <script>
+	import {ipcRenderer,shell} from 'electron';
     import shrinkableMenu from './main-components/shrinkable-menu/shrinkable-menu.vue';
     import tagsPageOpened from './main-components/tags-page-opened.vue';
     import breadcrumbNav from './main-components/breadcrumb-nav.vue';
@@ -73,9 +77,10 @@
     import lockScreen from './main-components/lockscreen/lockscreen.vue';
     import messageTip from './main-components/message-tip.vue';
     import themeSwitch from './main-components/theme-switch/theme-switch.vue';
+    import weather from '@/components/Weather.vue'
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
-    
+
     export default {
         components: {
             shrinkableMenu,
@@ -84,7 +89,8 @@
             fullScreen,
             lockScreen,
             messageTip,
-            themeSwitch
+            themeSwitch,
+			weather
         },
         data () {
             return {
@@ -120,14 +126,19 @@
                 return this.$store.state.app.messageCount;
             }
         },
+        beforeMount(){
+            let screenWidth = ipcRenderer.sendSync('width-change', 'change');
+                if (screenWidth<1920) this.shrink = true;
+            },
         methods: {
             init () {
+				
                 let pathArr = util.setCurrentPath(this, this.$route.name);
                 this.$store.commit('updateMenulist');
                 if (pathArr.length >= 2) {
                     this.$store.commit('addOpenSubmenu', pathArr[1].name);
                 }
-                this.userName = Cookies.get('user');
+                this.userName = sessionStorage.getItem('user');
                 let messageCount = 3;
                 this.messageCount = messageCount.toString();
                 this.checkTag(this.$route.name);
@@ -146,6 +157,7 @@
                     // 退出登录
                     this.$store.commit('logout', this);
                     this.$store.commit('clearOpenedSubmenu');
+					ipcRenderer.send('login-failed');
                     this.$router.push({
                         name: 'login'
                     });

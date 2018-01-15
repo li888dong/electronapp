@@ -1,82 +1,84 @@
 /*重置按钮样式  Button组件中有例子*/
-.ivu-btn{
-	position: relative;
-	/* height: 34px; */
-}
-.ivu-btn span{
-	position: relative;
-	z-index: 10;
-}
-.ivu-btn-primary{
-	background-color: #0089F0!important;
+/*.ivu-btn{*/
+	/*position: relative;*/
+	/*!* height: 34px; *!*/
+/*}*/
+/*.ivu-btn span{*/
+	/*position: relative;*/
+	/*z-index: 10;*/
+/*}*/
+/*.ivu-btn-primary{*/
+	/*background-color: #0089F0!important;*/
+	/*color: #fff!important;*/
+/*}*/
+/*.ivu-btn-info{*/
+	/*background-color: #ffffff!important;*/
+	/*color: #0089F0!important;*/
+
+/*}*/
+/*.ivu-btn-info.disabled{*/
+	/*border:1px solid #0089F0;*/
+	/*border-radius: 4px;*/
+	/*opacity: 0.5;*/
+/*}*/
+/*.ivu-btn-info.disabled:hover{*/
+	/*opacity: 0.5;*/
+	/*border:1px solid #0089F0;*/
+	/*border-radius: 4px;*/
+/*}*/
+/*.ivu-btn-info.disabled:hover:after{*/
+	/*display: none!important;*/
+/*}*/
+/*.ivu-btn-info.disabled:after{*/
+	/*display: none!important;*/
+/*}*/
+/*.ivu-btn-success{*/
+	/*background-color: #31C9D7!important;*/
+	/*color: #fff!important;*/
+/*}*/
+/*.ivu-btn-error{*/
+	/*background-color: #F35E7A!important;*/
+	/*color: #fff!important;*/
+/*}*/
+/*.ivu-btn-default:hover{*/
+	/*color: inherit;*/
+	/*border-color: rgb(221, 222, 225)!important;*/
+	/*opacity: 0.8;*/
+/*}*/
+/*.ivu-btn-info:hover:after{*/
+	/*display: none!important;*/
+/*}*/
+/*.ivu-btn:hover:after{*/
+	/*display: inline-block;*/
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*top: 0;*/
+	/*right: 0;*/
+	/*bottom: 0;*/
+	/*background: rgba(0,0,0,0.1);*/
+	/*color: #ffffff;*/
+	/*content: "";*/
+/*}*/
+
+/*.ivu-btn.disabled:after{*/
+	/*display: inline-block;*/
+	/*position: absolute;*/
+	/*left: -1px;*/
+	/*top: -1px;*/
+	/*right: -1px;*/
+	/*bottom: -1px;*/
+	/*background-color: #fff;*/
+	/*opacity: 0.6;*/
+	/*content: "";*/
+/*}*/
+
+
+.ivu-input-group-append .ivu-btn, .ivu-input-group-prepend .ivu-btn{
+	background-color:#2d8cf0!important;
 	color: #fff!important;
-}
-.ivu-btn-info{
-	background-color: #ffffff!important;
-	color: #0089F0!important;
-
-}
-.ivu-btn-info.disabled{
-	border:1px solid #0089F0;
-	border-radius: 4px;
-	opacity: 0.5;
-}
-.ivu-btn-info.disabled:hover{
-	opacity: 0.5;
-	border:1px solid #0089F0;
-	border-radius: 4px;
-}
-.ivu-btn-info.disabled:hover:after{
-	display: none!important;
-}
-.ivu-btn-info.disabled:after{
-	display: none!important;
-}
-.ivu-btn-success{
-	background-color: #31C9D7!important;
-	color: #fff!important;
-}
-.ivu-btn-error{
-	background-color: #F35E7A!important;
-	color: #fff!important;
-}
-.ivu-btn-default:hover{
-	color: inherit;
-	border-color: rgb(221, 222, 225)!important;
-	opacity: 0.8;
-}
-.ivu-btn-info:hover:after{
-	display: none!important;
-}
-.ivu-btn:hover:after{
-	display: inline-block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0,0,0,0.1);
-	color: #ffffff;
-	content: "";
-}
-
-.ivu-btn.disabled:after{
-	display: inline-block;
-	position: absolute;
-	left: -1px;
-	top: -1px;
-	right: -1px;
-	bottom: -1px;
-	background-color: #fff;
-	opacity: 0.6;
-	content: "";
-}
-
-
-.ivu-input-group-append, .ivu-input-group-prepend{
-	background-color:#0089f0;
-	color: #fff;
-	border: 1px solid #0089f0;
+	border: 1px solid #2d8cf0!important;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 }
 /*全局tab样式 button组件中有例子*/
 .my-tab{

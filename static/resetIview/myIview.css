@@ -1,7 +1,7 @@
-@import "menu.css";
+/*@import "menu.css";*/
 @import "form.css";
 @import "button.css";
-@import "table.css";
+/*@import "table.css";*/
 @import "Radio.css";
 @import "homeCalendar.css";
 
@@ -20,6 +20,14 @@
 .ivu-radio-group-button .ivu-radio-wrapper:first-child,
 .ivu-radio-group-button .ivu-radio-wrapper:last-child{
 	/*border-radius: 0;*/
+}
+.single-page-con::-webkit-scrollbar{
+	width: 5px;
+	/*滚动条宽度（右侧滚动条）*/
+	height: 0px;
+	/*滚动条高度（底部滚动条）*/
+	background-color: #eeeeee;
+	z-index: 999;
 }
 .ivu-select-dropdown::-webkit-scrollbar,
 .ivu-scroll-container::-webkit-scrollbar,
@@ -48,6 +56,7 @@
 	z-index: 999;
 }
 /*定义滚动条轨道 内阴影+圆角*/
+.single-page-con::-webkit-scrollbar-track,
 .ivu-select-dropdown::-webkit-scrollbar-track,
 .ivu-scroll-container::-webkit-scrollbar-track,
 .bidBox::-webkit-scrollbar-track,
@@ -60,6 +69,7 @@
 	z-index: 999;
 }
 /*定义滑块 内阴影+圆角*/
+.single-page-con::-webkit-scrollbar-thumb,
 .ivu-select-dropdown::-webkit-scrollbar-thumb,
 .ivu-scroll-container::-webkit-scrollbar-thumb,
 .bidBox::-webkit-scrollbar-thumb,
@@ -73,4 +83,15 @@
 }
 .small .ivu-input-wrapper{
 	 width: 94px;
+}
+/*设备概况进度条样式重置*/
+.ivu-slider-disabled .ivu-slider-bar{
+      background-color: #57a3f3;
+ }
+.ivu-slider-disabled .ivu-slider-wrap{
+      background-color:#e9eaec;
+      cursor:default;
+ }
+.single-page{
+	margin: 10px 0!important;
 }

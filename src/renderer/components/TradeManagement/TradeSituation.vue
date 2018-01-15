@@ -109,7 +109,6 @@
         },
         watch: {
             month: function () {
-                this.reqMonth();
                 this.reqAnalysis();
             }
         },
@@ -215,7 +214,7 @@
 	<div class="main-container">
           <Row>	
            <Row gutter=15>
-			   <Col span="18">
+			   <Col :lg='{span:18}' :md='{span:17}'>
 			      <Card class="height">
 						  <h3 slot="title">交易基础数据分析</h3>
 						  <div class="btn-group relative" slot="extra">
@@ -233,12 +232,12 @@
 										  <ul class="cx relative">
 											  <li><span class="name">长协</span></li>
 											  <li><span class="count">{{pieData.month.longpact}}</span></li>
-											  <li class="ml absolute rate_main"><span class="rate">{{pieData.month.lp_ratio.toFixed(2)}}%</span></li>
+											  <li class="ml absolute rate_main"><span class="rate">{{pieData.month.lp_ratio*100}}%</span></li>
 										  </ul>
 										  <ul class="jj relative">
 											  <li><span class="name">竞价</span></li>
 											  <li><span class="count">{{pieData.month.bidding}}</span></li>
-											  <li class="ml absolute rate_main2"><span class="rate">{{pieData.month.bid_ratio.toFixed(2)}}%</span></li>
+											  <li class="ml absolute rate_main2"><span class="rate">{{pieData.month.bid_ratio}}%</span></li>
 										  </ul>
 								  </Card>
 							  </Col>
@@ -248,12 +247,14 @@
 									  <ul class="cx relative">
 										  <li><span class="name">长协</span></li>
 										  <li><span class="count">{{pieData.year.longpact}}</span></li>
-										  <li class="ml absolute rate_main"><span class="rate">{{pieData.year.lp_ratio.toFixed(2)}}%</span></li>
+										  <!-- 年度长协比例（不能乘以100）-->
+										  <li class="ml absolute rate_main"><span class="rate">{{pieData.year.lp_ratio*10*10}}%</span></li>
 									  </ul>
 									  <ul class="jj relative">
 										  <li><span class="name">竞价</span></li>
 										  <li><span class="count">{{pieData.year.bidding}}</span></li>
-										  <li class="ml absolute rate_main2"><span class="rate">{{pieData.year.bid_ratio.toFixed(2)}}%</span></li>
+										  <!-- 年度竞价比例（不能乘以100） -->
+										  <li class="ml absolute rate_main2"><span class="rate">{{pieData.year.bid_ratio*10*10}}%</span></li>
 									  </ul>
 								  </Card>
 							  </Col>
@@ -261,7 +262,7 @@
 					  </div>
 				  </Card>
 		        </Col>
-	           <Col span="6">
+	           <Col :lg='{span:6}' :md='{span:7}'>
 	           <Card class='height'>
 		           <h3 slot="title">月度交易占比</h3>
 		           <div class="trade-pie relative">
@@ -401,7 +402,7 @@
 	}
 
 	.height_2 {
-		height: 280px;
+		height: 315px;
 	}
 
 	.height_3 {
@@ -564,10 +565,14 @@
 		margin-left:0;
 		margin-right: 0;
 	}*/
-	@media (max-width: 1366px) {
+	@media (min-width: 1365px) and (max-width: 1919px) {
 		.mytable td{
 			padding-left:5px;
 			padding-right:5px;
 		}
+	.my-panel .count {
+
+		margin-left: 10px;
+	 }
 	}
 </style>

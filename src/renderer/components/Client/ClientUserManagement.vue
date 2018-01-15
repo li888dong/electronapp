@@ -270,7 +270,7 @@
 				<Button type="primary" @click='addModal=true'>新增用户</Button>
 			</div>
 			<div class="table-container">
-				<Table :columns="column1" :data="tableData" :loading='loading'></Table>
+				<Table :columns="column1" :data="tableData" :loading='loading' size="small"></Table>
 			</div>
 			<div class="page-center">
 				<!--分页-->

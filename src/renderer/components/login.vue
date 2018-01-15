@@ -178,6 +178,8 @@ export default {
                     this.$router.push('main/home');
                     ipcRenderer.send('login-succeed');
                     localStorage.setItem('auto',this.auto);
+                    this.$store.dispatch('setAuthorityList',res.data.psermissions);
+                    console.log('权限',res.data.psermissions);
                     if (this.auto === true){
                         localStorage.setItem('mobile',this.form.mobile);
                         localStorage.setItem('password',this.form.password)

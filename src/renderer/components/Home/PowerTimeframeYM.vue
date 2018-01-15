@@ -1,98 +1,110 @@
 <script>
     export default {
         name: 'powertimeframe',
+	    props:['baseWidth','belong'],
         data() {
             return {
-                powerFrameType: 'month',
-                yearData: {
-                    width: '200'
-                },
-                monthData: {
-                    width: '300'
-                },
-                barWidth: ''
+                powerFrameType: '月',
+	            totalWidth:0,
+                barWidth: '',
+	            guduanData:0,
+	            pingduanData:0,
+	            fengduanData:0,
             }
         },
 	    mounted(){
-            this.barWidth = this.yearData.width;
-            this.changeType()
+	    	this.totalWidth = this.baseWidth;
+            this.changeType();
 	    },
-        methods: {
-            changeType(type='month') {
-                this.powerFrameType = type;
-                console.log(this.powerFrameType)
-                this.powerFrameType === 'month'?this.barWidth = this.monthData.width:this.barWidth = this.yearData.width
+        computed:{
+            cus_id:function () {
+                return this.$store.getters.cus_id
             }
+        },
+        watch:{
+            cus_id:function () {
+                this.doAjax(this.belong)
+            },
+            baseWidth:function(){
+            	this.totalWidth = this.baseWidth;
+            }
+        },
+        methods: {
+	        doAjax(belong){
+	            if (belong === 'com'){
+                    this.$http.post(this.$api.POWER_FRAME,{com_id:this.$store.getters.com_id,type:this.powerFrameType})
+                        .then(res => {
+                            console.log('企业用电时段分布',res);
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+                }else if (belong === 'cus'){
+                    this.$http.post(this.$api.CLIENT_TIMEFRAME,{cus_id:this.cus_id,type:this.powerFrameType})
+                        .then(res => {
+                            console.log('用户用电时段分布',res);
+                            this.guduanData = Number(res.data.data.e1);
+                            this.pingduanData = Number(res.data.data.e2);
+                            this.fengduanData = Number(res.data.data.e3);
+                        }, err => {
+                            this.$api.errcallback(err)
+                        })
+                        .catch(err=>{
+                            this.$api.errcallback(err)
+                        })
+	            }
+
+            },
+            changeType(type='月') {
+                this.powerFrameType = type;
+                this.doAjax(this.belong)
+            }
+        },
+        updated(){
+        	this.totalWidth = this.baseWidth;
         }
     }
 </script>
 <template>
-	<div class="power-timeframe data-panel ">
-		<h3 class="title">用电实时段分布</h3>
-		<div class="btn-group fr btn-switch">
-			<button class="button" v-bind:class="{btnSelected:powerFrameType==='month'}"
-			        @click="changeType('month')">月
-			</button><!--0
-			-->
-			<button class="button" v-bind:class="{btnSelected:powerFrameType==='year'}"
-			        @click="changeType('year')">年
-			</button>
+	<Card class="power-timeframe">
+		<h3 slot="title">用电实时段分布</h3>
+		<div slot="extra" class="btn-group">
+			<RadioGroup v-model="powerFrameType" type="button" v-on:on-change="changeType">
+				<Radio label="月"></Radio>
+				<Radio label="年"></Radio>
+			</RadioGroup>
 		</div>
-		<div class="power-timeframe-bar">
-			<div class="power-timeframe-bar-low">谷段 <span><span class="bar"
-			                                                    v-bind:style="{width: barWidth + 'px'}">50%</span>228Mw.时</span>
+		<div class="power-timeframe-bar" :style="{width:totalWidth+'px'}">
+			<div class="power-timeframe-bar-low">谷段 <span><span class="bar" v-if="guduanData !==0"
+			                                                    v-bind:style="{width: totalWidth*guduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((guduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{guduanData}}Mw.时</span>
 			</div>
-			<div class="power-timeframe-bar-normal">平段 <span><span class="bar"
-			                                                       v-bind:style="{width: barWidth + 'px'}">50%</span>228Mw.时</span>
+			<div class="power-timeframe-bar-normal">平段 <span><span class="bar" v-if="pingduanData !==0"
+			                                                       v-bind:style="{width: totalWidth*pingduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((pingduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{pingduanData}}Mw.时</span>
 			</div>
-			<div class="power-timeframe-bar-high">峰段 <span><span class="bar"
-			                                                     v-bind:style="{width: barWidth + 'px'}">50%</span>228Mw.时</span>
+			<div class="power-timeframe-bar-high">峰段 <span><span class="bar" v-if="fengduanData !==0"
+			                                                     v-bind:style="{width: totalWidth*fengduanData/(guduanData+pingduanData+fengduanData) + 'px'}">{{((fengduanData/(guduanData+pingduanData+fengduanData)).toFixed(2))*100}}%</span>{{fengduanData}}Mw.时</span>
 			</div>
 		</div>
-	</div>
+	</Card>
 </template>
 <style scoped>
 	.power-timeframe {
-		width: 605px;
 		height: 202px;
-		display: inline-block;
-		vertical-align: top;
-		margin-left: -5px;
 	}
-
-	.power-timeframe .title {
-		margin-left: -10px;
+	.btn-group{
+		margin-top: -8px;
 	}
-
-	.power-timeframe h3 {
-		display: inline-block;
-	}
-
-	.power-timeframe .btn-switch {
-		margin-top: 0;
-	}
-
-	.power-timeframe .btn-switch button {
-		float: left;
-		padding: 0;
-		height: 24px;
-		min-width: 24px;
-		font-size: 12px;
-		line-height: 24px;
-		border-radius: 50%;
-		margin-left: 20px
-	}
-
 	.power-timeframe .power-timeframe-bar {
-		width: 540px;
-		height: 150px;
-		margin-top: 22px;
+		height: 120px;
+		margin-left: 20px;
 	}
 
 	.power-timeframe .power-timeframe-bar > div {
 		white-space: nowrap;
 		width: 100%;
-		height: 50px;
+		height: 42px;
 	}
 
 	.power-timeframe .power-timeframe-bar > div > span {
@@ -100,7 +112,7 @@
 		vertical-align: middle;
 		background-color: #eee;
 		width: 92%;
-		line-height: 37px;
+		line-height: 34px;
 		color: #a8a8a8;
 		margin-left: 15px;
 	}

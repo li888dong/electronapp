@@ -1,5 +1,5 @@
 <template>
-    <div id="main" class="app-main">
+    <div id="main" class="app-main" @click='companybol'>
         <router-view></router-view>
     </div>
 </template>
@@ -12,17 +12,23 @@
             };
         },
         mounted () {
+            
 
         },
         beforeDestroy () {
 
         },
         methods: {
-
+           companybol(){
+               this.$store.dispatch('setCompanbol',false)
+           },
         }
     };
 </script>
 
+<style lang="less">
+    @import "../../static/resetIview/reset";
+</style>
 <style>
 html,body{
     width: 100%;

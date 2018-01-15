@@ -29,3 +29,10 @@ export const officeReg = (rule,val,callback)=>{
                     callback();
                 }
             };
+export const lengthNum = (rule, val, callback) => {
+                if (val.length > 10 || val.length < 10) {
+                    return callback(new Error("营销户号必须为10位!"));
+                } else {
+                    callback();
+                }
+            };

@@ -1,7 +1,9 @@
 const state = {
     fastboot:false,
     access_token:'',
-    mainsidebar:false
+    mainsidebar:false,
+    authorityList:[],
+    companbol:false
 }
 
 const mutations = {
@@ -19,6 +21,12 @@ const mutations = {
     },
     setMainSidebar(state,res){
         state.mainsidebar = res;
+    },
+    setAuthorityList(state,res){
+        state.authorityList = res;
+    },
+    setCompanbol(state,res){
+        state.companbol = res
     }
 }
 
@@ -35,6 +43,12 @@ const actions = {
     },
     'setMainSidebar':function({commit},res){
         commit('setMainSidebar',res)
+    },
+    'setAuthorityList':function({commit},res){
+        commit('setAuthorityList',res)
+    },
+    'setCompanbol':function({commit},res){
+        commit('setCompanbol',res)
     }
 }
 
@@ -51,6 +65,12 @@ export default {
         },
         mainsidebar:state=>{
             return state.mainsidebar
+        },
+        authorityList:state=>{
+            return state.authorityList
+        },
+        companbol:state=>{
+            return state.companbol
         }
     }
 }

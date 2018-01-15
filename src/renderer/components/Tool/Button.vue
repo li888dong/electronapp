@@ -1,190 +1,85 @@
-<script>
-    import MyTab from './MyTab.vue'
-	import Panel from './Panel.vue'
-	import MyUpload from './upLoad.vue'
-
-    export default {
-        components: {
-            'my-tab': MyTab,
-			'panel':Panel,
-			'my-upload':MyUpload
-        },
-        name: 'button',
-        data() {
-            return {
-              file:'',
-            }
-        },
-        methods: {
-            log() {
-                console.log(1)
-            },
-            uploadComplete(status, result ,flag,file) {
-                if (status == 200) { //
-                    console.log(result);
-                    this.file = file;
-                } else {
-                    //失败处理
-                }
-            },
-        },
-        mounted(){
-        }
-
-    }
-</script>
 <template>
-	<div>
-		<Row>
-			<Col span="8" offset="4">
-			<Button type="primary">主操作</Button>
-			<Button type="default">默认</Button>
-			<Button type="info">次操作</Button>
-			<Button type="success">特殊按钮1</Button>
-			<Button type="error">特殊按钮2</Button>
-			</Col>
-		</Row>
-		<Row>
-			<Col span="8" offset="4">
-			<Button type="primary" class="disabled">主操作</Button>
-			<Button type="default" class="disabled">默认</Button>
-			<Button type="info" class="disabled">次操作</Button>
-			<Button type="success" class="disabled">特殊按钮1</Button>
-			<Button type="error" class="disabled">特殊按钮2</Button>
-			</Col>
-		</Row>
-		<Row>
-			<Col span="8" offset="4">
-				<span class="my-tab my-tab-disabled">
-						tab-disabled
-					</span>
-				<span class="my-tab my-tab-normal">
-						tab-normal
-					</span>
-				<span class="my-tab my-tab-hl">
-						tab-hl
-					</span>
-				<span class="my-tab my-tab-zd">
-						tab-zd
-					</span>
-				<my-tab type="normal">
-					测试
-				</my-tab>
-				<my-tab type="disabled">
-					测试
-				</my-tab>
-			</Col>
-		</Row>
-		<Row>
-			<Col span="8" offset="4">
-			<!--面板-->
-			<panel>
-                 <h3 class="title-lv3">标题</h3>
-				  <div class="container">内容</div>
-			</panel>
-		</Col>
-		</Row>
-		<Row>
-		   <Col span="8" offset="4">
-			
-		</Col><my-upload @complete="uploadComplete">
-			<Input placeholder='请选择文件' class='file' v-model='file'></Input>
-			<a>选择文件</a>
-			</my-upload>
-		</Row>
+	<div class="hello">
+		<h1>{{ msg }}</h1>
+		<h2>Essential Links</h2>
+		<ul>
+			<li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
+			<li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
+			<li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
+			<li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
+			<br>
+			<li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
+		</ul>
+		<h2>Ecosystem</h2>
+		<ul>
+			<li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
+			<li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
+			<li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
+			<li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+		</ul>
+		<div class="App-viz" ref='domViz' id="content">
+			物可视报表将要被画在这里
+		</div>
 	</div>
 </template>
-<style>
-	.my-tab {
+
+<script>
+	import axios from 'axios'
+//	import Cookie from 'js-cookie'
+	import {ipcRenderer,shell} from 'electron';
+	export default {
+		name: 'HelloWorld',
+		data() {
+			return {
+				msg: 'Welcome to Your Vue.js App'
+			}
+		},
+		mounted: function () {
+			const containerElement = document.getElementById('content');
+			axios({
+				method: 'post',
+				url: 'http://localhost:8080/tokens',
+				data:{ttl:180}
+			}).then(res => {
+				console.log('物可视token',res)
+//				Cookie.set('x-bce-iot-viz-token',res.data.token);
+				ipcRenderer.send('set-cookie',res.data.token);
+				const bdIotVizPlayer = window.BDIotVizPlayer;
+				bdIotVizPlayer({
+					containerElement,
+					dashboardId: '5a4f1a174418bb0380b5f450'
+				});
+			}, err => {
+				console.log(err)
+			})
+
+		}
+	}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+	h1, h2 {
+		font-weight: normal;
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
 		display: inline-block;
-		vertical-align: middle;
-		padding: 5px 10px;
-		margin: 0;
-		text-align: center;
-		height: 30px;
-		cursor: pointer;
-	}
-	.ivu-btn {
-		position: relative;
+		margin: 0 10px;
 	}
 
-	.ivu-btn span {
-		position: relative;
-		z-index: 10;
+	a {
+		color: #42b983;
 	}
 
-	.ivu-btn-primary {
-		background-color: #0089F0 !important;
-		color: #fff !important;
-	}
-
-	.ivu-btn-info {
-		background-color: #ffffff !important;
-		color: #0089F0 !important;
-
-	}
-
-	.ivu-btn-info.disabled {
-		border: 1px solid #0089F0;
-		border-radius: 4px;
-		opacity: 0.5;
-	}
-
-	.ivu-btn-info.disabled:hover {
-		opacity: 0.5;
-		border: 1px solid #0089F0;
-		border-radius: 4px;
-	}
-
-	.ivu-btn-info.disabled:hover:after {
-		display: none !important;
-	}
-
-	.ivu-btn-info.disabled:after {
-		display: none !important;
-	}
-
-	.ivu-btn-success {
-		background-color: #31C9D7 !important;
-		color: #fff !important;
-	}
-
-	.ivu-btn-error {
-		background-color: #F35E7A !important;
-		color: #fff !important;
-	}
-
-	.ivu-btn-default:hover {
-		color: inherit;
-		border-color: rgb(221, 222, 225) !important;
-		opacity: 0.8;
-	}
-
-	.ivu-btn-info:hover:after {
-		display: none !important;
-	}
-
-	.ivu-btn:hover:after {
-		display: inline-block;
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, 0.1);
-		color: #ffffff;
-		content: "";
-	}
-
-	.ivu-btn.disabled:after {
-		display: inline-block;
-		position: absolute;
-		left: -1px;
-		top: -1px;
-		right: -1px;
-		bottom: -1px;
-		background-color: #fff;
-		opacity: 0.6;
-		content: "";
+	.App-viz {
+		width: 800px;
+		height: 400px;
+		margin: auto;
 	}
 </style>

@@ -31,7 +31,7 @@
 
 <script>
     import {ipcRenderer} from 'electron';
-    import MainSidebar from '@/components/MainSidebar'
+    import MainSidebar from '@/components/sidebar/sidebarMenuShrink'
     import Header from '@/components/Header'
     import FastBoot from '@/components/FastBoot'
 
@@ -83,13 +83,13 @@
 	@import "../../../static/common.css";
 	@media (min-width: 1367px) {
       .main_content{
-         flex: 43;
+         flex: 50;
       }
       .sidebar_menu{
-        flex:5;
+        flex:1;
       }
 	}
-	@media (max-width: 1366px){
+	@media (min-width: 1365px) and (max-width: 1919px){
 		.sidebar_menu{
             display: none;
         }

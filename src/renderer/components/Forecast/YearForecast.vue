@@ -46,82 +46,98 @@
                     },
                     {
                         title: '1月',
+	                    width:80,
                         key: 'month01',
                         align: 'center'
                     },
                     {
                         title: '2月',
+						width:80,
                         key: 'month02',
                         align: 'center'
                     },
                     {
                         title: '3月',
+						width:80,
                         key: 'month03',
                         align: 'center'
                     },
                     {
                         title: '4月',
+						width:80,
                         key: 'month04',
                         align: 'center'
                     },
                     {
                         title: '5月',
+						width:80,
                         key: 'month05',
                         align: 'center'
                     },
                     {
                         title: '6月',
+						width:80,
                         key: 'month06',
                         align: 'center'
                     },
                     {
                         title: '7月',
+						width:80,
                         key: 'month07',
                         align: 'center'
                     },
                     {
                         title: '8月',
+						width:80,
                         key: 'month08',
                         align: 'center'
                     },
                     {
                         title: '9月',
+						width:80,
                         key: 'month09',
                         align: 'center'
                     },
                     {
                         title: '10月',
+						width:80,
                         key: 'month10',
                         align: 'center'
                     },
                     {
                         title: '11月',
+						width:80,
                         key: 'month11',
                         align: 'center'
                     },
                     {
                         title: '12月',
+						width:80,
                         key: 'month12',
                         align: 'center'
                     },
                     {
                         title: '合计',
+	                    width:100,
                         key: 'total',
                         align: 'center'
                     },
                     {
                         title: '修改人',
+						width:100,
                         key: 'modifiedby',
                         align: 'center'
                     },
                     {
                         title: '确认人',
                         key: 'confirmor',
+						width:100,
                         align: 'center'
                     },
                     {
                         title: '状态',
                         key: 'n17',
+						width:80,
                         aligin:'left',
                         render: (h, params) => {
                             let status0 = params.row.status ==='0';
@@ -161,6 +177,7 @@
                     {
                         title: '操作',
                         key: 'change',
+						width:80,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
@@ -343,7 +360,7 @@
 					</Row>
 				</div>
 				<Row>
-					<Table border @on-selection-change="selectItem" :columns="columns6" :data="tableData1"></Table>
+					<Table @on-selection-change="selectItem" :columns="columns6" :data="tableData1" size="small"></Table>
 					<Spin size="large" fix v-if="spinShow"></Spin>
 				</Row>
 				<div class="page-container">
@@ -368,7 +385,7 @@
 				<table v-if="modifyModal">
 					<thead>
 					<tr>
-						<th>2017年月份</th>
+						<th>{{selectYear}}年月份</th>
 						<th>01月</th>
 						<th>02月</th>
 						<th>03月</th>
@@ -458,7 +475,7 @@
 <style scoped>
 	.layout-content {
 		background: #fff;
-		height: 810px;
+		height: 841px;
 	}
 
 	.layout-content-top {
@@ -497,7 +514,7 @@
 		border: 1px solid #edb00d;
 		text-align: center;
 	}
-    @media (max-width: 1366px) {
+    @media (min-width: 1365px) and (max-width: 1919px) {
         .yearUpdate{
             max-height:450px !important;
             overflow-y:scroll !important;

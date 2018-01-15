@@ -3,7 +3,7 @@
         box-sizing: border-box;
         background-color: #fff;
         margin-top:4px;
-        height:150px;
+        height:160px;
         text-align: center;
     }
     .center{
@@ -26,15 +26,15 @@
         font-size:22px;
         color:#fea06f;
     }
-    @media (max-width: 1366px) {
+    @media (min-width: 1365px) and (max-width: 1919px){
         .center{
-        text-align: left;
+         text-align: left;
         }
         .month_choose{
-            width:135px;
+            width:180px;
         }
         .small .ivu-input-wrapper{
-            width:65px;
+            width:90px;
             
         }
     }

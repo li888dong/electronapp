@@ -1,72 +1,28 @@
 <style>
-	.calendar-input-container #calendar {
-		top: -36px!important;
-		left: -1px!important;
-		width: 243px!important;
-		height: 283px!important;
-		border: none!important;
-	}
 
-	.calendar-input-container #calendar .week{
-		color: #999!important;
-	}
-	.calendar-input-container #calendar .weekend{
-		color: #999;
-	}
-	.calendar-input-container #calendar .week .weekend{
-		color: #999;
-	}
-	.calendar-input-container #calendar .days span:not(.unselect){
-		color:#5a5a5a!important;
-		font-weight:bold;
-	}
-	.calendar-input-container #calendar .days span.select{
-		border-radius: 50%!important;
-		background-color: #F78181!important;
-		color: white!important;
-
-	}
-	.calendar-input-container #calendar .days span{
-		height: 20px!important;
-		width: 20px!important;
-		margin: 0 6.5px!important;
-	}
-
-	.calendar-input-container #calendar .days span:hover{
-		border-radius: 50%!important;
-		background-color: #F78181!important;
-		color: white!important;
-		transition: none;
-	}
-	.calendar-input-container input{
-		display: none!important;
-	}
 </style>
 <template>
 	<div id="homeCalendar">
-		<calendar-input></calendar-input>
+		<calendar-input
+			:planDate="{
+                plan1: new Date(planDate.bid_day).getDate(),
+                plan2_start: new Date(planDate.decl_cycle_start).getDate(),
+                plan2_end: new Date(planDate.decl_cycle_end).getDate(),
+                plan3_start: new Date(planDate.fore_cycle_start).getDate(),
+                plan3_end: new Date(planDate.fore_cycle_end).getDate(),
+                plan4_start: new Date(planDate.cf_cycle_start).getDate(),
+                plan4_end: new Date(planDate.cf_cycle_end).getDate()
+		}"></calendar-input>
 	</div>
 </template>
 <script>
 
-import calendarInput from '../../../../node_modules/calendar-plugin/calendar-input.vue';
+import calendarInput from './calendar-plugin/calendar-input.vue';
 
     export default {
         name: 'homeCalendar',
-	    mounted(){
-//            (function () {
-//                laydate.render({
-//                    elem:"#homeCalendar",
-//                    position: 'static',
-//                    width:'200px'
-//                });
-//            })()
-        },
-        data(){
-            return{
-
-            }
-        },components: {
+	    props:['planDate'],
+	    components: {
             'calendar-input':calendarInput
         }
     }

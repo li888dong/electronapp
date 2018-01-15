@@ -1,63 +1,74 @@
 <script>
     import Weather from '@/components/Weather.vue'
-    import {ipcRenderer} from 'electron';
+    import FastBoot from '@/components/FastBoot'
+    import {ipcRenderer, shell} from 'electron';
 
     export default {
         name: 'mainheader',
+        data() {
+            return {
+                logout: false,
+                bol:false
+            }
+        },
         mounted() {
-            this.weatherData();
+        },
+        computed: {
+            fullname:function () {
+	            return this.$store.getters.fullname
+            }
         },
         methods: {
-//            用以关闭应用
-            closeApp() {
-                console.log(ipcRenderer);
-                ipcRenderer.send('window-all-closed');
+            toggleFast() {
+                this.$store.dispatch('setFastboot');
             },
-//            用以关闭应用
-            hideApp() {
-                console.log(ipcRenderer);
-                ipcRenderer.send('hide-window');
+            out() {
+                this.$router.push('/login');
+                ipcRenderer.send('login-failed');
             },
-            weatherData(city = '郑州') {
-                this.$http.get('http://www.sojson.com/open/api/weather/json.shtml?city=' + city).then(res => {
-                    this.weather.city = res.data.city;
-                    this.weather.nowWeather = res.data.data.forecast[0].type;
-                    this.weather.temperature = res.data.data.wendu;
-                    this.weather.humidity = res.data.data.shidu;
-                }, err => {
-                    console.log(err)
-                })
+            toggleMainSidebar(){
+            	 if(this.$store.getters.mainsidebar === true){
+            	 	this.$store.dispatch('setMainSidebar',false);
+            	 }else{
+            	 	this.$store.dispatch('setMainSidebar',true);
+            	 }
             }
         },
         components: {
-            'weather': Weather
+            'weather': Weather,
+            'fast-boot': FastBoot
         }
     }
 </script>
 <template>
 
-	<div class="header fixed height_79">
+	<div class="header">
 		<ul class="absolute">
-			<li class="top_40 icon-menu">
-				<i class="icon iconfont icon-liebiao"></i>
+			<li class="top_15 icon-menu fast_menu" @click="toggleFast" style="cursor: pointer">
+				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
 			</li>
-			<li class="search top_40 left_136">
+			<li class="top_15 main_menu icon-menu" @click="toggleMainSidebar()" style="cursor: pointer">
+				<i class="icon iconfont icon-caidan" style="font-size: 28px!important;"></i>
+			</li>
+			<li class="search top_15 left_136">
 				<input type="search" placeholder="请输入设备名称/设备编号/厂家名称等关键字">
 			</li>
-			<li class="icon-li left_582 top_40">
+			<li class="icon-li top_15">
 				<i class="icon iconfont icon-search"></i>
 			</li>
-			<li class="weather top_40">
+			<li class="weather top_15">
 				<weather></weather>
 			</li>
 			<li class="setting">
 				<ul>
-					<router-link  class="menu-icon right_243" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>
-					<!--<li class="menu-icon right_316"><i class="iconfont">&#xe6ff;</i></li>-->
-					<li class="menu-icon right_168"><i class="iconfont">&#xe606;</i></li>
-					<li class="avatar right_72">李栋</li>
-					<!--<li class="hideBtn iconfont" @click="hideApp()">&#xe601;</li>-->
-					<!--<li class="right_29 closeBtn iconfont" @click="closeApp()">&#xe664;</li>-->
+					<!--<router-link  class="menu-icon right_243" to="message-center" tag="li"><i class="iconfont">&#xe6ff;</i></router-link>-->
+					<!--<li class="menu-icon right_168"><i class="iconfont">&#xe606;</i></li>-->
+					<li class="avatar right_72">{{fullname}}</li>
+					<i class="iconfont icon-xiala absolute" :class="{rotate90:!logout}"
+					   style="right: 30px;font-size: 14px!important;" @click="logout = !logout">
+
+					</i>
+					<span class="logout" v-if="logout" @click="out">退出登录</span>
 				</ul>
 			</li>
 		</ul>
@@ -66,8 +77,9 @@
 <style scoped>
 	.header {
 		background-color: #fff;
-		width: 90%;
-		z-index: 1000;
+		height: 79px;
+		overflow: hidden;
+		position: relative;
 	}
 
 	.header > ul {
@@ -82,28 +94,34 @@
 	}
 
 	.header .icon-menu {
-		width: 88px;
+		width: 78px;
 		height: 50px;
-		padding-top: 12px;
+		padding-top: 6px;
 		box-sizing: border-box;
 		text-align: center;
 		border-right: 1px solid #efefef;
 	}
-	.header .avatar{
+
+	.header .avatar {
 		top: -10px;
-		width: 45px;
-		height: 45px;
+		width: 48px;
+		height: 48px;
 		text-align: center;
-		line-height: 45px;
+		line-height: 48px;
 		background-color: #EA2E2E;
 		border-radius: 50%;
 		color: white;
-		font-size: 18px;
+		white-space: nowrap;
+		word-wrap: normal;
+		font-size: 12px;
 	}
+
 	.icon-li {
 		width: 30px;
 		height: 40px;
 		line-height: 40px;
+		left: 565px;
+		color: #999999;
 	}
 
 	.menu-icon {
@@ -111,24 +129,12 @@
 		height: 25px;
 	}
 
-	.top_40 {
-		top: 20px;
-	}
-
-	.left_47 {
-		left: 47px;
+	.top_15 {
+		top: 15px;
 	}
 
 	.left_136 {
-		left: 136px;
-	}
-
-	.left_582 {
-		left: 582px;
-	}
-
-	.right_29 {
-		right: 29px;
+		left: 128px;
 	}
 
 	.right_72 {
@@ -136,15 +142,11 @@
 	}
 
 	.right_168 {
-		right: 168px;
+		right: 142px;
 	}
 
 	.right_243 {
-		right: 243px;
-	}
-
-	.right_316 {
-		right: 316px;
+		right: 192px;
 	}
 
 	.header li input[type='search'] {
@@ -153,13 +155,14 @@
 		border-radius: 40px;
 		outline: none;
 		border: none;
-		background-color: #ededed;
+		background-color: #EDEDED;
 		padding: 5px 10px 5px 20px;
 		box-shadow: none;
+
 	}
 
 	.header .weather {
-		left: 990px;
+		left: 58%;
 		width: 200px;
 		height: 60px;
 		color: #000;
@@ -167,8 +170,8 @@
 	}
 
 	.header .setting {
-		top: 20px;
-		right: 0;
+		top: 27px;
+		right: 10px;
 	}
 
 	li.setting i {
@@ -176,19 +179,36 @@
 		font-size: 22px !important;
 	}
 
-	.closeBtn {
-		top: -45px;
+	.logout {
+		position: absolute;
+		top: 20px;
+		right: 0;
+		width: 56px;
+		background-color: #fff;
 		cursor: pointer;
-		font-size: 20px;
-		font-weight:bold;
 	}
 
-	.hideBtn {
-		top: -45px;
-		right: 65px;
-		cursor: pointer;
-		font-size: 20px;
-		font-weight:bold;
+	.logout:hover {
+		opacity: 0.8;
+	}
 
+	.rotate90 {
+		transform: rotate(-90deg);
+	}
+	.main_menu{
+		 display: none;
+	}
+		@media (min-width: 1365px) and (max-width: 1919px){
+		.main_menu{
+            display: block;
+        }
+        .fast_menu{
+        	display: none;
+        }
+        .header{
+        	position: fixed;
+        	width: 100%;
+        	z-index: 999;
+        }
 	}
 </style>

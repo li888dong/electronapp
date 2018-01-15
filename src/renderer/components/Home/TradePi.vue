@@ -1,19 +1,32 @@
 <style>
 	.powerTimeFrame {
-		margin: 0 0 0 0;
-		padding:  5px 5px;
-		box-sizing: border-box;
-		background-color: #fff;
 		height: 202px;
-		width: 399px;
+        width: 100%;
+
 	}
+	.title{
+		display: inline-block;
+		height: 20px;
+		line-height: 20px;
+		font-size: 16px;
+		color: #1c2438;
+		font-weight: 700;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+    /*@media (max-width: 1366px) {*/
+        /*.powerTimeFrame{*/
+            /*width: 382px;*/
+        /*}*/
+    /*}*/
 </style>
 <template>
-	<div class="data-pannel powerTimeFrame">
-		<div id="powerTimeFrame" :style="{width: '399px', height: '202px'}">
-
+	<Card class="powerTimeFrame">
+		<h3 class="title">交易分布</h3>
+		<div id="powerTimeFrame" style="position: absolute;left: 0;top: 0;bottom: 0;right: 0;">
 		</div>
-	</div>
+	</Card>
 
 </template>
 
@@ -22,15 +35,21 @@
         name: 'powertimeframe',
         data() {
             return {
-                chartOption2: {
-                    title: {
-                        text: '交易分布',
-                        textStyle: {
-                            fontSize:14,
-	                        fontWeight:'bolder'
-
-                        }
-                    },
+	            tradeData:{
+	                month:{
+						bidding:0,
+		                longpact:0
+	                },
+		            year:{
+                        bidding:0,
+                        longpact:0
+		            }
+	            }
+            }
+        },
+	    computed:{
+            chartOption:function () {
+                return {
 //          鼠标悬浮提示
                     tooltip: {
                         trigger: 'item',
@@ -38,9 +57,10 @@
                     },
                     legend: {
                         orient: 'vertical',
-	                    right:'40',
-	                    top:'30',
-                        itemWidth:14,
+                        left: '240',
+                        top: '60',
+                        itemWidth:16,
+                        itemHeight:16,
                         data: ['市场竞价(月)', '长协(月)', '市场竞价(年)', '长协(年)']
                     },
                     series: [
@@ -49,26 +69,22 @@
                             type: 'pie',
                             selectedMode: 'single',
                             radius: ['0', '45px'],
-                            center:['115','105'],
-//              itemStyle:{
-//                normal:{
-//                    color:['#ab7aee','#31c9d7']
-//                },
-//                emphasis:{
-//                    color:['#ab7aee','#31c9d7']
-//                }
-//              },
-//              color:['#ab7aee','#31c9d7'],
-
+                            center: ['135', '105'],
+                            itemStyle: {
+                                normal: {
+                                    offset:5
+                                },
+                                emphasis: {}
+                            },
                             label: {
                                 normal: {
-                                    show:false
+                                    show: false
                                 }
                             },
 
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.tradeData.year.longpact,
                                     name: '长协(年)',
                                     itemStyle: {
                                         normal: {
@@ -80,7 +96,7 @@
                                     }
                                 },
                                 {
-                                    value: 679,
+                                    value: this.tradeData.year.bidding,
                                     name: '市场竞价(年)',
                                     itemStyle: {
                                         normal: {
@@ -99,13 +115,13 @@
                             radius: ['65px', '80px'],
                             label: {
                                 normal: {
-                                    show:false
+                                    show: false
                                 }
                             },
-                            center:['115','105'],
+                            center: ['135', '105'],
                             data: [
                                 {
-                                    value: 335,
+                                    value: this.tradeData.month.longpact,
                                     name: '长协(月)',
                                     itemStyle: {
                                         normal: {
@@ -117,7 +133,7 @@
                                     }
                                 },
                                 {
-                                    value: 310,
+                                    value: this.tradeData.month.bidding,
                                     name: '市场竞价(月)',
                                     itemStyle: {
                                         normal: {
@@ -129,28 +145,39 @@
                                     }
                                 },
                             ]
-//                itemStyle:{
-//                  normal:{
-//                      color:['#edb00d','#4fa8f9']
-//                  },
-//                    emphasis:{
-//                        color:['#d69d02','#3077b9']
-//                    }
-//                }
                         }
                     ]
-                }
+                };
+            },
+		    pieChart:function () {
+			    return this.$echarts.init(document.getElementById('powerTimeFrame'))
             }
-        },
+	    },
         mounted() {
-            this.drawLine(this.chartOption2);
+			this.pieChart.showLoading();
+            this.$http.post(this.$api.BID_FRAME,{com_id:this.$store.getters.com_id})
+                .then(res => {
+                    this.pieChart.hideLoading();
+	                this.tradeData= res.data.data;
+                    console.log('交易分布',this.tradeData);
+                    this.drawLine();
+                }, err => {
+                    this.pieChart.hideLoading();
+                    this.drawLine();
+                    this.$api.errcallback(err)
+                })
+                .catch(err=>{
+                    this.pieChart.hideLoading();
+                    this.drawLine();
+                    this.$api.errcallback(err)
+                })
+
         },
         methods: {
-            drawLine(option = this.chartOption2) {
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
-                let powerFrameChart = this.$echarts.init(document.getElementById('powerTimeFrame'));
-                // 绘制图表
-                powerFrameChart.setOption(option);
+                this.pieChart.clear();
+                this.pieChart.setOption(this.chartOption);
             }
         }
     }

@@ -1,60 +1,40 @@
-<style>
-	.power-load-chart .typeSwich {
-		border-bottom: solid 1px #eee;
-		right: 0;
-		left: 0;
-		top: 10px;
-		margin:0 20px;
-		height: 30px;
-		z-index: 999;
+<style scoped>
+	.chart-container {
+		height: 396px;
+		width: 100%;
 	}
 
-	.power-load-chart .typeSwich li {
-		margin-left: 20px;
-		width: 24px;
-		height: 24px;
-		float: right;
-		border-radius: 50%;
-		background-color: #eeeeee;
-		border: 1px solid #999;
-		text-align: center;
-		line-height: 24px;
-		cursor: pointer;
-		color: #828282;
-	}
-	.power-load-chart .typeSwich .btnSelected{
-
-	}
-	.danwei{
-		border: none!important;
-		background-color: #fff!important;
-	}
-	.danwei span{
+	.danwei {
 		position: absolute;
-		top: 30px;
-		right: 20px;
-		color: #868686;
+		top: 55px;
+		right: 3px;
+		border: none !important;
+		background-color: transparent !important;
+	}
 
+	.btn-group {
+		z-index: 10;
+		margin-top: -8px;
 	}
 </style>
 <template>
-	<div class="relative">
-		<ul class="absolute typeSwich btn-group">
-			<li v-bind:class="{btnSelected:powerRealtimeType==='月'}" class="btn" @click="powerRealtimeTypeSwitch('月')">
-				月
-			</li>
-			<li v-bind:class="{btnSelected:powerRealtimeType==='日'}" class="btn" @click="powerRealtimeTypeSwitch('日')">
-				日
-			</li>
-			<li v-bind:class="{btnSelected:powerRealtimeType==='15'}" class="btn"
-			    @click="powerRealtimeTypeSwitch('15')">15
-			</li>
-			<li class="danwei"><span>单位Mw.h</span></li>
-		</ul>
-		<div id="powerChart" :style="{width: '1662px', height: '383px',margin:'0 auto'}">
+	<Card class="chart-container">
+
+		<h3 slot="title">实时电量负荷</h3>
+
+		<div class="btn-group relative" slot="extra">
+			<RadioGroup v-model="powerRealtimeType" type="button" v-on:on-change="powerRealtimeTypeSwitch">
+				<Radio label="15"></Radio>
+				<Radio label="日"></Radio>
+				<Radio label="月"></Radio>
+			</RadioGroup>
+			<span class="danwei">单位Mw.h</span>
+		</div>
+
+		<div id="powerChart" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;">
 
 		</div>
-	</div>
+	</Card>
 
 </template>
 
@@ -62,135 +42,398 @@
 
     export default {
         name: 'powerChart',
+        props: ['belong'],
         data() {
             return {
                 powerRealtimeType: '15',
-                powerdata: [],
+                type: 1,
+                powerdata1: {
+                    xData: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+                    yData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+                },
+                powerdata2: {
+                    xData: ["1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日"],
+                    electricity: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    valley_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    flat_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    peak_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                },
+                powerdata3: {
+                    xData: ["2017/10/4", "2017/10/5", "2017/10/6", "2017/10/7", "2017/10/8", "2017/10/9", "2017/10/10", "2017/10/11", "2017/10/12", "2017/10/13", "2017/10/14", "2017/10/15", "2017/10/16", "2017/10/17", "2017/10/18", "2017/10/19", "2017/10/20", "2017/10/21", "2017/10/22", "2017/10/23", "2017/10/24", "2017/10/25", "2017/10/26", "2017/10/27", "2017/10/28", "2017/10/29", "2017/10/30", "2017/10/31", "2017/11/1", "2017/11/2", "2017/11/3", "2017/11/4", "2017/11/5", "2017/11/6", "2017/11/7", "2017/11/8", "2017/11/9", "2017/11/10", "2017/11/11", "2017/11/12", "2017/11/13", "2017/11/14", "2017/11/15", "2017/11/16", "2017/11/17", "2017/11/18", "2017/11/19", "2017/11/20", "2017/11/21"],
+                    declare: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    forecast: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    longpact: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    bidding: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    monitor: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    valley_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    flat_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    peak_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                },
                 powerdate: [],
-                chartOption1: {
-                    title: {
-                        text: "实时电量负荷",
-	                    textStyle:{
-                            fontSize:'14'
-                        },
-	                    left:'5',
-	                    top:'5'
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
+            }
+        },
+        watch: {
+            cus_id: function () {
+                this.doAjax(this.belong);
+            }
+        },
+        computed: {
+            cus_id: function () {
+                return this.$store.getters.cus_id
+            },
+            chartOption1: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.lineTooltip,
                     legend: {
-                        left:20,
-	                    top:42,
-	                    itemWidth:14,
-                        data: ['申报电量', '预测电量','长协购电量','竞价购电量', '实时电量', '谷段电量', '平段电量','峰段电量',]
+                        ...this.$store.getters.chartOption.legend,
+                        left: 17,
+                        top: 60,
+                        data: ['实时电量'],
                     },
                     grid: {
-                        top:'20%',
+                        ...this.$store.getters.chartOption.grid,
+                        top: '100',
                         left: '20',
-                        right: '3%',
-                        bottom: '3%',
-                        containLabel: true
+                        right: '20',
+                        bottom: '8%'
                     },
                     xAxis: [
                         {
-                            type: 'category',
-                            data: ["1968/10/4", "1968/10/5", "1968/10/6", "1968/10/7", "1968/10/8", "1968/10/9", "1968/10/10", "1968/10/11", "1968/10/12", "1968/10/13", "1968/10/14", "1968/10/15", "1968/10/16", "1968/10/17", "1968/10/18", "1968/10/19", "1968/10/20", "1968/10/21", "1968/10/22", "1968/10/23", "1968/10/24", "1968/10/25", "1968/10/26", "1968/10/27", "1968/10/28", "1968/10/29", "1968/10/30", "1968/10/31", "1968/11/1", "1968/11/2", "1968/11/3", "1968/11/4", "1968/11/5", "1968/11/6", "1968/11/7", "1968/11/8", "1968/11/9", "1968/11/10", "1968/11/11", "1968/11/12", "1968/11/13", "1968/11/14", "1968/11/15", "1968/11/16", "1968/11/17", "1968/11/18", "1968/11/19", "1968/11/20", "1968/11/21"]
+                            ...this.$store.getters.chartOption.xAxis,
+                            data: this.powerdata1.xData,
                         }
                     ],
                     yAxis: [
                         {
-                            position:'right',
-                            type: 'value',
-                            boundaryGap: 0
+                            ...this.$store.getters.chartOption.yAxis,
+                            position: 'right'
                         }
                     ],
-//          设置可拖动区间
-                    dataZoom: [ {
-                        type: 'slider',
-	                    bottom:0,
-                        startValue: '1968/10/4',
-                        endValue: '1968/10/28'
-                    }],
-	                color:['#f35e7a','#fc8b40','#ab7aee','#31c9d7','#6ec71e','#14d86b','#818af8','#edb00d'],
+                    //设置可拖动区间
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    color: this.$store.getters.chartOption.colorList,
                     series: [
                         {
-                            name: '申报电量',
-                            type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
-                        },
+                            name: '实时电量',
+                            type: 'line',
+                            smooth: true,
+                            itemStyle: {normal: {areaStyle: {type: 'default', opacity: 0.08}}},
+                            data: this.powerdata1.yData
+                        }
+                    ]
+                }
+            },
+            chartOption2: function () {
+
+                return {
+                    tooltip: this.$store.getters.chartOption.barTooltip,
+                    legend: {
+                        ...this.$store.getters.chartOption.legend,
+                        left: 17,
+                        top: 60,
+                        data: ['实时电量', '谷段电量', '平段电量', '峰段电量',]
+                    },
+                    grid: {
+                        ...this.$store.getters.chartOption.grid,
+                        top: '100',
+                        left: '20',
+                        right: '20',
+                        bottom: '8%'
+                    },
+                    xAxis: [
                         {
-                            name: '预测电量',
-                            type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
-                        },
-	                    {
-                            name: '长协购电量',
-                            type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
-                        }, {
-                            name: '竞价购电量',
-                            type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
-                        },
+                            ...this.$store.getters.chartOption.xAxis,
+                            boundaryGap: true,
+                            data: this.powerdata2.xData
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            ...this.$store.getters.chartOption.yAxis,
+                            position: 'right'
+                        }
+                    ],
+                    // 设置可拖动区间
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    color: this.$store.getters.chartOption.colorList,
+                    series: [
                         {
                             name: '实时电量',
                             type: 'bar',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48].map((i) => i * 3),
+                            barMaxWidth: 40,
+                            data: this.powerdata2.electricity,
                         },
-	                    {
+                        {
                             name: '谷段电量',
                             type: 'bar',
-                            barWidth : "3%",
+                            barWidth: '10%',
+                            barMaxWidth: 20,
                             stack: '实时电量',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                            data: this.powerdata2.valley_section
                         },
                         {
                             name: '平段电量',
                             type: 'bar',
                             stack: '实时电量',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                            data: this.powerdata2.flat_section
                         },
                         {
                             name: '峰段电量',
                             type: 'bar',
                             stack: '实时电量',
-                            data: [184, 160, 74, 60, 207, 158, 75, 156, 217, 253, 298, 30, 187, 130, 94, 169, 53, 161, 45, 109, 103, 162, 32, 228, 270, 226, 79, 226, 206, 65, 34, 77, 5, 85, 26, 158, 276, 284, 261, 49, 66, 175, 46, 275, 58, 12, 210, 14, 48]
+                            data: this.powerdata2.peak_section
                         }
 
                     ]
                 }
+            },
+            chartOption3: function () {
+                return {
+                    tooltip: this.$store.getters.chartOption.barTooltip,
+                    legend: {
+                        ...this.$store.getters.chartOption.legend,
+                        left: 17,
+                        top: 60,
+                        data: ['申报电量', '预测电量', '长协购电量', '竞价购电量', '实时电量', '谷段电量', '平段电量', '峰段电量',]
+                    },
+                    grid: {
+                        ...this.$store.getters.chartOption.grid,
+                        top: '100',
+                        left: '20',
+                        right: '20',
+                        bottom: '8%'
+                    },
+                    xAxis: [
+                        {
+                            ...this.$store.getters.chartOption.xAxis,
+                            data: this.powerdata3.xData
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            ...this.$store.getters.chartOption.yAxis,
+                            position: 'right'
+                        }
+                    ],
+                    //设置可拖动区间
+                    dataZoom: this.$store.getters.chartOption.dataZoom,
+                    color: this.$store.getters.chartOption.colorList,
+                    series: [
+                        {
+                            name: '申报电量',
+                            type: 'bar',
+                            barMaxWidth: 40,
+                            data: this.powerdata3.declare
+                        },
+                        {
+                            name: '预测电量',
+                            type: 'bar',
+                            barMaxWidth: 40,
+                            data: this.powerdata3.forecast
+                        },
+                        {
+                            name: '长协购电量',
+                            type: 'bar',
+                            barMaxWidth: 40,
+                            data: this.powerdata3.longpact
+                        }, {
+                            name: '竞价购电量',
+                            type: 'bar',
+                            barMaxWidth: 40,
+                            data: this.powerdata3.bidding
+                        },
+                        {
+                            name: '实时电量',
+                            type: 'bar',
+                            barMaxWidth: 40,
+                            data: this.powerdata3.monitor
+                        },
+                        {
+                            name: '谷段电量',
+                            type: 'bar',
+                            barMaxWidth: 20,
+                            barWidth: "3%",
+                            stack: '实时电量',
+                            data: this.powerdata3.valley_section
+                        },
+                        {
+                            name: '平段电量',
+                            type: 'bar',
+                            stack: '实时电量',
+                            data: this.powerdata3.flat_section
+                        },
+                        {
+                            name: '峰段电量',
+                            type: 'bar',
+                            stack: '实时电量',
+                            data: this.powerdata3.peak_section
+                        }
+
+                    ]
+                }
+            },
+            powerChart: function () {
+                return this.$echarts.init(document.getElementById('powerChart'))
             }
         },
         mounted() {
-            this.initData();
-            this.drawLine(this.chartOption1);
+            this.drawLine();
+            this.doAjax(this.belong);
         },
         methods: {
-            powerRealtimeTypeSwitch(type) {
-                this.powerRealtimeType = type
-            },
-            initData() {
-                var base = +new Date(1968, 9, 3);
-                var oneDay = 24 * 3600 * 1000;
-                var date = [];
-                var data = [];
-                for (var i = 1; i < 50; i++) {
-                    var now = new Date(base += oneDay);
-                    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-                    data.push(Math.round((Math.random() * 300)));
+            doAjax(belong) {
+                this.powerChart.showLoading();
+                if (belong === 'com') {
+                    this.$http.post(this.$api.REALTIME_POWER_CURVE, {
+                        com_id: this.$store.getters.com_id,
+                        type: this.type
+                    })
+                        .then(res => {
+                            this.powerChart.hideLoading();
+                            console.log('企业实时电量负荷曲线', res);
+                            let data = Object.values(res.data.data);
+
+                            if (this.type === 1) {
+                                this.powerdata1.xData = [];
+                                this.powerdata1.yData = [];
+                                data.map(i => {
+                                    this.powerdata1.xData.push(i.collect_time);
+                                    this.powerdata1.yData.push(i.total);
+                                })
+                            } else if (this.type === 2) {
+                                this.powerdata2.xData = [];
+                                this.powerdata2.electricity = [];
+                                this.powerdata2.valley_section = [];
+                                this.powerdata2.flat_section = [];
+                                this.powerdata2.peak_section = [];
+                                data.map(i => {
+                                    this.powerdata2.xData.push(i.day);
+                                    this.powerdata2.electricity.push(i.electricity);
+                                    this.powerdata2.valley_section.push(i.valley_section);
+                                    this.powerdata2.flat_section.push(i.flat_section);
+                                    this.powerdata2.peak_section.push(i.peak_section);
+                                })
+                            } else if (this.type === 3) {
+                                this.powerdata3.xData = [];
+                                this.powerdata3.declare = [];
+                                this.powerdata3.forecast = [];
+                                this.powerdata3.longpact = [];
+                                this.powerdata3.bidding = [];
+                                this.powerdata3.monitor = [];
+                                this.powerdata3.valley_section = [];
+                                this.powerdata3.flat_section = [];
+                                this.powerdata3.peak_section = [];
+                                data.map(i => {
+                                    this.powerdata3.xData.push(i.month);
+                                    this.powerdata3.declare.push(i.declare);
+                                    this.powerdata3.forecast.push(i.forecast);
+                                    this.powerdata3.longpact.push(i.longpact);
+                                    this.powerdata3.bidding.push(i.bidding);
+                                    this.powerdata3.monitor.push(i.monitor);
+                                    this.powerdata3.valley_section.push(i.valley_section);
+                                    this.powerdata3.flat_section.push(i.flat_section);
+                                    this.powerdata3.peak_section.push(i.peak_section);
+                                })
+                            }
+                            console.log(this.powerdata3);
+                            this.drawLine();
+                        }, err => {
+                            this.powerChart.hideLoading();
+                            this.$api.errcallback(err);
+                            this.drawLine();
+                        })
+                        .catch(err => {
+                            this.powerChart.hideLoading();
+                            this.$api.errcallback(err)
+                        })
+                } else if (belong === 'cus') {
+                    this.$http.post(this.$api.CLIENT_REALTIME_CURVE, {
+                        cus_id: this.cus_id,
+	                    type: this.type
+                    })
+                        .then(res => {
+                            this.powerChart.hideLoading();
+                            console.log('用户实时电量负荷曲线', res);
+                            let data = Object.values(res.data.data);
+
+                            if (this.type === 1) {
+                                this.powerdata1.xData = [];
+                                this.powerdata1.yData = [];
+                                data.map(i => {
+                                    this.powerdata1.xData.push(i.collect_time);
+                                    this.powerdata1.yData.push(i.total);
+                                })
+                            } else if (this.type === 2) {
+                                this.powerdata2.xData = [];
+                                this.powerdata2.electricity = [];
+                                this.powerdata2.valley_section = [];
+                                this.powerdata2.flat_section = [];
+                                this.powerdata2.peak_section = [];
+                                data.map(i => {
+                                    this.powerdata2.xData.push(i.day);
+                                    this.powerdata2.electricity.push(i.electricity);
+                                    this.powerdata2.valley_section.push(i.valley_section);
+                                    this.powerdata2.flat_section.push(i.flat_section);
+                                    this.powerdata2.peak_section.push(i.peak_section);
+                                })
+                            } else if (this.type === 3) {
+                                this.powerdata3.xData = [];
+                                this.powerdata3.declare = [];
+                                this.powerdata3.forecast = [];
+                                this.powerdata3.longpact = [];
+                                this.powerdata3.bidding = [];
+                                this.powerdata3.monitor = [];
+                                this.powerdata3.valley_section = [];
+                                this.powerdata3.flat_section = [];
+                                this.powerdata3.peak_section = [];
+                                data.map(i => {
+                                    this.powerdata3.xData.push(i.month);
+                                    this.powerdata3.declare.push(i.declare);
+                                    this.powerdata3.forecast.push(i.forecast);
+                                    this.powerdata3.longpact.push(i.longpact);
+                                    this.powerdata3.bidding.push(i.bidding);
+                                    this.powerdata3.monitor.push(i.monitor);
+                                    this.powerdata3.valley_section.push(i.valley_section);
+                                    this.powerdata3.flat_section.push(i.flat_section);
+                                    this.powerdata3.peak_section.push(i.peak_section);
+                                })
+                            }
+                            console.log(this.powerdata3);
+                            this.drawLine();
+                        }, err => {
+                            this.powerChart.hideLoading();
+                            this.$api.errcallback(err);
+                            this.drawLine();
+                        })
+                        .catch(err => {
+                            this.powerChart.hideLoading();
+                            this.$api.errcallback(err)
+                        })
                 }
-                this.powerdate = date;
-                this.powerdata = data;
+
             },
-            drawLine(option = this.chartOption1) {
+            powerRealtimeTypeSwitch(type) {
+                if (type === '15') {
+                    this.type = 1;
+                } else if (type === '日') {
+                    this.type = 2
+                } else if (type === '月') {
+                    this.type = 3
+                }
+                this.doAjax(this.belong);
+            },
+            drawLine() {
                 // 基于准备好的dom，初始化echarts实例
-                let powerChart = this.$echarts.init(document.getElementById('powerChart'));
+                this.powerChart.clear();
+                if (this.powerRealtimeType === '15') {
+                    this.powerChart.setOption(this.chartOption1, true);
+                } else if (this.powerRealtimeType === '日') {
+                    this.powerChart.setOption(this.chartOption2, true);
+                } else {
+                    this.powerChart.setOption(this.chartOption3, true);
+                }
                 // 绘制图表
-                powerChart.setOption(option);
+
             }
         }
     }

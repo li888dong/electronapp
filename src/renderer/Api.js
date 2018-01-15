@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 const vue = new Vue();
 /*
 * 首页开始
@@ -39,7 +40,6 @@ export const REALTIME_POWER_CURVE = 'api/index/loadcurve';
 * */
 
 
-
 /*
 * 客户中心开始
 * */
@@ -53,22 +53,27 @@ export const CLIENT_DIS = '/api/customers/regions_dist';
 //客户列表
 export const CLIENT_LIST = '/api/customers/index';
 //用户管理
-export const CLIENT_MANAGE='/api/userscus/index';
+export const CLIENT_MANAGE = '/api/userscus/index';
 //用户管理审核
-export const CLIENT_CHECK='/api/userscus/setstatus';
+export const CLIENT_CHECK = '/api/userscus/setstatus';
 //用户管理删除
 export const CLIENT_DELECT_USER = '/api/userscus/';
 //添加用户
-export const CLIENT_ADD_USER ='/api/userscus';
+export const CLIENT_ADD_USER = '/api/userscus';
 //用户合同管理
 export const CLIENT_CONTRACT_AGREEMENT = '/api/contract/unlist';
-
+//客户收藏列表
+export const CLIENT_COLLECT_LIST = '/api/myfavorite/index'
+//添加各户收藏
+export const CLIENT_ADD_COLLECT = '/api/myfavorite'
+//取消收藏
+export const CLIENT_CANCEL_COLLECT = '/api/myfavorite/'
 // 客户总览
 //客户总览接线图 无数据
 export const CLIENT_HOOKUP = '/api/customers/wiringdiagram';
 
 // 用电实时进度
-export const CLIENT_USED= '/api/customers/used';
+export const CLIENT_USED = '/api/customers/used';
 //用电时段分布
 export const CLIENT_TIMEFRAME = '/api/customers/timedist';
 //用电时段分布
@@ -85,21 +90,21 @@ export const CLIENT_CONTRACT_INFO = '/api/customers/get_coninfo';
 //用户电费单列表
 export const CLIENT_ELE_BILL = '/api/users/ebilllist';
 //添加用户电费单（暂未使用）
-export const CLIENT_ADD_ELEBILL='/api/users/add_electric_bill';
+export const CLIENT_ADD_ELEBILL = '/api/users/add_electric_bill';
 //审核用户电费单（暂未使用）
-export const CLIENT_CHECK_ELEBILL='/api/users/setstatus';
+export const CLIENT_CHECK_ELEBILL = '/api/users/setstatus';
 //上传用户电费单（暂未使用）
 export const CLIENT_UPLODDING_ELEBILL = '/api/file/uploadimg';
 //用户申报记录
 export const CLIENT_DECLARE_RECORD = '/api/users/declarelog';
 //用户终端列表
-export const CLIENT_TERMINAL_LIST='/api/devices/list';
+export const CLIENT_TERMINAL_LIST = '/api/devices/list';
 //删除终端
 export const CLIENT_TERMINAL_DELETE = 'api/devices/';
 //用户终端详情
 export const CLIENT_TERMINAL_DETAIL = '/api/devices/';
 //终端详情在线监控
-export const CLIENT_TERMINAL_ONLINE='/api/devices/onlineTime';
+export const CLIENT_TERMINAL_ONLINE = '/api/devices/onlineTime';
 //在线监控设备日志
 //暂无数据
 export const CLIENT_EQUIPMENT_LOG = '/api/devices/log';
@@ -107,7 +112,7 @@ export const CLIENT_EQUIPMENT_LOG = '/api/devices/log';
 //暂无数据
 export const CLIENT_EQUIPMENT_REMIND = '/api/devices/errorRemind';
 //终端详情采集监控
-export const CLIENT_COLLECT_DATA='/api/devices/datachart';
+export const CLIENT_COLLECT_DATA = '/api/devices/datachart';
 //终端采集记录
 export const CLIENT_TERMINAL_RECORD = '/api/devices/get_epinfo';
 //终端倍率
@@ -116,7 +121,7 @@ export const CLIENT_TERMINAL_RATIO = '/api/devices/getratio';
 export const CLIENT_TERMINAL_EDITRATIO = '/api/devices/editratio';
 //配置终端
 //请求出错
-export const CLIENT_ADD_TERMINAL ='/api/devices';
+export const CLIENT_ADD_TERMINAL = '/api/devices';
 // 获取变压器
 export const CLIENT_GET_TRANSFORMER = '/api/devices/tflist';
 //添加变压器
@@ -129,7 +134,7 @@ export const CLIENT_FACTORY = '/api/devices/epflist';
 //接线方式
 export const TERMINAL_WIRING_WAY = '/api/devices/getwiring';
 //新增客户
-export const CLIENT_ADD ='/api/customers/add';
+export const CLIENT_ADD = '/api/customers/add';
 // 获取行业信息
 export const GET_INDLIST = 'api/contract/indlist';
 //添加行业（暂未使用）
@@ -181,7 +186,7 @@ export const ADD_MOCK_BIDDING = '/api/ppsupply';
 //本月竞价模拟
 export const MONTH_BIDDING_NOW = '/api/ppsupply/index';
 //修改竞价模拟
-export const MONTH_BIDDING_UPDATE ='/api/ppsupply/update';
+export const MONTH_BIDDING_UPDATE = '/api/ppsupply/update';
 //参与竞价的电厂详情
 export const MONTH_BIDDING_DETAIL = '/api/ppsupply/';
 //删除竞价电厂
@@ -242,7 +247,6 @@ export const MONTH_IMPORT = '/api/excel/monthimport';
 */
 
 
-
 //售电合同开始
 export const POWER_ADD_COMPACT = '/api/contract/store';
 //合同上传
@@ -292,11 +296,29 @@ export const EQUIPMENT_INFO = '/api/devices/assetinfo';
 //设备统计日志
 export const EQUIPMENT_INFO_LIST = '/api/devices/counterLog';
 //设备异常记录
-export const EQUIPMENT_ABNORMAL_RECORD ='/api/devices/deviceerror';
+export const EQUIPMENT_ABNORMAL_RECORD = '/api/devices/deviceerror';
 //设备管理结束
+//售电沙盘开始
+//市场份额偏差考核
+export const POWER_MARKET = '/api/salesand/index';
+//公司区域签约电量排行Top10
+export const POWER_CITY_RANK = '/api/salesand/purchase';
+//签约企业用电用电量Top10
+export const POWER_COMPANY_RANK = '/api/salesand/singused';
+//客户申报电量偏差Top10
+export const CLIENT_PIANCHA_RANK = '/api/salesand/powerdev';
+//售电沙盘结束
+//行业指数开始
+//行业指数电量排行
+export const TRADE_RANK = '/api/industry/rankings'
+//行业指数行业占比
+export const TRADE_RATIO = '/api/industry/proportion'
+//行业指数竞价趋势
+export const TRADE_BIDDING = '/api/industry/tendency'
+//行业指数结束
 export const errcallback = function (err) {
-    vue.$Modal.error({
-        content: '请求出错'
-    });
-    console.error("请求出错"+err)
+	vue.$Modal.error({
+		content: '请求出错'
+	});
+	console.error("请求出错" + err)
 }
