@@ -216,11 +216,11 @@ export default {
             });
         },
         init () {
-            this.userForm.name = 'Lison';
-            this.userForm.cellphone = '17712345678';
-            this.initPhone = '17712345678';
-            this.userForm.company = 'TalkingData';
-            this.userForm.department = '可视化部门';
+            this.userForm.name = sessionStorage.getItem('fullname');
+            this.userForm.cellphone = sessionStorage.getItem('mobile');
+            this.initPhone = sessionStorage.getItem('mobile');
+            this.userForm.company = sessionStorage.getItem('fullname');
+            this.userForm.department = '暂无';
         },
         cancelInputCodeBox () {
             this.inputCodeVisible = false;

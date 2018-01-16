@@ -3,6 +3,9 @@
 		padding-left:5px;
 		padding-right:5px;
 	}
+	.single-page .main-container{
+       width:100%;
+	}
 </style>
 <template>
 
@@ -67,6 +70,7 @@
 		data() {
 			return {
 				periodicTime: 'half',
+				mainwidth:0,
 //                Width:0
 			}
 		},

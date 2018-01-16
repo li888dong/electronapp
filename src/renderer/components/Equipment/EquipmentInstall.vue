@@ -54,10 +54,10 @@ export default {
                 let screenWidth = ipcRenderer.sendSync('width-change', 'change');
                 let totalWidth = 0;
                 console.log(screenWidth);
-                if (screenWidth > 1366) {
-                    totalWidth = 436;
-                } else {
+                if (screenWidth < 1920) {
                     totalWidth = 300;
+                } else {
+                    totalWidth = 436;
                 }
                 return totalWidth;
             },

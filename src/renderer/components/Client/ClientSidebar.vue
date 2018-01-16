@@ -242,8 +242,8 @@
 						}).then(res => {
 							console.log('添加收藏', res);
 							if (res.data.status === '1') {
-								target.style.color = '#f4ea2a';
-								e.stopPropagation();
+								
+								this.changeClinentList('我的收藏');
 								this.$Message.success('收藏成功！');
 							}
 						}, err => {
@@ -357,7 +357,7 @@
 							<Row>
 								<Col span="24">
 								<p v-bind:title="item.name" class="company-name"><i class='iconfont icon-shoucang1'
-								                                                    @click='collectClient(item.id,item.myid)'
+								                                                    @click.self.stop='collectClient(item.id,item.myid)'
 								                                                    :data-myid='item.myid'
 								                                                    v-bind:class="{act:item.myid}"></i>{{item.name}}
 								</p>
@@ -367,7 +367,6 @@
 					</template>
 				</Scroll>
 			</ul>
-
 			<Spin size="large" fix v-if="spinShow"></Spin>
 		</div>
 	</div>
@@ -556,7 +555,7 @@
 	}
 
 	i.act {
-		color: #f4ea2a;
+		color: #3399ff;
 	}
 
 	.hid_company::-webkit-scrollbar {

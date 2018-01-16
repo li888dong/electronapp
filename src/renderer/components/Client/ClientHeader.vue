@@ -21,7 +21,7 @@
 		<div class="client-header">
 			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
 			<h1>{{cus_name}}</h1>
-			<div class="span-group fr">
+			<div class="span-group">
 			<span :class="{selected:$route.name==='client-zonglan'}" @click="changePage('client-zonglan')"><i
 					class="iconfont icon-zonglan-hui"></i> 总览</span>
 				<span :class="{selected:$route.name==='client-detail'}" @click="changePage('client-detail')"><i
@@ -38,8 +38,8 @@
 </template>
 <style scoped>
 	.client-box {
-		width: 100%;
 		height: 60px;
+		width:100%;
 		position: fixed;
 		z-index: 1000;
 		top: 105px;
@@ -48,7 +48,6 @@
 	}
 
 	.client-header {
-		width: 86.5%;
 		height: 60px;
 		display: inline-block;
 		margin-left: 25px;
@@ -64,9 +63,9 @@
 	}
 
 	.client-header h1 {
-		height: 26px;
+		height: 60px;
 		font-size: 24px;
-		line-height: 60px;
+		line-height: 30px;
 		padding: 0 15px;
 		margin-left: 30px;
 		float: left;
@@ -88,6 +87,9 @@
 	}
 
 	.span-group {
+		width: 578px;
+		position: fixed;
+		right: 0;
 		font-size: 16px;
 		margin-top: 10px;
 	}
@@ -97,21 +99,5 @@
 	}
 	.client-box {
 		background-color: #f0f0f0;
-	}
-
-	@media (min-width: 1365px) and (max-width: 1919px) {
-		.client-box {
-		  margin-left:20px;
-	    }
-		.client-header {
-			width: 85%;
-		}
-		.client-header .back {
-		position: absolute;
-		top: 18px;
-		left: 8px;
-		z-index: 9;
-		cursor: pointer;
-	}
 	}
 </style>

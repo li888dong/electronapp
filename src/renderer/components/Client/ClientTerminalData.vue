@@ -12,6 +12,7 @@
 				monitoringShow: 2,
 				eTotal: 0,
 				origratio: 0,
+				chartwidth:0,
 				ratio: {
 					pt: 0,
 					pt_ratio1: 0,
@@ -742,6 +743,8 @@
 			this.clientIndex = this.$route.query.clientIndex || this.terminalList[0].id;
 			this.currentPDS = this.$route.query.index || 0;
 			this.clientTerminalList();
+			var width = document.getElementsByClassName('terminal-chart')[0];
+			this.chartwidth= width.clientWidth - 32;
 		},
 		watch: {
 			cus_id: function () {
@@ -1355,7 +1358,7 @@
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="dianliu-chart" style="width:1477px;height: 430px;"></div>
+					<div class="chart-main" id="dianliu-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 				<div v-show="currentChartType===3" class="relative">
 					<span style="margin-left: 10px;">当前PT系数:<span
@@ -1368,48 +1371,53 @@
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="dianya-chart" style="width:1447px;height: 430px;"></div>
+					<div class="chart-main" id="dianya-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 				<div v-show="currentChartType===4" class="relative">
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="wugong-chart" style="width:1447px;height: 430px;"></div>
+					<div class="chart-main" id="wugong-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 				<div v-show="currentChartType===5" class="relative">
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="shizai-chart" style="width:1447px;height: 430px;"></div>
+						<div class="chart-main" id="shizai-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
+					
 				</div>
 				<div v-show="currentChartType===6" class="relative">
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="yinshu-chart" style="width:1447px;height: 430px;"></div>
+					<div class="chart-main" id="yinshu-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 				<div v-show="currentChartType===7" class="relative">
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="yougong-chart" style="width:1447px;height: 430px;"></div>
+					<div class="chart-main" id="yougong-chart" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 				<div v-show="monitoringShow===4" class="relative">
 					<Button class="refresh fr" type="primary" @click="collectJiankongData">
 						<i class="iconfont icon-shuaxin"></i>
 					</Button>
-					<div class="chart-main" id="chart-main3" style="width:1447px;height: 430px;"></div>
+					<div class="chart-main" id="chart-main3" :style="{width:chartwidth+'px'}" style="height:430px"></div>
 				</div>
 			</Row>
 		</Card>
 	</div>
 </template>
 <style scoped>
-
 	.pds-container {
 		height: 200px;
 	}
-
+	.refresh{
+     position: absolute;
+	 top:0px;
+	 right:0px;
+	 z-index:99;
+	}
 	.pds-container li {
 		display: inline-block;
 		vertical-align: middle;
@@ -1473,6 +1481,7 @@
 		overflow: hidden;
 		background-color: #fff;
 		margin-top: 15px;
+		width:100%;
 	}
 
 	.select-time {
@@ -1569,7 +1578,7 @@
 		}
 
 		.select-time {
-			padding: 0 0 15px 340px;
+			padding: 0 0 15px 345px;
 		}
 
 		#chart-jiankong {
@@ -1594,15 +1603,6 @@
 		}
 		.cld-detail li {
 			margin-right:5px;
-		}
-		#dianliu-chart,
-		#dianya-chart,
-		#wugong-chart,
-		#shizai-chart,
-		#yinshu-chart,
-		#yougong-chart,
-		#chart-main3{
-            width:1084px !important;
 		}
 	}
 </style>

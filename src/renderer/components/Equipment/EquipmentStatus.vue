@@ -194,6 +194,7 @@ export default {
         isOnline(value){
             if(value){
                 this.loading = true;
+                this.currentPage = 1;
                 this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey,status:1}).then(res=>{
                      console.log("掉线设备",res);
                     if(res.data.status === '1'){

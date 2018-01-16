@@ -279,6 +279,8 @@
         mounted() {
             this.drawLine();
             this.doAjax(this.belong);
+            var width = document.getElementsByClassName('chart-container')[0];
+            console.log(22344,width.clientWidth);
         },
         methods: {
             doAjax(belong) {

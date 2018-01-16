@@ -45,8 +45,8 @@ function createWindow() {
         // fullscreen: true,
 		frame:false,//取消顶部任务栏
 		autoHideMenuBar:true,//取消顶部菜单栏
-        // movable:false,
-        // resizable:false,//不可改变窗口大小
+        movable:false,
+        resizable:false,//不可改变窗口大小
     })
     //console.log(app.getVersion());
     mainWindow.loadURL(winURL)
