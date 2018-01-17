@@ -34,11 +34,21 @@
             }
 		},
 		mounted() {
+			console.log('mounted')
 			this.clientList();
 			this.$Message.config({
                   top:100,
-          });
+			})
 
+		},
+		created: function(){
+			console.log('created')
+			
+		},
+		watch: {
+			bol: function(val){
+				console.log(val)
+			}
 		},
 		methods: {
 			changeCompany(id, name, clientid, user_id) {
@@ -294,7 +304,15 @@
 			},
 			toggle() {
 				this.bol = !this.bol;
-				console.log(this.bol);
+				// console.log(this.bol);
+				if(this.bol){
+					console.log(document)
+					let tem = document.getElementById('useSearch')
+					console.log(tem,8888888888888888)
+				}else{
+					console.log('没有获取到元素')
+				}
+
 			},
 			companylist() {
 				this.companyList = this.options1;
@@ -308,7 +326,16 @@
 				this.$store.dispatch('setCompanbol',false);
 				this.bol = false;
 				console.log(22222,this.companyList);
-			}
+			},
+			doThis(){
+				console.log(this.keyword)
+				if(this.keyword.length < 1 || /^\s*$/.test(this.keyword)){
+					this.bol= false
+				}else{
+					console.log('值不为空')
+				}
+				console.log("dothis")
+			},
 		},
 	}
 </script>
@@ -320,8 +347,9 @@
 					<i class="iconfont icon-search" @click='toggle'></i>
 					<transition name='seach'>
 						<input v-if='bol' type="input" placeholder="请输入关键字" v-model="keyword" id='search absolute'
-						       autofocus='autofocus' style="height:36px;border: none;z-index: 22;width:140px"
-						       @keyup='doSearch' @keyup.enter='companylist'>
+						       autofocus='autofocus' style="height:38px;border: none;z-index: 22;width:140px"
+						       @keyup='doSearch' @keyup.enter='companylist' v-on="{ mouseout : doThis }">
+
 
 						<!-- <Select
 						filterable
@@ -447,7 +475,7 @@
 
 	.company-list ul {
 		width: 100%;
-		height: 870px;
+		height: 852px;
 		overflow: hidden;
 		z-index: 992;
 
@@ -583,7 +611,7 @@
 
 	@media (min-width: 1365px) and (max-width: 1919px) {
 		.client-sidebar {
-			width: 12.5%;
+			width: 12%;
 			position: fixed;
 			z-index: 999;
 		}

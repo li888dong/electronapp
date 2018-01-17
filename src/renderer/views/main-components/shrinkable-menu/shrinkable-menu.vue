@@ -1,7 +1,15 @@
 <style lang="less">
     @import './styles/menu.less';
 </style>
-
+<style>
+    .version{
+        position: fixed;
+        margin: 0 auto;
+        text-align: center;
+        bottom: 0;
+        color: #ffffff;
+    }
+</style>
 <template>
     <div :style="{background: bgColor}" class="ivu-shrinkable-menu">
         <slot name="top"></slot>
@@ -19,6 +27,7 @@
             :icon-color="shrinkIconColor"
             @on-change="handleChange"
         ></sidebar-menu-shrink>
+        <p class="version">当前版本beta{{version}}内部测试版</p>
     </div>
 </template>
 
@@ -26,8 +35,14 @@
 import sidebarMenu from './components/sidebarMenu.vue';
 import sidebarMenuShrink from './components/sidebarMenuShrink.vue';
 import util from '@/libs/util';
+import {version} from '../../../../../package.json'
 export default {
     name: 'shrinkableMenu',
+    data(){
+        return {
+        	version:version
+        }
+    },
     components: {
         sidebarMenu,
         sidebarMenuShrink
@@ -77,6 +92,7 @@ export default {
                 });
             }
             this.$emit('on-change', name);
+            console.log(name);
         }
     }
 };

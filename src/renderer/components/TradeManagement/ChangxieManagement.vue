@@ -192,7 +192,7 @@
                             label: {
                                 normal: {
                                     show: true,
-                                    position: 'insideRight'
+                                    position: 'inside'
                                 }
                             },
                             data:['0','0','0','0','0','0','0','0','0','0','0','0']
@@ -203,7 +203,7 @@
                             label: {
                                 normal: {
                                     show: true,
-                                    position: 'insideRight'
+                                    position: 'inside'
                                 }
                             },
                             data:['0','0','0','0','0','0','0','0','0','0','0','0']
@@ -323,7 +323,7 @@
                             label: {
                                 normal: {
                                     show: true,
-                                    position: 'insideRight'
+                                    position: 'inside'
                                 }
                             },
                             data: Object.values(i.info[0])

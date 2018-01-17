@@ -47,7 +47,7 @@
 		},
 		methods:{
 			toPlanInfo() {
-				this.$router.push('planInfo')
+				this.$router.push('/planInfo')
 			}
 		}
 	}

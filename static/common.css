@@ -58,7 +58,7 @@ input,select,textarea,option{
 	/*overflow: hidden;*/
 	box-sizing: border-box;
 	/*margin: 60px 20px 20px 20px;*/
-	margin: 60px 0px 0px 20px;
+	margin: 52px 0px 0px 20px;
 }
 .fixed {
 	top: 0;

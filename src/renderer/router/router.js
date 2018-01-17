@@ -1,4 +1,5 @@
 import Main from '@/views/Main.vue';
+import { resolve } from 'url';
 
 // 不作为Main组件的子页面展示的页面单独写，如下
 export const loginRouter = {
@@ -128,7 +129,66 @@ export const otherRouter = {
 				}
 			]
 		},
-
+		{
+			path: '/client-zonglan',
+			name: 'client-zonglan',
+			title:'客户总览',
+			component: require('@/components/Client/ClientZonglan').default
+		},
+		{
+			path: '/client-compare',
+			name: 'client-compare',
+			title:'客户指数',
+			component: require('@/components/Client/ClientIndexCompare').default
+		},
+		{
+			path: '/client-piancha',
+			name: 'client-piancha',
+			title:'客户偏差',
+			component: require('@/components/Client/ClientPianCha').default
+		},
+		{
+			path: '/client-detail',
+			name: 'client-detail',
+			title:'客户详情',
+			component: require('@/components/Client/ClientDetail').default
+		},
+		{
+			path: '/client-terminal',
+			name: 'client-terminal',
+			title:'终端详情',
+			component: require('@/components/Client/ClientTerminalData').default
+		},
+		{
+			path: '/caiji-detail',
+			name: 'caiji-detail',
+			title:'终端采集记录',
+			component: require('@/components/Client/ClientCaiji').default
+		},
+		{
+			path: '/add-celiang',
+			name: 'add-celiang',
+			title:'添加测量点',
+			component: require('@/components/Client/ClientAddCeliang').default
+		},
+		{
+			path: '/hetong',
+			name: 'agreement',
+			title:'客户合同',
+			component: require('@/components/Client/ClientAgreement').default
+		},
+		{
+			path: '/user-manager',
+			name: 'user-manager',
+			title:'用户管理',
+			component: require('@/components/Client/ClientUserManagement').default
+		},
+		{
+			path: '/database',
+			name: 'database',
+			title:'电量数据库',
+			component: require('@/components/Client/PowerDatabase').default
+		},
 		{
 			path: '/planInfo',
 			name: 'planInfo',
@@ -314,28 +374,38 @@ export const appRouter = [
 		name: 'contract',
 		component: Main,
 		children: [
-			{ path: 'contract_changxie', title: '长协合同',icon:'icon-jishiben01', name: 'contract_changxie', component: resolve => { require(['@/components/ContractManagement/ChangxieContract.vue'], resolve); } },
-			{ path: 'contract_shoudian', title: '售电合同',icon:'icon-jishiben01', name: 'contract_shoudian', component: resolve => { require(['@/components/ContractManagement/saleContract.vue'], resolve); } },
+            { path: '/contract_changxie', 
+              title: '长协合同',
+              icon:'icon-jishiben01', 
+              name: 'contract_changxie', 
+              component: resolve => { require(['@/components/ContractManagement/ChangxieContract.vue'], resolve); } 
+            },
+            { path: '/contract_shoudian', 
+              title: '售电合同',
+              icon:'icon-jishiben01', 
+              name: 'contract_shoudian', 
+              component: resolve => { require(['@/components/ContractManagement/saleContract.vue'], resolve); } 
+            },
         ]
-	},
+    },
     {
-        path:'/index-compare',
+        path:'/compare',
         icon:'icon-zhuzhuangtutubiao',
         title:'行业指数',
         name:'index-compare',
         component: Main,
         children: [
-            { path: 'index_compare', title: '行业指数', name: 'index_compare', component: resolve => { require(['@/components/IndexCompare.vue'], resolve); } }
+            { path: 'index_compare', title: '行业指数', name: 'index_compare', component: resolve => { require(['@/components/IndexCompare.vue'], resolve); } },
         ]
     },
     {
-        path:'/sand-table',
+        path:'/sand',
         icon:'icon-qizi',
         title:'售电沙盘',
         name:'sand-table',
         component: Main,
         children: [
-            { path: 'sand_table', title: '售电沙盘', name: 'sand_table', component: resolve => { require(['@/components/SandTable.vue'], resolve); } }
+            { path: 'sand_table', title: '售电沙盘', name: 'sand_table', component: resolve => { require(['@/components/SandTable.vue'], resolve); } },
         ]
     }
     // {

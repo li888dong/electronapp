@@ -63,7 +63,7 @@
 	}
 
 	.client-header h1 {
-		height: 60px;
+		height: 30px;
 		font-size: 24px;
 		line-height: 30px;
 		padding: 0 15px;

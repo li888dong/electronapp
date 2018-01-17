@@ -26,17 +26,26 @@
         font-size:22px;
         color:#fea06f;
     }
+    .small{
+        width:94px;
+    }
     @media (min-width: 1365px) and (max-width: 1919px){
         .center{
-         text-align: left;
+         text-align: center;
         }
         .month_choose{
-            width:180px;
+            width:50%;
         }
-        .small .ivu-input-wrapper{
-            width:90px;
+        .small{
+          width:28%;
             
         }
+        .ivu-col-span-md-17{
+			width:70.83333333%;
+		}
+		.ivu-col-span-md-7{
+			width:29.16666667%;
+		}
     }
 </style>
 <template>

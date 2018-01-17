@@ -62,6 +62,7 @@
                 modal1: false,
                 modal2: false,
                 modal3: false,
+                modal4:false,
                 tip: '',
                 user_nums: [],
                 user_num: '',
@@ -281,6 +282,8 @@
                                         this.$router.push('/hetong');
                                     } else if (msg === '客户名称不存在!') {
                                         this.modal2 = true;
+                                    }else if(msg ==='合同已存在！'){
+                                         this.modal4 = true;
                                     }
                                 }, err => {
                                     this.$api.errcallback(err);
@@ -443,7 +446,7 @@
                     this.$http.post(this.$api.CLIENT_BASIC_INFO, {cus_id: this.cus_id}).then(res => {
                         console.log('用户基本信息', res);
                         if(res.data.status==='1'){
-                              this.address1 = res.data.data.province;
+                        this.address1 = res.data.data.province;
                         this.address2 = res.data.data.city;
                         this.address3 = res.data.data.county;
                         this.defaultAddress = 'true';
@@ -458,6 +461,7 @@
                         this.$api.errcallback(err);
                     })
                 } else {
+                    this.addTableList.yddz =[];
                     this.addTableList.stree = '';
                 }
             },
@@ -519,7 +523,7 @@
             updateCompact() {
                 if (this.$route.query.id) {
                     console.log(this.$route.query);
-                    this.addList.cus_name = this.$route.query.cus_name;
+                    this.addList.user_name = this.$route.query.cus_name;
                     var div = document.getElementById('name');
                     var input = div.getElementsByClassName('ivu-input')[0];
                     input.readOnly = true;
@@ -597,7 +601,7 @@
             }
         },
         mounted() {
-            if (this.$route.query.cus_name) {
+            if (this.$route.query.cus_name && this.$route.query.active ==='添加') {
                 this.addList.user_name = this.$route.query.cus_name;
                 var div = document.getElementById('name');
                 var input = div.getElementsByClassName('ivu-input')[0];
@@ -716,7 +720,7 @@
 					</div>
 					<div v-if='hint2'>
 						<Alert type="warning" show-icon
-						       style='width: 200px;margin:5px auto;color: red;margin-left:450px' class='cont_empty'>内容不能为空
+						       style='width: 460px;margin:5px auto;color: red;margin-left:450px' class='cont_empty'>内容不能为空并请确认合同方式是否保存或是否已选择要上传的合同！
 						</Alert>
 					</div>
 				</FormItem>
@@ -871,7 +875,7 @@
 						<Row>
 							<Col span='13'>
 							<FormItem prop='yddz'>
-								<al-selector level=2     class='address' data-type='name' v-model='addTableList.yddz'
+								<al-selector level=2  class='address' data-type='name' v-model='addTableList.yddz'
 								             v-if="!defaultArea"/>
 								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
 							</FormItem>
@@ -885,7 +889,7 @@
 						</Row>
 					</FormItem>
 					<FormItem label=''>
-						<Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress">
+						<Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress" v-model="defaultArea">
 							<span>企业默认地址</span>
 						</Checkbox>
 					</FormItem>
@@ -906,6 +910,18 @@
 				</p>
 				<div style="text-align:center">
 					<p style="color: red">客户名称不存在</p>
+				</div>
+				<div slot="footer" style='text-align: center;'>
+					<Button type="primary" @click='cancel'>确认</Button>
+				</div>
+            </Modal>
+            <Modal v-model="modal4" width="360" class-name="vertical-center-modal">
+				<p slot="header" style="color:#f60;text-align:center">
+					<Icon type="information-circled"></Icon>
+					<span>警告</span>
+				</p>
+				<div style="text-align:center">
+					<p style="color: red">合同已存在</p>
 				</div>
 				<div slot="footer" style='text-align: center;'>
 					<Button type="primary" @click='cancel'>确认</Button>

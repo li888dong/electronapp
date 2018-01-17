@@ -207,7 +207,7 @@
                         data = res.data.citys;
 
                         for(let i of data){
-                            i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'').replace(/user_no/g, " 户号 ").replace(/elec/g, " - ").replace(/"|\[|\]|\,/g, '').replace(/:/g, '')
+                            i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'').replace(/user_no/g, " 户号：").replace(/elec/g, " - ").replace(/"|\[|\]|\,/g, '').replace(/:/g, '')
                             console.log(i.sbdlinfo,2222222222222222)
                         }
                         console.log(data,2222222222222222)

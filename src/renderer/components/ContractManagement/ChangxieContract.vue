@@ -101,6 +101,10 @@
 					console.log("长协合同删除成功", res);
 					if (res.data.status === '1') {
 						this.hetongList.splice(index, 1);
+						if(this.hetongList.length === 0){
+							this.currentPage = this.currentPage -1;
+						}
+						this.$Message.info('删除成功');
 					}
 					this.changxieList();
 				}, err => {
@@ -108,7 +112,7 @@
 				}).catch(err => {
 					this.$api.errcallback(err);
 				})
-				this.$Message.info('删除成功');
+				
 			},
 			cancel() {
 				this.$Message.info('取消删除');

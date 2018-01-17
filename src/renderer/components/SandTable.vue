@@ -56,8 +56,9 @@
            this.$http.post(this.$api.POWER_MARKET,{com_id:this.$store.getters.com_id,month:this.month}).then(res=>{
            	    console.log('售电沙盘 总排行',res);
            	    if(res.data.status === '1'){
-           	    	this.companyList1 = res.data.data;
-           	    	var obj = res.data.paixu[0];
+					   this.companyList1 = res.data.data;
+					   if(res.data.paixu.length!==0){
+						var obj = res.data.paixu[0];
            	    	var com_name = obj.num;
            	    	for(let i=0;i<this.companyList1.length;i++){
            	    		if(!com_name === this.companyList1[i].com_name){
@@ -68,6 +69,7 @@
            	    			
            	    		}
            	    	}
+                 }
 
            	    }
            },err=>{
@@ -210,7 +212,7 @@
 
 				<Row :gutter="10">
 					<Col span="12">
-						<div style="width: 1500px;" class='henan_map'>
+						<div style="width: 1500px;height:500px" class='henan_map'>
 
 							<henan-map></henan-map>
 						</div>
@@ -245,7 +247,7 @@
 				<Card class="ranklist-container">
 				<h3 slot="title">签约企业用电量Top10</h3>
 				<ul>
-					<li v-for='(item,index) in companyList2'><span class="ranking">No.{{index+1}}</span><span class="company-name">{{item.name}}</span>
+					<li v-for='(item,index) in companyList2' :title = 'item.name'><span class="ranking">No.{{index+1}}</span><span class="company-name">{{item.name}}</span>
 					<span class="ranklist-bar" :style="{width:200*(item.bndyjdl/total2)+'px'}"></span></li>
 				</ul>
 			</Card>
@@ -254,7 +256,7 @@
 				<Card class="ranklist-container">
 					<h3 slot="title">客户申报电量偏差Top10</h3>
 					<ul>
-						<li v-for='(item,index) in companyList3' ><span class="ranking">No.{{index+1}}</span><span class="company-name">{{item.name}}</span><span class="rate">{{item.ratio *100}}%</span>
+						<li v-for='(item,index) in companyList3' :title = 'item.name'><span class="ranking">No.{{index+1}}</span><span class="company-name">{{item.name}}</span><span class="rate">{{item.ratio *100}}%</span>
 						<span class="ranklist-bar" :style="{width:200*item.ratio+'px'}"></span></li>
 					</ul>
 
@@ -275,7 +277,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		text-align: left;
-		padding-left:10px;
+		padding-left:20px;
 	}
 	.btn-group{
 		margin-top: -8px;
@@ -297,6 +299,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		text-align: left;
+		padding-left:20px;
 	  }
 	}
 </style>

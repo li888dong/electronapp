@@ -59,7 +59,7 @@ export default {
             this.$refs.inputEle.focus();
         },
         handleUnlock () {
-            if (this.validator()) {
+            if (this.validator()&&this.password === localStorage.getItem('password')) {
                 this.avatorLeft = '0px';
                 this.inputLeft = '400px';
                 this.password = '';

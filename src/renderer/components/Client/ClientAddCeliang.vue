@@ -111,6 +111,8 @@
                 return true
             },
             showUnit: function (value) {
+                this.no = value;
+                console.log(value);
                 this.byqList.map(i=>{
                     if (i.no===value){
                         this.name = i.name;
@@ -146,7 +148,6 @@
                 if (!this.isEmpty(this.terminalList)) {
                     this.terminalList.cgrq = this.terminalList.cgrq.Format('yyyy-MM-dd');
                     this.terminalList.azrq = this.terminalList.azrq.Format('yyyy-MM-dd');
-                    this.no = parseInt(this.no);
                     this.terminalList.ptxs = parseInt(this.terminalList.ptxs);
                     this.terminalList.ctxs = parseInt(this.terminalList.ctxs);
                     this.terminalList.origratio = parseFloat(this.terminalList.origratio);
@@ -414,9 +415,9 @@
 							</Select>
 						</FormItem>
 						<FormItem label="变压器信息" class='mgb_20 trans' prop='byqxx'>
-							<Select style="width:300px;color:black" placeholder="请选择或添加变压器名称" v-model="no"
+							<Select style="width:300px;color:black" placeholder="请选择或添加变压器名称" :value="no"
 							        v-on:on-change='showUnit'>
-								<Option v-for="item in byqList" :value="item.no">{{item.name}}
+								<Option v-for="item in byqList" :value="item.id">{{item.name}}
 								</Option>
 							</Select><span class="add" @click="modal2 = true" style="cursor: pointer;margin-left:10px;">添加</span>
 							<span v-show='addShow'>变压器容量单位: <span class="add"

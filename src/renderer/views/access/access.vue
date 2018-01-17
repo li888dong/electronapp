@@ -48,8 +48,8 @@ export default {
     name: 'access_index',
     data () {
         return {
-            accessCode: parseInt(sessionStorage.getItem('access')),
-            switchValue: parseInt(sessionStorage.getItem('access')) === 1
+            accessCode: parseInt(localStorage.getItem('access')),
+            switchValue: parseInt(localStorage.getItem('access')) === 1
         };
     },
     computed: {

@@ -116,7 +116,12 @@ export default {
                 console.log('售电合同删除ok',res);
                 if(res.data.status==='1'){
                     this.data1.splice(index, 1);
+                    if(this.data1.length === 0){
+                        this.currentPage = this.currentPage -1;
+                    }
+                    this.$Message.info('删除成功');
                 }
+                this.powerSaleList();
             },err=>{
                 this.$api.errcallback(err);
             }).catch(err=>{

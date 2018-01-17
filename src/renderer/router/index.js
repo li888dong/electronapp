@@ -26,11 +26,11 @@ router.beforeEach((to, from, next) => {
     } else if (sessionStorage.getItem('locking') === '0' && to.name === 'locking') {
         next(false);
     } else {
-        if (!sessionStorage.getItem('mobile') && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
+        if (!localStorage.getItem('fullname') && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
             next({
                 name: 'login'
             });
-        } else if (sessionStorage.getItem('mobile') && to.name === 'login') { // 判断是否已经登录且前往的是登录页
+        } else if (localStorage.getItem('fullname') && to.name === 'login') { // 判断是否已经登录且前往的是登录页
             Util.title();
             next({
                 name: 'home_index'
@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
         } else {
             const curRouterObj = Util.getRouterObjByName([otherRouter, ...appRouter], to.name);
             if (curRouterObj && curRouterObj.access !== undefined) { // 需要判断权限的路由
-                if (curRouterObj.access === parseInt(sessionStorage.getItem('access'))) {
+                if (curRouterObj.access === parseInt(localStorage.getItem('access'))) {
                     Util.toDefaultPage([otherRouter, ...appRouter], to.name, router, next); // 如果在地址栏输入的是一级菜单则默认打开其第一个二级菜单的页面
                 } else {
                     next({

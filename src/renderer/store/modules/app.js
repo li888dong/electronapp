@@ -38,7 +38,7 @@ const app = {
             state.tagsList.push(...list);
         },
         updateMenulist (state) {
-            let accessCode = parseInt(sessionStorage.getItem('access'));
+            let accessCode = parseInt(localStorage.getItem('access'));
             let menuList = [];
             appRouter.forEach((item, index) => {
                 if (item.access !== undefined) {

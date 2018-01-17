@@ -1,7 +1,7 @@
 {
   "name": "smartpower",
-  "version": "0.8.0",
-  "author": "li888dong <498437323@qq.com>",
+  "version": "0.9.0",
+  "author": "易采智电数据管理咨询有限公司",
   "description": "易采电力数据管理系统",
   "license": "MIT",
   "main": "./dist/electron/main.js",

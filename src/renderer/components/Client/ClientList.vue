@@ -263,7 +263,7 @@
                 });
             },
             gotoAddUser() {
-                this.$router.push('/AddClient');
+                this.$router.push({path:'/AddClient',query:{userDetail:{}}});
             },
             changeSelect(city) {
                 this.spinShow = true;

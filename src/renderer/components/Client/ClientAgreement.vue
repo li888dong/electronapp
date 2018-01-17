@@ -75,6 +75,16 @@
                             this.pageTotal = res.data.data.total;
                             this.loading = false;
                         } else {
+                            this.agreementList = [{
+                                cus_name: this.$store.getters.cus_name,
+                                con_no: '暂无数据',
+                                way: '暂无数据',
+                                ly_used: '0',
+                                ly_maxload: '0',
+                                bndyjdl: '0',
+                                bndyjzdfh: '0',
+                                usernos: []
+                            }];
                             this.loading = false;
                         }
 
@@ -119,7 +129,10 @@
                     console.log('售电合同删除ok', res);
                     if (res.data.status === '1') {
                         this.agreementList.splice(index, 1);
+                        this.$Message.info('删除成功');
+                        this.userAgreement();
                     }
+                    
                 }, err => {
                     this.$api.errcallback(err);
                 }).catch(err => {
@@ -130,7 +143,7 @@
                 this.$Message.info('点击了取消');
             },
             toAddHetong() {
-                this.$router.push({path: '/add-hetong', query: {cus_name: this.cus_name}})
+                this.$router.push({path: '/add-hetong', query: {cus_name: this.cus_name,active:"添加"}})
             }
         },
         computed: {
@@ -142,9 +155,6 @@
             }
         },
         watch: {
-            cus_id: function () {
-                this.userAgreement();
-            },
             cus_name: function () {
 
             }
@@ -205,7 +215,6 @@
 				<div class="fenYe">
 					<Page :total="pageTotal" :page-size='limit' :current='currentPage' show-total show-elevator
 					      v-on:on-change='pageChange'></Page>
-					<Button type="primary">确定</Button>
 				</div>
 			</div>
 		</Card>

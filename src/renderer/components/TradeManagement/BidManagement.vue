@@ -78,15 +78,21 @@
 					{
 						title: '购方名称',
 						key: 'com_name',
+						width:200,
 					}, {
-						title: '所属区域',
-						key: 'area',
+						title: '购方报价',
+						key: 'com_price',
 					}, {
 						"sortable": true,
 						title: '售方名称',
-						key: 'seller'
-					}, {
-						title: '时间段',
+						key: 'seller',
+						width:200,
+					}, 
+					{
+						title: '售方报价',
+						key: 'seller_price'
+					},{
+						title: '时间',
 						key: 'month'
 					}, {
 						"sortable": true,
@@ -99,17 +105,8 @@
 					}, {
 						"sortable": true,
 						title: '差价',
-						key: 'price_dif'
-					}, {
-						title: '电厂报价',
-						key: 'seller_price'
-					}, {
-						title: '售电公司报价',
-						key: 'com_price',
-					}, {
-						title: '报价差价',
-						key: 'price_dif'
-					}
+						key: 'spread'
+					},
 				],
 				data1: [],
 				limit: 5,
@@ -659,7 +656,12 @@
 			margin-right: 4px;
 			margin-left: 4px;
 		}
-
+		.ivu-col-span-md-17{
+			width:70.83333333%;
+		}
+		.ivu-col-span-md-7{
+			width:29.16666667%;
+		}
 		.power_name {
 			width: 100px;
 		}

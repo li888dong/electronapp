@@ -16,6 +16,7 @@ const user = {
                 theme = localStorage.theme;
             }
             localStorage.removeItem('pageOpenedList');
+            localStorage.removeItem('fullname');
             localStorage.removeItem('currentPageName');
             localStorage.removeItem('cachePage');
             if (theme) {

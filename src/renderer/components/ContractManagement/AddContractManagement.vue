@@ -86,6 +86,7 @@
                 hint: false,
                 bol: false,
                 isGo: true,
+                modal1:false
             }
         },
         components: {
@@ -127,8 +128,53 @@
                             
                             arr.push(obj);
                         }
+                        this.dcList = arr;
+                        if(this.$route.query.id){
+                    this.formItem.lpcon_no = this.$route.query.lpcon_no;
+                    this.formItem.lpcon_year=this.$route.query.lpcon_year;
+                    this.formItem.signed_num = this.$route.query.signed_num;
+                    if(this.$route.query.signed_status == "签约"){
+                        this.formItem.signed_status = "1";
+                    }else{
+                         this.formItem.signed_status = "0";
                     }
-                    this.dcList = arr;
+                        for(var i=0;i<this.dcList.length;i++){
+                            if(this.$route.query.powerplant === this.dcList[i].label){
+                                this.formItem.powerplant = this.$route.query.powerplant;
+                                this.powerId = parseInt(this.dcList[i].value);
+                            }
+                        }
+                    this.formItem.signed_day = this.$route.query.signed_day;
+                    this.formItem.signed_price = this.$route.query.signed_price;
+                    this.formItem.exec_date = this.$route.query.exec_date;
+                    this.formItem.business = this.$route.query.business;
+                    this.formItem.tel = this.$route.query.tel;
+                    var arr = this.$route.query.list;
+                    console.log(arr[0]);
+                    this.month.month01 = arr[0].month01;
+                    this.month.month02 = arr[0].month02;
+                    this.month.month03 = arr[0].month03;
+                    this.month.month04 = arr[0].month04;
+                    this.month.month05 = arr[0].month05;
+                    this.month.month06 = arr[0].month06;
+                    this.month.month07 = arr[0].month07;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month09 = arr[0].month09;
+                    this.month.month10 = arr[0].month10;
+                    this.month.month11 = arr[0].month11;
+                    this.month.month12 = arr[0].month12;
+                    
+            }else{
+                 for(let k in this.formItem){
+                    this.formItem[k] = '';
+                 };
+                 for(let k in this.month){
+                     this.month[k] = '';
+                 }
+            }
+                    }
+                    
                      console.log(this.dcList);
 
                 }, err => {
@@ -138,12 +184,14 @@
                 })
             },
             powerAddress(value) {
-                if (value.value != '' && value.label != "") {
                     console.log(value);
-                    this.powerId = value.value;
-                    this.formItem.powerplant = value.label;
-                    console.log(this.powerId, this.formItem.powerplant);
-                    this.$http.get(this.$api.POWER_PLANT_ADDRESS + this.powerId).then(res => {
+                    for(var i=0;i<this.dcList.length;i++){
+                            if(value=== this.dcList[i].value){
+                                this.formItem.powerplant = this.dcList[i].label;
+                            }
+                    }
+                    console.log(this.formItem.powerplant);
+                    this.$http.get(this.$api.POWER_PLANT_ADDRESS + value).then(res => {
                         console.log('电厂地址', res);
                         if (res.data.status==='1') {
                             this.formItem.address = res.data[0].address;
@@ -153,7 +201,6 @@
                     }).catch(err => {
                         this.$api.errcallback(err);
                     })
-                }
             },
             upLoadPowerCompact() {
                  if(this.$route.query.id){
@@ -172,13 +219,14 @@
                                     console.log('修改长协合同', res);
                                     if (res.data.status==='1') {
                                         if(this.isGo){
-                                            this.$router.push('/ChangxieContract');
+                                            this.$router.push({name:'contract_changxie'});
                                         }else {
                                         this.success();
                                         for (let k in this.formItem) {
                                             this.formItem[k] = '';
                                         }
                                         this.file = '';
+                                        this.powerId ='';
                                         this.formItem.signed_day = '';
                                         this.formItem.exec_date='';
                                         for (let k in this.month) {
@@ -217,20 +265,23 @@
                                     console.log('添加长协合同', res);
                                     if (res.data.status==='1') {
                                         if(this.isGo){
-                                            this.$router.push('/ChangxieContract');
+                                            this.$router.push({name:'contract_changxie'});
                                         }else{
                                             this.success();
                                         for (let k in this.formItem) {
                                             this.formItem[k] = '';
                                         }
                                         this.file = '';
+                                        this.powerId ='';
                                         this.formItem.signed_day = '';
                                         this.formItem.exec_date='';
                                         for (let k in this.month) {
                                             this.month[k] = '';
                                           }
                                         } 
-                                    } 
+                                    }else{
+                                        this.modal1 = true;
+                                    }
                                 }, err => {
                                     this.$api.errcallback(err);
                                 }).catch(err => {
@@ -323,45 +374,7 @@
         },
         mounted() {
             this.powerPlant();
-            if(this.$route.query.id){
-                    this.formItem.lpcon_no = this.$route.query.lpcon_no;
-                    this.formItem.lpcon_year=this.$route.query.lpcon_year;
-                    this.formItem.signed_num = this.$route.query.signed_num;
-                    if(this.$route.query.signed_status == "签约"){
-                        this.formItem.signed_status = "1";
-                    }else{
-                         this.formItem.signed_status = "0";
-                    }
-                    this.formItem.signed_day = this.$route.query.signed_day;
-                    this.formItem.signed_price = this.$route.query.signed_price;
-                    this.formItem.exec_date = this.$route.query.exec_date;
-                    this.formItem.business = this.$route.query.business;
-                    this.formItem.tel = this.$route.query.tel;
-                    var arr = this.$route.query.list;
-                    console.log(arr[0]);
-                    this.month.month01 = arr[0].month01;
-                    this.month.month02 = arr[0].month02;
-                    this.month.month03 = arr[0].month03;
-                    this.month.month04 = arr[0].month04;
-                    this.month.month05 = arr[0].month05;
-                    this.month.month06 = arr[0].month06;
-                    this.month.month07 = arr[0].month07;
-                    this.month.month08 = arr[0].month08;
-                    this.month.month08 = arr[0].month08;
-                    this.month.month09 = arr[0].month09;
-                    this.month.month10 = arr[0].month10;
-                    this.month.month11 = arr[0].month11;
-                    this.month.month12 = arr[0].month12;
-                    
-            }else{
-                 for(let k in this.formItem){
-                    this.formItem[k] = '';
-                 };
-                 for(let k in this.month){
-                     this.month[k] = '';
-                 }
-            }
-            console.log(this.$route.query);
+ 
             this.$Message.config({
                 top: 200,
                 duration: 3
@@ -394,9 +407,9 @@
 						</Row>
 						<Row>
 							<Col span="8">
-							<Form-item label="签约电厂" prop='powerplant'>
+							<Form-item label="签约电厂">
 								<Select  placeholder="请选择签约电厂"
-								        v-on:on-change='powerAddress' label-in-value :value='formItem.powerplant'>
+								        v-on:on-change='powerAddress'  :value='powerId'>
 									<Option v-for='item in dcList' :value="item.value" :key='item.value'>
 										{{item.label}}
 									</Option>
@@ -518,14 +531,25 @@
 							<Button type="ghost" @click="$router.go(-1)">取消</Button>
 						</div>
 						<div v-if='hint'>
-							<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red'>内容不能为空
+							<Alert type="warning" show-icon style='width: 320px;margin:5px auto;color: red'>内容不能为空并确认已选择要上传的合同！
 							</Alert>
 						</div>
 					</Form>
 				</div>
 			</Row>
 		</Card>
-
+        <Modal v-model="modal1" width="360" class-name="vertical-center-modal">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>警告</span>
+            </p>
+            <div style="text-align:center">
+                <p style="color: red">合同已存在</p>
+            </div>
+            <div slot="footer" style='text-align: center;'>
+                <Button type="primary" @click='modal1 = false'>确认</Button>
+            </div>
+        </Modal>
 	</Row>
 </template>
 

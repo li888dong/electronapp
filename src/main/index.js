@@ -9,34 +9,62 @@ if (process.env.NODE_ENV !== 'development') {
 }
 // 应用程序只允许单例打开
 const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
-	if (mainWindow) {
-		if (mainWindow.isMinimized()) mainWindow.restore()
-		mainWindow.focus()
+	if (loginWindow) {
+		if (loginWindow.isMinimized()) loginWindow.restore()
+		loginWindow.focus()
 	}
 })
 if (shouldQuit) {
 	app.quit()
 }
+let loginWindow;
 let mainWindow,isLogin=false;
+let token;
 const winURL = process.env.NODE_ENV === 'development'
     ? `http://localhost:9080`
     : `file://${__dirname}/index.html`
 
+// 创建登录窗口
+function createLogin() {
+	/**
+	 * Initial window options
+	 */
+	var width = 300,
+		height = 442;
+	loginWindow = new BrowserWindow({
+		width: width,
+		height: height,
+		// 打开应用时先隐藏，防止长时间白屏
+		show:false,
+		useContentSize: false,
+		// 开发环境的跨域请求
+		webPreferences: {webSecurity: false},
+		// fullscreen: true,
+		frame:false,//取消顶部任务栏
+		autoHideMenuBar:true,//取消顶部菜单栏
+		movable:false,
+		resizable:false,//不可改变窗口大小
+	})
+	//console.log(app.getVersion());
+	loginWindow.loadURL(winURL)
+	// 页面准备完毕后再显示，防止长时间白屏
+	loginWindow.on('ready-to-show', function() {
+		loginWindow.show();
+		loginWindow.focus();
+	})
+	loginWindow.on('closed', () => {
+		loginWindow = null
+	})
+}
+// 创建主窗口 默认隐藏
 function createWindow() {
     /**
      * Initial window options
      */
-    var width = 300,
-        height = 442;
-
     var size = screen.getPrimaryDisplay().workAreaSize;
-    if(isLogin){
-        width = size.width;
-        height = size.height;
-    }
     mainWindow = new BrowserWindow({
-        width: width,
-        height: height,
+        width: size.width,
+        height: size.height,
         // 打开应用时先隐藏，防止长时间白屏
         show:false,
         useContentSize: false,
@@ -50,11 +78,6 @@ function createWindow() {
     })
     //console.log(app.getVersion());
     mainWindow.loadURL(winURL)
-	// 页面准备完毕后再显示，防止长时间白屏
-    mainWindow.on('ready-to-show', function() {
-		mainWindow.show();
-		mainWindow.focus();
-	})
     mainWindow.on('closed', () => {
         mainWindow = null
     })
@@ -69,20 +92,24 @@ function createWindow() {
 // 			console.error(error);
 // 	});
 // });
-ipcMain.on('login-succeed',()=>{
+ipcMain.on('setToken',(event,args)=>{
+	token = args
+});
+ipcMain.on('getToken',(event,args)=>{
+	event.returnValue = token
+});
+ipcMain.on('login-succeed',(event,arg)=>{
     isLogin =true;
-	mainWindow.hide();
-    var size = screen.getPrimaryDisplay().workAreaSize;
-    mainWindow.setBounds({
-        x:0,
-        y:0,
-        width:size.width,
-        height:size.height
-    });
-    // mainWindow.reload();
+	// 登录成功销毁登录窗口显示主窗口
+	mainWindow.webContents.send('goto-home', 'login-succeed');
+	if (loginWindow){
+		loginWindow.destroy();
+	}
 });
 ipcMain.on('renderer-complete',()=>{
-	mainWindow.show();
+	setTimeout(function () {
+		mainWindow.show();
+	},200)
 })
 ipcMain.on('login-failed',()=>{
     isLogin =false;
@@ -104,15 +131,18 @@ ipcMain.on('window-all-closed', () => {
 });
 //小化
 ipcMain.on('hide-window', () => {
-    mainWindow.minimize();
+    mainWindow.hide();
+    loginWindow.minimize();
 });
 //最大化
 ipcMain.on('show-window', () => {
-    mainWindow.maximize();
+	mainWindow.hide();
+	loginWindow.maximize();
 });
 //还原
 ipcMain.on('orignal-window', () => {
-    mainWindow.unmaximize();
+	mainWindow.hide();
+	loginWindow.unmaximize();
 });
 ipcMain.on('width-change',(event,arg)=>{
     var size = screen.getPrimaryDisplay().workAreaSize;
@@ -122,17 +152,21 @@ ipcMain.on('width-change',(event,arg)=>{
 app.on('ready', function()  {
   //autoUpdater.checkForUpdatesAndNotify();
   autoUpdater.checkForUpdatesAndNotify();
+  createLogin();
   createWindow();
 });
-
+app.on('before-quit',()=>{
+	mainWindow.webContents.send('quit');
+});
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
-})
+});
 
 app.on('activate', () => {
     if (mainWindow === null) {
+		createLogin();
         createWindow()
     }
 })

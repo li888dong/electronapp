@@ -81,9 +81,6 @@
 	background-color: #ccc;
 	z-index: 999;
 }
-.small .ivu-input-wrapper{
-	 width: 94px;
-}
 /*设备概况进度条样式重置*/
 .ivu-slider-disabled .ivu-slider-bar{
       background-color: #57a3f3;
@@ -94,4 +91,59 @@
  }
 .single-page{
 	margin: 10px 0!important;
+}
+/* 售电合同页面表格重置 */
+.htData .ivu-table th,
+.htData .ivu-table td{
+	border-right:1px solid #e9eaec;
+}
+.htData .ivu-table th:last-child{
+	border-right:0;
+}
+.htData .ivu-table-wrapper {
+	border-top: 0;
+}
+.saleBox .ivu-table::before,.saleBox .ivu-table::after{
+    display: none;
+}
+.htData tr td:last-child{
+	border-right: 0;
+}
+.htData tr:last-child td {
+	border-bottom: 0;
+}
+.htData .ivu-table-border th:last-child{
+	border-right: 0;
+}
+/*重置售电合同表格样式*/
+.hetongShuju .ivu-table th,
+.hetongShuju .ivu-table td{
+	border-right:1px solid #e9eaec;
+}
+.hetongShuju .ivu-table th:last-child{
+	border-right:0;
+}
+.hetongShuju .ivu-table tr:last-child td{
+	border-bottom: 0;
+}
+.hetongShuju tr td:last-child{
+	border-right: 0;
+}
+.hetongShuju .ivu-table-wrapper {
+	border-top: 0;
+}
+.hetongShuju  .ivu-table:before{
+	height: 0;
+}
+.hetongShuju  .ivu-table:after{
+	width: 0;
+}
+.ht-list .ivu-table:before{
+     height: 0;
+}
+.ht-list .ivu-table-row:last-child td{
+	border-bottom: none;
+}
+.ht-list .ivu-table:after{
+	 width:0;
 }

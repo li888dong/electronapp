@@ -413,37 +413,37 @@ export default {
         class-name="vertical-center-modal" 
         @on-ok="renderM">
         <div  class='modelBox'>
-        <Row class="gongSiBox" v-if="modal1">
-            <Col span="9" class="gongSi">
-                <Row class="comName">
-                    <Col span='12'>企业名称</Col>
-                    <Col span='6'>所属区域</Col>
-                    <Col span='6'>是否购电</Col>
-                </Row>
-                <Row class='qiye'>
-                    <Row  class='qiyeBox'>
-                    <Col span='12' style='overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>{{tableData1[modifyIndex].cus_name}}</Col>
-                    <Col span='6'>{{tableData1[modifyIndex].city}}</Col>
-                    <Col span='6'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
-                    </Row>
-                </Row>
-            </Col>
-            <Col span="15" style='margin-left: 37.5%'>
-                <table cellspacing="10" cellpadding="10">
-                    <tr>
-                        <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
-                        <td>企业申报合计: {{tableData1[modifyIndex].declare}}</td>
-                        <td>人工预测合计: {{tableData1[modifyIndex].p_predict}} <!-- <br>
-                        <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox> --></td>
-                    </tr>
-                    <tr v-for='item in tableData1[modifyIndex].usernos' :data-id='item.id'>
-                        <td >{{item.user_no}}:<span class="num">{{item.sy_predict}}</span></td>
-                        <td>{{item.user_no}}:<span class="num">{{item.declare_power}}</span></td>
-                        <td>{{item.user_no}}:<input type="text" placeholder="-" class="updateNum" value=''></td>
-                    </tr>
-                </table>
-            </Col>
-        </Row>
+          <Row class="gongSiBox" v-if="modal1">
+              <Col span="9" class="gongSi">
+                  <Row class="comName">
+                      <Col span='12'>企业名称</Col>
+                      <Col span='6'>所属区域</Col>
+                      <Col span='6'>是否购电</Col>
+                  </Row>
+                  <Row class='qiye'>
+                      <Row  class='qiyeBox'>
+                        <Col span='12' style='overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>{{tableData1[modifyIndex].cus_name}}</Col>
+                        <Col span='6'>{{tableData1[modifyIndex].city}}</Col>
+                        <Col span='6'>{{tableData1[modifyIndex].status==2?'是':'否'}}</Col>
+                      </Row>
+                  </Row>
+              </Col>
+              <Col span="15" style='margin-left: 37.5%'>
+                  <table cellspacing="10" cellpadding="10">
+                      <tr>
+                          <td>系统预测合计: {{tableData1[modifyIndex].sy_predict}}</td>
+                          <td>企业申报合计: {{tableData1[modifyIndex].declare}}</td>
+                          <td>人工预测合计: {{tableData1[modifyIndex].p_predict}} <!-- <br>
+                          <Checkbox label="使用客户申报数值">使用客户申报数值</Checkbox> --></td>
+                      </tr>
+                      <tr v-for='item in tableData1[modifyIndex].usernos' :data-id='item.id'>
+                          <td >{{item.user_no}}:<span class="num">{{item.sy_predict}}</span></td>
+                          <td>{{item.user_no}}:<span class="num">{{item.declare_power}}</span></td>
+                          <td>{{item.user_no}}:<input type="text" placeholder="-" class="updateNum" value='' style="text-align: center"></td>
+                      </tr>
+                  </table>
+              </Col>
+          </Row>
         </div>
      </Modal>
       <Modal
