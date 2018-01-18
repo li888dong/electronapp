@@ -358,11 +358,12 @@
                                 total += arr4[i];
                            }
                          for(let i=0;i<arr5.length-1;i++){
-                                  obj[arr5[i]] = arr4[i];
+                                  obj[arr5[i]] = (arr4[i]*100).toFixed(2);
                         }
                          obj.name='长协比例（%）';
-                         obj.total=total.toFixed(4);
+                         obj.total=(total*100).toFixed(2);
                          arr3[2] = obj;
+                         
                          // console.log(obj);
                          console.log(arr3,1);
                          this.data5=arr3;

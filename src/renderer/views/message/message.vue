@@ -200,7 +200,7 @@ export default {
         },
         getContent (index) {
             // you can write ajax request here to get message content
-            let mesContent = '';
+            let mesContent = '这里是易采智电客户管理系统';
 //            switch (this.currentMessageType + index) {
 //                case 'unread0': mesContent = '这是您点击的《欢迎登录iView-admin后台管理系统，来了解他的用途吧》的相关内容。'; break;
 //                case 'unread1': mesContent = '这是您点击的《使用iView-admin和iView-ui组件库快速搭建你的后台系统吧》的相关内容。'; break;
@@ -213,10 +213,10 @@ export default {
     },
     mounted () {
         this.currentMesList = this.unreadMesList = [
-//            {
-//                title: '欢迎登录iView-admin后台管理系统，来了解他的用途吧',
-//                time: 1507390106000
-//            },
+            {
+                title: '欢迎登录易采智电管理系统，来了解他的用途吧',
+                time: new Date()
+            },
 //            {
 //                title: '使用iView-admin和iView-ui组件库快速搭建你的后台系统吧',
 //                time: 1507390106000

@@ -206,7 +206,6 @@
 						console.log('权限', res.data.psermissions);
 						ipcRenderer.send('login-succeed');
 					} else {
-						ipcRenderer.send('login-failed');
 						this.$Message.error('请输入正确的用户名和密码');
 					}
 				}, err => {

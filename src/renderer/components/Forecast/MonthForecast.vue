@@ -1,6 +1,7 @@
 <script>
 import myFenye from "@/components/Tool/myFenye";
 import mySearch from "@/components/Tool/mySearch";
+import {add} from '../../../../static/numberadd.js'
 
 export default {
   name: "MonthForecast",
@@ -215,7 +216,8 @@ export default {
           align: "center"
         }
       ],
-      data2: []
+      data2: [],
+      m:1
     };
   },
   mounted() {
@@ -303,28 +305,32 @@ export default {
       let postArr = [];
       let _this = this;
       var data = [];
+      var newarr = [];
       var inputs = document.getElementsByClassName("updateNum");
-
       for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value) {
           console.log(inputs[i]);
           var id = inputs[i].parentNode.parentNode.getAttribute("data-id");
           console.log(id);
           id = parseInt(id);
-          var value = parseInt(inputs[i].value);
+          var value = Number(inputs[i].value);
           var arr = { id: id, p_predict: value };
           data.push(arr);
-          this.tableData1[_this.modifyIndex].usernos[i].p_predict = parseInt(
+          this.tableData1[_this.modifyIndex].usernos[i].p_predict = Number(
             inputs[i].value
           );
+          newarr.push(this.tableData1[_this.modifyIndex].usernos[i].p_predict);
         }
       }
-      console.log(this.tableData1[_this.modifyIndex]);
+      
+      this.m = add(newarr);
+      console.log(newarr);
       var usernos = this.tableData1[_this.modifyIndex].usernos;
       var total = 0;
       for (let i = 0; i < usernos.length; i++) {
-        total += usernos[i].p_predict;
+        total += (usernos[i].p_predict*this.m);
       }
+      total = total/this.m;
       console.log(total);
       this.$http
         .post(this.$api.MONTH_MODIFY, {

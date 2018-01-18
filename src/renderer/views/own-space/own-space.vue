@@ -216,10 +216,10 @@ export default {
             });
         },
         init () {
-            this.userForm.name = sessionStorage.getItem('fullname');
-            this.userForm.cellphone = sessionStorage.getItem('mobile');
-            this.initPhone = sessionStorage.getItem('mobile');
-            this.userForm.company = sessionStorage.getItem('fullname');
+            this.userForm.name = localStorage.getItem('fullname');
+            this.userForm.cellphone = localStorage.getItem('mobile');
+            this.initPhone = localStorage.getItem('mobile');
+            this.userForm.company = localStorage.getItem('fullname');
             this.userForm.department = '暂无';
         },
         cancelInputCodeBox () {

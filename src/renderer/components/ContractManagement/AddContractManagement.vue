@@ -2,6 +2,7 @@
     import inputs from '@/components/ContractManagement/inputs'
     import MyUpload from '../Tool/upLoad.vue'
     import {telphone} from '../../../../static/verification.js'
+    import {add} from '../../../../static/numberadd.js'
     export default {
         name: 'ContractManagement',
         data() {
@@ -86,7 +87,9 @@
                 hint: false,
                 bol: false,
                 isGo: true,
-                modal1:false
+                modal1:false,
+                arr:[],
+                m:1
             }
         },
         components: {
@@ -345,6 +348,20 @@
             },
             fail(){
                 this.$Message.success("添加失败");
+            },
+            newarr(){
+                for(let k in this.month){
+                    if(this.arr.indexOf(this.month[k]) == -1 && this.month[k] != ''){
+                        this.arr.push(this.month[k]);
+                    }
+                }
+                console.log(this.arr);
+            },
+            creatm(){
+                if(this.arr.length !=0){
+                    this.m = add(this.arr);
+                  console.log(this.m);
+                }
             }
         },
         watch: {
@@ -356,6 +373,10 @@
             },
             dcList:function(){
                return this.dcList
+            },
+            arr:function(){
+                this.creatm();
+                
             }
         },
         computed: {
@@ -374,11 +395,10 @@
         },
         mounted() {
             this.powerPlant();
- 
             this.$Message.config({
                 top: 200,
                 duration: 3
-            });
+            });  
         }
     }
 </script>
@@ -508,20 +528,20 @@
 							<div>总计</div>
 						</Row>
 						<Row class="monthData">
-							<Input class='input' number v-model='month.month01' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month02' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month03' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month04' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month05' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month06' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month07' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month08' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month09' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month10' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month11' placeholder='-'></Input>
-							<Input class='input' number v-model='month.month12' placeholder='-'></Input>
+							<Input class='input' number v-model='month.month01' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month02' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month03' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month04' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month05' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month06' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month07' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month08' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month09' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month10' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month11' placeholder='-' v-on:on-blur='newarr'></Input>
+							<Input class='input' number v-model='month.month12' placeholder='-' v-on:on-blur='newarr'></Input>
 							<Input class='input' number disabled
-							       :value='allMonth=month.month01+month.month02+month.month03+month.month04+month.month05+month.month06+month.month07+month.month08+month.month09+month.month10+month.month11+month.month12'
+							       :value="allMonth=(month.month01*m+month.month02*m+month.month03*m+month.month04*m+month.month05*m+month.month06*m+month.month07*m+month.month08*m+month.month09*m+month.month10*m+month.month11*m+month.month12*m)/m"
 							       placeholder='-' v-model='allMonth' v-on:on-change='isEquality'></Input>
 						</Row>
 						<i class="tiShi" v-if='allMonth != formItem.signed_num && isEquality'>十二个月购电量分配合计与签约电量不一致！</i>
