@@ -31,6 +31,11 @@
 	                .catch(err=>{
                         this.$api.errcallback(err)
 	                })
+			},
+			//跳转警告界面
+			toHint(){
+				this.$router.push('DataHInt')
+				console.log('aasdfsdfsad')
 			}
 		},
 		components:{
@@ -47,7 +52,7 @@
 
 				<Col span="4" class="data-item sjyc"><strong class="data-exception"><CountTo :startVal='0' :endVal='fiveData.abnormal' :duration='2000'></CountTo></strong><span class="data-title">数据异常</span></Col>
 
-				<Col span="4" class="data-item dlpc"><strong class="power-deviation"><CountTo :startVal='0' :endVal='fiveData.activepower' :duration='2000'></CountTo></strong> <span class="data-title">电量偏差</span></Col>
+				<Col span="4" class="data-item dlpc"><strong class="power-deviation"  @click="toHint"><CountTo :startVal='0' :endVal='fiveData.activepower' :duration='2000'></CountTo></strong> <span class="data-title">电量偏差</span></Col>
 
 				<Col span="4" class="data-item glys"><strong class="power-factor"><CountTo :startVal='0' :endVal='fiveData.powerfactor' :duration='2000'></CountTo></strong><span class="data-title">功率因数</span></Col>
 

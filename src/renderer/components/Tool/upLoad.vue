@@ -71,7 +71,7 @@
 		<slot></slot>
 	</label>
 </template>
-<style>
+<style scoped>
 	.mo-upload {
 		display: inline-block;
 		position: relative;

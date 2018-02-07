@@ -181,11 +181,24 @@
             	 	 console.log('剩余电量',res);
             	 	 if(res.data.status === '1'){
             	 	 	  var data =  res.data.data.data;
-            	 	 	  this.electricList2 = data;
-            	 	 	 // var ratice = 0;
-            	 	 	 for(let i =0;i<this.electricList2.length;i++){
-                                this.electricList2[i].ratice = ((this.electricList2[i].dump_energy/this.electricList2[i].load_power)*100).toFixed(2);
-            	 	 	 }
+							this.electricList2 = data;
+							var data =  res.data.data.data;
+							for(let i=0;i<data.length;i++){
+								data[i].dump_energy = data[i].dump_energy - 0;
+								data[i].load_power = data[i].load_power - 0;
+								data[i].has_saled = data[i].has_saled - 0;
+							}
+
+						   // var ratice = 0;
+						   for(let i =0;i<this.electricList2.length;i++){
+            	 	 	     if(isNaN(this.electricList2[i].dump_energy/this.electricList2[i])){
+									 this.electricList2[i].ratice = 0
+									 console.log(111);
+								}else{
+								   this.electricList2[i].ratice = ((this.electricList2[i].dump_energy/this.electricList2[i].load_power)*100).toFixed(2);
+								    console.log(2222);
+								} 
+						   }
                          this.electricList = this.electricList2.splice(0,4);
                          this.totalPages = res.data.data.total;
                          this.currentPage = res.data.data.current_page;
@@ -196,13 +209,62 @@
             	 	 	 this.spinShow = false;
             	 	 }
             	 },err=>{
-            	 	  this.spinShow = false;
+					   this.spinShow = false;
+					   this.electricList = [{pp_name:'暂无数据',fadian_method:'暂无数据暂',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+                       this.electricList2 =[{pp_name:'暂无数据',fadian_method:'暂无数据',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
             	 	  this.$api.errcallback(err);
             	 }).catch(err=>{
-            	 	 this.spinShow = false;
+					  this.spinShow = false;
+					  this.electricList = [{pp_name:'暂无数据',fadian_method:'暂无数据暂',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+                      this.electricList2 =[{pp_name:'暂无数据',fadian_method:'暂无数据',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
             	 	 this.$api.errcallback(err);
             	 })
-            }
+			},
+			pageChange(value){
+				 this.spinShow = true;
+            	 this.$http.post(this.$api.POWER_PLANT_ELECTRIC,{limit:this.limit,page:value}).then(res=>{
+            	 	 console.log('剩余电量 分页',res);
+            	 	 if(res.data.status === '1'){
+            	 	 	  var data =  res.data.data.data;
+							this.electricList2 = data;
+							var data =  res.data.data.data;
+							for(let i=0;i<data.length;i++){
+								data[i].dump_energy = data[i].dump_energy - 0;
+								data[i].load_power = data[i].load_power - 0;
+								data[i].has_saled = data[i].has_saled - 0;
+							}
+
+						   // var ratice = 0;
+						   for(let i =0;i<this.electricList2.length;i++){
+            	 	 	     if(isNaN(this.electricList2[i].dump_energy/this.electricList2[i])){
+									 this.electricList2[i].ratice = 0
+									 console.log(111);
+								}else{
+								   this.electricList2[i].ratice = ((this.electricList2[i].dump_energy/this.electricList2[i].load_power)*100).toFixed(2);
+								    console.log(2222);
+								} 
+						   }
+                         this.electricList = this.electricList2.splice(0,4);
+                         this.totalPages = res.data.data.total;
+                         this.currentPage = res.data.data.current_page;
+                         console.log('原',this.electricList2);
+                         console.log('分',this.electricList);
+                         this.spinShow = false;
+            	 	 }else{
+            	 	 	 this.spinShow = false;
+            	 	 }
+            	 },err=>{
+					   this.spinShow = false;
+					   this.electricList = [{pp_name:'暂无数据',fadian_method:'暂无数据暂',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+                       this.electricList2 =[{pp_name:'暂无数据',fadian_method:'暂无数据',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+            	 	  this.$api.errcallback(err);
+            	 }).catch(err=>{
+					  this.spinShow = false;
+					  this.electricList = [{pp_name:'暂无数据',fadian_method:'暂无数据暂',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+                      this.electricList2 =[{pp_name:'暂无数据',fadian_method:'暂无数据',unit_capacity:'暂无数据',load_power:'暂无数据',has_saled:'暂无数据',ratice:'0'}];
+            	 	 this.$api.errcallback(err);
+            	 })
+			}
         },
         components: {
             'trade-pie': TradePie,
@@ -237,7 +299,7 @@
 										  <ul class="jj relative">
 											  <li><span class="name">竞价</span></li>
 											  <li><span class="count">{{pieData.month.bidding}}</span></li>
-											  <li class="ml absolute rate_main2"><span class="rate">{{pieData.month.bid_ratio}}%</span></li>
+											  <li class="ml absolute rate_main2"><span class="rate">{{pieData.month.bid_ratio*100}}%</span></li>
 										  </ul>
 								  </Card>
 							  </Col>
@@ -348,7 +410,7 @@
 			<div class="page-center">
 			<!--&lt;!&ndash;分页&ndash;&gt;-->
 			<div class="fenYe">
-			<Page :total="totalPages" :current='currentPage' :page-size= 'limit' show-total show-elevator></Page> <!-- <Button type="primary">确定</Button> -->
+			<Page :total="totalPages" :current='currentPage' :page-size= 'limit' show-total show-elevator  v-on:on-change="pageChange"></Page> <!-- <Button type="primary">确定</Button> -->
 			</div>
 			</div>
 			</Row>

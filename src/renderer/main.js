@@ -30,6 +30,9 @@ import '../../static/resetIview/myIview.css'
 import '../../static/normalize.css'
 import '../../static/font/iconfont.css'
 import '../../static/dateformat'
+//引入font-awesome 字体图标
+import '../../static/font/fontawesome-all.min.css'
+
 
 Vue.use(iView);
 Vue.use(iviewArea);

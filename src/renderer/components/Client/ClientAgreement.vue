@@ -186,7 +186,7 @@
 					<li>本年度预计最大负荷：{{item.bndyjzdfh}} MWh</li>
 					<li class="change">
 						<router-link
-								:to="{path:'/add-hetong',query:{id:item.id,cus_name:item.cus_name,con_no:item.con_no,way:item.way,way_param:item.way_param,deadline:item.deadline,ly_used:item.ly_used,ly_maxload:item.ly_maxload,bndyjdl:item.bndyjdl,bndyjzdfh:item.bndyjzdfh,usernos:item.usernos,user_nums:item.user_nums}}"
+								:to="{path:'/add-hetong',query:{id:item.id,cus_name:item.cus_name,con_no:item.con_no,way:item.way,way_param:item.way_param,deadline:item.deadline,ly_used:item.ly_used,ly_maxload:item.ly_maxload,bndyjdl:item.bndyjdl,bndyjzdfh:item.bndyjzdfh,usernos:item.usernos,user_nums:item.user_nums,active:'修改',route_path:'用户合同'}}"
 								tag="span" style="cursor: pointer; ">修改
 						</router-link>
 						<span>
@@ -296,7 +296,7 @@
 	}
 
 	.hetongNav {
-		height: 50px;
+		min-height: 30px;
 		background-color: #f8f8f9;
 		padding-left: 15px;
 		position: relative;
@@ -304,12 +304,13 @@
 		font-size: 14px;
 		font-weight: 400;
 		border: 1px solid #eeeeee;
-		border-bottom: none;
+        border-bottom: none;
+        padding-right:80px;
 	}
 
 	.hetongNav li {
-		float: left;
-		line-height: 50px;
+		display: inline;
+		line-height: 30px;
 		padding-right: 30px;
 	}
 
@@ -332,12 +333,8 @@
         cursor: pointer;
     }
     .hetongNav li {
-        float: left;
-        line-height: 50px;
+        line-height: 30px;
         padding-right: 5px;
-    }
-    .hetongNav{
-        font-size: 12px;
-    }
+     }
     }
 </style>

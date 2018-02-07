@@ -45,7 +45,7 @@
                     grid: {
                         top:40,
                         left: 0,
-                        right:20,
+                        right:40,
                         bottom: '6%',
                         containLabel: true
                     },

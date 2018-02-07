@@ -12,12 +12,14 @@
         },
         data() {
             return {
+                button1: '全部客户',
                 spinShow: false,
                 reqType: '',
                 currentCity: 'all',
                 currentPage: 1,
                 totalPage: 0,
                 pageLimit: 18,
+                month:new Date().Format('yyyy-MM'),
                 cityList: {
                     zz: {
                         name: '郑州',
@@ -115,7 +117,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('client-zonglan', params);
+                                            this.gotoClientPage('client-detail', params);
                                         }
                                     }
                                 }, params.row.name)
@@ -123,123 +125,108 @@
                         }
                     },
                     {
-                        sortable: true,
-                        title: '实际用电量',
-                        key: 'actual_used'
-                    },
-                    {
-                        sortable: true,
-                        title: '申报电量',
-                        key: 'declare'
-                    },
-                    {
-                        sortable: true,
-                        title: '申报偏差',
-                        key: 'dec_dev'
-                    },
-                    {
-                        sortable: true,
-                        title: '购电量',
-                        key: 'purchase'
-                    },
-                    {
-                        sortable: true,
-                        title: '购电偏差',
-                        key: 'pur_dev'
-                    },
-                    {
-                        sortable: true,
-                        title: '预测电量',
-                        key: 'forecast'
-                    },
-                    {
-                        sortable: true,
-                        title: '预测偏差',
-                        key: 'fore_dev'
-                    },
-                    {
-                        sortable: true,
-                        title: '最低功率因数',
-                        key: 'power_factor'
-                    },
-                    {
-                        title: '总览',
-                        key: 'zonglan',
-                        width: 60,
-                        render: (h, params) => {
-                            return h('span', {
-                                attrs: {
-                                    class: 'iconfont icon-zhuzhuangtutubiao'
-                                },
-                                style: {
-                                    marginRight: '5px',
-                                    cursor: 'pointer'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.gotoClientPage('client-zonglan', params)
-                                    }
-                                }
-                            }, '')
-
-                        }
-                    },
-                    {
-                        title: '指数',
-                        width: 60,
-                        key: 'zhishu',
-                        render: (h, params) => {
-                            return h('span', {
-                                attrs: {
-                                    class: 'iconfont icon-zhishufenxiyanpan'
-                                },
-                                style: {
-                                    marginRight: '5px',
-                                    cursor: 'pointer',
-                                },
-                                on: {
-                                    click: () => {
-                                        this.gotoClientPage('client-compare', params);
-                                    }
-                                }
-                            }, '')
-
-                        }
-                    },
-                    {
-                        title: '操作',
-                        key: 'action',
-                        align: 'center',
+                        title: '监控&分析',
+                        key: 'jiankong',
                         render: (h, params) => {
                             return h('div', [
                                 h('span', {
+                                    attrs: {
+                                        class: 'fa fa-chart-pie',
+                                        title: '总览'
+                                    },
                                     style: {
                                         marginRight: '5px',
-                                        color: '#4fa8f9 ',
                                         cursor: 'pointer'
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('agreement', params)
+                                            this.gotoClientPage('client-zonglan', params)
                                         }
                                     }
-                                }, '合同'),
+                                }, ''),
                                 h('span', {
+                                    attrs: {
+                                        class: 'fas fa-chart-line',
+                                        title: '指数'
+                                    },
                                     style: {
                                         marginRight: '5px',
-                                        color: '#4fa8f9 ',
                                         cursor: 'pointer'
                                     },
                                     on: {
                                         click: () => {
-                                            this.gotoClientPage('user-manager', params)
+                                            this.gotoClientPage('client-compare', params)
                                         }
                                     }
-                                }, '用户')
+                                }, ''),
+                                h('span', {
+                                    attrs: {
+                                        class: 'fas fa-chart-bar',
+                                        title: '偏差'
+                                    },
+                                    style: {
+                                        marginRight: '5px',
+                                        cursor: 'pointer'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.gotoClientPage('client-piancha', params)
+                                        }
+                                    }
+                                }, ''),
                             ])
+
                         }
-                    }
+                    },
+                    {
+                        title: '已购电量(预测)',
+                        key: 'pur_total',
+                        render:(h,params)=>{
+                            if(params.row.pur_total&&params.row.pur_total != 0){
+                               return h('span',{},params.row.pur_total);
+                            }else{
+                               return  h('span',{},'-');
+                            }
+                        }
+                    },
+                    {
+                        title: '使用电量(电费单)',
+                        key: 'actual_used',
+                        render:(h,params)=>{
+                            if(params.row.actual_used&&params.row.actual_used != 0){
+                               return h('span',{},params.row.actual_used);
+                            }else{
+                               return  h('span',{},'-');
+                            }
+                        }
+                    },
+                    {
+                        title: '监控电量',
+                        key: 'monitor',
+                        render:(h,params)=>{
+                            if(params.row.monitor&&params.row.monitor != 0){
+                               return h('span',{},params.row.monitor);
+                            }else{
+                               return  h('span',{},'-');
+                            }
+                        }
+                    },
+                    {
+                        title: '申报电量',
+                        key: 'decl_total',
+                        render:(h,params)=>{
+                            if(params.row.decl_total&&params.row.decl_total != 0){
+                               return h('span',{},params.row.decl_total);
+                            }else{
+                               return h('span',{},'-');
+                            }
+                        }
+                    },
+                   
                 ],
+                keyword:'',
+                dimList:[],
+                companyshow:false,
             }
         },
         mounted() {
@@ -248,10 +235,42 @@
         computed: {
             searchKey() {
                 return this.$store.getters.searchKey
+            },
+            companbol:function(){
+               return this.$store.getters.companbol
             }
         },
         watch: {},
         methods: {
+            //月份选择
+            mouthSUB(){
+                let years = this.month.substr(0, 4)      
+                let mouths = this.month.substr(5, 2)
+                // console.log('月份减少', years,mouths )
+                mouths = mouths - 1
+                if(mouths <= 0 ){
+                    mouths = 12
+                    years = years - 1
+                }else {
+                    console.log('正常')
+                }
+                this.month = years + '-' + (mouths < 10 ? '0' + mouths : mouths);
+                this.clientList()
+            },
+            mouthAdd(){
+                // console.log('月份增加',this.month)
+                let years = this.month.substr(0, 4)      
+                let mouths = this.month.substr(5, 2)
+                mouths = mouths - 0 + 1
+                if(mouths >= 12 ){
+                    mouths = 1
+                    years = years - 0  + 1
+                }else {
+                    console.log('正常')
+                }
+                this.month = years + '-' + (mouths < 10 ? '0' + mouths : mouths);
+                this.clientList()
+            },
             setcusList(res) {
                 this.$store.dispatch('setcusList', res)
             },
@@ -263,7 +282,7 @@
                 });
             },
             gotoAddUser() {
-                this.$router.push({path:'/AddClient',query:{userDetail:{}}});
+                this.$router.push({path:'/AddClient',query:{userDetail:{active:'新增'}}});
             },
             changeSelect(city) {
                 this.spinShow = true;
@@ -302,21 +321,24 @@
             },
             clientList() {
                 this.spinShow = true;
-                this.reqType = 0;
-                this.currentCity ='all';
-                this.$http.post(this.$api.CLIENT_LIST, {
+                // this.currentCity ='all';
+                this.$http.post(this.$api.CLIENT_MATRIX, {
                     com_id: this.$store.getters.com_id,
-                    type: this.reqType,
                     page: this.currentPage,
+                    month:this.month,
                     limit: this.pageLimit
                 }).then(res => {
                     this.spinShow = false;
-                    console.log('客户列表默认', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].current_page;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
+                    console.log('数据矩阵默认列表', res);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         this.totalPage = data.total;
+                         this.currentPage = data.current_page;
+                         this.cusList.tableData = data.data;
+                         this.setcusList(data.data);
+                    }else{
+                        this.cusList.tableData = [];
+                    }
                 }, err => {
                     this.spinShow = false;
                     this.$api.errcallback(err);
@@ -327,22 +349,24 @@
                 })
             },
             comSearch() {
-                this.spinShow = true;
-                this.reqType = 1;
-                this.$http.post(this.$api.CLIENT_LIST, {
+                if(this.button1 === '全部客户'){
+                    this.$store.dispatch('setCompanbol',false);
+                    this.spinShow = true;
+                    this.$http.post(this.$api.CLIENT_MATRIX, {
                     com_id: this.$store.getters.com_id,
-                    type: this.reqType,
                     keyword: this.$store.getters.searchKey,
-                    page: this.currentPage,
-                    limit: this.pageLimit
+                    month:this.month,
                 }).then(res => {
                     this.spinShow = false;
                     console.log('客户列表搜索', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].current_page;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         this.totalPage = data.total;
+                         this.currentPage = data.current_page;
+                         this.cusList.tableData = data.data;
+                        this.setcusList(data.data);
+                    }
+                   
                 }, err => {
                     this.cusList.tableData = [];
                     this.spinShow = false;
@@ -352,24 +376,128 @@
                     this.spinShow = false;
                     this.$api.errcallback(err);
                 })
+                }else{
+                    this.$store.dispatch('setCompanbol',false);
+                    this.spinShow = true;
+                    this.$http.post(this.$api.CLIENT_MATRIX, {
+                        com_id: this.$store.getters.com_id,
+                        keyword: this.$store.getters.searchKey,
+                        month:this.month,
+                        uid:this.$store.getters.uid
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('客户列表搜索', res);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         this.totalPage = data.total;
+                         this.currentPage = data.current_page;
+                         this.cusList.tableData = data.data;
+                        this.setcusList(data.data);
+                    }
+                   
+                }, err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.cusList.tableData = [];
+                    this.spinShow = false;
+                    this.$api.errcallback(err);
+                })
+                }
+                
+            },
+            dimSearchs(){
+                if(this.button1 === '全部客户'){
+                      this.$store.dispatch('setCompanbol',true);
+				      this.companyshow = true;
+				    if (this.timer) {
+					     clearTimeout(this.timer);
+				    }
+				    if (this.$store.getters.searchKey.length < 1) {
+					     return
+				    }
+                     this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_MATRIX,{
+                        com_id:this.$store.getters.com_id,
+                        keyword:this.$store.getters.searchKey,
+                        month:this.month,
+                     }).then(res=>{
+                           console.log('模糊搜索',res);
+                        if(res.data.status ==='1'){
+                              this.dimList = res.data.data.data;
+                              this.companyshow = false;
+                          }
+                    },err=>{
+                        this.dimSearch = [];
+                        this.companyshow = false;
+                        this.$api.errcallback(err);
+                     }).catch(err=>{
+                        this.dimSearch = [];
+                        this.companyshow = false;
+                        this.$api.errcallback(err);
+                     }),500)
+                }else{
+                     this.$store.dispatch('setCompanbol',true);
+				      this.companyshow = true;
+				    if (this.timer) {
+					     clearTimeout(this.timer);
+				    }
+				    if (this.$store.getters.searchKey.length < 1) {
+					     return
+				    }
+                     this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_MATRIX,{
+                        com_id:this.$store.getters.com_id,
+                        keyword:this.$store.getters.searchKey,
+                        month:this.month,
+                        uid:this.$store.getters.uid
+                     }).then(res=>{
+                           console.log('模糊搜索',res);
+                        if(res.data.status ==='1'){
+                              this.dimList = res.data.data.data;
+                              this.companyshow = false;
+                          }
+                    },err=>{
+                        this.dimSearch = [];
+                        this.companyshow = false;
+                        this.$api.errcallback(err);
+                     }).catch(err=>{
+                        this.dimSearch = [];
+                        this.companyshow = false;
+                        this.$api.errcallback(err);
+                     }),500)
+
+                }
+              
+            },
+            chooseclient(item){
+                let arr =[];
+                arr.push(item);
+                this.cusList.tableData = arr;
+                this.$store.dispatch('setCompanbol',false);
+                this.currentPage = 1;
+                this.totalPage = 1;
             },
             pageChange(page) {
                 this.spinShow = true;
-                this.$http.post(this.$api.CLIENT_LIST, {
+                this.$http.post(this.$api.CLIENT_MATRIX, {
                     com_id: this.$store.getters.com_id,
-                    type: this.reqType,
-                    area: this.currentCity,
+                    month:this.month,
                     keyword: this.$store.getters.searchKey,
                     page: page,
                     limit: this.pageLimit
                 }).then(res => {
                     this.spinShow = false;
-                    console.log('客户列表分页', res);
-                    let data = res.data[0].data;
-                    this.totalPage = res.data[0].total;
-                    this.currentPage = res.data[0].current_page;
-                    this.cusList.tableData = data;
-                    this.setcusList(data);
+                    console.log('数据矩阵分页', res);
+                    if(res.data.status==='1'){
+                          let data = res.data.data;
+                          this.totalPage =data.total;
+                          this.currentPage = data.current_page;
+                          this.cusList.tableData = data.data;
+                          this.setcusList(data.data);
+                    }else{
+
+                    }
+                   
                 }, err => {
                     this.cusList.tableData = [];
                     this.spinShow = false;
@@ -381,6 +509,40 @@
                 });
                 console.log(page)
             },
+            changetype(){
+                if(this.button1 === '全部客户'){
+                    this.clientList();
+                }else{
+                     this.spinShow = true;
+                // this.currentCity ='all';
+                this.$http.post(this.$api.CLIENT_MATRIX, {
+                    com_id: this.$store.getters.com_id,
+                    page: this.currentPage,
+                    month:this.month,
+                    limit: this.pageLimit,
+                    uid:this.$store.getters.uid,
+                }).then(res => {
+                    this.spinShow = false;
+                    console.log('数据矩阵默认列表', res);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         this.totalPage = data.total;
+                         this.currentPage = data.current_page;
+                         this.cusList.tableData = data.data;
+                         this.setcusList(data.data);
+                    }else{
+                        this.cusList.tableData = [];
+                    }
+                }, err => {
+                    this.spinShow = false;
+                    this.$api.errcallback(err);
+                }).catch(err => {
+                    this.spinShow = false;
+
+                    this.$api.errcallback(err);
+                })
+                }
+            }
         },
 
     }
@@ -392,49 +554,69 @@
 				<div class="header">
 					<Row>
 						<Col span="1">
-						<h3 class="title-lv2">客户列表</h3>
-						</Col>
-						<Col span="23">
-						<div class="tab-container">
-							<!-- TODO 各地区客户个数待添加-->
-							<my-tab v-on:changeSelect="changeSelect('all')"
-							        v-bind:type="currentCity === 'all'?'disabled':'normal'">全部
-							</my-tab>
-							<template v-for="(city,key) in cityList">
-								<my-tab
-										v-on:changeSelect="changeSelect(city.name)"
-										v-bind:type="currentCity === city.name?'disabled':'normal'"
-								>{{city.name}}
-								</my-tab>
-							</template>
-						</div>
-						</Col>
+						    <h3 class="title-lv2">数据矩阵</h3>
+						</Col>                        
+						<!-- TODO 各地区客户个数待添加-->
+						<!-- <Col span="23">                        
+                            <div class="tab-container">
+                                <my-tab v-on:changeSelect="changeSelect('all')"
+                                        v-bind:type="currentCity === 'all'?'disabled':'normal'">全部
+                                </my-tab>
+                                <template v-for="(city,key) in cityList">
+                                    <my-tab
+                                            v-on:changeSelect="changeSelect(city.name)"
+                                            v-bind:type="currentCity === city.name?'disabled':'normal'"
+                                    >{{city.name}}
+                                    </my-tab>
+                                </template>
+                            </div>
+						</Col> -->
 					</Row>
 				</div>
 				<div class="table-container relative">
 					<Row className="mgt_15">
 						<Col span="24">
 						<Row>
-							<Col span="5">
-							<my-search style="text-align: left" placeholder="客户编号或客户名称"
-							           v-on:doSearch="comSearch"></my-search>
+							<Col :lg="{span:5}" :md="{span:6}" class='relative'>
+							    <my-search style="text-align: left" placeholder="客户编号或客户名称"
+                                       v-on:doSearch="comSearch" v-on:dimSearch='dimSearchs'></my-search>
+                                    <!-- <div class="searchBox flex-row" v-on:keyup.enter="doSearch">
+                                        <i class="iconfont icon-search" ></i>
+                                        <Input v-model="keyword" placeholder="客户编号或客户名称" v-on:on-keyup='dimSearch' v-on:on-keyup.enter='dimList'>  
+                                        </Input>
+                                        <Button type="primary" @click="comSearch">搜索</Button>                                        
+                                        </div> -->
+                                <div class="absolute list" v-if='companbol'>
+                                    <ul>
+                                        <li v-for='item in dimList' @click="chooseclient(item)">{{item.name}}</li>
+                                    </ul>
+                                    <Spin size="small" fix v-if="companyshow"></Spin>
+                                 </div>                                 
 							</Col>
-							<Button type="primary" @click="gotoAddUser" style="margin-left: 10px;" class='add_User'>+新增客户</Button>
-
+							<RadioGroup v-model="button1" type="button" class="mgl_15" v-on:on-change='changetype'>
+                                <Radio label="全部客户"></Radio>
+                                <Radio label="我的客户"></Radio>
+                            </RadioGroup>
 							<Button type="primary" class="refresh absolute" style="right: 0;" @click="clientList">
-
-								<i class="iconfont icon-shuaxin"></i>
+								<i class="fas fa-cogs"></i>
 							</Button>
+                            <Button type="primary" class="refresh absolute" style="right: 42px;" @click="clientList">
+								<i class="fas fa-sync"></i>
+							</Button>
+                            <div class="absolute" style="right: 84px;top: 0">
+                                <ButtonGroup>
+                                    <Button icon="ios-skipbackward" @click="mouthSUB()"></Button>
+                                    <Button>{{month}}</Button>
+                                    <Button icon="ios-skipforward" @click="mouthAdd()"></Button>
+                                </ButtonGroup>
+                            </div>
 						</Row>
 						</Col>
 					</Row>
 					<Row className="mgt_15">
-
 						<Table size="small" :columns="columns4" :data="cusList.tableData"></Table>
 						<Spin size="large" fix v-if="spinShow"></Spin>
 					</Row>
-
-
 				</div>
 			</div>
 		</Card>
@@ -472,6 +654,20 @@
 	.table-container {
 
 	}
+    .searchBox {
+    width: 340px;
+    margin-right: 0;
+    position: relative;
+}
+
+.searchBox i {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    left: 10px;
+    z-index: 11;
+}
 
 	.title-lv2 {
 		display: inline-block;
@@ -484,6 +680,51 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+    .list{
+        top:32px;
+        left:0;
+        width:285px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        min-height: 25px;
+        max-height:200px;
+        overflow: scroll;
+        z-index: 22;
+    }
+    .list li{
+        white-space: nowrap;
+        font-size: 12px;
+        padding:0 10px;
+        height:25px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    .list li:hover{
+        background-color: #E0EBF7;
+		color: #108CEE;
+    }
+    .list::-webkit-scrollbar {
+		width: 0;
+		/*滚动条宽度（右侧滚动条）*/
+		height: 7px;
+		/*滚动条高度（底部滚动条）*/
+		background-color: #eeeeee;
+		z-index: 999;
+	}
+
+	.list::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+		z-index: 999;
+	}
+
+	.list::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+		background-color: #ccc;
+		z-index: 999;
+	}
     @media (min-width: 1365px) and (max-width: 1919px) {
         .tab-container{
              margin-left:15px;
@@ -491,6 +732,9 @@
         .add_User{
              margin-left:80px !important;
              margin-top:1px;
+        }
+        .mgl_15{
+            margin-left:15px;
         }
     }
 </style>

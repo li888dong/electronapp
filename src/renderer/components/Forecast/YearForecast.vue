@@ -9,7 +9,7 @@
             return {
                 spinShow:false,
                 currentPage:1,
-	            limit:11,
+	            limit:16,
 	            totalPage:0,
                 modalShow: false,
                 selectList: [],
@@ -41,102 +41,207 @@
                     {
                         title: '企业名称',
                         width: 200,
-                        key: 'com_name',
+                        key: 'name',
                         align: 'left'
                     },
                     {
                         title: '1月',
 	                    width:80,
                         key: 'month01',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month01 && params.row.month01!= 0){
+                                return h('span',{},params.row.month01)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '2月',
 						width:80,
                         key: 'month02',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month02 && params.row.month02!= 0){
+                                return h('span',{},params.row.month02)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '3月',
 						width:80,
                         key: 'month03',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month03 && params.row.month03!= 0){
+                                return h('span',{},params.row.month03)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '4月',
 						width:80,
                         key: 'month04',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month04 && params.row.month04!= 0){
+                                return h('span',{},params.row.month04)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '5月',
 						width:80,
                         key: 'month05',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month05 && params.row.month05!= 0){
+                                return h('span',{},params.row.month05)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '6月',
 						width:80,
                         key: 'month06',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month06 && params.row.month06!= 0){
+                                return h('span',{},params.row.month06)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '7月',
 						width:80,
                         key: 'month07',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month07 && params.row.month07 != 0){
+                                return h('span',{},params.row.month07)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '8月',
 						width:80,
                         key: 'month08',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month08 && params.row.month08 != 0){
+                                return h('span',{},params.row.month08)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '9月',
 						width:80,
                         key: 'month09',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month09 && params.row.month09 != 0){
+                                return h('span',{},params.row.month09)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '10月',
 						width:80,
                         key: 'month10',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month10 && params.row.month10 != 0){
+                                return h('span',{},params.row.month10)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '11月',
 						width:80,
                         key: 'month11',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month11 && params.row.month11 != 0){
+                                return h('span',{},params.row.month11)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '12月',
 						width:80,
                         key: 'month12',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.month12 && params.row.month12 != 0){
+                                return h('span',{},params.row.month12)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '合计',
 	                    width:100,
                         key: 'total',
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.total && params.row.total != 0){
+                                return h('span',{},params.row.total)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '修改人',
 						width:100,
                         key: 'modifiedby',
-                        align: 'center'
+                        align: 'center',
+                         render:(h,params)=>{
+                            if(params.row.modifiedby){
+                                return h('span',{},params.row.modifiedby)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '确认人',
                         key: 'confirmor',
 						width:100,
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.confirmor){
+                                return h('span',{},params.row.confirmor)
+                            }else{
+                                 return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '状态',
-                        key: 'n17',
+                        key: 'status',
 						width:80,
                         aligin:'left',
                         render: (h, params) => {
@@ -189,7 +294,7 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.modifyComName = params.row.com_name;
+                                            this.modifyComName = params.row.name;
                                             this.modifyIndex = params.index;
                                             this.tableData2 = params.row.list;
                                             this.modifyModal = true;
@@ -202,12 +307,19 @@
                 ],
                 tableData1: [],
                 tableData2: [],
-                modifyModal: false
+                modifyModal: false,
+                markbol:false,
+                yearList:[]
             }
         },
         mounted() {
             this.yearData()
         },
+        computed:{
+            companbol:function(){
+               return this.$store.getters.companbol
+            }
+},
         methods: {
             pageChange(page){
                 this.currentPage = page;
@@ -215,6 +327,7 @@
                 console.log(page)
             },
             yearData() {
+                this.$store.dispatch('setCompanbol',false);
                 this.spinShow = true;
                 this.$http.post(this.$api.YEAR_FORECAST, {
                     com_id: this.$store.getters.com_id,
@@ -226,13 +339,48 @@
                 }).then(res => {
                     this.spinShow = false;
                     console.log("年度预测", res);
-                    this.tableData1 = res.data.data.data;
-	                this.totalPage = res.data.data.total;
-	                this.currentPage = res.data.data.current_page;
+                    if(res.data.status === '1'){
+                        var arr =[];
+                        var list = [];
+                        let data = res.data.data.data;
+                        for(let i =0;i< data.length;i++ ){
+                            var obj = {
+                               name:data[i].name,
+                               month01:data[i].foreinfo[0].month01,
+                               month02:data[i].foreinfo[0].month02,
+                               month03:data[i].foreinfo[0].month03,
+                               month04:data[i].foreinfo[0].month04,
+                               month05:data[i].foreinfo[0].month05,
+                               month06:data[i].foreinfo[0].month06,
+                               month07:data[i].foreinfo[0].month07,
+                               month08:data[i].foreinfo[0].month08,
+                               month09:data[i].foreinfo[0].month09,
+                               month10:data[i].foreinfo[0].month10,
+                               month11:data[i].foreinfo[0].month11,
+                               month12:data[i].foreinfo[0].month12,
+                               total:data[i].total,
+                               modifiedby:data[i].modifiedby,
+                               confirmor:data[i].confirmor,
+                               status:data[i].status,
+                               list:data[i].unlist
+
+
+                            }
+                            arr.push(obj);
+                        }
+                        this.tableData1 = arr;
+                        this.totalPage = res.data.data.total;
+	                    this.currentPage = res.data.data.current_page;
+                    }else{
+                        this.tableData1=[];
+                    } 
                 }, err => {
                     this.spinShow = false;
+                    this.tableData1=[];
                     this.$api.errcallback(err);
                 }).catch(err => {
+                    this.spinShow = false;
+                    this.tableData1=[];
                     this.$api.errcallback(err);
                 })
             },
@@ -250,6 +398,42 @@
             selectItem(items){
                 console.log(items);
                 this.selectList = items
+            },
+            yearDim(){
+               this.markbol = true;
+               this.$store.dispatch('setCompanbol',true);
+               if (this.timer) {
+					clearTimeout(this.timer);
+				}
+				if (this.$store.getters.searchKey.length < 1) {
+					return
+				}
+                this.timer = setTimeout(() => this.$http.post(this.$api.YEAR_FORECAST,{
+                    com_id: this.$store.getters.com_id,
+                    year: this.selectYear,
+                    area: this.selectArea,
+                    keyword: this.$store.getters.searchKey
+                }).then(res=>{
+                    console.log('年度预测模糊搜索',res);
+                    if(res.data.status ==='1'){
+                        this.yearList = res.data.data.data;
+                    }
+                    this.markbol = false;
+                },err=>{
+                    this.markbol=false;
+                    this.yearList =[];
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.markbol=false;
+                    this.yearList =[];
+                     this.$api.errcallback(err);
+                }), 500)
+            },
+            chooseyear(item){
+               let arr =[];
+               arr.push(item);
+               this.tableData1 = arr;
+               this.$store.dispatch('setCompanbol',false);
             },
 	        allComfirm(){
                 let postArr = [];
@@ -349,9 +533,15 @@
 						<al-selector level=1  @on-change="areaSelect"/>
 
 						</Col>
-						<Col span="5">
+						<Col span="5" class="relative">
 
-						<mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="yearData"></mySearch>
+                        <mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="yearData" v-on:dimSearch='yearDim'></mySearch>
+                        <div class="absolute yearlist" v-if='companbol'>
+                            <ul>
+                                <li v-for='item in yearList' @click='chooseyear(item)'>{{item.com_name}}</li>
+                            </ul>
+                            <Spin size="small" fix v-if="markbol"></Spin>
+                        </div>
 						</Col>
 						<Col span="4" offset="9" style="display: flex;justify-content: flex-end">
 						<Button class="fl" type="primary" @click="allComfirm">批量确认</Button>
@@ -377,7 +567,7 @@
 		<Modal
 				:title="modifyComName"
 				v-model="modifyModal"
-				width='54'
+				width='55'
 				:mask-closable="false"
 				class-name="vertical-center-modal"
 				@on-ok="modifyData">
@@ -385,7 +575,7 @@
 				<table v-if="modifyModal">
 					<thead>
 					<tr>
-						<th>{{selectYear}}年月份</th>
+						<th style="white-space: nowrap;">{{selectYear}}年/月份</th>
 						<th>01月</th>
 						<th>02月</th>
 						<th>03月</th>
@@ -401,7 +591,14 @@
 						<th>合计</th>
 					</tr>
 					</thead>
-					<tbody>
+                    <tbody v-if = 'tableData2.length == 0'>
+                        <tr>
+                            <td colspan="14">
+                                暂无数据
+                            </td>
+                        </tr>
+                    </tbody>
+					<tbody v-if = 'tableData2.length > 0'>
 					<tr v-for="item in tableData2">
 						<td>户号{{item.id}}</td>
 						<td><input placeholder='-' type="text" v-model="item.month01"></td>
@@ -513,6 +710,49 @@
 		height: 30px;
 		border: 1px solid #edb00d;
 		text-align: center;
+	}
+    .yearlist{
+        top:32px;
+        width:283px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        min-height: 25px;
+        max-height:200px;
+        overflow: scroll;
+        z-index: 22;
+    }
+    .yearlist li{
+        white-space: nowrap;
+        font-size: 12px;
+        padding:0 10px;
+        height:25px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    .yearlist li:hover{
+        background-color: #E0EBF7;
+		color: #108CEE;
+    }
+    .yearlist::-webkit-scrollbar {
+		width: 0;
+		/*滚动条宽度（右侧滚动条）*/
+		height: 7px;
+		/*滚动条高度（底部滚动条）*/
+		background-color: #eeeeee;
+		z-index: 999;
+	}
+
+	.yearlist::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+		z-index: 999;
+	}
+	.yearlist::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+		background-color: #ccc;
+		z-index: 999;
 	}
     @media (min-width: 1365px) and (max-width: 1919px) {
         .yearUpdate{

@@ -249,7 +249,7 @@
 					<div slot="extra" class="btn-group">
 						<!-- <DatePicker type="year" placeholder="请选择年份" style="width: 180px"></DatePicker> -->
 						<Button type="primary" class="refresh" @click='reqChart()'>
-							<i class="iconfont icon-shuaxin"></i>
+							<i class="fas fa-sync"></i>
 						</Button>
 					</div>
 					<Row className="char-group">
@@ -264,7 +264,7 @@
 			<Row className="mgt_15">
 				<Card>
 
-					<Table :columns="columns4" :data="tableData1" height="370"></Table>
+					<Table :columns="columns4" :data="tableData1" height="384"></Table>
 				</Card>
 			</Row>
 		</div>

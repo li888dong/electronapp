@@ -1,6 +1,6 @@
 {
   "name": "smartpower",
-  "version": "0.9.0",
+  "version": "0.8.0",
   "author": "易采智电数据管理咨询有限公司",
   "description": "易采电力数据管理系统",
   "license": "MIT",
@@ -46,7 +46,7 @@
       "icon": "build/icons/icon.icns",
       "publish": {
         "provider": "generic",
-        "url": "http://www.cx8o92.cn/download/ios",
+        "url": "http://39.106.106.150/download/ios/",
         "channel": "latest"
       }
     },
@@ -54,7 +54,7 @@
       "icon": "build/icons/logo.ico",
       "publish": {
         "provider": "generic",
-        "url": "http://www.cx8o92.cn/download/windows",
+        "url": "http://39.106.106.150/download/windows/",
         "channel": "latest"
       },
       "target": "nsis"

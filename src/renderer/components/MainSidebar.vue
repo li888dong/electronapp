@@ -38,9 +38,9 @@
                     <MenuItem name="0-1" @click.native="toggleMainSidebar('home')">
                         <div ><i class="iconfont icon-zonglan-hui"></i><span> &nbsp;概况</span></div>
                     </MenuItem>
-                    <!--<MenuItem name="0-2" @click.native="$router.push('button')">-->
-                        <!--<div><i class="iconfont icon-yanjing"></i><span> &nbsp;Button</span></div>-->
-                    <!--</MenuItem>-->
+                    <!-- <MenuItem name="0-2" @click.native="toggleMainSidebar('button')">
+                        <div><i class="iconfont icon-yanjing"></i><span> &nbsp;Button</span></div>
+                    </MenuItem> -->
                     <Submenu name="1">
                         <template slot="title">
                             <Icon type="ios-people"></Icon>

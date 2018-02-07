@@ -1,7 +1,7 @@
 <template>
     <div class="searchBox flex-row" v-on:keyup.enter="doSearch">
-        <i class="iconfont icon-search" ></i>
-        <Input v-model="value" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size">
+        <i class="fas fa-search" ></i>
+        <Input v-model="value" :placeholder="placeholder" :style="{width:swidth+'px'}" :size="size" v-on:on-keyup='dimSearch'>
             <Button slot="append" @click="doSearch">搜索</Button>
         </Input>
     </div>
@@ -20,6 +20,10 @@
             doSearch(){
                 this.$store.dispatch('setTermLinalKey',this.value);
                 this.$emit('doSearch')
+            },
+            dimSearch(){
+                this.$store.dispatch('setTermLinalKey',this.value);
+                this.$emit('dimSearch')
             }
         }
     }
@@ -37,7 +41,7 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    top: 6px;
+    top: 10px;
     left: 10px;
     z-index: 11;
 }

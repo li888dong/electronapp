@@ -61,9 +61,7 @@
 			</div>
 		</div>
 		<div class="single-page-con" :style="{left: shrink?'60px':'200px'}">
-			<div class="single-page">
 				<router-view></router-view>
-			</div>
 		</div>
 	</div>
 </template>
@@ -190,6 +188,8 @@
 		watch: {
 			'$route'(to) {
 				this.$store.commit('setCurrentPageName', to.name);
+				this.$store.dispatch('setSearchKey','');
+				this.$store.dispatch('setCompanbol',false);
 				let pathArr = util.setCurrentPath(this, to.name);
 				if (pathArr.length > 2) {
 					this.$store.commit('addOpenSubmenu', pathArr[1].name);
@@ -206,7 +206,7 @@
 		},
 		created() {
 //			设置登录后公司数据
-			this.$store.commit('setLogin', [true,localStorage.getItem('com_id'),localStorage.getItem('fullname')]);
+			this.$store.commit('setLogin', [true,localStorage.getItem('com_id'),localStorage.getItem('fullname'),localStorage.getItem('uid')]);
 			// 显示打开的页面的列表
 			this.$store.commit('setOpenedList');
 		}

@@ -133,6 +133,7 @@
 					this.$api.errcallback(err);
 				})
 			},
+
 			totalRankY() {
 				this.$http.post(this.$api.POWER_MARKET, {
 					com_id: this.$store.getters.com_id,
@@ -141,18 +142,19 @@
 					console.log('售电沙盘 总排行', res);
 					if (res.data.status === '1') {
 						this.companyList1 = res.data.data;
-						var obj = res.data.paixu[0];
-						var com_name = obj.num;
-						for (let i = 0; i < this.companyList1.length; i++) {
-							if (!com_name === this.companyList1[i].com_name) {
-								this.noList = res.data.paixu;
-								this.bol = true;
-							} else {
-								this.bol = false;
+						if (res.data.paixu.length !== 0) {
+							var obj = res.data.paixu[0];
+							var com_name = obj.num;
+							for (let i = 0; i < this.companyList1.length; i++) {
+								if (!com_name === this.companyList1[i].com_name) {
+									this.noList = res.data.paixu;
+									this.bol = true;
+								} else {
+									this.bol = false;
 
+								}
 							}
 						}
-
 					}
 				}, err => {
 					this.$api.errcallback(err);
@@ -240,7 +242,7 @@
 
 				<Row :gutter="10">
 					<Col span="12">
-					<div style="width: 1500px;height:500px" class='henan_map'>
+					<div class='henan_map'>
 
 						<henan-map></henan-map>
 					</div>
@@ -259,7 +261,6 @@
 							</li>
 						</ul>
 					</div>
-
 					</Col>
 				</Row>
 			</Card>
@@ -330,10 +331,15 @@
 		color: red;
 	}
 
+	.henan_map {
+		width: 800px;
+		height: 380px;
+	}
+
 	@media (min-width: 1365px) and (max-width: 1919px) {
 		.henan_map {
-			width: 1500px;
-			height: 500px;
+			width: 800px;
+			height: 380px;
 		}
 
 		.company-name {

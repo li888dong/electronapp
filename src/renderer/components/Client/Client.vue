@@ -31,7 +31,7 @@
     }
     .ivu-col-span-3{
         width:12.5%;
-        height:936px;
+        height:710px;
     }
 }
 </style>

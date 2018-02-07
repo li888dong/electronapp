@@ -4,24 +4,24 @@
             <div style="text-align: center;" :key="index">
                 <Dropdown transfer v-if="item.children.length !== 1" placement="right-start" :key="index" @on-click="changeMenu">
                     <Button style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
-                        <i class="iconfont" :class="item.icon" style="color: #ffffff"></i>
+                        <i :class="item.icon" style="color: #ffffff"></i>
                         <!--<Icon :size="20" :color="iconColor" :type="item.icon"></Icon>-->
                     </Button>
                     <DropdownMenu style="width: 200px;" slot="list">
                         <template v-for="(child, i) in item.children">
-                            <DropdownItem :name="child.name" :key="i"><Icon :type="child.icon"></Icon><span style="padding-left:10px;">{{ itemTitle(child) }}</span></DropdownItem>
+                            <DropdownItem :name="child.name" :key="i"><i :class="child.icon"></i><span style="padding-left:10px;">{{ itemTitle(child) }}</span></DropdownItem>
                         </template>
                     </DropdownMenu>
                 </Dropdown>
                 <Dropdown transfer v-else placement="right-start" :key="index" @on-click="changeMenu">
                     <Button @click="changeMenu(item.children[0].name)" style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
-                        <i class="iconfont" :class="item.icon" style="color: #ffffff"></i>
+                        <i  :class="item.icon" style="color: #ffffff"></i>
                         <!--<Icon :size="20" :color="iconColor" :type="item.icon"></Icon>-->
                     </Button>
                     <DropdownMenu style="width: 200px;" slot="list">
                         <DropdownItem :name="item.children[0].name" :key="'d' + index">
                             <!--<Icon :type="item.icon"></Icon>-->
-                            <i class="iconfont" :class="item.icon"></i>
+                            <i  :class="item.icon"></i>
                             <span style="padding-left:10px;">{{ itemTitle(item.children[0]) }}</span>
                         </DropdownItem>
                     </DropdownMenu>

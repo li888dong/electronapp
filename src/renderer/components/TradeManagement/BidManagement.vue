@@ -24,43 +24,7 @@
 				show: '本月竞价模拟',
 				comsupply: [],
 				powerplant: [],
-				dcMockDatas: [
-					{
-						name: '电厂1',
-						electricity: 200,
-						price: 250,
-						caozuo1: '修改',
-						caozuo2: '删除',
-					},
-					{
-						name: '电厂2',
-						electricity: 300,
-						price: 300,
-						caozuo1: '修改',
-						caozuo2: '删除',
-					},
-					{
-						name: '电厂3',
-						electricity: 400,
-						price: 200,
-						caozuo1: '修改',
-						caozuo2: '删除',
-					},
-					{
-						name: '电厂4',
-						electricity: 300,
-						price: 311,
-						caozuo1: '修改',
-						caozuo2: '删除',
-					},
-					{
-						name: '电厂5',
-						electricity: 600,
-						price: 211,
-						caozuo1: '修改',
-						caozuo2: '删除',
-					},
-				],
+				dcMockDatas: [{}],
 				gsMockDatas: [
 					{
 						name: '最高报价',
@@ -109,7 +73,7 @@
 					},
 				],
 				data1: [],
-				limit: 5,
+				limit: 9,
 				totalPage: 0,
 				currentPage: 1,
 				loading: false,
@@ -298,10 +262,15 @@
 					if (res.data.status === '1') {
 						if (res.data.data.length > 0) {
 							this.dcMockDatas = res.data.data;
+							
 							for (let i = 0; i < this.dcMockDatas.length; i++) {
 								this.dcMockDatas[i].caozuo1 = '修改';
 								this.dcMockDatas[i].caozuo2 = '删除';
+								this.dcMockDatas[i].price = Number(this.dcMockDatas[i].price);
+								this.dcMockDatas[i].electricity = Number(this.dcMockDatas[i].electricity);
 							}
+						}else{
+							this.dcMockDatas =[{}];
 						}
 
 					}
@@ -594,7 +563,7 @@
 	.relative .page-center {
 		text-align: center;
 		position: absolute;
-		bottom: 65px;
+		bottom: 0px;
 		left: 0;
 		right: 0;
 	}

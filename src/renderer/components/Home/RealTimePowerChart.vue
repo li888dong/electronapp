@@ -59,15 +59,15 @@
 					peak_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				},
 				powerdata3: {
-					xData: ["2017/10/4", "2017/10/5", "2017/10/6", "2017/10/7", "2017/10/8", "2017/10/9", "2017/10/10", "2017/10/11", "2017/10/12", "2017/10/13", "2017/10/14", "2017/10/15", "2017/10/16", "2017/10/17", "2017/10/18", "2017/10/19", "2017/10/20", "2017/10/21", "2017/10/22", "2017/10/23", "2017/10/24", "2017/10/25", "2017/10/26", "2017/10/27", "2017/10/28", "2017/10/29", "2017/10/30", "2017/10/31", "2017/11/1", "2017/11/2", "2017/11/3", "2017/11/4", "2017/11/5", "2017/11/6", "2017/11/7", "2017/11/8", "2017/11/9", "2017/11/10", "2017/11/11", "2017/11/12", "2017/11/13", "2017/11/14", "2017/11/15", "2017/11/16", "2017/11/17", "2017/11/18", "2017/11/19", "2017/11/20", "2017/11/21"],
-					declare: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					forecast: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					longpact: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					bidding: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					monitor: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					valley_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					flat_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					peak_section: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+					xData: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+					declare: [0,0,0,0,0,0,0,0,0,0,0,0],
+					forecast: [0,0,0,0,0,0,0,0,0,0,0,0],
+					longpact: [0,0,0,0,0,0,0,0,0,0,0,0],
+					bidding: [0,0,0,0,0,0,0,0,0,0,0,0],
+					monitor: [0,0,0,0,0,0,0,0,0,0,0,0],
+					valley_section: [0,0,0,0,0,0,0,0,0,0,0,0],
+					flat_section: [0,0,0,0,0,0,0,0,0,0,0,0],
+					peak_section: [0,0,0,0,0,0,0,0,0,0,0,0],
 				},
 				powerdate: [],
 			}
@@ -291,8 +291,8 @@
 						.then(res => {
 							this.powerChart.hideLoading();
 							console.log('企业实时电量负荷曲线', res);
+							if(res.data.status ==='1'){
 							let data = Object.values(res.data.data);
-
 							if (this.type === 1) {
 								this.powerdata1.xData = [];
 								this.powerdata1.yData = [];
@@ -306,6 +306,14 @@
 								this.powerdata2.valley_section = [];
 								this.powerdata2.flat_section = [];
 								this.powerdata2.peak_section = [];
+								for(let j=0;j<data.length;j++){
+									if(typeof data[j].electricity == 'object'&& typeof data[j].valley_section == 'object' && typeof data[j].flat_section == 'object' && typeof data[j].peak_section == 'object'){
+										data[j].electricity = 0;
+										data[j].valley_section=0;
+										data[j].flat_section =0;
+										data[j].peak_section =0;
+									}
+								}
 								data.map(i => {
 									this.powerdata2.xData.push(i.day);
 									this.powerdata2.electricity.push(i.electricity);
@@ -314,28 +322,30 @@
 									this.powerdata2.peak_section.push(i.peak_section);
 								})
 							} else if (this.type === 3) {
-								this.powerdata3.xData = [];
-								this.powerdata3.declare = [];
-								this.powerdata3.forecast = [];
-								this.powerdata3.longpact = [];
-								this.powerdata3.bidding = [];
-								this.powerdata3.monitor = [];
-								this.powerdata3.valley_section = [];
-								this.powerdata3.flat_section = [];
-								this.powerdata3.peak_section = [];
-								data.map(i => {
-									this.powerdata3.xData.push(i.month);
-									this.powerdata3.declare.push(i.declare);
-									this.powerdata3.forecast.push(i.forecast);
-									this.powerdata3.longpact.push(i.longpact);
-									this.powerdata3.bidding.push(i.bidding);
-									this.powerdata3.monitor.push(i.monitor);
-									this.powerdata3.valley_section.push(i.valley_section);
-									this.powerdata3.flat_section.push(i.flat_section);
-									this.powerdata3.peak_section.push(i.peak_section);
-								})
+									this.powerdata3.xData = [];
+								    this.powerdata3.declare = [];
+								    this.powerdata3.forecast = [];
+								    this.powerdata3.longpact = [];
+								    this.powerdata3.bidding = [];
+								    this.powerdata3.monitor = [];
+								    this.powerdata3.valley_section = [];
+								    this.powerdata3.flat_section = [];
+								    this.powerdata3.peak_section = [];
+								    data.map(i => {
+									   this.powerdata3.xData.push(i.month);
+									   this.powerdata3.declare.push(i.declare);
+									   this.powerdata3.forecast.push(i.forecast);
+									   this.powerdata3.longpact.push(i.longpact);
+									   this.powerdata3.bidding.push(i.bidding);
+									   this.powerdata3.monitor.push(i.monitor);
+									   this.powerdata3.valley_section.push(i.valley_section);
+									   this.powerdata3.flat_section.push(i.flat_section);
+									   this.powerdata3.peak_section.push(i.peak_section);
+								   })
+								   console.log(this.powerdata3);
+								}	
 							}
-							console.log(this.powerdata3);
+							
 							this.drawLine();
 						}, err => {
 							this.powerChart.hideLoading();

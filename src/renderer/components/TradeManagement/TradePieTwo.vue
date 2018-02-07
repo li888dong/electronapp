@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="month-all">
-            <p>月度总交易电量 <span>{{pieData.month.longpact + pieData.month.bidding}}</span>KW.时</p>
+            <p>月度总交易电量 <span>{{Number(pieData.month.longpact) + Number(pieData.month.bidding)}}</span>KW.时</p>
         </div>
     </div>
 

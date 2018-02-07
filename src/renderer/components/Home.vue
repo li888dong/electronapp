@@ -1,10 +1,11 @@
 <style>
 	.card{
-		padding-left:5px;
-		padding-right:5px;
+		padding-right:10px;
 	}
 	.single-page .main-container{
-       width:100%;
+	   width:100%;
+	   margin-left:5px;
+	   margin-right:5px;
 	}
 </style>
 <template>
@@ -28,7 +29,7 @@
 				</Col>
 			</Col>
 
-			<Col span="7" class="card">
+			<Col span="7">
 				<!--计划进度提醒-->
 				<process-plan></process-plan>
 			</Col>
@@ -41,13 +42,13 @@
 			<power-timeframe belong="com" :baseWidth='Width'></power-timeframe>
 			</Col>
 			<!--交易分步-->
-			<Col span="7" class="card mgt_15">
+			<Col span="7" class="mgt_15">
 			<trade-pi></trade-pi>
 			</Col>
 		</Row>
 		<!--实时电量负荷-->
 		<!-- <Row className="mgt_15"> -->
-			<Col style="width: 100%" class="card mgt_15">
+			<Col style="width: 100%" class="mgt_15">
 			<real-time-power-chart belong="com"></real-time-power-chart>
 			</Col>
 		<!-- </Row> -->

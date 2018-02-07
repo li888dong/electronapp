@@ -8,7 +8,7 @@
             return {
                 spinShow: false,
                 currentPage: 1,
-                limit: 14,
+                limit: 16,
                 totalPage: 0,
                 detailModal: false,
                 delModal: false,
@@ -34,36 +34,78 @@
                         title: '上月申报电量(万KW-h)',
                         key: 'sysb',
                         width: 180,
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.sysb && params.row.sysb != 0){
+                                return h('span',{},params.row.sysb)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '上月用电量(万KW-h)',
                         key: 'syydl',
                         width: 150,
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.syydl && params.row.syydl != 0){
+                                return h('span',{},params.row.syydl)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '预测电量(万kW-h)',
                         key: 'ycdl',
                         width: 150,
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.ycdl && params.row.ycdl != 0){
+                                return h('span',{},params.row.ycdl)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '申报电量(万kW-h)',
                         key: 'sbdl',
                         width: 150,
-                        align: 'center'
+                        align: 'center',
+                        render:(h,params)=>{
+                            if(params.row.sbdl && params.row.sbdl != 0){
+                                return h('span',{},params.row.sbdl)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '购电量(万kW-h)',
                         key: 'gdl',
                         align: 'center',
-                        width: 150
+                        width: 150,
+                        render:(h,params)=>{
+                            if(params.row.gdl && params.row.gdl != 0){
+                                return h('span',{},params.row.gdl)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     }, {
                         title: '申报时间',
                         key: 'created_at',
                         align: 'center',
-                        width: 170
+                        width: 170,
+                        render:(h,params)=>{
+                            if(params.row.created_at){
+                                return h('span',{},params.row.created_at)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '申报状态',
@@ -72,17 +114,16 @@
                         width: 100,
                         render: (h, params) => {
                             let text = '未申报';
-                            if (params.row.dstatus === 0) {
+                            if (params.row.dstatus === '0') {
                                 text = '未申报'
-                            } else if (params.row.dstatus === 1) {
+                            } else if (params.row.dstatus === '1') {
                                 text = '已申报'
                             }
                             return h('div', [
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
-                                        color: '#36c ',
-                                        cursor: 'pointer'
+                                        cursor: 'default'
                                     },
                                     on: {
                                         click: () => {
@@ -108,8 +149,7 @@
                                 h('span', {
                                     style: {
                                         marginRight: '5px',
-                                        color: '#36c ',
-                                        cursor: 'pointer'
+                                        cursor: 'default'
                                     },
                                     on: {
                                         click: () => {
@@ -118,12 +158,6 @@
                                 }, text)
                             ])
                         }
-                    },
-                    {
-                        title: '确认人',
-                        key: 'confirmor',
-                        align: 'center',
-                        width: 100
                     },
                     {
                         title: '操作',
@@ -167,32 +201,72 @@
                     {
                         title: '申报时间',
                         width: 160,
-                        key: 'updated_at'
+                        key: 'updated_at',
+                        render:(h,params)=>{
+                            if(params.row.updated_at){
+                                return h('span',{},params.row.updated_at)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '申报人',
-                        key: 'confirmor'
+                        key: 'confirmor',
+                        render:(h,params)=>{
+                            if(params.row.confirmor){
+                                return h('span',{},params.row.confirmor)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '申报电量合计',
                         width: 110,
-                        key: 'sbdl'
+                        key: 'sbdl',
+                        render:(h,params)=>{
+                            if(params.row.sbdl && params.row.sbdl !=0){
+                                return h('span',{},params.row.sbdl)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '详情',
                         width: 160,
-                        key: 'sbdlinfo'
+                        key: 'sbdlinfo',
+                        render:(h,params)=>{
+                            if(params.row.sbdlinfo){
+                                return h('span',{},params.row.sbdlinfo)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     },
                     {
                         title: '备注',
-                        key: 'remarks'
+                        key: 'remarks',
+                        render:(h,params)=>{
+                            if(params.row.remarks){
+                                return h('span',{},params.row.remarks)
+                            }else{
+                                return h('span',{},'-')
+                            }
+                        }
                     }
                 ],
                 tableData1: [],
                 tableData2: [],
-                loading: false
-
-
+                loading: false,
+                declareList:[],
+                markbol:false
+            }
+        },
+        computed:{
+            companbol:function(){
+               return this.$store.getters.companbol
             }
         },
         methods: {
@@ -208,7 +282,6 @@
 
                         for(let i of data){
                             i.sbdlinfo = JSON.stringify(i.sbdlinfo).replace(/[\{\}]/g,'').replace(/user_no/g, " 户号：").replace(/elec/g, " - ").replace(/"|\[|\]|\,/g, '').replace(/:/g, '')
-                            console.log(i.sbdlinfo,2222222222222222)
                         }
                         console.log(data,2222222222222222)
                         this.tableData2 = data
@@ -281,6 +354,22 @@
                                     id: data[i].declarepower.id
                                 }
                                 arr.push(obj);
+                            }else{
+                                obj = {
+                                    cus_id: data[i].id,
+                                    name: data[i].name,
+                                    sysb: data[i].sysb,
+                                    ycdl: data[i].ycdl,
+                                    syydl: data[i].syydl,
+                                    gdl: data[i].gdl,
+                                    created_at: data[i].declarepower.created_at,
+                                    sbdl: data[i].declarepower.sbdl,
+                                    dstatus: data[i].declarepower.dstatus,
+                                    status: data[i].declarepower.status,
+                                    confirmor: data[i].declarepower.confirmor,
+                                    id: data[i].declarepower.id
+                                }
+                                arr.push(obj);
                             }
 
                         }
@@ -311,6 +400,67 @@
             pageChange(page) {
                 this.currentPage = page;
                 this.userShenBao();
+            },
+            userDim(){
+                this.markbol = true;
+                this.$store.dispatch('setCompanbol',true);
+				if (this.timer) {
+					clearTimeout(this.timer);
+				}
+				if (this.$store.getters.searchKey.length < 1) {
+					return
+				}
+                this.timer = setTimeout(() => this.$http.post(this.$api.USER_DECLARE,{
+                    com_id: this.$store.getters.com_id,
+                    time: this.selectMonth,
+                    area: this.selectArea,
+                    keyword: this.$store.getters.searchKey
+                }).then(res=>{
+                      console.log("用户模糊搜索",res);
+                      if (res.data.status === '1') {
+                        var data = res.data.data.data;
+                        var obj = {};
+                        var arr = [];
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].declarepower instanceof Object) {
+                                obj = {
+                                    cus_id: data[i].id,
+                                    name: data[i].name,
+                                    sysb: data[i].sysb,
+                                    ycdl: data[i].ycdl,
+                                    syydl: data[i].syydl,
+                                    gdl: data[i].gdl,
+                                    created_at: data[i].declarepower.created_at,
+                                    sbdl: data[i].declarepower.sbdl,
+                                    dstatus: data[i].declarepower.dstatus,
+                                    status: data[i].declarepower.status,
+                                    confirmor: data[i].declarepower.confirmor,
+                                    id: data[i].declarepower.id
+                                }
+                                arr.push(obj);
+                            }
+
+                        }
+                        this.declareList = arr;
+                    }
+                    this.markbol = false;
+                },err=>{
+                    this.markbol = false;
+                    this.declareList=[];
+                    this.$api.errcallback(err);
+                }).catch(err=>{
+                    this.markbol = false;
+                    this.declareList =[];
+                    this.$api.errcallback(err);
+                }), 1000)
+            },
+            chooseuser(item){
+                let arr =[];
+                arr.push(item);
+                this.tableData1 = arr;
+                this.$store.dispatch('setCompanbol',false);
+                this.currentPage = 1;
+                this.totalPage = 1;
             }
         },
         mounted() {
@@ -336,9 +486,15 @@
 						<Col span="4">
 						<al-selector level=1   @on-change="areaSelect"/>
 						</Col>
-						<Col span="6">
+						<Col span="6" class="relative">
 
-						<mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="userShenBao"></mySearch>
+                        <mySearch placeholder="请输入公司名称或关键字" swidth="340" v-on:doSearch="userShenBao" v-on:dimSearch='userDim'></mySearch>
+                        <div class="absolute userlist" v-if='companbol'>
+                            <ul>
+                                <li v-for='item in declareList' @click='chooseuser(item)'>{{item.name}}</li>
+                            </ul>
+                            <Spin size="small" fix v-if="markbol"></Spin>
+                        </div>
 						</Col>
 
 					</Row>
@@ -371,6 +527,7 @@
 		<Modal
 				v-model="delModal"
 				title="删除提醒"
+                class-name="vertical-center-modal"
 				@on-ok="deleteShenbao">
 			<p>确认删除该条记录？</p>
 		</Modal>
@@ -390,4 +547,49 @@
     .layout-content-main table{
         width: 100%;
     }
+    .userlist{
+        top:32px;
+        left:5px;
+        width:282px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        min-height: 25px;
+        max-height:200px;
+        overflow: scroll;
+        z-index: 22;
+    }
+    .userlist li{
+        white-space: nowrap;
+        font-size: 12px;
+        padding:0 10px;
+        height:25px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    .userlist li:hover{
+        background-color: #E0EBF7;
+		color: #108CEE;
+    }
+    .userlist::-webkit-scrollbar {
+		width: 0;
+		/*滚动条宽度（右侧滚动条）*/
+		height: 7px;
+		/*滚动条高度（底部滚动条）*/
+		background-color: #eeeeee;
+		z-index: 999;
+	}
+
+	.userlist::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+		z-index: 999;
+	}
+
+	.userlist::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+		background-color: #ccc;
+		z-index: 999;
+	}
 </style>

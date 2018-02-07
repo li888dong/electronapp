@@ -178,7 +178,7 @@
 			},
 //        注册新用户时的跳转页
 			addUser() {
-				shell.openExternal('http://web.cx8o92.cn/#/login');
+				shell.openExternal('http://web.ecaidata.com');
 			},
 			//            用以关闭应用
 			closeApp() {
@@ -197,6 +197,7 @@
 							localStorage.setItem('password', this.form.password);
 						}
 						localStorage.setItem('com_id', res.data.com_id);
+						localStorage.setItem('uid', res.data.userinfo.id);
 						localStorage.setItem('fullname', res.data.userinfo.fullname);
 						localStorage.setItem('setAuthorityList', res.data.psermissions);
 						localStorage.setItem('auto', this.auto);

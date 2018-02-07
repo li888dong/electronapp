@@ -57,6 +57,7 @@ export const otherRouter = {
     redirect: '/home',
     component: Main,
     children: [
+		{ path: 'home', title: {i18n: 'home'}, name: 'home_index', component: resolve => { require(['@/components/Home.vue'], resolve); } },
         { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: resolve => { require(['@/views/own-space/own-space.vue'], resolve); } },
         { path: 'order/:order_id', title: '订单详情', name: 'order-info', component: resolve => { require(['@/views/advanced-router/component/order-info.vue'], resolve); } }, // 用于展示动态路由
         { path: 'shopping', title: '购物详情', name: 'shopping', component: resolve => { require(['@/views/advanced-router/component/shopping-info.vue'], resolve); } }, // 用于展示带参路由
@@ -241,7 +242,19 @@ export const otherRouter = {
 			path: '/weather',
 			name: 'weather',
 			component: require('@/components/Weather').default
-		},
+        },
+        {
+            path:'/add-usernos',
+            name:'Addusernos',
+            title:'添加户号',
+            component:require('@/components/Client/AddClientnos').default
+        },
+        {
+            path:'/DataHInt',
+            name:'DataHInt',
+            title:'预测告警',
+            component:require('@/components/DataHInt/DataHInt').default
+        }
     ]
 };
 
@@ -249,7 +262,7 @@ export const otherRouter = {
 export const appRouter = [
     {
         path: '/home',
-        icon: 'icon-zonglan-hui',
+        icon: 'fas fa-th-large',
         name: 'home',
         title: '概况',
         component: Main,
@@ -279,16 +292,32 @@ export const appRouter = [
     //     ]
     // },
     {
+        path: '/client_centers',
+        icon: 'fas fa-users',
+        title: '客户列表',
+        name: 'client_centers',
+		access:1,
+        component: Main,
+        children: [
+            {
+                path: 'client_lists',
+                title: '客户列表',
+                name: 'client_lists',
+                component: resolve => { require(['@/components/ClientList/ClientLists.vue'], resolve); }
+            },
+        ]
+    },
+    {
         path: '/client_center',
-        icon: 'icon-numberlist',
-        title: '客户中心',
+        icon: 'fas fa-server',
+        title: '数据矩阵',
         name: 'client_center',
 		access:1,
         component: Main,
         children: [
             {
                 path: 'client_list',
-                title: '客户列表',
+                title: '数据矩阵',
                 name: 'client_list',
                 component: resolve => { require(['@/components/Client/ClientList.vue'], resolve); }
             },
@@ -296,7 +325,7 @@ export const appRouter = [
     },
     {
         path: '/forecast',
-        icon: 'icon-fenxi',
+        icon: 'fa fa-podcast',
         title: '预测分析',
         name: 'forecast',
         component: Main,
@@ -304,21 +333,21 @@ export const appRouter = [
             {
                 path: 'annual',
                 title: '用户申报',
-				icon:'icon-fenxi',
+				icon:'fa fa-random',
                 name: 'forecast_annual',
                 component: resolve => { require(['@/components/Forecast/UserForecast.vue'], resolve); }
             },
             {
                 path: 'month',
                 title: '月度预测',
-				icon:'icon-xieyi',
+				icon:'fas fa-calendar-alt',
                 name: 'forecast_month',
                 component: resolve => { require(['@/components/Forecast/MonthForecast.vue'], resolve); }
             },
             {
                 path: 'year',
                 title: '年度预测',
-				icon:'icon-xieyi',
+				icon:'fas fa-calendar',
                 name: 'forecast_year',
                 component: resolve => { require(['@/components/Forecast/YearForecast.vue'], resolve); }
             }
@@ -326,7 +355,7 @@ export const appRouter = [
     },
     {
         path: '/trade',
-        icon: 'icon-jiaoyiguanli',
+        icon: 'fas fa-balance-scale',
         title: '交易管理',
         name: 'trade',
         component: Main,
@@ -334,14 +363,14 @@ export const appRouter = [
             {
                 path: '/trade_situation',
                 title: '交易概况',
-				icon: 'icon-jiaoyiguanli',
+				icon: 'fas fa-chart-bar',
                 name: 'situation',
                 component: resolve => { require(['@/components/TradeManagement/TradeSituation.vue'], resolve); }
             },
 			{
 				path: '/biding_management',
 				title: '竞价管理',
-				icon:'icon-zhuzhuangtutubiao',
+				icon:'fa fa-gavel',
 				name: 'biding',
 				component: resolve => { require(['@/components/TradeManagement/BidManagement.vue'], resolve); }
 			}
@@ -349,7 +378,7 @@ export const appRouter = [
             {
                 path: '/changxie_management',
                 title: '长协管理',
-				icon:'icon-xieyi',
+				icon:'fas fa-clipboard',
                 name: 'changxie',
                 component: resolve => { require(['@/components/TradeManagement/ChangxieManagement.vue'], resolve); }
             }
@@ -357,32 +386,32 @@ export const appRouter = [
     },
 	{
 		path: '/equipment',
-		icon: 'icon-shebei1',
+		icon: 'fa fa-magnet',
 		title: '设备管理',
 		name: 'equipment',
 		component: Main,
 		children: [
-			{ path: 'equ_situation', title: '设备概况',icon:'icon-shebei', name: 'equ_situation', component: resolve => { require(['@/components/Equipment/Equipment.vue'], resolve); } },
-			{ path: 'equ_info', title: '资产信息',icon:'icon-lifangti', name: 'equ_info', component: resolve => { require(['@/components/Equipment/AssetInfo.vue'], resolve); } },
-			{ path: 'equ_log', title: '统计日志',icon:'icon-lifangti', name: 'equ_log', component: resolve => { require(['@/components/Equipment/EquipmentStatus.vue'], resolve); } },
+			{ path: 'equ_situation', title: '设备概况',icon:'fas fa-wrench', name: 'equ_situation', component: resolve => { require(['@/components/Equipment/Equipment.vue'], resolve); } },
+			{ path: 'equ_info', title: '资产信息',icon:'fas fa-suitcase', name: 'equ_info', component: resolve => { require(['@/components/Equipment/AssetInfo.vue'], resolve); } },
+			{ path: 'equ_log', title: '统计日志',icon:'fas fa-print', name: 'equ_log', component: resolve => { require(['@/components/Equipment/EquipmentStatus.vue'], resolve); } },
 		]
 	},
     {
 		path: '/contract',
-		icon: 'icon-wenjianjia',
+		icon: 'fas fa-copy',
 		title: '合同管理',
 		name: 'contract',
 		component: Main,
 		children: [
             { path: '/contract_changxie', 
               title: '长协合同',
-              icon:'icon-jishiben01', 
+              icon:'fa fa-file', 
               name: 'contract_changxie', 
               component: resolve => { require(['@/components/ContractManagement/ChangxieContract.vue'], resolve); } 
             },
             { path: '/contract_shoudian', 
               title: '售电合同',
-              icon:'icon-jishiben01', 
+              icon:'fa fa-bolt', 
               name: 'contract_shoudian', 
               component: resolve => { require(['@/components/ContractManagement/saleContract.vue'], resolve); } 
             },
@@ -390,7 +419,7 @@ export const appRouter = [
     },
     {
         path:'/compare',
-        icon:'icon-zhuzhuangtutubiao',
+        icon:'fas fa-wifi',
         title:'行业指数',
         name:'index-compare',
         component: Main,
@@ -400,7 +429,7 @@ export const appRouter = [
     },
     {
         path:'/sand',
-        icon:'icon-qizi',
+        icon:'fa fa-flag',
         title:'售电沙盘',
         name:'sand-table',
         component: Main,

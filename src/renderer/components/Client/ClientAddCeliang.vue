@@ -187,7 +187,7 @@
                         console.log("添加终端", res);
                         if (res.data.status==='1') {
                             if (goDetil) {
-                                this.$router.push('client-detail')
+                                this.$router.push({path:'client-detail',query:{target:'terminal'}});
                             } else {
                                 this.success();
                                 for (let k in this.terminalList) {

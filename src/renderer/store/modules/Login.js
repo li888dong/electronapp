@@ -1,7 +1,8 @@
 const state = {
     login:false,
     com_id:'',
-    fullname:''
+    fullname:'',
+    uid:'',
 }
 
 const mutations = {
@@ -10,6 +11,7 @@ const mutations = {
         state.login = res[0];
         state.com_id=res[1];
         state.fullname=res[2]||'未设置';
+        state.uid = res[3]; 
     }
 }
 
@@ -36,6 +38,9 @@ export default {
         },
         fullname:state=>{
             return state.fullname
+        },
+        uid:state=>{
+            return state.uid
         }
     }
 }

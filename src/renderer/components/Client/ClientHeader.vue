@@ -19,19 +19,19 @@
 <template>
 	<div class="client-box">
 		<div class="client-header">
-			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
+			<i class="fas fa-angle-left back" @click="$router.go(-1)" style="font-size:25px"></i>
 			<h1>{{cus_name}}</h1>
 			<div class="span-group">
 			<span :class="{selected:$route.name==='client-zonglan'}" @click="changePage('client-zonglan')"><i
-					class="iconfont icon-zonglan-hui"></i> 总览</span>
+					class="fa fa-chart-pie"></i> 总览</span>
 				<span :class="{selected:$route.name==='client-detail'}" @click="changePage('client-detail')"><i
-						class="iconfont icon-chakan"></i> 详情</span>
+						class="fas fa-list"></i> 详情</span>
 				<span :class="{selected:$route.name==='client-piancha'}" @click="changePage('client-piancha')"><i
-						class="iconfont icon-zhuzhuangtutubiao"></i> 偏差</span>
+						class="fas fa-chart-bar"></i> 偏差</span>
 				<span :class="{selected:$route.name==='client-compare'}" @click="changePage('client-compare')"><i
-						class="iconfont icon-zhibiaoyuce"></i> 指数</span>
+						class="fas fa-chart-line"></i> 指数</span>
 				<span :class="{selected:$route.name==='database'}" @click="changePage('database')"><i
-						class="iconfont icon-shujuku1"></i> 历史电量</span>
+						class="fas fa-chart-area"></i> 历史电量</span>
 			</div>
 		</div>
 	</div>
@@ -44,7 +44,6 @@
 		z-index: 1000;
 		top: 105px;
 		margin-left: 10px;
-
 	}
 
 	.client-header {
@@ -56,7 +55,7 @@
 
 	.client-header .back {
 		position: absolute;
-		top: 18px;
+		top: 16px;
 		left: 15px;
 		z-index: 9;
 		cursor: pointer;
@@ -98,6 +97,11 @@
 		color: #4fa8f9;
 	}
 	.client-box {
-		background-color: #f0f0f0;
+		background-color: #fff;
+	}
+	@media (min-width: 1365px) and (max-width: 1919px) {
+		.client-box{
+			margin-left: 15px;
+		}
 	}
 </style>

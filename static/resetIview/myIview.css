@@ -90,7 +90,7 @@
       cursor:default;
  }
 .single-page{
-	margin: 10px 0!important;
+	margin: 10px 5px!important;
 }
 /* 售电合同页面表格重置 */
 .htData .ivu-table th,
@@ -146,4 +146,41 @@
 }
 .ht-list .ivu-table:after{
 	 width:0;
+}
+.ivu-form-item-error-tip{
+	display: none;
+}
+/* 添加表单margin-bottom值重置 */
+.myForm .ivu-form-item,
+.form-container .ivu-form-item,
+.form_container .ivu-form-item{
+	margin-bottom:13px;
+}
+/* 客户详情面板高度 */
+.ivu-tabs .ivu-tabs-tabpane{
+	height: 570px;
+}
+/* 搜索组件的top值1取消 */
+.ivu-row .ivu-input-group{
+	top: 0;
+}
+.mgl_0 .ivu-form-item-content{
+	margin-left:0 !important;
+}
+
+/* 警告页面表格颜色修改 */
+.ivu-table .dataHint-table-info-row td{
+    color: #9ea7b4;
+}
+.ivu-table .dataHint-table-error-row td{
+    color: #464c5b;
+}
+
+/* 月度预测表格嵌套 */
+.ivu-table .ivu-table-expanded-cell {
+	padding: 0;
+	background-color: #fff;
+}
+.myModal .ivu-modal-body{
+	height: 500px;
 }

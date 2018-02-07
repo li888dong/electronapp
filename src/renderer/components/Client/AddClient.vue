@@ -1,6 +1,6 @@
 <script>
 	import bank from '../../../../static/bank.json'
-	import {telphone, codeLength, officeReg} from '../../../../static/verification.js'
+	import {telphone, codeLength, officeReg,email} from '../../../../static/verification.js'
 
 	export default {
 		name: 'AddClient',
@@ -11,133 +11,88 @@
 					id:undefined,
 					name: '',
 					sn: '',
-					sn_sp: '',
-					tyshxydm: '',
+					uid: '',
+					tyshxydm:'',
 					legal_person: '',
-					organization: '',
-					bank: '',
-					bank_card: '',
+					is_admittance: '',
+					idcard:'',
+					major_product:'',
+					status:'',
+					reg_assets:'',
+					qualification:'',
+					reg_time:'',
+					username:'',
+					password:'',
+					fullname:'',
 					category: '',
-					grade: '',
-					contact: '',
-					res_s: [],
+					duty_id: '',
 					address: '',
 					zipcode: '',
-					telphone: '',
+					mobile: '',
 					email: '',
-					officephone1: '',
-					officephone2: '',
-					fax1: '',
-					fax2: '',
-					date: '',
-					time: '',
-					slider: [20, 50],
-					textarea: '',
+					phone: '',
+					fax: '',	
+					c_address:'',
+					put_date:'',
 
 				},
-				bankList: [
-					{
-						value: '中国人民银行',
-						label: '中国人民银行'
-					},
-					{
-						value: '中国建设银行',
-						label: '中国建设银行'
-					},
-					{
-						value: '中国光大银行',
-						label: '中国光大银行'
-					},
-					{
-						value: '中国招商银行',
-						label: '中国招商银行'
-					},
-					{
-						value: '中国浦发银行',
-						label: '中国浦发银行'
-					},
-					{
-						value: '中国工商银行',
-						label: '中国工商银行'
-					}
-				],
-				faxNum: false,
-				phoneNum: false,
-				msgHint: '',
+				arr:[],
+				res_s: [],
+				res_ss:[],
 				categoryList1: [],
 				categoryList2: [],
 				categoryList3: [],
-				model11: '',
-				model22: '',
 				category1: '',
 				category2: '',
 				category3: '',
 				hint: false,
 				emptyRule: {required: true, message: '内容不能为空', trigger: 'blur'},
+				changeRule:{required: true, message: '内容不能为空', trigger: 'change'},
+				changeRule2:{required: true,type:'number', message: '内容不能为空', trigger: 'change'},
 				msg: '',
-				modal1: false
+				modal1: false,
+				categoryindex:1,
+				list1:[],
+				list2:[],
+				list3:[]
 			}
 		},
 		methods: {
-			addClient(goht) {
+			addClient() {
 				//手机号正则表达式
 				var tel_reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
 				//邮箱的正则表达式
 				var email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
 				//固定电话的正则验证
 				var officephone_reg = /^[0-9]{3,4}\-[0-9]{3,8}$/;
-				if (!this.isEmpty(this.formItem) && this.category1 && tel_reg.test(this.formItem.telphone) && email_reg.test(this.formItem.email) && officephone_reg.test(this.formItem.officephone1 + "-" + this.formItem.officephone2) && officephone_reg.test(this.formItem.fax1 + "-" + this.formItem.fax2)) {
-					if (this.category1) {
+				console.log(this.formItem);
+				console.log(this.category1);
+				if (this.formItem.name &&this.formItem.sn) {
+					if (this.categoryindex ===1) {
 						this.formItem.category = this.category1
-					} else if (this.category1 && this.category2) {
-						this.formItem.category = this.category1 + "," + this.category2
-					} else if (this.category1 && this.category2 && this.category3) {
-						this.formItem.category = this.category1 + "," + this.category2 + "," + this.category3;
+					} else if (this.categoryindex === 2) {
+						this.formItem.category = this.category2
+					} else if (this.categoryindex === 3) {
+						this.formItem.category = this.category3;
 					}
-					this.$http.post(this.$api.CLIENT_ADD, {
-						id:this.formItem.id,
-						com_id: this.$store.getters.com_id,
-						name: this.formItem.name,
-						sn: this.formItem.sn,
-						tyshxydm: this.formItem.tyshxydm,
-						legal_person: this.formItem.legal_person,
-						organization: this.formItem.organization,
-						bank: this.formItem.bank,
-						bank_card: this.formItem.bank_card,
-						category: this.formItem.category,
-						grade: this.formItem.grade,
-						contact: this.formItem.contact,
-						province: this.formItem.res_s[0].name,
-						city: this.formItem.res_s[1].name,
-						county: this.formItem.res_s[2].name,
-						address: this.formItem.address,
-						zipcode: this.formItem.zipcode,
-						telphone: this.formItem.telphone,
-						email: this.formItem.email,
-						officephone: this.formItem.officephone1 + '-' + this.formItem.officephone2,
-						fax: this.formItem.fax1 + '-' + this.formItem.fax2,
-					}).then(res => {
+					this.formItem['com_id'] = this.$store.getters.com_id;
+					this.formItem['province'] = this.res_s[0],
+					this.formItem['city'] = this.res_s[1],
+					this.formItem['county'] = this.res_s[2],
+					this.formItem['c_province'] = this.res_ss[0],
+					this.formItem['c_city'] = this.res_ss[1],
+					this.formItem['c_county'] = this.res_ss[2],
+					this.$http.post(this.$api.CLIENT_ADD,this.formItem).then(res => {
 						console.log(res);
 						if (res.data.status === '1') {
-							if (goht) {
-								this.$store.dispatch('setCusId', res.data.id);
-								this.$store.dispatch('setCusName', this.formItem.name);
-								this.$router.push({
-									path: 'add-hetong',
-									query: {cus_name: this.formItem.name, cus_id: res.data.id}
-								});
-							} else {
+							    this.$router.push({name:'client_lists'})
 								for (let k in this.formItem) {
 									this.formItem[k] = "";
 								}
 								this.category1 = '';
 								this.category2 = '';
 								this.category3 = '';
-								this.$router.push({name:'client_list'});
-							}
-						} else {
-							this.modal1 = true;
-							this.msg = res.data.msg;
+								
 						}
 
 					}, err => {
@@ -151,19 +106,23 @@
 
 			},
 			changeCategory1(value) {
+				this.categoryindex = 1;
 				let grade = 1;
 				this.categoryList2 = [];
 				this.categoryList3 = [];
-				this.changeCategory(value, grade)
+				this.changeCategory(value, grade);
+				console.log(value,grade);
 			},
 			changeCategory2(value) {
+				this.categoryindex = 2;
 				let grade = 2;
 				this.categoryList3 = [];
-				this.changeCategory(value, grade)
+				this.changeCategory(value, grade);
+				console.log(value,grade);
 			},
 			changeCategory3(value) {
-				let grade = 3;
-				this.changeCategory(value, grade)
+				this.categoryindex = 3;
+				console.log(value);
 			},
 			changeCategory(value, grade) {
 				console.log(value, grade)
@@ -181,6 +140,25 @@
 									value: i.id
 								})
 							})
+						if(this.$route.query.userDetail.active == '修改'){
+							this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.$route.query.userDetail.id}).then(res=>{
+									if(res.data.status ==='1'){
+										let data = res.data.data;
+										this.formItem.category = data.category;
+										console.log(this.formItem.category);
+										var name = this.formItem.category.split(',')[1];
+										for(let i=0;i< this.categoryList2.length;i++){
+											if(name == this.categoryList2[i].label ){
+                                                this.category2 = this.categoryList2[i].value;
+											}
+										}
+									}
+								},err=>{
+									this.$api.errcallback(err);
+								}).catch(err=>{
+									this.$api.errcallback(err);
+								})
+						}
 						} else if (grade === 2) {
 							this.categoryList3 = [];
 							data.map(i => {
@@ -189,7 +167,26 @@
 									value: i.id
 								})
 							})
+								if(this.$route.query.userDetail.active == '修改'){
+							this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.$route.query.userDetail.id}).then(res=>{
+									if(res.data.status ==='1'){
+										let data = res.data.data;
+										this.formItem.category = data.category;
+										console.log(this.formItem.category);
+										var name = this.formItem.category.split(',')[2];
+										for(let i=0;i< this.categoryList3.length;i++){
+											if(name == this.categoryList3[i].label ){
+                                                this.category3 = this.categoryList3[i].value;
+											}
+										}
+									}
+								},err=>{
+									this.$api.errcallback(err);
+								}).catch(err=>{
+									this.$api.errcallback(err);
+								})
 						}
+						  }
 
 					}, err => {
 						this.$api.errcallback(err);
@@ -200,7 +197,7 @@
 					this.$http.post(this.$api.GET_INDLIST, {
 						pid: 0
 					}).then(res => {
-						console.log(res);
+						console.log(res,"111");
 						this.categoryList1 = [];
 						let data = res.data.data;
 						data.map(i => {
@@ -209,6 +206,25 @@
 								value: i.id
 							})
 						})
+						if(this.$route.query.userDetail.active == '修改'){
+							this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.$route.query.userDetail.id}).then(res=>{
+									if(res.data.status ==='1'){
+										let data = res.data.data;
+										this.formItem.category = data.category;
+										console.log(this.formItem.category);
+										var name = this.formItem.category.split(',')[0];
+										for(let i=0;i< this.categoryList1.length;i++){
+											if(name == this.categoryList1[i].label ){
+                                                this.category1 = this.categoryList1[i].value;
+											}
+										}
+									}
+								},err=>{
+									this.$api.errcallback(err);
+								}).catch(err=>{
+									this.$api.errcallback(err);
+								})
+						}
 					}, err => {
 						this.$api.errcallback(err);
 					}).catch(err => {
@@ -272,6 +288,134 @@
 				this.category2 = '';
 				this.category3 = '';
 				this.modal1 = false;
+			},
+			clientLeader(){
+                this.$http.post(this.$api.USER_LEADER,{com_id: this.$store.getters.com_id}).then(res=>{
+					console.log('客户负责人',res);
+					if(res.data.status==='1'){
+						var arr = res.data.data;
+						var arr2 =[];
+						var obj ={};
+						for(let i= 0;i<arr.length;i++){
+							obj ={
+								 value:arr[i].id,
+								 label:arr[i].fullname
+							}
+							arr2.push(obj);
+						}
+						this.list1 = arr2;
+						if(!this.$route.query.userDetail.id){
+							 this.formItem.uid = Number(this.$store.getters.uid);
+							 console.log('ffvff');
+						}
+					}
+				},err=>{
+					this.$api.errcallback(err);
+				}).catch(err=>{
+					this.$api.errcallback(err);
+				})
+			},
+			clientDuty(){
+				this.$http.post(this.$api.CONTACS_DUTY).then(res=>{
+					console.log('联系人职务',res);
+					if(res.data.status==='1'){
+                        var arr = res.data.data;
+						var arr2 =[];
+						var obj ={};
+						for(let i= 0;i<arr.length;i++){
+							obj ={
+								 value:arr[i].id,
+								 label:arr[i].name
+							}
+							arr2.push(obj);
+						}
+						this.list2 = arr2;
+					}
+				},err=>{
+					 this.$api.errcallback(err);
+				}).catch(err=>{
+					this.$api.errcallback(err);
+				})
+			},
+			clientLot(){
+				this.$http.post(this.$api.GAIN_LOT).then(res=>{
+					console.log('交易获取批次',res);
+                    if(res.data.status==='1'){
+                        var arr = res.data.data;
+						var arr2 =[];
+						var obj ={};
+						for(let i= 0;i<arr.length;i++){
+							obj ={
+								 value:arr[i].id,
+								 label:arr[i].name
+							}
+							arr2.push(obj);
+						}
+						this.list3 = arr2;
+					}
+				},err=>{
+					this.$api.errcallback(err);
+				}).catch(err=>{
+					this.$api.errcallback(err);
+				})
+			},
+			clientdetail(){
+				this.$http.post(this.$api.CLIENT_BASIC_INFO,{cus_id:this.$route.query.userDetail.id}).then(res=>{
+					console.log('客户详情',res);
+					if(res.data.status ==='1'){
+						 let data = res.data.data;
+						 this.formItem.id = data.id;
+						 this.formItem.name = data.name;
+						 var div = document.getElementById('name');
+                         var input = div.getElementsByClassName('ivu-input')[0];
+                         input.readOnly = true;
+						 this.formItem.sn = data.sn; 
+						this.formItem.uid = data.uid;
+						this.formItem.tyshxydm = data.tyshxydm;
+						this.formItem.legal_person = data.legal_person;
+						this.formItem.put_date = data.put_date;
+						if(data.dealinfo){
+						  if(data.dealinfo.is_admittance){
+                             this.formItem.is_admittance = data.dealinfo.is_admittance;
+						  }
+						   
+						   this.formItem.username = data.dealinfo.username;
+						   this.formItem.password = data.dealinfo.password;
+						   if(data.dealinfo.status){
+                               this.formItem.status = data.dealinfo.status;
+						   }
+						   if(data.dealinfo.qualification){
+                              this.formItem.qualification = Number(data.dealinfo.qualification);
+						   }
+						   
+						}
+						if(data.contact){
+						   this.formItem.fullname = data.contact.fullname;
+						   if(data.contact.duty_id){
+                              this.formItem.duty_id = data.contact.duty_id;
+						   }
+						   this.formItem.address = data.contact.address;
+						   this.formItem.zipcode = data.contact.zipcode;
+						   this.formItem.mobile = data.contact.mobile;
+						   this.formItem.email =  data.contact.email;
+						   this.formItem.phone = data.contact.phone;
+						   this.formItem.fax = data.contact.fax;
+						}
+						this.formItem.idcard = data.idcard;
+						this.formItem.major_product = data.major_product;
+						this.formItem.reg_assets = data.reg_assets;
+						this.formItem.reg_time = data.reg_time;
+						this.formItem.category = data.category;
+						this.formItem.c_address = data.address;
+						this.arr = [data.province,data.city,data.county];
+						console.log(this.arr);
+						this.res_s = this.arr;
+					}
+				},err=>{
+					this.$api.errcallback(err);
+				}).catch(err=>{
+					 this.$api.errcallback(err);
+				})
 			}
 		},
 		computed: {
@@ -279,32 +423,39 @@
 				return {
 					name: [this.emptyRule],
 					sn: [this.emptyRule],
+					uid:[this.changeRule2],
 					tyshxydm: [this.emptyRule,
 						{validator: codeLength, trigger: 'blur'},],
+					major_product:[this.emptyRule],
 					legal_person: [this.emptyRule],
-					organization: [this.emptyRule],
-					bank: [this.emptyRule],
-					bank_card: [this.emptyRule],
-					change: [this.emptyRule],
-					contact: [this.emptyRule],
-					telphone: [this.emptyRule,
+					is_admittance:[this.changeRule],
+                    idcard:[this.emptyRule],
+					status: [this.changeRule],
+					reg_assets: [this.emptyRule],
+					qualification:[this.changeRule2],
+					reg_time:[this.emptyRule],
+					username: [this.emptyRule],
+					password: [this.emptyRule],
+					duty_id:[this.changeRule2],
+					fullname: [this.emptyRule],
+					mobile: [this.emptyRule,
 						{ min: 11,max:11, message: '手机号码必须为11位', trigger: 'blur'},
 						{validator: telphone, trigger: 'blur'},
 					],
 					email: [this.emptyRule,
-						{type: 'email', message: '邮箱格式不对', trigger: 'blur'}],
-					officephone1: [this.emptyRule],
-					officephone2: [this.emptyRule, {
+						{validator: email, trigger: 'blur'}],
+					phone: [this.emptyRule, {
 						validator: officeReg, trigger: 'blur'
 					}],
-					fax1: [this.emptyRule],
-					fax2: [this.emptyRule, {
+					fax: [this.emptyRule, {
 						validator: officeReg, trigger: 'blur'
 					}],
 					address: [this.emptyRule],
-					zipcode: [this.emptyRule]
+					c_address:[this.emptyRule],
+					zipcode: [this.emptyRule],
+					put_date:[this.emptyRule]
 				}
-			}
+			},
 		},
 		watch: {
 			hint: function () {
@@ -313,190 +464,227 @@
 			'$route':function () {
 				this.getBank();
 				this.changeCategory();
-				console.log(this.$route.query)
-				if (!!this.$route.query.userDetail){
-					this.formItem.id = this.$route.query.userDetail.id;
-					this.formItem.name= this.$route.query.userDetail.name;
-					this.formItem.sn = this.$route.query.userDetail.sn;
-					this.formItem.tyshxydm = this.$route.query.userDetail.tyshxydm;
-					this.formItem.legal_person = this.$route.query.userDetail.legal_person;
-					this.formItem.organization = this.$route.query.userDetail.organization;
-					this.formItem.bank = this.$route.query.userDetail.bank;
-					this.formItem.bank_card = this.$route.query.userDetail.bank_card;
-					this.category1 = this.$route.query.userDetail.category.split(',')[0];
-					this.category2 = this.$route.query.userDetail.category.split(',')[1];
-					this.category3 = this.$route.query.userDetail.category.split(',')[2];
-					this.formItem.grade = this.$route.query.userDetail.grade;
-					this.formItem.contact = this.$route.query.userDetail.contact;
-					this.formItem.res_s = [this.$route.query.userDetail.province,this.$route.query.userDetail.city,this.$route.query.userDetail.county];
-					this.formItem.address = this.$route.query.userDetail.address;
-					this.formItem.zipcode = this.$route.query.userDetail.zipcode;
-					this.formItem.telphone = this.$route.query.userDetail.telphone;
-					this.formItem.email = this.$route.query.userDetail.email;
-					this.formItem.officephone1 = this.$route.query.userDetail.officephone.split('-')[0];
-					this.formItem.officephone2 = this.$route.query.userDetail.officephone.split('-')[1];
-					this.formItem.fax1 = this.$route.query.userDetail.fax.split('-')[0];
-					this.formItem.fax2 = this.$route.query.userDetail.fax.split('-')[1];
-				}else {
-					for (let key in this.formItem){
-						this.formItem[key] = ''
-					}
-				}
+			},
+			res_s:function(newValue,old){
+			   console.log(newValue,old);
+			   return this.res_s = newValue;
+			   
 			}
 
+		},
+		beforeMount(){
+           
 		},
 		mounted() {
 			this.getBank();
 			this.changeCategory();
-			console.log(this.$route.query)
-			if (!!this.$route.query.userDetail){
-				this.formItem.id = this.$route.query.userDetail.id;
-				this.formItem.name= this.$route.query.userDetail.name;
-				this.formItem.sn = this.$route.query.userDetail.sn;
-				this.formItem.tyshxydm = this.$route.query.userDetail.tyshxydm;
-				this.formItem.legal_person = this.$route.query.userDetail.legal_person;
-				this.formItem.organization = this.$route.query.userDetail.organization;
-				this.formItem.bank = this.$route.query.userDetail.bank;
-				this.formItem.bank_card = this.$route.query.userDetail.bank_card;
-				this.category1 = this.$route.query.userDetail.category.split(',')[0];
-				this.category2 = this.$route.query.userDetail.category.split(',')[1];
-				this.category3 = this.$route.query.userDetail.category.split(',')[2];
-				this.formItem.grade = this.$route.query.userDetail.grade;
-				this.formItem.contact = this.$route.query.userDetail.contact;
-				this.formItem.res_s = [this.$route.query.userDetail.province,this.$route.query.userDetail.city,this.$route.query.userDetail.county];
-				this.formItem.address = this.$route.query.userDetail.address;
-				this.formItem.zipcode = this.$route.query.userDetail.zipcode;
-				this.formItem.telphone = this.$route.query.userDetail.telphone;
-				this.formItem.email = this.$route.query.userDetail.email;
-				this.formItem.officephone1 = this.$route.query.userDetail.officephone.split('-')[0];
-				this.formItem.officephone2 = this.$route.query.userDetail.officephone.split('-')[1];
-				this.formItem.fax1 = this.$route.query.userDetail.fax.split('-')[0];
-				this.formItem.fax2 = this.$route.query.userDetail.fax.split('-')[1];
-			}
+			this.clientLeader();
+			this.clientDuty();
+			this.clientLot();
+			console.log(this.$route.query);
+			console.log(this.res_s);
+			if(this.$route.query.userDetail.active === '修改'){
+				   this.clientdetail();
+				   this.res_s = this.$route.query.dizhi;
+			}	
 		}
 	}
 </script>
 
 <template>
-	<div class="AddClient">
+	<div class="AddClient main-container">
 		<Card class="AddClientBox">
-			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"
-			   style="position: absolute;top: 14px;left: 10px;"></i>
-			<h3 slot="title" style="padding-left:40px;">{{$route.query.userDetail.name?'修改客户信息':'添加新用户'}}</h3>
-			<Form :model="formItem" :label-width="120" :rules="ruleValidate">
-				<h4>基本信息</h4>
+			<h3 slot="title">{{$route.query.userDetail.active==='修改' ?'修改客户信息':'添加新用户'}}</h3>
+			<Form :model="formItem" :label-width="120" :rules="ruleValidate" class="myForm">
+				<!-- <h4>基本信息</h4> -->
 				<Row>
-					<Col span="12">
-					<Form-item label="企业全称" prop='name' class='mgb_20'>
-						<Input v-model="formItem.name" placeholder="请输入企业全称"></Input>
+					<Col span="9">
+					<FormItem label="企业全称" prop='name'>
+						<Input v-model="formItem.name" placeholder="需与营业执照名称完全一致，企业名称不可修改。" id='name'></Input>
 
-					</Form-item>
+					</FormItem>
 					</Col>
-					<Col span="5">
-					<Form-item label="企业简称" prop='sn' class='mgb_20'>
+					<Col span="5" offset='2'>
+					<FormItem label="企业简称" prop='sn'>
 						<Input v-model="formItem.sn" placeholder="请输入企业简称"></Input>
-					</Form-item>
-					</Col>
-					<Col span="20" offset='2' class="hint" style='margin-top:10px'>
-					<p>需与当地政府颁发的商业许可证书或企业注册证上的企业名称完全一致，信息审核审核成功后，企业名称不可修改。</p>
+					</FormItem>
 					</Col>
 				</Row>
 				<Row>
-					<Col span="12">
-					<Form-item label="统一社会信用代码" prop='tyshxydm' class='mgb_20'>
+				  <Col span='9'>
+					<FormItem label="所属行业">
+						<Col span='8'>
+						   <Select v-model='category1' v-on:on-change='changeCategory1'>
+							<Option v-for='item in categoryList1' :value='item.value'>{{item.label}}</Option>
+						   </Select>
+						</Col>
+						<Col span='7' offset='1'>
+						   <Select v-model='category2'  v-on:on-change='changeCategory2' v-if='categoryList2.length>0'>
+							<Option v-for='item in categoryList2' :value='item.value'>{{item.label}}</Option>
+						   </Select>
+						</Col>
+						<Col span='7' offset='1'>
+						   <Select v-model='category3' v-on:on-change='changeCategory3' v-if='categoryList3.length>0'>
+							<Option v-for='item in categoryList3' :value='item.value'>{{item.label}}</Option>
+						   </Select>
+						</Col>
+						
+					</FormItem>
+				  </Col>
+				  <Col span='5' offset='2'>
+					 <FormItem label='客户负责人' prop='uid'>
+						 <Select v-model='formItem.uid'>
+							 <Option v-for='item in list1' :value='item.value' :key='item.value'>{{item.label}}</Option>
+						 </Select>
+					 </FormItem>
+				  </Col>
+				</Row>
+				<h4>客户基本信息</h4>
+				<Row>
+					<Col span="9">
+					<FormItem label="营业执照注册号" prop='tyshxydm'>
 						<Input v-model="formItem.tyshxydm" placeholder="请输入15位或18位的统一社会信用代码"></Input>
-					</Form-item>
+					</FormItem>
 					</Col>
+					 <Col span='9' offset='2'>
+						<FormItem label="客户产品"  prop='major_product'>
+							<Input  v-model='formItem.major_product' placeholder="请输入公司主要生产产品"></Input>
+						</FormItem>
+					     </Col>
+					
+
 				</Row>
 				<Row>
-					<Col span="8">
-					<Form-item label="法人代表姓名" prop='legal_person' class='mgb_20'>
+					<Col span="9">
+					<FormItem label="法人代表姓名" prop='legal_person'>
 						<Input v-model="formItem.legal_person" placeholder="与营业执照上一致"></Input>
-					</Form-item>
+					</FormItem>
 					</Col>
-					<Col span="8">
-					<Form-item label="组织机构代码" prop='organization' class='mgb_20'>
-						<Input v-model="formItem.organization" placeholder="与营业执照上一致"></Input>
-					</Form-item>
+					<Col span="9" offset='2'>
+					<FormItem label="是否已准入" prop='is_admittance'>
+						<Select v-model='formItem.is_admittance'>
+							<Option value='1'>是</Option>
+							<Option value='0'>否</Option>
+						</Select>
+					</FormItem>
 					</Col>
+					
 				</Row>
 				<Row>
-
-					<Col span="8">
-					<Form-item label="选择开户银行" prop='bank' class='mgb_20'>
-						<Select
-								v-model="formItem.bank"
-								filterable
-								remote
-								:remote-method="getBank"
-								:loading="loading1">
-							<Option :value="item.value" v-for='(item, index) in bankList' :key="index">{{item.label}}
-							</Option>
-						</Select>
-					</Form-item>
+					<Col span="9">
+					<FormItem label="法人身份证号" prop='idcard'>
+						<Input v-model='formItem.idcard' placeholder="请输入有效身份证号"></Input>
+					</FormItem>
 					</Col>
-					<Col span="8" v-if="$route.query.userDetail.bank">
-					<Form-item label="开户银行" prop='bank' class='mgb_20'>
-						<Input v-model="formItem.bank" placeholder="请如实填写"></Input>
-					</Form-item>
+					<Col span="9" offset='2'>
+					<FormItem label="交易资格状态" prop='status'>
+						 <Select v-model='formItem.status'>
+							 <Option value='1'>已提交</Option>
+							 <Option value='2'>已通过</Option>
+							 <Option value='3'>已公示</Option>
+							 <Option value='4'>变更</Option>
+						 </Select>
+					</FormItem>
 					</Col>
+				
 				</Row>
 				<Row>
-					<Col span="8">
-					<Form-item label="开户账号" prop='bank_card' class='mgb_20'>
-						<Input v-model="formItem.bank_card" placeholder="请如实填写"></Input>
-					</Form-item>
+					<Col span="9">
+					<FormItem label="注册资本" prop='reg_assets'>
+						<Input v-model="formItem.reg_assets" placeholder="请如实填写"></Input>
+					</FormItem>
 					</Col>
+						<Col span="9" offset='2'>
+						<FormItem label="交易资格获取批次" prop='qualification'>
+							 <Select v-model='formItem.qualification'>
+								 <Option v-for='item in list3' :value='item.value' :key='item.value'>{{item.label}}</Option>
+							 </Select>
+					</FormItem>
+				 </Col>
+					
 				</Row>
-				<h4>业务信息</h4>
-				<Row :gutter="10">
-					<Form-item label="所属行业" class='mgb_20'>
+				<Row>
+						<Col span="9">
+						<FormItem label="成立日期" prop='reg_time'>
+							<Input v-model="formItem.reg_time" placeholder="请如实填写"></Input>
+						</FormItem>
+						</Col>
+						<Col span="9" offset='2'>
+							<FormItem label="交易中心账号" prop='username'>
+								<Input v-model="formItem.username" placeholder="请如实填写"></Input>
+						</FormItem>
+					 </Col>
+						
+					</Row>
+					<Row>
+						<Col span="9">
+						<FormItem label="投运日期" prop='put_date'>
+							<Input v-model="formItem.put_date" placeholder="请如实填写"></Input>
+						</FormItem>
+						</Col>
+						<Col span="9" offset='2'>
+								<FormItem label="交易中心密码" prop='password'>
+									<Input v-model="formItem.password" placeholder="请如实填写"></Input>
+							</FormItem>
+						 </Col>
+					</Row>
+					  <Row :gutter='10'>
+						 <FormItem label="注册地址" class='address'>
+						   <Col span="8">
+						    <FormItem>
+							<al-selector data-type='name' v-model="res_ss" level=2 />
+						</FormItem>
+						</Col>
+						<Col span="8">
+						<FormItem prop='c_address'>
+							<Input v-model="formItem.c_address" placeholder="请输入详细通讯地址"></Input>
+						</FormItem>
+						</Col>
+					    </FormItem>
+					  </Row>
+							
+				<h4>联系人信息</h4>
+				 <Row>
+					<Col span="6">
+						 <FormItem label="联系人姓名" prop='fullname'>
+							 <Input v-model="formItem.fullname" placeholder="请输入联系人姓名"></Input>
+						 </FormItem>
+					</Col>
+					<Col span="6" offset='1'>
+					     <FormItem label="联系人职务" prop='duty_id'>
+							<Select v-model="formItem.duty_id">
+								<Option v-for='item in list2' :value='item.value' :key='item.value'>{{item.label}}</Option>
+							</Select>
+						</FormItem>
+					 </Col>
+					 <Col span="6" offset='1'>
+						<FormItem label="联系人手机号" prop='mobile'>
+							<Input v-model="formItem.mobile" placeholder="请输入联系人手机号码"></Input>
+					   </FormItem>
+					</Col>
+				 </Row>
+				 <Row>
 						<Col span="6">
-						<Select v-model="category1" placeholder="请选择" v-on:on-change='changeCategory1'>
-							<Option :value='item.label' v-for='item in categoryList1'>{{item.label}}</Option>
-						</Select>
+							<FormItem label="联系人固定电话" prop='phone'>
+								 <Input v-model="formItem.phone" placeholder="格式：区号-固定电话"></Input>
+							</FormItem>
 						</Col>
-						<Col span="4">
-						<Select v-model="category2" placeholder="请选择" v-on:on-change='changeCategory2'
-						        v-if="categoryList2.length>0">
-							<Option :value='item.label' v-for='item in categoryList2'>{{item.label}}</Option>
-						</Select>
+						<Col span="6" offset='1'>
+							<FormItem label="联系人传真号码" prop='fax'>
+								 <Input v-model="formItem.fax" placeholder="格式：区号-传真号码"></Input>
+							</FormItem>
 						</Col>
-						<Col span="4">
-						<Select v-model="category3" placeholder="请选择" v-on:on-change='changeCategory3'
-						        v-if="categoryList3.length>0">
-							<Option :value='item.label' v-for='item in categoryList3'>{{item.label}}</Option>
-						</Select>
+						<Col span="6" offset='1'>
+							<FormItem label="联系人邮箱地址" prop='email'>
+							     <Input  v-model='formItem.email' placeholder="请输入邮箱"></Input>
+							</FormItem>
 						</Col>
-					</Form-item>
-				</Row>
+				 </Row>
 				<Row :gutter="10">
-					<Form-item label="用电等级" prop='grade' class='mgb_20'>
-						<Col span="6">
-						<Select v-model="formItem.grade" placeholder="请选择">
-							<Option value="0.4kV">0.4kV</Option>
-							<Option value="6.3kV">6.3kV</Option>
-							<Option value="10kV">10kV</Option>
-							<Option value="20kV">20kV</Option>
-							<Option value="35kV">35kV</Option>
-							<Option value="66kV">66kV</Option>
-							<Option value="110kV">110kV</Option>
-							<Option value="220kV">220kV</Option>
-							<Option value="330kV">330kV</Option>
-							<Option value="500kV">500kV</Option>
-							<Option value="750kV">750kV</Option>
-							<Option value="1000kV">1000kV</Option>
-						</Select>
-						</Col>
-
-					</Form-item>
-				</Row>
-				<h4>联系信息</h4>
-				<Row :gutter="10">
-					<Form-item label="通讯地址" class='address'>
+					<FormItem label="通讯地址" class='address'>
 						<Col span="8">
 						<FormItem>
-							<al-selector v-model="formItem.res_s" level=2 />
+							<al-selector   data-type='name' v-model="res_s" level=2 />
 						</FormItem>
 						</Col>
 						<Col span="8">
@@ -509,78 +697,15 @@
 							<Input v-model="formItem.zipcode" placeholder="邮政编码" :maxlength="6"></Input>
 						</FormItem>
 						</Col>
-					</Form-item>
+					</FormItem>
 				</Row>
 				<Row>
-					<Col span="8">
-					<Form-item label="联系人" prop='contact' class='mgb_20'>
-						<Input v-model="formItem.contact" placeholder="请输入联系人姓名"></Input>
-					</Form-item>
-					</Col>
-				</Row>
-				<Row>
-					<Col span="8">
-					<Form-item label="联系人电话" prop='telphone' class='mgb_20'>
-						<Input v-model="formItem.telphone" placeholder="请输入联系人手机号码"></Input>
-					</Form-item>
-
-					</Col>
-					<Col span="12" class="hint2">
-					<p>该手机号用于开通系统登录账号，请确保手机号正确</p>
-					</Col>
-				</Row>
-				<Row>
-					<Col span="8">
-					<Form-item label="电子邮箱" prop='email' class='mgb_20'>
-						<Input v-model="formItem.email" placeholder="请输入联系人邮箱号码"></Input>
-					</Form-item>
-					</Col>
-					<Col span="12" class="hint2">
-					<p>接收账号密码和找回密码使用。</p>
-					</Col>
-				</Row>
-				<Row>
-					<Col span="8">
-					<Form-item label="办公电话" class='mgb_20 mgb_15'>
-						<Col span="8">
-						<FormItem prop='officephone1'>
-							<Input v-model="formItem.officephone1" placeholder="-" id='tel1' :maxlength="4"></Input>
-						</FormItem>
-						</Col>
-						<Col span="1" style="text-align: center;line-height: 34px;">
-						-</Col>
-						<Col span="15">
-						<FormItem prop='officephone2'>
-							<Input v-model="formItem.officephone2" placeholder="请输入办公电话" :maxlength="8"></Input>
-						</FormItem>
-						</Col>
-					</Form-item>
-					</Col>
-					<Col span="8">
-					<Form-item label="传真号码" style='margin-bottom: 0px'>
-						<Col span="8">
-						<FormItem prop='fax1'>
-							<Input v-model="formItem.fax1" placeholder="-" :maxlength="4"></Input>
-						</FormItem>
-						</Col>
-						<Col span="1" style="text-align: center;line-height: 34px;">
-						-</Col>
-						<Col span="15">
-						<FormItem prop='fax2'>
-							<Input v-model="formItem.fax2" placeholder="请输入传真号码" :maxlength="8"></Input>
-						</FormItem>
-						</Col>
-					</Form-item>
-					</Col>
-				</Row>
-				<Row>
-					<Col span="12" style="text-align: center;line-height: 34px;margin-top:10px">
+					<Col span="14" style="text-align: center;line-height: 34px;margin-top:80px">
 					<Form-item style='margin-bottom: 0'>
-						<Button type="primary" @click="addClient('goht')">保存并添加合同</Button>
 						<Button type="primary" style="margin-left: 30px" @click='addClient()'>保存</Button>
 						<Button type="ghost" style="margin-left: 30px" @click="$router.go(-1)">取消</Button>
 						<div v-if='hint' style="margin-left: 60px;">
-							<Alert type="warning" show-icon style='width: 200px;margin:2px auto;color: red;'>内容不能为空
+							<Alert type="warning" show-icon style='width:250px;margin:10px auto;color: red;'>公司名称及简称不能为空！
 							</Alert>
 						</div>
 					</Form-item>
@@ -602,18 +727,7 @@
 </template>
 
 <style scoped>
-	/* 表单每一项的下外边距 */
-
-	.mgb_20 {
-		margin-bottom: 20px;
-	}
-
-	.mgb_15 {
-		margin-bottom: 12px;
-	}
-
 	.AddClient {
-		padding: 20px;
 		line-height: 1;
 		max-height: 914px;
 		overflow: hidden;
@@ -626,13 +740,18 @@
 	}
 
 	.AddClientBox h4 {
-		font-size: 14px;
-		padding-left: 6px;
-		margin-bottom: 15px;
+         font-size: 14px;
+          margin-bottom: 15px;
+          margin-left: -100px;
+          border-bottom: 1px solid #e3e8ee;
+		  width: 95%;
+		  padding-left:5px;
+          padding-bottom:5px;
 	}
 
 	.AddClientBox form {
-		margin-left: 20%;
+		margin-left: 15%;
+		margin-top:10px;
 	}
 
 	.AddClientBox form input {
@@ -655,15 +774,6 @@
 		margin-left: 10px;
 		line-height: 34px;
 	}
-
-	.jiancheng {
-		display: inline;
-		margin-left: 30px;
-		margin-right: 22px;
-		font-size: 14px;
-		color: #000;
-	}
-
 	select {
 		width: 200px;
 		height: 30px;
@@ -672,38 +782,6 @@
 		border-color: #ccc;
 		padding-left: 10px;
 	}
-
-	.addClientSubmit {
-		width: 100%;
-		height: 38px;
-		text-align: center;
-		margin-top: 40px;
-	}
-
-	.addClientSubmit button {
-		width: 120px;
-		height: 38px;
-		font-size: 14px;
-		color: #fff;
-		background-color: #108CEE;
-		margin-left: 14px;
-	}
-
-	.addClientSubmit .saveAdd {
-		width: 200px;
-	}
-
-	.addClientSubmit .save {
-		width: 70px;
-	}
-
-	.addClientSubmit .cancel {
-		width: 70px;
-		color: #108CEE;
-		border: 1px solid #108CEE;
-		background-color: #fff;
-	}
-
 	.vertical-center-modal {
 		display: flex;
 		align-items: center;
@@ -713,5 +791,10 @@
 
 	.vertical-center-modal .ivu-modal {
 		top: 0;
+	}
+	@media (min-width: 1365px) and (max-width: 1919px){
+		.hint{
+			left:25px;
+		}
 	}
 </style>

@@ -105,8 +105,10 @@ export default {
             value: '',
             totalPage:0,
             currentPage:1,
-            limit:14,
+            limit:16,
             loading:false,
+            markbol:false,
+            logList:[]
         }
     },
     methods:{
@@ -120,6 +122,8 @@ export default {
                      console.log("设备详情",res);
                      if(res.data.status === '1'){
                          this.data1 = res.data.data;
+                         this.totalPage = 1;
+                          this.currentPage = 1;
                          this.loading = false;
                      }else{
                           this.data1 = [] ;
@@ -174,6 +178,7 @@ export default {
         },
         searchMethods(){
              this.loading = true;
+             this.$store.dispatch('setCompanbol',false);
                  this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
                 console.log("设备统计日志",res);
                 if(res.data.status==='1'){
@@ -188,6 +193,7 @@ export default {
                  this.loading = false;
                  this.$api.errcallback(err);
             }).catch(err=>{
+                this.loading = false;
                 this.$api.errcallback(err);
             })
         },
@@ -195,7 +201,7 @@ export default {
             if(value){
                 this.loading = true;
                 this.currentPage = 1;
-                this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey,status:1}).then(res=>{
+                this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey,status:0}).then(res=>{
                      console.log("掉线设备",res);
                     if(res.data.status === '1'){
                         this.data1=res.data.data.data;
@@ -213,6 +219,37 @@ export default {
             }else{
              this.equipmentInfo();
           }
+       },
+       logDim(){
+        this.markbol = true;
+        this.$store.dispatch('setCompanbol',true);
+        if (this.timer) {
+				clearTimeout(this.timer);
+			}
+		if (this.$store.getters.terminalKey.length < 1) {
+				return
+		}
+        this.timer = setTimeout(() => this.$http.post(this.$api.EQUIPMENT_INFO_LIST,{com_id:this.com_id,page:this.currentPage,limit:this.limit,keyword:this.$store.getters.terminalKey}).then(res=>{
+                console.log("设备统计日志模糊搜索",res);
+                if(res.data.status==='1'){
+                    this.logList=res.data.data.data; 
+                    this.markbol = false;
+                }else{
+                    this.markbol = false;
+                }
+            },err=>{
+                 this.markbol = false;
+                 this.$api.errcallback(err);
+            }).catch(err=>{
+                this.markbol = false;
+                this.$api.errcallback(err);
+            }), 500)
+       },
+       chooselog(item){
+         let arr =[];
+         arr.push(item);
+         this.data1 = arr;
+         this.$store.dispatch('setCompanbol',false);
        }
     },
     watch:{
@@ -223,6 +260,9 @@ export default {
     computed:{
         com_id:function(){
             return this.$store.getters.com_id;
+        },
+        companbol:function(){
+               return this.$store.getters.companbol
         }
     },
     components : {
@@ -248,12 +288,20 @@ export default {
                     <!--<Select v-model="model1" style="width:100px; margin-left: 10px;margin-right:10px;" placeholder="请选择区域">-->
                         <!--<Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
                     <!--</Select>-->
-                    <div class="search"><mySearch placeholder="请输入逻辑地址" swidth="340"  v-on:doSearch="searchMethods"></mySearch></div>
+                    <div class="search relative">
+                        <mySearch placeholder="请输入逻辑地址" swidth="340"  v-on:doSearch="searchMethods" v-on:dimSearch='logDim'></mySearch>
+                        <div class="absolute loglist" v-if='companbol'>
+                            <ul>
+                                <li v-for='item in logList' @click='chooselog(item)'>{{item.clientid}}</li>
+                            </ul>
+                            <Spin size="small" fix v-if="markbol"></Spin>
+                        </div>
+                    </div>
                 </div>
                 <div class="viewOffline">
                     <Checkbox label="Eat" v-on:on-change='isOnline'></Checkbox>
                     仅显示已掉线设备
-                    <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentInfo()'><i class="iconfont icon-shuaxin" style="top:-12px;left:-8px;"></i></Button>
+                    <Button type="primary" class="refresh" style="margin-left: 10px;" @click='equipmentInfo()'><i class="fas fa-sync" style="top:-12px;left:-8px;"></i></Button>
 
                 </div>    
             </div>
@@ -328,9 +376,9 @@ export default {
   /* 分页的样式 */
   .page-center  .fenYe {
     width: 100%;
-    height: 60px;
+    height: 40px;
     background-color: #fff;
-    padding-top: 10px;
+    /* padding-top: 10px; */
     text-align: center;
   }
   .fenYe table{
@@ -343,5 +391,47 @@ export default {
     top: -12px;
     left: 12px;
   }*/
+  .loglist{
+    width:283px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    min-height: 25px;
+    max-height:200px;
+    overflow: scroll;
+    z-index: 22;
+  }
+  .loglist li{
+        white-space: nowrap;
+        font-size: 12px;
+        padding:0 10px;
+        height:25px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    .loglist li:hover{
+        background-color: #E0EBF7;
+		color: #108CEE;
+    }
+    .loglist::-webkit-scrollbar {
+		width: 0;
+		/*滚动条宽度（右侧滚动条）*/
+		height: 7px;
+		/*滚动条高度（底部滚动条）*/
+		background-color: #eeeeee;
+		z-index: 999;
+	}
+
+	.loglist::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+		border-radius: 10px;
+		background-color: #F5F5F5;
+		z-index: 999;
+	}
+	.loglist::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+		background-color: #ccc;
+		z-index: 999;
+	}
 
 </style>

@@ -2775,670 +2775,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "60110": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60110",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601100": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601100",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601101": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601101",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112010": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112010",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112011": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112011",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112012": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112012",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112013": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112013",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112089": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112089",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601121": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601121",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601122": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601122",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601123": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601123",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601124": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601124",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601125": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601125",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601126": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601126",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601127": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601127",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601128": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601128",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011290": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011290",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011291": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011291",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011292": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011292",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011293": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011293",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011294": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011294",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011295": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011295",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011296": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011296",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011297": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011297",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112980": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112980",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112981": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112981",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112986": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112986",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112987": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112987",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112988": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112988",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112989": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112989",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112990": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112990",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112991": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112991",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112992": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112992",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112993": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112993",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112994": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112994",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112995": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112995",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112996": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112996",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60112997": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60112997",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011300": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011300",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113080": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113080",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113081": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113081",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113089": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113089",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601131": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601131",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601136": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601136",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601137": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601137",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601138": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601138",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011390": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011390",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011391": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011391",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011392": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011392",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011393": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011393",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113940": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113940",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113941": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113941",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113943": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113943",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113944": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113944",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113945": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113945",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113946": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113946",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113984": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113984",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113985": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113985",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113986": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113986",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113988": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113988",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60113989": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60113989",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6011399": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6011399",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60114": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60114",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601140": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601140",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601142": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601142",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601143": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601143",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601144": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601144",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601145": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601145",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601146": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601146",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601147": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601147",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601148": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601148",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601149": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601149",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601174": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601174",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601177": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601177",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601178": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601178",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601179": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601179",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601186": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601186",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601187": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601187",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601188": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601188",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "601189": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "601189",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "60119": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "60119",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "601382": {
     "bank": "中国银行",
     "bankCode": "01040000",
@@ -3567,14 +2903,6 @@
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
-  "620011": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620011",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620013": {
     "bank": "交通银行香港分行",
     "bankCode": "03010344",
@@ -3607,14 +2935,6 @@
     "cardNoLength": "19",
     "cardType": "预付费卡"
   },
-  "620024": {
-    "bank": "Royal Bank Open Stock Company",
-    "bankCode": "27550031",
-    "BIN": "620024",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
   "620025": {
     "bank": "中国银行（澳大利亚）",
     "bankCode": "01040036",
@@ -3631,14 +2951,6 @@
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
-  "620027": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620027",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620030": {
     "bank": "中国工商银行(亚洲)有限公司",
     "bankCode": "01020344",
@@ -3646,14 +2958,6 @@
     "cardName": "工银亚洲预付卡",
     "cardNoLength": "16",
     "cardType": "预付费卡"
-  },
-  "620031": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620031",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
   },
   "620035": {
     "bank": "中国银行(马来西亚)",
@@ -3678,14 +2982,6 @@
     "cardName": "铁路卡",
     "cardNoLength": "19",
     "cardType": "预付费卡"
-  },
-  "620039": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620039",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
   },
   "620040": {
     "bank": "中国银行",
@@ -3799,14 +3095,6 @@
     "cardNoLength": "19",
     "cardType": "预付费卡"
   },
-  "620079": {
-    "bank": "Commercial Bank of Dubai",
-    "bankCode": "28790784",
-    "BIN": "620079",
-    "cardName": "PrepaidCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620082": {
     "bank": "中信银行",
     "bankCode": "03020000",
@@ -3839,14 +3127,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "620091": {
-    "bank": "Commercial Bank of Dubai",
-    "bankCode": "28790784",
-    "BIN": "620091",
-    "cardName": "PrepaidCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620094": {
     "bank": "中国工商银行新加坡分行",
     "bankCode": "01020702",
@@ -3863,30 +3143,6 @@
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
-  "620103": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620103",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "620105": {
-    "bank": "The Bancorp Bank",
-    "bankCode": "28880840",
-    "BIN": "620105",
-    "cardName": "UnionPay Travel Card",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "620106": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620106",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620107": {
     "bank": "中国建设银行（亚洲）",
     "bankCode": "25330344",
@@ -3894,30 +3150,6 @@
     "cardName": "预付卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
-  },
-  "620108": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "620108",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "6201086": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6201086",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "6201088": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6201088",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
   },
   "620114": {
     "bank": "中国工商银行法兰克福分行",
@@ -3935,22 +3167,6 @@
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
-  "620120": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620120",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "620123": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620123",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620124": {
     "bank": "中国工商银行澳门分行",
     "bankCode": "01020446",
@@ -3959,14 +3175,6 @@
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
-  "620125": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620125",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620126": {
     "bank": "澳门通股份有限公司",
     "bankCode": "28020446",
@@ -3974,22 +3182,6 @@
     "cardName": "旅游卡",
     "cardNoLength": "19",
     "cardType": "预付费卡"
-  },
-  "620129": {
-    "bank": "The Mauritius Commercial Bank",
-    "bankCode": "29170480",
-    "BIN": "620129",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "620132": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620132",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
   },
   "620142": {
     "bank": "中国工商银行布鲁塞尔分行",
@@ -4028,22 +3220,6 @@
     "bankCode": "01020380",
     "BIN": "620149",
     "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "620152": {
-    "bank": "Travelex",
-    "bankCode": "26040344",
-    "BIN": "620152",
-    "cardName": "CashPassportCounsumer",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "620153": {
-    "bank": "Travelex",
-    "bankCode": "26040344",
-    "BIN": "620153",
-    "cardName": "CashPassportCounsumer",
     "cardNoLength": "16",
     "cardType": "预付费卡"
   },
@@ -4174,22 +3350,6 @@
     "cardName": "澳门中国银行银联预付卡",
     "cardNoLength": "16",
     "cardType": "预付费卡"
-  },
-  "620220": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620220",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "620278": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620278",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
   },
   "620302": {
     "bank": "工商银行",
@@ -4623,14 +3783,6 @@
     "cardNoLength": "18",
     "cardType": "借记卡"
   },
-  "620812": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "620812",
-    "cardName": "BC-CUPGiftCard",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "620902": {
     "bank": "工商银行",
     "bankCode": "01020000",
@@ -4671,14 +3823,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "621003": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621003",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621004": {
     "bank": "东营银行",
     "bankCode": "05274550",
@@ -4695,14 +3839,6 @@
     "cardNoLength": "18",
     "cardType": "借记卡"
   },
-  "621006": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621006",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621008": {
     "bank": "新疆维吾尔自治区农村信用社联合",
     "bankCode": "14448800",
@@ -4716,22 +3852,6 @@
     "bankCode": "05238333",
     "BIN": "621010",
     "cardName": "广成卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621011": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621011",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621012": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621012",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
@@ -4791,28 +3911,12 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "621020": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621020",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621021": {
     "bank": "河北省农村信用社联合社",
     "bankCode": "14411200",
     "BIN": "621021",
     "cardName": "信通卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621023": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621023",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621024": {
@@ -4823,28 +3927,12 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621025": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621025",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621026": {
     "bank": "辽宁省农村信用社联合社",
     "bankCode": "14542200",
     "BIN": "621026",
     "cardName": "金信卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621027": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621027",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621028": {
@@ -4868,22 +3956,6 @@
     "bankCode": "04031000",
     "BIN": "621030",
     "cardName": "京卡借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621031": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621031",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621032": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621032",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
@@ -4933,14 +4005,6 @@
     "BIN": "621038",
     "cardName": "龙凤卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621039": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621039",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621040": {
@@ -5143,14 +4207,6 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621064": {
-    "bank": "AEON信贷财务亚洲有限公司",
-    "bankCode": "25260344",
-    "BIN": "621064",
-    "cardName": "AEON银联礼品卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621065": {
     "bank": "青海省农村信用社联合社",
     "bankCode": "14498500",
@@ -5252,14 +4308,6 @@
     "bankCode": "03300000",
     "BIN": "621077",
     "cardName": "卓锦借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621078": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621078",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
@@ -5615,14 +4663,6 @@
     "cardNoLength": "18",
     "cardType": "借记卡"
   },
-  "621220": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621220",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621221": {
     "bank": "驻马店银行",
     "bankCode": "05605110",
@@ -5725,14 +4765,6 @@
     "BIN": "621233",
     "cardName": "锦程卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621234": {
-    "bank": "CSC",
-    "bankCode": "26790422",
-    "BIN": "621234",
-    "cardName": "CSC借记卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621235": {
@@ -5919,14 +4951,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "621257": {
-    "bank": "Baiduri Bank Berhad",
-    "bankCode": "27130096",
-    "BIN": "621257",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621258": {
     "bank": "重庆农村商业银行",
     "bankCode": "14136900",
@@ -6036,14 +5060,6 @@
     "bankCode": "05646710",
     "BIN": "621273",
     "cardName": "锦程卡",
-    "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621274": {
-    "bank": "澳门BDA",
-    "bankCode": "27860446",
-    "BIN": "621274",
-    "cardName": "汇业卡",
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
@@ -6191,14 +5207,6 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621295": {
-    "bank": "越南Vietcombank",
-    "bankCode": "26550704",
-    "BIN": "621295",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621296": {
     "bank": "长安银行",
     "bankCode": "05417900",
@@ -6235,14 +5243,6 @@
     "bank": "中国工商银行巴黎分行",
     "bankCode": "01020250",
     "BIN": "621300",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621301": {
-    "bank": "格鲁吉亚 Invest Bank",
-    "bankCode": "29230268",
-    "BIN": "621301",
     "cardName": "借记卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
@@ -6349,14 +5349,6 @@
     "BIN": "621317",
     "cardName": "牡丹灵通卡",
     "cardNoLength": "18",
-    "cardType": "借记卡"
-  },
-  "621324": {
-    "bank": "澳门BDA",
-    "bankCode": "27860446",
-    "BIN": "621324",
-    "cardName": "汇业卡",
-    "cardNoLength": "19",
     "cardType": "借记卡"
   },
   "621325": {
@@ -6511,14 +5503,6 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621344": {
-    "bank": "Royal Bank Open Stock Company",
-    "bankCode": "27550031",
-    "BIN": "621344",
-    "cardName": "借记卡",
-    "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
   "621345": {
     "bank": "宁波东海银行",
     "bankCode": "05503320",
@@ -6613,14 +5597,6 @@
     "BIN": "621348",
     "cardName": "祥云借记卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621349": {
-    "bank": "乌兹别克斯坦INFINBANK",
-    "bankCode": "27650860",
-    "BIN": "621349",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621350001": {
@@ -6925,14 +5901,6 @@
     "BIN": "621353108",
     "cardName": "新华卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621354": {
-    "bank": "BCEL",
-    "bankCode": "27710418",
-    "BIN": "621354",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621355001": {
@@ -8167,14 +7135,6 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621484": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621484",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621485": {
     "bank": "招商银行",
     "bankCode": "03080000",
@@ -8831,14 +7791,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "621624": {
-    "bank": "OJSCBASIAALLIANCEBANK",
-    "bankCode": "28160860",
-    "BIN": "621624",
-    "cardName": "UnionPay",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621625": {
     "bank": "广东华兴银行",
     "bankCode": "05785800",
@@ -9183,51 +8135,11 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "621640": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "621640",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621642": {
-    "bank": "Mongolia Trade Develop. Bank",
-    "bankCode": "28530496",
-    "BIN": "621642",
-    "cardName": "普卡/金卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621645": {
-    "bank": "巴基斯坦FAYSAL BANK",
-    "bankCode": "28040586",
-    "BIN": "621645",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621647": {
-    "bank": "俄罗斯ORIENT EXPRESS BANK",
-    "bankCode": "28450643",
-    "BIN": "621647",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621648": {
     "bank": "中国银行金边分行",
     "bankCode": "01040116",
     "BIN": "621648",
     "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621649": {
-    "bank": "CJSC Fononbank",
-    "bankCode": "28720762",
-    "BIN": "621649",
-    "cardName": "Fonon Bank Card",
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
@@ -9303,14 +8215,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "621654": {
-    "bank": "Krung Thaj Bank Public Co. Ltd",
-    "bankCode": "28550764",
-    "BIN": "621654",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621655": {
     "bank": "宁波通商银行",
     "bankCode": "05803320",
@@ -9325,14 +8229,6 @@
     "BIN": "621656001",
     "cardName": "金裕卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "621657": {
-    "bank": "巴基斯坦HabibBank",
-    "bankCode": "28990586",
-    "BIN": "621657",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "621659001": {
@@ -9847,22 +8743,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "6216846": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6216846",
-    "cardName": "UnionPay",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "6216848": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6216848",
-    "cardName": "UnionPay",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "621687913": {
     "bank": "宝丰豫丰村镇银行",
     "bankCode": "15604951",
@@ -9924,14 +8804,6 @@
     "bankCode": "03050000",
     "BIN": "621691",
     "cardName": "借记卡普卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "621694": {
-    "bank": "Capital Bank of Mongolia",
-    "bankCode": "29120496",
-    "BIN": "621694",
-    "cardName": "借记卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
@@ -11071,14 +9943,6 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "622145": {
-    "bank": "Allied Bank",
-    "bankCode": "26930608",
-    "BIN": "622145",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "622146": {
     "bank": "青岛银行",
     "bankCode": "04504520",
@@ -11238,14 +10102,6 @@
     "cardName": "银联标准贷记卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
-  },
-  "622164": {
-    "bank": "The Bancorp Bank",
-    "bankCode": "28880840",
-    "BIN": "622164",
-    "cardName": "China UnionPay Travel Card",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
   },
   "622165": {
     "bank": "包商银行",
@@ -12519,14 +11375,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "622354": {
-    "bank": "Bangkok Bank Pcl",
-    "bankCode": "26350764",
-    "BIN": "622354",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "622355": {
     "bank": "集友银行",
     "bankCode": "47980344",
@@ -12534,14 +11382,6 @@
     "cardName": "中银卡",
     "cardNoLength": "16",
     "cardType": "借记卡"
-  },
-  "622356": {
-    "bank": "CSC",
-    "bankCode": "26790422",
-    "BIN": "622356",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
   },
   "622358": {
     "bank": "河北省农村信用社联合社",
@@ -13421,30 +12261,6 @@
     "BIN": "622492",
     "cardName": "银联港币银行卡",
     "cardNoLength": "17",
-    "cardType": "借记卡"
-  },
-  "622493": {
-    "bank": "AEON信贷财务亚洲有限公司",
-    "bankCode": "25230344",
-    "BIN": "622493",
-    "cardName": "AEONJUSCO银联卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "622495": {
-    "bank": "Travelex",
-    "bankCode": "26040344",
-    "BIN": "622495",
-    "cardName": "Travelex港币卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "622496": {
-    "bank": "Travelex",
-    "bankCode": "26040344",
-    "BIN": "622496",
-    "cardName": "Travelex美元卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "622498": {
@@ -15527,14 +14343,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "622920": {
-    "bank": "日本三井住友卡公司",
-    "bankCode": "26110392",
-    "BIN": "622920",
-    "cardName": "MITSUISUMITOMOGINREN",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "622921": {
     "bank": "河北银行股份有限公司",
     "bankCode": "64221210",
@@ -15661,14 +14469,6 @@
     "BIN": "622940",
     "cardName": "麒麟借记卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "622941": {
-    "bank": "AEON信贷财务亚洲有限公司",
-    "bankCode": "25260344",
-    "BIN": "622941",
-    "cardName": "AEON银联礼品卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "622942": {
@@ -15893,14 +14693,6 @@
     "BIN": "622973",
     "cardName": "狮城借记卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "622974": {
-    "bank": "AEON信贷财务亚洲有限公司",
-    "bankCode": "25260344",
-    "BIN": "622974",
-    "cardName": "AEON银联礼品卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "6229756114": {
@@ -17423,52 +16215,12 @@
     "cardNoLength": "16",
     "cardType": "借记卡"
   },
-  "623300": {
-    "bank": "Rawbank S.a.r.l",
-    "bankCode": "29460180",
-    "BIN": "623300",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
   "623301": {
     "bank": "工商银行",
     "bankCode": "01020000",
     "BIN": "623301",
     "cardName": "牡丹灵通卡",
     "cardNoLength": "18",
-    "cardType": "借记卡"
-  },
-  "623302": {
-    "bank": "PVB Card Corporation",
-    "bankCode": "29470608",
-    "BIN": "623302",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "623303": {
-    "bank": "PVB Card Corporation",
-    "bankCode": "29470608",
-    "BIN": "623303",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "623304": {
-    "bank": "PVB Card Corporation",
-    "bankCode": "29470608",
-    "BIN": "623304",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623307": {
-    "bank": "U Microfinance Bank Limited",
-    "bankCode": "29600586",
-    "BIN": "623307",
-    "cardName": "U Paisa ATM &Debit Card",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "623308": {
@@ -17495,60 +16247,12 @@
     "cardNoLength": "19",
     "cardType": "借记卡"
   },
-  "623311": {
-    "bank": "Ecobank Nigeria",
-    "bankCode": "29620566",
-    "BIN": "623311",
-    "cardName": "Prepaid Card",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "623312": {
-    "bank": "Al Baraka Bank(Pakistan)",
-    "bankCode": "29630586",
-    "BIN": "623312",
-    "cardName": "al baraka classic card",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623313": {
-    "bank": "OJSC Hamkor bank",
-    "bankCode": "29640860",
-    "BIN": "623313",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623314": {
-    "bank": "Fidelity Bank Plc",
-    "bankCode": "29660566",
-    "BIN": "623314",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
   "623318": {
     "bank": "东亚银行有限公司",
     "bankCode": "25020344",
     "BIN": "623318",
     "cardName": "银联双币借记卡",
     "cardNoLength": "19",
-    "cardType": "借记卡"
-  },
-  "623323": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "623323",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623324": {
-    "bank": "PVB Card Corporation",
-    "bankCode": "29470608",
-    "BIN": "623324",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
     "cardType": "借记卡"
   },
   "623328": {
@@ -17559,22 +16263,6 @@
     "cardNoLength": "17",
     "cardType": "借记卡"
   },
-  "623331": {
-    "bank": "State Bank of Mauritius",
-    "bankCode": "29810480",
-    "BIN": "623331",
-    "cardName": "Prepaid card",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
-  "623334": {
-    "bank": "K & R International Limited",
-    "bankCode": "25380344",
-    "BIN": "623334",
-    "cardName": "环球通",
-    "cardNoLength": "16",
-    "cardType": "预付费卡"
-  },
   "623335": {
     "bank": "中国工商银行(亚洲)有限公司",
     "bankCode": "01020344",
@@ -17582,142 +16270,6 @@
     "cardName": "",
     "cardNoLength": "16",
     "cardType": "预付费卡"
-  },
-  "623336": {
-    "bank": "JSC ATFBank",
-    "bankCode": "29830398",
-    "BIN": "623336",
-    "cardName": "预付卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623337": {
-    "bank": "JSC ATFBank",
-    "bankCode": "29830398",
-    "BIN": "623337",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623338": {
-    "bank": "JSC ATFBank",
-    "bankCode": "29830398",
-    "BIN": "623338",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623339": {
-    "bank": "OJSC Russian Investment Bank",
-    "bankCode": "28260417",
-    "BIN": "623339",
-    "cardName": "借记卡",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623341": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "623341",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "6233451": {
-    "bank": "JSC Liberty Bank",
-    "bankCode": "29140268",
-    "BIN": "6233451",
-    "cardName": "Classic",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "6233452": {
-    "bank": "JSC Liberty Bank",
-    "bankCode": "29140268",
-    "BIN": "6233452",
-    "cardName": "Gold",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623347": {
-    "bank": "JSC Liberty Bank",
-    "bankCode": "29140268",
-    "BIN": "623347",
-    "cardName": "Diamond",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "623348": {
-    "bank": "State Bank of Mauritius",
-    "bankCode": "29810480",
-    "BIN": "623348",
-    "cardName": "Debit Card",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335101": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335101",
-    "cardName": "classic",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335102": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335102",
-    "cardName": "gold",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335103": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335103",
-    "cardName": "platinum",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335104": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335104",
-    "cardName": "diamond",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335105": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335105",
-    "cardName": "classic",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335106": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335106",
-    "cardName": "gold",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335107": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335107",
-    "cardName": "platinum",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
-  },
-  "62335108": {
-    "bank": "CJSC “Spitamen Bank”",
-    "bankCode": "30030762",
-    "BIN": "62335108",
-    "cardName": "diamond",
-    "cardNoLength": "16",
-    "cardType": "借记卡"
   },
   "623400": {
     "bank": "工商银行",
@@ -17919,62 +16471,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "624306": {
-    "bank": "Cim Finance Ltd",
-    "bankCode": "29440480",
-    "BIN": "624306",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624320": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "624320",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624321": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "624321",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624322": {
-    "bank": "Cim Finance Ltd",
-    "bankCode": "29440480",
-    "BIN": "624322",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624323": {
-    "bank": "JSC ATFBank",
-    "bankCode": "29830398",
-    "BIN": "624323",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624324": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "624324",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "624325": {
-    "bank": "NongHyup Bank",
-    "bankCode": "29650410",
-    "BIN": "624325",
-    "cardName": "NH Card",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "624402": {
     "bank": "工商银行",
     "bankCode": "01020000",
@@ -18031,58 +16527,10 @@
     "cardNoLength": "16",
     "cardType": "准贷记卡"
   },
-  "625002": {
-    "bank": "越南西贡商业银行",
-    "bankCode": "27200704",
-    "BIN": "625002",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625003": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625003",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625004": {
-    "bank": "Royal Bank Open Stock Company",
-    "bankCode": "27550031",
-    "BIN": "625004",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625006": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625006",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625007": {
-    "bank": "菲律宾RCBC",
-    "bankCode": "27250608",
-    "BIN": "625007",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625008": {
     "bank": "创兴银行有限公司",
     "bankCode": "25170344",
     "BIN": "625008",
-    "cardName": "银联双币信用卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625009": {
-    "bank": "创兴银行有限公司",
-    "bankCode": "25170344",
-    "BIN": "625009",
     "cardName": "银联双币信用卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
@@ -18092,30 +16540,6 @@
     "bankCode": "25060344",
     "BIN": "625010",
     "cardName": "永亨银联白金卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625011": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625011",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625012": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625012",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625013": {
-    "bank": "Allied Bank",
-    "bankCode": "26930608",
-    "BIN": "625013",
-    "cardName": "贷记卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18159,14 +16583,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625020": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625020",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625021": {
     "bank": "中国工商银行法兰克福分行",
     "bankCode": "01020276",
@@ -18183,14 +16599,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625023": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625023",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625024": {
     "bank": "恒生银行有限公司",
     "bankCode": "25140344",
@@ -18199,27 +16607,11 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625025": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625025",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625026": {
     "bank": "恒生银行有限公司",
     "bankCode": "25140344",
     "BIN": "625026",
     "cardName": "港币贷记白金卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625027": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625027",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18239,42 +16631,10 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625031": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625031",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625032": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625032",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625033": {
-    "bank": "菲律宾BDO",
-    "bankCode": "27240608",
-    "BIN": "625033",
-    "cardName": "银联卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625034": {
     "bank": "香港上海汇丰银行有限公司",
     "bankCode": "25120344",
     "BIN": "625034",
-    "cardName": "银联卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625035": {
-    "bank": "菲律宾BDO",
-    "bankCode": "27240608",
-    "BIN": "625035",
     "cardName": "银联卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
@@ -18286,30 +16646,6 @@
     "cardName": "商惠通",
     "cardNoLength": "16",
     "cardType": "准贷记卡"
-  },
-  "6250386": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6250386",
-    "cardName": "UnionPay",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6250388": {
-    "bank": "Russian Standard Bank",
-    "bankCode": "27670643",
-    "BIN": "6250388",
-    "cardName": "UnionPay",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625039": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625039",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
   },
   "625040": {
     "bank": "中银信用卡(国际)有限公司",
@@ -18455,22 +16791,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625078": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625078",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625079": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625079",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625080": {
     "bank": "广州农村商业银行",
     "bankCode": "65055810",
@@ -18607,30 +16927,6 @@
     "cardNoLength": "16",
     "cardType": "准贷记卡"
   },
-  "625103": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625103",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625104": {
-    "bank": "俄罗斯ORIENT EXPRESS BANK",
-    "bankCode": "28450643",
-    "BIN": "625104",
-    "cardName": "信用卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625106": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625106",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625107": {
     "bank": "上海商业银行",
     "bankCode": "25090344",
@@ -18644,22 +16940,6 @@
     "bankCode": "01020554",
     "BIN": "625110",
     "cardName": "信用卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625111": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625111",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625112": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625112",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18703,67 +16983,11 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625120": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625120",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625123": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625123",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625124": {
-    "bank": "越南Vietcombank",
-    "bankCode": "26550704",
-    "BIN": "625124",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625125": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625125",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625127": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625127",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625128": {
     "bank": "福建省农村信用社联合社",
     "bankCode": "65173900",
     "BIN": "625128",
     "cardName": "福万通贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625131": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625131",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625132": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625132",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18780,14 +17004,6 @@
     "bankCode": "25190344",
     "BIN": "625136",
     "cardName": "中银Good Day银联双币白金卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625139": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625139",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18831,35 +17047,11 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625154": {
-    "bank": "越南Vietcombank",
-    "bankCode": "26550704",
-    "BIN": "625154",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625158": {
     "bank": "临汾市尧都区农村信用合作联社",
     "bankCode": "65341770",
     "BIN": "625158",
     "cardName": "天河贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625178": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625178",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625179": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625179",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -18887,30 +17079,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625220": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625220",
-    "cardName": "中国通卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625243": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625243",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625244": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625244",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625288": {
     "bank": "东莞农村商业银行",
     "bankCode": "14156020",
@@ -18924,14 +17092,6 @@
     "bankCode": "01020000",
     "BIN": "6253098",
     "cardName": "牡丹信用卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625320": {
-    "bank": "BC卡公司",
-    "bankCode": "26630410",
-    "BIN": "625320",
-    "cardName": "中国通卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -19223,14 +17383,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625804": {
-    "bank": "韩国KB",
-    "bankCode": "28590410",
-    "BIN": "625804",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625805": {
     "bank": "广发银行股份有限公司",
     "bankCode": "03060000",
@@ -19276,22 +17428,6 @@
     "bankCode": "03060000",
     "BIN": "625810",
     "cardName": "银联标准白金卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625814": {
-    "bank": "韩国三星卡公司",
-    "bankCode": "28660410",
-    "BIN": "625814",
-    "cardName": "三星卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625817": {
-    "bank": "韩国三星卡公司",
-    "bankCode": "28660410",
-    "BIN": "625817",
-    "cardName": "三星卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
@@ -19343,14 +17479,6 @@
     "cardNoLength": "16",
     "cardType": "贷记卡"
   },
-  "625829": {
-    "bank": "Bank of China(Malaysia)",
-    "bankCode": "99900458",
-    "BIN": "625829",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
   "625831": {
     "bank": "浦发银行信用卡中心",
     "bankCode": "63100000",
@@ -19387,30 +17515,6 @@
     "bank": "新韩卡公司",
     "bankCode": "29010410",
     "BIN": "625841",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625842": {
-    "bank": "Kasikorn Bank PCL",
-    "bankCode": "26030764",
-    "BIN": "625842",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6258433": {
-    "bank": "Kasikorn Bank PCL",
-    "bankCode": "26030764",
-    "BIN": "6258433",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6258434": {
-    "bank": "Kasikorn Bank PCL",
-    "bankCode": "26030764",
-    "BIN": "6258434",
     "cardName": "贷记卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
@@ -19739,14 +17843,6 @@
     "bank": "中国工商银行卡拉奇分行",
     "bankCode": "01020586",
     "BIN": "625942",
-    "cardName": "贷记卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "625943": {
-    "bank": "Bank of China(Malaysia)",
-    "bankCode": "99900458",
-    "BIN": "625943",
     "cardName": "贷记卡",
     "cardNoLength": "16",
     "cardType": "贷记卡"
@@ -21150,54 +19246,6 @@
     "cardName": "金穗信用卡",
     "cardNoLength": "16",
     "cardType": "准贷记卡"
-  },
-  "644": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "644",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "65": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "65",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6506": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6506",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6507": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6507",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6508": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6508",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
-  },
-  "6509": {
-    "bank": "Discover Financial Services，I",
-    "bankCode": "26290840",
-    "BIN": "6509",
-    "cardName": "发现卡",
-    "cardNoLength": "16",
-    "cardType": "贷记卡"
   },
   "66405512": {
     "bank": "交通银行",

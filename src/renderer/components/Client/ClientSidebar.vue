@@ -1,4 +1,6 @@
 <script>
+	import mySearch from '@/components/Tool/mySearch'
+	import {ipcRenderer} from 'electron'
 	export default {
 		name: 'clientsidebar',
 		data() {
@@ -8,10 +10,7 @@
 				totalPages: 0,
 				lastPage: 0,
 				currentPage: 1,
-				limit: 26,
-				keyword: '',
-				letter: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-				button1: '全部',
+				button1: '所有客户',
 				isCollect: false,
 				letters: '',
 				actname: '',
@@ -22,31 +21,61 @@
 				i: '',
 				bol: false,
 				companyshow: false,
-				timer: null
+				timer: null,
 			}
 		},
+		components: {
+            'my-search': mySearch
+        },
 		computed: {
 			selectedId: function () {
 				return this.$store.getters.cus_id
 			},
-			companbol:function(){
-               return this.$store.getters.companbol
-            }
+			companbol: function () {
+				return this.$store.getters.companbol
+			},
+			limit:function(){
+				let screenWidth = ipcRenderer.sendSync('width-change', 'change');
+                let limit = 0;
+                console.log(screenWidth);
+                if (screenWidth < 1920) {
+                    limit = 12;
+                } else {
+                    limit = 17;
+                }
+                return limit
+			},
+			height:function(){
+				let screenWidth = ipcRenderer.sendSync('width-change', 'change');
+                let height = 0;
+                console.log(screenWidth);
+                if (screenWidth < 1920) {
+                    height = 560;
+                } else {
+                    height = 790;
+                }
+                return height
+			},
+			keyword:function(){
+				return this.$store.getters.searchKey;
+			},
+			uid:function(){
+				return this.$store.getters.uid;
+			}
 		},
 		mounted() {
 			console.log('mounted')
 			this.clientList();
 			this.$Message.config({
-                  top:100,
+				top: 100,
 			})
+		},
+		created: function () {
+			console.log('created')
 
 		},
-		created: function(){
-			console.log('created')
-			
-		},
 		watch: {
-			bol: function(val){
+			bol: function (val) {
 				console.log(val)
 			}
 		},
@@ -85,85 +114,100 @@
 					this.$api.errcallback(err);
 				})
 			},
-			handleReachBottom() {
-				return new Promise(resolve => {
-					if (this.button1 === '全部') {
-						if (this.currentPage < this.lastPage) {
-							this.currentPage += 1;
-							console.log(1)
-							// this.spinShow = true;
-							this.$http.post(this.$api.CLIENT_LIST, {
-								com_id: this.$store.getters.com_id,
-								type: 3,
-								limit: this.limit,
-								page: this.currentPage
-							}).then(res => {
-								console.log('下一页客户名称列表', res);
-								if (res.data.status === '1') {
-									let list = res.data[0].data;
-									this.currentPage = res.data[0].current_page
-									for (let i = 0; i < list.length; i++) {
-										this.companyList.push(list[i]);
-									}
-								} else {
-
-								}
-
-								// this.spinShow =false;
-								// resolve();
-							}, err => {
-								// reject();
-								// this.spinShow =false;
-								this.$api.errcallback(err);
-							}).catch(err => {
-								// this.spinShow =false;
-								this.$api.errcallback(err);
-							})
-						} else {
-							this.currentPage = this.lastPage;
-						}
-					} else if (this.button1 === '我的收藏') {
-						if (this.currentPage < this.lastPage) {
-							this.currentPage += 1;
-							this.$http.post(this.$api.CLIENT_COLLECT_LIST, {
-								com_id: this.$store.getters.com_id,
-								limit: this.limit,
-								page: this.currentPage
-							}).then(res => {
-								console.log('下一页收藏', res);
-								if (res.data.status === '1') {
-									let list = res.data.list.data;
-									this.actname = true;
-									for (let i = 0; i < list.length; i++) {
-										this.companyList.push(list[i]);
-									}
-								}
-							}, err => {
-								this.$api.errcallback(err);
-							}).catch(err => {
-								this.$api.errcallback(err);
-							})
-						}
-					}
-				})
-			},
-			doSearch() {
-				this.$store.dispatch('setCompanbol',true);
-				this.companyshow = true;
-				if (this.timer) {
-					clearTimeout(this.timer);
-				}
-				if (this.keyword.length < 1) {
-					return
-				}
-				this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_LIST, {
+			doSearch(){
+				if(this.button1 === '所有客户'){
+                      this.$http.post(this.$api.CLIENT_LIST, {
 						com_id: this.$store.getters.com_id,
 						type: 3,
 						keyword: this.keyword,
 					}).then(res => {
 						this.spinShow = false;
 						this.loading1 = false;
-						console.log('客户sss名称列表', res);
+						console.log('所有客户搜索all', res);
+						if (res.data.status === '1') {
+
+							this.companyList = res.data[0];
+							this.companyshow = false;
+							this.$store.dispatch('setCompanbol', false);
+							console.log(this.companyList)
+						}
+
+					}, err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					}).catch(err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					})
+				}else if(this.button1 ==='我的客户'){
+                     this.$http.post(this.$api.CLIENT_LIST, {
+						com_id: this.$store.getters.com_id,
+						type: 3,
+						keyword: this.keyword,
+						uid:this.uid
+					}).then(res => {
+						this.spinShow = false;
+						this.loading1 = false;
+						console.log('我的客户搜索all', res);
+						if (res.data.status === '1') {
+
+							this.companyList = res.data[0];
+							this.companyshow = false;
+							this.$store.dispatch('setCompanbol', false);
+							console.log(this.companyList)
+						}
+
+					}, err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					}).catch(err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					})
+				}else{
+                      this.$http.post(this.$api.CLIENT_COLLECT_LIST, {
+						com_id: this.$store.getters.com_id,
+						keyword: this.keyword,
+					}).then(res => {
+						this.spinShow = false;
+						this.loading1 = false;
+						console.log('关注客户搜索all', res);
+						if (res.data.status === '1') {
+
+							this.companyList = res.data.list.data;
+							this.companyshow = false;
+							this.$store.dispatch('setCompanbol', false);
+							console.log(this.companyList)
+						}
+
+					}, err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					}).catch(err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					})
+				}
+               
+			},
+			dimSearch() {
+				if(this.button1 ==='所有客户'){
+                    this.$store.dispatch('setCompanbol', true);
+			     	this.companyshow = true;
+				    if (this.timer) {
+					   clearTimeout(this.timer);
+				    }
+				     if (this.keyword.length < 1) {
+					    return
+				    }
+				    this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_LIST, {
+						     com_id: this.$store.getters.com_id,
+						     type: 3,
+						     keyword: this.keyword,
+					}).then(res => {
+						this.spinShow = false;
+						this.loading1 = false;
+						console.log('所有客户搜索', res);
 						if (res.data.status === '1') {
 
 							this.options1 = res.data[0];
@@ -179,16 +223,80 @@
 						this.$api.errcallback(err);
 					})
 					, 500)
+				}else if(this.button1 === '我的客户'){
+                      this.$store.dispatch('setCompanbol', true);
+				      this.companyshow = true;
+				      if (this.timer) {
+					      clearTimeout(this.timer);
+				      }
+				      if (this.keyword.length < 1) {
+					      return
+				     }
+				    this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_LIST, {
+						com_id: this.$store.getters.com_id,
+						type: 3,
+						keyword: this.keyword,
+						uid:this.uid,
+					}).then(res => {
+						this.spinShow = false;
+						this.loading1 = false;
+						console.log('我的客户搜索', res);
+						if (res.data.status === '1') {
 
+							this.options1 = res.data[0];
+							this.companyshow = false;
+							console.log(this.options1)
+						}
+
+					}, err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					}).catch(err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					})
+					, 500)
+				}else{
+                     this.$store.dispatch('setCompanbol', true);
+				     this.companyshow = true;
+				     if (this.timer) {
+					    clearTimeout(this.timer);
+				      }
+				     if (this.keyword.length < 1) {
+					    return
+				     }
+				   this.timer = setTimeout(() => this.$http.post(this.$api.CLIENT_COLLECT_LIST, {
+						com_id: this.$store.getters.com_id,
+						keyword: this.keyword,
+					}).then(res => {
+						this.spinShow = false;
+						this.loading1 = false;
+						console.log('关注客户搜索', res);
+						if (res.data.status === '1') {
+
+							this.options1 = res.data.list.data;
+							this.companyshow = false;
+							console.log(this.options1)
+						}
+
+					}, err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					}).catch(err => {
+						this.companyshow = false;
+						this.$api.errcallback(err);
+					})
+					, 500)
+				}
 			},
 			changeClinentList(value) {
-				if (this.button1 === '全部') {
+				if (this.button1 === '所有客户') {
 					this.clientList();
 					this.$store.dispatch('setCusId', this.companyList[0].id);
 					this.$store.dispatch('setCusName', this.companyList[0].name);
 					this.$store.dispatch('setClientId', this.companyList[0].clientid);
 
-				} else {
+				} else if(this.button1 === '关注客户'){
 					this.currentPage = 1;
 					this.spinShow = true;
 					this.$http.post(this.$api.CLIENT_COLLECT_LIST, {
@@ -225,6 +333,35 @@
 						this.companyList = [];
 						this.$api.errcallback(err)
 					})
+				}else{
+					this.spinShow = true;
+				    this.$http.post(this.$api.CLIENT_LIST, {
+					com_id: this.$store.getters.com_id,
+					type: 3,
+					limit: this.limit,
+					page: this.currentPage,
+					uid:this.uid
+				}).then(res => {
+					this.spinShow = false;
+					console.log('我的客户列表', res);
+					if (res.data.status === '1') {
+						this.companyList = res.data[0].data;
+						this.totalPages = res.data[0].total;
+						this.currentPage = res.data[0].current_page;
+						this.lastPage = res.data[0].last_page;
+					} else {
+						this.companyList = [];
+					}
+
+				}, err => {
+					this.spinShow = false;
+					this.companyList = [];
+					this.$api.errcallback(err);
+				}).catch(err => {
+					this.spinShow = false;
+					this.companyList = [];
+					this.$api.errcallback(err);
+				})
 				}
 
 			},
@@ -236,7 +373,8 @@
 						this.$http.delete(this.$api.CLIENT_CANCEL_COLLECT + myid).then(res => {
 							console.log('取消收藏', res);
 							if (res.data.status === '1') {
-								this.changeClinentList('我的收藏');
+								this.changeClinentList('关注客户');
+								// this.button1 = '关注客户';
 								this.$Message.success('取消收藏！');
 							}
 						}, err => {
@@ -252,8 +390,9 @@
 						}).then(res => {
 							console.log('添加收藏', res);
 							if (res.data.status === '1') {
-								
-								this.changeClinentList('我的收藏');
+
+								this.changeClinentList('关注客户');
+								// this.button1 = '关注客户';
 								this.$Message.success('收藏成功！');
 							}
 						}, err => {
@@ -267,135 +406,95 @@
 
 				}
 			},
-			letterSeach(index, item) {
-				this.actindex = index + 1;
-				this.currentPage = 1;
-				this.spinShow = true;
-				this.$http.post(this.$api.CLIENT_LIST, {
-					com_id: this.$store.getters.com_id,
-					type: 3,
-					letter: item,
-					page: this.currentPage,
-					limit: this.limit
-				}).then(res => {
-					console.log('字母查询', res);
-					if (res.data.status === '1') {
-						this.companyList = res.data[0].data;
-						this.totalPages = res.data[0].total;
-						this.currentPage = res.data[0].current_page;
-						this.lastPage = res.data[0].last_page;
-						this.spinShow = false;
-						this.$store.dispatch('setCusId', this.companyList[0].id);
-						this.$store.dispatch('setCusName', this.companyList[0].name);
-						this.$store.dispatch('setClientId', this.companyList[0].clientid);
-					} else {
-						this.spinShow = false;
-						this.companyList = [];
-					}
-				}, err => {
-					this.spinShow = false;
-					this.companyList = [];
-					this.$api.errcallback(err);
-				}).catch(err => {
-					this.spinShow = false;
-					this.companyList = [];
-					this.$api.errcallback(err);
-				})
-			},
 			toggle() {
 				this.bol = !this.bol;
 				// console.log(this.bol);
-				if(this.bol){
+				if (this.bol) {
 					console.log(document)
 					let tem = document.getElementById('useSearch')
-					console.log(tem,8888888888888888)
-				}else{
+					console.log(tem, 8888888888888888)
+				} else {
 					console.log('没有获取到元素')
 				}
 
 			},
 			companylist() {
 				this.companyList = this.options1;
-				this.$store.dispatch('setCompanbol',false);
+				this.$store.dispatch('setCompanbol', false);
 				this.bol = false;
 			},
 			chooseCompany(item) {
 				let arr = [];
 				arr.push(item);
 				this.companyList = arr;
-				this.$store.dispatch('setCompanbol',false);
+				this.$store.dispatch('setCompanbol', false);
 				this.bol = false;
-				console.log(22222,this.companyList);
+				console.log(22222, this.companyList);
 			},
-			doThis(){
+			doThis() {
 				console.log(this.keyword)
-				if(this.keyword.length < 1 || /^\s*$/.test(this.keyword)){
-					this.bol= false
-				}else{
+				if (this.keyword.length < 1 || /^\s*$/.test(this.keyword)) {
+					this.bol = false
+				} else {
 					console.log('值不为空')
 				}
 				console.log("dothis")
 			},
+			pageChange(value){
+				this.currentPage = value;
+				this.clientList();
+			}
 		},
 	}
 </script>
 <template>
 	<div class="client-sidebar">
-		<div class="search_box relative">
-			<div class="search">
-				<div class='search_main absolute' style="display: inline-block;z-index: 222">
-					<i class="iconfont icon-search" @click='toggle'></i>
-					<transition name='seach'>
-						<input v-if='bol' type="input" placeholder="请输入关键字" v-model="keyword" id='search absolute'
-						       autofocus='autofocus' style="height:38px;border: none;z-index: 22;width:140px"
-						       @keyup='doSearch' @keyup.enter='companylist' v-on="{ mouseout : doThis }">
-
-
-						<!-- <Select
-						filterable
-						remote
-						:remote-method="doSearch"
-						:loading="loading1" v-on:on-change='changeValue' v-if='bol'>
-						<Option v-for="(option, index) in options1" :value="option.value" :key="index">{{option.label}}</Option>
-					</Select> -->
-					</transition>
-				</div>
-
-				<ul v-if='companbol' class='hid_company'>
-					<li v-for='item in options1' @click='chooseCompany(item)'>{{item.name}}</li>
-					<Spin size="small" fix v-if="companyshow"></Spin>
-				</ul>
-
-
-				<RadioGroup v-model="button1" type="button" class='btn_box' v-on:on-change='changeClinentList'>
-					<Radio label="全部"></Radio>
-					<Radio label="收藏"></Radio>
-				</RadioGroup>
-				<!-- <div class="letter_box" id='letter_box'><span v-for='(item,index) in letter' v-bind:class='{active:actindex == index+1}' @click='letterSeach(index,item)'>{{item}}</span></div> -->
-			</div>
+		<div class="search_box">
+			  <Row class="relative">
+					<div class='search_main'>
+						<my-search v-on:doSearch='doSearch' v-on:dimSearch='dimSearch' class="searchBox"></my-search>
+				    </div>
+					<ul v-if='companbol' class='hid_company'>
+						<li v-for='item in options1' @click='chooseCompany(item)' style="text-align:left">{{item.name}}</li>
+						<Spin size="small" fix v-if="companyshow"></Spin>
+					</ul>		
+			  </Row>
+				<Row>
+					<div class="choose_box">
+						 <RadioGroup v-model="button1" type="button" class='btn_box' v-on:on-change='changeClinentList'>
+							<Radio label="所有客户" class="rest"></Radio>
+							<Radio label="我的客户"  class="rest"></Radio>
+							<Radio label="关注客户"  class="rest"></Radio>
+						</RadioGroup>
+					</div>
+				</Row>
 		</div>
 		<div class="company-list" id='companyList'>
-
-			<ul id='clientMenu'>
-				<Scroll height='870' :on-reach-bottom="handleReachBottom" :distance-to-edge=-35>
+		  <Scroll  :height='height'>
+			<ul>
+				
 					<template v-for="item in companyList">
 
 						<li class="relative" v-bind:class="{selected:selectedId == item.id}"
 						    @click="changeCompany(item.id,item.name,item.clientid,item.user_id)">
 							<Row>
 								<Col span="24">
-								<p v-bind:title="item.name" class="company-name"><i class='iconfont icon-shoucang1'
+								<p v-bind:title="item.name" class="company-name"><i class='fas fa-star'
 								                                                    @click.self.stop='collectClient(item.id,item.myid)'
 								                                                    :data-myid='item.myid'
-								                                                    v-bind:class="{act:item.myid}"></i>{{item.name}}
-								</p>
+								                                                    v-bind:class="{act:item.myid}"></i>
+                                                                                    {{item.name}}</p>
 								</Col>
 							</Row>
 						</li>
 					</template>
-				</Scroll>
+				
 			</ul>
 			<Spin size="large" fix v-if="spinShow"></Spin>
+		</Scroll>
+		<div class="btn_group">
+		    <Page :current="currentPage" :total="totalPages" simple :page-size='limit' show-elevator show-total v-on:on-change='pageChange'></Page>
+		</div>	
 		</div>
 	</div>
 </template>
@@ -404,28 +503,24 @@
 		background-color: #fff;
 		margin: 3px;
 	}
+	 .searchBox{
+		 width:100% !important;
 
+	 }
 	.search_box {
 		width: 100%;
-		height: 60px;
-		line-height: 60px;
 		border-bottom: solid 1px #ccc;
+		padding:10px 0px;
+		text-align:center;
 	}
-
-	.search {
-		display: inline-block;
-		line-height: 60px;
-		width: 100%;
-		border-radius: 10px;
-		padding-left: 20px;
-
+	.choose_box{
+     margin-top: 10px;
 	}
-
 	.hid_company {
 		position: absolute;
-		top: 59px;
+		top: 32px;
 		z-index: 99;
-		left: 5px;
+		left: 0px;
 		background-color: #fff;
 		width: 190px;
 		min-height: 20px;
@@ -445,37 +540,9 @@
 		background-color: #E0EBF7;
 		color: #108CEE;
 	}
-
-	.letter_box {
+	.company-list{
 		width: 100%;
-		white-space: pre-wrap;
-		line-height: 20px;
-
-	}
-
-	.letter_box span {
-		display: inline-block;
-		cursor: pointer;
-
-	}
-
-	span.active {
-		color: #2d8cf0;
-	}
-
-	.letter_box span:nth-child(2n) {
-		padding: 2px 9px;
-	}
-
-	.btn_box {
-		margin-bottom: 10px;
-		margin-left: 40px;
-		/*margin-right:16px;*/
-	}
-
-	.company-list ul {
-		width: 100%;
-		height: 852px;
+		height: 838px;
 		overflow: hidden;
 		z-index: 992;
 
@@ -608,10 +675,18 @@
 		background-color: #ccc;
 		z-index: 999;
 	}
-
+	.btn_box label{
+		padding: 0 8px;
+	}
+	.btn_group{
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			border-top:1px solid #ccc;
+	}
 	@media (min-width: 1365px) and (max-width: 1919px) {
 		.client-sidebar {
-			width: 12%;
+			width: 12.2%;
 			position: fixed;
 			z-index: 999;
 		}
@@ -627,9 +702,9 @@
 
 		.hid_company {
 			position: absolute;
-			top: 56px;
+			top: 32px;
 			z-index: 99;
-			left: 5px;
+			left: 0px;
 			background-color: #fff;
 			width: 160px;
 			min-height: 20px;
@@ -638,7 +713,9 @@
 			border: 1px solid #ccc;
 
 		}
-
+        .company-list{
+			height: 610px;
+		}
 		.hid_company li {
 
 			white-space: nowrap;
@@ -646,6 +723,15 @@
 			height: 20px;
 			line-height: 20px;
 			cursor: pointer;
+		}
+		.rest{
+			padding: 0 4px !important;
+		}
+		.btn_group{
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			border-top:1px solid #ccc;
 		}
 	}
 </style>

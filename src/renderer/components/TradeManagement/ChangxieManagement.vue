@@ -265,7 +265,7 @@
                 this.cxChart.setOption(this.chartOption)
             },
             gotoChangXie(){
-                this.$router.push('/ChangxieContract');
+                this.$router.push({name:'contract_changxie'});
             },
 	        qianyueList(page){
                 this.loading2 = true;
@@ -337,9 +337,11 @@
                           listData.longpact = {name:'长协合同总计（wkw）',month01:0,month02:0, month03:0,month04:0,month05:0,month06:0, month07:0,month08:0,month09:0,month10:0, month11:0, month12:0,total:0};
                           listData.lp_ratio = {name:'长协比例（%）',month01:0,month02:0, month03:0,month04:0,month05:0,month06:0, month07:0,month08:0,month09:0,month10:0, month11:0, month12:0,total:0}
                           for(let k in listData.annual_forecast.list){
-                             if(listData.annual_forecast.list[k] == null || ''){
+                             if(typeof listData.annual_forecast.list[k] == 'object'){
+                                 
                                  listData.annual_forecast.list[k] = 0;
                              }
+                             console.log(typeof listData.annual_forecast.list[k]);
                           }
                            listData.annual_forecast.list.name = '年度预测合计（wkw）';
                            arr3 = [listData.annual_forecast.list,listData.longpact,listData.lp_ratio];
@@ -349,6 +351,12 @@
                               for(let k in arr3[0]){
                                    arr5.push(k);
                               }
+                         for(let k in listData.annual_forecast.list){
+                             if(typeof listData.annual_forecast.list[k] == 'object'){
+                                 
+                                 listData.annual_forecast.list[k] = 0;
+                             }
+                          }
                           console.log(2,arr5);
                           arr3[0].name='年度预测合计（wkw）';
                           arr3[1].name='长协合同总计（wkw）';
@@ -426,7 +434,7 @@
 					<Page
 							:total="totalPage"
 							:current="currentPage"
-							:page-size="3"
+							:page-size="pageLimit"
 							show-total
 							show-elevator
 							v-on:on-change="qianyueList"

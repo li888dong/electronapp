@@ -157,7 +157,7 @@ export default {
         },
 //        注册新用户时的跳转页
         addUser(){
-            shell.openExternal('http://web.cx8o92.cn/#/login');
+            shell.openExternal('http://web.ecaidata.com');
         },
         //            用以关闭应用
         closeApp() {

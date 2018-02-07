@@ -89,7 +89,7 @@
                 isGo: true,
                 modal1:false,
                 arr:[],
-                m:1
+                m:1,
             }
         },
         components: {
@@ -108,9 +108,16 @@
                 this.file = file;
             },
             changeStatus() {
-                if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
-                     this.bol = true;
-                     this.isGo = true;
+                if(this.file==this.$route.query.filename&& this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12){
+                      this.isGo = true;
+                      this.bol = false;
+                      this.upLoadPowerCompact();
+
+                }else if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
+                    
+                        this.bol = true;
+                        this.isGo = true;
+                     
                 }else{
                     this.hint = true;
                 }
@@ -132,11 +139,9 @@
                             arr.push(obj);
                         }
                         this.dcList = arr;
+                
                         if(this.$route.query.id){
-                    this.formItem.lpcon_no = this.$route.query.lpcon_no;
-                    this.formItem.lpcon_year=this.$route.query.lpcon_year;
-                    this.formItem.signed_num = this.$route.query.signed_num;
-                    if(this.$route.query.signed_status == "签约"){
+                            if(this.$route.query.signed_status == "签约"){
                         this.formItem.signed_status = "1";
                     }else{
                          this.formItem.signed_status = "0";
@@ -147,38 +152,9 @@
                                 this.powerId = parseInt(this.dcList[i].value);
                             }
                         }
-                    this.formItem.signed_day = this.$route.query.signed_day;
-                    this.formItem.signed_price = this.$route.query.signed_price;
-                    this.formItem.exec_date = this.$route.query.exec_date;
-                    this.formItem.business = this.$route.query.business;
-                    this.formItem.tel = this.$route.query.tel;
-                    var arr = this.$route.query.list;
-                    console.log(arr[0]);
-                    this.month.month01 = arr[0].month01;
-                    this.month.month02 = arr[0].month02;
-                    this.month.month03 = arr[0].month03;
-                    this.month.month04 = arr[0].month04;
-                    this.month.month05 = arr[0].month05;
-                    this.month.month06 = arr[0].month06;
-                    this.month.month07 = arr[0].month07;
-                    this.month.month08 = arr[0].month08;
-                    this.month.month08 = arr[0].month08;
-                    this.month.month09 = arr[0].month09;
-                    this.month.month10 = arr[0].month10;
-                    this.month.month11 = arr[0].month11;
-                    this.month.month12 = arr[0].month12;
-                    
-            }else{
-                 for(let k in this.formItem){
-                    this.formItem[k] = '';
-                 };
-                 for(let k in this.month){
-                     this.month[k] = '';
-                 }
-            }
-                    }
-                    
+                        }
                      console.log(this.dcList);
+                    }
 
                 }, err => {
                     this.$api.errcallback(err);
@@ -214,7 +190,7 @@
                     this.formItem.signed_num = parseInt(this.formItem.signed_num);
                     if (this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12) {
                         this.$http.post(this.$api.ALLOT_POWER, this.month).then(res => {
-                            console.log("电量分配", res);
+                            console.log("修改电量分配", res);
                             if (res.data.status==='1') {
                                 this.formItem.d_id = res.data.id;
                                 if (this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.htscdz&&this.formItem.d_id&&this.formItem.remarks && tel_reg.test(this.formItem.tel)) {
@@ -326,7 +302,11 @@
                 this.formItem.signed_status = value;
             },
             changeEmpty() {
-                if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
+                if(this.file == this.$route.query.filename&& this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12){
+                      this.isGo = false;
+                      this.bol = false;
+                      this.upLoadPowerCompact();
+                }else if(this.file && this.formItem.lpcon_no&&this.formItem.lpcon_year&&this.formItem.powerplant&&this.formItem.signed_num&&this.formItem.signed_status && this.formItem.signed_day&&this.formItem.signed_price&&this.formItem.exec_date&&this.formItem.business && this.formItem.tel&&this.formItem.address&&this.formItem.remarks &&this.month.month01&&this.month.month02 &&this.month.month03 && this.month.month04 && this.month.month05 && this.month.month06 && this.month.month07 && this.month.month08 && this.month.month08 &&this.month.month09 && this.month.month10 && this.month.month11 && this.month.month12 ){
                     this.bol = true;
                     this.isGo = false;
                 }else{
@@ -399,6 +379,43 @@
                 top: 200,
                 duration: 3
             });  
+            if(this.$route.query.id){
+                    this.formItem.lpcon_no = this.$route.query.lpcon_no;
+                    this.formItem.lpcon_year=this.$route.query.lpcon_year;
+                    this.formItem.signed_num = this.$route.query.signed_num;
+                    this.formItem.signed_day = this.$route.query.signed_day;
+                    this.formItem.signed_price = this.$route.query.signed_price;
+                    this.formItem.exec_date = this.$route.query.exec_date;
+                    this.formItem.business = this.$route.query.business;
+                    this.formItem.tel = this.$route.query.tel;
+                    this.formItem.remarks = this.$route.query.remarks;
+                    this.file = this.$route.query.filename;
+                    this.formItem.htscdz = this.$route.query.htscdz;
+                    this.month['id'] = this.$route.query.d_id;
+                    var arr = this.$route.query.list;
+                    console.log(arr[0]);
+                    this.month.month01 = arr[0].month01;
+                    this.month.month02 = arr[0].month02;
+                    this.month.month03 = arr[0].month03;
+                    this.month.month04 = arr[0].month04;
+                    this.month.month05 = arr[0].month05;
+                    this.month.month06 = arr[0].month06;
+                    this.month.month07 = arr[0].month07;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month08 = arr[0].month08;
+                    this.month.month09 = arr[0].month09;
+                    this.month.month10 = arr[0].month10;
+                    this.month.month11 = arr[0].month11;
+                    this.month.month12 = arr[0].month12;
+                    
+                }else{
+                      for(let k in this.formItem){
+                         this.formItem[k] = '';
+                      };
+                     for(let k in this.month){
+                         this.month[k] = '';
+                       }
+                    }
         }
     }
 </script>
@@ -408,7 +425,7 @@
 		<Card>
 			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"
 			   style="position: absolute;top: 10px;left: 10px;"></i>
-			<h3 slot="title" style="padding-left: 40px;">添加长协合同</h3>
+			<h3 slot="title" style="padding-left: 40px;">{{$route.query.id?'修改长协合同':'添加长协合同'}}</h3>
 			<Row class="ContractBox">
 				<div class="ContractBox-main">
 					<Form ref="formItem" :model="formItem" :rules='ruleVa' :label-width="110">
@@ -439,7 +456,7 @@
 							<Col span="8">
 							<Form-item label="签约电量" prop='signed_num'>
 								<Input v-model="formItem.signed_num" placeholder="请输入签约电量"></Input> <i
-									class="wkw">万KVA</i>
+									class="wkw">MW.h</i>
 							</Form-item>
 							</Col>
 

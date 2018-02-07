@@ -2,528 +2,402 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f173bf77-0a43-4a97-8bc3-49caf53b122a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/Update.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-console-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-datetime-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-debug-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-errorhandling-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l1-2-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-file-l2-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-handle-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-heap-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-interlocked-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-libraryloader-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-localization-l1-2-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-memory-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-namedpipe-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processenvironment-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processthreads-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-processthreads-l1-1-1.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-profile-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-rtlsupport-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-string-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-synch-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-synch-l1-2-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-sysinfo-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-timezone-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-core-util-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-conio-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-convert-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-environment-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-filesystem-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-heap-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-locale-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-math-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-multibyte-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-private-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-process-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-runtime-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-stdio-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-string-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-time-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/api-ms-win-crt-utility-l1-1-0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/blink_image_resources_200_percent.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/client.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/content_resources_200_percent.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/content_shell.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/d3dcompiler_47.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ffmpeg.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/icudtl.dat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/libEGL.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/libGLESv2.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/am.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ar.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/bg.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/bn.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ca.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/cs.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/da.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/de.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/el.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/en-GB.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/en-US.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/es-419.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/es.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/et.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fa.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fake-bidi.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fi.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fil.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/fr.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/gu.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/he.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hi.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hr.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/hu.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/id.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/it.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ja.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/kn.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ko.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/lt.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/lv.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ml.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/mr.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ms.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/nb.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/nl.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pl.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pt-BR.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/pt-PT.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ro.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ru.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sk.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sl.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sr.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sv.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/sw.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/ta.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/te.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/th.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/tr.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/uk.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/vi.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/zh-CN.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/locales/zh-TW.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/msvcp140.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/natives_blob.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/node.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/pdf_viewer_resources.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/256x256.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/icon.icns" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/build/icons/icon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/b1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/icons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo蓝底.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/logo（没有文字）.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/公司 (1).png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/天气.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/消息.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/登录.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/蓝底logo（小）.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/PingFang SC Semibold.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/PingHei-light.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/0.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/1.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/10.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/100.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/101.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/102.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/103.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/104.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/105.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/106.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/107.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/108.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/109.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/11.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/110.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/111.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/112.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/113.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/114.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/115.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/116.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/117.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/118.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/119.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/12.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/120.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/121.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/122.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/123.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/124.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/125.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/126.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/127.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/128.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/129.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/13.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/130.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/131.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/132.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/133.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/134.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/14.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/15.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/17.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/18.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/19.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/2.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/20.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/21.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/22.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/23.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/24.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/25.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/26.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/27.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/28.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/29.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/3.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/30.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/31.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/32.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/33.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/34.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/35.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/36.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/37.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/38.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/39.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/4.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/40.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/41.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/42.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/43.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/44.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/45.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/46.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/47.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/48.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/49.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/5.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/50.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/51.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/52.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/53.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/54.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/55.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/56.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/57.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/58.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/59.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/6.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/60.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/61.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/62.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/63.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/65.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/66.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/67.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/68.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/69.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/7.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/70.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/71.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/72.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/73.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/74.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/75.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/76.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/77.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/78.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/79.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/8.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/80.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/81.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/82.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/83.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/84.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/85.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/86.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/87.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/88.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/89.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/9.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/90.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/91.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/92.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/93.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/94.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/95.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/96.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/97.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/98.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/99.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/images/static.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/file-16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/file-64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/folder-16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/folder-64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/images/go-up.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_left.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_right.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/align_top.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/images/refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/image.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/select-files-en.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/select-files-zh-CN.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/images/swfupload.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/electron.asar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/snapshot_blob.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ucrtbase.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/ui_resources_200_percent.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/vcruntime140.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/views_resources_200_percent.pak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/Setup.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/Setup.msi" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/smartpower-0.0.0-full.nupkg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/Gruntfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/LICENSES.chromium.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.babelrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/build.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/dev-client.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/dev-runner.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.main.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.renderer.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.electron-vue/webpack.web.config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.eslintignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.eslintrc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/electronapp.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/appveyor.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/dist/electron/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/dist/web/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package-lock.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package/Gruntfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/package/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/index.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/main/index.dev.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/main/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/Api.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/App.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/assets/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/AnnualForecast.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/BidChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/BidManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/Button.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/MyTab.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Button/Panel.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/AddClient.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/Client.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAddAgreement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAddCeliang.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientAgreement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientCaiji.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientDetail.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientHeader.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientIndexCompare.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientList.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientPiancha.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientSidebar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientSituation.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientTerminalData.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientUserManage.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientUserManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/ClientZonglan.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/FuheChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/GonglvChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/JieXianTu.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/PowerDatabase.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Client/YougongChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ClientList.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ClientSidebar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/CompanyPowerProgress.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/CompletionRate.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/AddContractManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/ChangxieContract.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/ContractManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/inputs.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/ContractManagement/saleContract.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Echarts-demo/Echarts-demo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Echarts-demo/Echarts-demo2.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/AssetInfo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/Equipment.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentException.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentInform.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentInstall.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentRun.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/EquipmentStatus.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/PagingTool.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Equipment/test.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Exmaple.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/FastBoot.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/AnnualForecast - 副本.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/AnnualForecast.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/ImportData.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/MonthForecast.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/UserForecast.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Forecast/YearForecast.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Header.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/HenanMap.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/DataIndex.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/FiveData.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/HomeCalendar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerTimeframeProgress.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerTimeframeYM.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/PowerUse.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/ProcessPlan.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/RealTimePowerChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/TradePi.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/WorkRemind.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/calendar-plugin/calendar-input.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Home/calendar-plugin/calendar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/HomeCalendar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/IndexCompare.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/JieXianTu.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LandingPage.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LandingPage/SystemInformation.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart1.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart2.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/LineChart3.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Main.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/MainPage.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/MainSidebar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Map.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/Message.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageCenter.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageDetail.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageMain.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageSend.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Message/MessageSidebar.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Pagenation.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PowerTimeFrame.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PowerTimeframeProgress.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/PreviousBidingChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/RealTimePowerChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/SandTable.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Table/Table.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Testcart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Button.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/MyTab.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Panel.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/Table.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/myFenye.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/mySearch.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/mySearchTwo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Tool/upLoad.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/BidChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/BidManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/MatchingManagement.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/PreviousBidingChart.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradePie.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradePieTwo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradeManagement/TradeSituation.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/TradePi.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/Weather.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/login.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/components/planInfo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/router/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Client.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/ClientList.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Counter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Global.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/Login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/src/renderer/store/modules/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/china.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/china.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/common.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/dateformat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/flare.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_fontclass.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_symbol.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/demo_unicode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/font/iconfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/henan.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/iconfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/anchor/anchor.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/autoheight/autoheight.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/baidumap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/baidumap/map.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/clearhtml/clearhtml.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/code.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/prettify.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/code/prettify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/emoticons/emoticons.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/filemanager/filemanager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/flash/flash.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/image/image.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/insertfile/insertfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/lineheight/lineheight.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/link/link.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/map/map.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/map/map.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/media/media.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/multiimage/multiimage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/pagebreak/pagebreak.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/plainpaste/plainpaste.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/preview/preview.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/quickformat/quickformat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/table/table.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/html/3.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/template/template.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/kindeditor/plugins/wordpaste/wordpaste.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/laydate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/font/iconfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/laydate/theme/default/laydate.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/myiVew.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/normalize.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/Radio.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/button.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/form.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/homeCalendar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/menu.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/myIview.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/static/resetIview/table.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/.eslintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/specs/Launch.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/e2e/utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/karma.conf.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/resources/app/test/unit/specs/LandingPage.spec.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client-win32-x64/version" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/installer/RELEASES" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.eot" afterPath="$PROJECT_DIR$/static/font/iconfont.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.ttf" afterPath="$PROJECT_DIR$/static/font/iconfont.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.woff" afterPath="$PROJECT_DIR$/static/font/iconfont.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.eot" afterPath="$PROJECT_DIR$/static/iconfont.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.ttf" afterPath="$PROJECT_DIR$/static/iconfont.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.woff" afterPath="$PROJECT_DIR$/static/iconfont.woff" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/Api.js" afterPath="$PROJECT_DIR$/src/renderer/Api.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/App.vue" afterPath="$PROJECT_DIR$/src/renderer/App.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/AddClient/AddClient.vue" afterPath="$PROJECT_DIR$/src/renderer/components/AddClient/AddClient.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Button/Panel.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Button/Panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/AddClient.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/AddClient.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/Client.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/Client.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientAddAgreement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientAddAgreement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientAddCeliang.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientAddCeliang.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientAgreement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientAgreement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientCaiji.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientCaiji.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientDetail.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientDetail.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientHeader.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientHeader.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientIndexCompare.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientIndexCompare.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientList.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientList.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientPiancha.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientPiancha.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientSidebar.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientSidebar.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientSituation.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientSituation.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientTerminalData.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientTerminalData.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientUserManage.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientUserManage.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientUserManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientUserManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/ClientZonglan.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/ClientZonglan.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/FuheChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/FuheChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/GonglvChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/GonglvChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/JieXianTu.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/JieXianTu.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Client/YougongChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Client/YougongChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/ContractManagement/AddContractManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/ContractManagement/AddContractManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/ContractManagement/ChangxieContract.vue" afterPath="$PROJECT_DIR$/src/renderer/components/ContractManagement/ChangxieContract.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/ContractManagement/ContractManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/ContractManagement/ContractManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/ContractManagement/inputs.vue" afterPath="$PROJECT_DIR$/src/renderer/components/ContractManagement/inputs.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/ContractManagement/saleContract.vue" afterPath="$PROJECT_DIR$/src/renderer/components/ContractManagement/saleContract.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/AssetInfo.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/AssetInfo.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/Equipment - 副本.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/Equipment - 副本.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/Equipment.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/Equipment.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentException.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentException.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentInform.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentInform.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentInstall.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentInstall.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentRun.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentRun.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentStatus.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/EquipmentStatus.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/PagingTool.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/PagingTool.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Equipment/test.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Equipment/test.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/FastBoot.vue" afterPath="$PROJECT_DIR$/src/renderer/components/FastBoot.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Forecast/ImportData.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Forecast/ImportData.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Forecast/MonthForecast.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Forecast/MonthForecast.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Forecast/UserForecast.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Forecast/UserForecast.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Forecast/YearForecast.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Forecast/YearForecast.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Header.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Header.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/HenanMap.vue" afterPath="$PROJECT_DIR$/src/renderer/components/HenanMap.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/DataIndex.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/DataIndex.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/FiveData.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/FiveData.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/HomeCalendar.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/HomeCalendar.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/PowerTimeframeProgress.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/PowerTimeframeProgress.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/PowerTimeframeYM.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/PowerTimeframeYM.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/PowerUse.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/PowerUse.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/ProcessPlan.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/ProcessPlan.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/TradePi.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/TradePi.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/WorkRemind.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/WorkRemind.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/calendar-plugin/calendar-input.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Home/calendar-plugin/calendar-input.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Home/calendar-plugin/calendar.css" afterPath="$PROJECT_DIR$/src/renderer/components/Home/calendar-plugin/calendar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/IndexCompare.vue" afterPath="$PROJECT_DIR$/src/renderer/components/IndexCompare.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/LineChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/LineChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/MainPage.vue" afterPath="$PROJECT_DIR$/src/renderer/components/MainPage.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/MainSidebar.vue" afterPath="$PROJECT_DIR$/src/renderer/components/MainSidebar.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Message/Message.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Message/Message.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Message/MessageCenter.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Message/MessageCenter.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Message/MessageDetail.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Message/MessageDetail.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Message/MessageSend.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Message/MessageSend.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Message/MessageSidebar.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Message/MessageSidebar.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Pagenation.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Pagenation.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/SandTable.vue" afterPath="$PROJECT_DIR$/src/renderer/components/SandTable.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/Button.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/Button.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/MyTab.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/MyTab.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/Panel.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/Panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/myFenye.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/myFenye.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/mySearch.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/mySearch.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/mySearchTwo.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/mySearchTwo.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Tool/upLoad.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Tool/upLoad.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/BidChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/BidChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/BidManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/BidManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/MatchingManagement.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/MatchingManagement.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/PreviousBidingChart.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/PreviousBidingChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradePie.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradePie.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradePieTwo.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradePieTwo.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradeSituation.vue" afterPath="$PROJECT_DIR$/src/renderer/components/TradeManagement/TradeSituation.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/Weather.vue" afterPath="$PROJECT_DIR$/src/renderer/components/Weather.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/login.vue" afterPath="$PROJECT_DIR$/src/renderer/components/login.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/components/planInfo.vue" afterPath="$PROJECT_DIR$/src/renderer/components/planInfo.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/libs/table2excel.js" afterPath="$PROJECT_DIR$/src/renderer/libs/table2excel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/libs/util.js" afterPath="$PROJECT_DIR$/src/renderer/libs/util.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/locale/index.js" afterPath="$PROJECT_DIR$/src/renderer/locale/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/locale/locale.js" afterPath="$PROJECT_DIR$/src/renderer/locale/locale.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/main.js" afterPath="$PROJECT_DIR$/src/renderer/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/router/index.js" afterPath="$PROJECT_DIR$/src/renderer/router/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/router/router.js" afterPath="$PROJECT_DIR$/src/renderer/router/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/index.js" afterPath="$PROJECT_DIR$/src/renderer/store/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/Chart.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/Chart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/Client.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/Client.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/Counter.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/Counter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/Global.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/Global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/Login.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/Login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/app.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/index.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/store/modules/user.js" afterPath="$PROJECT_DIR$/src/renderer/store/modules/user.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/styles/common.less" afterPath="$PROJECT_DIR$/src/renderer/styles/common.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/styles/fonts/ionicons.svg" afterPath="$PROJECT_DIR$/src/renderer/styles/fonts/ionicons.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/styles/loading.less" afterPath="$PROJECT_DIR$/src/renderer/styles/loading.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/template/index.ejs" afterPath="$PROJECT_DIR$/src/renderer/template/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/vendors/vendors.base.js" afterPath="$PROJECT_DIR$/src/renderer/vendors/vendors.base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/vendors/vendors.exten.js" afterPath="$PROJECT_DIR$/src/renderer/vendors/vendors.exten.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/Main.vue" afterPath="$PROJECT_DIR$/src/renderer/views/Main.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/access/access-test.vue" afterPath="$PROJECT_DIR$/src/renderer/views/access/access-test.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/access/access.less" afterPath="$PROJECT_DIR$/src/renderer/views/access/access.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/access/access.vue" afterPath="$PROJECT_DIR$/src/renderer/views/access/access.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/advanced-router.less" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/advanced-router.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/argument-page.vue" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/argument-page.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/expandRow.vue" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/expandRow.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/order-info.vue" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/order-info.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/shopping-info.vue" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/component/shopping-info.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/advanced-router/mutative-router.vue" afterPath="$PROJECT_DIR$/src/renderer/views/advanced-router/mutative-router.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/403.less" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/403.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/403.vue" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/403.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/404.less" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/404.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/404.vue" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/404.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/500.less" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/500.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/500.vue" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/500.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/error-page.less" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/error-page.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/error-page/error-page.vue" afterPath="$PROJECT_DIR$/src/renderer/views/error-page/error-page.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/article-publish/article-publish.less" afterPath="$PROJECT_DIR$/src/renderer/views/form/article-publish/article-publish.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/article-publish/article-publish.vue" afterPath="$PROJECT_DIR$/src/renderer/views/form/article-publish/article-publish.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/article-publish/preview.less" afterPath="$PROJECT_DIR$/src/renderer/views/form/article-publish/preview.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/article-publish/preview.vue" afterPath="$PROJECT_DIR$/src/renderer/views/form/article-publish/preview.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/work-flow/work-flow.less" afterPath="$PROJECT_DIR$/src/renderer/views/form/work-flow/work-flow.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/form/work-flow/work-flow.vue" afterPath="$PROJECT_DIR$/src/renderer/views/form/work-flow/work-flow.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/countUp.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/countUp.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/dataSourcePie.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/dataSourcePie.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/inforCard.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/inforCard.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/map.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/map.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/mapDataTable.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/mapDataTable.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/serviceRequests.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/serviceRequests.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/styles/infor-card.less" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/styles/infor-card.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/styles/to-do-list-item.less" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/styles/to-do-list-item.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/toDoListItem.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/toDoListItem.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/userFlow.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/userFlow.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/components/visiteVolume.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/components/visiteVolume.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/home.less" afterPath="$PROJECT_DIR$/src/renderer/views/home/home.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/home.vue" afterPath="$PROJECT_DIR$/src/renderer/views/home/home.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-city-value.js" afterPath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-city-value.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-geography-value.js" afterPath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-geography-value.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-style-json.js" afterPath="$PROJECT_DIR$/src/renderer/views/home/map-data/get-style-json.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/international/international.less" afterPath="$PROJECT_DIR$/src/renderer/views/international/international.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/international/international.vue" afterPath="$PROJECT_DIR$/src/renderer/views/international/international.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/login.less" afterPath="$PROJECT_DIR$/src/renderer/views/login.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/login.vue" afterPath="$PROJECT_DIR$/src/renderer/views/login.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/breadcrumb-nav.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/breadcrumb-nav.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/fullscreen.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/fullscreen.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/components/locking-page.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/components/locking-page.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/components/unlock.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/components/unlock.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/lockscreen.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/lockscreen.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/styles/unlock.less" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/lockscreen/styles/unlock.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/message-tip.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/message-tip.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/components/sidebarMenu.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/components/sidebarMenu.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/components/sidebarMenuShrink.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/components/sidebarMenuShrink.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/shrinkable-menu.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/shrinkable-menu.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/styles/menu.less" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/shrinkable-menu/styles/menu.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/tags-page-opened.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/tags-page-opened.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main-components/theme-switch/theme-switch.vue" afterPath="$PROJECT_DIR$/src/renderer/views/main-components/theme-switch/theme-switch.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/main.less" afterPath="$PROJECT_DIR$/src/renderer/views/main.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/message/message.less" afterPath="$PROJECT_DIR$/src/renderer/views/message/message.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/message/message.vue" afterPath="$PROJECT_DIR$/src/renderer/views/message/message.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/area-linkage.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/area-linkage.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/area-linkage.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/area-linkage.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/components/al-cascader.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/components/al-cascader.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/components/al-selector.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/components/al-selector.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/util/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/area-linkage/util/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/CountTo.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/CountTo.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/count-to.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/count-to.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/count-to.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/count-to/count-to.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/draggable-list/draggable-list.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/draggable-list/draggable-list.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/draggable-list/draggable-list.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/draggable-list/draggable-list.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/file-upload/file-upload.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/file-upload/file-upload.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/file-upload/upload.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/file-upload/upload.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/cropper.min.css" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/cropper.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/image-editor.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/image-editor.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/image-editor.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/image-editor/image-editor.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/markdown-editor.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/markdown-editor.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/markdown-editor.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/markdown-editor.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/simplemde.min.css" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/markdown-editor/simplemde.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane-page.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane-page.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/split-pane.less" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/split-pane.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/split-pane.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/split-pane/split-pane/split-pane.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/text-editor.vue" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/text-editor.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/langs/en_GB.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/langs/en_GB.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/langs/zh_CN.GB2312.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/langs/zh_CN.GB2312.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/advlist/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/anchor/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autolink/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autoresize/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/autosave/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/bbcode/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/charmap/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/code/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/css/prism.css" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/css/prism.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/codesample/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/colorpicker/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/contextmenu/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/directionality/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/emoticons/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullpage/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/fullscreen/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/help/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/hr/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/image/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/imagetools/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/importcss/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/insertdatetime/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/legacyoutput/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/link/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/lists/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/media/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/nonbreaking/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/noneditable/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/pagebreak/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/paste/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/preview/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/print/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/save/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/searchreplace/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/spellchecker/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/tabfocus/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/table/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/template/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textcolor/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/textpattern/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/toc/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/css/visualblocks.css" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/css/visualblocks.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualblocks/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/visualchars/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/plugin.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/plugin.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/plugins/wordcount/plugin.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.svg" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/fonts/tinymce-small.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/fonts/tinymce.svg" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/fonts/tinymce.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/skin.mobile.min.css" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/skins/lightgray/skin.mobile.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/theme.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/theme.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/theme.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/inlite/theme.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/index.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/theme.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/theme.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/theme.min.js" afterPath="$PROJECT_DIR$/src/renderer/views/my-components/text-editor/tinymce/themes/modern/theme.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/own-space/own-space.less" afterPath="$PROJECT_DIR$/src/renderer/views/own-space/own-space.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/own-space/own-space.vue" afterPath="$PROJECT_DIR$/src/renderer/views/own-space/own-space.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/ExportExcel.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/ExportExcel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/canEditTable.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/canEditTable.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/dragableTable.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/dragableTable.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/editable-table.less" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/editable-table.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/multiPageTable.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/multiPageTable.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/table.less" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/table.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/components/table_data.js" afterPath="$PROJECT_DIR$/src/renderer/views/tables/components/table_data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/data/search.js" afterPath="$PROJECT_DIR$/src/renderer/views/tables/data/search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/data/table2csv.js" afterPath="$PROJECT_DIR$/src/renderer/views/tables/data/table2csv.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/data/table2excel.js" afterPath="$PROJECT_DIR$/src/renderer/views/tables/data/table2excel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/dragable-table.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/dragable-table.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/editable-table.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/editable-table.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/exportable-table.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/exportable-table.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/searchable-table.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/searchable-table.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/renderer/views/tables/table-to-image.vue" afterPath="$PROJECT_DIR$/src/renderer/views/tables/table-to-image.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bank.json" afterPath="$PROJECT_DIR$/static/bank.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/bdiotvizplayer.min.js" afterPath="$PROJECT_DIR$/static/bdiotvizplayer.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/china.js" afterPath="$PROJECT_DIR$/static/china.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/china.json" afterPath="$PROJECT_DIR$/static/china.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/common.css" afterPath="$PROJECT_DIR$/static/common.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/dateformat.js" afterPath="$PROJECT_DIR$/static/dateformat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/debunce.js" afterPath="$PROJECT_DIR$/static/debunce.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/flare.json" afterPath="$PROJECT_DIR$/static/flare.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/demo.css" afterPath="$PROJECT_DIR$/static/font/demo.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/demo_fontclass.html" afterPath="$PROJECT_DIR$/static/font/demo_fontclass.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/demo_symbol.html" afterPath="$PROJECT_DIR$/static/font/demo_symbol.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/demo_unicode.html" afterPath="$PROJECT_DIR$/static/font/demo_unicode.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.css" afterPath="$PROJECT_DIR$/static/font/iconfont.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.js" afterPath="$PROJECT_DIR$/static/font/iconfont.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/font/iconfont.svg" afterPath="$PROJECT_DIR$/static/font/iconfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/henan.json" afterPath="$PROJECT_DIR$/static/henan.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.css" afterPath="$PROJECT_DIR$/static/iconfont.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.js" afterPath="$PROJECT_DIR$/static/iconfont.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/iconfont.svg" afterPath="$PROJECT_DIR$/static/iconfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/laydate/laydate.js" afterPath="$PROJECT_DIR$/static/laydate/laydate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/laydate/theme/default/font/iconfont.svg" afterPath="$PROJECT_DIR$/static/laydate/theme/default/font/iconfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/laydate/theme/default/laydate.css" afterPath="$PROJECT_DIR$/static/laydate/theme/default/laydate.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/normalize.css" afterPath="$PROJECT_DIR$/static/normalize.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/numberadd.js" afterPath="$PROJECT_DIR$/static/numberadd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/Radio.css" afterPath="$PROJECT_DIR$/static/resetIview/Radio.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/button.css" afterPath="$PROJECT_DIR$/static/resetIview/button.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/form.css" afterPath="$PROJECT_DIR$/static/resetIview/form.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/homeCalendar.css" afterPath="$PROJECT_DIR$/static/resetIview/homeCalendar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/menu.css" afterPath="$PROJECT_DIR$/static/resetIview/menu.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/myIview.css" afterPath="$PROJECT_DIR$/static/resetIview/myIview.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/reset.less" afterPath="$PROJECT_DIR$/static/resetIview/reset.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/resetIview/table.css" afterPath="$PROJECT_DIR$/static/resetIview/table.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/verification.js" afterPath="$PROJECT_DIR$/static/verification.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/银行.html" afterPath="$PROJECT_DIR$/static/银行.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -535,19 +409,51 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-513">
-              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+            <state relative-caret-position="27">
+              <caret line="146" column="40" lean-forward="false" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#67#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/renderer/components/login.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4968">
+              <caret line="184" column="14" lean-forward="false" selection-start-line="184" selection-start-column="14" selection-end-line="184" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.electron-vue/build.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>builder</find>
+      <find>webConfig</find>
+      <find>ready</find>
+      <find>mainWindow</find>
+      <find>login-s</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -558,6 +464,9 @@
         <option value="$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Client/PowerDatabase.vue" />
         <option value="$PROJECT_DIR$/src/renderer/components/Home/RealTimePowerChart.vue" />
+        <option value="$PROJECT_DIR$/.electron-vue/build.js" />
+        <option value="$PROJECT_DIR$/dist/electron/index.html" />
+        <option value="$PROJECT_DIR$/dist/electron/home.html" />
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
@@ -571,13 +480,14 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/client/node_modules" />
+    <handled-path value="$PROJECT_DIR$/build/win-unpacked/resources/app.asar.unpacked/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1924" />
-    <option name="height" value="1047" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -594,43 +504,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <expand>
-            <path>
-              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="renderer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="electronapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="electronapp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="renderer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electronapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electronapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="D:/Program Files/nodejs/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../power" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
@@ -646,7 +541,90 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="false" name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="build:web" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build:web" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="build:clean" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build:clean" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="postinstall" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="postinstall" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -656,18 +634,31 @@
       <envs />
       <method />
     </configuration>
-    <configuration name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
       <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
     </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="npm.dev" />
+      <item index="1" class="java.lang.String" itemvalue="npm.build:web" />
+      <item index="2" class="java.lang.String" itemvalue="npm.build:clean" />
+      <item index="3" class="java.lang.String" itemvalue="npm.postinstall" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="npm.dev" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="npm.build:web" />
+        <item index="1" class="java.lang.String" itemvalue="npm.postinstall" />
+        <item index="2" class="java.lang.String" itemvalue="npm.build:clean" />
+        <item index="3" class="java.lang.String" itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -683,36 +674,60 @@
       <updated>1511711122340</updated>
       <workItem from="1511711123715" duration="1227000" />
       <workItem from="1513839428304" duration="1092000" />
+      <workItem from="1517807977223" duration="643000" />
+      <workItem from="1517886554492" duration="7002000" />
+      <workItem from="1517916297907" duration="8526000" />
+      <workItem from="1517984341971" duration="45000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2319000" />
+    <option name="totallyTimeSpent" value="18535000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1924" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14899258" sideWeight="0.49019608" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14805058" sideWeight="0.47712418" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14899258" sideWeight="0.50980395" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14899258" sideWeight="0.52287585" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3264642" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14899258" sideWeight="0.52287585" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14899258" sideWeight="0.47712418" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -722,11 +737,60 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3915">
+          <caret line="146" column="40" lean-forward="false" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4968">
+          <caret line="184" column="14" lean-forward="false" selection-start-line="184" selection-start-column="14" selection-end-line="184" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/build.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/renderer/components/TradeManagement/ChangxieManagement.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2376">
           <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -734,7 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4455">
           <caret line="165" column="27" lean-forward="true" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -742,7 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1485">
           <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="165" column="27" lean-forward="false" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -766,15 +826,90 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/views/access/access.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="140" lean-forward="false" selection-start-line="0" selection-start-column="140" selection-end-line="0" selection-end-column="140" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/renderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="26" lean-forward="false" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/electron/home.html" />
+    <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.web.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/webpack.renderer.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2952">
+          <caret line="9" column="40" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/electron/electron.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="94" column="8" lean-forward="false" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1817">
+          <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/renderer/components/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4968">
+          <caret line="184" column="14" lean-forward="false" selection-start-line="184" selection-start-column="14" selection-end-line="184" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.electron-vue/build.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        <state relative-caret-position="162">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="146" column="40" lean-forward="false" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

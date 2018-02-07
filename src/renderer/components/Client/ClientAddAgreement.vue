@@ -1,6 +1,8 @@
 <script>
     import MyUpload from '../Tool/upLoad.vue'
-    import {lengthNum} from '../../../../static/verification.js'
+    import bank from '../../../../static/bank.json'
+    import {telphone, codeLength, officeReg,email} from '../../../../static/verification.js'
+import { defaultCoreCipherList } from 'constants';
 
     export default {
         components: {'my-upload': MyUpload},
@@ -8,12 +10,11 @@
         data() {
             return {
                 cus_id: '',
-                htfs: '',
                 file: '',
                 bol: false,
-                defaultArea: false,
                 addList: {
-                    user_name: '',
+                    id:undefined,
+                    cus_name:'',
                     con_no: '',
                     way: '',
                     ly_used: '',
@@ -21,16 +22,22 @@
                     bndyjdl: '',
                     bndyjzdfh: '',
                     htscdz: '',
-                    deadline: '',
-                    htid: '',
+                    bank_name:'',
+                    bank_account:'',
+                    address:'',
+                    zipcode:'',
+                    contact:'',
+                    phone:'',
+                    fax:'',
+                    sub_branch:'',
+                    way_param: ''
                 },
                 index: '',
+                res_s:[],
                 id: '',
                 hint2: false,
                 hint: false,
                 isKong: false,
-                htscdz: '',
-                way_param: '',
                 way_param1: '',
                 way_param2: '',
                 way_param3: '',
@@ -59,219 +66,50 @@
                         label: '固定服务',
                     }
                 ],
-                modal1: false,
                 modal2: false,
-                modal3: false,
-                modal4:false,
                 tip: '',
-                user_nums: [],
-                user_num: '',
-                columns1: [
-                    {
-                        title: '营销用户编号',
-                        key: 'user_id',
-                        align: 'center',
-                        width: '150'
-
-                    }, {
-                        title: '用户电压等级',
-                        key: 'user_grade',
-                        align: 'center',
-                        width: '120'
-                    },
-                    {
-                        title: '报装容量',
-                        key: 'bzrl',
-                        align: 'center',
-                        width: '90'
-                    }, {
-                        title: '用电类别',
-                        key: 'ydlb',
-                        width: '150',
-                        align: 'center'
-                    }, {
-                        title: '用电单位类型',
-                        key: 'yddwlb',
-                        width: '150',
-                        align: 'center'
-                    }, {
-                        title: '用电地址',
-                        align: 'center',
-                        key: 'yddz'
-                    }, {
-                        title: '操作',
-                        key: 'zc',
-                        align: 'center',
-                        render: (h, params) => {
-                            console.log(params.row);
-                            return h('div', [
-                                h('span', {
-                                    style: {
-                                        color: '#3EC7F5',
-                                        cursor: 'pointer',
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.modal3 = true;
-                                            this.id = params.row.id;
-                                            this.addTableList.user_id = params.row.user_id;
-                                            this.addTableList.user_grade = params.row.user_grade;
-                                            this.addTableList.bzrl = params.row.bzrl;
-                                            this.addTableList.ydlb = params.row.ydlb;
-                                            this.addTableList.yddwlb = params.row.yddwlb;
-                                            var arr = params.row.yddz.split(" ");
-                                            console.log(arr);
-                                            this.addTableList.yddz = [arr[0], arr[1], arr[2]];
-                                            this.addTableList.stree = arr[3];
-                                        }
-                                    }
-                                }, '修改'),
-                                h('span', {
-                                    style: {
-                                        color: '#3EC7F5',
-                                        cursor: 'pointer',
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.deleteUserNum(params.row.id, params.index);
-                                        }
-                                    }
-                                }, '删除')
-                            ])
-                        }
-                    }
-                ],
-                data1: [],
-                addTableList: {
-                    user_id: '',
-                    user_grade: '',
-                    bzrl: '',
-                    ydlb: '',
-                    yddwlb: '',
-                    yddz: [],
-                    stree: '',
-                },
-                addValidate: {
-                    user_name: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    con_no: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    ly_used: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    ly_maxload: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    bndyjdl: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ],
-                    bndyjzdfh: [
-                        {required: true, message: '内容不能为空', trigger: 'blur'}
-                    ]
-
-                },
-                defaultAddress: 'true',
+                emptyRule: {required: true, message: '内容不能为空', trigger: 'blur'},
+				changeRule:{required: true, message: '内容不能为空', trigger: 'change'},
                 address1: '',
                 address2: '',
                 address3: '',
-                way: '',
-                modalValidator: {
-                    user_id: [{required: true, message: '内容不能为空', trigger: 'blur'}, {
-                        validator: lengthNum,
-                        trigger: 'blur'
-                    }],
-                    user_grade: [{required: true, message: '内容不能为空', trigger: 'change'}],
-                    bzrl: [{required: true, message: '内容不能为空', trigger: 'blur'}],
-                    ydlb: [{required: true, message: '内容不能为空', trigger: 'change'}],
-                    yddwlb: [{required: true, message: '内容不能为空', trigger: 'change'}],
-                    stree: [{required: true, message: '内容不能为空', trigger: 'blur'}]
-                }
+                loading1:false,
+                bankList:[],
+                way:'',
+                data1:'',
+                data2:'',
+                msg:'',
+                changeBol:false
             }
         },
         methods: {
             //文件上传
             uploadComplete(result) {
                 console.log(result);
-                this.addList.htid = result.fileid;
+                this.addList.htscdz = result.fileid;
                 this.addCompact();
                 this.bol = false;
             },
             selectSuccess(file) {
                 this.file = file;
+                this.changeBol = true;
+                console.log(this.changeBol);
             },
-            addCompact() {
-                if (this.$route.query.id) {
-                    if ( this.addList.user_name && this.addList.con_no && this.addList.way&&this.addList.ly_used&&this.addList.ly_maxload && this.addList.bndyjdl&&this.addList.bndyjdl && this.addList.bndyjzdfh&&this.addList.deadline) {
-                        if (this.way_param) {
-                            if (this.user_nums.length > 0) {
-                                this.addList.ly_used = parseFloat(this.addList.ly_used);
-                                this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
-                                this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
-                                this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
-                                this.$http.post(this.$api.POWER_ADD_COMPACT, {
-                                    id: this.$route.query.id,
-                                    cus_name: this.addList.user_name,
-                                    con_no: this.addList.con_no,
-                                    way: this.addList.way,
-                                    way_param: this.way_param,
-                                    ly_used: this.addList.ly_used,
-                                    ly_maxload: this.addList.ly_maxload,
-                                    bndyjdl: this.addList.bndyjdl,
-                                    bndyjzdfh: this.addList.bndyjzdfh,
-                                    htscdz: this.addList.htid,
-                                    user_nums: this.user_nums.join(','),
-                                    deadline: this.addList.deadline[0] + '/' + this.addList.deadline[1]
-
-                                }).then(res => {
-                                    console.log('修改成功', res);
-                                    if (res.data.status==='1') {
-                                        for (let key in this.addList) {
-                                            this.addList[key] = '';
-                                        }
-                                        this.file = '';
-                                        for (let key in this.data1) {
-                                            this.data1 = ''
-                                        }
-                                        this.$router.push('/saleContract');
-                                    }
-                                }, err => {
-                                    this.$api.errcallback(err);
-                                }).catch(err => {
-                                    this.$api.errcallback(err);
-                                })
-                            }
-                        }
-                    } else {
-                        this.hint2 = true;
-                    }
-                } else {
-                    if (this.addList.user_name && this.addList.con_no && this.addList.way&&this.addList.ly_used&&this.addList.ly_maxload && this.addList.bndyjdl&&this.addList.bndyjdl && this.addList.bndyjzdfh&&this.addList.deadline) {
-                        if (this.way_param) {
-                            if (this.user_nums.length > 0) {
-                                this.addList.ly_used = parseFloat(this.addList.ly_used);
-                                this.addList.ly_maxload = parseFloat(this.addList.ly_maxload);
-                                this.addList.bndyjdl = parseFloat(this.addList.bndyjdl);
-                                this.addList.bndyjzdfh = parseFloat(this.addList.bndyjzdfh);
-                                this.$http.post(this.$api.POWER_ADD_COMPACT, {
-                                    cus_name: this.addList.user_name,
-                                    con_no: this.addList.con_no,
-                                    way: this.addList.way,
-                                    way_param: this.way_param,
-                                    ly_used: this.addList.ly_used,
-                                    ly_maxload: this.addList.ly_maxload,
-                                    bndyjdl: this.addList.bndyjdl,
-                                    bndyjzdfh: this.addList.bndyjzdfh,
-                                    htscdz: this.addList.htid,
-                                    user_nums: this.user_nums.join(','),
-                                    deadline: this.addList.deadline[0] + '/' + this.addList.deadline[1]
-
-                                }).then(res => {
+            addCompact(){
+                console.log(this.addList.htscdz,'0000');
+                if (this.addList.cus_name && this.addList.con_no && this.addList.way&&this.data1&&this.data2&&this.addList.way_param) {
+                                this.addList.ly_used = Number(this.addList.ly_used);
+                                this.addList.ly_maxload = Number(this.addList.ly_maxload);
+                                this.addList.bndyjdl = Number(this.addList.bndyjdl);
+                                this.addList.bndyjzdfh = Number(this.addList.bndyjzdfh);
+                                this.addList['deadline']= this.data1 + '/' + this.data2;
+                                this.addList['province'] = this.res_s[0];
+                                this.addList['city'] = this.res_s[1];
+                                this.addList['county'] = this.res_s[2];
+                                this.$http.post(this.$api.POWER_ADD_COMPACT,this.addList).then(res => {
                                     console.log('添加合同', res);
-                                    let msg = res.data.msg;
-                                    if (msg === "添加成功!") {
+
+                                    if (res.data.status ==='1') {
                                         for (let key in this.addList) {
                                             this.addList[key] = '';
                                         }
@@ -279,29 +117,33 @@
                                         for (let key in this.data1) {
                                             this.data1 = ''
                                         }
-                                        this.$router.push('/hetong');
-                                    } else if (msg === '客户名称不存在!') {
+                                        this.$router.push({path:'/client-detail',query:{target:'contract'}});
+                                    }else{
+                                        this.msg = res.data.msg;
                                         this.modal2 = true;
-                                    }else if(msg ==='合同已存在！'){
-                                         this.modal4 = true;
                                     }
                                 }, err => {
                                     this.$api.errcallback(err);
                                 }).catch(err => {
                                     this.$api.errcallback(err);
                                 })
-                            }
-                        }
                     } else {
                         this.hint2 = true;
+                        console.log(13324);
                     }
-                }
-            },
+                 },
             changeStatus() {
-                if (this.file && this.addList.user_name && this.addList.con_no && this.addList.way&&this.addList.ly_used&&this.addList.ly_maxload && this.addList.bndyjdl&&this.addList.bndyjdl && this.addList.bndyjzdfh&&this.addList.deadline &&this.user_nums.length > 0 && this.way_param) {
+                   console.log(this.addList);
+                   console.log(this.addList.way_param);
+                   console.log(this.addList.bank_name);
+                if(this.file&&!this.changeBol&& this.addList.cus_name && this.addList.con_no && this.addList.way&&this.addList.way_param&&this.data1&&this.data2){
+                    this.bol = false;
+                    this.addCompact();
+                } else if (this.file &&this.changeBol && this.addList.cus_name && this.addList.con_no && this.addList.way&& this.addList.way&&this.addList.way_param&&this.data1&&this.data2) {
                     this.bol = true;
                 } else {
                     this.hint2 = true;
+                    console.log(2392304903);
                 }
             },
             saveBtn() {
@@ -311,7 +153,7 @@
 
                 if (this.addList.way === '分成模式') {
                     if (this.way_param1 && this.way_param2) {
-                        this.way_param = this.way_param1 + ":" + this.way_param2;
+                        this.addList.way_param = this.way_param1 + ":" + this.way_param2;
                         console.log(this.way_param);
                         for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
@@ -322,7 +164,7 @@
                     }
                 } else if (this.addList.way === '保底模式') {
                     if (this.way_param3) {
-                        this.way_param = this.way_param3;
+                        this.addList.way_param = this.way_param3;
                         for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
@@ -330,7 +172,7 @@
                     }
                 } else if (this.addList.way === '分成保底') {
                     if (this.way_param4 && this.way_param5 && this.way_param6) {
-                        this.way_param = this.way_param4 + "," + this.way_param5 + ":" + this.way_param6;
+                        this.addList.way_param = this.way_param4 + "," + this.way_param5 + ":" + this.way_param6;
                         for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
@@ -338,7 +180,7 @@
                     }
                 } else if (this.addList.way === '分成叠加') {
                     if (this.way_param7 && this.way_param8 && this.way_param9) {
-                        this.way_param = this.way_param7 + ":" + this.way_param8 + "," + this.way_param9;
+                        this.addList.way_param = this.way_param7 + ":" + this.way_param8 + "," + this.way_param9;
                         for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
@@ -346,63 +188,14 @@
                     }
                 } else if (this.addList.way === '固定服务') {
                     if (this.way_param10 !== '') {
-                        this.way_param = this.way_param10;
+                        this.addList.way_param = this.way_param10;
                         for (i = 0; i < div.length; i++) {
                             div[i].style.display = 'none';
                         }
                         this.way = "固定服务";
                     }
                 }
-            },
-            saveData() {
-                if (!this.isEmpty(this.addTableList)) {
-                    let arr = this.addTableList.yddz;
-                    let address = arr.join(' ') + ' ' + this.addTableList.stree;
-                    let data1 = {
-                        id: '',
-                        user_id: this.addTableList.user_id,
-                        user_grade: this.addTableList.user_grade,
-                        bzrl: this.addTableList.bzrl,
-                        ydlb: this.addTableList.ydlb,
-                        yddwlb: this.addTableList.yddwlb,
-                        yddz: address
-                    };
-                    this.$http.post(this.$api.USER_NUM_ADD, {
-                        cus_id: this.cus_id,
-                        user_no: data1.user_id,
-                        vol_level: data1.user_grade,
-                        packing_capacity: data1.bzrl,
-                        category: data1.ydlb,
-                        unit_type: data1.yddwlb,
-                        address: data1.yddz
-                    }).then(res => {
-                        console.log('用户户号添加', res);
-                        if (res.data.status==='1') {
-                            console.log(res.data.id);
-                            data1["id"] = res.data.id;
-                            this.data1.push(data1);
-                            this.user_nums.push(res.data.id);
-                        }
-                        this.addTableList.yddz = [];
-                        this.addTableList.user_id = '';
-                        this.addTableList.user_grade = '';
-                        this.addTableList.bzrl = '';
-                        this.addTableList.ydlb = '';
-                        this.addTableList.yddwlb = '';
-                        this.addTableList.stree = '';
-
-                        this.modal1 = false;
-                    }, err => {
-                        this.$api.errcallback(err);
-                    }).catch(err => {
-                        this.$api.errcallback(err);
-                    })
-                } else if (this.isEmpty(this.addTableList)) {
-                    this.hint = true;
-                }
-
-
-            },
+              },
             isEmpty(obj) {
                 for (let key in obj) {
                     if (obj[key] != '') {
@@ -441,153 +234,112 @@
             cancel() {
                 this.modal2 = false;
             },
-            isDefaultAddress(value) {
-                if (value === true) {
-                    this.$http.post(this.$api.CLIENT_BASIC_INFO, {cus_id: this.cus_id}).then(res => {
-                        console.log('用户基本信息', res);
-                        if(res.data.status==='1'){
-                        this.address1 = res.data.data.province;
-                        this.address2 = res.data.data.city;
-                        this.address3 = res.data.data.county;
-                        this.defaultAddress = 'true';
-                        this.addTableList.yddz = [this.address1, this.address2, this.address3];
-                        console.log(this.addTableList.yddz);
-                        this.addTableList.stree = res.data.data.address;
-                        }
-                      
-                    }, err => {
-                        this.$api.errcallback(err);
-                    }).catch(err => {
-                        this.$api.errcallback(err);
-                    })
-                } else {
-                    this.addTableList.yddz =[];
-                    this.addTableList.stree = '';
-                }
+            time1(value){
+               console.log(value,4444);
+               this.data1 = value;
             },
-            saveUpdate() {
-                let arr = this.addTableList.yddz;
-                let address = arr.join(' ') + ' ' + this.addTableList.stree;
-                let data1 = {
-                    id: this.id,
-                    user_id: this.addTableList.user_id,
-                    user_grade: this.addTableList.user_grade,
-                    bzrl: this.addTableList.bzrl,
-                    ydlb: this.addTableList.ydlb,
-                    yddwlb: this.addTableList.yddwlb,
-                    yddz: address
-                };
-                this.$http.post(this.$api.USER_NUM_ADD, {
-                    id: this.id, cus_id: this.cus_id,
-                    user_no: this.addTableList.user_id,
-                    vol_level: this.addTableList.user_grade,
-                    packing_capacity: this.addTableList.bzrl,
-                    category: this.addTableList.ydlb,
-                    unit_type: this.addTableList.yddwlb,
-                    address: address
-                }).then(res => {
-                    console.log("修改", res);
-                    if (res.data.status==='1') {
-                        this.data1.splice(this.index, 1, data1);
+            time2(value){
+                console.log(value,55555);
+                this.data2=value;
+            },
+            updateCompact(id) {
+                this.$http.post(this.$api.SALE_CONTRACT_DETAIL,{id:id}).then(res=>{
+                    console.log('售电合同详情',res);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         this.addList.id = id;
+                         this.addList.cus_name = this.cus_name;
+                         var div = document.getElementById('name');
+                         var input = div.getElementsByClassName('ivu-input')[0];
+                         input.readOnly = true;
+                         this.addList.con_no = data.con_no;
+                         this.addList.way = data.way;
+                         this.addList.ly_used = data.ly_used;
+                        this.addList.ly_maxload = data.ly_maxload;
+                        this.addList.bndyjdl = data.bndyjdl;
+                        this.addList.bndyjzdfh = data.bndyjzdfh;
+                        this.addList.htscdz = data.htscdz;
+                        this.addList.bank_name = data.bank_name;
+                        this.addList.bank_account = data.bank_account;
+                        this.addList.address = data.address;
+                        this.addList.zipcode = data.zipcode;
+                        this.addList.contact = data.contact;
+                        this.addList.phone = data.phone;
+                        this.addList.fax = data.fax;
+                        this.addList.sub_branch = data.sub_branch;
+                        this.addList.way_param = data.way_param;
+                        this.data1 = data.deadline.split('/')[0];
+                        this.data2 = data.deadline.split('/')[1];
+                        if(this.addList.way_param&&this.addList.way){
+                            switch(this.addList.way){
+                               case '分成模式':
+                                     this.way_param1 = this.addList.way_param.split(':')[0];
+                                     this.way_param2 = this.addList.way_param.split(':')[1];
+                                break;
+                                case '保底模式':
+                                     this.way_param3 = this.addList.way_param;
+                                break;
+                                case '分成保底':
+                                      this.way_param4 = this.addList.way_param.split(',')[0];
+                                      this.way_param5 = this.addList.way_param.split(',')[1].split(':')[0];
+                                      this.way_param6 = this.addList.way_param.split(',')[1].split(':')[1];
+                                break;
+                                case '分成叠加':
+                                     this.way_param7 = this.addList.way_param.split(',')[0].split(':')[0];
+                                     this.way_param8 = this.addList.way_param.split(',')[0].split(':')[1];
+                                     this.way_param9 = this.addList.way_param.split(',')[1];
+                                break;
+                                case '固定服务':
+                                     this.way_param10 = this.addList.way_param;
+                                break;
+                                default:
+                                break;
+                           }
+                        }
+                        this.file = data.filename;
+                        this.changeBol = false;
                     }
-                    this.addTableList.yddz = [];
-                    this.addTableList.user_id = '';
-                    this.addTableList.user_grade = '';
-                    this.addTableList.bzrl = '';
-                    this.addTableList.ydlb = '';
-                    this.addTableList.yddwlb = '';
-                    this.addTableList.stree = '';
-                    this.modal3 = false;
-                }, err => {
+                },err=>{
                     this.$api.errcallback(err);
-                }).catch(err => {
+                }).catch(err=>{
                     this.$api.errcallback(err);
                 })
-            },
-            deleteUserNum(id, index) {
-                this.$http.post(this.$api.USER_NUM_DEL, {id: id}).then(res => {
-                    console.log("删除", res);
-                    if (res.data.status==='1') {
-                        this.data1.splice(index, 1);
-                    }
-                }, err => {
-                    this.$api.errcallback(err);
-                }).catch(err => {
-                    this.$api.errcallback(err);
-                })
-            },
-            timeArea(value) {
-                this.addList.deadline = value;
-                console.log(value);
-            },
-            updateCompact() {
-                if (this.$route.query.id) {
-                    console.log(this.$route.query);
-                    this.addList.user_name = this.$route.query.cus_name;
-                    var div = document.getElementById('name');
-                    var input = div.getElementsByClassName('ivu-input')[0];
-                    input.readOnly = true;
-                    this.addList.con_no = this.$route.query.con_no;
-                    this.addList.way = this.$route.query.way;
-                    this.addList.ly_used = this.$route.query.ly_used;
-                    this.addList.ly_maxload = this.$route.query.ly_maxload;
-                    this.addList.bndyjdl = this.$route.query.bndyjdl;
-                    this.addList.bndyjzdfh = this.$route.query.bndyjzdfh;
-                    var arr4 = this.$route.query.deadline.split('/');
-                    this.addList.deadline = [arr4[0], arr4[1]];
-                    var arr = [];
-                    var arr2 = [];
-                    switch (this.addList.way) {
-                        case "分成模式" :
-                            arr = this.$route.query.way_param.split(':');
-                            this.way_param1 = arr[0];
-                            this.way_param2 = arr[1];
-                            break;
-                        case "保底模式":
-                            this.way_param3 = this.$route.query.way_param;
-                            break;
-                        case "分成保底":
-                            arr = this.$route.query.way_param.split(',');
-                            arr2 = arr[1].split(":");
-                            this.way_param4 = arr[0];
-                            this.way_param5 = arr2[0];
-                            this.way_param6 = arr2[1];
-                            break;
-                        case "分成叠加":
-                            arr = this.$route.query.way_param.split(',');
-                            arr2 = arr[0].split(":");
-                            this.way_param7 = arr2[0];
-                            this.way_param8 = arr2[1];
-                            this.way_param9 = arr[1];
-                            break;
-                        case "固定服务":
-                            this.way_param10 = this.$route.query.way_param;
-                            break;
-                        default:
-                            break;
-                    }
-                    for (let i = 0; i < this.$route.query.usernos.length; i++) {
-                        var obj = {
-                            id: this.$route.query.usernos[i].id,
-                            user_id: this.$route.query.usernos[i].user_no,
-                            user_grade: this.$route.query.usernos[i].vol_level,
-                            bzrl: this.$route.query.usernos[i].packing_capacity,
-                            ydlb: this.$route.query.usernos[i].category,
-                            yddwlb: this.$route.query.usernos[i].unit_type,
-                            yddz: this.$route.query.usernos[i].address
-                        };
-                        this.data1.push(obj);
-                        var arr3 = this.$route.query.user_nums.split(',');
-                        for (let i = 0; i < arr3.length; i++) {
-                            this.user_nums.push(arr3[i]);
-                        }
-                    }
-                }
             },
             addressChange(value) {
                 this.addTableList.yddz = value;
                 console.log(value);
-            }
+            },
+            getBank(query) {
+				let bankSet = new Set();
+				this.bankList = [];
+				if (query) {
+					setTimeout(() => {
+						for (let key in bank) {
+							if (new RegExp(query).test(bank[key].bank)) {
+								bankSet.add(bank[key].bank)
+							}
+						}
+						Array.from(bankSet).map(i => {
+							this.bankList.push({
+								label: i,
+								value: i
+							})
+						});
+					},1)
+				} else {
+					setTimeout(() => {
+						for (let key in bank) {
+							bankSet.add(bank[key].bank)
+						}
+						Array.from(bankSet).map(i => {
+							this.bankList.push({
+								label: i,
+								value: i
+							})
+						});
+					},1)
+				}
+			},
         },
         watch: {
             hint: function () {
@@ -598,106 +350,167 @@
             },
             hint2: function () {
                 this.disappear();
+            },
+            '$route':function () {
+                this.getBank();
+            }
+        },
+        computed:{
+            addValidate:function(){
+                return {
+                    cus_name:[this.emptyRule],
+                    con_no: [this.emptyRule],
+                    ly_used: [this.emptyRule],
+                    ly_maxload: [this.emptyRule],
+                    bndyjdl: [this.emptyRule],
+                    bndyjzdfh: [this.emptyRule],
+                    way:[this.changeRule],
+                    bank_name :[this.changeRule],
+                    bank_account:[this.emptyRule],
+                    address:[this.emptyRule],
+                    zipcode:[this.emptyRule],
+                    contact:[this.emptyRule],
+                    phone:[this.emptyRule,{validator: officeReg, trigger: 'blur'}],
+                    fax:[this.emptyRule,{validator: officeReg, trigger: 'blur'}],
+                    sub_branch:[this.emptyRule]
+                }
+            },
+            cus_name:function(){
+                return this.$store.getters.cus_name;
             }
         },
         mounted() {
+            this.getBank();
             if (this.$route.query.cus_name && this.$route.query.active ==='添加') {
-                this.addList.user_name = this.$route.query.cus_name;
+                this.addList.cus_name = this.$route.query.cus_name;
                 var div = document.getElementById('name');
                 var input = div.getElementsByClassName('ivu-input')[0];
                 input.readOnly = true;
                 // console.log(this.$route.query.cus_id)
             } else {
-                this.addList.user_name = '';
+                this.addList.cus_name = '';
             }
             this.cus_id = this.$route.query.cus_id || this.$store.getters.cus_id;
-            this.updateCompact();
+            if(this.$route.query.id){
+                  this.updateCompact(this.$route.query.id);
+            }
         }
     }
 </script>
 <template>
-	<div class="main-container relative">
+	<div class="main-container relative addAgreement">
 		<Card class="main-container-panel">
-			<i class="iconfont icon-fanhui1 back" @click="$router.go(-1)"></i>
-			<h3 slot="title" style="padding-left:40px">添加售电合同</h3>
+			<h3 slot="title">{{$route.query.active?'添加售电合同':'修改售电合同'}}</h3>
 			<Form class="form-container" :label-width='130' ref='addList' :model='addList' :rules='addValidate'>
-				<h3 class="title">基本信息</h3>
-				<FormItem label='客户名称' prop="user_name">
-					<Input v-model='addList.user_name' id='name'></Input>
-				</FormItem>
-				<FormItem label='合同编号' prop="con_no">
-					<Input v-model='addList.con_no'></Input>
-				</FormItem>
-				<FormItem label='合同方式' prop='way' class='mgb_0'>
-
-					<Select v-model="addList.way" style="width:200px;" placeholder="合同模式">
-						<Option v-for="item in htfsList" :value="item.value" :key="item.value">{{item.label}} </Option>
-					</Select>
-
-					<div class="htfs-container" v-show="addList.way === '分成模式'">
-						<span>分成比例:</span>
-						<Input class="width-90" placeholder="售电公司占比" v-model='way_param1'></Input> ：
-						<Input class="width-90" placeholder="用户占比" v-model='way_param2'></Input>
-					</div>
-					<div class="htfs-container" v-show="addList.way === '保底模式'">
-						<span>保底价格:</span>
-						<Input class="width-90" placeholder="输入保底价格" v-model='way_param3'></Input>
-					</div>
-					<div class="htfs-container" v-show="addList.way === '分成保底'">
-						<span>保底价格:</span>
-						<Input class="width-90 mgr-10" placeholder="输入保底价格" v-model='way_param4'></Input>
-						<span>分成比例:</span>
-						<Input class="width-90" placeholder="售电公司占比" v-model='way_param5'></Input> ：
-						<Input class="width-90" placeholder="用户占比" v-model='way_param6'></Input>
-					</div>
-					<div class="htfs-container" v-show="addList.way === '分成叠加'">
-						<span>分成比例:</span>
-						<Input class="width-90" placeholder="售电公司占比" v-model='way_param7'></Input> ：
-						<Input class="width-90 mgr-10" placeholder="用户占比" v-model='way_param8'></Input>
-						<span>叠加价格:</span>
-						<Input placeholder="叠加价格" class="width-90" v-model='way_param9'></Input>
-					</div>
-					<div class="htfs-container" v-show="addList.way === '固定服务'">
-						<span>服务费率:</span>
-						<Input class="width-90" placeholder="输入服务费率" v-model='way_param10'></Input><span>/kw.h</span>
-					</div>
-					<div class="btn-save">
-						<Button :type="way===''?'primary':'default'" @click='saveBtn()'>保存</Button>
-						<span v-if='isKong' style="font-size: 12px;color:red;margin-left:5px;">内容不能为空</span>
-					</div>
-					<div style="height: 24px;line-height: 24px;color: #ccc;">
-						<span v-if='way == "分成模式"'>分成比例：{{way_param1}} : {{way_param2}}</span>
-						<span v-if='way == "保底模式"'>保底价格：{{way_param3}} </span>
-						<span v-if='way == "分成保底"'>保底价格：{{way_param4}},分成比例：{{way_param5}} : {{way_param6}} </span>
-						<span v-if='way == "分成叠加"'>分成比例：{{way_param7}} : {{way_param8}},叠加价格:{{way_param9}} </span>
-						<span v-if='way == "固定服务"'>服务费率:{{way_param10}}</span>
-					</div>
-				</FormItem>
-				<FormItem label='合同起止日期'>
-					<DatePicker
-							type="daterange"
-							placement="bottom-end"
-							placeholder="请选择合同起止日期"
-							size='large' class='add_hetong' v-on:on-change="timeArea"
-							:value='addList.deadline'></DatePicker>
-				</FormItem>
-				<FormItem label='上年度用电量' prop='ly_used'>
-					<Input v-model='addList.ly_used'></Input>
-					<span>MW.h</span>
-				</FormItem>
-				<FormItem label='上年度最大负荷量' prop='ly_maxload'>
-					<Input v-model='addList.ly_maxload'></Input>
-					<span>MW.h</span>
-				</FormItem>
-				<FormItem label='本年度预计电量' prop='bndyjdl'>
-					<Input v-model='addList.bndyjdl'></Input>
-					<span>MW.h</span>
-				</FormItem>
-				<FormItem label='本年度预计最大负荷' prop='bndyjzdfh'>
-					<Input v-model='addList.bndyjzdfh'></Input>
-					<span>MW.h</span>
-				</FormItem>
-				<FormItem label='合同上传' class='myTab'>
+                <Row>
+                    <Col span='9'>
+                         	<FormItem label='客户名称' prop='cus_name'>
+					            <Input v-model='addList.cus_name' id='name'></Input>
+				            </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span='9'>
+				     <FormItem label='合同编号' prop="con_no">
+                            <Input v-model='addList.con_no'></Input>
+                    </FormItem>
+                    </Col>
+                </Row>
+                 <Row>
+                     <Col span='9'>
+                              <FormItem label='合同周期'>
+                                       <DatePicker
+                                             type="date"
+                                             placement="bottom-end"
+                                             placeholder="请选择"
+                                             class='add_hetong' v-on:on-change="time1"
+                                            :value='data1'></DatePicker>&nbsp;<DatePicker
+                                             type="date"
+                                             placement="bottom-end"
+                                             placeholder="请选择"
+                                             class='add_hetong' v-on:on-change="time2"
+                                             :value='data2'></DatePicker>
+                             </FormItem> 
+                     </Col>
+                </Row>
+                <Row>
+                    <Col span='9'>
+                       <FormItem label='合同方式' prop='way' class='mgb_0'>
+                                <Select v-model="addList.way" placeholder="合同模式">
+						             <Option v-for="item in htfsList" :value="item.value" :key="item.value">{{item.label}} </Option>
+					            </Select>
+                                 <div style="height: 13px;line-height: 13px;color: #ccc;font-siz:12px">
+						             <span v-if='way == "分成模式"'>分成比例：{{way_param1}} : {{way_param2}}</span>
+						             <span v-if='way == "保底模式"'>保底价格：{{way_param3}} </span>
+						             <span v-if='way == "分成保底"'>保底价格：{{way_param4}},分成比例：{{way_param5}} : {{way_param6}} </span>
+						             <span v-if='way == "分成叠加"'>分成比例：{{way_param7}} : {{way_param8}},叠加价格:{{way_param9}} </span>
+						             <span v-if='way == "固定服务"'>服务费率:{{way_param10}}</span>
+					            </div>
+					     </FormItem>
+                    </Col>
+                    <Col span='15'>
+                            <FormItem class="mgl_0">
+                                 <div class="htfs-container" v-show="addList.way === '分成模式'">
+						             <span>分成比例:</span>
+						             <Input class="width-90" placeholder="售电公司占比" v-model='way_param1'></Input> ：
+						             <Input class="width-90" placeholder="用户占比" v-model='way_param2'></Input>
+					            </div>
+					             <div class="htfs-container" v-show="addList.way === '保底模式'">
+						              <span>保底价格:</span>
+						              <Input class="width-90" placeholder="输入保底价格" v-model='way_param3'></Input>
+					             </div>
+					             <div class="htfs-container" v-show="addList.way === '分成保底'">
+						              <span>保底价格:</span>
+						              <Input class="width-90 mgr-10" placeholder="输入保底价格" v-model='way_param4'></Input>
+						              <span>分成比例:</span>
+						              <Input class="width-90" placeholder="售电公司占比" v-model='way_param5'></Input> ：
+						              <Input class="width-90" placeholder="用户占比" v-model='way_param6'></Input>
+					            </div>
+					            <div class="htfs-container" v-show="addList.way === '分成叠加'">
+						             <span>分成比例:</span>
+						             <Input class="width-90" placeholder="售电公司占比" v-model='way_param7'></Input> ：
+						             <Input class="width-90 mgr-10" placeholder="用户占比" v-model='way_param8'></Input>
+						             <span>叠加价格:</span>
+						             <Input placeholder="叠加价格" class="width-90" v-model='way_param9'></Input>
+					            </div>
+					            <div class="htfs-container" v-show="addList.way === '固定服务'">
+						             <span>服务费率:</span>
+						             <Input class="width-90" placeholder="输入服务费率" v-model='way_param10'></Input><span>/kw.h</span>
+					             </div>
+					             <div class="btn-save">
+						              <Button :type="way===''?'primary':'default'" @click='saveBtn()'>保存</Button>
+						              <span v-if='isKong' style="font-size: 12px;color:red;margin-left:5px;">内容不能为空</span>
+					             </div>
+                            </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span='9'>
+                         <FormItem label='上年度用电量' prop='ly_used'>
+					         <Input v-model='addList.ly_used'></Input>
+				        </FormItem>
+                    </Col>
+                    <Col span='9' offset='2'>
+                       <FormItem label='上年度最大负荷量' prop='ly_maxload'>
+					         <Input v-model='addList.ly_maxload'></Input>
+				       </FormItem>
+                    </Col>
+                </Row>
+               <Row>
+                   <Col span='9'>
+                        <FormItem label='本年度预计电量' prop='bndyjdl'>
+					         <Input v-model='addList.bndyjdl'></Input>
+				        </FormItem>
+                   </Col>
+                   <Col span='9' offset='2'>
+                         <FormItem label='本年度预计最大负荷' prop='bndyjzdfh'>
+					         <Input v-model='addList.bndyjzdfh'></Input>
+				        </FormItem>
+                   </Col>
+               </Row>
+				
+				<Row>
+                    <FormItem label='合同上传' class='myTab'>
 					<my-upload @complete="uploadComplete" :url='$api.UPLOAD_COMPACT' @selectComplete='selectSuccess'
 					           :beginUpload='bol'>
 						<Input placeholder='请选择文件' class='file' v-model='file'></Input>
@@ -705,203 +518,99 @@
 					</my-upload>
 					<br>
 					<i class="typeTip">仅支持PDF格式</i><span>{{tip}}</span><br/>
-				</FormItem>
-				<FormItem label='用户户号' class='myTab'>
-					<Table :columns='columns1' :data='data1' width='1000' height='150' size="small"></Table>
-					<div style="width:1000px;text-align: right;">
-						<Button type="primary" style='margin-top:10px;' @click='modal1=true'>添加</Button>
-					</div>
-
-				</FormItem>
-				<FormItem>
-					<div class="btn-group">
-						<Button type="primary" class="mgr-20" @click='changeStatus()'>保存</Button>
-						<Button type="default" @click="$router.go(-1)">取消</Button>
-					</div>
-					<div v-if='hint2'>
-						<Alert type="warning" show-icon
-						       style='width: 460px;margin:5px auto;color: red;margin-left:450px' class='cont_empty'>内容不能为空并请确认合同方式是否保存或是否已选择要上传的合同！
-						</Alert>
-					</div>
-				</FormItem>
+                   </FormItem>
+                </Row>
+                <h4>开户行信息</h4>
+                <Row>
+                    <Col span='9'>
+                         <FormItem label="选择开户银行">
+                              <Row>
+                                 <Col span='8'>
+                                    <FormItem  prop='bank_name'>
+                                        <Select
+								             v-model = "addList.bank_name"
+								             filterable
+                                             clearable
+								             remote
+								             :remote-method="getBank"
+								             :loading="loading1"
+                                             class="bank_list">
+							                 <Option :value="item.value" v-for='(item, index) in bankList' :key="index">{{item.label}}</Option>
+						                 </Select>
+                                     </FormItem>
+                                </Col>
+                               <Col span='15' offset='1'>
+                                     <FormItem prop='sub_branch'>
+                                         <Input class="bank_infor" placeholder='添加开户信息 如"郑州花园路支行"' v-model="addList.sub_branch"></Input>
+                                    </FormItem>
+                               </Col>
+                             </Row>
+				        </FormItem>
+                    </Col>
+                </Row>
+				<Row>
+                    <Col span='9'>
+                          <FormItem label='银行账户' prop='bank_account'>
+                             <Input v-model='addList.bank_account'></Input>
+                         </FormItem>  
+                    </Col>
+                </Row>
+               <Row>
+                    <FormItem label="通讯地址" class='address'>
+                         <Row>
+                             <Col span="8">
+                                 <FormItem>
+                                     <al-selector data-type='name' v-model="res_s" level=2 />
+                                 </FormItem>
+                             </Col>
+                             <Col span="8" style="margin-left:10px">
+                                  <FormItem prop='address'>
+                                      <Input v-model="addList.address" placeholder="请输入详细通讯地址" class="address"></Input>
+                                  </FormItem>
+                             </Col>
+                             <Col span="2" style="margin-left:10px">
+                                <FormItem prop='zipcode'>
+                                     <Input v-model="addList.zipcode" placeholder="邮政编码" :maxlength="6" class="code"></Input>
+                                 </FormItem>
+                             </Col>
+                         </Row>
+                    </FormItem>
+               </Row>
+               <Row>
+                   <Col span='9'>
+                        <FormItem label='联系人' prop='contact'>
+                            <Input v-model='addList.contact' placeholder="联系人姓名"></Input>
+                       </FormItem> 
+                   </Col>
+               </Row>
+                <Row>
+                    <Col span='9'>
+                         <FormItem label='固定电话' prop='phone'>
+                             <Input v-model='addList.phone' placeholder="格式：区号-办公固定号码"></Input>
+                         </FormItem> 
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span='9'>
+                        <FormItem label='传真号码' prop='fax'>
+                             <Input v-model='addList.fax' placeholder="格式：区号-传真号码"></Input>
+                         </FormItem> 
+                    </Col>
+                </Row>
+                 <Row>
+                    <FormItem>
+					     <div class="btn-group">
+						     <Button type="primary" class="mgr-20" @click='changeStatus()'>保存</Button>
+						     <Button type="default" @click="$router.go(-1)">取消</Button>
+					    </div>
+					     <div v-if='hint2'>
+						    <Alert type="warning" show-icon
+						       style='width: 460px;margin:5px auto;color: red;margin-left:450px' class='cont_empty'>合同编号，合同周期，合同方式及上传合同不能为空！
+						    </Alert>
+					    </div>
+                     </FormItem>
+                 </Row>
 			</Form>
-
-			<!--遮罩层-->
-			<Modal v-model="modal1" :styles="{top:'280px'}" class="addAgreement-modal" width="850px;">
-				<h3 slot="header" class="title">添加营销用户编号</h3>
-				<Form class="add-msg" :model='addTableList' :label-width='100' :rules='modalValidator'>
-					<FormItem label='营销用户编号:' prop='user_id'><Input class="width-200" placeholder="用户户号"
-					                                                v-model='addTableList.user_id'></Input></FormItem>
-					<FormItem label='用户电压等级:' prop='user_grade'><Select class="width-200"
-					                                                    v-model='addTableList.user_grade'>
-						<Option value="0.4kV">0.4kV</Option>
-						<Option value="6.3kV">6.3kV</Option>
-						<Option value="10kV">10kV</Option>
-						<Option value="20kV">20kV</Option>
-						<Option value="35kV">35kV</Option>
-						<Option value="66kV">66kV</Option>
-						<Option value="110kV">110kV</Option>
-						<Option value="220kV">220kV</Option>
-						<Option value="330kV">330kV</Option>
-						<Option value="500kV">500kV</Option>
-						<Option value="750kV">750kV</Option>
-						<Option value="1000kV">1000kV</Option>
-					</Select></FormItem>
-					<FormItem label='报装容量:' prop='bzrl'><Input class="width-200"
-					                                           v-model='addTableList.bzrl'></Input><span>KVA</span>
-					</FormItem>
-					<FormItem label='用电类别:' prop='ydlb'><Select class="width-200" v-model='addTableList.ydlb'>
-						<Option value="居民生活用电">居民生活用电</Option>
-						<Option value="大工业中小化肥">大工业中小化肥</Option>
-						<Option value="大工业其它优待">大工业其它优待</Option>
-						<Option value="乡村居民生活用电">乡村居民生活用电</Option>
-						<Option value="城镇居民生活用电">城镇居民生活用电</Option>
-						<Option value="中小学教学用电">中小学教学用电</Option>
-						<Option value="农业生产用电">农业生产用电</Option>
-						<Option value="农业排灌">农业排灌</Option>
-						<Option value="贫困县农业排灌用电">贫困县农业排灌用电</Option>
-						<Option value="一般工商业">一般工商业</Option>
-						<Option value="非工业">非工业</Option>
-						<Option value="普通工业中小化肥">普通工业中小化肥</Option>
-						<Option value="商业用电">商业用电</Option>
-						<Option value="趸售">趸售</Option>
-						<Option value="趸售大工业">趸售大工业</Option>
-						<Option value="趸售普工、非普工业">趸售普工、非普工业</Option>
-						<Option value="趸售非居民">趸售非居民</Option>
-						<Option value="趸售居民生活用电">趸售居民生活用电</Option>
-						<Option value="趸售农业生产用电">趸售农业生产用电</Option>
-						<Option value="趸售商业用电">趸售商业用电</Option>
-						<Option value="其它用电">其它用电</Option>
-						<Option value="大用户直购电">大用户直购电</Option>
-						<Option value="考核">考核</Option>
-						<Option value="大工业用电">大工业用电</Option>
-						<Option value="抽水蓄能">抽水蓄能</Option>
-						<Option value="售邻省">售邻省</Option>
-						<Option value="其他">其他</Option>
-					</Select></FormItem>
-					<FormItem label='用电单元类型:' prop='yddwlb'><Select class="width-200" v-model='addTableList.yddwlb'>
-						<Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
-						<Option value="工业">工业</Option>
-					</Select></FormItem>
-					<FormItem label='用户地址:' class='user_address'>
-						<Row>
-							<Col span='13'>
-							<FormItem prop='yddz'>
-								<al-selector level=2  class='address' data-type='name' v-model='addTableList.yddz'
-								             v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
-							</FormItem>
-							</Col>
-							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">
-							<FormItem prop='stree'>
-								<Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;'
-								       v-model='addTableList.stree' v-if="!defaultArea"></Input>
-							</FormItem>
-							</Col>
-						</Row>
-					</FormItem>
-					<FormItem label=''>
-						<Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress" v-model="defaultArea">
-							<span>企业默认地址</span>
-						</Checkbox>
-					</FormItem>
-				</Form>
-				<div slot="footer" class="add-btn-group">
-					<Button type="primary" @click="saveData">保存</Button>
-					<Button type="default" @click="modal1=false">取消</Button>
-					<div v-if='hint'>
-						<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red;'>内容不能为空</Alert>
-					</div>
-				</div>
-			</Modal>
-			<!-- 修改 -->
-			<Modal v-model="modal3" :styles="{top:'280px'}" class="addAgreement-modal" width="850px;">
-				<h3 slot="header" class="title">添加营销用户编号</h3>
-				<Form class="add-msg" :model='addTableList' :label-width='100' :rules='modalValidator'>
-					<FormItem label='营销用户编号:' prop='user_id'><Input class="width-200" placeholder="用户户号"
-					                                                v-model='addTableList.user_id'></Input></FormItem>
-					<FormItem label='用户电压等级:' prop='user_grade'><Select class="width-200"
-					                                                    v-model='addTableList.user_grade'>
-						<Option value="0.4kV">0.4kV</Option>
-						<Option value="6.3kV">6.3kV</Option>
-						<Option value="10kV">10kV</Option>
-						<Option value="20kV">20kV</Option>
-						<Option value="35kV">35kV</Option>
-						<Option value="66kV">66kV</Option>
-						<Option value="110kV">110kV</Option>
-						<Option value="220kV">220kV</Option>
-						<Option value="330kV">330kV</Option>
-						<Option value="500kV">500kV</Option>
-						<Option value="750kV">750kV</Option>
-						<Option value="1000kV">1000kV</Option>
-					</Select></FormItem>
-					<FormItem label='报装容量:' prop='bzrl'><Input class="width-200"
-					                                           v-model='addTableList.bzrl'></Input><span>KVA</span>
-					</FormItem>
-					<FormItem label='用电类别:' prop='ydlb'><Select class="width-200" v-model='addTableList.ydlb'>
-						<Option value="居民生活用电">居民生活用电</Option>
-						<Option value="大工业中小化肥">大工业中小化肥</Option>
-						<Option value="大工业其它优待">大工业其它优待</Option>
-						<Option value="乡村居民生活用电">乡村居民生活用电</Option>
-						<Option value="城镇居民生活用电">城镇居民生活用电</Option>
-						<Option value="中小学教学用电">中小学教学用电</Option>
-						<Option value="农业生产用电">农业生产用电</Option>
-						<Option value="农业排灌">农业排灌</Option>
-						<Option value="贫困县农业排灌用电">贫困县农业排灌用电</Option>
-						<Option value="一般工商业">一般工商业</Option>
-						<Option value="非工业">非工业</Option>
-						<Option value="普通工业中小化肥">普通工业中小化肥</Option>
-						<Option value="商业用电">商业用电</Option>
-						<Option value="趸售">趸售</Option>
-						<Option value="趸售大工业">趸售大工业</Option>
-						<Option value="趸售普工、非普工业">趸售普工、非普工业</Option>
-						<Option value="趸售非居民">趸售非居民</Option>
-						<Option value="趸售居民生活用电">趸售居民生活用电</Option>
-						<Option value="趸售农业生产用电">趸售农业生产用电</Option>
-						<Option value="趸售商业用电">趸售商业用电</Option>
-						<Option value="其它用电">其它用电</Option>
-						<Option value="大用户直购电">大用户直购电</Option>
-						<Option value="考核">考核</Option>
-						<Option value="大工业用电">大工业用电</Option>
-						<Option value="抽水蓄能">抽水蓄能</Option>
-						<Option value="售邻省">售邻省</Option>
-						<Option value="其他">其他</Option>
-					</Select></FormItem>
-					<FormItem label='用电单元类型:' prop='yddwlb'><Select class="width-200" v-model='addTableList.yddwlb'>
-						<Option value="农、林、牧、渔业">农、林、牧、渔业</Option>
-						<Option value="工业">工业</Option>
-					</Select></FormItem>
-					<FormItem label='用户地址:' class='user_address'>
-						<Row>
-							<Col span='13'>
-							<FormItem prop='yddz'>
-								<al-selector level=2  class='address' data-type='name' v-model='addTableList.yddz'
-								             v-if="!defaultArea"/>
-								<p v-else>{{addTableList.yddz.join('-')}}-{{addTableList.stree}}</p>
-							</FormItem>
-							</Col>
-							<Col span='8' style='margin-left: 15px' v-if="!defaultArea">
-							<FormItem prop='stree'>
-								<Input placeholder="街道等详细地址" style='width:250px;vertical-align: top;'
-								       v-model='addTableList.stree' v-if="!defaultArea"></Input>
-							</FormItem>
-							</Col>
-						</Row>
-					</FormItem>
-					<FormItem label=''>
-						<Checkbox label='企业默认地址' v-on:on-change="isDefaultAddress" v-model="defaultArea">
-							<span>企业默认地址</span>
-						</Checkbox>
-					</FormItem>
-				</Form>
-				<div slot="footer" class="add-btn-group">
-					<Button type="primary" @click="saveUpdate">保存</Button>
-					<Button type="default" @click="modal3=false">取消</Button>
-					<div v-if='hint'>
-						<Alert type="warning" show-icon style='width: 200px;margin:5px auto;color: red;'>内容不能为空</Alert>
-					</div>
-				</div>
-			</Modal>
 			<!-- 错误提示蒙版 -->
 			<Modal v-model="modal2" width="360" class-name="vertical-center-modal">
 				<p slot="header" style="color:#f60;text-align:center">
@@ -909,24 +618,12 @@
 					<span>警告</span>
 				</p>
 				<div style="text-align:center">
-					<p style="color: red">客户名称不存在</p>
+					<p style="color: red">{{msg}}</p>
 				</div>
 				<div slot="footer" style='text-align: center;'>
 					<Button type="primary" @click='cancel'>确认</Button>
 				</div>
             </Modal>
-            <Modal v-model="modal4" width="360" class-name="vertical-center-modal">
-				<p slot="header" style="color:#f60;text-align:center">
-					<Icon type="information-circled"></Icon>
-					<span>警告</span>
-				</p>
-				<div style="text-align:center">
-					<p style="color: red">合同已存在</p>
-				</div>
-				<div slot="footer" style='text-align: center;'>
-					<Button type="primary" @click='cancel'>确认</Button>
-				</div>
-			</Modal>
 		</Card>
 	</div>
 </template>
@@ -940,22 +637,26 @@
 		cursor: pointer;
 		/* color: #108CEE; */
 	}
-
-	.title {
-		display: block;
-	}
-
-	.main-container {
-		height: 900px;
-	}
-
-	.main-container-panel {
-		height: 900px;
-	}
-
-	.form-container {
-		margin-left: 12%;
-		margin-top: 20px;
+    .addAgreement{
+        line-height: 1;
+        max-height: 914px;
+        overflow: hidden;
+    }
+    .main-container-panel{
+        background-color: #fff;
+		height: 905px;
+		overflow: hidden;
+    }
+    .main-container-panel h4{
+        margin-bottom: 15px;
+        padding-left:5px;
+        padding-bottom:5px;
+        border-bottom:1px solid #e3e8ee;
+        margin-left:-100px;
+    }
+	.addAgreement .form-container {
+        margin-left: 12%;
+        margin-top: 20px;
 	}
 
 	.form-container label {
@@ -977,28 +678,19 @@
 	}
 
 	.htfs-container {
-		display: inline-block;
+        display: inline-block;
+        margin-left:5px;
 	}
 
 	.htfs-container span {
 		display: inline !important;
 	}
-
-	.ivu-input {
-		width: 200px;
-	}
-
-	.ivu-input-wrapper {
-		width: 200px;
-	}
-
 	.btn-save {
 		float: none;
 		margin-top: 0;
 		margin-left: 10px;
 		display: inline-block;
 	}
-
 	.width-90 {
 		width: 90px;
 	}
@@ -1013,7 +705,8 @@
 		width: 100%;
 		float: none;
 		text-align: center;
-		margin-left: -100px;
+        margin-left: -100px;
+        margin-top:20px;
 	}
 
 	.mgr-20 {
@@ -1033,19 +726,6 @@
 	.ivu-modal-content .ivu-modal-header .title {
 		text-align: center;
 	}
-
-	.width-200 {
-		width: 200px;
-	}
-
-	.width-80 {
-		width: 80px;
-	}
-
-	.width-100 {
-		width: 100px;
-	}
-
 	.ivu-modal-footer .add-btn-group {
 		text-align: center;
 	}
@@ -1053,7 +733,6 @@
 	label {
 		position: relative;
 	}
-
 	.biaoFrom td {
 		height: 34px;
 	}
@@ -1063,16 +742,6 @@
 		color: #ccc;
 		text-align: left;
 	}
-
-	.myTab {
-		margin-bottom: 2px;
-	}
-
-	.address {
-		width: 400px;
-		display: inline-block;
-	}
-
 	.mgb_0 {
 		margin-bottom: 0;
 	}
@@ -1080,14 +749,30 @@
 	.user_address {
 		margin-bottom: 0px;
 	}
+    .myTab {
+		margin-bottom: 2px;
+	}
+    .address{
+      width:100%;
+     }
+     .code{
+      width:100%;
+     }
+     .add_hetong{
+        width:49.3%;
+     }
+     .bank_infor{
+         width:100%;
+     }
     @media (min-width: 1365px) and (max-width: 1919px) {
         .cont_empty{
-            margin-left:300px !important;
+            margin-left:200px !important;
         }
-    .form-container {
+       .addAgreement .form-container {
         margin-left: 10%;
-        margin-top: 20px;
-    }
+        margin-top:20px;
+
+      }
         
     }
 </style>

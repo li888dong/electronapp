@@ -41,6 +41,7 @@
 					console.log(err)
 				});
 			}else {
+				//www.ecaidata.com
 				Vue.prototype.$http = axios.create({
 					headers:{
 						common:{
@@ -83,4 +84,10 @@ html,body{
     width: 100%;
     height: 100%;
 }
+.company-list .ivu-scroll-container{
+   overflow-y:hidden;
+}
+.bank_list .ivu-select-not-found{
+         display: none !important;
+	}
 </style>

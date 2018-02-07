@@ -249,8 +249,14 @@
                 this.huhaoSpin = true;
                 this.$http.post(this.$api.CLIENT_DATA_INDEX, {cus_id: this.cus_id}).then(res => {
                     this.huhaoSpin = false;
-                    this.indexData = res.data.data;
                     console.log('户号指数', this.indexData);
+                    if(res.data.status === '1'){
+                       this.indexData = res.data.data;
+                    }else{
+                       this.indexData = '';
+                    }
+                   
+                    
                 }, err => {
                     this.huhaoSpin = false;
                     this.indexData = '';
@@ -267,13 +273,16 @@
                 this.$http.post(this.$api.CLIENT_DAYTB, {cus_id: this.cus_id}).then(res => {
                     this.dayTongbi.spin = false;
                     console.log('日电量同比', res);
-                    let data = res.data.data;
-                    for (let k in data) {
-                        this.dayTongbi.year.push(data[k].year);
-                        this.dayTongbi.lastyear.push(data[k].lastyear);
+                    if(res.data.status === '1'){
+                         let data = res.data.data;
+                         for (let k in data) {
+                             this.dayTongbi.year.push(data[k].year);
+                             this.dayTongbi.lastyear.push(data[k].lastyear);
+                         }
+                         console.log(this.dayTongbi);
+                         this.drawBar1(this.chartOption1);
                     }
-                    console.log(this.dayTongbi);
-                    this.drawBar1(this.chartOption1);
+                   
                 }, err => {
                     this.dayTongbi.spin = false;
                     this.$api.errcallback(err);
@@ -288,9 +297,10 @@
                 this.$http.post(this.$api.CLIENT_DAY_COMPARE, {cus_id: this.cus_id}).then(res => {
                     this.dayCompare.spin = false;
                     console.log('日对比', res);
-                    this.dayCompare = res.data.data;
-                    this.drawBar2(this.chartOption2);
-
+                    if(res.data.status === '1'){
+                        this.dayCompare = res.data.data;
+                        this.drawBar2(this.chartOption2);
+                    }
                 }, err => {
                     this.dayCompare.spin = false;
                     this.$api.errcallback(err);
@@ -305,9 +315,11 @@
                 this.$http.post(this.$api.CLIENT_MONTH_COMPARE, {cus_id: this.cus_id}).then(res => {
                     this.monthCompare.spin = false;
                     console.log('月对比', res);
-                    this.monthCompare = res.data.data;
-
-                    this.drawBar3(this.chartOption3);
+                    if(res.data.status === '1'){
+                      this.monthCompare = res.data.data;
+                      this.drawBar3(this.chartOption3);
+                    }
+                    
 
                 }, err => {
                     this.monthCompare.spin = false;
@@ -462,7 +474,7 @@
 			<Card>
 				<h3 slot="title">日电量同比</h3>
 				<span class="danwei1">单位:Mw.h</span>
-				<div id="compare-bar-1" style="width:100%;height: 465px;">
+				<div id="compare-bar-1" style="width:100%;height: 480px;">
 
 				</div>
 				<Spin size="large" fix v-if="dayTongbi.spin"></Spin>
@@ -472,7 +484,7 @@
 			<Card>
 				<h3 slot="title">日对比</h3>
 				<span class="danwei">单位:Mw.h</span>
-				<div id="compare-bar-2">
+				<div id="compare-bar-2" style="width:100%;height: 480px;">
 
 				</div>
 				<Spin size="large" fix v-if="dayCompare.spin"></Spin>
@@ -482,7 +494,7 @@
 			<Card>
 				<h3 slot="title">月对比</h3>
 				<span class="danwei">单位:Mw.h</span>
-				<div id="compare-bar-3">
+				<div id="compare-bar-3" style="width:100%;height: 480px;">
 
 				</div>
 				<Spin size="large" fix v-if="monthCompare.spin"></Spin>

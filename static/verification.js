@@ -15,7 +15,7 @@ export  const codeLength = (rule, val, callback) => {
             };
 export const officeReg = (rule,val,callback)=>{
                 console.log(val);
-                var officephone_reg = /^[0-9]{3,8}$/;
+                var officephone_reg =/^[0-9]{3,4}\-[0-9]{3,8}$/;
                     if( !officephone_reg.test(val)){
                         return callback(new Error('请输入正确的格式'));
                     }else{
@@ -36,3 +36,11 @@ export const lengthNum = (rule, val, callback) => {
                     callback();
                 }
             };
+export const email=(rule, val, callback)=>{
+    var email_reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+    if(!email_reg.test(val)){
+        return callback(new Error('邮箱格式不对'));
+    }else{
+        callback();
+    } 
+}

@@ -59,7 +59,7 @@
                 edit_fore_cycle:[],
                 edit_decl_cycle:[],
                 edit_cf_cycle:[],
-	            tableData:[{month:'暂未确定', bid_day:'暂未确定',fore_cycle:'暂未确定',decl_cycle:'暂未确定',cf_cycle:'暂未确定',status:'暂未确定'}],
+	            tableData:[{month:'-', bid_day:'-',fore_cycle:'-',decl_cycle:'-',cf_cycle:'-',status:'-'}],
                 planDate:{
                     bid_day: "",
                     fore_cycle_start: "",
@@ -188,12 +188,12 @@
                         this.planChart();
                         }else{
                              this.tableData = [{
-                                 month:'暂未确定',
-                                 bid_day:'暂未确定',
-                                 fore_cycle:'暂未确定',
-                                 decl_cycle:'暂未确定',
-                                 cf_cycle:'暂未确定',
-                                 status:'暂未确定'
+                                 month:'-',
+                                 bid_day:'-',
+                                 fore_cycle:'-',
+                                 decl_cycle:'-',
+                                 cf_cycle:'-',
+                                 status:'-'
                              }]
                         }
 						

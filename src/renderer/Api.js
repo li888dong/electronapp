@@ -39,6 +39,20 @@ export const REALTIME_POWER_CURVE = 'api/index/loadcurve';
 * 首页结束
 * */
 
+/*
+* 告警中心开始
+* */
+// 告警趋势
+export const REPORT_TREND = 'api/report/trend';
+// 告警分布
+export const REPORT_SPREAD = 'api/report/spread';
+// 告警事件
+export const REPORT_INDEX = 'api/report/index';
+// 修改告警事件处理意见  处理状态
+export const REPORT_UPDATE = 'api/report/update';
+/*
+* 告警中心开始
+* */
 
 /*
 * 客户中心开始
@@ -52,6 +66,8 @@ export const CLIENT_DIS = '/api/customers/regions_dist';
 
 //客户列表
 export const CLIENT_LIST = '/api/customers/index';
+//客户删除
+export const CLIENT_DELECT = '/api/customers/';
 //用户管理
 export const CLIENT_MANAGE = '/api/userscus/index';
 //用户管理审核
@@ -60,7 +76,7 @@ export const CLIENT_CHECK = '/api/userscus/setstatus';
 export const CLIENT_DELECT_USER = '/api/userscus/';
 //添加用户
 export const CLIENT_ADD_USER = '/api/userscus';
-//用户合同管理
+//用户合同管理变更为 --> 用户户号信息
 export const CLIENT_CONTRACT_AGREEMENT = '/api/contract/unlist';
 //客户收藏列表
 export const CLIENT_COLLECT_LIST = '/api/myfavorite/index'
@@ -142,7 +158,6 @@ export const CLIENT_BUSINESS = '/api/customers/add_industry';
 //添加银行（暂未使用）
 export const CLIENT_ADD_BANK = '/api/customers/add_bank';
 
-
 // 客户指数
 // 户号指数无数据
 export const CLIENT_DATA_INDEX = '/api/customers/dataindex';
@@ -163,7 +178,8 @@ export const CLIENT_PIANCHA_TABLE = '/api/devanalysis/index';
 * 客户中心结束
 * */
 
-
+//数据矩阵
+export const  CLIENT_MATRIX = '/api/customers/matrix';
 /*
 * 交易管理
 * */
@@ -251,10 +267,16 @@ export const MONTH_IMPORT = '/api/excel/monthimport';
 export const POWER_ADD_COMPACT = '/api/contract/store';
 //合同上传
 export const UPLOAD_COMPACT = '/api/file/upload';
-//用户户号添加
-export const USER_NUM_ADD = '/api/contract/add_usernums';
+//客户负责人
+export const USER_LEADER = '/api/customers/cusUsers';
+//联系人职务
+export const CONTACS_DUTY ='/api/customers/duties';
+//获取批次
+export const GAIN_LOT = '/api/customers/dealQual';
 //删除户号
 export const USER_NUM_DEL = '/api/contract/del_usernums';
+//售电合同详情（修改）
+export const  SALE_CONTRACT_DETAIL = '/api/contract/getConinfo';
 //售电合同结束
 //添加长协合同开始
 //电厂下拉列表
@@ -276,6 +298,18 @@ export const POWER_SALE_LIST = '/api/contract/list';
 //售电合同删除
 export const POWER_SALE_DEL = '/api/contract/del';
 //合同管理结束
+//添加用户户号开始
+//添加营销户号-用电类型
+export const POWER_CLASSES ='/api/contract/electroType';
+//添加营销户号-用电单位类型
+export const POWER_UNIT_CLASSES='/api/contract/electroUnit';
+//添加营销户号-产业集聚地
+export const INDUSTRY_AREA = '/api/contract/indParks';
+//添加用户户号
+export const USER_NUM_ADD = '/api/contract/add_usernums';
+//修改户号->户号详情
+export const USERNOS_DETAIL = '/api/contract/usernoInfo';
+//添加户号结束
 //消息中心开始
 export const MESSAGE_LIST = '/api/news/list';
 //消息中心结束
